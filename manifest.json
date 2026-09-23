@@ -1,0 +1,22 @@
+{
+  "name": "考研EP系统",
+  "short_name": "考研EP",
+  "description": "考研成长系统 v1.4.6.3 - 单机学习打卡",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f5f7",
+  "theme_color": "#1d1d1f",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
