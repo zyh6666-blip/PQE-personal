@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.4.6.3</title>
+<title>考研成长系统 v1.4.6.4</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f7;color:#1d1d1f;min-height:100vh;padding-bottom:40px}
@@ -131,13 +131,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 </style>
 <base target="_blank">
 <base target="_blank">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1d1d1f">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="考研EP系统">
-<link rel="apple-touch-icon" href="icon-180.png">
 </head>
 <body>
 <div id="app">
@@ -145,7 +138,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.6.3</span>
+      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.6.4</span>
       <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -168,6 +161,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     <button class="navbtn active" data-page="home" onclick="switchPage('home')">首页</button>
     <button class="navbtn" data-page="daily" onclick="switchPage('daily')">每日登记</button>
     <button class="navbtn" data-page="shop" onclick="switchPage('shop')">🛒 商店</button>
+    <button class="navbtn" data-page="warehouse" onclick="switchPage('warehouse')">🎒 仓库</button>
     <button class="navbtn" data-page="mail" onclick="switchPage('mail')">📮 邮件 <span id="mail-badge" style="display:none;background:#ff3b30;color:#fff;border-radius:9px;padding:0 6px;font-size:10px;margin-left:2px;line-height:16px;"></span></button>
     <button class="navbtn" data-page="calendar" onclick="switchPage('calendar')">📅 日历</button>
   </div>
@@ -416,9 +410,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     <div id="shop-tokens-list"></div>
     <div class="card" style="margin-top:12px;border-style:dashed;"><div style="display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:13px;font-weight:600;">🎟️ 竞技补充票</div><div style="font-size:11px;color:#8e8e93;">每日限购 2 张 · 当日有效</div></div><button class="btn-accent" style="padding:5px 12px;font-size:12px;" onclick="buyRaceTicket()">🪙 40 购买</button></div></div>
   </div>
-  <div class="card" style="margin-top:12px;">
-    <div style="font-size:14px;font-weight:600;margin-bottom:8px;">📦 持有道具</div>
-    <div id="inventory-list"></div>
+  <div class="card" style="margin-top:12px;border-style:dashed;">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:13px;font-weight:600;">🎒 我的仓库</div>
+        <div style="font-size:11px;color:#8e8e93;margin-top:2px;">集中查看票券、体验卡、经验卡、材料与升级道具</div>
+      </div>
+      <button class="btn-accent" style="padding:6px 14px;font-size:12px;" onclick="switchPage('warehouse')">进入仓库</button>
+    </div>
+  </div>
+</div>
+
+<!-- 仓库 -->
+<div id="page-warehouse" class="page">
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
+      <div>
+        <div style="font-size:17px;font-weight:600;">🎒 我的仓库</div>
+        <div style="font-size:12px;color:#8e8e93;margin-top:3px;">按用途分类展示当前持有的全部道具、票券、经验卡与材料</div>
+      </div>
+      <div id="warehouse-summary" style="background:#f2f2f7;border-radius:20px;padding:5px 12px;font-size:12px;color:#6e6e73;white-space:nowrap;"></div>
+    </div>
+    <div id="warehouse-list"></div>
   </div>
 </div>
 
@@ -593,7 +606,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 <!-- 竞技 -->
 <div id="page-race" class="page">
-  <details style="margin:0 0 10px 0;"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#007aff;padding:7px 10px;background:#f0f7ff;border-radius:8px;">❓ 这个玩法是干嘛的（点我展开）</summary><div style="font-size:12px;color:#6e6e73;padding:8px 10px;line-height:1.7;background:#fafbfd;border-radius:0 0 8px 8px;">影子竞技是<b>双轨周赛季排位系统</b>（单机版，对手为效率模型生成的虚拟幽灵）。<b>双轨分数</b>：①<b>资格分</b>=资格赛90分钟EP×5，赛季固定，是唯一胜负判定线，只有防御挑战成功才覆盖（段位本周锁定不变）；②<b>竞技积分</b>=资格赛后发放1000，通过挑战输赢流转（胜+x/对方-x/2，x=30±分差/50，15~50），是候选匹配与赛季排名的唯一依据，赛季末清零。<b>段位由资格赛锁死</b>：青铜3000-4000/白银4001-5000/黄金5001-6500/铂金6501-8000/钻石8001-10000/大师10001+，之后超出或跌下区间都不影响本周段位。<b>挑战</b>：每天3张免费票（商店限购2张），候选单按竞技积分在同段位匹配5人，卡片显示对方资格分与竞技积分；开90分钟赛程，结束时窗口分（EP×5）高于对方资格分即胜。<b>防御挑战</b>：花1券自我挑战90分钟，成功覆盖资格分、券不退。<b>袭击</b>：幽灵每日最多袭你2次（独立配额），按你的资格分模拟，被破-50积分并解锁当日复仇；<b>复仇</b>成功夺回50积分再按常规流程结算，失败只耗券。<b>自动化幽灵对战</b>：页面运行时每分钟30%概率触发，从全名册3000幽灵中抽两名互殴（85%）或挑战你（15%，完全同权的常规对战，±x流转）；幽灵持续交战、积分榜实时变动，排行榜分页浏览（每页50人，可"跳到我"）。<b>周日24点结算</b>：按竞技积分在本段位排名，10档奖励（1/2/3/4-10/11-20/21-50/51-100/101-200/201-300/301-500）<b>非累积</b>：低段材料包+积分（100-2000），高段材料包+积分（2000-5000）+代币≤100，核心仅高段前三档。全国榜下方可查看全部段位分数区间与10档奖励明细，自己所在区间高亮。策略：资格分打高定好段，积分挑软柿子稳吃。</div></details>
+  <details style="margin:0 0 10px 0;"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#007aff;padding:7px 10px;background:#f0f7ff;border-radius:8px;">❓ 这个玩法是干嘛的（点我展开）</summary><div style="font-size:12px;color:#6e6e73;padding:8px 10px;line-height:1.7;background:#fafbfd;border-radius:0 0 8px 8px;">影子竞技是<b>双轨周赛季排位系统</b>（单机版，对手为效率模型生成的虚拟幽灵）。<b>双轨分数</b>：①<b>资格分</b>=资格赛90分钟EP×5，赛季固定，是唯一胜负判定线，只有防御挑战成功才覆盖（段位本周锁定不变）；②<b>竞技积分</b>=资格赛后发放1000，通过挑战输赢流转（胜+x/对方-x/2，x=30±分差/50，15~50），是候选匹配与赛季排名的唯一依据，赛季末清零。<b>段位由资格赛锁死</b>：青铜3000-4000/白银4001-5000/黄金5001-6500/铂金6501-8000/钻石8001-10000/大师10001+，之后超出或跌下区间都不影响本周段位。<b>挑战</b>：每天3张免费票（商店限购2张），候选单按竞技积分在同段位匹配5人，卡片显示对方资格分与竞技积分；开90分钟赛程，结束时窗口分（EP×5）高于对方资格分即胜。<b>防御挑战</b>：花1券自我挑战90分钟，成功覆盖资格分、券不退。<b>复仇</b>：幽灵挑战你成功时扣竞技积分并记入复仇名单；复仇成功夺回50再按常规流程结算，失败只耗券。<b>自动化幽灵对战</b>：页面运行时每分钟30%概率触发，从全名册3000幽灵中抽两名互殴（85%）或挑战你（15%，完全同权的常规对战，±x流转）；幽灵持续交战、积分榜实时变动，排行榜分页浏览（每页50人，可"跳到我"）。<b>周日24点结算</b>：按竞技积分在本段位排名，10档奖励（1/2/3/4-10/11-20/21-50/51-100/101-200/201-300/301-500）<b>非累积</b>：低段材料包+积分（100-2000），高段材料包+积分（2000-5000）+代币≤100，核心仅高段前三档。全国榜下方可查看全部段位分数区间与10档奖励明细，自己所在区间高亮。策略：资格分打高定好段，积分挑软柿子稳吃。</div></details>
   <div class="card" style="margin-bottom:12px;" id="arena-header"></div>
   <div class="card" style="margin-bottom:12px;">
     <div class="card-title">⚔️ 本周赛程</div>
@@ -612,7 +625,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     · <b>段位锁定</b>：青铜3000-4000 / 白银4001-5000 / 黄金5001-6500 / 铂金6501-8000 / 钻石8001-10000 / 大师10001+，由资格赛一锤定音，本周内无论分数如何变动都不改段；每段位500名幽灵同场竞技。<br>
     · <b>每日对局</b>：每天3张免费票（商店限购2张）。候选单按竞技积分在同段位匹配5人。开90分钟赛程，<b>窗口结束时你的窗口分（EP×5）高于对方资格分即胜</b>；打低分者输了按"对方挑战你"反向计分。每打完一场候选自动重抽，每日3次手动刷新。<br>
     · <b>防御挑战</b>：花1张竞技券开90分钟自我挑战，成功则以新EP×5覆盖资格分（段位不变），券不退。<br>
-    · <b>袭击事件</b>：幽灵每日最多袭击你2次（按你的资格分模拟胜负）：被破-50竞技积分并解锁当日<b>复仇</b>（花1券开90分钟，成功夺回50再按常规流程结算，失败只耗券）；防住+50。<br>
+    · <b>复仇机制</b>：幽灵自动对战挑战你成功时按资格分模拟：被破扣竞技积分并记入<b>复仇名单</b>（花1券开90分钟，成功夺回50再按常规流程结算，失败只耗券）。<br>
     · <b>自动化幽灵对战</b>：页面运行时每分钟30%概率触发，从全名册3000名幽灵中抽两名互殴（85%）或<b>挑战你</b>（15%，与幽灵完全同权的常规对战，±x流转）。幽灵之间持续交战使积分榜实时变动。<br>
     · <b>赛季结算</b>：周日24点按<b>本段位竞技积分排名</b>发放10档奖励（第1/2/3/4-10/11-20/21-50/51-100/101-200/201-300/301-500名，<b>非累积</b>）：低段材料包+积分（100-2000），高段材料包+积分（2000-5000）+代币≤100，💠核心仅高段前三档。全国榜为分页式（每页50人），支持"跳到我"；下方可查看全部段位的分数区间与10档奖励明细。</div></details>
   </div>
@@ -649,7 +662,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🛡️ 功能属性（15个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">常驻生效、不可卸下，重铸券更换（叠加7天冷却）。最多4槽，随等级逐步解锁（Lv.28首槽、Lv.100第4槽）。15个分四类：主动技——战意觉醒（标记任务结算返还40%损失）、移速提升（加快其他主动技20%）；补救——无敌之盾（不足上限自动补足，240分钟重生）、修正（首任务补足50%）、猎手韧性（200韧性条承担30%扣减）、猎手防护（3连不同标签得韧性/150EP）；结构——战术快速换位（完成率换算到其他标签）、爆炸剑气（相邻任务加成）、置顶强化（+15%但惩罚+20%）、紧急撤离（首个未完成延期明日）、以一当十（模考+70%且当日免罚）；赌局——母体威慑（幸运变感染任务：限时完成重奖、失败重罚）、觉醒肾上腺素（CD-5%）、暴走持续延长（持续+10%）、灵魂武者（乱斗抽2个+潜能第4栏提前）。按作息短板选用。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🏷️ 标签专精（四维改装）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每个标签四条改装线各10级：<b>极速</b>=maxEp+3%/级；<b>加速</b>=当日同标签连击+2%/级；<b>操控</b>=罚率-2%/级；<b>氮增</b>=完成占比主成长（普通上限10%→最高20%，SP固定10%）。前5级纯积分，Lv6-10加吃材料。材料：公用=结算天数（门槛）+积分；专属四样在结算自动掉落——训练印记（每完成任务）、冲刺奖章（增益窗口内完成）、全勤徽章（当日全勤）、巅峰凭证（EP达上限90%），溢出回收5积分/个，材料包可批量补。四线满级觉醒<b>SP运动版</b>：maxEp+25%、罚率减半、专属涂装卡，按标签频率分档——高频400结算天+💠3+🪙100 / 中频280+💠2+🪙60 / 低频160+💠1+🪙30。捷径：商店"直接升级"无条件+1级、"终极改装包"直升满级（不含SP）。进度只随时间走，每天结算即攒材料；优先养高频标签。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🏆 杯赛（能量10点 · 每日结算+3）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b><b>每日任务</b>免费领；<b>日杯</b>每天出现（20%加开、前晚预告），1⚡报名后按成绩解锁8段累积奖励；<b>冲刺锦标赛</b>3⚡（报名一次）：周一至五每天随机悬赏1标签+3目标，每目标1奖杯、日结锁定，全周标签提前可见，最多15奖杯对应15档（高档稀有票券+代币≤200），周末结算领取、结算完毕后隐藏；<b>精研核心杯</b>2⚡，仅周末显示，4档全核心（参与💠1，后三档💠1/3/5）；<b>大型赛事</b>3天2⚡10段，终段二选一；<b>月杯</b>5⚡、4标签总分合计10档累积（积分≤2500/代币≤250/票券各≤10/材料包≤20/直接升级≤8/经验卡≤5；核心85%届拆档共≤10、终极升级15%届仅最高档1个），次月补领；计分：每日最多计3个该标签任务（质量分/上限×100，达上限+20）；40代币可补5点能量（每日1次）；<b>双周标签杯</b>4⚡、两周2标签10段，终档按80%核心/20%终极生成，赛后界面保留可一键补领。</div></details>
-      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">⚔️ 影子竞技</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b>双轨分数</b>：资格分=资格赛EP×5（赛季固定，胜负判定线，防御挑战可覆盖）；竞技积分=资格赛后发1000，挑战输赢流转（胜+x/对方-x/2），候选匹配与排名依据，赛季清零。<b>段位锁定</b>：按资格分定段（青铜3000-4000/白银4001-5000/黄金5001-6500/铂金6501-8000/钻石8001-10000/大师10001+），本周不变。<b>挑战</b>：同段候选按竞技积分匹配5人，90分钟窗口分高于对方资格分即胜；每日3票+商店2票。<b>袭击/复仇</b>：每日最多被袭2次（独立配额，按你资格分模拟），被破-50并解锁复仇；复仇成功夺回50再常规结算，失败只耗券。<b>自动化幽灵对战</b>：每分钟30%概率触发，3000幽灵互殴（85%）或挑战你（15%，同权常规对战±x）；积分榜实时变动，排行榜分页（每页50人）可"跳到我"。<b>结算</b>：周日24点按段位内竞技积分排名，10档非累积奖励（1/2/3/4-10/11-20/21-50/51-100/101-200/201-300/301-500），低段材料包+积分、高段加代币≤100、核心仅高段前三档。全国榜下方可查看全部段位区间与奖励明细。</div></details>
+      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">⚔️ 影子竞技</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b>双轨分数</b>：资格分=资格赛EP×5（赛季固定，胜负判定线，防御挑战可覆盖）；竞技积分=资格赛后发1000，挑战输赢流转（胜+x/对方-x/2），候选匹配与排名依据，赛季清零。<b>段位锁定</b>：按资格分定段（青铜3000-4000/白银4001-5000/黄金5001-6500/铂金6501-8000/钻石8001-10000/大师10001+），本周不变。<b>挑战</b>：同段候选按竞技积分匹配5人，90分钟窗口分高于对方资格分即胜；每日3票+商店2票。<b>复仇</b>：幽灵挑战你成功（被挑战且失败）即扣积分并入名单，均可复仇；成功夺回50再常规结算，失败只耗券。<b>自动化幽灵对战</b>：每分钟30%概率触发，3000幽灵互殴（85%）或挑战你（15%，同权常规对战±x）；积分榜实时变动，排行榜分页（每页50人）可"跳到我"。<b>结算</b>：周日24点按段位内竞技积分排名，10档非累积奖励（1/2/3/4-10/11-20/21-50/51-100/101-200/201-300/301-500），低段材料包+积分、高段加代币≤100、核心仅高段前三档。全国榜下方可查看全部段位区间与奖励明细。</div></details>
       <details id="guide-cup" style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🏆 杯赛规则总览</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.8;"><b>日杯</b>：每天至少出现1个，随机加开时最多2个；每个日杯只会是积分杯或四个材料杯之一。8段累积奖励，达到高档后可从低段逐段领取。<br><b>冲刺锦标赛</b>：周一至周五每天随机悬赏1个标签并给出3个目标（完成数/质量总分/完成3个），每完成1个目标得1奖杯、当天结束锁定；5天最多15奖杯，对应15档累积奖励（高档为稀有票券，代币不超过200），仅周末可领，届末保留一键补领；报名一次即可，全周悬赏标签提前可见、到对应日子才开放。<br><b>精研核心杯</b>：周六、周日指定标签计分，4档全核心奖励——参与即得💠1，后三档按分数💠1/3/5；仅周末显示（工作日隐藏），届末保留一键补领。<br><b>月杯</b>：整月4个指定标签总分合计，10档累积奖励——积分/代币/票券/材料包/直接升级/经验卡逐步升级，高档拆发💠精研核心（当届85%概率，共≤10个）或第10档为🏆终极改装包×1（15%概率），次月保留一键补领。<br><b>大型赛事</b>：限时3天指定标签，10段累积奖励；第10段为终极改装包或3个精研核心二选一。<br><b>双周标签杯</b>：为期两周、指定2个标签，成绩=两标签各自全程积分之和（每标签每天最多计3个任务），10段累积奖励；当届终档生成时80%概率为精研核心（拆档发放、本届共5个）、20%概率为终极改装包（仅最高档），玩家无选择权；赛季结束后界面保留，可一键补领未领档位。<br><b>能量</b>：日杯1、周悬赏3、周末2、双周4、月杯5；每日结算回复3点。</div></details>
 <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🏅 成就 / 🛒 商店 / 📮 邮件 / 📅 日历</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b>成就</b>：六大分支（日常基石/知识闭环/等级飞升/词汇征服/标签专精/终局清算）共40+项，全部自动追踪（读历史结算，无需申报），带进度条与前置链，奖励为积分/代币/道具/称号（不发EP），称号可在首页装备展示。<b>商店</b>：积分来自每日结算（EP÷100×30，上限800/日），代币来自成就/杯赛/竞技；每周限购自动重置，全局限购终生累计。💠精研核心150代币/周限购1个，是SP觉醒稀缺材料（另产自精研核心杯/月杯与双周杯终档/大型赛事/竞技高段）。<b>邮件</b>：未读角标、一键领取、删除已读、新邮件弹窗。<b>日历</b>：结算日、日杯、冲刺锦标赛、精研核心杯、月杯、双周杯、竞技赛季、大型赛事全标记。</div></details>
       <details><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">💾 数据管理</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">数据全部存在浏览器本地（localStorage），不联网、不上传，清浏览器数据会丢档。跨设备与备份用首页「数据管理」：导出=下载JSON文件（并尝试复制剪贴板）；导入=选文件或粘贴JSON，导入前显示备份EP/积分/任务数并二次确认，导入会覆盖当前设备全部数据，建议先导出现存档。建议每周固定导出一次到云盘/微信/邮件——15个月的账本比等级更值钱，iPad用户尤其要勤导出（本地文件在部分浏览器下存储不稳）。换新设备导入最近备份即可继续；存档异常时也可用备份回滚。导入后刷新一次确认落盘。</div></details>
@@ -807,6 +820,33 @@ const BRAWLS=[
 ];
 const SHOP_POINTS=[{id:"parts_pack",name:"零件材料包",icon:"📦",cost:1200,limit:"无限制",desc:"可批量兑换指定标签的指定材料",type:"points"},{id:"draw_ticket",name:"属性抽取券",icon:"🎟️",cost:250,limit:"每周5张",desc:"乱斗抽卡使用",type:"points"},{id:"exp12",name:"1.2倍经验卡",icon:"⚡",cost:300,limit:"每周3张",desc:"当日EXP倍率增益",type:"points"},{id:"exp15",name:"1.5倍经验卡",icon:"⚡",cost:600,limit:"每周2张",desc:"当日EXP倍率增益",type:"points"},{id:"points_to_tokens",name:"100代币",icon:"🪙",cost:1800,limit:"每周3次",desc:"可使用积分兑换100代币",type:"points",convertToTokens:100}];const SHOP_TOKENS=[{id:"change_ticket",name:"属性变更券",icon:"🎫",cost:80,limit:"每周2张",desc:"乱斗用，禁止直接选【融合】",type:"tokens"},{id:"reroll_ticket",name:"特殊属性重铸券",icon:"🔮",cost:220,limit:"每周1张",desc:"被动重铸，叠加7天冷却",type:"tokens"},{id:"exp2",name:"2倍经验卡",icon:"⚡",cost:160,limit:"每周2张",desc:"当日EXP倍率增益",type:"tokens"},{id:"exp25",name:"2.5倍经验卡",icon:"⚡",cost:300,limit:"每周1张",desc:"当日EXP倍率增益",type:"tokens"},{id:"exp3",name:"3倍经验卡",icon:"⚡",cost:550,limit:"全局最多3张",desc:"硬上限防升级爆炸",type:"tokens"},{id:"talent_extra",name:"天赋额外抽取",icon:"🌟",cost:450,limit:"每周1次",desc:"天赋池抽空后不可买",type:"tokens"},{id:"sp_core",name:"精研核心",icon:"💠",cost:150,limit:"每周1个",desc:"SP觉醒最基础物资（精研核心杯/大型杯赛/竞技高段亦可获得）",type:"tokens"},{id:"ult_upgrade",name:"终极改装包",icon:"🏆",cost:600,limit:"全局最多2个",desc:"任选标签直升四线满级（不含SP）",type:"tokens"},{id:"direct_up",name:"直接升级",icon:"🔧",cost:60,limit:"无限制",desc:"任选标签的任一零件无条件+1级",type:"tokens"},{id:"brawl_vip",name:"乱斗特权券",icon:"👑",cost:120,limit:"全局最多2张",desc:"可直接选取【融合】",type:"tokens"}];
 const EXP_CARDS=[{id:"exp12",name:"1.2倍",mult:1.2},{id:"exp15",name:"1.5倍",mult:1.5},{id:"exp2",name:"2倍",mult:2},{id:"exp25",name:"2.5倍",mult:2.5},{id:"exp3",name:"3倍",mult:3}];
+const INVENTORY_CATALOG=[
+  {title:'票券与体验',icon:'🎟️',color:'#007aff',items:[
+    {k:'draw_ticket',n:'属性抽取券',i:'🎟️',d:'用于抽取乱斗属性'},
+    {k:'change_ticket',n:'属性变更券',i:'🎫',d:'更换乱斗属性'},
+    {k:'reroll_ticket',n:'特殊属性重铸券',i:'🔮',d:'重铸角色功能属性'},
+    {k:'brawl_vip',n:'乱斗特权券',i:'👑',d:'可直接选择融合属性'},
+    {k:'slot_trial',n:'全功能体验卡',i:'🎟️',d:'24小时体验全部功能槽'},
+    {k:'potential_trial',n:'潜能体验卡',i:'🧪',d:'24小时无视等级体验潜能'},
+    {k:'passive_duration',n:'被动体验持续卡',i:'⏳',d:'延长功能属性体验时间'},
+    {k:'brawl_trial',n:'乱斗体验卡',i:'🧪',d:'临时开启乱斗玩法'},
+    {k:'talent_extra',n:'天赋额外抽取',i:'🌟',d:'立即增加1次天赋抽取'}
+  ]},
+  {title:'经验卡',icon:'⚡',color:'#ff9500',items:[
+    {k:'exp12',n:'1.2倍经验卡',i:'⚡',d:'当日结算 EP ×1.2'},
+    {k:'exp15',n:'1.5倍经验卡',i:'⚡',d:'当日结算 EP ×1.5'},
+    {k:'exp2',n:'2倍经验卡',i:'⚡',d:'当日结算 EP ×2'},
+    {k:'exp25',n:'2.5倍经验卡',i:'⚡',d:'当日结算 EP ×2.5'},
+    {k:'exp3',n:'3倍经验卡',i:'⚡',d:'当日结算 EP ×3'}
+  ]},
+  {title:'材料与升级',icon:'📦',color:'#34c759',items:[
+    {k:'parts_pack',n:'零件材料包',i:'📦',d:'批量兑换指定标签材料'},
+    {k:'universal_mat',n:'通用材料',i:'🧊',d:'升级材料不足时自动补缺口'},
+    {k:'sp_core',n:'精研核心',i:'💠',d:'SP 运动版觉醒材料'},
+    {k:'ult_upgrade',n:'终极改装包',i:'🏆',d:'任选标签四线满级'},
+    {k:'direct_up',n:'直接升级',i:'🔧',d:'任选标签任一零件 +1 级'}
+  ]}
+];
 const TIER_CFG={common:{name:"普通",prob:.60,color:"#8e8e93",total:13},rare:{name:"稀有",prob:.30,color:"#007aff",total:12},epic:{name:"高级",prob:.07,color:"#34c759",total:7},legend:{name:"传说",prob:.03,color:"#ff3b30",total:3}};
 const TIER_KEYS=["common","rare","epic","legend"];
 const CAT_COLOR={"经验增益":"#007aff","作息调控":"#34c759","科目权重":"#af52de","风险":"#ff3b30","跨日影响":"#8e8e93"};
@@ -979,6 +1019,26 @@ function dailyResetCheck(){
 }
 function getLevelInfo(ep){for(let i=0;i<LEVELS.length;i++){if(ep>=LEVELS[i].s&&ep<=LEVELS[i].e)return LEVELS[i];if(i===LEVELS.length-1&&ep>=LEVELS[i].s)return LEVELS[i];}return LEVELS[0];}
 function getNextNeed(ep){const info=getLevelInfo(ep);const idx=LEVELS.indexOf(info);if(idx<LEVELS.length-1)return LEVELS[idx+1].s-ep;return 0;}
+// 统一处理总EP入账与军衔提升提示，避免不同入口升级时漏提示
+function addTotalEp(amount,deferRankNotice){
+  const gain=Math.max(0,Math.round(Number(amount)||0));if(!gain)return[];
+  const beforeLv=getLevelInfo(state.totalEP).lv;
+  state.totalEP+=gain;
+  const afterLv=getLevelInfo(state.totalEP).lv;
+  const crossed=LEVELS.filter(l=>l.lv>beforeLv&&l.lv<=afterLv);
+  if(crossed.length&&!deferRankNotice)showRankUpNotices(crossed);
+  return crossed;
+}
+function showRankUpNotices(levels){
+  if(!levels||!levels.length)return;
+  levels.forEach(function(level){
+    const range=level.e>=99999999?'MAX':level.s+' - '+level.e+' EP';
+    showGainModal('🎖️ 提升了军衔',[
+      ['恭喜军衔提升至','Lv.'+level.lv+' '+level.name],
+      ['军衔区间',range]
+    ],'继续加油，下一级更进一步');
+  });
+}
 function checkUnlock(type){if(type==='brawl'&&state.brawlTrialDate===new Date().toDateString())return true;if(type==='potential'&&(state.potentialTrialUntil||0)>Date.now())return true;if(type==='passive'&&(state.slotTrialUntil||0)>Date.now())return true;return state.totalEP>=UNLOCK[type].s;}
 const MODES=[
   {id:'classic',name:'经典玩法',icon:'📘',desc:'功能属性+天赋生效 · 无乱斗/潜能'},
@@ -1208,7 +1268,7 @@ function confirmMode(){
 const LOCK_DESC={talent:'方可开启天赋面板',potential:'方可开启潜能模式',brawl:'方可开启乱斗模式',passive:'后，将逐步开放最多4个常驻功能槽。<br>功能属性一旦装备将长期生效，不能像天赋一样每日自由卸下。'};
 function renderLock(type){const tb=document.getElementById('brawl-trial-btn');if(tb){tb.textContent='🧪 使用乱斗体验卡（剩 '+(state.inventory.brawl_trial||0)+'）';tb.style.display=(state.inventory.brawl_trial||0)>0?'':'none';}
   const ptb=document.getElementById('potential-trial-btn');if(ptb){ptb.style.display=(state.inventory.potential_trial||0)>0?'':'none';const c=document.getElementById('potential-trial-count');if(c)c.textContent=state.inventory.potential_trial||0;}
-  const pstb=document.getElementById('passive-slot-trial-btn');if(pstb){pstb.style.display=(state.inventory.slot_trial||0)>0?'':'none';const c2=document.getElementById('passive-slot-trial-count');if(c2)c2.textContent=state.inventory.slot_trial||0;}const lock=document.getElementById(type+'-lock');const content=document.getElementById(type+'-content');const lv=getLevelInfo(state.totalEP);const lvEl=document.getElementById(type+'-lock-lv');if(lvEl)lvEl.textContent='Lv.'+lv.lv+' '+lv.name;const titleEl=lock.querySelector('.lock-title');const descEl=lock.querySelector('.lock-desc');if(!checkUnlock(type)){lock.style.display='block';content.style.display='none';titleEl.textContent=LOCK_TITLES[type];descEl.innerHTML='需达到 <span class="lock-lv">'+UNLOCK[type].name+'</span> '+LOCK_DESC[type]+'<br>当前等级：<span id="'+type+'-lock-lv">Lv.'+lv.lv+' '+lv.name+'</span>';return;}const mb=getModeBlock(type);if(mb){lock.style.display='block';content.style.display='none';titleEl.textContent=mb.title;descEl.innerHTML=mb.desc;return;}lock.style.display='none';content.style.display='block';renderStaticHintBoxes();}function switchPage(name){document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const _nb=document.querySelector('.navbtn[data-page="'+name+'"]');if(_nb)_nb.classList.add('active');document.getElementById('page-'+name).classList.add('active');if(name==='home')renderHome();if(name==='shop')updateShopUI();if(name==='daily'){updateDailyUI();renderModeOptions();renderDailySkills();renderDailyAttrs();}if(name==='long'){checkLongMigration();renderLongTasks();}if(name==='cycle'){renderCycleTasks();}if(name==='talent')renderLock('talent');if(name==='potential')renderLock('potential');if(name==='brawl')renderLock('brawl');if(name==='passive')renderLock('passive');if(name==='achievement')renderAchievementUI();if(name==='mail')renderMailPage();if(name==='calendar')renderCalendar();if(name==='cup')renderCupUI();if(name==='race')renderArenaUI();if(name==='upgrade')renderUpgradeUI();if(name==='guide')renderGuidePage();}
+  const pstb=document.getElementById('passive-slot-trial-btn');if(pstb){pstb.style.display=(state.inventory.slot_trial||0)>0?'':'none';const c2=document.getElementById('passive-slot-trial-count');if(c2)c2.textContent=state.inventory.slot_trial||0;}const lock=document.getElementById(type+'-lock');const content=document.getElementById(type+'-content');const lv=getLevelInfo(state.totalEP);const lvEl=document.getElementById(type+'-lock-lv');if(lvEl)lvEl.textContent='Lv.'+lv.lv+' '+lv.name;const titleEl=lock.querySelector('.lock-title');const descEl=lock.querySelector('.lock-desc');if(!checkUnlock(type)){lock.style.display='block';content.style.display='none';titleEl.textContent=LOCK_TITLES[type];descEl.innerHTML='需达到 <span class="lock-lv">'+UNLOCK[type].name+'</span> '+LOCK_DESC[type]+'<br>当前等级：<span id="'+type+'-lock-lv">Lv.'+lv.lv+' '+lv.name+'</span>';return;}const mb=getModeBlock(type);if(mb){lock.style.display='block';content.style.display='none';titleEl.textContent=mb.title;descEl.innerHTML=mb.desc;return;}lock.style.display='none';content.style.display='block';renderStaticHintBoxes();}function switchPage(name){document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const _nb=document.querySelector('.navbtn[data-page="'+name+'"]');if(_nb)_nb.classList.add('active');document.getElementById('page-'+name).classList.add('active');if(name==='home')renderHome();if(name==='shop')updateShopUI();if(name==='warehouse')renderWarehouseUI();if(name==='daily'){updateDailyUI();renderModeOptions();renderDailySkills();renderDailyAttrs();}if(name==='long'){checkLongMigration();renderLongTasks();}if(name==='cycle'){renderCycleTasks();}if(name==='talent')renderLock('talent');if(name==='potential')renderLock('potential');if(name==='brawl')renderLock('brawl');if(name==='passive')renderLock('passive');if(name==='achievement')renderAchievementUI();if(name==='mail')renderMailPage();if(name==='calendar')renderCalendar();if(name==='cup')renderCupUI();if(name==='race')renderArenaUI();if(name==='upgrade')renderUpgradeUI();if(name==='guide')renderGuidePage();}
 function fmtDate(ts){const d=new Date(ts);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function checkCycleMigration(){
   if(!state.cycleTasks)return;
@@ -1421,7 +1481,7 @@ function updateLongTask(idx,field,val){const t=state.longTasks[idx];if(!t)return
   if(info.ep<=0){alert('请先填写该任务的完成EP与质量EP');return;}
   showModal('✅ 完成长期任务','任务：<b>'+(t.name||'长期任务')+'</b><br>截止：'+t.deadline+' · 时间进度 '+Math.round(info.ratio*100)+'%<br>任务EP：<b>'+info.ep+'</b><br>时间加成：<b style="color:#34c759;">+'+Math.round(info.rate*100)+'%（+'+info.bonus+' EP）</b><br>入账总计：<b style="color:#007aff;">'+info.total+' EP</b><br><br>确认后任务锁定入账，不可修改。',function(){
     t.locked=true;t.completed=true;t.doneDate=todayStr();t.bonusEp=info.bonus;t.grantedEp=info.total;
-    state.totalEP+=info.total;if(typeof arenaAddEp==='function')arenaAddEp(info.total);
+    addTotalEp(info.total);if(typeof arenaAddEp==='function')arenaAddEp(info.total);
     saveState();updateTopBar();renderLongTasks();closeModal();
   });
 }
@@ -1978,6 +2038,31 @@ const modeNames={classic:'📘 经典玩法',brawl:'⚔️ 随机属性（乱斗
   renderAnnouncements();
 }
 function updateTopBar(){const info=getLevelInfo(state.totalEP);const rs=getRankStyle(info.lv);const el=document.getElementById('top-lv');el.textContent='Lv.'+info.lv+' '+info.name+(equippedTitle()?' · '+equippedTitle():'');el.style.background=rs.bg;el.style.color=rs.color;document.getElementById('top-points').textContent=state.points;document.getElementById('top-tokens').textContent=state.tokens;document.getElementById('top-ep').textContent=state.totalEP;updateLevelProgress();renderHome();}
+function renderWarehouseUI(){
+  const box=document.getElementById('warehouse-list');if(!box)return;
+  const inv=state.inventory||{};
+  const count=k=>Math.max(0,Math.round(Number(inv[k])||0));
+  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const ignored={points:1,tokens:1,totalEP:1};
+  const total=Object.keys(inv).reduce((s,k)=>s+(ignored[k]?0:count(k)),0);
+  const kinds=Object.keys(inv).filter(k=>!ignored[k]&&count(k)>0).length;
+  const summary=document.getElementById('warehouse-summary');
+  if(summary)summary.innerHTML='持有 <b style="color:#1d1d1f;">'+total+'</b> 件 · '+kinds+' 种';
+  const known={};
+  let html='';
+  INVENTORY_CATALOG.forEach(function(g){
+    html+='<div style="display:flex;align-items:center;gap:8px;margin:16px 0 8px;"><span style="font-size:15px;">'+g.icon+'</span><span style="font-size:13px;font-weight:700;color:'+g.color+';">'+g.title+'</span><span style="flex:1;height:1px;background:'+g.color+'22;"></span></div>';
+    html+='<div class="inv-grid">'+g.items.map(function(x){
+      known[x.k]=1;const n=count(x.k);
+      return '<div class="inv-item" style="'+(n?'':'opacity:.42;')+'" title="'+esc(x.d)+'"><div style="font-size:18px">'+x.i+'</div><div style="font-size:11px;color:#6e6e73;margin:2px 0">'+x.n+'</div><div class="inv-count">×'+n+'</div><div style="font-size:10px;color:#8e8e93;line-height:1.4;margin-top:3px;">'+x.d+'</div></div>';
+    }).join('')+'</div>';
+  });
+  const extras=Object.keys(inv).filter(k=>!known[k]&&!ignored[k]&&count(k)>0);
+  if(extras.length){
+    html+='<div style="display:flex;align-items:center;gap:8px;margin:16px 0 8px;"><span style="font-size:15px;">🎁</span><span style="font-size:13px;font-weight:700;color:#af52de;">其他道具</span><span style="flex:1;height:1px;background:#af52de22;"></span></div><div class="inv-grid">'+extras.map(k=>'<div class="inv-item"><div style="font-size:18px">🎁</div><div style="font-size:11px;color:#6e6e73;margin:2px 0">'+esc(k)+'</div><div class="inv-count">×'+count(k)+'</div></div>').join('')+'</div>';
+  }
+  box.innerHTML=html;
+}
 function updateShopUI(){document.getElementById('shop-points').textContent=state.points;document.getElementById('shop-tokens').textContent=state.tokens;const pl=document.getElementById('shop-points-list');const tl=document.getElementById('shop-tokens-list');const inv=document.getElementById('inventory-list');pl.innerHTML=SHOP_POINTS.map(it=>{const bought=state.shopBought[it.id]||0;const limitNum=it.limit==='无限制'?999:(parseInt(it.limit)||999);const canBuy=state.points>=it.cost&&bought<limitNum;return '<div class="shop-item"><div class="shop-item-left"><span class="shop-icon">'+it.icon+'</span><div class="shop-info"><div class="shop-name">'+it.name+'</div><div class="shop-desc">'+it.desc+' · '+it.limit+'</div></div></div><div style="text-align:right"><div class="shop-cost">'+it.cost+' 积分</div><button class="btn-primary" style="margin-top:4px;padding:4px 10px;font-size:12px;'+(canBuy?'':'opacity:0.4')+'" '+(canBuy?'':'disabled')+' onclick="buyItem(\''+it.id+'\')">购买</button></div></div>';}).join('');tl.innerHTML=SHOP_TOKENS.map(it=>{const bought=state.shopBought[it.id]||0;let limitNum=999;if(it.limit.includes('最多')){const m=it.limit.match(/\d+/);if(m)limitNum=parseInt(m[0]);}else{const m=it.limit.match(/\d+/);if(m)limitNum=parseInt(m[0]);}const canBuy=state.tokens>=it.cost&&bought<limitNum;return '<div class="shop-item"><div class="shop-item-left"><span class="shop-icon">'+it.icon+'</span><div class="shop-info"><div class="shop-name">'+it.name+'</div><div class="shop-desc">'+it.desc+' · '+it.limit+'</div></div></div><div style="text-align:right"><div class="shop-cost">'+it.cost+' 代币</div><button class="btn-accent" style="margin-top:4px;padding:4px 10px;font-size:12px;'+(canBuy?'':'opacity:0.4')+'" '+(canBuy?'':'disabled')+' onclick="buyItem(\''+it.id+'\')">购买</button></div></div>';}).join('');const invItems=[{k:'draw_ticket',n:'属性抽取券',i:'🎟️'},{k:'change_ticket',n:'属性变更券',i:'🎫'},{k:'reroll_ticket',n:'特殊属性重铸券',i:'🔮'},{k:'brawl_vip',n:'乱斗特权券',i:'👑'},
   {k:'slot_trial',n:'全功能体验卡',i:'🎟️'},
   {k:'potential_trial',n:'潜能体验卡',i:'🧪'},
@@ -1985,7 +2070,7 @@ function updateShopUI(){document.getElementById('shop-points').textContent=state
   {k:'parts_pack',n:'零件材料包',i:'📦'},
   {k:'sp_core',n:'精研核心',i:'💠'},
   {k:'ult_upgrade',n:'终极改装包',i:'🏆'},
-  {k:'direct_up',n:'直接升级',i:'🔧'},{k:'exp12',n:'1.2倍经验卡',i:'⚡'},{k:'exp15',n:'1.5倍经验卡',i:'⚡'},{k:'exp2',n:'2倍经验卡',i:'⚡'},{k:'exp25',n:'2.5倍经验卡',i:'⚡'},{k:'exp3',n:'3倍经验卡',i:'⚡'},{k:'talent_extra',n:'天赋额外抽取',i:'🌟'},{k:'brawl_trial',n:'乱斗体验卡',i:'🧪'}];inv.innerHTML='<div class="inv-grid">'+invItems.map(x=>'<div class="inv-item"><div style="font-size:18px">'+x.i+'</div><div style="font-size:11px;color:#6e6e73;margin:2px 0">'+x.n+'</div><div class="inv-count">'+(state.inventory[x.k]||0)+'</div></div>').join('')+'</div>';document.getElementById('b-change-count').textContent=state.inventory.change_ticket||0;document.getElementById('b-draw-count').textContent=state.inventory.draw_ticket||0;const vipCnt=document.getElementById('b-vip-count');if(vipCnt)vipCnt.textContent=state.inventory.brawl_vip||0;const slotCnt=document.getElementById('slot-trial-count');if(slotCnt)slotCnt.textContent=state.inventory.slot_trial||0;const potTrialCnt=document.getElementById('potential-trial-count');if(potTrialCnt)potTrialCnt.textContent=state.inventory.potential_trial||0;const passiveDurCnt=document.getElementById('passive-duration-count');if(passiveDurCnt)passiveDurCnt.textContent=state.inventory.passive_duration||0;const partsPackCnt=document.getElementById('parts-pack-count');if(partsPackCnt)partsPackCnt.textContent=state.inventory.parts_pack||0;}
+  {k:'direct_up',n:'直接升级',i:'🔧'},{k:'exp12',n:'1.2倍经验卡',i:'⚡'},{k:'exp15',n:'1.5倍经验卡',i:'⚡'},{k:'exp2',n:'2倍经验卡',i:'⚡'},{k:'exp25',n:'2.5倍经验卡',i:'⚡'},{k:'exp3',n:'3倍经验卡',i:'⚡'},{k:'talent_extra',n:'天赋额外抽取',i:'🌟'},{k:'brawl_trial',n:'乱斗体验卡',i:'🧪'}];if(inv)inv.innerHTML='<div class="inv-grid">'+invItems.map(x=>'<div class="inv-item"><div style="font-size:18px">'+x.i+'</div><div style="font-size:11px;color:#6e6e73;margin:2px 0">'+x.n+'</div><div class="inv-count">'+(state.inventory[x.k]||0)+'</div></div>').join('')+'</div>';document.getElementById('b-change-count').textContent=state.inventory.change_ticket||0;document.getElementById('b-draw-count').textContent=state.inventory.draw_ticket||0;const vipCnt=document.getElementById('b-vip-count');if(vipCnt)vipCnt.textContent=state.inventory.brawl_vip||0;const slotCnt=document.getElementById('slot-trial-count');if(slotCnt)slotCnt.textContent=state.inventory.slot_trial||0;const potTrialCnt=document.getElementById('potential-trial-count');if(potTrialCnt)potTrialCnt.textContent=state.inventory.potential_trial||0;const passiveDurCnt=document.getElementById('passive-duration-count');if(passiveDurCnt)passiveDurCnt.textContent=state.inventory.passive_duration||0;const partsPackCnt=document.getElementById('parts-pack-count');if(partsPackCnt)partsPackCnt.textContent=state.inventory.parts_pack||0;}
 function buyItem(id){if(id==='parts_pack'){buyPartsPackBulk();return;}const sp=SHOP_POINTS.find(x=>x.id===id);const st=SHOP_TOKENS.find(x=>x.id===id);const item=sp||st;if(!item)return;const bought=state.shopBought[id]||0;let limitNum=999;if(item.limit.includes('最多')){const m=item.limit.match(/\d+/);if(m)limitNum=parseInt(m[0]);}else if(item.limit!=='无限制'){const m=item.limit.match(/\d+/);if(m)limitNum=parseInt(m[0]);}if(bought>=limitNum){alert('已达上限');return;}if(item.type==='points'){
     if(state.points<item.cost){alert('积分不足');return;}
   }else{
@@ -2950,7 +3035,7 @@ function submitDaily(){
     if(getPassiveState().p12Resilience){getPassiveState().resilience=Math.min(200,getPassiveState().resilience+getPassiveState().p12Resilience);getPassiveState().p12Resilience=0;}
      
     const pointsInfo=calcAutoPoints(finalEp,state.totalEP,state.totalEP+finalEp);
-    state.totalEP+=finalEp;
+    const rankUps=addTotalEp(finalEp,true);
     state.points+=pointsInfo.total;
     state.tokens+=tks;
     const _en=getEnergy();_en.v=Math.min(10,_en.v+3);
@@ -2996,6 +3081,7 @@ function submitDaily(){
     if(state._lastDrops){Object.keys(state._lastDrops).forEach(function(k){_g.push([k,'×'+state._lastDrops[k],'#ff9500']);});}
     const _lv=getLevelInfo(state.totalEP);
     showGainModal('💰 结算完成 · 恭喜获得',_g,'Lv.'+_lv.lv+' '+_lv.name+' · 距下级 '+getNextNeed(state.totalEP)+' EP');
+    showRankUpNotices(rankUps);
   });
 }
 function revokeDaily(){if(!state.dailyHistory.length){alert('没有可撤销的记录');return;}const last=state.dailyHistory.pop();state.totalEP-=last.ep;state.points-=last.points;state.tokens-=last.tokens;if(last.cardId){state.inventory[last.cardId]=(state.inventory[last.cardId]||0)+1;state.dailyCardUsedDate='';state.dailyCardUsedId='';}if(last.tasks&&last.tasks.length){
@@ -3102,7 +3188,7 @@ function claimAchieve(code){
   if(!it||state.achievement.claimed.includes(code))return;
   state.achievement.claimed.push(code);
   const r=it.r||{};
-  if(r.ep)state.totalEP+=r.ep;
+  const rankUps=r.ep?addTotalEp(r.ep,true):[];
   if(r.p)state.points+=r.p;
   if(r.t)state.tokens+=r.t;
   if(r.items)r.items.forEach(x=>{state.inventory[x]=(state.inventory[x]||0)+1;});
@@ -3112,6 +3198,7 @@ function claimAchieve(code){
   updateShopUI();
   renderAchievementUI();
   showGainModal('🏆 成就达成 · '+it.n,rwLines(it.r,it.title),'称号可在首页等级旁装备');
+  showRankUpNotices(rankUps);
 }
 function submitManual(code){
   const it=ACHIEVE_DATA.find(x=>x.c===code);
@@ -3557,7 +3644,7 @@ function choosePotentialCandidate(idx){
   const item=(state.potential.candidates||[])[idx];if(!item)return;
   const slot=state.potential.candidateSlot;
   state.potential.drawn.push(item.id);state.potential.hist.push(item);state.potential.candidates=[];state.potential.candidateSlot=null;collectToCodex('potential',item.id);
-  if(item.id===7){state.totalEP+=600;updateTopBar();}
+  if(item.id===7){addTotalEp(600);updateTopBar();}
   if(item.id===38){state.potentialFirstLimited=true;}
   saveState();closeModal();updatePotentialUI();renderDailySkills();renderTalentBars();
   if(item.id===31)setTimeout(function(){openPotentialMarkSelector('tag');},80);
@@ -5958,7 +6045,7 @@ function next(){
   }
 function renderAnnouncements(){
   const box=document.getElementById('ann-list');if(!box)return;
-  const list=[{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
+  const list=[{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
   const dc=getDayCupInfo();const dtag=getTag(dc.tagId);
   if(dc.active)list.push({t:'🏆 日杯今日开启',d:'指定「'+(dtag?dtag.path.join(' · '):'')+'」，1 能量报名，冠军 🪙15。',c:'#ff9500'});
   else list.push({t:'🏆 日杯预告',d:'下一次日杯：'+dc.daysToActive+' 天后（'+dc.dateStr+'），前一天邮件提醒。',c:'#ff9500'});
@@ -6744,8 +6831,162 @@ renderArenaUI=function(){
 
 var _gainQueue=[];var _gainBusy=false;
 </script>
+
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+/* ================= v1.4.6.4 竞技改版：移除基地袭击 · 复仇名单 · 离线补算（追加覆盖，不改原代码） ================= */
+(function(){
+'use strict';
+
+/* ① 删除基地袭击系统 */
+arenaMaybeAttack=function(){return;};
+
+/* ② 重写 arenaGhostVsMe：沿用补丁K的 ±x 结算，失败改为压入复仇名单 revList（上限5条），不再覆盖 a.revenge */
+arenaGhostVsMe=function(){
+  const a=getArena();
+  try{arenaEnsureRoster(a);}catch(e){}
+  const pool=state.arenaRoster.list.filter(function(g){return g.div===a.division;});
+  if(!pool.length)return;
+  const g=pool[Math.floor(Math.random()*pool.length)];
+  const gSim=g.score*(0.8+Math.random()*0.4);
+  const iWin=gSim<=a.qualScore;
+  const x=arenaX(a.arenaPts,ghostPts(g));
+  a.matchLog=a.matchLog||[];
+  if(iWin){
+    a.arenaPts=Math.round(a.arenaPts||0)+x;g.arenaPts=Math.max(0,ghostPts(g)-Math.round(x*0.5));
+    a.matchLog.unshift({t:Date.now(),type:'对战',name:g.name,win:true,delta:x});
+    sendSystemMail('⚔️ 自动对战胜利',g.name+' 的模拟分 '+Math.round(gSim)+' 未越过你的资格分线 '+a.qualScore+'：竞技积分 +<b>'+x+'</b>，当前 '+a.arenaPts+'。',{});
+  }else{
+    const lost=Math.round(x*0.5);
+    a.arenaPts=Math.max(0,Math.round(a.arenaPts||0)-lost);g.arenaPts=ghostPts(g)+x;
+    a.defLosses=(a.defLosses||0)+1;
+    a.revList=a.revList||[];
+    a.revList.unshift({name:g.name,lost:lost,t:Date.now(),done:false});
+    a.revList=a.revList.slice(0,5);
+    a.matchLog.unshift({t:Date.now(),type:'被挑战',name:g.name,win:false,delta:-lost});
+    sendSystemMail('⚔️ 自动对战失利',g.name+' 的模拟分 '+Math.round(gSim)+' 越过了你的资格分线 '+a.qualScore+'：竞技积分 -<b>'+lost+'</b>，当前 '+a.arenaPts+'。已记入<b>复仇名单</b>（花 1 张竞技券开 90 分钟复仇，成功夺回 50 再按常规结算，失败只耗券）。',{});
+  }
+  a.matchLog=a.matchLog.slice(0,5);
+  saveState();
+};
+
+/* ③ 重写 arenaStartRevenge(idx)：从 revList 选目标，花 1 券开 90 分钟复仇（结算沿用 arenaFinishPending 的 revenge 分支） */
+arenaStartRevenge=function(idx){
+  const a=getArena();
+  a.revList=a.revList||[];
+  const it=a.revList[Number(idx)];
+  if(!it||it.done){alert('该目标不可复仇');return;}
+  if(a.pending||a.qualActive){alert('有赛程进行中');return;}
+  if(arenaTicketsLeft()<1){alert('今日竞技券不足（复仇也需 1 张）');return;}
+  const g=(state.arenaRoster.list||[]).find(function(x){return x.name===it.name;});
+  if(!g){alert('目标已不在本赛区名册中');return;}
+  showModal('⚔️ 复仇 · '+g.name,'消耗 <b>1 张竞技券</b>开启 90 分钟复仇赛程。<br>对方资格分 <b>'+g.score+'</b>，当前竞技积分 <b style="color:#ff9500;">'+ghostPts(g)+'</b>。<br><br>成功：夺回 <b>'+Math.min(50,ghostPts(g))+'</b> 竞技积分（以对方现有积分为上限），再按常规挑战结算 ±x；失败：仅损失这张券，积分不动。',function(){
+    const now=Date.now();
+    a.defenses=(a.defenses||0)+1;
+    a.pending={type:'revenge',ghost:g,startAt:now,endAt:now+90*60000,ep:0,target:g.score,x:0};
+    it.done=true;
+    saveState();renderArenaUI();closeModal();
+  });
+};
+
+/* ④ 包装 renderArenaUI：在 #arena-revenge 渲染未复仇目标列表 + 逐个复仇按钮 */
+var __rui1464=renderArenaUI;
+renderArenaUI=function(){
+  __rui1464();
+  const a=getArena();
+  const rv=document.getElementById('arena-revenge');
+  if(!rv)return;
+  const all=a.revList||[];
+  const list=all.filter(function(it){return it&&!it.done;});
+  if(!list.length){rv.innerHTML='';return;}
+  const noTicket=arenaTicketsLeft()<1;
+  rv.innerHTML='<div style="border:1px solid #ff3b3040;border-radius:10px;padding:10px;background:#fff5f5;">'
+    +'<div style="font-size:13px;font-weight:600;color:#ff3b30;margin-bottom:2px;">⚔️ 复仇名单（'+list.length+'）</div>'
+    +all.map(function(it,i){
+      if(!it||it.done)return '';
+      const d=new Date(it.t);
+      const ts=(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+      return '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-top:1px solid #ff3b3020;font-size:12px;"><span style="flex:1;">'+it.name+' <span style="color:#8e8e93;font-size:11px;">-'+it.lost+' 分 · '+ts+'</span></span><button class="btn-accent" style="padding:4px 12px;font-size:11px;white-space:nowrap;" onclick="arenaStartRevenge('+i+')" '+(noTicket?'disabled':'')+'>复仇 · 1券</button></div>';
+    }).join('')
+    +'<div style="font-size:11px;color:#8e8e93;margin-top:6px;">成功：夺回 50 竞技积分（以对方现有积分为上限）再按常规流程结算；失败：仅损失 1 张券。</div></div>';
+};
+
+/* ⑤ 重写 arenaAutoMatch：概率按分钟计算，0:00-06:00 为 0.05/60，其余 0.30；时间戳存 state.arenaAutoLast */
+function arenaMinuteProb(date){const h=date.getHours();return (h>=0&&h<6)?(0.05/60):0.30;}
+arenaAutoMatch=function(){
+  const now=Date.now();
+  const last=state.arenaAutoLast||now;
+  const mins=Math.floor((now-last)/60000);
+  if(mins<1)return;
+  state.arenaAutoLast=now;
+  const p=arenaMinuteProb(new Date());
+  if(Math.random()<1-Math.pow(1-p,mins)){
+    if(Math.random()<0.15)arenaGhostVsMe();
+    else arenaGhostMatch();
+  }
+};
+
+/* ⑥ arenaOfflineCatchup：启动时 + visibilitychange 回前台时，按分钟补算错过的对战（上限2880分钟），
+      85% 幽灵互殴 / 15% 挑战我；补算期间临时拦截 sendSystemMail 只计数，结束后发 1 封汇总邮件 */
+function arenaOfflineCatchup(){
+  const now=Date.now();
+  let a;
+  try{a=getArena();}catch(e){return;}
+  const last=state.arenaAutoLast||a.lastGhostMatchAt||now;
+  let mins=Math.floor((now-last)/60000);
+  state.arenaAutoLast=now;
+  if(mins<1)return;
+  if(mins>2880)mins=2880;
+  let mailCount=0,matches=0,vsMe=0,vsMeLost=0;
+  const __origMail=sendSystemMail,__origSave=saveState;
+  sendSystemMail=function(){mailCount++;};
+  saveState=function(){}; /* 补算期间不逐场写盘，结束后统一保存 */
+  try{
+    for(let i=0;i<mins;i++){
+      const p=arenaMinuteProb(new Date(last+(i+1)*60000));
+      if(Math.random()>=p)continue;
+      matches++;
+      if(Math.random()<0.15){
+        vsMe++;
+        const before=(a.revList||[]).length;
+        arenaGhostVsMe();
+        if((a.revList||[]).length>before)vsMeLost++;
+      }else arenaGhostMatch();
+    }
+  }catch(e){}
+  sendSystemMail=__origMail;
+  saveState=__origSave;
+  if(matches>0){
+    sendSystemMail('⚔️ 离线对战补算','你离开约 '+mins+' 分钟，期间按分钟补算幽灵对战 <b>'+matches+'</b> 场：幽灵互殴 '+(matches-vsMe)+' 场 · 挑战你 '+vsMe+' 场'+(vsMeLost?'（失利 <b>'+vsMeLost+'</b> 场，已入复仇名单）':'')+'。逐条战报已合并（共 '+mailCount+' 条），详情见竞技页比赛日志与复仇名单。',{});
+  }
+  saveState();
+  try{if(document.getElementById('page-race').classList.contains('active'))renderArenaUI();}catch(e){}
+}
+
+/* 旧档迁移：袭击时代的 a.revenge 一次性并入复仇名单 */
+var __getArena1464=getArena;
+getArena=function(){
+  const a=__getArena1464();
+  if(!Array.isArray(a.revList))a.revList=[];
+  if(a.revenge&&a.revenge.ghost&&!a.pending){
+    a.revList.unshift({name:a.revenge.ghost.name,lost:50,t:(a.revenge.startAt||Date.now()),done:false});
+    a.revList=a.revList.slice(0,5);
+    a.revenge=null;
+    saveState();
+  }
+  return a;
+};
+
+/* 启动补算 + 回前台补算 */
+try{arenaOfflineCatchup();}catch(e){}
+document.addEventListener('visibilitychange',function(){
+  if(!document.hidden){try{arenaOfflineCatchup();}catch(e){}}
+});
+
+/* PWA：注册 Service Worker（sw.js，缓存名 kaoyan-v1464） */
+if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
+  window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
+}
+})();
 </script>
 </body>
 </html>

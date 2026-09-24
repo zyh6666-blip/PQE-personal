@@ -1,11 +1,44 @@
-const CACHE='kaoyan-v1463';
-const ASSETS=['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png','./icon-180.png'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()));});
-self.addEventListener('activate',e=>{e.waitUntil(clients.claim());});
-self.addEventListener('fetch',e=>{
+/* 考研EP系统 Service Worker · v1.4.6.4 */
+const CACHE_NAME = 'kaoyan-v1464';
+const APP_SHELL = ['./', './index.html'];
+
+self.addEventListener('install', function (e) {
+  e.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function (c) { return c.addAll(APP_SHELL); })
+      .then(function () { return self.skipWaiting(); })
+  );
+});
+
+self.addEventListener('activate', function (e) {
+  e.waitUntil(
+    caches.keys()
+      .then(function (keys) {
+        return Promise.all(keys.map(function (k) {
+          if (k !== CACHE_NAME) return caches.delete(k);
+        }));
+      })
+      .then(function () { return self.clients.claim(); })
+  );
+});
+
+/* 同源 GET：缓存优先 + 后台更新（stale-while-revalidate），离线可用 */
+self.addEventListener('fetch', function (e) {
+  const req = e.request;
+  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
   e.respondWith(
-    caches.match(e.request,{ignoreSearch:true}).then(r=>r||fetch(e.request).then(res=>{
-      const copy=res.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return res;
-    }).catch(()=>caches.match('./index.html')))
+    caches.match(req, { ignoreSearch: req.mode === 'navigate' }).then(function (hit) {
+      const fetching = fetch(req).then(function (resp) {
+        if (resp && resp.ok) {
+          const copy = resp.clone();
+          caches.open(CACHE_NAME).then(function (c) { c.put(req, copy); });
+        }
+        return resp;
+      }).catch(function () { return null; });
+      if (hit) { e.waitUntil(fetching); return hit; }
+      return fetching.then(function (resp) {
+        return resp || caches.match('./index.html');
+      });
+    })
   );
 });
