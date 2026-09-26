@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.4.6.4</title>
+<title>考研成长系统 v1.4.7</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f7;color:#1d1d1f;min-height:100vh;padding-bottom:40px}
@@ -138,7 +138,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.6.4</span>
+      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.7</span>
       <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -652,9 +652,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     <div class="card-title">📖 游戏指南 · 全功能说明</div>
     <div style="font-size:12px;color:#8e8e93;margin-bottom:10px;">点击标题展开/收起。建议配合「每日登记」页边用边看。</div>
     <div id="guide-body">
-      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🔄 核心循环</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天的核心循环五步：①早上打开「每日登记」，添加今日任务（最多15个，可拖拽排序、置顶1个），选好三级标签——任务结构决定今天的玩法上限；②三选一确认今日玩法（经典/乱斗/潜能，互斥，确认后当日不可换），再「确认今日任务」锁定结构；③白天完成任务，逐个填完成EP（必须是该标签当前占比要求值）与质量EP（自评，杯赛只看这个），点「完成」锁定单个任务——长期/周期任务副本会自动迁入；④晚上点「结算今日」：汇总全部加成与扣减（天赋/乱斗/潜能/被动/经验卡），明细账单逐任务列流水，确认后EP/积分入账、杯赛计分、材料掉落、能量+3；⑤次日0点所有日抛内容重置（乱斗属性、潜能栏、天赋锁定、经验卡），解锁新的随机内容，未结算的任务作废。所有锁定的内容当日不可反悔。策略：早上花三分钟想清楚今天干什么，比晚上补账重要得多。</div></details>
+      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🔄 核心循环</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天的核心循环五步：①早上打开「每日登记」，添加今日任务（最多15个，可拖拽排序、置顶1个），选好三级标签——任务结构决定今天的玩法上限；②三选一确认今日玩法（经典/乱斗/潜能，互斥，确认后当日不可换），再「确认今日任务」锁定结构；③白天完成任务，逐个填完成EP（必须是该标签当前占比要求值）并做任务状态评价（四维加权出质量EP，杯赛只看这个），点「完成」锁定单个任务——长期/周期任务副本会自动迁入；④晚上点「结算今日」：汇总全部加成与扣减（天赋/乱斗/潜能/被动/经验卡），明细账单逐任务列流水，确认后EP/积分入账、杯赛计分、材料掉落、能量+3；⑤次日0点所有日抛内容重置（乱斗属性、潜能栏、天赋锁定、经验卡），解锁新的随机内容，未结算的任务作废。所有锁定的内容当日不可反悔。策略：早上花三分钟想清楚今天干什么，比晚上补账重要得多。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">📋 任务体系</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b>每日任务</b>：最多15个，确认后结构锁定（仍可填EP），可拖拽排序、置顶1个（完成+5%，置顶强化被动升至15%但惩罚+20%）。<b>周期任务</b>：按1/2/3/7/14/30天周期自动生成副本到每日栏，副本不可删除，完成后记周期；截止后不再生成。<b>长期任务</b>：设定截止日期，前20%/50%/80%时间完成分别+80%/+40%/+20%加成，截止前1天自动并入每日栏，逾期当日结算EP-50%（每任务扣一次）；可随时「转移今日」提前并入，转后未完成按每日任务规则扣减并返回长期栏。<b>特殊标记</b>：幸运任务（结算+20%/40%，5个以上任务时出现1个、终极英雄2个）、感染任务（母体威慑被动：指定早中晚时段内完成+30%且全体增益，失败重罚）、强化任务（异界猎手支援）。副本类任务完成状态同步回源任务。</div></details>
-      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">💰 结算引擎</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b>完成EP</b>：必须是「该标签完成占比」对应的固定数值（基础10%，随极速/氮增成长，普通最高20%、SP固定10%），填错无法提交——它代表"做了"这个行为的基准分。<b>质量EP</b>：自评空间，建议按正确率/掌握度打分，是杯赛计分唯一依据（质量÷上限×100，达上限+20）。<b>罚则</b>：未完成任务按标签罚率（5%~30%）累计扣减总EP，多种减免可叠加（韧性承担、护盾吸收、硬化、保险、紧急撤离等），扣减上限100%。<b>明细账单</b>：结算弹窗逐任务列出全部加成流水（天赋/乱斗/潜能/被动/置顶/幸运），每笔标注来源与数值，可追溯。<b>经验卡</b>每日限1张（1.2~3倍，仅作用于EP）。<b>撤销</b>可整体回滚最近一次结算（退回EP/积分/代币/经验卡，恢复任务快照）。结算前看预览，确认无误再点。</div></details>
+      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">💰 结算引擎</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b>完成EP</b>：必须是「该标签完成占比」对应的固定数值（基础10%，随极速/氮增成长，普通最高20%、SP固定10%），填错无法提交——它代表"做了"这个行为的基准分。<b>质量EP</b>：由「任务状态评价」四维自评（正确率50%/专注度30%/用时5%/基本状态15%，各0-100，默认60）加权平均后乘以（最大EP-完成EP）得出，是杯赛计分唯一依据（质量÷上限×100，达上限+20）。<b>罚则</b>：未完成任务按标签罚率（5%~30%）累计扣减总EP，多种减免可叠加（韧性承担、护盾吸收、硬化、保险、紧急撤离等），扣减上限100%。<b>明细账单</b>：结算弹窗逐任务列出全部加成流水（天赋/乱斗/潜能/被动/置顶/幸运），每笔标注来源与数值，可追溯。<b>经验卡</b>每日限1张（1.2~3倍，仅作用于EP）。<b>撤销</b>可整体回滚最近一次结算（退回EP/积分/代币/经验卡，恢复任务快照）。结算前看预览，确认无误再点。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🎮 今日玩法（三选一互斥）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天三选一互斥：<b>📘 经典</b>——功能属性（常驻被动）+天赋生效，无随机规则，适合求稳或天赋池深的日子；<b>⚔️ 乱斗</b>——功能属性+天赋+每日随机乱斗属性（1个，灵魂武者2个，25个规则改写结算公式），适合想赌增益的日子；<b>✨ 潜能</b>——功能属性+潜能栏位构筑（9/14/18点开栏2选1，每日3次刷新），适合作息规律、能配合时段的日子。乱斗与潜能互斥，经典为默认。在「每日登记」点卡片选择并「确认今日玩法」，确认后当日结算前不可更换。选择策略：看今天任务结构——任务杂选乱斗赌增益、作息固定选潜能吃时段加成、有重要模考选经典稳吃天赋。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🧬 天赋（35个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每日抽取天赋并装配（6槽6费）：普通60%/稀有30%/高级7%/传说3%四档，共35个；每升1级+1次抽取，池抽空即止。互斥组只能带一个：时段三选一（晨读/下午茶/夜猫子）、政治主客观、英二有无作文、教综学与刷等。确认后当日锁定。天赋分全局型（看任务结构给加成）、科目专属型（政治/英二/教综/语言学）、条件型（时段/题型按钮）与传说主动技：心态壁垒（借乱斗属性120分钟）、不灭阳炎（扣15%燃烧15分钟后首任务+70%）、终结恩赐（按上限差额充能、满300开-97%护盾120分钟）、绝对免疫（250EP护盾优先吸收扣减）。策略：先定今日主攻科目再围绕配装。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">⚔️ 乱斗属性（25个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每日抽1个乱斗属性（灵魂武者可抽2个）改写结算公式，25个等概率。增益型：致命一击（完成顺序递增）、快速换弹（同标签连击）、第一滴血、致命攻击（80%+50%）、过度增长（破千阶梯+10%~110%）、枪械协同、重生契约、特工（90分钟+20%，CD90）与隐身（40分钟减免60%，CD120）主动技；保险型：无限火力、保底局（保底550）、摆脱危机（一标签免罚）、生命保险、双重装甲、防御补给；负面型：钢铁利爪（惩罚+20%）、复制感染（锚定首任务EP）；特殊型：融合（每科目专属属性+25%）、异界猎手支援（30%强化任务）、最后的幸存者。属性抽取券/变更券/特权券（可直接选融合）在商店有售。每日重置，与潜能互斥，确认后不可更换。策略：先看属性再排任务。</div></details>
@@ -6045,7 +6045,7 @@ function next(){
   }
 function renderAnnouncements(){
   const box=document.getElementById('ann-list');if(!box)return;
-  const list=[{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
+  const list=[{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
   const dc=getDayCupInfo();const dtag=getTag(dc.tagId);
   if(dc.active)list.push({t:'🏆 日杯今日开启',d:'指定「'+(dtag?dtag.path.join(' · '):'')+'」，1 能量报名，冠军 🪙15。',c:'#ff9500'});
   else list.push({t:'🏆 日杯预告',d:'下一次日杯：'+dc.daysToActive+' 天后（'+dc.dateStr+'），前一天邮件提醒。',c:'#ff9500'});
@@ -6976,16 +6976,464 @@ getArena=function(){
   return a;
 };
 
-/* 启动补算 + 回前台补算 */
+/* 启动/回前台补算已由 v1.4.6.5 块统一接管（旧模型作废，避免双重补算） */
+
+/* PWA：注册 Service Worker */
+if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
+  window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
+}
+})();
+</script>
+
+<script>
+/* ================= 竞技触发逻辑改版：幽灵资格赛排队 + 分时段定时战斗（追加覆盖） ================= */
+(function(){
+'use strict';
+
+var ARENA_DIVS_1465=['bronze','silver','gold','platinum','diamond','master'];
+
+/* 幽灵活跃度：普通60%(×1) / 活跃25%(×4) / 肝帝12%(×12) / 卷王3%(×40)，战斗抽选按此加权 */
+function arenaActTier(r){return r<0.03?40:(r<0.15?12:(r<0.4?4:1));}
+function arenaWeightedPick(list){
+  let tw=0;for(let i=0;i<list.length;i++)tw+=(list[i].act||1);
+  let v=Math.random()*tw;
+  for(let i=0;i<list.length;i++){v-=(list[i].act||1);if(v<=0)return list[i];}
+  return list[list.length-1];
+}
+
+/* 某时间戳所在周的周一 0:00 */
+function arenaMondayOf(ts){const d=new Date(ts);const day=(d.getDay()+6)%7;d.setHours(0,0,0,0);d.setDate(d.getDate()-day);return d.getTime();}
+
+/* 幽灵是否已完成本周资格赛 */
+function arenaGhostQualified(g,a,now){
+  return !!(g&&g.qualWeek===a.weekKey&&typeof g.qualAt==='number'&&g.qualAt<=(now||Date.now()));
+}
+function arenaQualifiedGhosts(div,a){
+  a=a||getArena();
+  const now=Date.now();
+  return (state.arenaRoster.list||[]).filter(function(g){return g.div===div&&arenaGhostQualified(g,a,now);});
+}
+
+/* 名册外包：为缺少活跃度的幽灵回填 act 档 */
+var __aer1465b=arenaEnsureRoster;
+arenaEnsureRoster=function(a){
+  __aer1465b(a);
+  try{(state.arenaRoster.list||[]).forEach(function(g){
+    if(typeof g.act!=='number'||!isFinite(g.act))g.act=arenaActTier(Math.random());
+  });}catch(e){}
+};
+
+/* getArena 外包：每周一为 3000 幽灵随机排定资格赛日程（每小时 100 个，30 小时排完） */
+var __getArena1465=getArena;
+getArena=function(){
+  const a=__getArena1465();
+  try{
+    arenaEnsureRoster(a);
+    const list=state.arenaRoster.list||[];
+    if(list.length&&list[0].qualWeek!==a.weekKey){
+      const ws=arenaMondayOf(Date.now());
+      const order=list.slice();
+      for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=order[i];order[i]=order[j];order[j]=t;}
+      order.forEach(function(g,i){
+        g.qualWeek=a.weekKey;
+        g.qualAt=ws+Math.floor(i/100)*3600000+Math.floor(Math.random()*3600000);
+      });
+      saveState();
+    }
+  }catch(e){}
+  return a;
+};
+
+/* 每分钟战斗场次：本周一 6:00 起；每天 6-23 点必 1 场 + 50% 第 2 场；23-6 点 10% 一场；周一 0-6 点无战斗 */
+function arenaBattlesForMinute(ts){
+  if(ts<arenaMondayOf(ts)+6*3600000)return 0;
+  const h=new Date(ts).getHours();
+  if(h>=6&&h<23)return 1+(Math.random()<0.5?1:0);
+  return Math.random()<0.10?1:0;
+}
+function arenaRunBattle(){
+  if(Math.random()<0.003)arenaGhostVsMe();   /* 平衡性调整：5% → 0.3%，与单个幽灵参战频率拉平 */
+  else arenaGhostMatch();
+}
+
+/* 幽灵互殴：随机段位 + 限同段位 + 仅已资格赛幽灵 */
+arenaGhostMatch=function(){
+  const a=getArena();
+  try{arenaEnsureRoster(a);}catch(e){}
+  const div=ARENA_DIVS_1465[Math.floor(Math.random()*ARENA_DIVS_1465.length)];
+  const pool=arenaQualifiedGhosts(div,a);
+  if(pool.length<2)return null;
+  const g1=arenaWeightedPick(pool);
+  let g2=arenaWeightedPick(pool);
+  if(g2===g1)g2=pool[(pool.indexOf(g1)+1)%pool.length];
+  const x=arenaX(ghostPts(g1),ghostPts(g2));
+  const win=(g1.score*(0.8+Math.random()*0.4))>g2.score;
+  if(win){g1.arenaPts=ghostPts(g1)+x;g2.arenaPts=Math.max(0,ghostPts(g2)-Math.round(x*0.5));}
+  else{g1.arenaPts=Math.max(0,ghostPts(g1)-Math.round(x*0.5));g2.arenaPts=ghostPts(g2)+x;}
+  a.lastGhostMatchAt=Date.now();
+  saveState();
+  return {g1:g1,g2:g2,win:win,x:x};
+};
+
+/* 幽灵挑战我：我未打资格赛则不会被挑战；60% 概率挑竞技积分 ±20 以内的对手；结算与复仇名单逻辑不变 */
+arenaGhostVsMe=function(){
+  const a=getArena();
+  if(!a.qualDone)return false;
+  try{arenaEnsureRoster(a);}catch(e){}
+  const pool=arenaQualifiedGhosts(a.division,a);
+  if(!pool.length)return false;
+  let g=null;
+  if(Math.random()<0.6){
+    const near=pool.filter(function(x){return Math.abs(ghostPts(x)-(a.arenaPts||0))<=20;});
+    if(near.length)g=arenaWeightedPick(near);
+  }
+  if(!g)g=arenaWeightedPick(pool);
+  const gSim=g.score*(0.8+Math.random()*0.4);
+  const iWin=gSim<=a.qualScore;
+  const x=arenaX(a.arenaPts,ghostPts(g));
+  a.matchLog=a.matchLog||[];
+  if(iWin){
+    a.arenaPts=Math.round(a.arenaPts||0)+x;g.arenaPts=Math.max(0,ghostPts(g)-Math.round(x*0.5));
+    a.matchLog.unshift({t:Date.now(),type:'对战',name:g.name,win:true,delta:x});
+    sendSystemMail('⚔️ 自动对战胜利',g.name+' 的模拟分 '+Math.round(gSim)+' 未越过你的资格分线 '+a.qualScore+'：竞技积分 +<b>'+x+'</b>，当前 '+a.arenaPts+'。',{});
+  }else{
+    const lost=Math.round(x*0.5);
+    a.arenaPts=Math.max(0,Math.round(a.arenaPts||0)-lost);g.arenaPts=ghostPts(g)+x;
+    a.defLosses=(a.defLosses||0)+1;
+    a.revList=a.revList||[];
+    a.revList.unshift({name:g.name,lost:lost,t:Date.now(),done:false});
+    a.revList=a.revList.slice(0,5);
+    a.matchLog.unshift({t:Date.now(),type:'被挑战',name:g.name,win:false,delta:-lost});
+    sendSystemMail('⚔️ 自动对战失利',g.name+' 的模拟分 '+Math.round(gSim)+' 越过了你的资格分线 '+a.qualScore+'：竞技积分 -<b>'+lost+'</b>，当前 '+a.arenaPts+'。已记入<b>复仇名单</b>（花 1 张竞技券开 90 分钟复仇，成功夺回 50 再按常规结算，失败只耗券）。',{});
+  }
+  a.matchLog=a.matchLog.slice(0,5);
+  saveState();
+  return true;
+};
+
+/* 在线触发：按分钟结算；缺口 >3 分钟转离线补算 */
+arenaAutoMatch=function(){
+  const now=Date.now();
+  const last=state.arenaAutoLast||now;
+  const mins=Math.floor((now-last)/60000);
+  if(mins<1)return;
+  if(mins>3){arenaOfflineCatchup();return;}
+  state.arenaAutoLast=now;
+  for(let i=0;i<mins;i++){
+    const n=arenaBattlesForMinute(last+(i+1)*60000);
+    for(let j=0;j<n;j++)arenaRunBattle();
+  }
+};
+
+/* 离线补算：逐分钟重放（上限 2880 分钟），拦截逐条邮件只计数，结束发 1 封汇总 */
+function arenaOfflineCatchup(){
+  const now=Date.now();
+  let a;
+  try{a=getArena();}catch(e){return;}
+  const last=state.arenaAutoLast||a.lastGhostMatchAt||now;
+  let mins=Math.floor((now-last)/60000);
+  state.arenaAutoLast=now;
+  if(mins<1)return;
+  if(mins>2880)mins=2880;
+  let mailCount=0,matches=0,vsMe=0,vsMeLost=0;
+  const __origMail=sendSystemMail,__origSave=saveState;
+  sendSystemMail=function(){mailCount++;};
+  saveState=function(){};
+  try{
+    for(let i=0;i<mins;i++){
+      const n=arenaBattlesForMinute(last+(i+1)*60000);
+      for(let j=0;j<n;j++){
+        if(Math.random()<0.003){
+          const before=(a.revList||[]).length;
+          if(arenaGhostVsMe()){matches++;vsMe++;if((a.revList||[]).length>before)vsMeLost++;}
+        }else if(arenaGhostMatch())matches++;
+      }
+    }
+  }catch(e){}
+  sendSystemMail=__origMail;
+  saveState=__origSave;
+  if(matches>0){
+    sendSystemMail('⚔️ 离线对战补算','你离开约 '+mins+' 分钟，期间补算幽灵对战 <b>'+matches+'</b> 场：幽灵互殴 '+(matches-vsMe)+' 场 · 挑战你 '+vsMe+' 场'+(vsMeLost?'（失利 <b>'+vsMeLost+'</b> 场，已入复仇名单）':'')+'。逐条战报已合并（共 '+mailCount+' 条），详情见竞技页比赛日志与复仇名单。',{});
+  }
+  saveState();
+  try{if(document.getElementById('page-race').classList.contains('active'))renderArenaUI();}catch(e){}
+}
+
+/* arenaTick 整体替换：移除补丁F残留的随机幽灵战，统一走新分钟模型 */
+arenaTick=function(){
+  const a=getArena();
+  if(a.qualActive&&Date.now()>a.qualEndAt){arenaFinishQual(a);}
+  if(a.pending&&Date.now()>a.pending.endAt){arenaFinishPending(a);}
+  if(a.revenge&&a.revenge.active&&Date.now()>a.revenge.endAt){a.revenge=null;saveState();}
+  arenaSettleWeek(a);
+  try{arenaAutoMatch();}catch(e){}
+};
+
+/* 候选名单：仅已资格赛的同段幽灵 */
+arenaCandidates=function(){
+  const a=getArena();
+  const today=new Date().toDateString();
+  if(a.candDate!==today||!Array.isArray(a.cand)||a.cand.some(function(g){return !g||typeof g.score!=='number'||!isFinite(g.score)||!arenaGhostQualified(g,a);})){
+    const pool=arenaQualifiedGhosts(a.division,a).sort(function(x,y){return Math.abs(ghostPts(x)-a.arenaPts)-Math.abs(ghostPts(y)-a.arenaPts);}).slice(0,15);
+    let h=arenaHashStr(today+'|'+a.weekKey+'|r'+(a.refreshes||0));
+    for(let i=pool.length-1;i>0;i--){h=(h*31+7)>>>0;const j=h%(i+1);const t=pool[i];pool[i]=pool[j];pool[j]=t;}
+    a.cand=pool.slice(0,5);a.candDate=today;saveState();
+  }
+  return a.cand;
+};
+
+/* 排行榜：仅已资格赛幽灵上榜；我未打资格赛时排行榜不可见 */
+var __rui1465=renderArenaUI;
+renderArenaUI=function(){
+  __rui1465();
+  const a=getArena();
+  const board=document.getElementById('arena-board');
+  if(!board)return;
+  if(!a.qualDone){
+    board.innerHTML='<div style="border:1px dashed #d1d1d6;border-radius:10px;padding:18px;text-align:center;font-size:13px;color:#8e8e93;line-height:1.9;">🔒 你还未参加本周资格赛<br>完成资格赛后才会进入排行榜并解锁查看；未参加资格赛的幽灵同样不会上榜。</div>';
+    return;
+  }
+  try{arenaEnsureRoster(a);}catch(e){}
+  const qual=arenaQualifiedGhosts(a.division,a);
+  const peers=qual.map(function(g){return {name:g.name,pts:ghostPts(g),isYou:false};});
+  peers.push({name:'你',pts:(a.arenaPts||0),isYou:true});
+  peers.sort(function(x,y){return y.pts-x.pts;});
+  const myRank=peers.findIndex(function(p){return p.isYou;});
+  __myRankK=myRank;
+  const total=peers.length,PS=50,pages=Math.max(1,Math.ceil(total/PS));
+  if(__boardPage<1)__boardPage=1;
+  if(__boardPage>pages)__boardPage=pages;
+  const start=(__boardPage-1)*PS;
+  let rows='';
+  for(let i=start;i<Math.min(start+PS,total);i++){
+    const p=peers[i];
+    const tier=arenaTierOfRank(i);
+    rows+='<div style="display:flex;justify-content:space-between;padding:5px 10px;font-size:12px;border-bottom:1px solid #f2f2f7;'+(p.isYou?'background:#007aff10;font-weight:700;box-shadow:inset 3px 0 0 #007aff;':'')+'"><span style="flex:1;">'+(i+1)+'. '+p.name+(p.isYou?'（你）':'')+'</span><span style="flex:1;text-align:right;color:#ff9500;font-weight:600;">'+p.pts+'</span><span style="flex:1;text-align:right;font-size:10px;color:#8e8e93;">'+ARENA_TIER_NAMES[tier]+'</span></div>';
+  }
+  board.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:6px;"><span style="font-size:12px;color:#6e6e73;">'+ARENA_DIV_NAMES[a.division]+'赛区 · 已资格赛 <b>'+qual.length+'</b>/500 · 你的名次 <b style="color:#ff9500;">'+(myRank+1)+'</b> · '+ARENA_TIER_NAMES[arenaTierOfRank(myRank)]+'</span><button class="btn-accent" style="padding:4px 12px;font-size:11px;" onclick="arenaBoardJumpMe()">🔍 跳到我</button></div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><button class="btn-secondary" style="padding:3px 12px;font-size:11px;" onclick="arenaBoardPage(-1)" '+(__boardPage<=1?'disabled':'')+'>◀ 上一页</button><span style="font-size:11px;color:#8e8e93;">第 '+__boardPage+' / '+pages+' 页（每页50人）</span><button class="btn-secondary" style="padding:3px 12px;font-size:11px;" onclick="arenaBoardPage(1)" '+(__boardPage>=pages?'disabled':'')+'>下一页 ▶</button></div>'
+    +'<div style="border:1px solid #e5e5ea;border-radius:8px;">'+rows+'</div>';
+};
+
+/* 启动补算 + 回前台补算（覆盖 v1.4.6.4 块的同名监听，重复执行无害：时间戳已推进即返回） */
 try{arenaOfflineCatchup();}catch(e){}
 document.addEventListener('visibilitychange',function(){
   if(!document.hidden){try{arenaOfflineCatchup();}catch(e){}}
 });
+})();
+</script>
 
-/* PWA：注册 Service Worker（sw.js，缓存名 kaoyan-v1464） */
-if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
-  window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
+<script>
+/* ================= 任务状态评价（四维加权替代手填质量EP）+ 周期副本跨天清理（追加覆盖） ================= */
+(function(){
+'use strict';
+
+/* ---------- ① 任务状态评价：正确率50% / 专注度30% / 用时5% / 基本状态15%，默认60必填（可改） ---------- */
+var QUALITY_DIMS=[['acc','正确率',0.5],['focus','专注度',0.3],['time','用时',0.05],['state','基本状态',0.15]];
+var QUALITY_DEFAULT=60;
+
+function qDimVal(t,k){
+  const qs=t.qs||{};const v=parseInt(qs[k]);
+  return isNaN(v)?QUALITY_DEFAULT:Math.max(0,Math.min(100,v));
 }
+function qualityAvg(t){
+  return qDimVal(t,'acc')*0.5+qDimVal(t,'focus')*0.3+qDimVal(t,'time')*0.05+qDimVal(t,'state')*0.15;
+}
+/* 质量EP = 加权平均% ×（标签最大EP - 完成EP要求值） */
+function computeQualityEp(t){
+  const tag=getTag(t.tagId);
+  if(!tag)return parseInt(t.qualityEp)||0;
+  const cap=Math.max(0,(tag.maxEp||0)-(requiredBaseOf(t)||0));
+  return Math.round(qualityAvg(t)/100*cap);
+}
+function syncQuality(t){t.qs=t.qs||{};t.qualityEp=computeQualityEp(t);}
+
+window.updateQDim=function(src,idx,dim,val){
+  const list=(src==='long'?state.longTasks:state.todayTasks);
+  const t=list&&list[idx];
+  if(!t||t.completed)return;
+  t.qs=t.qs||{};
+  const v=parseInt(val);
+  t.qs[dim]=isNaN(v)?QUALITY_DEFAULT:Math.max(0,Math.min(100,v));
+  t.qualityEp=computeQualityEp(t);
+  saveState();
+  const el=document.getElementById('qres-'+src+'-'+idx);
+  if(el)el.innerHTML='→ 质量EP <b style="color:#007aff;">'+t.qualityEp+'</b>（'+Math.round(qualityAvg(t))+'%）';
+};
+
+function qEvalPanel(src,idx,t){
+  let h='<div style="margin-top:6px;border:1px dashed #d1d1d6;border-radius:8px;padding:8px;background:#fafbfd;">';
+  h+='<div style="font-size:11px;color:#8e8e93;margin-bottom:5px;">📋 任务状态评价 <span style="color:#c7c7cc;">（0-100 · 默认'+QUALITY_DEFAULT+' · 权重：正确率50% 专注度30% 用时5% 基本状态15%）</span></div>';
+  h+='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">';
+  QUALITY_DIMS.forEach(function(d){
+    h+='<label style="display:flex;align-items:center;gap:3px;font-size:11px;color:#6e6e73;white-space:nowrap;">'+d[1]+'<input type="number" min="0" max="100" value="'+qDimVal(t,d[0])+'" oninput="updateQDim(\''+src+'\','+idx+',\''+d[0]+'\',this.value)" style="width:50px;padding:4px 5px;border:1px solid #d1d1d6;border-radius:6px;font-size:12px;"></label>';
+  });
+  h+='<span id="qres-'+src+'-'+idx+'" style="font-size:12px;color:#6e6e73;margin-left:auto;white-space:nowrap;">→ 质量EP <b style="color:#007aff;">'+computeQualityEp(t)+'</b>（'+Math.round(qualityAvg(t))+'%）</span>';
+  h+='</div></div>';
+  return h;
+}
+
+/* 渲染后处理：把"质量EP"输入框替换为四维评价面板；完成卡片追加评价明细 */
+function upgradeQualityUI(){
+  const box=document.getElementById('task-list');
+  if(box){
+    box.querySelectorAll('input[onchange*="qualityEp"]').forEach(function(inp){
+      const m=/updateTask\((\d+)/.exec(inp.getAttribute('onchange')||'');
+      if(!m)return;
+      const i=+m[1],t=state.todayTasks[i];
+      if(!t||t.completed)return;
+      const tmp=document.createElement('div');tmp.innerHTML=qEvalPanel('today',i,t);
+      const row=inp.parentNode;
+      row.parentNode.insertBefore(tmp.firstChild,row.nextSibling);
+      inp.remove();
+    });
+    const cards=box.querySelectorAll('.task-card');
+    state.todayTasks.forEach(function(t,i){
+      const card=cards[i];
+      if(!card||!t.completed||!t.qs)return;
+      const divs=card.querySelectorAll('div');
+      for(let k=0;k<divs.length;k++){
+        if(!divs[k].children.length&&/^\s*质量EP/.test(divs[k].textContent)){
+          divs[k].innerHTML='质量EP: '+(t.qualityEp||0)+' <span style="font-size:10px;color:#8e8e93;">（评价 '+Math.round(qualityAvg(t))+'%：正确'+qDimVal(t,'acc')+' 专注'+qDimVal(t,'focus')+' 用时'+qDimVal(t,'time')+' 状态'+qDimVal(t,'state')+'）</span>';
+          break;
+        }
+      }
+    });
+  }
+  const lbox=document.getElementById('long-task-list');
+  if(lbox){
+    lbox.querySelectorAll('input[onchange*="qualityEp"]').forEach(function(inp){
+      const m=/updateLongTask\((\d+)/.exec(inp.getAttribute('onchange')||'');
+      if(!m)return;
+      const i=+m[1],t=state.longTasks[i];
+      if(!t||t.completed)return;
+      const tmp=document.createElement('div');tmp.innerHTML=qEvalPanel('long',i,t);
+      const row=inp.parentNode;
+      row.parentNode.insertBefore(tmp.firstChild,row.nextSibling);
+      inp.remove();
+    });
+  }
+}
+
+var __renderTasks_q=renderTasks;
+renderTasks=function(){__renderTasks_q();try{upgradeQualityUI();}catch(e){}};
+var __renderLongTasks_q=renderLongTasks;
+renderLongTasks=function(){__renderLongTasks_q();try{upgradeQualityUI();}catch(e){}};
+
+/* 标签/完成EP变更时同步重算质量EP */
+var __updateTask_q=updateTask;
+updateTask=function(idx,field,val){
+  __updateTask_q(idx,field,val);
+  try{
+    const t=state.todayTasks[idx];
+    if(t&&!t.completed&&(field==='baseEp'||field==='tagId')&&t.qs){syncQuality(t);saveState();}
+  }catch(e){}
+};
+var __updateLongTask_q=updateLongTask;
+updateLongTask=function(idx,field,val){
+  __updateLongTask_q(idx,field,val);
+  try{
+    const t=state.longTasks[idx];
+    if(t&&!t.completed&&(field==='baseEp'||field==='tagId')&&t.qs){syncQuality(t);saveState();}
+  }catch(e){}
+};
+
+/* 完成前按四维评价结算质量EP（未填按默认60），无敌之盾/修正等下游逻辑不受影响 */
+var __completeTask_q=completeTask;
+completeTask=function(idx){
+  const t=state.todayTasks[idx];
+  if(t&&!t.completed){syncQuality(t);saveState();}
+  __completeTask_q(idx);
+};
+var __confirmLongComplete_q=confirmLongComplete;
+confirmLongComplete=function(idx){
+  const t=state.longTasks[idx];
+  if(t&&!t.completed){syncQuality(t);saveState();}
+  __confirmLongComplete_q(idx);
+};
+
+/* ---------- ② 周期任务：错过的未完成副本次日清理，按"上次生成时间"排下一副本，错过不连补 ---------- */
+checkCycleMigration=function(){
+  if(!state.cycleTasks)return;
+  let changed=false;
+  const t0=new Date();t0.setHours(0,0,0,0);
+  const now=t0.getTime();
+  const today=todayStr();
+  const before=state.todayTasks.length;
+  state.todayTasks=state.todayTasks.filter(function(x){
+    if(!x.fromCycle)return true;      /* 非周期副本不动 */
+    if(x.completed)return true;       /* 已完成未结算的副本保留（EP未入账） */
+    return x.pushDate===today;        /* 只保留今天生成的未完成副本 */
+  });
+  if(state.todayTasks.length!==before)changed=true;
+  state.cycleTasks.forEach(function(ct){
+    if(!ct.name||!ct.tagId)return;
+    const d=getDaysToDeadline(ct.deadline);
+    if(d!==null&&d<0)return;
+    if(state.todayTasks.some(function(x){return x.fromCycle===ct.id;}))return;
+    const base=ct.lastPush?parseDateOnly(ct.lastPush):(ct.lastDone?parseDateOnly(ct.lastDone):0);
+    let shouldPush=false;
+    if(!base&&!ct.lastDone)shouldPush=true;
+    else if(now>=base+ct.cycleDays*86400000)shouldPush=true;
+    if(shouldPush){
+      ct.lastPush=today;
+      state.todayTasks.push({name:ct.name,baseEp:'',qualityEp:'',tagId:ct.tagId,fromCycle:ct.id,pushDate:today});
+      changed=true;
+    }
+  });
+  if(changed)saveState();
+};
+})();
+</script>
+
+<script>
+/* ================= 修复：连续打卡/连续天数统计的日期排序 bug =================
+   dailyHistory 的 date 为 toLocaleDateString('zh-CN') 不补零格式（2025/9/30、2025/10/1），
+   原实现用字符串排序，跨月后顺序错乱（"2025/10/1" < "2025/9/28"），导致 streak 卡死。
+   以下三个函数仅把排序改为按时间戳数值排序，其余逻辑不变。 */
+(function(){
+'use strict';
+function __parseSlashDate(d){const p=d.split('/').map(Number);return new Date(p[0],p[1]-1,p[2]).getTime();}
+
+getVocabStreak=function(){
+  const recs=state.dailyHistory||[];if(!recs.length)return 0;
+  const map={};recs.forEach(function(d){map[d.date]=d;});
+  const days=[...new Set(recs.map(function(d){return d.date;}))].sort(function(a,b){return __parseSlashDate(a)-__parseSlashDate(b);});
+  let streak=0;let expected=__parseSlashDate(days[days.length-1]);
+  for(let i=days.length-1;i>=0;i--){
+    const t=__parseSlashDate(days[i]);
+    if(t!==expected)break;
+    if(!map[days[i]].didVocab)break;
+    streak++;expected-=86400000;
+  }
+  return streak;
+};
+
+getMaxConsecutiveDays=function(minEp){
+  const days=[...new Set(state.dailyHistory.filter(function(d){return !minEp||(d.rawEp||d.ep)>=minEp;}).map(function(d){return d.date;}))].sort(function(a,b){return __parseSlashDate(a)-__parseSlashDate(b);});
+  if(!days.length)return 0;
+  let max=1,cur=1,last=__parseSlashDate(days[0]);
+  for(let i=1;i<days.length;i++){
+    const t=__parseSlashDate(days[i]);
+    if(t-last===86400000){cur++;max=Math.max(max,cur);}
+    else if(t!==last){cur=1;}
+    last=t;
+  }
+  return max;
+};
+
+getMaxConsecutiveBy=function(filterFn){
+  const days=[...new Set(state.dailyHistory.filter(filterFn).map(function(d){return d.date;}))].sort(function(a,b){return __parseSlashDate(a)-__parseSlashDate(b);});
+  if(!days.length)return 0;
+  let max=1,cur=1,last=__parseSlashDate(days[0]);
+  for(let i=1;i<days.length;i++){
+    const t=__parseSlashDate(days[i]);
+    if(t-last===86400000){cur++;max=Math.max(max,cur);}
+    else if(t!==last){cur=1;}
+    last=t;
+  }
+  return max;
+};
 })();
 </script>
 </body>
