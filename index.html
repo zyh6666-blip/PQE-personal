@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.4.7.1</title>
+<title>考研成长系统 v1.4.7.2</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f7;color:#1d1d1f;min-height:100vh;padding-bottom:40px}
@@ -138,7 +138,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.7.1</span>
+      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.7.2</span>
       <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -6045,7 +6045,7 @@ function next(){
   }
 function renderAnnouncements(){
   const box=document.getElementById('ann-list');if(!box)return;
-  const list=[{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
+  const list=[{t:'📢 v1.4.7.2 修复',d:'🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断（List通关数、代币同样自动保存）· 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
   const dc=getDayCupInfo();const dtag=getTag(dc.tagId);
   if(dc.active)list.push({t:'🏆 日杯今日开启',d:'指定「'+(dtag?dtag.path.join(' · '):'')+'」，1 能量报名，冠军 🪙15。',c:'#ff9500'});
   else list.push({t:'🏆 日杯预告',d:'下一次日杯：'+dc.daysToActive+' 天后（'+dc.dateStr+'），前一天邮件提醒。',c:'#ff9500'});
@@ -7445,6 +7445,114 @@ try{renderTasks();}catch(e){console.error('qInit',e);}
 try{renderLongTasks();}catch(e){console.error('qInitLong',e);}
 var __switchPage_q=switchPage;
 switchPage=function(name){__switchPage_q(name);try{if(name==='daily')renderTasks();if(name==='long')renderLongTasks();}catch(e){}};
+</script>
+
+<script>
+/* v1.4.7.2 修复：背单词打卡勾选 / List通关数 / 代币 三项输入原本只存在DOM上、从不存档，
+   页面重载（重启APP、更新版本）后勾选被静默重置，结算时 didVocab=false 导致连续打卡被误断。
+   现将三项输入持久化到 state.dailyInputs（按日期隔离），装载时自动恢复；今日已结算则不恢复。 */
+(function(){
+  function __todayStr(){return new Date().toLocaleDateString('zh-CN');}
+  window.__persistDailyInputs=function(){
+    try{
+      if(!state.dailyInputs||state.dailyInputs.date!==__todayStr())state.dailyInputs={date:__todayStr(),vocab:false,list:'',tokens:''};
+      var v=document.getElementById('daily-vocab');if(v)state.dailyInputs.vocab=v.checked;
+      var l=document.getElementById('daily-list');if(l)state.dailyInputs.list=l.value;
+      var k=document.getElementById('daily-tokens');if(k)state.dailyInputs.tokens=k.value;
+      saveState();
+    }catch(e){}
+  };
+  window.__restoreDailyInputs=function(){
+    try{
+      var di=state.dailyInputs;if(!di||di.date!==__todayStr())return;
+      var hist=state.dailyHistory||[];
+      if(hist.length&&hist[hist.length-1].date===__todayStr())return; /* 今日已结算，不恢复 */
+      var v=document.getElementById('daily-vocab');if(v)v.checked=!!di.vocab;
+      var l=document.getElementById('daily-list');if(l&&di.list)l.value=di.list;
+      var k=document.getElementById('daily-tokens');if(k&&di.tokens)k.value=di.tokens;
+    }catch(e){}
+  };
+  var _v=document.getElementById('daily-vocab');if(_v)_v.addEventListener('change',__persistDailyInputs);
+  var _l=document.getElementById('daily-list');if(_l)_l.addEventListener('input',__persistDailyInputs);
+  var _k=document.getElementById('daily-tokens');if(_k)_k.addEventListener('input',__persistDailyInputs);
+  __restoreDailyInputs();
+})();
+</script>
+
+<script>
+/* v1.4.7.2 一次性数据修复：2026/9/26 因勾选框不存档的bug被误记为未打卡，
+   这里把当天记录的 didVocab 修正为 true（仅当记录存在且未打卡时生效，执行一次）。
+   若当天没有结算记录则不做任何事。 */
+(function(){
+  try{
+    if(state._fixVocab0926)return;
+    state._fixVocab0926=true;
+    (state.dailyHistory||[]).forEach(function(d){if(d.date==='2026/9/26'&&!d.didVocab)d.didVocab=true;});
+    saveState();
+  }catch(e){}
+})();
+</script>
+
+<style>
+/* v1.4.7.2 标签色阶扩展：SP深色卡片上雷诺黄的可读性修正 */
+.task-card[class*="task-sp-"] [style*="color:#ffd60a"]{color:#ffe98a!important;text-shadow:0 1px 3px rgba(0,0,0,.5);}
+</style>
+<script>
+/* v1.4.7.2 标签色阶扩展：5档 → 7档
+   原：≤150灰 / ≤200绿 / ≤250蓝 / ≤350紫 / >350橙（39个标签中26个同为橙色，单调）
+   新：≤150灰 / ≤200绿 / ≤250蓝 / ≤350紫 / ≤450橙 / ≤500红 / >500黄
+   红色档启用 toyota（GR涂装）、黄色档启用 renault（黄黑涂装）两个沉睡SP主题。
+   仅改颜色与涂装映射，数值/罚率/平衡不受影响。 */
+getTagColor=function(maxEp){
+  if(maxEp<=150)return'#8e8e93';
+  if(maxEp<=200)return'#34c759';
+  if(maxEp<=250)return'#007aff';
+  if(maxEp<=350)return'#af52de';
+  if(maxEp<=450)return'#ff9500';
+  if(maxEp<=500)return'#ff3b30';
+  return'#ffd60a';
+};
+getSPCardTheme=function(tag){
+  const t=getTag(tag&&tag.id);const c=getTagColor(t?t.maxEp:0);
+  if(c==='#34c759')return 'aj';
+  if(c==='#007aff')return 'bolide';
+  if(c==='#af52de')return 'mosler';
+  if(c==='#ff9500')return 'htt';
+  if(c==='#ff3b30')return 'toyota';
+  if(c==='#ffd60a')return 'renault';
+  return 'bc';
+};
+</script>
+
+<style>
+/* v1.4.7.2 修正：renault 涂装对齐狂野飙车8 雷诺 Sport R.S.01「运动版」——
+   黑碳车身 + 品红霓虹描边 + 橙色底盘灯（普通卡保持雷诺黄基础色，觉醒后变黑粉霓虹） */
+.task-card.task-sp-renault{border-color:#ff2d95!important;background:linear-gradient(135deg,#040405 0%,#0b0b10 28%,#230016 46%,#ff2d95 62%,#ff7a00 76%,#160a03 86%,#060606 100%)!important;box-shadow:0 0 0 1.5px #ff2d9545,inset 0 0 22px rgba(255,45,149,.22)!important;}
+</style>
+
+<style>
+/* v1.4.7.2 SP涂装全面对齐狂野飙车8运动版实车（覆盖旧配色）：
+   aj=Ajlani Drakuma 深红霓虹 / bc=Pagani Huayra BC 香槟金 / mosler=Mosler Super GT 蓝紫
+   toyota=Toyota GT-One 黄金 / htt=HTT Pléthore 青绿（bolide蓝、renault品红已正确，不动） */
+.task-card.task-sp-aj{border-color:#ff2244!important;background:linear-gradient(135deg,#050507 0%,#141418 30%,#3d0714 50%,#ff2244 66%,#5c0a1a 82%,#070708 100%)!important;box-shadow:0 0 0 1.5px #ff224440,inset 0 0 20px rgba(255,34,68,.20)!important;}
+.task-card.task-sp-bc{border-color:#d9b26a!important;background:linear-gradient(135deg,#070708 0%,#17171a 30%,#443718 50%,#d9b26a 66%,#6e5626 82%,#080808 100%)!important;box-shadow:0 0 0 1.5px #d9b26a40,inset 0 0 20px rgba(217,178,106,.20)!important;}
+.task-card.task-sp-mosler{border-color:#5f7cff!important;background:linear-gradient(135deg,#04070c 0%,#0a1626 30%,#1b2f66 48%,#4d7cff 64%,#8b5cf6 80%,#0a0714 100%)!important;box-shadow:0 0 0 1.5px #5f7cff40,inset 0 0 20px rgba(95,124,255,.22)!important;}
+.task-card.task-sp-toyota{border-color:#ffe135!important;background:linear-gradient(135deg,#04060c 0%,#0a1220 30%,#4a3a08 50%,#ffe135 66%,#8a6d10 80%,#060608 100%)!important;box-shadow:0 0 0 1.5px #ffe13540,inset 0 0 20px rgba(255,225,53,.20)!important;}
+.task-card.task-sp-htt{border-color:#16e0a0!important;background:linear-gradient(135deg,#030807 0%,#071512 28%,#064a38 48%,#16e0a0 64%,#ff7a00 82%,#06100c 100%)!important;box-shadow:0 0 0 1.5px #16e0a040,inset 0 0 20px rgba(22,224,160,.22)!important;}
+</style>
+<script>
+/* 档位→SP涂装映射按A8实车配色协调重排（7档色 ↔ 7涂装全部可达）：
+   灰→bc香槟金 / 绿→htt青绿 / 蓝→bolide蓝 / 紫→mosler蓝紫 / 橙→toyota黄金 / 红→aj深红 / 黄→renault品红 */
+getSPCardTheme=function(tag){
+  const t=getTag(tag&&tag.id);const c=getTagColor(t?t.maxEp:0);
+  if(c==='#34c759')return 'htt';
+  if(c==='#007aff')return 'bolide';
+  if(c==='#af52de')return 'mosler';
+  if(c==='#ff9500')return 'toyota';
+  if(c==='#ff3b30')return 'aj';
+  if(c==='#ffd60a')return 'renault';
+  return 'bc';
+};
 </script>
 </body>
 </html>
