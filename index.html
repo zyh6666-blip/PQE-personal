@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.4.7.3</title>
+<title>考研成长系统 v1.4.7.4</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f7;color:#1d1d1f;min-height:100vh;padding-bottom:40px}
@@ -138,7 +138,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.7.3</span>
+      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.7.4</span>
       <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -2121,7 +2121,7 @@ function updatePointsPreview(){
   const firstDone=done.length?done[0]:null;
   const ownOf=function(t){
     const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
-    let adjusted=own;if(mods.hasClone&&firstDone&&t!==firstDone&&(t.completed&&t.baseEp!==''))adjusted=(parseInt(firstDone.baseEp)||0)+(parseInt(firstDone.qualityEp)||0);if(t._chain>=2){const _up=(state.tagUp||{})[t.tagId];const _acc=_up?(_up.acc||0):0;if(_acc>0||((_up.nit||0)>0))adjusted=Math.round(adjusted*(1+(t._chain-1)*(0.02*_acc+0.005*(_up.ctl||0))*(_up.sp?2:1)));}return fpTaskOwn(t,adjusted,[])+(t.longBonusEp||0);
+    let adjusted=own;if(mods.hasClone&&firstDone&&t!==firstDone&&(t.completed&&t.baseEp!==''))adjusted=(parseInt(firstDone.baseEp)||0)+(parseInt(firstDone.qualityEp)||0);if(t._chain>=2){const _up=(state.tagUp||{})[t.tagId];const _acc=_up?(_up.acc||0):0;if(_up&&(_acc>0||((_up.nit||0)>0)))adjusted=Math.round(adjusted*(1+(t._chain-1)*(0.02*_acc+0.005*(_up.ctl||0))*(_up.sp?2:1)));}return fpTaskOwn(t,adjusted,[])+(t.longBonusEp||0);
   };
   let gross=0,pen=0;
   state.todayTasks.forEach(t=>{
@@ -6045,7 +6045,7 @@ function next(){
   }
 function renderAnnouncements(){
   const box=document.getElementById('ann-list');if(!box)return;
-  const list=[{t:'📢 v1.4.7.3 修复',d:'🛠 修复杯赛与竞技结算奖励未正确入账的问题：历史漏发的杯赛奖励自动补发，竞技结算奖励补挂到原结算邮件（邮箱点领取即可）· 📮 竞技周结算奖励自动入账，结算邮件列明奖励明细 · 🛠 修复精研核心杯周末结束后补领入口被隐藏 · 🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断 · 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
+  const list=[{t:'📢 v1.4.7.4 修复',d:'🛠 修复冲刺锦标赛及杯赛只统计精确标签的问题：父级标签悬赏现在会计入其全部子标签任务（如 本科·专业课 悬赏可计入 课堂/作业/备考 任务），往届冲刺奖杯自动按新口径重算 · 🛠 修复冲刺锦标赛今日目标当天不点亮的问题（现在实时读取今日任务）· 🛠 修复精研核心杯往届补领按钮点击无反应，失败时会提示具体原因',c:'#ff9500'},{t:'📢 v1.4.7.3 修复',d:'🛠 修复杯赛与竞技结算奖励未正确入账的问题：历史漏发的杯赛奖励自动补发，竞技结算奖励补挂到原结算邮件（邮箱点领取即可）· 📮 竞技周结算奖励自动入账，结算邮件列明奖励明细 · 🛠 修复精研核心杯周末结束后补领入口被隐藏 · 🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断 · 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
   const dc=getDayCupInfo();const dtag=getTag(dc.tagId);
   if(dc.active)list.push({t:'🏆 日杯今日开启',d:'指定「'+(dtag?dtag.path.join(' · '):'')+'」，1 能量报名，冠军 🪙15。',c:'#ff9500'});
   else list.push({t:'🏆 日杯预告',d:'下一次日杯：'+dc.daysToActive+' 天后（'+dc.dateStr+'），前一天邮件提醒。',c:'#ff9500'});
@@ -7649,6 +7649,85 @@ try{renderCupUI();}catch(e){}
     saveState();
   }catch(e){console.error('fixGrantRWArr',e);}
 })();
+</script>
+<script>
+/* ================= v1.4.7.4 修复组 =================
+   ① 杯赛标签子树匹配：任务都挂在叶子标签（如 本科·专业课·课堂），而冲刺锦标赛悬赏池含父级标签（本科·专业课），
+      旧的精确匹配导致父级悬赏永远统计不到任务 → 改为子树匹配（对叶级悬赏行为不变）
+   ② 冲刺锦标赛今日目标当天点不亮：旧逻辑只读每日结算历史，当天还没结算所以永远⚪ → 今日改读实时任务
+   ③ 精研核心杯补领按钮点击无反应：旧代码claims未做防御且出错静默 → 重写为防御式+失败可见提示 */
+function cupTagMatch(taskTagId,cupTagId){
+  if(taskTagId===cupTagId)return true;
+  var a=getTag(taskTagId),b=getTag(cupTagId);
+  if(!a||!b||!a.path||!b.path||b.path.length>=a.path.length)return false;
+  for(var i=0;i<b.path.length;i++)if(a.path[i]!==b.path[i])return false;
+  return true;
+}
+cupScoreFor=function(tagId,dates){
+  var score=0;
+  (state.dailyHistory||[]).forEach(function(d){
+    if(dates.indexOf(normHistDate(d.date))===-1)return;
+    var counted=0;
+    (d.tasks||[]).forEach(function(t){
+      if(counted>=3)return;
+      if(t.completed&&cupTagMatch(t.tagId,tagId)){
+        var tag=getTag(t.tagId);var own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
+        if(tag&&tag.maxEp>0){score+=Math.round(own/tag.maxEp*100);if(own>=tag.maxEp)score+=20;}
+        counted++;
+      }
+    });
+  });
+  return score;
+};
+sprintEvalDay=function(sp,idx){
+  var dd=sp.days[idx];if(!dd)return;var tag=getTag(dd.tagId);if(!tag)return;
+  if(!dd.goals||dd.goals.length!==3){var h=arenaHashStr(sp.key+'-g'+idx);var idxs=[0,1,2,3,4,5,6,7,8,9];for(var i=idxs.length-1;i>0;i--){h=(h*31+7)>>>0;var j=h%(i+1);var tmp=idxs[i];idxs[i]=idxs[j];idxs[j]=tmp;}dd.goals=idxs.slice(0,3);}
+  var dateStr=sprintDayDate(sp.key,idx);
+  var rec=(state.dailyHistory||[]).find(function(x){return normHistDate(x.date)===dateStr;});
+  var all;
+  if(rec&&rec.tasks){all=rec.tasks.filter(function(t){return cupTagMatch(t.tagId,dd.tagId);});}
+  else if(idx===((new Date().getDay()+6)%7)){all=(state.todayTasks||[]).filter(function(t){return cupTagMatch(t.tagId,dd.tagId);});}
+  else{all=[];}
+  var tasks=all.filter(function(t){return t.completed;});
+  var n=tasks.length;
+  var qsum=tasks.reduce(function(s,t){return s+(parseInt(t.qualityEp)||0);},0);
+  var qBest=0,ownBest=0;
+  tasks.forEach(function(t){var q=parseInt(t.qualityEp)||0;if(q>qBest)qBest=q;var o=(parseInt(t.baseEp)||0)+q;if(o>ownBest)ownBest=o;});
+  var stats={n:n,qsum:qsum,qBest:qBest,ownBest:ownBest,max:tag.maxEp,total:all.length};
+  dd.eval=dd.goals.map(function(g){return SPRINT_GOALS[g].t(stats);});
+};
+/* 历届冲刺奖杯数按修正后的口径重算（纯读取历史，幂等）——修复旧精确匹配漏算的奖杯 */
+sprintTrophies=function(sp){
+  try{Object.keys(sp.days).forEach(function(k){var dd=sp.days[k];if(dd.locked)sprintEvalDay(sp,parseInt(k));});}catch(e){}
+  var n=0;Object.keys(sp.days).forEach(function(k){var dd=sp.days[k];if(dd.locked&&dd.eval)dd.eval.forEach(function(v){if(v)n++;});});return n;
+};
+claimWkdTier=function(i){
+  try{
+    var wk=getWeekendCup();if(!wk.enrolled)return;
+    wk.claims=wk.claims||{};
+    if(wk.claims[i])return;
+    var s=wkdScore(wk);
+    if(!_canClaimTier(wk.claims,i,s,WKD_CORE_TIERS))return;
+    wk.claims[i]=true;grantRW([WKD_CORE_RW[i]]);saveState();updateTopBar();updateShopUI();renderCupUI();
+  }catch(e){alert('领取失败：'+e.message);}
+};
+claimWkdAll=function(){
+  try{
+    var wk=state.wkdArchive;
+    if(!wk||!wk.enrolled){alert('没有可补领的上届记录');return;}
+    wk.claims=wk.claims||{};
+    var s=wkdScore(wk);var n=0;var cores=0;
+    for(var i=0;i<WKD_CORE_TIERS.length;i++){
+      if(wk.claims[i])continue;
+      if(!_canClaimTier(wk.claims,i,s,WKD_CORE_TIERS))break;
+      wk.claims[i]=true;cores+=WKD_CORE_RW[i].sp_core||0;n++;
+    }
+    if(!n){alert('没有可补领的奖励（得分未达下一档）');return;}
+    grantRW({sp_core:cores});
+    saveState();updateTopBar();updateShopUI();renderCupUI();
+    showGainModal('💠 精研核心杯 · 赛季补领',[['补领档位','×'+n],['精研核心','×'+cores]]);
+  }catch(e){alert('补领失败：'+e.message);}
+};
 </script>
 </body>
 </html>
