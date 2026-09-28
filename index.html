@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.4.7.2</title>
+<title>考研成长系统 v1.4.7.3</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f7;color:#1d1d1f;min-height:100vh;padding-bottom:40px}
@@ -138,7 +138,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.7.2</span>
+      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.7.3</span>
       <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -6045,7 +6045,7 @@ function next(){
   }
 function renderAnnouncements(){
   const box=document.getElementById('ann-list');if(!box)return;
-  const list=[{t:'📢 v1.4.7.2 修复',d:'🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断（List通关数、代币同样自动保存）· 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
+  const list=[{t:'📢 v1.4.7.3 修复',d:'🛠 修复杯赛与竞技结算奖励未正确入账的问题：历史漏发的杯赛奖励自动补发，竞技结算奖励补挂到原结算邮件（邮箱点领取即可）· 📮 竞技周结算奖励自动入账，结算邮件列明奖励明细 · 🛠 修复精研核心杯周末结束后补领入口被隐藏 · 🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断 · 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
   const dc=getDayCupInfo();const dtag=getTag(dc.tagId);
   if(dc.active)list.push({t:'🏆 日杯今日开启',d:'指定「'+(dtag?dtag.path.join(' · '):'')+'」，1 能量报名，冠军 🪙15。',c:'#ff9500'});
   else list.push({t:'🏆 日杯预告',d:'下一次日杯：'+dc.daysToActive+' 天后（'+dc.dateStr+'），前一天邮件提醒。',c:'#ff9500'});
@@ -7215,6 +7215,43 @@ renderArenaUI=function(){
     +'<div style="border:1px solid #e5e5ea;border-radius:8px;">'+rows+'</div>';
 };
 
+/* v1.4.7.3 提前装载：必须在下方启动补算之前装好。
+   ① grantRW 兼容数组参数（杯赛/竞技结算此前因此吞奖励）
+   ② arenaSettleWeek 改为按 a.weekKey 计算结算时点（支持补结算旧周），奖励自动入账+邮件列明明细
+   ③ 旧周未结算则立即补结算（state.arenaPrev 由 getArena rollover 时保留） */
+var __grantRW_obj=grantRW;
+grantRW=function(rw){
+  if(Array.isArray(rw)){rw.forEach(function(r){__grantRW_obj(r);});return;}
+  __grantRW_obj(rw);
+};
+arenaSettleWeek=function(a){
+  if(!a||a.settled)return;
+  const __end=new Date(parseDateOnly(a.weekKey)+6*86400000);__end.setHours(23,59,59,999);
+  if(Date.now()<__end.getTime())return;
+  const peers=state.arenaRoster.list.filter(g=>g.div===a.division).map(function(g){return {name:g.name,pts:ghostPts(g),isYou:false};});
+  peers.push({name:'你',pts:a.arenaPts||0,isYou:true});
+  peers.sort(function(x,y){return y.pts-x.pts;});
+  const rank=peers.findIndex(function(p){return p.isYou;});
+  const tier=arenaTierOfRank(rank);
+  const rw=arenaDivReward(a.division,tier);
+  grantRW(rw);
+  a.settled=true;
+  const rwText=rwLines(rw).map(function(x){return x[0]+' '+x[1];}).join('、');
+  sendSystemMail('🏁 赛季结算 · '+ARENA_DIV_NAMES[a.division]+' '+ARENA_TIER_NAMES[tier],'本赛季竞技积分 '+a.arenaPts+'，段位内排名第 '+(rank+1)+'，获得 '+ARENA_TIER_NAMES[tier]+' 档奖励（非累积）。<br><br>🎁 以下奖励已自动入账：'+rwText+'。',{});
+  const __mm=state.mailbox&&state.mailbox[state.mailbox.length-1];
+  if(__mm&&__mm.title.indexOf('🏁 赛季结算')===0)__mm.autoGranted=true;
+  saveState();
+  try{updateTopBar();updateShopUI();}catch(e){}
+};
+/* 跨周补结算：此处 state.rena 仍是旧周对象（本加载周期内还没有任何 getArena 调用触发 rollover），
+   旧周未结算则立即按旧周数据补结算，随后的启动补算/首个 arenaTick 再正常 rollover */
+try{
+  var __oldArena=state.arena;
+  if(__oldArena&&__oldArena.weekKey&&__oldArena.weekKey!==arenaWeekKey()&&!__oldArena.settled){
+    arenaSettleWeek(__oldArena);
+  }
+}catch(e){console.error('arenaPrevSettle',e);}
+
 /* 启动补算 + 回前台补算（覆盖 v1.4.6.4 块的同名监听，重复执行无害：时间戳已推进即返回） */
 try{arenaOfflineCatchup();}catch(e){}
 document.addEventListener('visibilitychange',function(){
@@ -7553,6 +7590,65 @@ getSPCardTheme=function(tag){
   if(c==='#ffd60a')return 'renault';
   return 'bc';
 };
+</script>
+<script>
+/* v1.4.7.2 修复：精研核心杯「届末补领」不可达——
+   工作日整个周末杯区块 display:none，上届未领奖励的补领按钮藏在区块内部，周末一过就再也点不到。
+   修复：只要上届存在未领取的档位，工作日也强制显示该区块（仅展示补领入口，计分规则不变）。 */
+var __renderCupUI_wkdFix=renderCupUI;
+renderCupUI=function(){
+  __renderCupUI_wkdFix.apply(this,arguments);
+  try{
+    var wrap=document.getElementById('cup-weekend-wrap');
+    if(!wrap)return;
+    var wa=state.wkdArchive;
+    if(wa&&wa.enrolled&&Object.keys(wa.claims||{}).length<WKD_CORE_TIERS.length)wrap.style.display='';
+  }catch(e){}
+};
+try{renderCupUI();}catch(e){}
+</script>
+<script>
+/* v1.4.7.2 根修：grantRW 数组参数吞奖励 + 历史漏发一次性补发
+   问题：精研核心杯/冲刺锦标赛/月杯/双周杯的领取与竞技周结算都调用 grantRW([奖励])（数组多包一层），
+   而 grantRW 只按对象处理，数组的 Object.keys 是下标，奖励被写进 inventory['0'] 垃圾键，从未真正入账。
+   修复：grantRW 兼容数组（已在 v1.4.6.5 块内提前装载）；并一次性补发所有「标记已领取但从未到账」的杯赛档位、还原竞技结算奖励到原邮件。 */
+(function(){
+  try{
+    if(state._fixGrantRWArr)return;
+    state._fixGrantRWArr=true;
+    var comp={};
+    function acc(rw){Object.keys(rw||{}).forEach(function(k){comp[k]=(comp[k]||0)+rw[k];});}
+    function repCup(cup,rwFn,n){if(!cup||!cup.claims)return;for(var i=0;i<n;i++){if(cup.claims[i])acc(rwFn(i,cup));}}
+    repCup(state.sprint,function(i){return SPRINT_RW[i];},SPRINT_TIERS.length);
+    repCup(state.sprintArchive,function(i){return SPRINT_RW[i];},SPRINT_TIERS.length);
+    repCup(state.monthCup,function(i,c){return monthRW(i,c.finalPrize);},MONTH_TIERS.length);
+    repCup(state.monthArchive,function(i,c){return monthRW(i,c.finalPrize);},MONTH_TIERS.length);
+    repCup(state.biCup,function(i,c){return biRW(i,c.finalPrize);},BI_TIERS.length);
+    repCup(state.biCupArchive,function(i,c){return biRW(i,c.finalPrize);},BI_TIERS.length);
+    repCup(state.weekendCup,function(i){return WKD_CORE_RW[i];},WKD_CORE_TIERS.length);
+    repCup(state.wkdArchive,function(i){return WKD_CORE_RW[i];},WKD_CORE_TIERS.length);
+    var arenaCount=0;
+    (state.mailbox||[]).forEach(function(m){
+      if(!m.title||m.title.indexOf('🏁 赛季结算 · ')!==0)return;
+      if(m.autoGranted)return; /* 修复后新产生的结算邮件：奖励已自动入账，跳过防重复 */
+      if(m.items&&Object.keys(m.items).length)return;
+      var rest=m.title.replace('🏁 赛季结算 · ','');
+      var divKey=null,tierIdx=-1;
+      Object.keys(ARENA_DIV_NAMES).forEach(function(k){if(rest.indexOf(ARENA_DIV_NAMES[k]+' ')===0)divKey=k;});
+      ARENA_TIER_NAMES.forEach(function(n,i){if(tierIdx<0&&rest.indexOf(n)>-1)tierIdx=i;});
+      if(divKey&&tierIdx>-1){
+        var rw=arenaDivReward(divKey,tierIdx);
+        if(Object.keys(rw).length){m.items=rw;m.claimed=false;m.read=false;m.body+='<br><br>🛠 本次更新已把该邮件的赛季奖励补挂为附件，点「领取」即可入账。';arenaCount++;}
+      }
+    });
+    if(state.inventory&&state.inventory['0']!==undefined)delete state.inventory['0'];
+    if(Object.keys(comp).length){
+      grantRW(comp);
+      sendSystemMail('🛠 杯赛奖励补发','检测到部分杯赛奖励此前未能正确入账，已一次性补发到账：'+rwLines(comp).map(function(x){return x[0]+' '+x[1];}).join('、')+'。（竞技赛季结算的奖励已补挂到原结算邮件，前往邮箱领取）',{});
+    }
+    saveState();
+  }catch(e){console.error('fixGrantRWArr',e);}
+})();
 </script>
 </body>
 </html>
