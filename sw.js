@@ -1,5 +1,5 @@
-/* 考研EP系统 Service Worker · v1.4.7.4 */
-const CACHE_NAME = 'kaoyan-v1474';
+/* 考研EP系统 Service Worker · v1.4.9 */
+const CACHE_NAME = 'kaoyan-v149';
 const APP_SHELL = ['./', './index.html'];
 
 self.addEventListener('install', function (e) {
