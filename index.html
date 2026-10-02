@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.4.9</title>
+<title>考研成长系统 v1.4.9.1</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f7;color:#1d1d1f;min-height:100vh;padding-bottom:40px}
@@ -59,6 +59,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 @keyframes passFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-10px) rotate(6deg);}}
 .pass-float{position:absolute;animation:passFloat 4.5s ease-in-out infinite;}
 #page-pass .card{position:relative;z-index:1;}
+#ann-list{max-height:220px;overflow-y:auto;padding-right:4px;}
 
 /* SP可视化字体对比适配 */
 .task-card[class*="task-sp-"] div[style*="color:#8e8e93"]{color:rgba(255,255,255,.84)!important;text-shadow:0 1px 3px rgba(0,0,0,.45);}
@@ -148,8 +149,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.9</span>
-      <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
+      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.4.9.1</span>
+            <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
           <div style="flex:1;height:5px;background:#e5e5ea;border-radius:3px;overflow:hidden;">
@@ -158,6 +159,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
           <span id="lv-progress-text" style="font-size:10px;color:#8e8e93;white-space:nowrap;">0%</span>
         </div>
       </div>
+      <span id="header-season" onclick="switchPage('pass')" title="查看赛季详情" style="cursor:pointer;display:none;"></span>
     </div>
     <div style="display:flex;align-items:center;gap:14px;font-size:13px;">
       <span>💰 积分:<b id="top-points">0</b></span>
@@ -195,6 +197,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 <!-- 首页 -->
 <div id="page-home" class="page active">
+  <div id="home-season" onclick="showSeasonIntro()" style="display:none;cursor:pointer;margin-bottom:12px;padding:13px 14px;border-radius:12px;border:1px solid #e8d9bf;background:linear-gradient(120deg,rgba(240,179,92,.12),rgba(217,138,126,.10));position:relative;overflow:hidden;"></div>
   <div class="card" style="margin-bottom:12px;">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
       <div>
@@ -1040,6 +1043,26 @@ st.textContent=
 +'#app>div[style*="position:sticky"]{border-bottom-color:'+t.panelBorder+'!important;}';
 document.body.style.background='';}
 
+function getSeasonTag(){const s=getPassSeason();const t=s.theme;const p1=String(s.start.getMonth()+1).padStart(2,'0');const p2=String(s.end.getMonth()+1).padStart(2,'0');return{s:s,t:t,tag:'S'+(s.idx+1),period:s.start.getFullYear()+'.'+p1+'-'+p2};}
+function _artTitle(txt,colorA,colorB,size){return '<span style="font-family:\'STKaiti\',\'KaiTi\',\'Songti SC\',\'Comic Sans MS\',Georgia,serif;font-style:italic;font-weight:800;font-size:'+size+';letter-spacing:2px;background:linear-gradient(120deg,'+colorA+','+colorB+');-webkit-background-clip:text;background-clip:text;color:transparent;">'+txt+'</span>';}
+function renderHeaderSeason(){const g=getSeasonTag();const el=document.getElementById('header-season');if(!el)return;el.style.display='inline-flex';el.style.alignItems='center';
+el.innerHTML='<span style="padding:3px 10px;border-radius:14px;background:linear-gradient(120deg,'+g.t.btnA+'22,'+g.t.btnB+'30);border:1px solid '+g.t.btnB+'66;">'+_artTitle(g.t.deco+' '+g.tag+' · '+g.t.name,g.t.btnB,g.t.btnA,'13px')+'</span>'+_artTitle(g.period,'#a0a0a8','#c0c0c8','10px').replace('<span style="','<span style="margin-left:5px;');
+const hs=document.getElementById('home-season');if(hs){hs.style.display='block';
+hs.innerHTML='<div style="position:absolute;right:-8px;top:-26px;font-size:88px;opacity:.16;line-height:1;">'+g.t.deco+'</div>'
++'<div style="position:relative;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;"><div>'
++'<div>'+_artTitle(g.t.deco+' '+g.tag+' 赛季 · '+g.t.name,g.t.btnB,g.t.btnA,'18px')+'</div>'
++'<div style="font-size:11px;color:#8e8e93;margin-top:4px;">'+g.period+' · '+g.t.desc+' · 点击查看赛季简介与本赛季通行证奖励 →</div>'
++'</div><span style="font-family:Georgia,serif;font-size:24px;color:'+g.t.btnB+';">›</span></div>';}}
+function showSeasonIntro(){const g=getSeasonTag();const t=g.t;
+const nm={slot_trial:'全功能体验卡',draw_ticket:'属性抽取券',change_ticket:'属性变更券',reroll_ticket:'特殊属性重铸券',parts_pack:'零件材料包',direct_up:'直接升级',sp_core:'精研核心',exp15:'1.5倍经验卡',exp2:'2倍经验卡',talent_extra:'天赋额外抽取'};
+let rows='';for(let l=1;l<=PASS_CFG.maxLevel;l++){const r=passLevelReward(l);if(r.items||r.tokens||r.frag||r.titleLv||r.convert){const parts=[];if(r.tokens)parts.push('代币 +'+r.tokens);if(r.items)Object.keys(r.items).forEach(function(k){parts.push(nm[k]||k+' ×'+r.items[k]);});if(r.frag)parts.push('🧩 终极升级碎片 ×'+r.frag);if(r.titleLv)parts.push('🏷️ 称号「'+t.titles[r.titleLv/20-1]+'」');if(r.convert)parts.push('♻️ '+r.convert);rows+='<div style="font-size:12px;padding:4px 0;border-bottom:1px solid #f2f2f7;"><b>Lv.'+l+'</b>　<span style="color:#6e6e73;">'+parts.join(' · ')+'</span></div>';}}
+const body='<div style="font-size:12px;line-height:1.7;color:#6e6e73;">'
++'<div style="display:flex;gap:5px;margin:2px 0 10px;"><span style="flex:1;height:16px;border-radius:4px;background:'+t.btnA+';" title="主题主色"></span><span style="flex:1;height:16px;border-radius:4px;background:'+t.btnB+';" title="主题深色"></span><span style="flex:1;height:16px;border-radius:4px;background:'+t.panel+';border:1px solid '+t.panelBorder+';" title="面板色"></span><span style="flex:1;height:16px;border-radius:4px;background:'+t.chip+';" title="点缀色"></span></div>'
++'<div style="margin-bottom:10px;"><b style="color:#1d1d1f;">🍁 主题内涵</b><br>备考是一场漫长的夜行：那些亮到深夜的台灯、写满又划掉的计划表、背到发涩的单词、模考后沉默的几分钟——很多时候你都会以为，这条路上只有自己一个人的脚步声。但并不是。无论你走到哪一章、卡在哪一道题、在哪个想放弃的夜晚又多坐了一小时，都有人曾经或正在和你经历一模一样的时刻：在同一个清晨按掉同一个闹钟，在同一个深夜的红圈里打卡，在同一条走廊尽头深呼吸。这一季的金色，是清晨窗帘缝里漏进来的第一缕光，提醒你新的一天又如期而至；绯色，是深夜里一句「加油」从屏幕那头传来的温度；而落叶，只有一起走过的人，才看得见它落在肩上的痕迹。光从来都不远，它不在终点，就在你身边——在并肩的地方。愿这一季，你抬头有光，转身有人，脚下有路。</div>'
++'<div><b style="color:#1d1d1f;">🎁 本赛季通行证特殊奖励档</b><div style="max-height:190px;overflow-y:auto;margin-top:4px;">'+rows+'</div>'
++'<div style="font-size:11px;color:#8e8e93;margin-top:5px;">每级固定发放：积分（Lv.1 起 +110 逐级递增）与里程币（Lv.1 起 +21 逐级递增）；扣罚降低、终极升级等可在通行证页的里程商店用里程币兑换。</div></div></div>';
+showModal('🍁 赛季简介 · '+g.tag+' '+t.name,body,function(){switchPage('pass');closeModal();});}
+
 function getPass(){const s=getPassSeason();if(!state.pass||state.pass.seasonIdx!==s.idx){state.pass={seasonIdx:s.idx,lp:0,pending:0,miles:0,penRed:0,frags:0,grantLv:0,signKey:'',weekly:{key:'',claimed:[]}};saveState();}return state.pass;}
 function getPassLevel(){const p=getPass();return Math.min(PASS_CFG.maxLevel,Math.floor(p.lp/PASS_CFG.lpPerLevel)+1);}
 function getPassPenReduce(){return Math.min(0.5,(getPass().penRed||0));}
@@ -1094,17 +1117,22 @@ let wh='<div style="font-size:11px;color:#8e8e93;margin-bottom:8px;">每周随�
 getWeeklyEntries().forEach(function(en){const cur=Math.min(en.t,en.f());const done=cur>=en.t;const claimed=p.weekly.claimed.indexOf(en.id)>-1;
 wh+='<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f2f2f7;font-size:13px;"><span>'+en.n+' <span style="color:#8e8e93;font-size:11px;">'+cur+' / '+en.t+'</span></span>'+(claimed?'<span style="font-size:11px;color:#34c759;font-weight:600;">✓ 已领取</span>':(done&&s.active?'<button class="btn-primary" style="padding:4px 12px;font-size:12px;'+_btnStyle+'" onclick="passClaimWeekly(\''+en.id+'\')">领取 +'+PASS_CFG.weeklyLp+' LP</button>':'<span style="font-size:11px;color:#c7c7cc;">未达成</span>'))+'</div>';});
 document.getElementById('pass-weekly').innerHTML=wh;
-let th='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(56px,1fr));gap:6px;">';
-for(let l=1;l<=PASS_CFG.maxLevel;l++){const got=l<=p.grantLv;const r=passLevelReward(l);const isTitle=!!r.titleLv;const isNow=l===lv;
-th+='<div style="text-align:center;padding:6px 2px;border-radius:8px;font-size:10px;background:'+(got?theme.color+'20':(isNow?theme.color+'12':'#f2f2f7'))+';border:1px solid '+(got?theme.color+'55':'#e5e5ea')+';'+(isNow?'box-shadow:0 0 0 1.5px '+theme.color+'66;':'')+'" title="Lv.'+l+'：积分+'+r.points+' · 里程币+'+r.miles+(r.tokens?' · 代币+'+r.tokens:'')+(r.items?' · 道具':'')+(r.frag?' · 终极升级碎片×'+r.frag:'')+(isTitle?' · 称号「'+theme.titles[r.titleLv/20-1]+'」':'')+(r.convert?' · '+r.convert:'')+'"><div style="font-weight:700;color:'+(got?theme.color:'#6e6e73')+';">'+l+'</div><div style="color:#8e8e93;">'+(got?'✓':(isTitle?'🏷️':(r.items?'🎁':'💰')))+'</div></div>';}
-th+='</div>';
+let th='<div style="font-size:11px;color:#8e8e93;margin-bottom:8px;">按级别分层展示 · 单击展开该层查看每级可领取内容 · ✓ 为已领取</div>';
+const _nm={slot_trial:'全功能体验卡',draw_ticket:'属性抽取券',change_ticket:'属性变更券',reroll_ticket:'特殊属性重铸券',parts_pack:'零件材料包',direct_up:'直接升级',sp_core:'精研核心',exp15:'1.5倍经验卡',exp2:'2倍经验卡',talent_extra:'天赋额外抽取'};
+function passRewardText(r){const parts=['💰 积分 +'+r.points,'🪙 里程币 +'+r.miles];if(r.tokens)parts.push('代币 +'+r.tokens);if(r.items)Object.keys(r.items).forEach(function(k){parts.push((k==='slot_trial'?'♻️ ':'🎁 ')+(_nm[k]||k)+' ×'+r.items[k]);});if(r.frag)parts.push('🧩 终极升级碎片 ×'+r.frag);if(r.titleLv)parts.push('🏷️ 称号「'+theme.titles[r.titleLv/20-1]+'」');if(r.convert)parts.push('♻️ '+r.convert);return parts.join(' · ');}
+for(let b=0;b<10;b++){const l0=b*10+1,l1=b*10+10;const bandHas=p.grantLv>=l1;const curBand=lv>=l0&&lv<=l1;
+let rows='';let giftN=0,titleN=0;
+for(let l=l0;l<=l1;l++){const r=passLevelReward(l);const got=l<=p.grantLv;if(r.items)giftN++;if(r.titleLv)titleN++;
+rows+='<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid '+(got?theme.color+'22':'#f2f2f7')+';font-size:12px;"><span style="font-weight:600;white-space:nowrap;color:'+(got?theme.color:'#1d1d1f')+';">Lv.'+l+(l===lv?' <span style="font-size:9px;padding:1px 5px;border-radius:4px;background:'+theme.btnA+';color:#fff;">当前</span>':'')+'</span><span style="flex:1;text-align:right;color:#6e6e73;font-size:11px;">'+passRewardText(r)+'</span><span style="color:'+(got?'#34c759':'#c7c7cc')+';font-weight:700;">'+(got?'✓':'○')+'</span></div>';}
+th+='<details'+(curBand?' open':'')+' style="margin-bottom:8px;border:1px solid '+(bandHas?theme.color+'55':(curBand?theme.color+'44':'#e5e5ea'))+';border-radius:10px;overflow:hidden;"><summary style="cursor:pointer;list-style:none;padding:10px 12px;font-size:13px;font-weight:700;background:'+(bandHas?theme.color+'15':(curBand?theme.color+'0d':'#f9f9fb'))+';color:'+(bandHas||curBand?theme.deep:'#6e6e73')+';display:flex;justify-content:space-between;align-items:center;"><span>🏅 Lv.'+l0+' – '+l1+(bandHas?' · 已全部领取':(curBand?' · 当前等级段':''))+'</span><span style="font-size:11px;font-weight:400;color:#8e8e93;">'+(giftN?'🎁×'+giftN+' ':'')+(titleN?'🏷️×'+titleN+' ':'')+'▾ 点击查看</span></summary><div style="padding:4px 8px 8px;">'+rows+'</div></details>';}
 document.getElementById('pass-track').innerHTML=th;
-let sh='';
-PASS_SHOP.forEach(function(mod,mi){const unlocked=lv>=mod.lv;
-sh+='<div style="margin-bottom:10px;padding:10px;border:1px solid '+(unlocked?theme.color+'44':'#e5e5ea')+';border-radius:10px;'+(unlocked?'background:'+theme.color+'08;':'opacity:.75;')+'"><div style="font-size:12px;font-weight:700;color:'+(unlocked?theme.color:'#8e8e93')+';margin-bottom:8px;">'+(unlocked?'🔓':'🔒')+' Lv.'+mod.lv+' 解锁模块</div>';
+let sh='<div style="font-size:11px;color:#8e8e93;margin-bottom:8px;">按解锁等级分层展示 · 单击展开该层查看可兑换商品 · 🔓 为已解锁模块</div>';
+let lastUnlocked=-1;for(let mi=0;mi<PASS_SHOP.length;mi++){if(lv>=PASS_SHOP[mi].lv)lastUnlocked=mi;}
+PASS_SHOP.forEach(function(mod,mi){const unlocked=lv>=mod.lv;const isLast=mi===lastUnlocked;
+let items='';
 mod.items.forEach(function(it,ii){const key='ps'+mi+'_'+ii;const bought=p['shop_'+key]||0;const afford=p.miles>=it.cost&&(!it.tok||state.tokens>=it.tok);const can=unlocked&&bought<it.lim&&afford;
-sh+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f2f2f7;font-size:12px;"><span>'+it.i+' '+it.n+' <span style="color:#8e8e93;font-size:10px;">'+(it.lim>1?'限'+it.lim+'/季 · ':'')+(it.tok?('🪙'+it.cost+'币+'+it.tok+'代币'):(it.cost+' 里程币'))+'</span></span><button class="btn-accent" style="padding:4px 12px;font-size:12px;'+_btnStyle+(can?'':'opacity:.4')+'" '+(can?'onclick="passBuyItem('+mi+','+ii+')"':'disabled')+'>'+(bought>=it.lim?'已达上限':'兑换')+'</button></div>';});
-sh+='</div>';});
+items+='<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid '+(unlocked?'#f2f2f7':'#f7f7f7')+';font-size:12px;"><span>'+it.i+' '+it.n+' <span style="color:#8e8e93;font-size:10px;">'+(it.lim>1?'限'+it.lim+'/季 · ':'')+(it.tok?('🪙'+it.cost+'币+'+it.tok+'代币'):(it.cost+' 里程币'))+'</span></span><button class="btn-accent" style="padding:4px 12px;font-size:12px;'+_btnStyle+(can?'':'opacity:.4')+'" '+(can?'onclick="passBuyItem('+mi+','+ii+')"':'disabled')+'>'+(bought>=it.lim?'已达上限':'兑换')+'</button></div>';});
+sh+='<details'+(isLast?' open':'')+' style="margin-bottom:8px;border:1px solid '+(unlocked?theme.color+'55':'#e5e5ea')+';border-radius:10px;overflow:hidden;'+(unlocked?'':'opacity:.75;')+'"><summary style="cursor:pointer;list-style:none;padding:10px 12px;font-size:13px;font-weight:700;background:'+(unlocked?theme.color+'12':'#f9f9fb')+';color:'+(unlocked?theme.deep:'#8e8e93')+';display:flex;justify-content:space-between;align-items:center;"><span>'+(unlocked?'🔓':'🔒')+' Lv.'+mod.lv+' 解锁模块'+(isLast&&unlocked?' · 当前最高已解锁':'')+'</span><span style="font-size:11px;font-weight:400;color:#8e8e93;">🛍️×'+mod.items.length+' ▾ 点击查看</span></summary><div style="padding:4px 10px 8px;">'+items+'</div></details>';});
 document.getElementById('pass-shop').innerHTML=sh;
 updatePassBadge();}
 function passClaimPending(){const p=getPass();if(p.pending<=0)return;const s=getPassSeason();const gain=p.pending;p.pending=0;p.lp+=gain;const newLv=getPassLevel();const theme=s.theme;const lines=[['LP','+'+gain]];const items={};
@@ -1414,6 +1442,21 @@ function checkCycleMigration(){
   let changed=false;
   const t=new Date();t.setHours(0,0,0,0);
   const now=t.getTime();
+  /* v1.4.9.1 修复：清理逾期副本与被跳过的未完成副本 */
+  const _before=state.todayTasks.length;
+  state.todayTasks=state.todayTasks.filter(function(x){
+    if(!x.fromCycle)return true;
+    const ct0=state.cycleTasks.find(function(c){return c.id===x.fromCycle;});
+    if(!ct0)return false;
+    const dd=getDaysToDeadline(ct0.deadline);
+    if(dd!==null&&dd<0)return false;
+    if(!x.completed&&ct0.lastDone){
+      const next0=parseDateOnly(ct0.lastDone)+ct0.cycleDays*86400000;
+      if(now>=next0)return false;
+    }
+    return true;
+  });
+  if(state.todayTasks.length!==_before)changed=true;
   state.cycleTasks.forEach(ct=>{
     if(!ct.name||!ct.tagId)return;
     const d=getDaysToDeadline(ct.deadline);
@@ -2173,6 +2216,7 @@ function usePotentialTrial(){
 }
 function renderHome(){
   applySeasonUI();
+  renderHeaderSeason();
   if(!document.getElementById('home-lv-name'))return;
   const info=getLevelInfo(state.totalEP);
   const idx=LEVELS.indexOf(info);
@@ -6246,7 +6290,7 @@ function next(){
   }
 function renderAnnouncements(){
   const box=document.getElementById('ann-list');if(!box)return;
-  const list=[{t:'📢 v1.4.9 通行证上线',d:'🎫 全新模块「通行证」：两月一季，共100级（每级4000 LP）。S1赛季「并肩有光」现已开启（2026.09.30–11.30，秋光同路主题全站换肤，面板为浅象牙色保证阅读体验）：日常结算最终EP×3计入LP（特殊玩法加成EP同样计入），每周6个词条任务各+5000 LP，每日签到+50里程币。升级自动发放积分/里程币/代币/票券/材料/💠核心/终极升级碎片，20/40/60/80/100级送赛季主题称号（并入成就称号）。里程商店每10级解锁一个模块（Lv.80全解锁）：可换经验卡、重铸券、核心、终极升级碎片（5片合成终极改装包）、扣罚降低10%/20%/50%（上限-50%），Lv.100可里程币+代币换终极升级。赛季结束冷却3天后开启新季 · 🔓 任务锁定机制改版：可随时解锁再编辑（仅未完成可改，已完成只读；删除仍扣标签上限10%EP，解锁后新增任务未完成罚率+50%；幸运任务按条件重新校验，满足则随机补发）',c:'#ff2d95'},{t:'📢 v1.4.8 大更新',d:'🧾 结算页改版：顶部展示真实EP/增益EP/扣减EP/最终EP四项汇总，任务EP明细改为点击展开折叠式，未完成任务额外标注"若完成可减少的损失" · 🔧 逆境追赶潜能改为只在第1栏出现、选择后当天免罚修改3次（任务修改机制见 v1.4.9 公告：解锁再编辑） · ⚡ 33号天赋"绝对免疫"重做"属性强化"：经典模式被动效果+20%，乱斗模式乱斗效果翻倍但结算EP-15% · 🔁 循环温故天赋新增适用「旧list重刷」「旧list新轮次」标签 · 🛒 商店：积分兑代币不限购，天赋额外抽取降至100代币 · ⚔️ 竞技时长90→120分钟，窗口内任务EP达标签上限90%时资格分+50 · 🏆 各杯赛卡片新增本期剩余时间显示',c:'#007aff'},{t:'📢 v1.4.7.4 修复',d:'🛠 修复冲刺锦标赛及杯赛只统计精确标签的问题：父级标签悬赏现在会计入其全部子标签任务（如 本科·专业课 悬赏可计入 课堂/作业/备考 任务），往届冲刺奖杯自动按新口径重算 · 🛠 修复冲刺锦标赛今日目标当天不点亮的问题（现在实时读取今日任务）· 🛠 修复精研核心杯往届补领按钮点击无反应，失败时会提示具体原因',c:'#ff9500'},{t:'📢 v1.4.7.3 修复',d:'🛠 修复杯赛与竞技结算奖励未正确入账的问题：历史漏发的杯赛奖励自动补发，竞技结算奖励补挂到原结算邮件（邮箱点领取即可）· 📮 竞技周结算奖励自动入账，结算邮件列明奖励明细 · 🛠 修复精研核心杯周末结束后补领入口被隐藏 · 🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断 · 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
+  const list=[{t:'📢 v1.4.9.1 赛季UI与修复',d:'①顶栏与首页新增赛季可视化（序号/主题/持续月份，艺术字呈现），首页点击可查看赛季简介（主题配色+内涵意象，本赛季「并肩有光」：你不是一个人，并肩之处便有光）与通行证奖励一览；②通行证等级奖励改为段位式分层展示（每10级一档，单击展开查看每级内容）；③公告栏限高滚动；④修复周期任务副本逾期后仍留在每日登记、以及未完成副本到点不跳过的问题。',c:'#ff2d95'},{t:'📢 v1.4.9 通行证上线',d:'🎫 全新模块「通行证」：两月一季，共100级（每级4000 LP）。S1赛季「并肩有光」现已开启（2026.09.30–11.30，秋光同路主题全站换肤，面板为浅象牙色保证阅读体验）：日常结算最终EP×3计入LP（特殊玩法加成EP同样计入），每周6个词条任务各+5000 LP，每日签到+50里程币。升级自动发放积分/里程币/代币/票券/材料/💠核心/终极升级碎片，20/40/60/80/100级送赛季主题称号（并入成就称号）。里程商店每10级解锁一个模块（Lv.80全解锁）：可换经验卡、重铸券、核心、终极升级碎片（5片合成终极改装包）、扣罚降低10%/20%/50%（上限-50%），Lv.100可里程币+代币换终极升级。赛季结束冷却3天后开启新季 · 🔓 任务锁定机制改版：可随时解锁再编辑（仅未完成可改，已完成只读；删除仍扣标签上限10%EP，解锁后新增任务未完成罚率+50%；幸运任务按条件重新校验，满足则随机补发）',c:'#ff2d95'},{t:'📢 v1.4.8 大更新',d:'🧾 结算页改版：顶部展示真实EP/增益EP/扣减EP/最终EP四项汇总，任务EP明细改为点击展开折叠式，未完成任务额外标注"若完成可减少的损失" · 🔧 逆境追赶潜能改为只在第1栏出现、选择后当天免罚修改3次（任务修改机制见 v1.4.9 公告：解锁再编辑） · ⚡ 33号天赋"绝对免疫"重做"属性强化"：经典模式被动效果+20%，乱斗模式乱斗效果翻倍但结算EP-15% · 🔁 循环温故天赋新增适用「旧list重刷」「旧list新轮次」标签 · 🛒 商店：积分兑代币不限购，天赋额外抽取降至100代币 · ⚔️ 竞技时长90→120分钟，窗口内任务EP达标签上限90%时资格分+50 · 🏆 各杯赛卡片新增本期剩余时间显示',c:'#007aff'},{t:'📢 v1.4.7.4 修复',d:'🛠 修复冲刺锦标赛及杯赛只统计精确标签的问题：父级标签悬赏现在会计入其全部子标签任务（如 本科·专业课 悬赏可计入 课堂/作业/备考 任务），往届冲刺奖杯自动按新口径重算 · 🛠 修复冲刺锦标赛今日目标当天不点亮的问题（现在实时读取今日任务）· 🛠 修复精研核心杯往届补领按钮点击无反应，失败时会提示具体原因',c:'#ff9500'},{t:'📢 v1.4.7.3 修复',d:'🛠 修复杯赛与竞技结算奖励未正确入账的问题：历史漏发的杯赛奖励自动补发，竞技结算奖励补挂到原结算邮件（邮箱点领取即可）· 📮 竞技周结算奖励自动入账，结算邮件列明奖励明细 · 🛠 修复精研核心杯周末结束后补领入口被隐藏 · 🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断 · 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
   const dc=getDayCupInfo();const dtag=getTag(dc.tagId);
   if(dc.active)list.push({t:'🏆 日杯今日开启',d:'指定「'+(dtag?dtag.path.join(' · '):'')+'」，1 能量报名，冠军 🪙15。',c:'#ff9500'});
   else list.push({t:'🏆 日杯预告',d:'下一次日杯：'+dc.daysToActive+' 天后（'+dc.dateStr+'），前一天邮件提醒。',c:'#ff9500'});
