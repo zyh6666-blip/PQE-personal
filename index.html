@@ -474,7 +474,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 	 <div id="talent-bars"></div>
      <div id="evolve-bars"></div>
      <div style="background:#f9f9fb;border-radius:10px;padding:12px;margin-bottom:12px;">
-      <div style="font-size:13px;font-weight:600;margin-bottom:8px;">🎮 今日玩法 <span style="font-weight:400;color:#8e8e93;font-size:12px;">（乱斗与潜能互斥 · 确认后今日结算前不可更改）</span></div>
+      <div style="font-size:13px;font-weight:600;margin-bottom:8px;">🎮 今日玩法 <span style="font-weight:400;color:#8e8e93;font-size:12px;">（经典/乱斗/潜能/进化 四选一互斥 · 确认后今日结算前不可更改）</span></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;" id="mode-options"></div>
        <button class="btn-primary" id="mode-confirm-btn" style="width:100%;margin-top:8px;padding:10px;" onclick="confirmMode()">✅ 确认今日玩法</button>
       <div style="font-size:12px;color:#8e8e93;margin-top:6px;" id="mode-status"></div>
@@ -682,10 +682,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     <div class="card-title">📖 游戏指南 · 全功能说明</div>
     <div style="font-size:12px;color:#8e8e93;margin-bottom:10px;">点击标题展开/收起。建议配合「每日登记」页边用边看。</div>
     <div id="guide-body">
-      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🔄 核心循环</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天的核心循环五步：①早上打开「每日登记」，添加今日任务（最多15个，可拖拽排序、置顶1个），选好三级标签——任务结构决定今天的玩法上限；②三选一确认今日玩法（经典/乱斗/潜能，互斥，确认后当日不可换），再「确认今日任务」锁定结构；③白天完成任务，逐个填完成EP（必须是该标签当前占比要求值）并做任务状态评价（四维加权出质量EP，杯赛只看这个），点「完成」锁定单个任务——长期/周期任务副本会自动迁入；④晚上点「结算今日」：汇总全部加成与扣减（天赋/乱斗/潜能/被动/经验卡），明细账单逐任务列流水，确认后EP/积分入账、杯赛计分、材料掉落、能量+3；⑤次日0点所有日抛内容重置（乱斗属性、潜能栏、天赋锁定、经验卡），解锁新的随机内容，未结算的任务作废。所有锁定的内容当日不可反悔。策略：早上花三分钟想清楚今天干什么，比晚上补账重要得多。</div></details>
+      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🔄 核心循环</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天的核心循环五步：①早上打开「每日登记」，添加今日任务（最多15个，可拖拽排序、置顶1个），选好三级标签——任务结构决定今天的玩法上限；②四选一确认今日玩法（经典/乱斗/潜能/进化，互斥，确认后当日不可换），再「确认今日任务」锁定结构；③白天完成任务，逐个填完成EP（必须是该标签当前占比要求值）并做任务状态评价（四维加权出质量EP，杯赛只看这个），点「完成」锁定单个任务——长期/周期任务副本会自动迁入；④晚上点「结算今日」：汇总全部加成与扣减（天赋/乱斗/潜能/被动/经验卡），明细账单逐任务列流水，确认后EP/积分入账、杯赛计分、材料掉落、能量+3；⑤次日0点所有日抛内容重置（乱斗属性、潜能栏、天赋锁定、经验卡），解锁新的随机内容，未结算的任务作废。所有锁定的内容当日不可反悔。策略：早上花三分钟想清楚今天干什么，比晚上补账重要得多。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">📋 任务体系</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b>每日任务</b>：最多15个，确认后结构锁定（仍可填EP），可拖拽排序、置顶1个（完成+5%，置顶强化被动升至15%但惩罚+20%）。<b>周期任务</b>：按1/2/3/7/14/30天周期自动生成副本到每日栏，副本不可删除，完成后记周期；截止后不再生成。<b>长期任务</b>：设定截止日期，前20%/50%/80%时间完成分别+80%/+40%/+20%加成，截止前1天自动并入每日栏，逾期当日结算EP-50%（每任务扣一次）；可随时「转移今日」提前并入，转后未完成按每日任务规则扣减并返回长期栏。<b>特殊标记</b>：幸运任务（结算+20%/40%，5个以上任务时出现1个、终极英雄2个）、感染任务（母体威慑被动：指定早中晚时段内完成+30%且全体增益，失败重罚）、强化任务（异界猎手支援）。副本类任务完成状态同步回源任务。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">💰 结算引擎</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b>完成EP</b>：必须是「该标签完成占比」对应的固定数值（基础10%，随极速/氮增成长，普通最高20%、SP固定10%），填错无法提交——它代表"做了"这个行为的基准分。<b>质量EP</b>：由「任务状态评价」四维自评（正确率50%/专注度30%/用时5%/基本状态15%，各0-100，默认60）加权平均后乘以（最大EP-完成EP）得出，是杯赛计分唯一依据（质量÷上限×100，达上限+20）。<b>罚则</b>：未完成任务按标签罚率（5%~30%）累计扣减总EP，多种减免可叠加（韧性承担、护盾吸收、硬化、保险、紧急撤离等），扣减上限100%。<b>明细账单</b>：结算弹窗逐任务列出全部加成流水（天赋/乱斗/潜能/被动/置顶/幸运），每笔标注来源与数值，可追溯。<b>经验卡</b>每日限1张（1.2~3倍，仅作用于EP）。<b>撤销</b>可整体回滚最近一次结算（退回EP/积分/代币/经验卡，恢复任务快照）。结算前看预览，确认无误再点。</div></details>
-      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🎮 今日玩法（三选一互斥）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天三选一互斥：<b>📘 经典</b>——功能属性（常驻被动）+天赋生效，无随机规则，适合求稳或天赋池深的日子；<b>⚔️ 乱斗</b>——功能属性+天赋+每日随机乱斗属性（1个，灵魂武者2个，25个规则改写结算公式），适合想赌增益的日子；<b>✨ 潜能</b>——功能属性+潜能栏位构筑（9/14/18点开栏2选1，每日3次刷新），适合作息规律、能配合时段的日子。乱斗与潜能互斥，经典为默认。在「每日登记」点卡片选择并「确认今日玩法」，确认后当日结算前不可更换。选择策略：看今天任务结构——任务杂选乱斗赌增益、作息固定选潜能吃时段加成、有重要模考选经典稳吃天赋。</div></details>
+      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🎮 今日玩法（四选一互斥）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天四选一互斥：<b>📘 经典</b>——功能属性（常驻被动）+天赋生效，无随机规则，适合求稳或天赋池深的日子；<b>⚔️ 乱斗</b>——功能属性+天赋+每日随机乱斗属性（1个，灵魂武者2个，25个规则改写结算公式），适合想赌增益的日子；<b>✨ 潜能</b>——功能属性+潜能栏位构筑（9/14/18点开栏2选1，每日3次刷新），适合作息规律、能配合时段的日子；<b>🧬 进化</b>——功能属性+天赋+攻防进化：完成任务按原始填入EP从Lv.1成长至Lv.10（每级小增益·相同词条取最大，3/6/9级随机大幅增益，9级无视任务数获得幸运任务，满级「终极英雄」三选一），进化模式下感染任务时限为全天。四玩法互斥，经典为默认。在「每日登记」点卡片选择并「确认今日玩法」，确认后当日结算前不可更换。选择策略：看今天任务结构——任务杂选乱斗赌增益、作息固定选潜能吃时段加成、有重要模考选经典稳吃天赋、想体验稳定成长选进化。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🧬 天赋（35个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每日抽取天赋并装配（6槽6费）：普通60%/稀有30%/高级7%/传说3%四档，共35个；每升1级+1次抽取，池抽空即止。互斥组只能带一个：时段三选一（晨读/下午茶/夜猫子）、政治主客观、英二有无作文、教综学与刷等。确认后当日锁定。天赋分全局型（看任务结构给加成）、科目专属型（政治/英二/教综/语言学）、条件型（时段/题型按钮）与传说主动技：心态壁垒（借乱斗属性120分钟）、不灭阳炎（扣15%燃烧15分钟后首任务+70%）、终结恩赐（按上限差额充能、满300开-97%护盾120分钟）、属性强化（经典模式被动效果+20%；乱斗模式乱斗效果放大100%、结算EP-15%）。策略：先定今日主攻科目再围绕配装。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">⚔️ 乱斗属性（25个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每日抽1个乱斗属性（灵魂武者可抽2个）改写结算公式，25个等概率。增益型：致命一击（完成顺序递增）、快速换弹（同标签连击）、第一滴血、致命攻击（80%+50%）、过度增长（破千阶梯+10%~110%）、枪械协同、重生契约、特工（90分钟+20%，CD90）与隐身（40分钟减免60%，CD120）主动技；保险型：无限火力、保底局（保底550）、摆脱危机（一标签免罚）、生命保险、双重装甲、防御补给；负面型：钢铁利爪（惩罚+20%）、复制感染（锚定首任务EP）；特殊型：融合（每科目专属属性+25%）、异界猎手支援（30%强化任务）、最后的幸存者。属性抽取券/变更券/特权券（可直接选融合）在商店有售。每日重置，与潜能互斥，确认后不可更换。策略：先看属性再排任务。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">✨ 潜能（40个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天9:00/14:00/18:00开栏，每栏2选1、每日3次刷新；40个潜能按五类分布（经验增益/作息调控/科目权重/风险/跨日影响），且位置构筑——同一潜能只在特定栏位出现（晨光仅第1栏、夜战仅3/4栏、超额仅第4栏等）。第4栏18点后开放（总潜能达500或装备灵魂武者）。作息类潜能需登记昨晚睡眠/今日午觉时长判定。风险类是高回报赌局（专念特教大类+100%其余-50%、舍弃复盘、致命一击递增）。跨日类影响明天（蓄势待发指定首潜能范围、逆境追赶可免罚改3次任务）。仅在潜能玩法下生效，与乱斗互斥；确认今日玩法后不可更换。</div></details>
@@ -853,7 +853,7 @@ const BRAWLS=[
 {id:6,name:"爆炸剑气",effect:"完成一个任务后，其相邻任务完成后可额外获得上一任务完成率等值的EP加成"},
 {id:7,name:"猎手韧性",effect:"获得韧性条，上限200。完成课堂类任务自动充能20；非课堂任务发生EP扣减时，韧性最多承担该次扣减的30%，不足部分正常扣除"},
 {id:8,name:"无敌之盾",effect:"任务完成时，若该任务获得EP低于其标签最大EP，自动消耗护盾并将本任务补足到标签最大EP。每天重置；使用后240分钟重新生成，后续每次重生时间增加30分钟"},
-{id:9,name:"母体威慑",effect:"幸运任务替换为感染任务。感染任务会被指定到早/中/晚任意时段，必须在该时段内完成：按时完成感染任务额外+30%EP（终极英雄生效时为60%），且今日其余任务额外+20%EP、扣减减少30%；未在指定时段完成则感染任务仅保留10%EP，其余任务EP减半"},
+{id:9,name:"母体威慑",effect:"幸运任务替换为感染任务。感染任务会被指定到早/中/晚任意时段（进化模式下为全天），必须在该时段内完成：按时完成感染任务额外+30%EP（终极英雄生效时为60%），且今日其余任务额外+20%EP、扣减减少30%；未在指定时段完成则感染任务仅保留10%EP，其余任务EP减半"},
 {id:10,name:"移速提升",effect:"主动技能：持续30分钟。期间所有其他主动技能的持续时间与冷却时间加快20%"},
 {id:11,name:"修正",effect:"今日第一个完成率低于标签上限50%的任务，自动补足到50%，仅限一次"},
 {id:12,name:"猎手防护",effect:"连续完成3个不同标签任务后，自动获得30点韧性；未装备7号时改为额外获得150EP"},
@@ -1021,6 +1021,20 @@ getTag=function(id,_t){
     const tm=_t.evoTradeMax||0;
     maxEp=Math.round(maxEp*(1+mb)*(1-tm));
     pen=Math.round(pen*(1-Math.min(0.9,pc+(_t.evoTradePen||0)))*100)/100;
+    if(ev.fuse&&!_t.completed&&(state.todayTasks||[]).length){
+      /* v1.5.0：融合——未完成任务标签显示平均扣减比例 */
+      let _sum=0,_cnt=0;
+      state.todayTasks.forEach(function(x){
+        const bx=_origGetTag(x.tagId);if(!bx)return;
+        let r=getTagRate(bx);
+        r*=(1-Math.min(0.9,(ev.taskpen||0)+(x.evoPenCut||0)));
+        if(x.evoTradePen)r*=(1-Math.min(0.9,x.evoTradePen));
+        if(ev.stealthActive)r*=0.4;
+        if(ev.boilActive)r*=0.2;
+        _sum+=r;_cnt++;
+      });
+      if(_cnt>0)pen=Math.round(_sum/_cnt*10000)/100;
+    }
   }
   if(!up&&!_t)return t;
   if(maxEp===t.maxEp&&pen===basePen)return t;
@@ -1227,7 +1241,17 @@ if(b.a==='settle')m.settleAdd=Math.max(m.settleAdd,b.v);else if(b.a==='pen')m.pe
 if(m.chances.length>1){const best={};m.chances.forEach(function(cb){const k=cb.pen?'p':'a';if(!best[k]||cb.v>best[k].v)best[k]=cb;});m.chances=Object.keys(best).map(function(k){return best[k];});}
 const sk=evoSkillActive();m.boilActive=sk.boil;m.stealthActive=sk.stealth;return m;}
 function pushEvolveNote(txt){const box=document.getElementById('notif-container');if(!box)return;const c=document.createElement('div');c.className='notif-card';c.style.borderLeftColor='#e8a33d';c.innerHTML='<div class="notif-title">🧬 进化</div><div class="notif-body">'+txt+'</div>';box.appendChild(c);requestAnimationFrame(function(){c.classList.add('show');});setTimeout(function(){c.classList.add('hide');setTimeout(function(){c.remove();},300);},6500);}
-function assignEvolveLucky(t){if(hasEvolveAttr('ea_mutate')){t.infected=true;t.infectSlot=randomInfectionSlot();const slot=getInfectionSlotInfo(t.infectSlot),d=new Date();d.setHours(slot.end,0,0,0);t.infectDeadline=d.getTime();}else t.lucky=true;}
+function setTaskInfected(t){
+ t.infected=true;
+ if(state.todayMode==='evolve'){
+  t.infectSlot='allday';
+  const d=new Date();d.setHours(24,0,0,0);t.infectDeadline=d.getTime();
+ }else{
+  t.infectSlot=randomInfectionSlot();
+  const slot=getInfectionSlotInfo(t.infectSlot),d=new Date();d.setHours(slot.end,0,0,0);t.infectDeadline=d.getTime();
+ }
+}
+function assignEvolveLucky(t){if(hasEvolveAttr('ea_mutate'))setTaskInfected(t);else t.lucky=true;}
 function pickEvolvePath(p){getEvolve().path=p;saveState();document.getElementById('modal-confirm').style.display='';document.getElementById('modal-extra').innerHTML='';closeModal();renderModeOptions();renderEvolveBars();pushEvolveNote('🧬 今日路径：'+(p==='atk'?'⚔️ 攻击':'🛡️ 防御')+'，从 Lv.1 开始成长');}
 function evolveOnTaskComplete(t){
  if(state.todayMode!=='evolve')return;
@@ -1452,7 +1476,7 @@ const MODES=[
   {id:'classic',name:'经典玩法',icon:'📘',desc:'功能属性+天赋生效 · 无乱斗/潜能'},
   {id:'brawl',name:'随机属性（乱斗）',icon:'⚔️',desc:'被动+天赋+乱斗属性 · 潜能失效',unlock:'brawl'},
   {id:'potential',name:'潜能玩法',icon:'✨',desc:'被动+潜能生效 · 天赋/乱斗失效',unlock:'potential'},
-  {id:'evolve',name:'进化模式',icon:'🧬',desc:'天赋+功能+攻防进化成长 · 乱斗/潜能失效',unlock:'evolve'}
+  {id:'evolve',name:'进化模式',icon:'🧬',desc:'天赋+功能+攻防进化：原始EP 1→10级成长 · 9级幸运 · 满级三选一 · 乱斗/潜能失效',unlock:'evolve'}
 ];
 const MODE_NAMES={classic:'经典玩法',brawl:'随机属性（乱斗）',potential:'潜能玩法',evolve:'进化模式'};
 function getModeBlock(type){
@@ -1536,7 +1560,7 @@ function usePotentialSprint(){
   sp.until=now+60*60000;sp.cdUntil=now+2*60*60000;saveState();renderDailySkills();alert('⚡ 短时冲刺启动：1小时内EP+30%、扣减-50%，考研标签任务再+20%。');
 }
 function doneRatio(){const all=state.todayTasks||[];if(!all.length)return 0;return all.filter(t=>t.completed&&t.completed&&t.baseEp!=='').length/all.length;}
-const INFECTION_SLOTS={morn:{name:'早时段',range:'06:00-12:00',start:6,end:12,weight:0.30},noon:{name:'中时段',range:'12:00-18:00',start:12,end:18,weight:0.35},even:{name:'晚时段',range:'18:00-24:00',start:18,end:24,weight:0.35}};
+const INFECTION_SLOTS={morn:{name:'早时段',range:'06:00-12:00',start:6,end:12,weight:0.30},noon:{name:'中时段',range:'12:00-18:00',start:12,end:18,weight:0.35},even:{name:'晚时段',range:'18:00-24:00',start:18,end:24,weight:0.35},allday:{name:'全天',range:'00:00-24:00',start:0,end:24,weight:0.35}};
 function randomInfectionSlot(){const keys=['morn','noon','even'],now=new Date().getTime();const valid=keys.filter(k=>todayAt(INFECTION_SLOTS[k].end)>now+5*60000);if(!valid.length)return 'even';return valid[Math.floor(Math.random()*valid.length)];}
 function getInfectionSlotInfo(key){return INFECTION_SLOTS[key]||INFECTION_SLOTS.morn;}
 function isTaskInInfectionSlot(t){const slot=getInfectionSlotInfo(t.infectSlot),h=new Date(t.doneAt||0).getHours();return h>=slot.start&&h<slot.end;}
@@ -2279,8 +2303,7 @@ function recalcLuckyMarks(){
     const prefer=pool.filter(t=>!t.completed);
     const pick=(prefer.length?prefer:pool)[Math.floor(Math.random()*(prefer.length?prefer:pool).length)];
     if(hasPassive(9)){
-      pick.infected=true;pick.infectSlot=randomInfectionSlot();
-      const slot=getInfectionSlotInfo(pick.infectSlot),d=new Date();d.setHours(slot.end,0,0,0);pick.infectDeadline=d.getTime();
+      setTaskInfected(pick);
     }else pick.lucky=true;
     marked.push(pick);
   }
@@ -2324,7 +2347,7 @@ function confirmTasks(){
     const ps=getPassiveState();
     state.todayTasks.forEach(t=>{t.infected=false;t.infectDeadline=0;t.infectSuccess=false;t.infectFailed=false;});
     if(hasPassive(9)){
-      state.todayTasks.forEach(t=>{if(t.lucky){t.lucky=false;t.infected=true;t.infectSlot=randomInfectionSlot();const slot=getInfectionSlotInfo(t.infectSlot),d=new Date();d.setHours(slot.end,0,0,0);t.infectDeadline=d.getTime();}});
+      state.todayTasks.forEach(t=>{if(t.lucky){t.lucky=false;setTaskInfected(t);}});
       ps.infectSuccess=false;ps.infectFailed=false;
     }
     const firstTag=getTag(state.todayTasks[0]&&state.todayTasks[0].tagId);
@@ -2485,7 +2508,7 @@ function renderHome(){
   const unlocks=[
     {name:'天赋系统',need:501,lv:'Lv.2 列兵2'},
     {name:'被动系统',need:30541,lv:'Lv.28 少尉1'},
-    {name:'乱斗模式',need:40837,lv:'Lv.33 少尉6'},
+    {name:'乱斗/进化模式',need:40837,lv:'Lv.33 少尉6'},
     {name:'潜能模式',need:105168,lv:'Lv.52 少校1'},
     {name:'满级 Lv.100',need:665030,lv:'元帅'}
   ];
@@ -2515,7 +2538,7 @@ const modeNames={classic:'📘 经典玩法',brawl:'⚔️ 随机属性（乱斗
   }else if(state.todayMode==='potential'){
     md=state.potential.hist.length?'<div class="chip-wrap">'+state.potential.hist.map(x=>'<span style="font-size:11px;padding:3px 8px;border-radius:6px;background:'+CAT_COLOR[x.cat]+'15;color:'+CAT_COLOR[x.cat]+';">#'+x.id+' '+x.name+'</span>').join('')+'</div>':'<span style="font-size:12px;color:#8e8e93;">今日潜能尚未抽取</span>';
   }else{
-    md='<div style="font-size:12px;color:#6e6e73;">角色被动 + 已装备天赋生效中 · 乱斗/潜能今日关闭</div>';
+    md='<div style="font-size:12px;color:#6e6e73;">角色被动 + 已装备天赋生效中 · 乱斗/潜能/进化今日关闭</div>';
   }
   document.getElementById('home-mode-detail').innerHTML=md;
   document.getElementById('home-today').innerHTML=th;
@@ -2611,6 +2634,7 @@ function updatePointsPreview(){
     let adjusted=own;if(mods.hasClone&&firstDone&&t!==firstDone&&(t.completed&&t.baseEp!==''))adjusted=(parseInt(firstDone.baseEp)||0)+(parseInt(firstDone.qualityEp)||0);if(t._chain>=2){const _up=(state.tagUp||{})[t.tagId];const _acc=_up?(_up.acc||0):0;if(_up&&(_acc>0||((_up.nit||0)>0)))adjusted=Math.round(adjusted*(1+(t._chain-1)*(0.02*_acc+0.005*(_up.ctl||0))*(_up.sp?2:1)));}return fpTaskOwn(t,adjusted,[])+(t.longBonusEp||0);
   };
   let gross=0,pen=0;
+  let evoSavedP=0;
   state.todayTasks.forEach(t=>{
     gross+=ownOf(t);
     if(!(t.completed&&t.baseEp!=='')&&!(mods.hasExempt&&sk.exemptTagId===t.tagId)) {
@@ -2627,11 +2651,13 @@ function updatePointsPreview(){
       if(mods.hasHarden)rate*=(1-0.45*brwAmp());
       if(mods.hasOvercap)rate=Math.min(rate,0.30/brwAmp());
       if(evo.on){
+          const _r0=rate;
           if(evo.taskpen||t.evoPenCut)rate*=(1-Math.min(0.9,(evo.taskpen||0)+(t.evoPenCut||0)));
           if(t.evoTradePen)rate*=(1-Math.min(0.9,t.evoTradePen));
           if(evo.insure)rate*=0.7;
           if(evo.stealthActive)rate*=0.4;
           if(evo.boilActive)rate*=0.2;
+          evoSavedP+=(_r0-rate);
         }
         if(t.penBoost)rate*=t.penBoost;
       pen+=rate;
@@ -3327,6 +3353,7 @@ function submitDaily(){
 
   let unfinished=[];
   let penaltyTotal=0;
+  let evoSavedRate=0;
   let grossRawEp=0;
   state.todayTasks.forEach(t=>{
     grossRawEp+=ownOf(t);
@@ -3346,6 +3373,7 @@ function submitDaily(){
       if(mods.hasOvercap)rate=Math.min(rate,0.30/brwAmp());
       let u_survive=false;
       if(evo.on){
+        const _rate0=rate;
         const tg2=getTag(t.tagId,t);
         const maxE2=tg2?tg2.maxEp:0;
         if(evo.taskpen||t.evoPenCut)rate*=(1-Math.min(0.9,(evo.taskpen||0)+(t.evoPenCut||0)));
@@ -3357,6 +3385,7 @@ function submitDaily(){
         if(evo.over&&maxE2>0&&grossRawEp>0)rate=Math.min(rate,maxE2*0.25/grossRawEp);
         if(evo.alert){const ti=state.todayTasks.indexOf(t);const nb2=[state.todayTasks[ti-1],state.todayTasks[ti+1]];for(let q=0;q<2;q++){const nx=nb2[q];if(nx&&nx.completed){const ng=getTag(nx.tagId,nx);if(ng&&((parseInt(nx.baseEp)||0)+(parseInt(nx.qualityEp)||0))<=ng.maxEp*0.6){rate*=0.93;break;}}}}
         if(evo.survive){const un2=state.todayTasks.filter(function(x){return !(x.completed&&x.baseEp!=='');});if(un2.length===1&&un2[0]===t){rate*=0.4;u_survive=true;}}
+        evoSavedRate+=(_rate0-rate);
       }
       if(t.penBoost)rate*=t.penBoost;
       if(t.potentialMark3&&hasPotential(3))rate*=0.6;
@@ -3365,7 +3394,19 @@ function submitDaily(){
       penaltyTotal+=rate;
     }
   });
-  if(evo.on&&evo.fuse&&unfinished.length){const _avg=penaltyTotal/unfinished.length;unfinished.forEach(function(u){u.rate=_avg;});}
+  if(evo.on&&evo.fuse){
+    /* v1.5.0修正：融合=今日【所有任务】扣减比例的平均值（含已完成） */
+    let _fs=0,_fc=0;
+    state.todayTasks.forEach(function(x){
+      const bx=getTag(x.tagId,x);if(!bx)return;
+      let r=getTagRate(bx);
+      if(x.penBoost)r*=x.penBoost;
+      if(x.potentialMark3&&hasPotential(3))r*=0.6;
+      if(x.pinned&&hasPassive(13))r*=(1+0.2*pasAmp());
+      _fs+=r;_fc++;
+    });
+    if(_fc>0&&unfinished.length){const _avg=_fs/_fc;unfinished.forEach(function(u){u.rate=_avg;});penaltyTotal=_avg*unfinished.length;}
+  }
   if(mods.hasInsurance)penaltyTotal=0;
   // 19号防御补给：每层(=完成数,上限10)减少5%扣除
   if(mods.hasSupply&&penaltyTotal>0){
@@ -3374,7 +3415,7 @@ function submitDaily(){
   }
   penaltyTotal=Math.min(penaltyTotal,1.0);
   if(getPassPenReduce()>0)penaltyTotal=Math.min(1,penaltyTotal*(1-getPassPenReduce()));
-  if(evo.on&&evo.pen)penaltyTotal=Math.min(1,penaltyTotal*(1-evo.pen));
+  if(evo.on&&evo.pen){const _penPre=penaltyTotal;penaltyTotal=Math.min(1,penaltyTotal*(1-evo.pen));evoSavedRate+=_penPre*Math.min(1,evo.pen);}
 
   // 置顶奖励
   let pinBonusEp=0;
@@ -3533,7 +3574,25 @@ function submitDaily(){
   const delLine=delDedPrev>0?'<br><span style="color:#ff3b30;">🗑️ 锁后删除任务扣减：-'+delDedPrev+' EP（每删1个扣标签上限10%）</span>':'';
   const exTag=getTag(sk.exemptTagId);
   const exemptNote=(mods.hasExempt&&exTag)?'<br><span style="color:#34c759;">🛡️ 摆脱危机：「'+exTag.path.join('·')+'」今日免罚</span>':'';
-  const ptsLine=(listClearToday>0?'<br>🎯 W4 List通关 ×'+listClearToday+'：+'+(listClearToday*200)+' EP（并入任务池 · 参与扣减 · 吃经验卡）':'')+odLine+delLine+exemptNote+absNote+tal.lines+brawlLines+(pinBonusEp>0?'<br>📌 置顶任务完成奖励：EP +<b style="color:#ff9500;">'+pinBonusEp+'</b>（'+(hasPassive(13)?'15':'5')+'%取整）':'')+'<br>今日可获得积分：<b style="color:#007aff;">+'+preview.total+'</b>'+(preview.lvUps>0?'（含升级奖励 +'+preview.upPoints+'）':'')+(preview.epPoints>=800?' <span style="font-size:11px;color:#8e8e93;">(EP积分已达日上限800)</span>':'');
+  /* 进化扣减减免预览（结算确认弹窗用） */
+let evoSavedP=0,gross=0;
+const _evp=getEvolveMods();
+state.todayTasks.forEach(function(t){
+ gross+=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
+ if(t.completed&&t.baseEp!=='')return;
+ const tg=getTag(t.tagId,t);
+ let r=tg?getTagRate(tg):0.3;
+ if(_evp.on){
+  const r0=r;
+  if(_evp.taskpen||t.evoPenCut)r*=(1-Math.min(0.9,(_evp.taskpen||0)+(t.evoPenCut||0)));
+  if(t.evoTradePen)r*=(1-Math.min(0.9,t.evoTradePen));
+  if(_evp.insure)r*=0.7;
+  if(_evp.stealthActive)r*=0.4;
+  if(_evp.boilActive)r*=0.2;
+  evoSavedP+=(r0-r);
+ }
+});
+const ptsLine=(listClearToday>0?'<br>🎯 W4 List通关 ×'+listClearToday+'：+'+(listClearToday*200)+' EP（并入任务池 · 参与扣减 · 吃经验卡）':'')+odLine+delLine+exemptNote+absNote+tal.lines+brawlLines+(pinBonusEp>0?'<br>📌 置顶任务完成奖励：EP +<b style="color:#ff9500;">'+pinBonusEp+'</b>（'+(hasPassive(13)?'15':'5')+'%取整）':'')+'<br>今日可获得积分：<b style="color:#007aff;">+'+preview.total+'</b>'+(preview.lvUps>0?'（含升级奖励 +'+preview.upPoints+'）':'')+(preview.epPoints>=800?' <span style="font-size:11px;color:#8e8e93;">(EP积分已达日上限800)</span>':'')+(evo.on&&evoSavedP>0?'<br>🧬 进化·扣减减免（少扣即多得）+'+Math.round(gross*Math.min(1,evoSavedP))+' EP':'');
   const detailAmount=v=>v>0?'+'+v:String(v);
   const baseTaskEp=doneList.reduce((sum,t)=>sum+(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0),0);
   const taskDetailRows=doneList.map((t,i)=>{
@@ -3542,7 +3601,7 @@ function submitDaily(){
     const eventRows=events.map(e=>'<div style="display:flex;justify-content:space-between;gap:8px;font-size:11px;padding:2px 0;border-bottom:1px solid #f2f2f7;"><span style="color:#6e6e73;">'+e.label+'</span><b style="color:'+(e.amount>=0?'#007aff':'#ff3b30')+';">'+detailAmount(e.amount)+' EP</b></div>').join('');
     const spOn=!!(tag&&((state.tagUp||{})[tag.id]||{}).sp);const detailHtml='<div style="font-size:10px;color:#8e8e93;margin:4px 0;">'+(tag?tag.path.join(' · '):'未分类')+'</div>'+(chips?'<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;">'+chips+'</div>':'')+(eventRows?'<div style="background:#f9f9fb;border-radius:8px;padding:6px 8px;">'+eventRows+'</div>':'<div style="font-size:11px;color:#8e8e93;">无单独附加增益</div>');return settlementTaskCardOpen(t,tag,spOn)+'<div onclick="var d=document.getElementById(\'std'+i+'\');if(d)d.style.display=(d.style.display===\'none\'?\'\':\'none\');" style="cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:flex-start;"><div style="font-size:13px;font-weight:600;">'+(i+1)+'. '+(t.name||'任务')+'</div><div style="font-size:11px;color:#007aff;white-space:nowrap;">填入 '+raw+' → 获得 '+baseAdjusted+' ▾</div></div><div id="std'+i+'" style="display:none;">'+detailHtml+'</div></div>';
   }).join('');
-  const unfinishedDetailRows=unfinished.map(u=>'<div style="font-size:12px;padding:4px 0;border-bottom:1px solid #f2f2f7;"><div style="display:flex;justify-content:space-between;"><span>'+u.name+'</span><b style="color:#ff3b30;">未完成扣减 '+Math.round(u.rate*100)+'%</b></div><div style="font-size:11px;color:#8e8e93;margin-top:2px;">若完成该任务，可减少约 '+Math.round(grossRawEp*u.rate)+' EP 的损失</div></div>').join('');
+  const unfinishedDetailRows=unfinished.map(u=>'<div style="font-size:12px;padding:4px 0;border-bottom:1px solid #f2f2f7;"><div style="display:flex;justify-content:space-between;"><span>'+u.name+'</span><b style="color:#ff3b30;">未完成扣减 '+Math.round(u.rate*100)+'%'+(evo.on&&evo.fuse?'（融合均值）':'')+'</b></div><div style="font-size:11px;color:#8e8e93;margin-top:2px;">若完成该任务，可减少约 '+Math.round(grossRawEp*u.rate)+' EP 的损失</div></div>').join('');
   const settlementSummaryHtml='<div style="background:#f2f7ff;border:1px solid #007aff25;border-radius:10px;padding:10px;margin-bottom:10px;"><div style="font-size:12px;font-weight:600;color:#007aff;margin-bottom:6px;">📊 今日EP汇总</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;"><span>真实EP（填入总和）：<b>'+baseTaskEp+'</b></span><span>增益EP：<b style="color:#1f9d43;">+'+Math.max(0,grossRawEp-baseTaskEp)+'</b></span><span>扣减EP：<b style="color:#ff3b30;">-'+Math.max(0,grossRawEp-effectiveRawEp)+'</b></span><span>最终获得EP：<b style="color:#007aff;">'+previewFinal+'</b></span></div></div>';
   const taskDetailHtml='<div style="font-size:11px;color:#8e8e93;margin-bottom:4px;">点击任意任务可展开/收起该任务的EP明细</div><div style="max-height:260px;overflow-y:auto;margin-bottom:10px;padding-right:4px;">'+taskDetailRows+'</div>'+(unfinishedDetailRows?'<div style="background:#fff5f5;border:1px solid #ff3b3025;border-radius:10px;padding:8px 10px;margin-bottom:10px;"><div style="font-size:12px;font-weight:600;color:#ff3b30;margin-bottom:4px;">未完成扣减明细</div>'+unfinishedDetailRows+'</div>':'');
   let confirmTitle='',confirmBody='';
