@@ -671,6 +671,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
       <button class="btn-accent" style="flex:1;font-size:12px;" onclick="openSPPanel()">🏎️ 运动版（SP觉醒）</button>
       <button class="btn-secondary" style="flex:1;font-size:12px;" onclick="sellSurplusMats()">♻️ 回收溢出材料（5积分/个）</button>
       <button class="btn-secondary" style="flex:1;font-size:12px;" onclick="usePartsPack()">📦 材料包 (<span id="parts-pack-count">0</span>)</button>
+      <button class="btn-secondary" style="flex:1;font-size:12px;" onclick="useUltUndo()">🎫 撤销卡 (<span id="ult-undo-count">0</span>)</button>
     </div>
     <div id="upgrade-list" style="max-height:560px;overflow-y:auto;padding-right:4px;"></div>
   </div>
@@ -888,6 +889,7 @@ const INVENTORY_CATALOG=[
     {k:'universal_mat',n:'通用材料',i:'🧊',d:'升级材料不足时自动补缺口'},
     {k:'sp_core',n:'精研核心',i:'💠',d:'SP 运动版觉醒材料'},
     {k:'ult_upgrade',n:'终极改装包',i:'🏆',d:'任选标签四线满级'},
+    {k:'ult_undo',n:'终极升级撤销卡',i:'🎫',d:'撤销一次已使用的终极改装包'},
     {k:'direct_up',n:'直接升级',i:'🔧',d:'任选标签任一零件 +1 级'}
   ]}
 ];
@@ -1414,6 +1416,7 @@ function renderEvolvePage(){
  box.innerHTML=h;
 }
 function ensureV1502Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v1502_balance'])return;state.mailGranted['v1502_balance']=true;if(!state.mailbox.some(function(m){return m.id==='v1502_balance';})){state.mailbox.push({id:'v1502_balance',title:'v1.5.0.2 标签数值调整明细（前→后）',body:'以下标签最大EP下调：<br>· 考研英二单词-旧list重刷 400→300<br>· 考研英二单词-当前list新轮次 350→250<br>· 过级考试单词-旧list重刷 400→350<br>· 过级考试单词-当前list新轮次 350→300<br>· 考研专业课单词-新list 300→250<br>· 考研专业课单词-旧list重刷 400→350<br>· 考研专业课单词-当前list新轮次 350→300<br>· 本科专业课-课堂 300→250<br>· 本科专业课-作业 400→250<br>· 本科专业课-备考 450→300<br>· 809语言学-刷题/改错 450→400<br>另：全功能体验卡到期后，若尚未达到Lv.28，体验期装备的功能属性将清零（正赛从0开始）。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
+function ensureUltUndoMail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['ult_undo_card'])return;state.mailGranted['ult_undo_card']=true;if(!state.mailbox.some(function(m){return m.id==='ult_undo_card';})){state.mailbox.push({id:'ult_undo_card',title:'🎫 终极升级撤销卡 ×1',body:'随卡说明：本卡可撤销一次「终极改装包」的使用，被撤销标签的四条改装线将恢复至使用前的状态（消耗的改装包与材料不退还）。<br><br>⚠️ 注意：只有从本次更新起使用的终极改装包会留下使用前快照；更早使用的记录无法精确回溯，届时只能选择将该标签四线重置为 Lv0。在「升级」页点击 🎫 撤销卡 使用。',items:{ult_undo:1},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 function ensureV150Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v150_update'])return;state.mailGranted['v150_update']=true;if(!state.mailbox.some(function(m){return m.id==='v150_update';})){state.mailbox.push({id:'v150_update',title:'v1.5.0「终极进化」更新奖励',body:'全新玩法「进化」上线：选定进化玩法后选择攻击/防御路径，完成任务按原始填入EP从Lv.1成长至Lv.10（满级成为终极英雄，三选一终极强化）。随邮件发放进化模式体验卡×1。',items:{evolve_trial:1},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 /* ================= 进化模式 END ================= */
 
@@ -2473,7 +2476,7 @@ function getUnreadMailCount(){return (state.mailbox||[]).filter(m=>!m.read).leng
 function updateMailBadge(){const b=document.getElementById('mail-badge');if(!b)return;const n=getUnreadMailCount();b.style.display=n>0?'':'none';b.textContent=n;}
 function showMailNotification(m){const box=document.getElementById('notif-container');if(!box)return;const card=document.createElement('div');card.className='notif-card';card.style.borderLeftColor='#ff9500';card.innerHTML='<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;"><span class="notif-title">📮 新邮件 · '+m.title+'</span><span style="font-size:16px;color:#c7c7cc;line-height:1;cursor:pointer;" onclick="event.stopPropagation();this.parentElement.parentElement.remove();">×</span></div><div class="notif-body">'+m.body+'</div><div class="notif-reward">点击打开邮箱</div>';card.onclick=()=>{switchPage('mail');card.remove();};box.appendChild(card);requestAnimationFrame(()=>card.classList.add('show'));setTimeout(()=>{card.classList.add('hide');setTimeout(()=>card.remove(),300);},6000);}
 function notifyNewMails(){state.mailSeen=state.mailSeen||[];if(!state.mailSeenMigrated){(state.mailbox||[]).forEach(m=>{if(state.mailSeen.indexOf(m.id)===-1)state.mailSeen.push(m.id);});state.mailSeenMigrated=true;saveState();return;}(state.mailbox||[]).forEach(m=>{if(state.mailSeen.indexOf(m.id)===-1){state.mailSeen.push(m.id);showMailNotification(m);}});saveState();}
-function renderMailPage(){const box=document.getElementById('mail-page-list');if(!box)return;ensureV143Mail();ensureV150Mail();ensureV1502Mail();if(!state.mailbox.length){box.innerHTML='<div style="text-align:center;color:#8e8e93;padding:20px;">邮箱空空如也</div>';updateMailBadge();return;}box.innerHTML=state.mailbox.map(m=>{const items=Object.keys(m.items||{}).map(k=>{const _map={slot_trial:'全功能体验卡',potential_trial:'潜能体验卡',evolve_trial:'进化模式体验卡',passive_duration:'被动体验持续卡',draw_ticket:'属性抽取券',change_ticket:'属性变更券',reroll_ticket:'特殊属性重铸券',brawl_vip:'乱斗特权券',sp_core:'精研核心',ult_upgrade:'终极改装包',direct_up:'直接升级',exp12:'1.2倍经验卡',exp15:'1.5倍经验卡',exp2:'2倍经验卡',exp25:'2.5倍经验卡',exp3:'3倍经验卡',talent_extra:'天赋额外抽取',tokens:'代币'};const _icon={slot_trial:'🎟️',potential_trial:'🧪',evolve_trial:'🧬',passive_duration:'⏳',draw_ticket:'🎟️',change_ticket:'🎫',reroll_ticket:'🔮',brawl_vip:'👑',sp_core:'💠',ult_upgrade:'🏆',direct_up:'🔧',exp12:'⚡',exp15:'⚡',exp2:'⚡',exp25:'⚡',exp3:'⚡',talent_extra:'🌟',tokens:'🪙'};const name=_map[k]||k;const icon=_icon[k]||'🎁';return '<span style="font-size:11px;padding:2px 6px;border-radius:6px;background:#f2f2f7;color:#6e6e73;">'+icon+' '+name+' × '+m.items[k]+'</span>';}).join(' ');return '<div style="border:1px solid #e5e5ea;border-radius:10px;padding:10px;margin-bottom:8px;background:'+(m.read?'#fff':'#ff950008')+';'+(m.read?'':'border-left:4px solid #ff9500;')+'"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;"><div style="font-size:13px;font-weight:600;">'+(m.claimed?'✓ ':'📬 ')+m.title+(m.claimed?'':' <span style="font-size:10px;color:#ff9500;">未领取</span>')+'</div><div style="display:flex;gap:6px;">'+(m.claimed?'':'<button class="btn-primary" style="padding:4px 10px;font-size:12px;" onclick="claimMail(\''+m.id+'\')">领取</button>')+'<button class="btn-secondary" style="padding:4px 10px;font-size:12px;" onclick="deleteMail(\''+m.id+'\')">删除</button></div></div><div style="font-size:11px;color:#6e6e73;margin-top:5px;line-height:1.5;">'+m.body+'</div><div style="margin-top:6px;">'+items+'</div></div>';}).join('');state.mailbox.forEach(m=>{m.read=true;});saveState();updateMailBadge();}
+function renderMailPage(){const box=document.getElementById('mail-page-list');if(!box)return;ensureV143Mail();ensureV150Mail();ensureV1502Mail();ensureUltUndoMail();if(!state.mailbox.length){box.innerHTML='<div style="text-align:center;color:#8e8e93;padding:20px;">邮箱空空如也</div>';updateMailBadge();return;}box.innerHTML=state.mailbox.map(m=>{const items=Object.keys(m.items||{}).map(k=>{const _map={slot_trial:'全功能体验卡',potential_trial:'潜能体验卡',evolve_trial:'进化模式体验卡',passive_duration:'被动体验持续卡',draw_ticket:'属性抽取券',change_ticket:'属性变更券',reroll_ticket:'特殊属性重铸券',brawl_vip:'乱斗特权券',sp_core:'精研核心',ult_upgrade:'终极改装包',ult_undo:'终极升级撤销卡',direct_up:'直接升级',exp12:'1.2倍经验卡',exp15:'1.5倍经验卡',exp2:'2倍经验卡',exp25:'2.5倍经验卡',exp3:'3倍经验卡',talent_extra:'天赋额外抽取',tokens:'代币'};const _icon={slot_trial:'🎟️',potential_trial:'🧪',evolve_trial:'🧬',passive_duration:'⏳',draw_ticket:'🎟️',change_ticket:'🎫',reroll_ticket:'🔮',brawl_vip:'👑',sp_core:'💠',ult_upgrade:'🏆',ult_undo:'🎫',direct_up:'🔧',exp12:'⚡',exp15:'⚡',exp2:'⚡',exp25:'⚡',exp3:'⚡',talent_extra:'🌟',tokens:'🪙'};const name=_map[k]||k;const icon=_icon[k]||'🎁';return '<span style="font-size:11px;padding:2px 6px;border-radius:6px;background:#f2f2f7;color:#6e6e73;">'+icon+' '+name+' × '+m.items[k]+'</span>';}).join(' ');return '<div style="border:1px solid #e5e5ea;border-radius:10px;padding:10px;margin-bottom:8px;background:'+(m.read?'#fff':'#ff950008')+';'+(m.read?'':'border-left:4px solid #ff9500;')+'"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;"><div style="font-size:13px;font-weight:600;">'+(m.claimed?'✓ ':'📬 ')+m.title+(m.claimed?'':' <span style="font-size:10px;color:#ff9500;">未领取</span>')+'</div><div style="display:flex;gap:6px;">'+(m.claimed?'':'<button class="btn-primary" style="padding:4px 10px;font-size:12px;" onclick="claimMail(\''+m.id+'\')">领取</button>')+'<button class="btn-secondary" style="padding:4px 10px;font-size:12px;" onclick="deleteMail(\''+m.id+'\')">删除</button></div></div><div style="font-size:11px;color:#6e6e73;margin-top:5px;line-height:1.5;">'+m.body+'</div><div style="margin-top:6px;">'+items+'</div></div>';}).join('');state.mailbox.forEach(m=>{m.read=true;});saveState();updateMailBadge();}
 function claimMail(id){const m=(state.mailbox||[]).find(x=>x.id===id);if(!m||m.claimed)return;Object.keys(m.items||{}).forEach(k=>{state.inventory[k]=(state.inventory[k]||0)+m.items[k];});m.claimed=true;saveState();renderMailPage();updateShopUI();renderDailySkills();updatePotentialUI();renderLock('passive');showGainModal('📮 附件领取 · 恭喜获得',rwLines(m.items));}
 function claimAllMails(){let n=0;(state.mailbox||[]).forEach(m=>{if(!m.claimed){Object.keys(m.items||{}).forEach(k=>{state.inventory[k]=(state.inventory[k]||0)+m.items[k];});m.claimed=true;n++;}});saveState();renderMailPage();updateShopUI();renderDailySkills();updatePotentialUI();renderLock('passive');updateMailBadge();if(n>0)showGainModal('📮 一键领取完成',[['邮件数量','×'+n],['附件','已全部入账']]);else alert('没有待领取的邮件');}
 function deleteMail(id){const m=(state.mailbox||[]).find(x=>x.id===id);if(!m)return;if(!m.claimed){alert('该邮件附件尚未领取，请先领取再删除');return;}showModal('删除邮件','确认删除邮件 <b>'+m.title+'</b> ？<br><br>删除后不可恢复。',function(){state.mailbox=state.mailbox.filter(x=>x.id!==id);saveState();renderMailPage();updateMailBadge();closeModal();});}
@@ -2483,6 +2486,38 @@ function usePassiveDurationCard(){
   const now=new Date(),target=new Date(now.getFullYear(),8,21,0,0,0,0);
   if(target.getTime()<=now.getTime()){alert('该体验卡的延长目标时间已过，无法使用。');return;}
   state.inventory.passive_duration--;state.slotTrialUntil=Math.max(state.slotTrialUntil||0,target.getTime());saveState();updateShopUI();renderLock('passive');updatePassiveUI();renderHome();alert('⏳ 被动体验持续卡已使用：角色功能属性体验时间已延长至 '+target.getFullYear()+'年9月21日 00:00。');
+}
+function useUltUndo(){
+ if((state.inventory.ult_undo||0)<1){alert('没有终极升级撤销卡');return;}
+ state.tagUpSnap=state.tagUpSnap||{};
+ const snapIds=Object.keys(state.tagUpSnap);
+ const maxed=[];
+ if(!snapIds.length){
+   Object.keys(state.tagUp||{}).forEach(function(tid){const u=state.tagUp[tid];if(u&&u.spd>=10&&u.acc>=10&&u.ctl>=10&&u.nit>=10&&!u.sp)maxed.push(tid);});
+ }
+ if(!snapIds.length&&!maxed.length){alert('没有可撤销的终极改装记录\n（本卡只对本版本之后使用的终极改装包有效）');return;}
+ let h='<div style="font-size:12px;color:#6e6e73;margin-bottom:8px;">'+(snapIds.length?'选择要撤销终极改装的标签（恢复至使用前状态）：':'⚠️ 没有使用快照（旧版使用无法精确回溯），可选择将以下满级标签四线重置为 Lv0：')+'</div>';
+ const ids=snapIds.length?snapIds:maxed;
+ ids.forEach(function(tid){
+  const tg=getTag(tid);if(!tg)return;
+  const label=snapIds.length?('恢复至 '+JSON.stringify(state.tagUpSnap[tid])):'重置为 Lv0';
+  h+='<button class="btn-secondary" style="width:100%;margin-bottom:6px;text-align:left;" onclick="confirmUltUndo(\''+tid+'\')">'+tg.path.join(' · ')+' <span style="color:#8e8e93;font-size:11px;">'+label+'</span></button>';
+ });
+ showModal('🎫 终极升级撤销卡','',function(){},h);
+ document.getElementById('modal-confirm').style.display='none';
+}
+function confirmUltUndo(tid){
+ const tg=getTag(tid);
+ showModal('🎫 确认撤销','撤销标签 <b>'+(tg?tg.path.join(' · '):tid)+'</b> 的终极改装？<br><br>四线将'+(state.tagUpSnap&&state.tagUpSnap[tid]?'恢复至使用前的状态':'重置为 Lv0')+'，消耗的改装包与材料不退还。',function(){
+  if(state.tagUpSnap&&state.tagUpSnap[tid]){state.tagUp[tid]=state.tagUpSnap[tid];delete state.tagUpSnap[tid];}
+  else if(state.tagUp&&state.tagUp[tid]){state.tagUp[tid]={spd:0,acc:0,ctl:0,nit:0};}
+  state.inventory.ult_undo--;
+  saveState();updateShopUI();updateTopBar();
+  try{renderUpgradeUI();}catch(e){}
+  document.getElementById('modal-confirm').style.display='';
+  closeModal();
+  showGainModal('🎫 撤销完成',[['标签','「'+(tg?tg.path.join('·'):tid)+'」'],['状态','已回退','#ff9500']]);
+ });
 }
 function useSlotTrial(){
   if((state.inventory.slot_trial||0)<1){alert('🎟️ 没有全功能体验卡');return;}
@@ -2573,6 +2608,24 @@ function renderWarehouseUI(){
   if(extras.length){
     html+='<div style="display:flex;align-items:center;gap:8px;margin:16px 0 8px;"><span style="font-size:15px;">🎁</span><span style="font-size:13px;font-weight:700;color:#af52de;">其他道具</span><span style="flex:1;height:1px;background:#af52de22;"></span></div><div class="inv-grid">'+extras.map(k=>'<div class="inv-item"><div style="font-size:18px">🎁</div><div style="font-size:11px;color:#6e6e73;margin:2px 0">'+esc(k)+'</div><div class="inv-count">×'+count(k)+'</div></div>').join('')+'</div>';
   }
+  /* v1.5.0.2 标签材料库存（结算自动掉落，升级页改装 Lv6-10 消耗） */
+  const _mats=state.tagMats||{};
+  const _matKeys=Object.keys(_mats).filter(function(k){const m=_mats[k];return m&&(m.mark||m.medal||m.badge||m.peak);});
+  if(_matKeys.length){
+    const _matName={mark:'训练印记',medal:'冲刺奖章',badge:'全勤徽章',peak:'巅峰凭证'};
+    let mh='<div style="display:flex;align-items:center;gap:8px;margin:16px 0 8px;"><span style="font-size:15px;">🏷️</span><span style="font-size:13px;font-weight:700;color:#af52de;">标签材料</span><span style="flex:1;height:1px;background:#af52de22;"></span><span style="font-size:11px;color:#8e8e93;">升级页改装 Lv6-10 消耗</span></div>';
+    mh+='<div style="display:flex;flex-direction:column;gap:6px;">';
+    _matKeys.forEach(function(tid){
+      const tg=getTag(tid);if(!tg)return;
+      const m=_mats[tid];
+      const row=['mark','medal','badge','peak'].filter(function(k){return m[k]>0;}).map(function(k){
+        return '<span style="font-size:11px;padding:2px 8px;border-radius:6px;background:#af52de12;color:#af52de;white-space:nowrap;">'+_matName[k]+' ×'+m[k]+'</span>';
+      }).join(' ');
+      if(row)mh+='<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 10px;border:1px solid #e5e5ea;border-radius:8px;font-size:12px;"><span style="color:#6e6e73;">'+tg.path.join(' · ')+'</span><span style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;">'+row+'</span></div>';
+    });
+    mh+='</div>';
+    html+=mh;
+  }
   box.innerHTML=html;
 }
 function updateShopUI(){document.getElementById('shop-points').textContent=state.points;document.getElementById('shop-tokens').textContent=state.tokens;const pl=document.getElementById('shop-points-list');const tl=document.getElementById('shop-tokens-list');const inv=document.getElementById('inventory-list');pl.innerHTML=SHOP_POINTS.map(it=>{const bought=state.shopBought[it.id]||0;const limitNum=it.limit==='无限制'?999:(parseInt(it.limit)||999);const canBuy=state.points>=it.cost&&bought<limitNum;return '<div class="shop-item"><div class="shop-item-left"><span class="shop-icon">'+it.icon+'</span><div class="shop-info"><div class="shop-name">'+it.name+'</div><div class="shop-desc">'+it.desc+' · '+it.limit+'</div></div></div><div style="text-align:right"><div class="shop-cost">'+it.cost+' 积分</div><button class="btn-primary" style="margin-top:4px;padding:4px 10px;font-size:12px;'+(canBuy?'':'opacity:0.4')+'" '+(canBuy?'':'disabled')+' onclick="buyItem(\''+it.id+'\')">购买</button></div></div>';}).join('');tl.innerHTML=SHOP_TOKENS.map(it=>{const bought=state.shopBought[it.id]||0;let limitNum=999;if(it.limit.includes('最多')){const m=it.limit.match(/\d+/);if(m)limitNum=parseInt(m[0]);}else{const m=it.limit.match(/\d+/);if(m)limitNum=parseInt(m[0]);}const canBuy=state.tokens>=it.cost&&bought<limitNum;return '<div class="shop-item"><div class="shop-item-left"><span class="shop-icon">'+it.icon+'</span><div class="shop-info"><div class="shop-name">'+it.name+'</div><div class="shop-desc">'+it.desc+' · '+it.limit+'</div></div></div><div style="text-align:right"><div class="shop-cost">'+it.cost+' 代币</div><button class="btn-accent" style="margin-top:4px;padding:4px 10px;font-size:12px;'+(canBuy?'':'opacity:0.4')+'" '+(canBuy?'':'disabled')+' onclick="buyItem(\''+it.id+'\')">购买</button></div></div>';}).join('');const invItems=[{k:'draw_ticket',n:'属性抽取券',i:'🎟️'},{k:'change_ticket',n:'属性变更券',i:'🎫'},{k:'reroll_ticket',n:'特殊属性重铸券',i:'🔮'},{k:'brawl_vip',n:'乱斗特权券',i:'👑'},
@@ -2581,8 +2634,8 @@ function updateShopUI(){document.getElementById('shop-points').textContent=state
   {k:'passive_duration',n:'被动体验持续卡',i:'⏳'},
   {k:'parts_pack',n:'零件材料包',i:'📦'},
   {k:'sp_core',n:'精研核心',i:'💠'},
-  {k:'ult_upgrade',n:'终极改装包',i:'🏆'},
-  {k:'direct_up',n:'直接升级',i:'🔧'},{k:'exp12',n:'1.2倍经验卡',i:'⚡'},{k:'exp15',n:'1.5倍经验卡',i:'⚡'},{k:'exp2',n:'2倍经验卡',i:'⚡'},{k:'exp25',n:'2.5倍经验卡',i:'⚡'},{k:'exp3',n:'3倍经验卡',i:'⚡'},{k:'talent_extra',n:'天赋额外抽取',i:'🌟'},{k:'evolve_trial',n:'进化模式体验卡',i:'🧬'},{k:'brawl_trial',n:'乱斗体验卡',i:'🧪'}];if(inv)inv.innerHTML='<div class="inv-grid">'+invItems.map(x=>'<div class="inv-item"><div style="font-size:18px">'+x.i+'</div><div style="font-size:11px;color:#6e6e73;margin:2px 0">'+x.n+'</div><div class="inv-count">'+(state.inventory[x.k]||0)+'</div></div>').join('')+'</div>';document.getElementById('b-change-count').textContent=state.inventory.change_ticket||0;document.getElementById('b-draw-count').textContent=state.inventory.draw_ticket||0;const vipCnt=document.getElementById('b-vip-count');if(vipCnt)vipCnt.textContent=state.inventory.brawl_vip||0;const slotCnt=document.getElementById('slot-trial-count');if(slotCnt)slotCnt.textContent=state.inventory.slot_trial||0;const potTrialCnt=document.getElementById('potential-trial-count');if(potTrialCnt)potTrialCnt.textContent=state.inventory.potential_trial||0;const passiveDurCnt=document.getElementById('passive-duration-count');if(passiveDurCnt)passiveDurCnt.textContent=state.inventory.passive_duration||0;const partsPackCnt=document.getElementById('parts-pack-count');if(partsPackCnt)partsPackCnt.textContent=state.inventory.parts_pack||0;}
+  {k:'ult_upgrade',n:'终极改装包',i:'🏆'},{k:'ult_undo',n:'终极升级撤销卡',i:'🎫'},
+  {k:'direct_up',n:'直接升级',i:'🔧'},{k:'exp12',n:'1.2倍经验卡',i:'⚡'},{k:'exp15',n:'1.5倍经验卡',i:'⚡'},{k:'exp2',n:'2倍经验卡',i:'⚡'},{k:'exp25',n:'2.5倍经验卡',i:'⚡'},{k:'exp3',n:'3倍经验卡',i:'⚡'},{k:'talent_extra',n:'天赋额外抽取',i:'🌟'},{k:'evolve_trial',n:'进化模式体验卡',i:'🧬'},{k:'brawl_trial',n:'乱斗体验卡',i:'🧪'}];if(inv)inv.innerHTML='<div class="inv-grid">'+invItems.map(x=>'<div class="inv-item"><div style="font-size:18px">'+x.i+'</div><div style="font-size:11px;color:#6e6e73;margin:2px 0">'+x.n+'</div><div class="inv-count">'+(state.inventory[x.k]||0)+'</div></div>').join('')+'</div>';document.getElementById('b-change-count').textContent=state.inventory.change_ticket||0;document.getElementById('b-draw-count').textContent=state.inventory.draw_ticket||0;const vipCnt=document.getElementById('b-vip-count');if(vipCnt)vipCnt.textContent=state.inventory.brawl_vip||0;const slotCnt=document.getElementById('slot-trial-count');if(slotCnt)slotCnt.textContent=state.inventory.slot_trial||0;const potTrialCnt=document.getElementById('potential-trial-count');if(potTrialCnt)potTrialCnt.textContent=state.inventory.potential_trial||0;const passiveDurCnt=document.getElementById('passive-duration-count');if(passiveDurCnt)passiveDurCnt.textContent=state.inventory.passive_duration||0;const partsPackCnt=document.getElementById('parts-pack-count');if(partsPackCnt)partsPackCnt.textContent=state.inventory.parts_pack||0;const uuc=document.getElementById('ult-undo-count');if(uuc)uuc.textContent=state.inventory.ult_undo||0;}
 function buyItem(id){if(id==='parts_pack'){buyPartsPackBulk();return;}const sp=SHOP_POINTS.find(x=>x.id===id);const st=SHOP_TOKENS.find(x=>x.id===id);const item=sp||st;if(!item)return;const bought=state.shopBought[id]||0;let limitNum=999;if(item.limit.includes('最多')){const m=item.limit.match(/\d+/);if(m)limitNum=parseInt(m[0]);}else if(item.limit!=='无限制'){const m=item.limit.match(/\d+/);if(m)limitNum=parseInt(m[0]);}if(bought>=limitNum){alert('已达上限');return;}if(item.type==='points'){
     if(state.points<item.cost){alert('积分不足');return;}
   }else{
@@ -5259,6 +5312,8 @@ function useUltUpgrade(tagId){
   const up=getTagUp(tagId);const tag=getTag(tagId);
   showModal('🏆 终极改装包','将标签 <b>'+tag.path.join(' · ')+'</b> 四条线直接升至 Lv10（综合100%）？<br><br>消耗：终极改装包×1<br><span style="font-size:11px;color:#8e8e93;">SP 觉醒不在本道具范围内（可SP化标签同样只到四线满级）</span>',function(){
     state.inventory.ult_upgrade--;
+    state.tagUpSnap=state.tagUpSnap||{};
+    if(!state.tagUpSnap[tagId])state.tagUpSnap[tagId]=JSON.parse(JSON.stringify(up));
     up.spd=10;up.acc=10;up.ctl=10;up.nit=10;
     saveState();updateShopUI();updateTopBar();renderUpgradeUI();closeModal();
     showGainModal('🏆 终极改装完成',[['标签','「'+tag.path.join('·')+'」','#ff9500'],['综合进度','100%'],['maxEp',getTag(tagId).maxEp]]);
