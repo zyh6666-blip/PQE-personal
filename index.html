@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 20261009-0211 -->
+<!-- build 20261009-0214 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -2511,7 +2511,6 @@ function useUltUndo(){
 function confirmUltUndo(tid){
  const tg=getTag(tid);
  showModal('🎫 确认撤销','撤销标签 <b>'+(tg?tg.path.join(' · '):tid)+'</b> 的终极改装？<br><br>四线将'+(state.tagUpSnap&&state.tagUpSnap[tid]?'恢复至使用前的状态':'退回到 Lv3')+'，并<b>返还 1 个终极改装包</b>（材料不退还）。',function(){
-  document.getElementById('modal-confirm').style.display='';
   if(state.tagUpSnap&&state.tagUpSnap[tid]){state.tagUp[tid]=state.tagUpSnap[tid];delete state.tagUpSnap[tid];}
   else if(state.tagUp&&state.tagUp[tid]){state.tagUp[tid]={spd:3,acc:3,ctl:3,nit:3};}
   state.inventory.ult_upgrade=(state.inventory.ult_upgrade||0)+1;
@@ -2522,6 +2521,7 @@ function confirmUltUndo(tid){
   closeModal();
   showGainModal('🎫 撤销完成',[['标签','「'+(tg?tg.path.join('·'):tid)+'」'],['状态','已回退','#ff9500']]);
  });
+ document.getElementById('modal-confirm').style.display='';
 }
 function useSlotTrial(){
   if((state.inventory.slot_trial||0)<1){alert('🎟️ 没有全功能体验卡');return;}
