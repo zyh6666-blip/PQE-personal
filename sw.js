@@ -1,3 +1,4 @@
+/* build 20261009-0211 */
 /* 考研EP系统 Service Worker · v1.4.9.1 */
 const CACHE_NAME = 'kaoyan-v1502';
 const APP_SHELL = ['./', './index.html'];
