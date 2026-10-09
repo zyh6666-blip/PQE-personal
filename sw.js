@@ -1,6 +1,6 @@
 /* build 20261009-0211 */
 /* 考研EP系统 Service Worker · v1.4.9.1 */
-const CACHE_NAME = 'kaoyan-v1502';
+const CACHE_NAME = 'kaoyan-v151';
 const APP_SHELL = ['./', './index.html'];
 
 self.addEventListener('install', function (e) {
@@ -45,3 +45,12 @@ self.addEventListener('fetch', function (e) {
 });
 
 /* bump 0214 */
+
+/* bump 0931 */
+/* bump 0935 */
+
+/* bump v151 */
+/* bump 1042 */
+/* bump 1048 */
+/* bump 1050 */
+/* bump 1058 */
