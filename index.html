@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- build 20261009-1802 -->
+<!-- build 20261010-2032 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.5.1.1</title>
+<title>考研成长系统 v1.5.2</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f7;color:#1d1d1f;min-height:100vh;padding-bottom:40px}
@@ -150,7 +150,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.5.1.1</span>
+      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.5.2</span>
             <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -415,7 +415,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
         <button class="btn-accent" style="width:100%;margin-top:8px;" id="slot-trial-btn" onclick="useSlotTrial()">🎟️ 全功能体验卡 (<span id="slot-trial-count">0</span>)</button>
         <button class="btn-secondary" style="width:100%;margin-top:8px;" id="passive-duration-btn" onclick="usePassiveDurationCard()">⏳ 被动体验持续卡 (<span id="passive-duration-count">0</span>)</button>
     </div>
-     <div class="card" style="margin-top:12px;">
+     <div class="card" style="margin-top:12px;border-style:dashed;">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:200px;"><div style="font-size:13px;font-weight:600;">🎴 专属功能槽 <span class="badge">Lv.28 随首槽开放 · 全系统唯一 · 每日可切换一次</span></div>
+      <div style="font-size:11px;color:#8e8e93;margin-top:2px;line-height:1.5;" id="exclusive-status">…</div></div>
+      <div style="display:flex;gap:6px;flex-shrink:0;"><button class="btn-accent" style="padding:5px 12px;font-size:12px;" onclick="openExclusiveShop()">🛒 专属商店</button><button class="btn-secondary" style="padding:5px 12px;font-size:12px;" onclick="swapExclusiveUI()">🔄 切换</button></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:12px;">
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <span style="font-size:14px;font-weight:600;">📖 被动图鉴</span>
         <button class="btn-secondary" style="padding:4px 12px;font-size:12px;" onclick="toggleCodex('passive')">展开/收起</button>
@@ -665,7 +672,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 <!-- 升级 -->
 <div id="page-upgrade" class="page">
-  <details style="margin:0 0 10px 0;"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#007aff;padding:7px 10px;background:#f0f7ff;border-radius:8px;">❓ 这个玩法是干嘛的（点我展开）</summary><div style="font-size:12px;color:#6e6e73;padding:8px 10px;line-height:1.7;background:#fafbfd;border-radius:0 0 8px 8px;">标签专精是<b>长期养成系统</b>：每个任务标签都是一台可改装的车，四条改装线各10级——<b>极速</b>（标签maxEp+3%/级）、<b>加速</b>（当日同标签连击+2%/级）、<b>操控</b>（罚率-2%/级）、<b>氮增</b>（完成占比主成长：普通上限10%→最高20%，SP固定10%）。升级消耗：前5级纯积分；Lv6-10吃专属材料+积分+代币，需求随级递增。<b>材料体系</b>：公用材料=结算天数（门槛，不消耗）+积分；四种专属材料在日常结算中自动掉落——训练印记（每完成1个任务）、冲刺奖章（主动技能生效中/当天前2个完成）、全勤徽章（当日全勤）、巅峰凭证（任务EP达上限90%），溢出的可回收5积分/个，零件材料包（商店）可批量补指定材料。<b>SP运动版</b>：四线全满后觉醒，按标签使用频率分档——高频400结算天数+💠3+🪙100、中频280+💠2+🪙60、低频160+💠1+🪙30；SP后maxEp+25%、罚率减半、任务卡变为专属涂装。 shortcuts：商店"直接升级"无条件+1级，"终极改装包"直升四线满级（不含SP）。进度只随时间走，肝不了也氪不了——每天结算就是攒材料。策略：优先养每日必做的高频标签（如背单词、政治刷题），四线均衡点比单线突进更划算。</div></details>
+  <details style="margin:0 0 10px 0;"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#007aff;padding:7px 10px;background:#f0f7ff;border-radius:8px;">❓ 这个玩法是干嘛的（点我展开）</summary><div style="font-size:12px;color:#6e6e73;padding:8px 10px;line-height:1.7;background:#fafbfd;border-radius:0 0 8px 8px;">标签专精是<b>长期养成系统</b>：每个任务标签都是一台可改装的车，四条改装线各10级——<b>极速</b>（标签maxEp+3%/级）、<b>加速</b>（当日同标签连击+2%/级）、<b>操控</b>（罚率-2%/级）、<b>氮增</b>（完成占比主成长：普通上限10%→最高20%，SP固定10%）。升级消耗：前5级纯积分；Lv6-10吃专属材料+积分+代币，需求随级递增。<b>材料体系</b>：公用材料=结算天数（门槛，不消耗）+积分；四种专属材料在日常结算中自动掉落——训练印记（每完成1个任务）、冲刺奖章（主动技能生效中/当天前2个完成）、全勤徽章（当日全勤）、巅峰凭证（任务EP达上限90%），溢出的可回收5积分/个，零件材料包（商店）可批量补指定材料。<b>SP运动版</b>：四线全满后觉醒，按标签使用频率分档——高频400结算天数+💠3+🪙100、中频280+💠2+🪙60、低频160+💠1+🪙30；SP后maxEp+25%、罚率减半、任务卡变为专属涂装。 shortcuts：商店"直接升级"无条件+1级，"终极改装包"直升四线满级（不含SP）。进度只随时间走，肝不了也氪不了——每天结算就是攒材料。策略：优先养每日必做的高频标签（如背单词、政治刷题），四线均衡点比单线突进更划算。<br><br><b>🎖️ 精英任务</b>：为高频标签（考研英二/过级单词、专业课作业/备考、刷题改错）开放每日性能调整。升级页「🎖️ 精英调整」进入清单，每个子标签独立订阅 100 积分/3 天（到期自动关闭、调整值保留、耐久修复照常；一经付款不退）。每条四项属性（最大EP/完成占比/连击增益/扣除比例）用 ◀ ▶ 逐档调整（±10%，SP ±5%），<b>此消彼长</b>——拉高一项自动削减关联项，强度池 ±6 兜底，性能分仅参考。「调整且当天完成该标签任务」耐久 -3%，归零效果 7 折、每小时自回 0.5%、代币可秒回（≤300）。每日登记中带深色 ELITE 徽标，上方性能分为当前/默认对照。</div></details>
   <div class="card" style="margin-bottom:12px;">
     <div class="card-title">🏷️ 标签专精 · 四维改装 <span class="badge">极速/加速/操控/氮增 各10级 · SP运动版</span></div>
     <div style="font-size:11px;color:#8e8e93;line-height:1.6;margin-bottom:10px;">公用材料：结算天数（按天累计，不消耗）+ 积分。四种材料四种材料：每种材料对应两个属性，升级一次同时提升两条线；升级次数不变，仍为每种材料10级。前5级以积分为 main，Lv6-10 开始消耗材料，后期材料、积分需求逐步提高。专属材料在结算时自动掉落（训练印记=每个完成任务 · 冲刺奖章=主动技能生效中或当天前2个完成的任务 · 全勤徽章=全勤日 · 巅峰凭证=EP达上限60%）。</div>
@@ -673,6 +680,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
       <button class="btn-accent" style="flex:1;font-size:12px;" onclick="openSPPanel()">🏎️ 运动版（SP觉醒）</button>
       <button class="btn-secondary" style="flex:1;font-size:12px;" onclick="sellSurplusMats()">♻️ 回收溢出材料（5积分/个）</button>
       <button class="btn-secondary" style="flex:1;font-size:12px;" onclick="usePartsPack()">📦 材料包 (<span id="parts-pack-count">0</span>)</button>
+      <button class="btn-secondary" style="flex:1;font-size:12px;" onclick="openElitePanel()">🎖️ 精英调整</button>
       <button class="btn-secondary" style="flex:1;font-size:12px;" onclick="useUltUndo()">🎫 撤销卡 (<span id="ult-undo-count">0</span>)</button>
     </div>
     <div id="upgrade-list" style="max-height:560px;overflow-y:auto;padding-right:4px;"></div>
@@ -687,7 +695,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
     <div id="guide-body">
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🔄 核心循环</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天的核心循环五步：①早上打开「每日登记」，添加今日任务（最多15个，可拖拽排序、置顶1个），选好三级标签——任务结构决定今天的玩法上限；②四选一确认今日玩法（经典/乱斗/潜能/进化，互斥，确认后当日不可换），再「确认今日任务」锁定结构；③白天完成任务，逐个填完成EP（必须是该标签当前占比要求值）并做任务状态评价（四维加权出质量EP，杯赛只看这个），点「完成」锁定单个任务——长期/周期任务副本会自动迁入；④晚上点「结算今日」：汇总全部加成与扣减（天赋/乱斗/潜能/被动/经验卡），明细账单逐任务列流水，确认后EP/积分入账、杯赛计分、材料掉落、能量+3；⑤次日0点所有日抛内容重置（乱斗属性、潜能栏、天赋锁定、经验卡），解锁新的随机内容，未结算的任务作废。所有锁定的内容当日不可反悔。策略：早上花三分钟想清楚今天干什么，比晚上补账重要得多。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">📋 任务体系</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b>每日任务</b>：最多15个，确认后结构锁定（仍可填EP），可拖拽排序、置顶1个（完成+5%，置顶强化被动升至15%但惩罚+20%）。<b>周期任务</b>：按1/2/3/7/14/30天周期自动生成副本到每日栏，副本不可删除，完成后记周期；截止后不再生成。<b>长期任务</b>：设定截止日期，前20%/50%/80%时间完成分别+80%/+40%/+20%加成，截止前1天自动并入每日栏，逾期当日结算EP-50%（每任务扣一次）；可随时「转移今日」提前并入，转后未完成按每日任务规则扣减并返回长期栏。<b>特殊标记</b>：幸运任务（结算+20%/40%，5个以上任务时出现1个、终极英雄2个）、感染任务（母体威慑被动：指定早中晚时段内完成+30%且全体增益，失败重罚）、强化任务（异界猎手支援）。副本类任务完成状态同步回源任务。</div></details>
-      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">💰 结算引擎</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b>完成EP</b>：必须是「该标签完成占比」对应的固定数值（基础10%，随极速/氮增成长，普通最高20%、SP固定10%），填错无法提交——它代表"做了"这个行为的基准分。<b>质量EP</b>：由「任务状态评价」四维自评（正确率50%/专注度30%/用时5%/基本状态15%，各0-100，默认60）加权平均后乘以（最大EP-完成EP）得出，是杯赛计分唯一依据（质量÷上限×100，达上限+20）。<b>罚则</b>：未完成任务按标签罚率（5%~30%）累计扣减总EP，多种减免可叠加（韧性承担、护盾吸收、硬化、保险、紧急撤离等），扣减上限100%。<b>明细账单</b>：结算弹窗逐任务列出全部加成流水（天赋/乱斗/潜能/被动/置顶/幸运），每笔标注来源与数值，可追溯。<b>经验卡</b>每日限1张（1.2~3倍，仅作用于EP）。<b>撤销</b>可整体回滚最近一次结算（退回EP/积分/代币/经验卡，恢复任务快照）。结算前看预览，确认无误再点。</div></details>
+      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">💰 结算引擎</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b>完成EP</b>：必须是「该标签完成占比」对应的固定数值（基础10%，随极速/氮增成长，普通最高20%、SP固定10%），填错无法提交——它代表"做了"这个行为的基准分。<b>质量EP</b>：由「任务状态评价」四维自评（正确率60%/专注度25%/用时8%/基本状态7%，各0-100，默认60）加权平均后乘以（最大EP-完成EP）得出，是杯赛计分唯一依据（质量÷上限×100，达上限+20）。<b>罚则</b>：未完成任务按标签罚率（5%~30%）累计扣减总EP，多种减免可叠加（韧性承担、护盾吸收、硬化、保险、紧急撤离等），扣减上限100%。<b>明细账单</b>：结算弹窗逐任务列出全部加成流水（天赋/乱斗/潜能/被动/置顶/幸运），每笔标注来源与数值，可追溯。<b>经验卡</b>每日限1张（1.2~3倍，仅作用于EP）。<b>撤销</b>可整体回滚最近一次结算（退回EP/积分/代币/经验卡，恢复任务快照）。结算前看预览，确认无误再点。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🎮 今日玩法（四选一互斥）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天四选一互斥：<b>📘 经典</b>——功能属性（常驻被动）+天赋生效，无随机规则，适合求稳或天赋池深的日子；<b>⚔️ 乱斗</b>——功能属性+天赋+每日随机乱斗属性（1个，灵魂武者2个，25个规则改写结算公式），适合想赌增益的日子；<b>✨ 潜能</b>——功能属性+潜能栏位构筑（9/14/18点开栏2选1，每日3次刷新），适合作息规律、能配合时段的日子；<b>🧬 进化</b>——功能属性+天赋+攻防进化：完成任务按原始填入EP从Lv.1成长至Lv.10（每级小增益·相同词条取最大，3/6/9级随机大幅增益，9级获得复利/缓刑，满级「终极英雄」三选一），感染任务与全玩法统一早/中/晚时段。四玩法互斥，经典为默认。在「每日登记」点卡片选择并「确认今日玩法」，确认后当日结算前不可更换。选择策略：看今天任务结构——任务杂选乱斗赌增益、作息固定选潜能吃时段加成、有重要模考选经典稳吃天赋、想体验稳定成长选进化。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🧬 天赋（35个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每日抽取天赋并装配（6槽6费）：普通60%/稀有30%/高级7%/传说3%四档，共35个；每升1级+1次抽取，池抽空即止。互斥组只能带一个：时段三选一（晨读/下午茶/夜猫子）、政治主客观、英二有无作文、教综学与刷等。确认后当日锁定。天赋分全局型（看任务结构给加成）、科目专属型（政治/英二/教综/语言学）、条件型（时段/题型按钮）与传说主动技：心态壁垒（借乱斗属性120分钟）、不灭阳炎（扣7%燃烧10分钟后首任务+20%）、终结恩赐（按上限差额充能、满300开-97%护盾120分钟）、属性强化（经典模式被动效果+20%；乱斗模式乱斗效果放大100%、结算EP-15%）。策略：先定今日主攻科目再围绕配装。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">⚔️ 乱斗属性（25个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每日抽1个乱斗属性（灵魂武者可抽2个）改写结算公式，25个等概率。增益型：致命一击（完成顺序递增）、快速换弹（同标签连击）、第一滴血、致命攻击（80%+50%）、过度增长（破千阶梯+10%~110%）、枪械协同、重生契约、特工（90分钟+20%，CD90）与隐身（40分钟减免60%，CD120）主动技；保险型：无限火力、保底局（保底550）、摆脱危机（一标签免罚）、生命保险、双重装甲、防御补给；负面型：钢铁利爪（惩罚+20%）、复制感染（锚定首任务EP）；特殊型：融合（每科目专属属性+25%）、异界猎手支援（30%强化任务）、最后的幸存者。属性抽取券/变更券/特权券（可直接选融合）在商店有售。每日重置，与潜能互斥，确认后不可更换。策略：先看属性再排任务。</div></details>
@@ -852,17 +860,17 @@ const BRAWLS=[
 {id:2,name:"战意觉醒",effect:"主动技能：持续30分钟、CD90分钟。持续时段内完成的任务会留下战意标记；今日结算产生EP扣减时，按标记任务对应损失返还40%"},
 {id:3,name:"暴走持续延长",effect:"所有主动技能持续时间增加10%"},
 {id:4,name:"战术快速换位",effect:"每天可选择1个普通任务，在结算时将其EP完成率换算到其他标签：目标EP=目标标签上限×原任务完成率"},
-{id:5,name:"灵魂武者",effect:"乱斗模式可额外抽取1个属性；装备后潜能第4栏在18:00与第3栏同时开放，无其他前置条件"},
+{id:5,name:"灵魂武者",effect:"乱斗模式可额外抽取1个属性；装备后潜能第4栏在18:00与第3栏同时开放；进化模式成长速度加快5%"},
 {id:6,name:"爆炸剑气",effect:"完成一个任务后，其相邻任务完成后可额外获得上一任务完成率等值的EP加成"},
-{id:7,name:"猎手韧性",effect:"获得韧性条，上限200。完成课堂类任务自动充能20；非课堂任务发生EP扣减时，韧性最多承担该次扣减的30%，不足部分正常扣除"},
+{id:7,name:"猎手韧性",effect:"获得韧性条，上限200。完成课堂类任务自动充能20；非课堂任务发生EP扣减时，韧性最多承担该次扣减的20%，不足部分正常扣除"},
 {id:8,name:"无敌之盾",effect:"任务完成时，若该任务获得EP低于其标签最大EP，自动消耗护盾并将本任务补足到标签最大EP。每天重置；使用后240分钟重新生成，后续每次重生时间增加30分钟"},
-{id:9,name:"母体威慑",effect:"幸运任务替换为感染任务。感染任务会被指定到早/中/晚任意时段（进化模式下为全天），必须在该时段内完成：按时完成感染任务额外+30%EP（终极英雄生效时为60%），且今日其余任务额外+20%EP、扣减减少30%；未在指定时段完成则感染任务仅保留10%EP，其余任务EP减半"},
+{id:9,name:"母体威慑",effect:"幸运任务替换为感染任务。感染任务会被指定到早/中/晚任意时段（进化模式下为全天），必须在该时段内完成：按时完成感染任务额外+30%EP（终极英雄生效时为60%），且今日其余任务额外+10%EP、扣减减少15%；未在指定时段完成则感染任务仅保留10%EP，其余任务EP减半"},
 {id:10,name:"移速提升",effect:"主动技能：持续30分钟。期间所有其他主动技能的持续时间与冷却时间加快20%"},
 {id:11,name:"修正",effect:"今日第一个完成率低于标签上限50%的任务，自动补足到50%，仅限一次"},
 {id:12,name:"猎手防护",effect:"连续完成3个不同标签任务后，自动获得30点韧性；未装备7号时改为额外获得150EP"},
 {id:13,name:"置顶强化",effect:"置顶需要确认且确认后今日不可更改。置顶任务完成奖励提升至15%，未完成惩罚增加20%"},
 {id:14,name:"紧急撤离",effect:"今日第一个未完成的普通任务自动移到第二天，且不触发惩罚；周期任务副本无效"},
-{id:15,name:"以一当十",effect:"完成任意一个模考任务后，该任务额外获得70%EP，且今日其余未完成任务不触发扣除惩罚"}
+{id:15,name:"以一当十",effect:"完成任意一个模考任务后，该任务额外获得20%EP，且今日其余未完成任务不触发扣除惩罚"}
 ];
 const SHOP_POINTS=[{id:"parts_pack",name:"零件材料包",icon:"📦",cost:1200,limit:"无限制",desc:"可批量兑换指定标签的指定材料",type:"points"},{id:"draw_ticket",name:"属性抽取券",icon:"🎟️",cost:250,limit:"每周5张",desc:"乱斗抽卡使用",type:"points"},{id:"exp12",name:"1.2倍经验卡",icon:"⚡",cost:300,limit:"每周3张",desc:"当日EXP倍率增益",type:"points"},{id:"exp15",name:"1.5倍经验卡",icon:"⚡",cost:600,limit:"每周2张",desc:"当日EXP倍率增益",type:"points"},{id:"points_to_tokens",name:"100代币",icon:"🪙",cost:1800,limit:"无限制",desc:"可使用积分兑换100代币",type:"points",convertToTokens:100}];const SHOP_TOKENS=[{id:"change_ticket",name:"属性变更券",icon:"🎫",cost:80,limit:"每周2张",desc:"乱斗用，禁止直接选【融合】",type:"tokens"},{id:"reroll_ticket",name:"特殊属性重铸券",icon:"🔮",cost:220,limit:"每周1张",desc:"被动重铸，叠加7天冷却",type:"tokens"},{id:"exp2",name:"2倍经验卡",icon:"⚡",cost:160,limit:"每周2张",desc:"当日EXP倍率增益",type:"tokens"},{id:"exp25",name:"2.5倍经验卡",icon:"⚡",cost:300,limit:"每周1张",desc:"当日EXP倍率增益",type:"tokens"},{id:"exp3",name:"3倍经验卡",icon:"⚡",cost:550,limit:"全局最多3张",desc:"硬上限防升级爆炸",type:"tokens"},{id:"talent_extra",name:"天赋额外抽取",icon:"🌟",cost:100,limit:"每周1次",desc:"天赋池抽空后不可买",type:"tokens"},{id:"sp_core",name:"精研核心",icon:"💠",cost:150,limit:"每周1个",desc:"SP觉醒最基础物资（精研核心杯/大型杯赛/竞技高段亦可获得）",type:"tokens"},{id:"ult_upgrade",name:"终极改装包",icon:"🏆",cost:600,limit:"全局最多2个",desc:"任选标签直升四线满级（不含SP）",type:"tokens"},{id:"direct_up",name:"直接升级",icon:"🔧",cost:60,limit:"无限制",desc:"任选标签的任一零件无条件+1级",type:"tokens"},{id:"brawl_vip",name:"乱斗特权券",icon:"👑",cost:120,limit:"全局最多2张",desc:"可直接选取【融合】",type:"tokens"}];
 const EXP_CARDS=[{id:"exp12",name:"1.2倍",mult:1.2},{id:"exp15",name:"1.5倍",mult:1.5},{id:"exp2",name:"2倍",mult:2},{id:"exp25",name:"2.5倍",mult:2.5},{id:"exp3",name:"3倍",mult:3}];
@@ -1015,6 +1023,10 @@ getTag=function(id,_t){
   if(up){const spd=up.spd||0,acc=up.acc||0,ctl=up.ctl||0,nit=up.nit||0;
     maxEp=Math.round(t.maxEp*(1+0.03*spd+0.01*acc+(up.sp?0.25:0)));
     pen=Math.round(pen*(1-0.02*ctl-0.005*nit)*(up.sp?0.5:1)*100)/100;}
+  const _et=(_t&&state.todayMode)?eliteTune(t.id):null;
+  if(_et){const _es=eliteStrength(t.id);
+    maxEp=Math.round(maxEp*(1+(_et.maxEpR-1)*_es));
+    pen=Math.round(pen*(1+(_et.penR-1)*_es)*100)/100;}
   if(_t&&state.todayMode==='evolve'){
     let mb=(_t.evoMaxBoost||0)+(_t.chainMaxBoost||0);
     let pc=(_t.evoPenCut||0);
@@ -1281,7 +1293,7 @@ function evolveOnTaskComplete(t){
  if(hasEvolveAttr('ea_clone')&&(e.cloneAnchor||0)<0){e.cloneAnchor=raw;e.cloneAnchorIdx=state.todayTasks.indexOf(t);pushEvolveNote('🧬 复制感染锚定：'+raw+' EP');}
  if(hasEvolveAttr('ea_chain')){state.todayTasks.forEach(function(x){if(x!==t&&!x.completed){x.chainBonus=Math.round(((x.chainBonus||0)+0.06)*100)/100;x.chainMaxBoost=Math.round(((x.chainMaxBoost||0)+0.08)*100)/100;}});}
  const oldLv=e.lv||1;
- const lv=evolveLvFromEp(evolveRawEp());
+ const lv=evolveLvFromEp(Math.round(evolveRawEp()*(hasPassive(5)?1.05:1)));
  if(lv>oldLv){for(let l=oldLv+1;l<=lv;l++){e.lv=l;onEvolveLevelUp(l);}}
  saveState();}
 function onEvolveLevelUp(lv){
@@ -1308,6 +1320,116 @@ function useEvoBoil(){const e=getEvolve();const now=Date.now();if((e.boilUntil||
  showModal('🩸 热血沸腾','进入 <b>120分钟</b> 沸血时间：所有未完成任务 <b>最大EP +100%</b>、<b>扣减 -80%</b>。<br><br>结束后冷却 240 分钟。',function(){e.boilUntil=Date.now()+120*60000;e.boilCdUntil=Date.now()+240*60000;saveState();renderTasks();renderEvolveBars();closeModal();});}
 function useEvoStealth(){const e=getEvolve();const now=Date.now();if((e.stealthUntil||0)>now)return;if((e.stealthCdUntil||0)>now){alert('🫥 隐身冷却中：'+fmtCD(e.stealthCdUntil-now));return;}
  showModal('🫥 隐身','接下来 <b>45分钟</b> 内，任务的 EP 扣减 <b>减少60%</b>。<br><br>结束后冷却 90 分钟。',function(){e.stealthUntil=Date.now()+45*60000;e.stealthCdUntil=Date.now()+90*60000;saveState();renderTasks();renderEvolveBars();closeModal();});}
+
+/* ================= 专属功能（第5槽商品）v1.5.2 ================= */
+const EXCLUSIVES=[
+{id:16,n:'追踪标记',icon:'🎯',cost:900,lv:32,d:'按标签追踪：当天完成多的标签次日挂「伤害加深」——该标签任务完成+10%EP且持续；未完成多的挂「伤害降低」——完成时扣减-10%，持续未完成则固定-10%。打平不挂；加深次日未完成则消失；降低完成后不转加深'},
+{id:17,n:'越战越勇',icon:'⚔️',cost:800,lv:28,d:'从首次获得EP起，此后每获得100EP，后续任务EP额外+1%（上限10%），同时每分钟衰减0.1个百分点'},
+{id:18,n:'残骸强化',icon:'🛡️',cost:600,lv:28,d:'锁定当天任务后按任务数定基础增幅（每个任务0.5%）；此后每发生100EP扣减，额外EP再+0.2%（上限10%）'},
+{id:19,n:'漫画爆炸',icon:'💥',cost:1000,lv:40,d:'充能收集：每30/60/90/120/150分钟各充一档（+2%/4%/6%/8%/10%EP）；点击「完成」任务时自动释放当前档位加成，随后充能进度清零'},
+{id:20,n:'封印无双',icon:'📜',cost:1200,lv:45,d:'任务获得EP达到标签上限88%及以上时，自动补足缺失部分使其达到100%'},
+{id:21,n:'善恶之交',icon:'😇',cost:700,lv:28,d:'完成任务得「天使」：20分钟内每分钟额外获得当前已获得初始EP的0.5%，期间再完成则重置计时并按最新EP计费；若完成获得EP不足上限50%则改触发「恶魔」：接下来20分钟扣减EP-10%'}
+];
+function getExclusive(){
+ if(!state.exclusive)state.exclusive={owned:[],equipped:0,swapDate:'',swapUsed:false};
+ if(!state.exState||state.exState.date!==new Date().toDateString()){
+  state.exState={date:new Date().toDateString(),comicStart:0,wreckBase:0,wreckExtra:0,angel:null,demonUntil:0,marksPrev:state.tagMarks||{}};
+  state.tagMarks={};
+ }
+ return state.exclusive;
+}
+function hasEx(id){return getExclusive().equipped===id;}
+function exOnTaskComplete(t){
+ const exs=getExclusive();
+ if(hasEx(19)){
+  const now=Date.now();
+  let start=state.exState.comicStart||now;
+  if(!state.exState.comicStart)state.exState.comicStart=now;
+  const tier=Math.min(5,Math.floor((now-start)/1800000));
+  t.exComicPct=[0,2,4,6,8,10][tier];
+  state.exState.comicStart=now;
+  if(tier>0)pushEvolveNote('💥 漫画爆炸释放 +'+[0,2,4,6,8,10][tier]+'%（充能重置）');
+ }
+ if(hasEx(21)){
+  const tg=getTag(t.tagId);
+  const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
+  const now=Date.now();
+  if(tg&&own>=tg.maxEp*0.5){
+   const total=getCompletedTasks().reduce(function(s,x){return s+(parseInt(x.baseEp)||0)+(parseInt(x.qualityEp)||0);},0);
+   state.exState.angel={startAt:now,until:now+20*60000,base:total};
+   state.exState.demonUntil=0;
+   pushEvolveNote('😇 天使降临：20分钟内每分钟+'+Math.round(total*0.005)+' EP');
+  }else{
+   state.exState.angel=null;
+   state.exState.demonUntil=now+20*60000;
+   pushEvolveNote('😈 恶魔附身：20分钟扣减-10%');
+  }
+ }
+ if(hasEx(18)&&!state.exState.wreckBase&&state.todayTasks.length){
+  state.exState.wreckBase=Math.min(10,state.todayTasks.length*0.5);
+ }
+}
+function evalTagMarks(){
+ const marks={};
+ const cnt={};
+ state.todayTasks.forEach(function(t){
+  if(!t.tagId)return;
+  cnt[t.tagId]=cnt[t.tagId]||{done:0,undone:0};
+  if(t.completed&&t.baseEp!=='')cnt[t.tagId].done++;else cnt[t.tagId].undone++;
+ });
+ const prev=state.exState.marksPrev||{};
+ Object.keys(cnt).forEach(function(tid){
+  const c=cnt[tid];
+  if(c.done>c.undone)marks[tid]={type:'up'};
+  else if(c.undone>c.done)marks[tid]={type:'down'};
+  else if(prev[tid]&&prev[tid].type==='down')marks[tid]={type:'down'};
+ });
+ state.tagMarks=marks;
+}
+
+
+/* ================= 精英任务 v1.5.2「精英降临」· 每标签独立 ================= */
+const ELITE_PARENTS=['wd_ky','wd_zyks','bk_zyk_zy','bk_zyk_bk'];
+const ELITE_COST=100;
+const ELITE_TOL=6;
+function isEliteTagId(id){const t=_origGetTag(id);if(!t)return false;if(ELITE_PARENTS.indexOf(id)>-1)return true;if(t.path.join('/').indexOf('刷题/改错')>-1)return true;return t.path.length>1&&ELITE_PARENTS.some(function(p){const pt=_origGetTag(p);return pt&&t.path.slice(0,pt.path.length).join('/')===pt.path.join('/');});}
+function eliteChildren(){const out=[];TASK_TAGS.forEach(function(t){if(tagChildren(t.path).length===0&&isEliteTagId(t.id))out.push(t);});return out;}
+function getElite(){
+ if(!state.elite||!state.elite.tags){
+  const old=state.elite||{};
+  state.elite={tags:{}};
+  if(old.tuned)Object.keys(old.tuned).forEach(function(tid){state.elite.tags[tid]={open:true,durability:(typeof old.durability==='number'?old.durability:100),tuned:old.tuned[tid],lastTick:Date.now(),warn:0};});
+ }
+ const now=Date.now();let ch=false;
+ Object.keys(state.elite.tags).forEach(function(tid){const t=state.elite.tags[tid];if(t.durability<100){const g=Math.floor((now-(t.lastTick||now))/3600000*0.5);if(g>0){t.durability=Math.min(100,t.durability+g);t.lastTick=now;ch=true;}}});
+ if(ch)saveState();
+ return state.elite;
+}
+function eliteTagState(tid){const el=getElite();if(!el.tags[tid])el.tags[tid]={open:false,durability:100,tuned:{},lastTick:Date.now(),warn:0,expiresAt:0};const st=el.tags[tid];if(st.open&&!st.expiresAt)st.expiresAt=Date.now()+3*86400000;return st;}
+function eliteActive(tid){const st=eliteTagState(tid);return st.open&&(st.expiresAt||0)>Date.now();}
+function eliteDaysLeft(tid){const st=eliteTagState(tid);return Math.max(0,Math.ceil(((st.expiresAt||0)-Date.now())/86400000));}
+function eliteTune(tid){return eliteActive(tid)?eliteTagState(tid).tuned:null;}
+function eliteStrength(tid){const t=(getElite().tags||{})[tid];return (!t||t.durability>0)?1:0.7;}
+function elitePool(tid){
+ const tn=eliteTune(tid)||{};let B=0;
+ Object.keys(tn).forEach(function(k){const t=tn[k];if(k==='penR')B+=1.0*((1-t)*100);else B+=({maxEpR:1.0,ratioR:1.2,chainR:0.8}[k]||1)*((t-1)*100);});
+ return Math.round(B*10)/10;
+}
+function eliteTuneSet(tagId,key,val,inv){
+ const st=eliteTagState(tagId);st.tuned=st.tuned||{};
+ const tn=st.tuned;
+ const old=tn[key]===undefined?(key==='penR'?1:1):tn[key];
+ if(key==='penR')tn[key]=inv?(1-(parseInt(val)||0)/100):(1+(parseInt(val)||0)/100);
+ else tn[key]=1+(parseInt(val)||0)/100;
+ if(Math.abs(elitePool(tagId))>ELITE_TOL){
+  const target=tn[key];let lo=0,hi=1;
+  for(let i=0;i<24;i++){const mid=(lo+hi)/2;tn[key]=old+(target-old)*mid;if(Math.abs(elitePool(tagId))>ELITE_TOL)hi=mid;else lo=mid;}
+  tn[key]=old+(target-old)*lo;
+  st.warn=1;
+ } else st.warn=0;
+ saveState();
+}
+function eliteScoreOf(tag){return eliteScoreTuned(tag,{maxEpR:1,ratioR:1,chainR:1,penR:1});}
 function useEvolveTrial(){if((state.inventory.evolve_trial||0)<1){alert('🧬 没有进化模式体验卡');return;}state.inventory.evolve_trial--;state.evolveTrialUntil=Date.now()+24*3600*1000;saveState();updateShopUI();renderLock('evolve');renderModeOptions();renderHome();alert('🧬 进化模式体验卡已使用：24小时内可无视等级开启进化模式。');}
 function evolveTaskBadges(t){
  if(state.todayMode!=='evolve')return'';
@@ -1332,6 +1454,241 @@ function evoBuffShort(b){
  if(b.a==='penchance')return '🎲-'+Math.round(b.v*100)+'%';
  return b.t;
 }
+
+function renderExclusiveUI(){
+ const box=document.getElementById('exclusive-status');if(!box)return;
+ const exs=getExclusive();
+ const lv=getLevelInfo(state.totalEP).lv;
+ const unlocked=lv>=28||(state.slotTrialUntil||0)>Date.now();
+ const cur=EXCLUSIVES.find(function(x){return x.id===exs.equipped;});
+ if(!unlocked){box.innerHTML='🔒 达到 Lv.28（少尉1）后随首槽开放';return;}
+ if(cur){box.innerHTML='已装备：<b>'+cur.icon+' '+cur.n+'</b>　<span style="color:#8e8e93;">'+cur.d+'</span>';}
+ else box.innerHTML='未装备专属功能 · 在专属商店购买（全系统同时只能装备一个）';
+}
+function openExclusiveShop(){
+ const lv=getLevelInfo(state.totalEP).lv;
+ const exs=getExclusive();
+ let h='<div style="font-size:12px;color:#8e8e93;margin-bottom:8px;">代币购买 · 全系统唯一 · 只能装备于第5槽 · 一天可切换一次</div>';
+ EXCLUSIVES.forEach(function(it){
+  const owned=exs.owned.indexOf(it.id)>-1;
+  const locked=lv<it.lv;
+  const afford=state.tokens>=it.cost;
+  const can=!owned&&!locked&&afford;
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f2f2f7;">'
+   +'<div style="flex:1;"><div style="font-size:13px;font-weight:600;">'+it.icon+' '+it.n+' '+(owned?'<span style="font-size:10px;color:#34c759;">已拥有</span>':'<span style="font-size:11px;color:#af52de;">🪙'+it.cost+'</span>')+(locked?' <span style="font-size:10px;color:#ff3b30;">🔒 Lv.'+it.lv+'</span>':'')+'</div>'
+   +'<div style="font-size:11px;color:#6e6e73;margin-top:2px;line-height:1.5;">'+it.d+'</div></div>'
+   +'<button class="btn-accent" style="padding:4px 12px;font-size:12px;'+(can?'':'opacity:.4')+'" '+(can?'onclick="buyExclusive('+it.id+')"':'disabled')+'>'+(owned?'已拥有':(locked?'未解锁':'购买'))+'</button></div>';
+ });
+ showModal('🎴 专属功能商店','',function(){},h);
+ document.getElementById('modal-confirm').style.display='none';
+ const cb=document.getElementById('modal-cancel');if(cb){cb.textContent='关闭';cb.onclick=function(){document.getElementById('modal-confirm').style.display='';cb.textContent='取消';cb.onclick=null;closeModal();};}
+}
+function buyExclusive(id){
+ const it=EXCLUSIVES.find(function(x){return x.id===id;});
+ if(!it||getExclusive().owned.indexOf(id)>-1)return;
+ if(getLevelInfo(state.totalEP).lv<it.lv){alert('需要达到 Lv.'+it.lv);return;}
+ showModal('🎴 确认购买','消耗 <b>'+it.cost+'</b> 代币购买专属功能 <b>'+it.icon+' '+it.n+'</b>？',function(){
+  state.tokens-=it.cost;getExclusive().owned.push(id);
+  if(!getExclusive().equipped){getExclusive().equipped=id;pushEvolveNote('🎴 专属功能已装备：'+it.n);}
+  saveState();updateTopBar();updateShopUI();
+  document.getElementById('modal-confirm').style.display='';
+  closeModal();openExclusiveShop();
+ });
+}
+function swapExclusiveUI(){
+ const exs=getExclusive();
+ const today=new Date().toDateString();
+ if(exs.swapDate===today&&exs.swapUsed){alert('今天已切换过专属功能，明天再试');return;}
+ if(!exs.owned.length){alert('还没有专属功能，先去商店购买');return;}
+ let h='<div style="font-size:12px;color:#6e6e73;margin-bottom:8px;">选择要装备的专属功能（每天限切换一次）：</div>';
+ exs.owned.forEach(function(id){
+  const it=EXCLUSIVES.find(function(x){return x.id===id;});
+  const cur=exs.equipped===id;
+  h+='<button class="btn-secondary" style="width:100%;margin-bottom:6px;text-align:left;'+(cur?'border-color:#af52de;background:#af52de10;':'')+'" onclick="doSwapExclusive('+id+')">'+it.icon+' '+it.n+(cur?'　<span style="font-size:10px;color:#af52de;">当前</span>':'')+'</button>';
+ });
+ showModal('🔄 切换专属功能','',function(){},h);
+ document.getElementById('modal-confirm').style.display='none';
+ const cb=document.getElementById('modal-cancel');if(cb){cb.textContent='关闭';cb.onclick=function(){document.getElementById('modal-confirm').style.display='';cb.textContent='取消';cb.onclick=null;closeModal();};}
+}
+function doSwapExclusive(id){
+ const exs=getExclusive();
+ exs.equipped=id;exs.swapUsed=true;exs.swapDate=new Date().toDateString();
+ saveState();
+ const it=EXCLUSIVES.find(function(x){return x.id===id});
+ document.getElementById('modal-confirm').style.display='';
+ document.getElementById('modal-extra').innerHTML='';
+ closeModal();
+ pushEvolveNote('🎴 专属功能切换为：'+(it?it.n:id));
+ if(document.getElementById('page-passive').classList.contains('active'))renderExclusiveUI();
+}
+
+
+function openElitePanel(){
+ let h='<div style="font-size:11px;color:#8e8e93;margin-bottom:10px;line-height:1.6;">每个精英标签<b>独立订阅</b>（'+ELITE_COST+' 积分 / 3 天）：有效期内开放调整界面，各标签互不影响；到期自动关闭、调整值保留、耐久修复照常。<b>一经付款，不做退款。</b></div>';
+ eliteChildren().forEach(function(tg){
+  const st=eliteTagState(tg.id);
+  const adjusted=st.tuned&&Object.keys(st.tuned).length;
+  const act=eliteActive(tg.id);
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px;border:1px solid #e5e5ea;border-radius:10px;margin-bottom:8px;background:'+(act?'#fff':'#fafbfd')+';">'
+   +'<div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;">🎖️ '+tg.path.join(' · ')+'</div>'
+   +'<div style="font-size:11px;color:#8e8e93;margin-top:2px;">性能分 '+eliteScoreOf(tg)
+   +(act?(' · 耐久 <b style="color:'+(st.durability<=0?'#ff3b30':'#d9832a')+';">'+st.durability+'%</b> · 剩 <b>'+eliteDaysLeft(tg.id)+'</b> 天'+(adjusted?'':' · 尚未调整'))
+        :(st.open?' · <span style="color:#ff3b30;">已过期</span> · 耐久 '+st.durability+'%':' · 未订阅'))+'</div></div>'
+   +(act
+     ?'<button class="btn-primary" style="padding:6px 14px;font-size:12px;white-space:nowrap;" onclick="openEliteTag(\''+tg.id+'\')">🔧 调整</button>'
+     :'<button class="btn-accent" style="padding:6px 14px;font-size:12px;white-space:nowrap;" onclick="unlockEliteTag(\''+tg.id+'\')">'+(st.open?'🔓 续费':'🔓 订阅')+' 💰'+ELITE_COST+'/3天</button>')
+   +'</div>';
+ });
+ showModal('🎖️ 精英设计','',function(){},h);
+ document.getElementById('modal-confirm').style.display='none';
+ const cb=document.getElementById('modal-cancel');if(cb){cb.textContent='收起';cb.onclick=function(){document.getElementById('modal-confirm').style.display='';cb.textContent='取消';cb.onclick=null;closeModal();};}
+}
+function unlockEliteTag(tid){
+ const tg=_origGetTag(tid);
+ showModal('🔓 精英改装订阅','订阅 <b>'+(tg?tg.path.join(' · '):tid)+'</b> 的性能调整？<br><br>消耗 <b>'+ELITE_COST+'</b> 积分 · <b>有效期 3 天</b> · 到期未续费自动关闭（耐久修复仍可进行）· 一经付款不退款',function(){
+  if(state.points<ELITE_COST){alert('积分不足');return;}
+  state.points-=ELITE_COST;
+  const st=eliteTagState(tid);
+  st.open=true;
+  st.expiresAt=Date.now()+3*86400000;
+  saveState();updateTopBar();
+  document.getElementById('modal-confirm').style.display='';
+  closeModal();openEliteTag(tid);
+ });
+}
+function eliteScoreTuned(tag,tn){
+ const up=(state.tagUp||{})[tag.id]||{spd:0,acc:0,ctl:0,nit:0};
+ const maxEp=tag.maxEp*(1+0.03*(up.spd||0)+0.01*(up.acc||0)+(up.sp?0.25:0))*(tn.maxEpR||1);
+ const Rp=0.15*(tn.ratioR||1),Cp=0.08*(tn.chainR||1),Pp=0.35*(tn.penR||1);
+ return Math.round(1000*(maxEp/300)*Math.pow(Rp/0.15,1.2)*Math.pow(Cp/0.08,0.8)*(0.35/Math.max(0.05,Pp)));
+}
+
+/* 精英联动矩阵：v 为显示空间（+ = 右 = 增益方向；penR 右 = 扣减更轻） */
+const ELITE_LINK={
+ maxEpR:[['ratioR',-0.6],['chainR',-0.4]],
+ ratioR:[['chainR',-0.5],['penR',-0.5]],
+ chainR:[['maxEpR',-0.4],['ratioR',0.3]],
+ penR:[['ratioR',-0.4]]
+};
+const ELITE_ATTR_DESC={
+ maxEpR:'该标签单个任务的EP上限',
+ ratioR:'完成EP要求（占上限的比例），越高完成越难',
+ chainR:'同标签连续完成任务的额外加成',
+ penR:'未完成时的罚率，越低越好'
+};
+function eliteCurV(tn,key){return key==='penR'?Math.round((1-(tn[key]===undefined?1:tn[key]))*100):Math.round(((tn[key]===undefined?1:tn[key])-1)*100);}
+function eliteSetV(tid,key,v){
+ const st=eliteTagState(tid);st.tuned=st.tuned||{};const tn=st.tuned;
+ if(key==='penR')tn[key]=1-v/100;else tn[key]=1+v/100;
+}
+function eliteArrow(tid,key,dir,lim,inv){
+ const step=lim/5;
+ const st=eliteTagState(tid);st.tuned=st.tuned||{};const tn=st.tuned;
+ const cur=eliteCurV(tn,key);
+ let v=Math.max(-lim,Math.min(lim,cur+dir*step));
+ v=Math.round(v/step)*step;
+ if(v===cur)return;
+ eliteSetV(tid,key,v);
+ /* 此消彼长：按矩阵自动联动其他要素 */
+ (ELITE_LINK[key]||[]).forEach(function(pair){
+  const k2=pair[0],off=pair[1];
+  const cur2=eliteCurV(tn,k2);
+  let v2=Math.max(-lim,Math.min(lim,cur2+dir*off*step));
+  v2=Math.round(v2/step)*step;
+  eliteSetV(tid,k2,v2);
+ });
+ /* 池容差保险：整体缩放 */
+ const B=elitePool(tid);
+ if(Math.abs(B)>ELITE_TOL){const f=ELITE_TOL/Math.abs(B);Object.keys(tn).forEach(function(k){tn[k]=1+(tn[k]-1)*f;});st.warn=1;}else st.warn=0;
+ saveState();
+ openEliteTag(tid);
+}
+
+function openEliteTag(tid){
+ const tg=_origGetTag(tid);if(!tg)return;
+ const st=eliteTagState(tid);
+ if(!eliteActive(tid)){
+  let hh='<div style="font-size:13px;line-height:1.8;color:#3a3a3c;">该标签的精英改装已'+(st.open?'过期':'未订阅')+'（有效期 3 天制）。<br><br>耐久：<b style="color:'+(st.durability<=0?'#ff3b30':'#d9832a')+';">'+st.durability+'%</b>（关闭期间每小时照常自回 0.5%，也可代币秒回）<br>已保存的调整值不会丢失，订阅后原样恢复。</div>';
+  showModal('🎖️ '+(_origGetTag(tid)?_origGetTag(tid).path.join(' · '):tid)+' · 已关闭',hh,function(){},'<div style="display:flex;flex-direction:column;gap:8px;"><button class="btn-primary" style="background:linear-gradient(90deg,#f0b35c,#d9832a)!important;" onclick="document.getElementById(\'modal-confirm\').style.display=\'\';document.getElementById(\'modal-extra\').innerHTML=\'\';closeModal();unlockEliteTag(\''+tid+'\')">🔓 '+(st.open?'续费':'订阅')+' 💰'+ELITE_COST+' / 3天</button>'+(st.durability<100?'<button class="btn-secondary" onclick="document.getElementById(\'modal-confirm\').style.display=\'\';document.getElementById(\'modal-extra\').innerHTML=\'\';closeModal();eliteRefill(\''+tid+'\')">🪙 耐久秒回满（≤300）</button>':'')+'</div>');
+  document.getElementById('modal-confirm').style.display='none';
+  const cb2=document.getElementById('modal-cancel');if(cb2){cb2.textContent='收起';cb2.onclick=function(){document.getElementById('modal-confirm').style.display='';cb2.textContent='取消';cb2.onclick=null;closeModal();};}
+  return;
+ }
+ const up=(state.tagUp||{})[tid]||{};
+ const lim=up.sp?5:10;
+ const tn=st.tuned;
+ (function(){const B=elitePool(tid);if(Math.abs(B)>ELITE_TOL){const f=ELITE_TOL/Math.abs(B);Object.keys(tn).forEach(function(k){tn[k]=1+(tn[k]-1)*f;});st.warn=1;saveState();}})();
+ const baseMax=Math.round(tg.maxEp*(1+0.03*(up.spd||0)+0.01*(up.acc||0)+(up.sp?0.25:0)));
+ const basePen=(typeof tg.pen==='number'?tg.pen:Math.round(getPenaltyRate(tg.maxEp)*100));
+ const scoreBase=eliteScoreTuned(tg,{maxEpR:1,ratioR:1,chainR:1,penR:1});
+ const row=function(label,key,val2str,inv){
+  const v=inv?Math.round((1-(tn[key]===undefined?1:tn[key]))*100):Math.round(((tn[key]===undefined?1:tn[key])-1)*100);
+  const zero=50,hp=Math.max(2,Math.min(98,50+v/lim*48));
+  const lo=Math.min(zero,hp),hi=Math.max(zero,hp);
+  const head=v>=0
+   ?'<div style="position:absolute;top:0;bottom:0;left:'+hp+'%;width:'+Math.max(0,98-hp)+'%;background:rgba(216,131,42,.12);border-left:1px dashed rgba(216,131,42,.45);"></div>'
+   :'<div style="position:absolute;top:0;bottom:0;left:2%;width:'+Math.max(0,hp-2)+'%;background:rgba(216,131,42,.12);border-right:1px dashed rgba(216,131,42,.45);"></div>';
+  const seg='<div style="position:absolute;top:0;bottom:0;left:'+lo+'%;width:'+(hi-lo)+'%;background:'+(v>0?'linear-gradient(90deg,#e8a33d,#f0b35c)':'linear-gradient(90deg,#c2451f,#d94f2b)')+';z-index:1;border-radius:3px;"></div>'+head;
+  return '<div style="margin:8px 0;"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;"><span style="font-weight:600;color:#3a3a3c;">'+label+' <span style="color:#a0a0a8;font-weight:400;">'+ELITE_ATTR_DESC[key]+'</span></span></div>'
+   +'<div style="display:flex;align-items:center;gap:4px;">'
+   +'<button class="btn-secondary" style="padding:2px 9px;font-size:12px;line-height:1.4;flex-shrink:0;" onclick="eliteArrow(\''+tid+'\',\''+key+'\',-1,'+lim+','+(inv?1:0)+')">◀</button>'
+   +'<div style="position:relative;flex:1;height:16px;background:linear-gradient(90deg,#e8ddcb 0,#e8ddcb '+(zero-1)+'%,#fff '+(zero-1)+'%,#fff '+(zero+1)+'%,#e8ddcb '+(zero+1)+'%,#e8ddcb 100%);border-radius:4px;border:1px solid #d8cbb5;">'+seg
+   +'<div style="position:absolute;top:-3px;bottom:-3px;width:3px;background:#1d1d1f;left:calc('+hp+'% - 1px);border-radius:2px;z-index:2;"></div></div>'
+   +'<button class="btn-secondary" style="padding:2px 9px;font-size:12px;line-height:1.4;flex-shrink:0;" onclick="eliteArrow(\''+tid+'\',\''+key+'\','+1+','+lim+','+(inv?1:0)+')">▶</button>'
+   +'<b style="width:92px;text-align:right;font-size:11px;color:#b5772a;flex-shrink:0;">'+val2str(v)+'</b></div></div>';
+ };
+ let h='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:12px;color:#6e6e73;">耐久：<b style="color:'+(st.durability<=0?'#ff3b30':'#d9832a')+';">'+st.durability+'%</b>'+(st.durability<=0?'（效果7折）':'')+'</span><button class="btn-secondary" style="padding:3px 10px;font-size:11px;" onclick="eliteRefill(\''+tid+'\')">🪙 秒回满（≤300）</button></div>';
+ h+='<div style="font-size:11px;color:#8e8e93;margin-bottom:4px;">「调整且当天完成该标签任务」耐久-3%；归零效果7折；每小时自回0.5%。◀ ▶ 调整（每档 '+(lim/5)+'%），<b>四要素此消彼长：拉高一项会自动削减关联项</b>，性能分仅参考。</div>';
+ const B=elitePool(tid);
+ h+='<div style="font-size:11px;margin-bottom:6px;color:'+(Math.abs(B)>ELITE_TOL?'#ff3b30':'#a0a0a8')+';">强度池：'+(B>0?'+':'')+B+' / ±'+ELITE_TOL+'</div>';
+ h+='<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;"><span style="font-size:12px;color:#6e6e73;">性能分</span><span><b style="color:#b5772a;font-size:17px;">'+eliteScoreTuned(tg,tn)+'</b> <span style="color:#a0a0a8;font-size:11px;">/ 默认 '+scoreBase+'</span></span></div>';
+ h+=row('最大EP','maxEpR',function(v){return baseMax+'→'+Math.round(baseMax*(1+v/100));},0);
+ h+=row('完成占比','ratioR',function(v){return '15%→'+(15*(1+v/100)).toFixed(1)+'%';},0);
+ h+=row('连击增益','chainR',function(v){return '8%→'+(8*(1+v/100)).toFixed(1)+'%';},0);
+ h+=row('扣除比例','penR',function(v){return basePen+'%→'+(basePen*(1-v/100)).toFixed(1)+'%';},1);
+ h+='<div style="display:flex;gap:8px;margin-top:10px;"><button class="btn-secondary" style="flex:1;padding:7px;font-size:12px;" onclick="eliteResetTag(\''+tid+'\')">默认</button><button class="btn-primary" style="flex:1;padding:7px;font-size:12px;" onclick="document.getElementById(\'modal-confirm\').style.display=\'\';document.getElementById(\'modal-extra\').innerHTML=\'\';closeModal();pushEvolveNote(\'🎖️ 精英调整已应用：'+tg.path.join('·')+'\')">应用</button></div>';
+ showModal('🎖️ '+tg.path.join(' · '),'',function(){},h);
+ document.getElementById('modal-confirm').style.display='none';
+ const cb=document.getElementById('modal-cancel');if(cb){cb.textContent='收起';cb.onclick=function(){document.getElementById('modal-confirm').style.display='';cb.textContent='取消';cb.onclick=null;closeModal();};}
+}
+function eliteResetTag(tid){const st=eliteTagState(tid);st.tuned={};st.warn=0;saveState();openEliteTag(tid);}
+function eliteRefill(tid){
+ const st=eliteTagState(tid);
+ if(st.durability>=100){alert('耐久已满');return;}
+ const cost=Math.ceil((100-st.durability)/100*300);
+ showModal('🪙 耐久秒回','消耗 <b>'+cost+'</b> 代币将该标签耐久回满？',function(){
+  if(state.tokens<cost){alert('代币不足');return;}
+  state.tokens-=cost;st.durability=100;st.lastTick=Date.now();saveState();updateTopBar();
+  document.getElementById('modal-confirm').style.display='';
+  closeModal();openEliteTag(tid);
+ });
+}
+function injectEliteScores(){
+ const box=document.getElementById('upgrade-list');if(!box)return;
+ TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;}).forEach(function(tg){
+  const up=(state.tagUp||{})[tg.id];
+  const canSP=up&&!up.sp&&(up.spd||0)>=10&&(up.acc||0)>=10&&(up.ctl||0)>=10&&(up.nit||0)>=10;
+  const sNow=eliteScoreTuned(tg,{maxEpR:1,ratioR:1,chainR:1,penR:1});
+  const sSP=canSP?eliteScoreTuned(tg,{maxEpR:1.25,ratioR:1,chainR:1,penR:0.5}):0;
+  const needle=tg.path.join(' · ');
+  let best=null;
+  const all=box.querySelectorAll('*');
+  for(let i=0;i<all.length;i++){
+   const n=all[i];
+   if(n._eliteScoreDone)continue;
+   if(n.textContent&&n.textContent.indexOf(needle)>-1){if(!best||n.querySelectorAll('*').length<best.querySelectorAll('*').length)best=n;}
+  }
+  if(best){
+   best._eliteScoreDone=1;
+   const d=document.createElement('div');
+   d.style.cssText='font-size:10px;color:#8e8e93;margin-top:2px;font-weight:400;';
+   d.textContent='性能分 '+sNow+(canSP?(' · SP后预估 '+sSP):'');
+   best.appendChild(d);
+  }
+ });
+}
+try{const _origRU=renderUpgradeUI;renderUpgradeUI=function(){_origRU();setTimeout(injectEliteScores,50);};}catch(e){}
+
 function renderEvolveBars(){const el=document.getElementById('evolve-bars');if(!el)return;
 if(state.todayMode!=='evolve'){el.innerHTML='';return;}
 const e=getEvolve();const path=e.path||'';const raw=evolveRawEp();const lv=e.lv||1;
@@ -1425,6 +1782,8 @@ function ensureV1502Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mail
 function ensureUltUndoMail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['ult_undo_card'])return;state.mailGranted['ult_undo_card']=true;if(!state.mailbox.some(function(m){return m.id==='ult_undo_card';})){state.mailbox.push({id:'ult_undo_card',title:'🎫 终极升级撤销卡 ×1',body:'随卡说明：本卡可撤销一次「终极改装包」的使用，被撤销标签的四条改装线将恢复至使用前的状态（消耗的改装包与材料不退还）。<br><br>⚠️ 注意：只有从本次更新起使用的终极改装包会留下使用前快照；更早使用的记录无法精确回溯，届时只能选择将该标签四线重置为 Lv0。在「升级」页点击 🎫 撤销卡 使用。',items:{ult_undo:1},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 function ensureTalentNerfMail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['talent_nerf_151'])return;state.mailGranted['talent_nerf_151']=true;if(!state.mailbox.some(function(m){return m.id==='talent_nerf_151';})){state.mailbox.push({id:'talent_nerf_151',title:'v1.5.1「天赋降温」天赋数值调整明细（前→后）',body:'33个天赋数值全面下调：<br>①稳步积累 全完成+25%→+4%<br>②错题复盘 +30%→+8%<br>③碎片吸收 +30%→+12%<br>④多元巩固 基础30%/每标签+10%→5%/+3%<br>⑤循环温故 +30%→+6%<br>⑥时政识记 +40%→+8%<br>⑦政治考试 +45%→+10%<br>⑧词句研磨 +30%→+6%<br>⑨英二考试 +40%→+7%<br>⑩轮次回顾 +30%→+6%<br>⑪教综考试 +45%→+9%<br>⑫文本解构 +30%→+8%<br>⑬语言考试 +45%→+9%<br>⑭真题深耕 扣减减免60%→30%<br>⑮晨读增益 +35%/-10%→+7%/-3%<br>⑯下午茶 +25%/-15%→+6%/-5%<br>⑰夜猫子 +20%/-15%→+5%/-2%<br>⑱厚积薄发 +40%→+10%<br>⑲主观题专精 +40%/-20%→+10%/-5%<br>⑳多选专项 +40%/-20%→+6%/-3%<br>㉑读写攻坚 +35%/-15%→+7%/-3%<br>㉒写作打磨 +35%/-15%→+6%/-3%<br>㉓教综学习 +40%/-18%→+7%/-2%<br>㉔教综还得刷题 +45%/-22%→+8%/-4%<br>㉕光看不行 -20%/+35%→-5%/+7%<br>㉖全域复盘 +50%·每数量+5%→+7%·每数量+10固定EP<br>㉗或昼或夜 +55%/下午-20%→+6%/下午-4%/未选中时段-5%<br>㉘心态壁垒 新增：借用属性效果30%；持续120分钟（乱斗40/灵魂武者20）<br>㉙时政闭环 +70%/-30%→+7%/-3%<br>㉚教综强攻 +70%/-30%→+7%/-3%<br>㉛英二强攻 +60%/-20%→+6%/-2%<br>㉜语言攻坚 +80%/-40%→+8%/-3%<br>㉝属性强化 乱斗放大100%→10%、进化效果+5%、结算扣15%→6%<br>㉞不灭阳炎 首扣15%→7%（保底7%）、每分钟1%→0.7%、持续100→143分钟、锁定期15→10分钟、首任务+70%→+20%、燃烧中可随时手动结束',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 function ensureMatMail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['mat_adjust'])return;state.mailGranted['mat_adjust']=true;if(!state.mailbox.some(function(m){return m.id==='mat_adjust';})){state.mailbox.push({id:'mat_adjust',title:'标签材料获取调整明细（前→后）',body:'<b>掉落修复</b>：材料统一入全局池（此前误写入旧表导致看似"掉了拿不到"，仓库现在可实时查看）。<br><br><b>获取门槛调整（前→后）</b>：<br>· 训练印记：每完成1个任务 +1 → <b>+2</b><br>· 冲刺奖章：仅增益窗口内完成 → <b>主动技能生效中 或 当天前2个完成的任务</b><br>· 全勤徽章：全勤日每个完成任务 ×1（不变）<br>· 巅峰凭证：EP达上限90% → <b>达上限60%</b><br><br>四种材料用于升级页改装 Lv6-10。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
+
+function ensureV152Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v152_notice'])return;state.mailGranted['v152_notice']=true;if(!state.mailbox.some(function(m){return m.id==='v152_notice';})){state.mailbox.push({id:'v152_notice',title:'v1.5.2「精英降临」完整更新公告',body:'各位考生：<br><br>本次更新带来了考研EP系统有史以来最大的玩法扩展——精英任务与专属功能两大系统，同时对既有内容做了大量平衡与修复。以下为详细说明。<br><br><b>一、精英任务（ELITE）</b><br>为最常见的五类标签（考研英二单词、过级考试单词、专业课作业、专业课备考、刷题/改错）开放了"每日性能调整"特权。每个精英子标签相互独立：在升级页点击「🎖️ 精英调整」进入清单，每个标签单独订阅 100 积分/3 天（到期自动关闭、调整值保留、耐久修复照常，一经付款不退款）。解锁后进入该标签专属的"精英设计"界面：最大EP、完成占比、连击增益、扣除比例四条属性条，各含 ◀ ▶ 箭头，每档 2%（SP 标签 1%），在 ±10%（SP ±5%）范围内调整。<br><br>四要素<b>此消彼长</b>：拉高任一项会自动按关联矩阵削减其他项（如最大EP升档会同时削减完成占比与连击增益），强度池 ±6 兜底，性能分仅作结构参考——你需要根据今天的任务结构，决定把"性能预算"花在哪一项上。每次"调整且当天完成该标签任务"会消耗 3% 耐久，耐久归零后调整效果打七折；耐久每小时自动回复 0.5%，也可花代币立即回满（上限 300）。每日登记中精英标签带深色 ELITE 反色徽标，升级页每个标签都标注了当前性能分与 SP 前后预估分。<br><br><b>二、专属功能（第5槽）</b><br>功能页新增专属功能槽（Lv.28 随首槽开放，首槽左侧小正方形，每日可切换一次，全系统唯一），六件专属功能以代币商品形式发售：16 追踪标记（900币/Lv.32，按标签挂伤害加深/降低标记的跨天系统）、17 越战越勇（800币，每100EP后续+1%上限10%、每分钟衰减0.1点）、18 残骸强化（600币，任务数定基础增幅+扣减喂养）、19 漫画爆炸（1000币/Lv.40，充能五档、完成时释放）、20 封印无双（1200币/Lv.45，88%补至100%）、21 善恶之交（700币，天使/恶魔双态）。<br><br><b>三、平衡与修复</b><br>33个天赋数值全面下调（详见另一封明细邮件）；功能属性四项调整（灵魂武者新增进化增速+5%、猎手韧性承担降至20%、母体威慑下调至15%/10%、以一当十降至20%）；质量评价权重改为正确率60/专注25/用时8/状态7；材料掉落全面修复（入全局池、训练印记×2、冲刺奖章改为技能生效中或当天前2个完成、巅峰凭证门槛降至60%）；标签数值颜色恢复默认（仅进化模式改动时高亮）；修复了无限火力从未生效的接线遗漏、置顶强化下置顶任务可随意修改的漏洞、打卡连击虚挂不清零等问题；结算弹窗重新排版（任务侧增益归入各任务、全局增益汇总底部、幸运/置顶同列）；邮件改为标题列表点开的窗口式阅读。<br><br>祝各位考生都能在 S1「并肩有光」赛季里找到最适合自己的打法。你不是一个人，并肩之处，便有光。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 function ensureV150Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v150_update'])return;state.mailGranted['v150_update']=true;if(!state.mailbox.some(function(m){return m.id==='v150_update';})){state.mailbox.push({id:'v150_update',title:'v1.5.0「终极进化」更新奖励',body:'全新玩法「进化」上线：选定进化玩法后选择攻击/防御路径，完成任务按原始填入EP从Lv.1成长至Lv.10（满级成为终极英雄，三选一终极强化）。随邮件发放进化模式体验卡×1。',items:{evolve_trial:1},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 /* ================= 进化模式 END ================= */
 
@@ -1456,6 +1815,7 @@ function dailyResetCheck(){
   if(state.brawlActiveDate!==today){state.brawl={drawn:[],hist:[]};state.fusionAssign={};state.fusionLockedDate='';state.brawlDrawDate='';state.brawlActiveDate=today;selectedBrawlIdx=0;if(state.brawlSkills)state.brawlSkills.exemptTagId=null;changed=true;}
   if(state.potentialActiveDate!==today){state.potential={drawn:[],hist:[],candidates:[],candidateSlot:null,refreshLeft:3,fourthEligibleAt:0};state.potentialActiveDate=today;state.potentialEditLeft=0;changed=true;}
   if(state.evolveDate!==today){state.evolve={path:'',lv:1,attrs:[],boilUntil:0,boilCdUntil:0,stealthUntil:0,stealthCdUntil:0,bountyIdx:-1,hopeIdx:-1,cloneAnchor:-1,cloneAnchorIdx:-1,ultimate:'',lv9At:0,lv10At:0};state.evolveDate=today;changed=true;}
+  if(!state.exState||state.exState.date!==today){getExclusive();changed=true;}
   /* v1.5.0.2 体验卡到期：未达到等级的玩家功能属性从0开始 */
   if((state.slotTrialUntil||0)>0&&Date.now()>state.slotTrialUntil&&state.totalEP<UNLOCK.passive.s){state.passive=[null,null,null,null];state.slotTrialUntil=0;changed=true;}
   if(state.talentFlameDate!==today||!state.talentFlame){state.talentFlame={startAt:0,until:0,active:false,baseEp:0,immediatePenaltyEp:0,deductedEp:0,finalPenaltyEp:0,endAt:0,cdUntil:0,date:today};state.talentFlameDate=today;changed=true;}
@@ -1610,7 +1970,7 @@ function fpTaskOwn(t,own,details){
   if(hasPotential(19)&&state.potentialSprint&&state.potentialSprint.until>Date.now()&&path[0]==='考研')add('潜能·短时冲刺（考研标签）',0.2);
   if(hasPotential(6)&&t.chapterClosed)add('潜能·章节收官',0.5);
   if(hasPotential(9)&&t.wanted)add('潜能·悬赏通缉',0.15);
-  if(hasPassive(15)&&ty==='mk')add('功能·以一当十',0.7);
+  if(hasPassive(15)&&ty==='mk')add('功能·以一当十',0.2);
   if(tag&&path.join(' ').indexOf('背单词')>-1)add('全局·连续打卡增益',getCheckinStreakBonus());
   return Math.max(0,Math.round(own*mult));
 }
@@ -1625,7 +1985,7 @@ function fpGlobalMods(tasks,doneList,gross,penaltyTotal){
   if(hasPotential(9)&&tasks.some(t=>t.wanted))mods.penaltyMult*=0.85;
   if(hasPotential(19)&&state.potentialSprint&&state.potentialSprint.until>Date.now()){mods.grossMult+=0.3;mods.penaltyMult*=0.5;mods.notes.push('短时冲刺：EP+30%，扣减-50%');}
   const ps=getPassiveState();if(ps.p12PendingEp)mods.grossAdd+=ps.p12PendingEp;if(ps.p12Resilience)mods.notes.push('猎手防护：韧性+'+ps.p12Resilience);
-  if(getPassiveState().infectSuccess){mods.grossMult+=0.2;mods.penaltyMult*=0.7;mods.notes.push('母体威慑成功：其余任务+20%EP，扣减-30%');}
+  if(getPassiveState().infectSuccess){mods.grossMult+=0.1;mods.penaltyMult*=0.85;mods.notes.push('母体威慑成功：其余任务+10%EP，扣减-15%');}
   if(getPassiveState().infectFailed){mods.postMult*=0.5;mods.notes.push('母体威慑失败：感染任务仅10%EP，其余任务EP减半');}
   if(hasPotential(5)&&tags.size>=4){const bonus=Math.min(1.5,0.5+0.2*(tags.size-4));mods.grossMult+=bonus;}
   if(hasPotential(8)&&!doneList.some(t=>tType(getTag(t.tagId))==='mk'))mods.grossMult-=0.7;
@@ -1723,7 +2083,7 @@ function confirmMode(){
 const LOCK_DESC={talent:'方可开启天赋面板',potential:'方可开启潜能模式',brawl:'方可开启乱斗模式',passive:'后，将逐步开放最多4个常驻功能槽。<br>功能属性一旦装备将长期生效，不能像天赋一样每日自由卸下。',evolve:'方可开启进化模式'};
 function renderLock(type){const tb=document.getElementById('brawl-trial-btn');if(tb){tb.textContent='🧪 使用乱斗体验卡（剩 '+(state.inventory.brawl_trial||0)+'）';tb.style.display=(state.inventory.brawl_trial||0)>0?'':'none';}
   const ptb=document.getElementById('potential-trial-btn');if(ptb){ptb.style.display=(state.inventory.potential_trial||0)>0?'':'none';const c=document.getElementById('potential-trial-count');if(c)c.textContent=state.inventory.potential_trial||0;}
-  const pstb=document.getElementById('passive-slot-trial-btn');if(pstb){pstb.style.display=(state.inventory.slot_trial||0)>0?'':'none';const c2=document.getElementById('passive-slot-trial-count');if(c2)c2.textContent=state.inventory.slot_trial||0;}const etb=document.getElementById('evolve-trial-btn');if(etb){etb.style.display=(state.inventory.evolve_trial||0)>0?'':'none';const ec=document.getElementById('evolve-trial-count');if(ec)ec.textContent=state.inventory.evolve_trial||0;}const lock=document.getElementById(type+'-lock');const content=document.getElementById(type+'-content');const lv=getLevelInfo(state.totalEP);const lvEl=document.getElementById(type+'-lock-lv');if(lvEl)lvEl.textContent='Lv.'+lv.lv+' '+lv.name;const titleEl=lock.querySelector('.lock-title');const descEl=lock.querySelector('.lock-desc');if(!checkUnlock(type)){lock.style.display='block';content.style.display='none';titleEl.textContent=LOCK_TITLES[type];descEl.innerHTML='需达到 <span class="lock-lv">'+UNLOCK[type].name+'</span> '+LOCK_DESC[type]+'<br>当前等级：<span id="'+type+'-lock-lv">Lv.'+lv.lv+' '+lv.name+'</span>';return;}const mb=getModeBlock(type);if(mb){lock.style.display='block';content.style.display='none';titleEl.textContent=mb.title;descEl.innerHTML=mb.desc;return;}lock.style.display='none';content.style.display='block';renderStaticHintBoxes();if(type==='evolve')renderEvolvePage();}function switchPage(name){document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const _nb=document.querySelector('.navbtn[data-page="'+name+'"]');if(_nb)_nb.classList.add('active');document.getElementById('page-'+name).classList.add('active');if(name==='home')renderHome();if(name==='shop')updateShopUI();if(name==='warehouse')renderWarehouseUI();if(name==='daily'){updateDailyUI();renderModeOptions();renderDailySkills();renderDailyAttrs();}if(name==='long'){checkLongMigration();renderLongTasks();}if(name==='cycle'){renderCycleTasks();}if(name==='talent')renderLock('talent');if(name==='potential')renderLock('potential');if(name==='brawl')renderLock('brawl');if(name==='passive')renderLock('passive');if(name==='evolve'){renderLock('evolve');}if(name==='pass')renderPassUI();if(name==='achievement')renderAchievementUI();if(name==='mail')renderMailPage();if(name==='calendar')renderCalendar();if(name==='cup')renderCupUI();if(name==='race')renderArenaUI();if(name==='upgrade')renderUpgradeUI();if(name==='guide')renderGuidePage();}
+  const pstb=document.getElementById('passive-slot-trial-btn');if(pstb){pstb.style.display=(state.inventory.slot_trial||0)>0?'':'none';const c2=document.getElementById('passive-slot-trial-count');if(c2)c2.textContent=state.inventory.slot_trial||0;}const etb=document.getElementById('evolve-trial-btn');if(etb){etb.style.display=(state.inventory.evolve_trial||0)>0?'':'none';const ec=document.getElementById('evolve-trial-count');if(ec)ec.textContent=state.inventory.evolve_trial||0;}const lock=document.getElementById(type+'-lock');const content=document.getElementById(type+'-content');const lv=getLevelInfo(state.totalEP);const lvEl=document.getElementById(type+'-lock-lv');if(lvEl)lvEl.textContent='Lv.'+lv.lv+' '+lv.name;const titleEl=lock.querySelector('.lock-title');const descEl=lock.querySelector('.lock-desc');if(!checkUnlock(type)){lock.style.display='block';content.style.display='none';titleEl.textContent=LOCK_TITLES[type];descEl.innerHTML='需达到 <span class="lock-lv">'+UNLOCK[type].name+'</span> '+LOCK_DESC[type]+'<br>当前等级：<span id="'+type+'-lock-lv">Lv.'+lv.lv+' '+lv.name+'</span>';return;}const mb=getModeBlock(type);if(mb){lock.style.display='block';content.style.display='none';titleEl.textContent=mb.title;descEl.innerHTML=mb.desc;return;}lock.style.display='none';content.style.display='block';renderStaticHintBoxes();if(type==='evolve')renderEvolvePage();if(type==='passive')renderExclusiveUI();}function switchPage(name){document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const _nb=document.querySelector('.navbtn[data-page="'+name+'"]');if(_nb)_nb.classList.add('active');document.getElementById('page-'+name).classList.add('active');if(name==='home')renderHome();if(name==='shop')updateShopUI();if(name==='warehouse')renderWarehouseUI();if(name==='daily'){updateDailyUI();renderModeOptions();renderDailySkills();renderDailyAttrs();}if(name==='long'){checkLongMigration();renderLongTasks();}if(name==='cycle'){renderCycleTasks();}if(name==='talent')renderLock('talent');if(name==='potential')renderLock('potential');if(name==='brawl')renderLock('brawl');if(name==='passive')renderLock('passive');if(name==='evolve'){renderLock('evolve');}if(name==='pass')renderPassUI();if(name==='achievement')renderAchievementUI();if(name==='mail')renderMailPage();if(name==='calendar')renderCalendar();if(name==='cup')renderCupUI();if(name==='race')renderArenaUI();if(name==='upgrade')renderUpgradeUI();if(name==='guide')renderGuidePage();}
 function fmtDate(ts){const d=new Date(ts);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function checkCycleMigration(){
   if(!state.cycleTasks)return;
@@ -2090,13 +2450,13 @@ function renderTasks(){
     baseSum+=b;qSum+=q;
     const tag=getTag(t.tagId,t);
     const tc=tag?getTagColor(tag.maxEp):'#c7c7cc';
-    const _bt=_origGetTag(t.tagId);const _chg=_bt&&(tag.maxEp!==_bt.maxEp||tag.pen!==(typeof _bt.pen==='number'?_bt.pen:Math.round(getPenaltyRate(_bt.maxEp)*100)));
+    const _bt=_origGetTag(t.tagId);const _chg=state.todayMode==='evolve'&&_bt&&(tag.maxEp!==_bt.maxEp||tag.pen!==(typeof _bt.pen==='number'?_bt.pen:Math.round(getPenaltyRate(_bt.maxEp)*100)));
     const maxEpText=tag?(_chg?'<span style="color:#d9832a;font-weight:700;">':'')+(tag.pen?'max '+tag.maxEp+'EP · -'+tag.pen+'%':'max '+tag.maxEp+'EP')+(_chg?'</span>':''):'';
         const _spOn=tag&&(((state.tagUp||{})[tag.id]||{}).sp);
         const tagBadge=tag?(_spOn?'<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#000;color:#fff;box-shadow:0 0 0 1px #ff950066,inset 0 0 8px rgba(255,149,0,.25);font-weight:600;white-space:nowrap;">★ '+tag.path.join(' · ')+' · SP · '+maxEpText+'</span>':'<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:'+tc+'15;color:'+tc+';white-space:nowrap;">'+tag.path.join(' · ')+' · '+maxEpText+'</span>'):'<span style="font-size:10px;color:#c7c7cc;">未分类</span>';
       const fusionAttr=(state.fusionAssign&&t.tagId&&state.fusionAssign[t.tagId])?BRAWLS.find(x=>x.id===state.fusionAssign[t.tagId]):null;
        const infectInfo=t.infected?(function(){const sl=getInfectionSlotInfo(t.infectSlot);return '<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#ff3b3018;color:#ff3b30;white-space:nowrap;" title="感染任务必须在该时段完成">☣️ 感染 · '+sl.name+' '+sl.range+'</span>';})():'';
-      const tagBadgeFull=tagBadge+infectInfo+(getCheckinStreakBadge(t)?' '+getCheckinStreakBadge(t):'')+(fusionAttr?' <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#af52de18;color:#af52de;white-space:nowrap;" title="'+fusionAttr.effect+'">🎯'+fusionAttr.name+'</span>':'');
+      const tagBadgeFull=tagBadge+(_bt&&isEliteTagId(t.tagId)?' <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#1d1d1f;color:#fff;font-weight:700;letter-spacing:1px;">🎖ELITE</span>':'')+infectInfo+(getCheckinStreakBadge(t)?' '+getCheckinStreakBadge(t):'')+(fusionAttr?' <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#af52de18;color:#af52de;white-space:nowrap;" title="'+fusionAttr.effect+'">🎯'+fusionAttr.name+'</span>':'');
       if(t.fromLong||t.fromCycle){
       const cc=t.fromLong?'#007aff':'#00b578';
       const cb=t.fromLong?'#f0f7ff':'#f0fbf7';
@@ -2125,7 +2485,7 @@ function renderTasks(){
     
      html+='<div ondragover="taskDragOver(event)" ondrop="taskDrop(event,'+i+')" ondragenter="taskDragEnter(event)" ondragleave="taskDragLeave(event)" class="task-card'+(t.pinned?' task-pinned':'')+(t.lucky?' task-lucky':'')+(t.infected?' task-infected':'')+(_spOn?' task-sp-'+getSPCardTheme(tag):'')+'" style="border:1px solid '+(t.infected?'#ff3b30':(t.lucky?'#ff2d95':(_spOn?'#8b5cf6':'#e5e5ea')))+';border-left:4px solid '+(t.infected?'#ff3b30':(t.lucky?'#ff2d95':(tag?(_spOn?'#8b5cf6':tc):'#e5e5ea')))+';border-radius:10px;padding:10px;margin-bottom:8px;background:'+(t.infected?'#fff1f0':(t.lucky?'#ffeef6':(_spOn?'':(tag?tc+'10':'#fff'))))+';">';
     
-    if(!locked&&!(t.completed&&t.baseEp!=='')){
+    if(!locked&&!(t.completed&&t.baseEp!=='')&&!(t.pinned&&t.pinConfirmed&&hasPassive(13))){
       // 未锁定（或再编辑模式）：未完成可编辑名称、标签、可删除；已完成只读
       html+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:8px;">';
           html+='<span draggable="true" ondragstart="taskDragStart(event,'+i+')" title="拖动调整顺序" style="cursor:grab;color:#c7c7cc;font-size:14px;user-select:none;padding:0 2px;">⠿</span>'+(t.pinned?' <span style="font-size:10px;padding:1px 6px;border-radius:4px;background:#ff950015;color:#ff9500;">'+(hasPassive(13)?'📌 置顶强化 +15%':'📌 置顶')+'</span>':'')+(t.lucky?' <span style="font-size:10px;padding:1px 6px;border-radius:4px;background:#ff2d9515;color:#ff2d95;">🍀 幸运</span>':'')+(t.evoReprieve?' <span style="font-size:10px;padding:1px 6px;border-radius:4px;background:#8e8e9315;color:#8e8e93;">⚖️ 缓刑顺延 · 罚率×'+(t.penBoost||1)+'</span>':'')+(t.enhanced?' <span style="font-size:10px;padding:1px 6px;border-radius:4px;background:#af52de15;color:#af52de;">⚡强化</span>':'');
@@ -2282,6 +2642,7 @@ function completeTask(idx){
       if(ct)ct.lastDone=todayStr();
     }
     evolveOnTaskComplete(state.todayTasks[idx]);
+    exOnTaskComplete(state.todayTasks[idx]);
     saveState();
     renderTasks();
     closeModal();
@@ -2489,7 +2850,7 @@ function mailItemsHtml(m){
 }
 function renderMailPage(){
   const box=document.getElementById('mail-page-list');if(!box)return;
-  ensureV143Mail();ensureV150Mail();ensureV1502Mail();ensureUltUndoMail();ensureMatMail();ensureTalentNerfMail();
+  ensureV143Mail();ensureV150Mail();ensureV1502Mail();ensureUltUndoMail();ensureMatMail();ensureV152Mail();ensureTalentNerfMail();
   if(!state.mailbox.length){box.innerHTML='<div style="text-align:center;color:#8e8e93;padding:20px;">邮箱空空如也</div>';updateMailBadge();return;}
   box.innerHTML=state.mailbox.map(function(m){
     const open=state._mailOpen===m.id;
@@ -2851,7 +3212,7 @@ function applyPassiveProtection(gross,effective,dryRun){
   let loss=Math.max(0,gross-effective);
   const ps=getPassiveState(),notes=[];
   if(hasPassive(7)&&loss>0){
-    const absorb=Math.min(ps.resilience,Math.round(loss*0.3*pasAmp()));
+    const absorb=Math.min(ps.resilience,Math.round(loss*0.2*pasAmp()));
     if(absorb>0){effective+=absorb;loss-=absorb;notes.push('猎手韧性吸收 '+absorb+' EP');if(!dryRun)ps.resilience-=absorb;}
   }
   updatePassiveShieldRespawn();
@@ -3417,7 +3778,7 @@ function submitDaily(){
   const ownOf=function(t){
     const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
     let adjusted=own;if(mods.hasClone&&firstDone&&t!==firstDone&&(t.completed&&t.baseEp!=='')){adjusted=(parseInt(firstDone.baseEp)||0)+(parseInt(firstDone.qualityEp)||0);taskDetailMap.set(t,[{label:'复制感染（锚定首任务）',amount:adjusted-own}]);}
-    if(t._chain>=2){const _up=(state.tagUp||{})[t.tagId];const _acc=_up?(_up.acc||0):0;if(_acc>0){const _m=1+(t._chain-1)*(0.02*_acc+0.005*(_up.ctl||0))*(_up.sp?2:1);const _before=adjusted;adjusted=Math.round(adjusted*_m);addSTDetail(t,'改装·加速连击 ×'+_m.toFixed(2),adjusted-_before);}}
+    if(t._chain>=2){const _up=(state.tagUp||{})[t.tagId];const _acc=_up?(_up.acc||0):0;if(_acc>0){const _etr=eliteTune(t.tagId);const _m=1+(t._chain-1)*(0.02*_acc*( _etr?_etr.chainR:1)+0.005*(_up.ctl||0))*(_up.sp?2:1);const _before=adjusted;adjusted=Math.round(adjusted*_m);addSTDetail(t,'改装·加速连击 ×'+_m.toFixed(2),adjusted-_before);}}
     const fpDetails=[];const finalOwn=fpTaskOwn(t,adjusted,fpDetails);
     if(!detailSeen.has(t)){
       (t.detailEvents||[]).forEach(d=>addSTDetail(t,d.label,d.amount));
@@ -3445,7 +3806,28 @@ function submitDaily(){
       if(t._evoCache.map!==taskDetailMap){t._evoCache.map=taskDetailMap;(t._evoCache.dl||[]).forEach(function(d){addSTDetail(t,d.label,d.amount);});}
       evoOwn=finalOwn+t._evoCache.delta;
     }
-    return evoOwn+(t.longBonusEp||0);
+    let exOwn=evoOwn;
+    {
+      if(!t._exCache){
+        let xd=0;const xdl=[];
+        const prev=(state.exState&&state.exState.marksPrev)||{};
+        if(hasEx(16)){const mk=prev[t.tagId];if(mk&&mk.type==='up'){const v=Math.round(evoOwn*0.1);xd+=v;xdl.push({label:'专属·追踪标记（伤害加深+10%）',amount:v});}}
+        if(hasEx(17)&&t.doneAt){
+          const done=getCompletedTasks().slice().sort(function(a,b){return (a.doneAt||0)-(b.doneAt||0);});
+          const di=done.indexOf(t);let earned=0;
+          for(let k=0;k<di;k++)earned+=(parseInt(done[k].baseEp)||0)+(parseInt(done[k].qualityEp)||0);
+          const first=done.length?(done[0].doneAt||0):0;
+          const bonus=Math.max(0,Math.min(10,Math.floor(earned/100)*1-((t.doneAt-first)/60000)*0.1));
+          if(bonus>0){const v=Math.round(evoOwn*bonus/100);xd+=v;xdl.push({label:'专属·越战越勇 +'+bonus.toFixed(1)+'%',amount:v});}
+        }
+        if(hasEx(19)&&(t.exComicPct||0)>0){const v=Math.round(evoOwn*t.exComicPct/100);xd+=v;xdl.push({label:'专属·漫画爆炸 +'+t.exComicPct+'%',amount:v});}
+        if(hasEx(20)){const tg=getTag(t.tagId);if(tg&&evoOwn>=Math.round(tg.maxEp*0.88)&&evoOwn<tg.maxEp){const v=tg.maxEp-evoOwn;xd+=v;xdl.push({label:'专属·封印无双（补至100%）',amount:v});}}
+        t._exCache={delta:xd,dl:xdl,map:null};
+      }
+      if(t._exCache.map!==taskDetailMap){t._exCache.map=taskDetailMap;(t._exCache.dl||[]).forEach(function(d){addSTDetail(t,d.label,d.amount);});}
+      exOwn=evoOwn+t._exCache.delta;
+    }
+    return exOwn+(t.longBonusEp||0);
   };
   const taskDetailMap=new Map(),detailSeen=new Set();
   const addSTDetail=function(t,label,amount){if(!amount)return;const arr=taskDetailMap.get(t)||[];arr.push({label:label,amount:Math.round(amount)});taskDetailMap.set(t,arr);};
@@ -3486,6 +3868,7 @@ function submitDaily(){
         if(evo.survive){const un2=state.todayTasks.filter(function(x){return !(x.completed&&x.baseEp!=='');});if(un2.length===1&&un2[0]===t){rate*=0.4;u_survive=true;}}
         evoSavedRate+=(_rate0-rate);
       }
+      if(hasEx(16)){const mk=((state.exState&&state.exState.marksPrev)||{})[t.tagId];if(mk&&mk.type==='down')rate*=0.9;}
       if(t.penBoost)rate*=t.penBoost;
       if(t.potentialMark3&&hasPotential(3))rate*=0.6;
       if(t.pinned&&hasPassive(13))rate*=(1+0.2*pasAmp());
@@ -3537,6 +3920,7 @@ function submitDaily(){
   }
   penaltyTotal=Math.min(penaltyTotal,1.0);
   if(getPassPenReduce()>0)penaltyTotal=Math.min(1,penaltyTotal*(1-getPassPenReduce()));
+  if(hasEx(21)&&(state.exState.demonUntil||0)>Date.now())penaltyTotal=Math.min(1,penaltyTotal*0.9);
   if(evo.on&&evo.pen){const _penPre=penaltyTotal;penaltyTotal=Math.min(1,penaltyTotal*(1-evo.pen));evoSavedRate+=_penPre*Math.min(1,evo.pen);}
 
   // 置顶奖励
@@ -3645,6 +4029,8 @@ function submitDaily(){
     if(evo.settleAdd)effectiveRawEp+=evo.settleAdd;
     if(evo.survive){unfinished.forEach(function(u){if(u.survive)effectiveRawEp+=Math.round(grossRawEp*u.rate*0.45);});}
   }
+  if(hasEx(18)){const _loss=Math.max(0,grossRawEp-effectiveRawEp);const _rate=Math.min(10,(state.exState.wreckBase||0)+Math.floor(_loss/100)*0.2);if(_rate>0){const _v=Math.round(grossRawEp*_rate/100);if(_v>0){effectiveRawEp+=_v;state._exWreck=_v;}}}
+  if(hasEx(21)&&state.exState.angel){const _mins=Math.min(20,(Date.now()-state.exState.angel.startAt)/60000);const _v=Math.round(state.exState.angel.base*0.005*_mins);if(_v>0){effectiveRawEp+=_v;state._exAngel=_v;}}
   if(evo.on){
     const _ei=evoInterestCalc(ownOf);
     if(_ei.a9+_ei.a10>0){effectiveRawEp+=_ei.a9+_ei.a10;state._evoInterest=_ei;}
@@ -3832,6 +4218,10 @@ const globalHtml='<div style="background:#f0f7ff;border:1px solid #007aff22;bord
     closeModal();
     const _g=[['今日EP','+'+finalEp],['积分','+'+pointsInfo.total]];if(tks)_g.push(['代币','+'+tks]);if(pointsInfo.lvUps)_g.push(['升级奖励','+'+pointsInfo.upPoints,'#af52de']);
     if(state._lastDrops){Object.keys(state._lastDrops).forEach(function(k){_g.push([k,'×'+state._lastDrops[k],'#ff9500']);});}
+    evalTagMarks();
+    (function(){getElite();const hit={};state.todayTasks.forEach(function(t){if(t.completed&&t.baseEp!==''&&t.tagId){const tn=eliteTune(t.tagId);if(tn&&Object.keys(tn).length)hit[t.tagId]=1;}});Object.keys(hit).forEach(function(tid){const st=eliteTagState(tid);st.durability=Math.max(0,st.durability-3);});})();
+    if(state._exWreck){_g.push(['专属·残骸强化','+'+state._exWreck,'#af52de']);state._exWreck=0;}
+    if(state._exAngel){_g.push(['专属·善恶之交（天使）','+'+state._exAngel,'#af52de']);state._exAngel=0;}
     if(state._evoInterest){_g.push(['进化·复利（9级阶段）','+'+state._evoInterest.a9,'#e8a33d']);_g.push(['进化·复利（10级阶段）','+'+state._evoInterest.a10,'#e8a33d']);state._evoInterest=null;}
     const _lv=getLevelInfo(state.totalEP);
     showGainModal('💰 结算完成 · 恭喜获得',_g,'Lv.'+_lv.lv+' '+_lv.name+' · 距下级 '+getNextNeed(state.totalEP)+' EP');
@@ -4194,7 +4584,7 @@ function importDataString(str){
     setTimeout(function(){alert('✅ 导入成功，数据已同步到本设备');},100);
   });
 }
-function showModal(title,body,onConfirm,extraHTML){document.getElementById('modal-title').textContent=title;document.getElementById('modal-body').innerHTML=body;document.getElementById('modal-extra').innerHTML=extraHTML||'';const btn=document.getElementById('modal-confirm');btn.textContent='确认';btn.style.display='';btn.onclick=function(){onConfirm();};const cancelBtn=document.getElementById('modal-cancel');if(cancelBtn){cancelBtn.style.display='';cancelBtn.textContent='取消';}const ov=document.getElementById('modal-overlay');ov.style.display='flex';ov.style.webkitAlignItems='center';ov.style.webkitJustifyContent='center';}
+function showModal(title,body,onConfirm,extraHTML){document.getElementById('modal-title').textContent=title;document.getElementById('modal-body').innerHTML=body;document.getElementById('modal-extra').innerHTML=extraHTML||'';const btn=document.getElementById('modal-confirm');btn.textContent='确认';btn.style.display='';btn.onclick=function(){onConfirm();};const cancelBtn=document.getElementById('modal-cancel');if(cancelBtn){cancelBtn.style.display='';cancelBtn.textContent='取消';cancelBtn.onclick=function(){closeModal();};}const ov=document.getElementById('modal-overlay');ov.style.display='flex';ov.style.webkitAlignItems='center';ov.style.webkitJustifyContent='center';}
 function closeModal(){document.getElementById('modal-overlay').style.display='none';const cancelBtn=document.getElementById('modal-cancel');if(cancelBtn)cancelBtn.style.display='';}
 function wRandom(w){let r=Math.random(),c=0;for(let i=0;i<w.length;i++){c+=w[i];if(r<c)return i;}return w.length-1;}
 function getTierCost(tier){return tier==='common'?0:tier==='rare'?1:tier==='epic'?2:3;}
@@ -4818,7 +5208,7 @@ const UP_TOK=[0,0,0,0,0,5,8,12,16,20];
 function getTagUp(tagId){state.tagUp=state.tagUp||{};if(!state.tagUp[tagId])state.tagUp[tagId]={spd:0,acc:0,ctl:0,nit:0,sp:false};return state.tagUp[tagId];}
 function getTagMats(tagId){state.tagMats=state.tagMats||{};if(!state.tagMats[tagId])state.tagMats[tagId]={mark:0,medal:0,badge:0,peak:0};return state.tagMats[tagId];}
 function baseRatioOf(t,tag){if(!tag)return 0.1;const up=(state.tagUp||{})[tag.id];if(!up)return 0.1;if(up.sp)return 0.1;return Math.min(0.2,0.1+0.01*(up.nit||0)+0.005*(up.spd||0));}
-function requiredBaseOf(t){const tag=getTag(t.tagId);if(!tag)return 50;return Math.round(tag.maxEp*baseRatioOf(t,tag));}
+function requiredBaseOf(t){const tag=getTag(t.tagId);if(!tag)return 50;const et=eliteTune(t.tagId);const rr=et?(1+(et.ratioR-1)*eliteStrength(t.tagId)):1;return Math.round(tag.maxEp*baseRatioOf(t,tag)*rr);}
 function computeTagChains(done){const cnt={};(done||[]).forEach(function(t){const c=(cnt[t.tagId]||0)+1;cnt[t.tagId]=c;t._chain=c;});}
 function tagFreqClass(tag){const p=tag.path.join(' ');if(p.indexOf('背单词')>-1)return 'hi';if(p.indexOf('模考')>-1)return 'low';return 'mid';}
 const SP_RECIPE={S:{label:'S',mats:12,core:6,tokens:260,ult:4},A:{label:'A',mats:10,core:5,tokens:200,ult:3},B:{label:'B',mats:8,core:4,tokens:150,ult:3},C:{label:'C',mats:6,core:3,tokens:100,ult:2},D:{label:'D',mats:5,core:2,tokens:70,ult:2}};
@@ -6433,8 +6823,9 @@ function spGainCompareHtml(t,up){
   const ctl=2*lv.ctl+0.5*lv.nit,ctlSp=50+ctl/2;
   const nit=Math.min(20,10+lv.nit+0.5*lv.spd),nitSp=10;
   const row=function(label,a,b){return '<div style="display:flex;justify-content:space-between;gap:8px;font-size:11px;padding:3px 0;border-bottom:1px solid #f2f2f7;"><span style="color:#8e8e93;">'+label+'</span><span><b>'+a+'</b> <span style="color:#8e8e93;">→</span> <b style="color:#ff9500;">'+b+'</b></span></div>';};
-  if(up.sp)return '<div style="font-size:11px;color:#ff9500;font-weight:700;">当前已是SP运动版</div>'+row('最大EP',maxCur,maxCur)+row('连击加成','+'+fmtUpNum(acc)+'%/阶','+'+fmtUpNum(acc)+'%/阶')+row('扣减减免','-'+fmtUpNum(ctl)+'%','-'+fmtUpNum(ctl)+'%')+row('完成占比',fmtUpNum(nit)+'%',fmtUpNum(nit)+'%');
-  return row('最大EP',maxCur,maxSp)+row('连击加成','+'+fmtUpNum(acc)+'%/阶','+'+fmtUpNum(accSp)+'%/阶')+row('扣减减免','-'+fmtUpNum(ctl)+'%','-'+fmtUpNum(ctlSp)+'%')+row('完成占比',fmtUpNum(nit)+'%',nitSp+'%');
+  const sc=eliteScoreTuned(t,{maxEpR:1,ratioR:1,chainR:1,penR:1}),scSp=eliteScoreTuned(t,{maxEpR:1.25,ratioR:0.5,chainR:2,penR:0.5});
+  if(up.sp)return '<div style="font-size:11px;color:#ff9500;font-weight:700;">当前已是SP运动版</div>'+row('性能分',sc,sc)+row('最大EP',maxCur,maxCur)+row('连击加成','+'+fmtUpNum(acc)+'%/阶','+'+fmtUpNum(acc)+'%/阶')+row('扣减减免','-'+fmtUpNum(ctl)+'%','-'+fmtUpNum(ctl)+'%')+row('完成占比',fmtUpNum(nit)+'%',fmtUpNum(nit)+'%');
+  return row('性能分',sc,scSp)+row('最大EP',maxCur,maxSp)+row('连击加成','+'+fmtUpNum(acc)+'%/阶','+'+fmtUpNum(accSp)+'%/阶')+row('扣减减免','-'+fmtUpNum(ctl)+'%','-'+fmtUpNum(ctlSp)+'%')+row('完成占比',fmtUpNum(nit)+'%',nitSp+'%');
 }
 
 
@@ -6803,7 +7194,7 @@ function next(){
   }
 function renderAnnouncements(){
   const box=document.getElementById('ann-list');if(!box)return;
-  const list=[{t:'📢 v1.5.1.1 修复更新',d:'修复：背单词打卡连击不再因历史记录虚挂（断一天即清零）；无限火力（3号乱斗属性）正式接线；结算明细重排（任务侧增益归入各任务、幸运/置顶同列，全局增益汇总底部）；邮件改为标题列表、点开查看。',c:'#007aff'},{t:'📢 v1.5.1 天赋降温',d:'❄️ 33个天赋数值全面下调（稳步积累25%→4%、时政闭环70%→7%、语言攻坚80%→8%等，详见天赋页）；🔥 不灭阳炎重做：首扣15%→7%、每分钟追加1%→0.7%、持续100→143分钟、锁定期15→10分钟、首任务加成70%→20%，且燃烧期间可随时手动结束（扣除不低于7%）；🔮 心态壁垒借用的属性效果降为30%（乱斗模式持续40分钟/灵魂武者20分钟）；⚡ 属性强化：乱斗放大100%→10%、新增进化效果放大5%、结算扣除15%→6%。',c:'#007aff'},{t:'📢 v1.5.0.2 进化数值平衡',d:'📉 升级门槛全面上调：<300=1级 → 每+200升1级至1500=8级 → 1500–1899平台期 → 1900=9级大门槛 → 2300=10级满级（原2064EP一天满级的情况不再出现）；⚔️ 攻击10级复利利率 0.7%→0.3%/秒。另修复：体验卡期间装备的功能属性在正赛解锁后不再越槽生效（按实际解锁槽位数截断）；体验卡到期且未到Lv.28时属性清零从0开始。🏷️ 标签最大EP下调11处（明细见邮件）。📦 材料修复与降门槛：入全局池（仓库可见）、训练印记+2/任务、冲刺奖章改为「技能生效中或当天前2个完成」、巅峰凭证 90%→60%（明细见邮件）。',c:'#e8a33d'},{t:'📢 v1.5.0.1 进化9/10级重做',d:'⚔️ 攻击：9级「💰复利」——每秒额外获得当前EP的0.01%（10级升至0.03%/秒，9级阶段利息在升10级时定格（1.5.0.2起）），计息基数为经天赋/功能/全部等级增益后的获得EP；🛡️ 防御：9级「⚖️缓刑」——豁免最多2个未完成任务并自动顺延明日，再未完成罚率×1.5几何滚动（上限100%），10级豁免全部；幸运任务回归通用逻辑（≥5任务1个），母体威慑全玩法统一早/中/晚时段。',c:'#e8a33d'},{t:'📢 v1.5.0 终极进化',d:'🧬 全新玩法「进化」：与乱斗同级解锁（Lv.33），更新发放体验卡×1。选定后选择攻击/防御路径，完成任务按原始填入EP从Lv.1成长至Lv.10（1500=8级→1900=9级大门槛→2300满级）。每级小增益+3/6/9级随机大幅增益，最大EP/扣减变化实时显示在任务卡上。',c:'#e8a33d'},{t:'📢 v1.4.9.1 赛季UI与修复',d:'①顶栏与首页新增赛季可视化（序号/主题/持续月份，艺术字呈现），首页点击可查看赛季简介（主题配色+内涵意象，本赛季「并肩有光」：你不是一个人，并肩之处便有光）与通行证奖励一览；②通行证等级奖励改为段位式分层展示（每10级一档，单击展开查看每级内容）；③公告栏限高滚动；④修复周期任务副本逾期后仍留在每日登记、以及未完成副本到点不跳过的问题。',c:'#ff2d95'},{t:'📢 v1.4.9 通行证上线',d:'🎫 全新模块「通行证」：两月一季，共100级（每级4000 LP）。S1赛季「并肩有光」现已开启（2026.09.30–11.30，秋光同路主题全站换肤，面板为浅象牙色保证阅读体验）：日常结算最终EP×3计入LP（特殊玩法加成EP同样计入），每周6个词条任务各+5000 LP，每日签到+50里程币。升级自动发放积分/里程币/代币/票券/材料/💠核心/终极升级碎片，20/40/60/80/100级送赛季主题称号（并入成就称号）。里程商店每10级解锁一个模块（Lv.80全解锁）：可换经验卡、重铸券、核心、终极升级碎片（5片合成终极改装包）、扣罚降低10%/20%/50%（上限-50%），Lv.100可里程币+代币换终极升级。赛季结束冷却3天后开启新季 · 🔓 任务锁定机制改版：可随时解锁再编辑（仅未完成可改，已完成只读；删除仍扣标签上限10%EP，解锁后新增任务未完成罚率+50%；幸运任务按条件重新校验，满足则随机补发）',c:'#ff2d95'},{t:'📢 v1.4.8 大更新',d:'🧾 结算页改版：顶部展示真实EP/增益EP/扣减EP/最终EP四项汇总，任务EP明细改为点击展开折叠式，未完成任务额外标注"若完成可减少的损失" · 🔧 逆境追赶潜能改为只在第1栏出现、选择后当天免罚修改3次（任务修改机制见 v1.4.9 公告：解锁再编辑） · ⚡ 33号天赋"绝对免疫"重做"属性强化"：经典模式被动效果+20%，乱斗模式乱斗效果翻倍但结算EP-15% · 🔁 循环温故天赋新增适用「旧list重刷」「旧list新轮次」标签 · 🛒 商店：积分兑代币不限购，天赋额外抽取降至100代币 · ⚔️ 竞技时长90→120分钟，窗口内任务EP达标签上限90%时资格分+50 · 🏆 各杯赛卡片新增本期剩余时间显示',c:'#007aff'},{t:'📢 v1.4.7.4 修复',d:'🛠 修复冲刺锦标赛及杯赛只统计精确标签的问题：父级标签悬赏现在会计入其全部子标签任务（如 本科·专业课 悬赏可计入 课堂/作业/备考 任务），往届冲刺奖杯自动按新口径重算 · 🛠 修复冲刺锦标赛今日目标当天不点亮的问题（现在实时读取今日任务）· 🛠 修复精研核心杯往届补领按钮点击无反应，失败时会提示具体原因',c:'#ff9500'},{t:'📢 v1.4.7.3 修复',d:'🛠 修复杯赛与竞技结算奖励未正确入账的问题：历史漏发的杯赛奖励自动补发，竞技结算奖励补挂到原结算邮件（邮箱点领取即可）· 📮 竞技周结算奖励自动入账，结算邮件列明奖励明细 · 🛠 修复精研核心杯周末结束后补领入口被隐藏 · 🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断 · 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
+  const list=[{t:'📢 v1.5.2 精英降临',d:'🎖️ 精英任务：考研英二/过级单词、专业课作业/备考、刷题改错标签开放性能调整（锁定前四元素±10%、SP±5%、此消彼长、性能分参考、100积分常驻面板、耐久系统、ELITE标识）；🎴 专属功能×6 代币商品（600-1200，第5槽Lv.28随首槽、每日可切换一次）：16追踪标记/17越战越勇/18残骸强化/19漫画爆炸/20封印无双/21善恶之交；功能属性四项调整（灵魂武者+进化5%、韧性20%、母体威慑15%/10%、以一当十20%）；质量权重60/25/8/7。',c:'#d9832a'},{t:'📢 v1.5.1.1 修复更新',d:'修复：背单词打卡连击不再因历史记录虚挂（断一天即清零）；无限火力（3号乱斗属性）正式接线；结算明细重排（任务侧增益归入各任务、幸运/置顶同列，全局增益汇总底部）；邮件改为标题列表、点开查看。',c:'#007aff'},{t:'📢 v1.5.1 天赋降温',d:'❄️ 33个天赋数值全面下调（稳步积累25%→4%、时政闭环70%→7%、语言攻坚80%→8%等，详见天赋页）；🔥 不灭阳炎重做：首扣15%→7%、每分钟追加1%→0.7%、持续100→143分钟、锁定期15→10分钟、首任务加成70%→20%，且燃烧期间可随时手动结束（扣除不低于7%）；🔮 心态壁垒借用的属性效果降为30%（乱斗模式持续40分钟/灵魂武者20分钟）；⚡ 属性强化：乱斗放大100%→10%、新增进化效果放大5%、结算扣除15%→6%。',c:'#007aff'},{t:'📢 v1.5.0.2 进化数值平衡',d:'📉 升级门槛全面上调：<300=1级 → 每+200升1级至1500=8级 → 1500–1899平台期 → 1900=9级大门槛 → 2300=10级满级（原2064EP一天满级的情况不再出现）；⚔️ 攻击10级复利利率 0.7%→0.3%/秒。另修复：体验卡期间装备的功能属性在正赛解锁后不再越槽生效（按实际解锁槽位数截断）；体验卡到期且未到Lv.28时属性清零从0开始。🏷️ 标签最大EP下调11处（明细见邮件）。📦 材料修复与降门槛：入全局池（仓库可见）、训练印记+2/任务、冲刺奖章改为「技能生效中或当天前2个完成」、巅峰凭证 90%→60%（明细见邮件）。',c:'#e8a33d'},{t:'📢 v1.5.0.1 进化9/10级重做',d:'⚔️ 攻击：9级「💰复利」——每秒额外获得当前EP的0.01%（10级升至0.03%/秒，9级阶段利息在升10级时定格（1.5.0.2起）），计息基数为经天赋/功能/全部等级增益后的获得EP；🛡️ 防御：9级「⚖️缓刑」——豁免最多2个未完成任务并自动顺延明日，再未完成罚率×1.5几何滚动（上限100%），10级豁免全部；幸运任务回归通用逻辑（≥5任务1个），母体威慑全玩法统一早/中/晚时段。',c:'#e8a33d'},{t:'📢 v1.5.0 终极进化',d:'🧬 全新玩法「进化」：与乱斗同级解锁（Lv.33），更新发放体验卡×1。选定后选择攻击/防御路径，完成任务按原始填入EP从Lv.1成长至Lv.10（1500=8级→1900=9级大门槛→2300满级）。每级小增益+3/6/9级随机大幅增益，最大EP/扣减变化实时显示在任务卡上。',c:'#e8a33d'},{t:'📢 v1.4.9.1 赛季UI与修复',d:'①顶栏与首页新增赛季可视化（序号/主题/持续月份，艺术字呈现），首页点击可查看赛季简介（主题配色+内涵意象，本赛季「并肩有光」：你不是一个人，并肩之处便有光）与通行证奖励一览；②通行证等级奖励改为段位式分层展示（每10级一档，单击展开查看每级内容）；③公告栏限高滚动；④修复周期任务副本逾期后仍留在每日登记、以及未完成副本到点不跳过的问题。',c:'#ff2d95'},{t:'📢 v1.4.9 通行证上线',d:'🎫 全新模块「通行证」：两月一季，共100级（每级4000 LP）。S1赛季「并肩有光」现已开启（2026.09.30–11.30，秋光同路主题全站换肤，面板为浅象牙色保证阅读体验）：日常结算最终EP×3计入LP（特殊玩法加成EP同样计入），每周6个词条任务各+5000 LP，每日签到+50里程币。升级自动发放积分/里程币/代币/票券/材料/💠核心/终极升级碎片，20/40/60/80/100级送赛季主题称号（并入成就称号）。里程商店每10级解锁一个模块（Lv.80全解锁）：可换经验卡、重铸券、核心、终极升级碎片（5片合成终极改装包）、扣罚降低10%/20%/50%（上限-50%），Lv.100可里程币+代币换终极升级。赛季结束冷却3天后开启新季 · 🔓 任务锁定机制改版：可随时解锁再编辑（仅未完成可改，已完成只读；删除仍扣标签上限10%EP，解锁后新增任务未完成罚率+50%；幸运任务按条件重新校验，满足则随机补发）',c:'#ff2d95'},{t:'📢 v1.4.8 大更新',d:'🧾 结算页改版：顶部展示真实EP/增益EP/扣减EP/最终EP四项汇总，任务EP明细改为点击展开折叠式，未完成任务额外标注"若完成可减少的损失" · 🔧 逆境追赶潜能改为只在第1栏出现、选择后当天免罚修改3次（任务修改机制见 v1.4.9 公告：解锁再编辑） · ⚡ 33号天赋"绝对免疫"重做"属性强化"：经典模式被动效果+20%，乱斗模式乱斗效果翻倍但结算EP-15% · 🔁 循环温故天赋新增适用「旧list重刷」「旧list新轮次」标签 · 🛒 商店：积分兑代币不限购，天赋额外抽取降至100代币 · ⚔️ 竞技时长90→120分钟，窗口内任务EP达标签上限90%时资格分+50 · 🏆 各杯赛卡片新增本期剩余时间显示',c:'#007aff'},{t:'📢 v1.4.7.4 修复',d:'🛠 修复冲刺锦标赛及杯赛只统计精确标签的问题：父级标签悬赏现在会计入其全部子标签任务（如 本科·专业课 悬赏可计入 课堂/作业/备考 任务），往届冲刺奖杯自动按新口径重算 · 🛠 修复冲刺锦标赛今日目标当天不点亮的问题（现在实时读取今日任务）· 🛠 修复精研核心杯往届补领按钮点击无反应，失败时会提示具体原因',c:'#ff9500'},{t:'📢 v1.4.7.3 修复',d:'🛠 修复杯赛与竞技结算奖励未正确入账的问题：历史漏发的杯赛奖励自动补发，竞技结算奖励补挂到原结算邮件（邮箱点领取即可）· 📮 竞技周结算奖励自动入账，结算邮件列明奖励明细 · 🛠 修复精研核心杯周末结束后补领入口被隐藏 · 🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断 · 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
   const dc=getDayCupInfo();const dtag=getTag(dc.tagId);
   if(dc.active)list.push({t:'🏆 日杯今日开启',d:'指定「'+(dtag?dtag.path.join(' · '):'')+'」，1 能量报名，冠军 🪙15。',c:'#ff9500'});
   else list.push({t:'🏆 日杯预告',d:'下一次日杯：'+dc.daysToActive+' 天后（'+dc.dateStr+'），前一天邮件提醒。',c:'#ff9500'});
@@ -8024,7 +8415,7 @@ document.addEventListener('visibilitychange',function(){
 'use strict';
 
 /* ---------- ① 任务状态评价：正确率50% / 专注度30% / 用时5% / 基本状态15%，默认60必填（可改） ---------- */
-var QUALITY_DIMS=[['acc','正确率',0.5],['focus','专注度',0.3],['time','用时',0.05],['state','基本状态',0.15]];
+var QUALITY_DIMS=[['acc','正确率',0.6],['focus','专注度',0.25],['time','用时',0.08],['state','基本状态',0.07]];
 var QUALITY_DEFAULT=60;
 
 function qDimVal(t,k){
@@ -8058,7 +8449,7 @@ window.updateQDim=function(src,idx,dim,val){
 
 function qEvalPanel(src,idx,t){
   let h='<div style="margin-top:6px;border:1px dashed #d1d1d6;border-radius:8px;padding:8px;background:#fafbfd;">';
-  h+='<div style="font-size:11px;color:#8e8e93;margin-bottom:5px;">📋 任务状态评价 <span style="color:#c7c7cc;">（0-100 · 默认'+QUALITY_DEFAULT+' · 权重：正确率50% 专注度30% 用时5% 基本状态15%）</span></div>';
+  h+='<div style="font-size:11px;color:#8e8e93;margin-bottom:5px;">📋 任务状态评价 <span style="color:#c7c7cc;">（0-100 · 默认'+QUALITY_DEFAULT+' · 权重：正确率60% 专注度25% 用时8% 基本状态7%）</span></div>';
   h+='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">';
   QUALITY_DIMS.forEach(function(d){
     h+='<label style="display:flex;align-items:center;gap:3px;font-size:11px;color:#6e6e73;white-space:nowrap;">'+d[1]+'<input type="number" min="0" max="100" value="'+qDimVal(t,d[0])+'" oninput="updateQDim(\''+src+'\','+idx+',\''+d[0]+'\',this.value)" style="width:50px;padding:4px 5px;border:1px solid #d1d1d6;border-radius:6px;font-size:12px;"></label>';
