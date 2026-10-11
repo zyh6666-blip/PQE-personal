@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 20261010-2032 -->
+<!-- build 20261010-2036 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -150,7 +150,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.5.2</span>
+      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.5.2 <span style="font-size:10px;color:#c7c7cc;font-weight:400;">b2032</span></span>
             <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -1682,7 +1682,7 @@ function injectEliteScores(){
    best._eliteScoreDone=1;
    const d=document.createElement('div');
    d.style.cssText='font-size:10px;color:#8e8e93;margin-top:2px;font-weight:400;';
-   d.textContent='性能分 '+sNow+(canSP?(' · SP后预估 '+sSP):'');
+   const tnEl=eliteTune(tg.id);const elMark=(tnEl&&Object.keys(tnEl).length)?' 🎖ELITE':'';d.textContent='性能分 '+sNow+elMark+(canSP?(' · SP后预估 '+sSP):'');
    best.appendChild(d);
   }
  });
@@ -2456,7 +2456,7 @@ function renderTasks(){
         const tagBadge=tag?(_spOn?'<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#000;color:#fff;box-shadow:0 0 0 1px #ff950066,inset 0 0 8px rgba(255,149,0,.25);font-weight:600;white-space:nowrap;">★ '+tag.path.join(' · ')+' · SP · '+maxEpText+'</span>':'<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:'+tc+'15;color:'+tc+';white-space:nowrap;">'+tag.path.join(' · ')+' · '+maxEpText+'</span>'):'<span style="font-size:10px;color:#c7c7cc;">未分类</span>';
       const fusionAttr=(state.fusionAssign&&t.tagId&&state.fusionAssign[t.tagId])?BRAWLS.find(x=>x.id===state.fusionAssign[t.tagId]):null;
        const infectInfo=t.infected?(function(){const sl=getInfectionSlotInfo(t.infectSlot);return '<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#ff3b3018;color:#ff3b30;white-space:nowrap;" title="感染任务必须在该时段完成">☣️ 感染 · '+sl.name+' '+sl.range+'</span>';})():'';
-      const tagBadgeFull=tagBadge+(_bt&&isEliteTagId(t.tagId)?' <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#1d1d1f;color:#fff;font-weight:700;letter-spacing:1px;">🎖ELITE</span>':'')+infectInfo+(getCheckinStreakBadge(t)?' '+getCheckinStreakBadge(t):'')+(fusionAttr?' <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#af52de18;color:#af52de;white-space:nowrap;" title="'+fusionAttr.effect+'">🎯'+fusionAttr.name+'</span>':'');
+      const tagBadgeFull=tagBadge+(_bt&&isEliteTagId(t.tagId)?' <b style="color:#b5772a;font-size:10px;">🎖ELITE</b>':'')+infectInfo+(getCheckinStreakBadge(t)?' '+getCheckinStreakBadge(t):'')+(fusionAttr?' <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#af52de18;color:#af52de;white-space:nowrap;" title="'+fusionAttr.effect+'">🎯'+fusionAttr.name+'</span>':'');
       if(t.fromLong||t.fromCycle){
       const cc=t.fromLong?'#007aff':'#00b578';
       const cb=t.fromLong?'#f0f7ff':'#f0fbf7';
@@ -6295,14 +6295,45 @@ function getTagUp(tagId){
   return syncUpStats(up);
 }
 function baseRatioOf(t,tag){if(!tag)return 0.1;const lv=upStatLevels(getTagUp(tag.id));if(tag&&getTagUp(tag.id).sp)return 0.1;return Math.min(0.2,0.1+0.01*lv.nit+0.005*lv.spd);}
-getTag=function(id){
+getTag=function(id,_t){
   const t=_origGetTag(id);if(!t)return t;
-  const up=(state.tagUp||{})[t.id];if(!up)return t;
-  const lv=upStatLevels(up);
-  const maxEp=Math.round(t.maxEp*(1+0.03*lv.spd+0.01*lv.acc+(up.sp?0.25:0)));
-  let pen=typeof t.pen==='number'?t.pen:Math.round(getPenaltyRate(t.maxEp)*100);
-  pen=Math.round(pen*(1-0.02*lv.ctl-0.005*lv.nit)*(up.sp?0.5:1)*100)/100;
-  if(maxEp===t.maxEp&&pen===t.pen)return t;
+  const up=(state.tagUp||{})[t.id];
+  const basePen=typeof t.pen==='number'?t.pen:Math.round(getPenaltyRate(t.maxEp)*100);
+  let maxEp=t.maxEp,pen=basePen;
+  if(up){const lv=upStatLevels(up);
+    maxEp=Math.round(t.maxEp*(1+0.03*lv.spd+0.01*lv.acc+(up.sp?0.25:0)));
+    pen=Math.round(pen*(1-0.02*lv.ctl-0.005*lv.nit)*(up.sp?0.5:1)*100)/100;}
+  const _et=(_t&&state.todayMode)?eliteTune(t.id):null;
+  if(_et){const _es=eliteStrength(t.id);
+    maxEp=Math.round(maxEp*(1+(_et.maxEpR-1)*_es));
+    pen=Math.round(pen*(1+(_et.penR-1)*_es)*100)/100;}
+  if(_t&&state.todayMode==='evolve'){
+    let mb=(_t.evoMaxBoost||0)+(_t.chainMaxBoost||0);
+    let pc=(_t.evoPenCut||0);
+    const ev=getEvolveMods();
+    if(!_t.completed){if(ev.boilActive)mb+=1.0;if(ev.claw)mb+=0.2;}
+    if(ev.lone&&state.todayTasks.length<=3)mb+=0.6;
+    if(ev.boilActive&&!_t.completed)pc=Math.min(0.9,pc+0.8);
+    const tm=_t.evoTradeMax||0;
+    maxEp=Math.round(maxEp*(1+mb)*(1-tm));
+    pen=Math.round(pen*(1-Math.min(0.9,pc+(_t.evoTradePen||0)))*100)/100;
+    if(ev.fuse&&!_t.completed&&(state.todayTasks||[]).length){
+      /* v1.5.0：融合——未完成任务标签显示平均扣减比例 */
+      let _sum=0,_cnt=0;
+      state.todayTasks.forEach(function(x){
+        const bx=_origGetTag(x.tagId);if(!bx)return;
+        let r=getTagRate(bx);
+        r*=(1-Math.min(0.9,(ev.taskpen||0)+(x.evoPenCut||0)));
+        if(x.evoTradePen)r*=(1-Math.min(0.9,x.evoTradePen));
+        if(ev.stealthActive)r*=0.4;
+        if(ev.boilActive)r*=0.2;
+        _sum+=r;_cnt++;
+      });
+      if(_cnt>0)pen=Math.round(_sum/_cnt*10000)/100;
+    }
+  }
+  if(!up&&!_t)return t;
+  if(maxEp===t.maxEp&&pen===basePen)return t;
   const c=Object.assign({},t);c.maxEp=maxEp;c.pen=pen;return c;
 };
 function computeTagChains(done){
