@@ -3143,7 +3143,7 @@ function updatePointsPreview(){
   if(mods.hasBlood&&firstDone){bloodB=ownOf(firstDone);}
   if(mods.hasSurvivor&&state.todayTasks.length&&state.todayTasks.every(function(x){return x.completed&&x.baseEp!=='';})){
     const _last=state.todayTasks.slice().sort(function(a,b){return (b.doneAt||0)-(a.doneAt||0);})[0];
-    if(_last){survB=ownOf(_last);if(survB>0)_details.push({label:'乱斗·最后的幸存者（全部完成·最后完成+100%）',amount:survB});}
+    if(_last)survB=ownOf(_last);
   }
     let gunB=0,reB=0,relB=0,relChain=0,prevT=null;
   if(mods.hasGun){
@@ -3810,7 +3810,7 @@ function submitDaily(){
           if(t.chainBonus){const v=Math.round((finalOwn+delta)*t.chainBonus);delta+=v;dl.push({label:'进化·致命一击（连锁）',amount:v});}
         }
         if(t.clawAdjBonus){delta+=t.clawAdjBonus;dl.push({label:'进化·钢铁利爪（相邻+10%）',amount:t.clawAdjBonus});}
-        if(tm[35]&&state.talentShield&&(t.doneAt||0)<state.talentShield.until){const _tg=getTag(t.tagId,t);if(_tg){const _gap=_tg.maxEp-finalOwn-delta;if(_gap>0){const _fill=Math.round(_gap*0.97);delta+=_fill;dl.push({label:'天赋·终结恩赐（护盾补足）',amount:_fill});}}}
+        if(calcTalentMods()[35]&&state.talentShield&&(t.doneAt||0)<state.talentShield.until){const _tg=getTag(t.tagId,t);if(_tg){const _gap=_tg.maxEp-finalOwn-delta;if(_gap>0){const _fill=Math.round(_gap*0.97);delta+=_fill;dl.push({label:'天赋·终结恩赐（护盾补足）',amount:_fill});}}}
         if(evo.chances.length){const _base=finalOwn+delta;evo.chances.forEach(function(cb){if(!cb.pen&&Math.random()<cb.c){const v=Math.round(_base*cb.v);delta+=v;dl.push({label:'进化·概率增益',amount:v});}});}
         if(evo.fatal&&Math.random()<0.4){const v=Math.round((finalOwn+delta)*1);delta+=v;dl.push({label:'进化·致命攻击',amount:v});}
         if(evo.bounty&&e2.bountyIdx>=0&&state.todayTasks[e2.bountyIdx]===t){const tg2=getTag(t.tagId);const v=Math.round((tg2?tg2.maxEp:0)*0.2);delta+=v;dl.push({label:'进化·悬赏通缉',amount:v});}
@@ -3967,13 +3967,10 @@ function submitDaily(){
   if(mods.hasBlood&&firstDone){
     bloodBonus=ownOf(firstDone);addSTDetail(firstDone,'乱斗·第一滴血',bloodBonus);
   }
-  // 20号最后的幸存者：列表中最后一个未完成任务+100%（已填EP部分）
-  if(mods.hasSurvivor){
-    for(let i=state.todayTasks.length-1;i>=0;i--){
-      const t=state.todayTasks[i];
-      const done=(t.completed&&t.baseEp!=='');
-      if(!done){survivorBonus=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);break;}
-    }
+  // 20号最后的幸存者：全部完成时，最后完成的任务+100%
+  if(mods.hasSurvivor&&state.todayTasks.length&&state.todayTasks.every(function(x){return x.completed&&x.baseEp!=='';})){
+    const _last=state.todayTasks.slice().sort(function(a,b){return (b.doneAt||0)-(a.doneAt||0);})[0];
+    if(_last)survivorBonus=ownOf(_last);
   }
   // 23号枪械协同：同标签≥2个，组内任务 +20%×(数量-1)%，上限100%
   let gunBonus=0;
