@@ -4953,7 +4953,7 @@ function updateBrawlConfirmBtn(){
 function drawBrawl(n){
   if(!checkUnlock('brawl')){alert('当前无开放权限！需达到 '+UNLOCK.brawl.name+' 方可使用乱斗模式');return;}
   if(brawlLockedGate())return;
-  if(state.brawlDrawDate===new Date().toDateString()){alert('⚔️ 今日乱斗属性已锁定，无法再次抽取');return;}
+  
   const maxAllowed = state.passive.some(p => p && p.id === 5) ? 2 : 1;
   if(state.brawl.hist.length >= maxAllowed){state.brawlDrawDate=new Date().toDateString();saveState();alert('今日乱斗属性已达上限（'+maxAllowed+'个）');return;}
   if(state.brawl.hist.length + n > maxAllowed){alert('最多还可抽取 '+(maxAllowed - state.brawl.hist.length)+' 个');return;}
@@ -4972,7 +4972,7 @@ function drawBrawl(n){
 function useBrawlVip(){
   if(!checkUnlock('brawl')){alert('当前无开放权限！需达到 '+UNLOCK.brawl.name);return;}
   if(brawlLockedGate())return;
-  if(state.brawlDrawDate===new Date().toDateString()){alert('⚔️ 今日乱斗属性已锁定，无法修改');return;}
+  
   if((state.inventory.brawl_vip||0)<1){alert('👑 乱斗特权券不足');return;}
   if(!state.brawl.hist.length){alert('请先抽取乱斗属性');return;}
   const curIdx=selectedBrawlIdx;const curItem=state.brawl.hist[curIdx];
@@ -5014,11 +5014,11 @@ function updateBrawlUI(){
   updateBrawlConfirmBtn();
 }
 function resetBrawl(){if(!checkUnlock('brawl')){alert('当前无开放权限！需达到 '+UNLOCK.brawl.name);return;}if(brawlLockedGate())return;
-  if(state.brawlDrawDate===new Date().toDateString()){alert('⚔️ 今日乱斗属性已锁定，无法修改');return;}state.brawl={drawn:[],hist:[]};state.fusionAssign={};state.fusionLockedDate='';state.brawlActiveDate=new Date().toDateString();selectedBrawlIdx=0;saveState();updateBrawlUI();maybeOpenFusion();renderDailyAttrs();}
+  state.brawl={drawn:[],hist:[]};state.fusionAssign={};state.fusionLockedDate='';state.brawlActiveDate=new Date().toDateString();selectedBrawlIdx=0;saveState();updateBrawlUI();maybeOpenFusion();renderDailyAttrs();}
 function useBrawlChange(){
   if(!checkUnlock('brawl')){alert('当前无开放权限！需达到 '+UNLOCK.brawl.name);return;}
   if(brawlLockedGate())return;
-  if(state.brawlDrawDate===new Date().toDateString()){alert('⚔️ 今日乱斗属性已锁定，无法修改');return;}
+  
   if((state.inventory.change_ticket||0)<1){alert('属性变更券不足');return;}
   if(state.brawl.hist.length===0){alert('请先抽取乱斗属性');return;}
   const curIdx=selectedBrawlIdx;
@@ -5047,7 +5047,7 @@ function useBrawlChange(){
 function useBrawlDraw(){
   if(!checkUnlock('brawl')){alert('当前无开放权限！需达到 '+UNLOCK.brawl.name);return;}
   if(brawlLockedGate())return;
-  if(state.brawlDrawDate===new Date().toDateString()){alert('⚔️ 今日乱斗属性已锁定，无法修改');return;}
+  
   const needed=Math.pow(2,state.brawlExtraDrawsToday);
   if((state.inventory.draw_ticket||0)<needed){alert('需'+needed+'张抽取券，当前'+(state.inventory.draw_ticket||0));return;}
   if(state.brawl.hist.length===0){alert('请先抽取乱斗属性');return;}
