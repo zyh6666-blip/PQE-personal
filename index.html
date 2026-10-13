@@ -3121,7 +3121,7 @@ function updatePointsPreview(){
       if(mods.hasSteelClaw)rate*=(1+0.2*brwAmp());
       if(mods.hasMutate)rate*=(1-0.2*brwAmp());
       if(mods.hasHarden)rate*=(1-0.45*brwAmp());
-      if(mods.hasOvercap){const _ocT=getTag(t.tagId,t);rate=Math.min(rate,((_ocT?_ocT.maxEp:0)*0.30)/(gross||1));}
+      
     if(hasPotential(9)&&t.wanted)rate*=0.85;
       if(evo.on){
           const _r0=rate;
@@ -3203,6 +3203,7 @@ function updatePointsPreview(){
   if(fp.minEp)finalEp=Math.max(finalEp,fp.minEp);
   if(attrBoostBrawl())finalEp=Math.max(0,Math.round(finalEp*0.94));
   finalEp=Math.max(0,finalEp-deletedTaskDeduction());
+  if(mods.hasOvercap&&doneMaxSum>0){const _floor=Math.round(doneMaxSum*0.7);if(finalEp<_floor)finalEp=_floor;}
   const markedWar=done.some(t=>t.warMarked);const remainingLoss=Math.max(0,gross-eff);
   if(hasPassive(2)&&markedWar&&remainingLoss>0)finalEp+=Math.round(remainingLoss*0.4*pasAmp());
   const luckyInfo=calcLuckyBonus(pen,mult);
@@ -3879,7 +3880,7 @@ function submitDaily(){
       if(mods.hasSteelClaw)rate*=(1+0.2*brwAmp());
       if(mods.hasMutate)rate*=(1-0.2*brwAmp());
       if(mods.hasHarden)rate*=(1-0.45*brwAmp());
-      if(mods.hasOvercap){const _ocT=getTag(t.tagId,t);rate=Math.min(rate,((_ocT?_ocT.maxEp:0)*0.30)/(grossRawEp||1));}
+      
     if(hasPotential(9)&&t.wanted)rate*=0.85;
       let u_survive=false;
       if(evo.on){
@@ -3979,6 +3980,9 @@ function submitDaily(){
   if(mods.hasBlood&&firstDone){
     bloodBonus=ownOf(firstDone);addSTDetail(firstDone,'乱斗·第一滴血',bloodBonus);
   }
+  // 15号超额：已完成任务maxEp总和（保底用）
+  let doneMaxSum=0;
+  if(mods.hasOvercap)doneList.forEach(function(t){const _tg=getTag(t.tagId,t);if(_tg)doneMaxSum+=_tg.maxEp;});
   // 20号最后的幸存者：全部完成时，最后完成的任务+100%
   if(mods.hasSurvivor&&state.todayTasks.length&&state.todayTasks.every(function(x){return x.completed&&x.baseEp!=='';})){
     const _last=state.todayTasks.slice().sort(function(a,b){return (b.doneAt||0)-(a.doneAt||0);})[0];
@@ -4095,7 +4099,7 @@ function submitDaily(){
     +(mods.hasMutate&&mutateBonus>0?'<br>🧬 基因突变：+'+mutateBonus+'':'')
     +(mods.hasChain&&chainBonus>0?'<br>⚔️ 致命一击：+'+chainBonus+'（按完成顺序递增）':'')
     +(mods.hasBlood&&bloodBonus>0?'<br>🩸 第一滴血：+'+bloodBonus+'':'')
-    +(mods.hasSurvivor&&survivorBonus>0?'<br>🏁 最后的幸存者：+'+survivorBonus+'':'')
+    +(mods.hasSurvivor&&survivorBonus>0?'<br>🏁 最后的幸存者：+'+survivorBonus+'':'')+(overcapBonus>0?'<br>📊 超额：所得不足70%已补足 +'+overcapBonus+' EP':'')
     +(exemptSum>0?'<br>🛡️ 免惩罚EP：'+exemptSum+'（双重装甲/生命保险）':'')
     +(state._supplyRefund?'<br>🎒 防御补给返还：+'+state._supplyRefund+' EP':'')
     +(mods.hasSteelClaw?'<br>🐾 钢铁利爪：未完成惩罚 +20%':'')
@@ -4188,6 +4192,8 @@ const globalHtml='<div style="background:#f0f7ff;border:1px solid #007aff22;bord
     if(fp.minEp)finalEp=Math.max(finalEp,fp.minEp);
   if(attrBoostBrawl())finalEp=Math.max(0,Math.round(finalEp*0.94));
   finalEp=Math.max(0,finalEp-deletedTaskDeduction());
+    let overcapBonus=0;
+    if(mods.hasOvercap&&doneMaxSum>0){const _floor=Math.round(doneMaxSum*0.7);if(finalEp<_floor){overcapBonus=_floor-finalEp;finalEp=_floor;}}
     if(hasPassive(2)&&markedWar&&remainLoss>0)finalEp+=Math.round(remainLoss*0.4*pasAmp());
     const overdueList=(state.longTasks||[]).filter(t=>!t.completed&&!t.penalized&&getDaysToDeadline(t.deadline)!==null&&getDaysToDeadline(t.deadline)<0);
     let overduePenaltyEp=0;
