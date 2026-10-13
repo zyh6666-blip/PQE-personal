@@ -3203,6 +3203,8 @@ function updatePointsPreview(){
   if(fp.minEp)finalEp=Math.max(finalEp,fp.minEp);
   if(attrBoostBrawl())finalEp=Math.max(0,Math.round(finalEp*0.94));
   finalEp=Math.max(0,finalEp-deletedTaskDeduction());
+  let doneMaxSum=0;
+  if(mods.hasOvercap)done.forEach(function(t){const _tg=getTag(t.tagId,t);if(_tg)doneMaxSum+=_tg.maxEp;});
   if(mods.hasOvercap&&doneMaxSum>0){const _floor=Math.round(doneMaxSum*0.7);if(finalEp<_floor)finalEp=_floor;}
   const markedWar=done.some(t=>t.warMarked);const remainingLoss=Math.max(0,gross-eff);
   if(hasPassive(2)&&markedWar&&remainingLoss>0)finalEp+=Math.round(remainingLoss*0.4*pasAmp());
@@ -3981,7 +3983,7 @@ function submitDaily(){
     bloodBonus=ownOf(firstDone);addSTDetail(firstDone,'乱斗·第一滴血',bloodBonus);
   }
   // 15号超额：已完成任务maxEp总和（保底用）
-  let doneMaxSum=0;
+  let doneMaxSum=0;let overcapBonus=0;
   if(mods.hasOvercap)doneList.forEach(function(t){const _tg=getTag(t.tagId,t);if(_tg)doneMaxSum+=_tg.maxEp;});
   // 20号最后的幸存者：全部完成时，最后完成的任务+100%
   if(mods.hasSurvivor&&state.todayTasks.length&&state.todayTasks.every(function(x){return x.completed&&x.baseEp!=='';})){
@@ -4089,6 +4091,7 @@ function submitDaily(){
  if(fp.minEp)previewFinal=Math.max(previewFinal,fp.minEp);
  if(attrBoostBrawl())previewFinal=Math.max(0,Math.round(previewFinal*0.94));
  previewFinal=Math.max(0,previewFinal-deletedTaskDeduction());
+ if(mods.hasOvercap&&doneMaxSum>0){const _floor=Math.round(doneMaxSum*0.7);if(previewFinal<_floor){overcapBonus=_floor-previewFinal;previewFinal=_floor;}}
  const markedWar=doneList.some(t=>t.warMarked),remainLoss=Math.max(0,grossRawEp-effectiveRawEp);
  if(hasPassive(2)&&markedWar&&remainLoss>0)previewFinal+=Math.round(remainLoss*0.4*pasAmp());
  const preview=calcAutoPoints(previewFinal+luckyPrev.total,state.totalEP,state.totalEP+previewFinal+luckyPrev.total);
@@ -4104,7 +4107,7 @@ function submitDaily(){
     +(state._supplyRefund?'<br>🎒 防御补给返还：+'+state._supplyRefund+' EP':'')
     +(mods.hasSteelClaw?'<br>🐾 钢铁利爪：未完成惩罚 +20%':'')
     +(mods.hasHarden?'<br>🛡️ 硬化：扣减 -45%':'')
-    +(mods.hasOvercap?'<br>📊 超额：单任务扣除≤30%':'')
+    +(mods.hasOvercap?'<br>📊 超额：完成所得不足max总和70%时补足至70%':'')
     +(mods.hasClone?'<br>🧫 复制感染：已完成EP锚定首任务 · 惩罚按首任务标签':'')
     +(mods.hasInsurance?'<br>🎯 保底局：无完成率惩罚 · 保底550':'')
     +(growthBonus>0?'<br>📈 过度增长：+'+Math.round(growthPct*100)+'%（+'+growthBonus+' EP）':'')
@@ -4192,7 +4195,6 @@ const globalHtml='<div style="background:#f0f7ff;border:1px solid #007aff22;bord
     if(fp.minEp)finalEp=Math.max(finalEp,fp.minEp);
   if(attrBoostBrawl())finalEp=Math.max(0,Math.round(finalEp*0.94));
   finalEp=Math.max(0,finalEp-deletedTaskDeduction());
-    let overcapBonus=0;
     if(mods.hasOvercap&&doneMaxSum>0){const _floor=Math.round(doneMaxSum*0.7);if(finalEp<_floor){overcapBonus=_floor-finalEp;finalEp=_floor;}}
     if(hasPassive(2)&&markedWar&&remainLoss>0)finalEp+=Math.round(remainLoss*0.4*pasAmp());
     const overdueList=(state.longTasks||[]).filter(t=>!t.completed&&!t.penalized&&getDaysToDeadline(t.deadline)!==null&&getDaysToDeadline(t.deadline)<0);
