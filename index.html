@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- build 20261010-2036 -->
+<!-- build 20261012-1750 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.5.2</title>
+<title>考研成长系统 v1.5.2.1</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f7;color:#1d1d1f;min-height:100vh;padding-bottom:40px}
@@ -150,7 +150,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.5.2 <span style="font-size:10px;color:#c7c7cc;font-weight:400;">b2032</span></span>
+      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.5.2.1</span>
             <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -367,6 +367,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
         <button class="btn-accent" onclick="useBrawlChange()">🎫 属性变更券 (<span id="b-change-count">0</span>)</button>
         <button class="btn-accent" onclick="useBrawlDraw()">🎟️ 属性抽取券 (<span id="b-draw-count">0</span>)</button>
         <button class="btn-accent" onclick="useBrawlVip()">👑 乱斗特权券 (<span id="b-vip-count">0</span>)</button>
+      <button class="btn-primary" id="brawl-confirm-btn" style="width:100%;margin-top:8px;" onclick="confirmBrawlAttrs()">✅ 确认属性（确认后今日锁定）</button>
       </div>
       <div style="font-size:12px;color:#6e6e73;margin-bottom:8px;" id="b-progress">池内剩余 25 / 25</div>
       <div style="font-size:12px;color:#8e8e93;margin-bottom:4px;">记录</div><div class="chip-wrap" id="b-hist"></div>
@@ -588,7 +589,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
         <input type="date" id="lt-deadline" style="flex:1;min-width:130px;padding:8px 10px;border:1px solid #d1d1d6;border-radius:8px;font-size:12px;">
       </div>
       <button class="btn-primary" style="width:100%;" onclick="addLongTask()">＋ 添加长期任务</button>
-      <div style="font-size:11px;color:#8e8e93;margin-top:6px;line-height:1.5;">截止前1天自动并入「每日登记」当日任务 · 逾期未完成：当日结算EP -50%（每个任务仅扣一次）· 完成后点「✅ 完成」确认锁定，锁定后仅可通过「✏️ 编辑」修改</div>
+      <div style="font-size:11px;color:#8e8e93;margin-top:6px;line-height:1.5;">截止前1天自动并入「每日登记」当日任务 · 逾期未完成：当日结算EP -50%（每个任务仅扣一次）· EP 只能在「每日登记」中填入（自动并入或「📥 转移今日」后完成），长期页不再直接填 EP</div>
     </div>
     <div id="long-task-list"></div>
   </div>
@@ -599,7 +600,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
       <span style="font-size:17px;font-weight:600;">📮 邮箱</span>
-      <div style="display:flex;gap:6px;"><button class="btn-accent" style="padding:5px 12px;font-size:12px;" onclick="claimAllMails()">📥 一键领取</button><button class="btn-secondary" style="padding:5px 12px;font-size:12px;" onclick="deleteReadMails()">🗑 删除已读</button></div>
+      <div style="display:flex;gap:6px;"><button class="btn-accent" style="padding:5px 12px;font-size:12px;" onclick="claimAllMails()">📥 一键领取</button><button class="btn-secondary" style="padding:5px 12px;font-size:12px;" onclick="markAllMailsRead()">✉️ 一键读取</button><button class="btn-secondary" style="padding:5px 12px;font-size:12px;" onclick="deleteReadMails()">🗑 删除已读</button></div>
     </div>
     <div id="mail-page-list"></div>
   </div>
@@ -777,7 +778,7 @@ const TALENTS=[
 {id:24,name:"教综还得刷题",tier:"rare",scope:"教育综合专属",effect:"教综作业/模考类任务完成+8%EP；教综其余类型-4%"},
 {id:25,name:"光看不行",tier:"rare",scope:"语言学专属",effect:"语言学背书/学习类任务-5%EP；语言学作业/模考任务+7%EP"},
 {id:26,name:"全域复盘",tier:"epic",scope:"全局",effect:"完成错题类任务+7%EP，且按完成数量结算时每个额外+10 EP（固定数值）"},
-{id:27,name:"或昼或夜",tier:"epic",scope:"全局",effect:"选择早/晚一个时段：该时段完成+6%；另一时段-10%；下午时段-4%"},
+{id:27,name:"或昼或夜",tier:"epic",scope:"全局",effect:"选择早/晚一个时段：该时段完成+6%；另一时段-5%；下午时段-4%"},
 {id:28,name:"心态壁垒",tier:"epic",scope:"全局",effect:"主动技能：随机激活一个乱斗属性（效果为原属性的30%）持续120分钟（乱斗模式40分钟、灵魂武者20分钟），并赋予一次更改机会，全天一次"},
 {id:29,name:"时政闭环",tier:"epic",scope:"政治专属",effect:"政治类标签任务+7%EP，其余任务-3%"},
 {id:30,name:"教综强攻",tier:"epic",scope:"教育综合专属",effect:"教综类标签任务+7%EP，其余任务-3%"},
@@ -848,7 +849,7 @@ const BRAWLS=[
 {id:16,name:"硬化",effect:"所有EXP扣减效果降低45%"},
 {id:17,name:"基因突变",effect:"所有未完成任务扣除EP惩罚降低20%，且已完成任务可以分别额外获得10%的EP"},
 {id:18,name:"保底局",effect:"无论当日任务完成率高低，不会触发任何「完成率不足」带来的EXP惩罚；同时设置当日最低总EXP保底值550"},
-{id:19,name:"防御补给",effect:"每完成一个任务可以获得层数，该层数可以降低后续任务因质量/未完成而扣除的EP，每层可以减少5%扣除值，最高10层"},
+{id:19,name:"防御补给",effect:"每完成一个任务获得1层（上限10层）；结算时每个已完成任务按「被扣EP（上限−获得）」的5%×层数返还EP"},
 {id:20,name:"最后的幸存者",effect:"当日最后一个未完成任务可以获得额外100%的EP"},
 {id:21,name:"复制感染",effect:"完成第一个任务的EP将决定后续任务的完成EP，即后续任务完成EP恒等于第一个，未完成扣除的惩罚按第一个完成任务的标签计算"},
 {id:22,name:"融合",effect:"抽取到此属性后：对每一门当日要学的科目，从25个属性池中单独抽取1个作为该科目专属属性；专属属性全部数值+25%，仅对对应科目生效；抽取专属时池内排除「融合」避免套娃。融合主属性本身不提供全局EXP加成"},
@@ -864,7 +865,7 @@ const BRAWLS=[
 {id:6,name:"爆炸剑气",effect:"完成一个任务后，其相邻任务完成后可额外获得上一任务完成率等值的EP加成"},
 {id:7,name:"猎手韧性",effect:"获得韧性条，上限200。完成课堂类任务自动充能20；非课堂任务发生EP扣减时，韧性最多承担该次扣减的20%，不足部分正常扣除"},
 {id:8,name:"无敌之盾",effect:"任务完成时，若该任务获得EP低于其标签最大EP，自动消耗护盾并将本任务补足到标签最大EP。每天重置；使用后240分钟重新生成，后续每次重生时间增加30分钟"},
-{id:9,name:"母体威慑",effect:"幸运任务替换为感染任务。感染任务会被指定到早/中/晚任意时段（进化模式下为全天），必须在该时段内完成：按时完成感染任务额外+30%EP（终极英雄生效时为60%），且今日其余任务额外+10%EP、扣减减少15%；未在指定时段完成则感染任务仅保留10%EP，其余任务EP减半"},
+{id:9,name:"母体威慑",effect:"幸运任务替换为感染任务。感染任务会被指定到早/中/晚任意时段，必须在该时段内完成：按时完成感染任务额外+30%EP（终极英雄生效时为60%），且今日其余任务额外+10%EP、扣减减少15%；未在指定时段完成则感染任务仅保留10%EP，其余任务EP减半"},
 {id:10,name:"移速提升",effect:"主动技能：持续30分钟。期间所有其他主动技能的持续时间与冷却时间加快20%"},
 {id:11,name:"修正",effect:"今日第一个完成率低于标签上限50%的任务，自动补足到50%，仅限一次"},
 {id:12,name:"猎手防护",effect:"连续完成3个不同标签任务后，自动获得30点韧性；未装备7号时改为额外获得150EP"},
@@ -1058,13 +1059,8 @@ getTag=function(id,_t){
 };
 function getTagRate(tag){if(!tag)return 0.30;if(typeof tag.pen==='number')return tag.pen/100;return getPenaltyRate(tag.maxEp);}
 function tagChildren(parentPath){const pl=parentPath?parentPath.length:0;return TASK_TAGS.filter(t=>t.path.length===pl+1&&(!parentPath||t.path.slice(0,pl).join('/')===parentPath.join('/')));}
-function getTagColor(maxEp){
-  if(maxEp<=150)return'#8e8e93';
-  if(maxEp<=200)return'#34c759';
-  if(maxEp<=250)return'#007aff';
-  if(maxEp<=350)return'#af52de';
-  return'#ff9500';
-}
+
+
 function getPenaltyRate(maxEp){
   if(maxEp<=150)return 0.05;
   if(maxEp<=200)return 0.10;
@@ -1276,7 +1272,7 @@ if(b.a==='settle')m.settleAdd=Math.max(m.settleAdd,b.v);else if(b.a==='pen')m.pe
 if(m.chances.length>1){const best={};m.chances.forEach(function(cb){const k=cb.pen?'p':'a';if(!best[k]||cb.v>best[k].v)best[k]=cb;});m.chances=Object.keys(best).map(function(k){return best[k];});}
 const sk=evoSkillActive();m.boilActive=sk.boil;m.stealthActive=sk.stealth;
 if(state.todayMode==='evolve'&&state.talent&&state.talentLocked&&state.talentLockDate===new Date().toDateString()&&(state.talent.equipped||[]).indexOf(33)>-1){
- m.boost=1.05;m.task*=1.05;m.taskpen=Math.min(0.9,m.taskpen*1.05);m.refund*=1.05;m.settleAdd=Math.round(m.settleAdd*1.05);m.pen=Math.min(0.9,m.pen*1.05);m.chances.forEach(function(c){c.v=c.v*1.05;});
+ m.task*=1.05;m.taskpen=Math.min(0.9,m.taskpen*1.05);m.refund*=1.05;m.settleAdd=Math.round(m.settleAdd*1.05);m.pen=Math.min(0.9,m.pen*1.05);m.chances.forEach(function(c){c.v=c.v*1.05;});
 }
 return m;}
 function pushEvolveNote(txt){const box=document.getElementById('notif-container');if(!box)return;const c=document.createElement('div');c.className='notif-card';c.style.borderLeftColor='#e8a33d';c.innerHTML='<div class="notif-title">🧬 进化</div><div class="notif-body">'+txt+'</div>';box.appendChild(c);requestAnimationFrame(function(){c.classList.add('show');});setTimeout(function(){c.classList.add('hide');setTimeout(function(){c.remove();},300);},6500);}
@@ -1292,6 +1288,7 @@ function evolveOnTaskComplete(t){
  const e=getEvolve();const raw=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
  if(hasEvolveAttr('ea_clone')&&(e.cloneAnchor||0)<0){e.cloneAnchor=raw;e.cloneAnchorIdx=state.todayTasks.indexOf(t);pushEvolveNote('🧬 复制感染锚定：'+raw+' EP');}
  if(hasEvolveAttr('ea_chain')){state.todayTasks.forEach(function(x){if(x!==t&&!x.completed){x.chainBonus=Math.round(((x.chainBonus||0)+0.06)*100)/100;x.chainMaxBoost=Math.round(((x.chainMaxBoost||0)+0.08)*100)/100;}});}
+ if(hasEvolveAttr('ea_claw')){const _ci=state.todayTasks.indexOf(t);[_ci-1,_ci+1].forEach(function(ni){const nb=state.todayTasks[ni];if(nb&&!nb.completed){nb.clawAdjBonus=(nb.clawAdjBonus||0)+Math.round(raw*0.1);}});}
  const oldLv=e.lv||1;
  const lv=evolveLvFromEp(Math.round(evolveRawEp()*(hasPassive(5)?1.05:1)));
  if(lv>oldLv){for(let l=oldLv+1;l<=lv;l++){e.lv=l;onEvolveLevelUp(l);}}
@@ -1784,6 +1781,7 @@ function ensureTalentNerfMail(){state.mailbox=Array.isArray(state.mailbox)?state
 function ensureMatMail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['mat_adjust'])return;state.mailGranted['mat_adjust']=true;if(!state.mailbox.some(function(m){return m.id==='mat_adjust';})){state.mailbox.push({id:'mat_adjust',title:'标签材料获取调整明细（前→后）',body:'<b>掉落修复</b>：材料统一入全局池（此前误写入旧表导致看似"掉了拿不到"，仓库现在可实时查看）。<br><br><b>获取门槛调整（前→后）</b>：<br>· 训练印记：每完成1个任务 +1 → <b>+2</b><br>· 冲刺奖章：仅增益窗口内完成 → <b>主动技能生效中 或 当天前2个完成的任务</b><br>· 全勤徽章：全勤日每个完成任务 ×1（不变）<br>· 巅峰凭证：EP达上限90% → <b>达上限60%</b><br><br>四种材料用于升级页改装 Lv6-10。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 
 function ensureV152Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v152_notice'])return;state.mailGranted['v152_notice']=true;if(!state.mailbox.some(function(m){return m.id==='v152_notice';})){state.mailbox.push({id:'v152_notice',title:'v1.5.2「精英降临」完整更新公告',body:'各位考生：<br><br>本次更新带来了考研EP系统有史以来最大的玩法扩展——精英任务与专属功能两大系统，同时对既有内容做了大量平衡与修复。以下为详细说明。<br><br><b>一、精英任务（ELITE）</b><br>为最常见的五类标签（考研英二单词、过级考试单词、专业课作业、专业课备考、刷题/改错）开放了"每日性能调整"特权。每个精英子标签相互独立：在升级页点击「🎖️ 精英调整」进入清单，每个标签单独订阅 100 积分/3 天（到期自动关闭、调整值保留、耐久修复照常，一经付款不退款）。解锁后进入该标签专属的"精英设计"界面：最大EP、完成占比、连击增益、扣除比例四条属性条，各含 ◀ ▶ 箭头，每档 2%（SP 标签 1%），在 ±10%（SP ±5%）范围内调整。<br><br>四要素<b>此消彼长</b>：拉高任一项会自动按关联矩阵削减其他项（如最大EP升档会同时削减完成占比与连击增益），强度池 ±6 兜底，性能分仅作结构参考——你需要根据今天的任务结构，决定把"性能预算"花在哪一项上。每次"调整且当天完成该标签任务"会消耗 3% 耐久，耐久归零后调整效果打七折；耐久每小时自动回复 0.5%，也可花代币立即回满（上限 300）。每日登记中精英标签带深色 ELITE 反色徽标，升级页每个标签都标注了当前性能分与 SP 前后预估分。<br><br><b>二、专属功能（第5槽）</b><br>功能页新增专属功能槽（Lv.28 随首槽开放，首槽左侧小正方形，每日可切换一次，全系统唯一），六件专属功能以代币商品形式发售：16 追踪标记（900币/Lv.32，按标签挂伤害加深/降低标记的跨天系统）、17 越战越勇（800币，每100EP后续+1%上限10%、每分钟衰减0.1点）、18 残骸强化（600币，任务数定基础增幅+扣减喂养）、19 漫画爆炸（1000币/Lv.40，充能五档、完成时释放）、20 封印无双（1200币/Lv.45，88%补至100%）、21 善恶之交（700币，天使/恶魔双态）。<br><br><b>三、平衡与修复</b><br>33个天赋数值全面下调（详见另一封明细邮件）；功能属性四项调整（灵魂武者新增进化增速+5%、猎手韧性承担降至20%、母体威慑下调至15%/10%、以一当十降至20%）；质量评价权重改为正确率60/专注25/用时8/状态7；材料掉落全面修复（入全局池、训练印记×2、冲刺奖章改为技能生效中或当天前2个完成、巅峰凭证门槛降至60%）；标签数值颜色恢复默认（仅进化模式改动时高亮）；修复了无限火力从未生效的接线遗漏、置顶强化下置顶任务可随意修改的漏洞、打卡连击虚挂不清零等问题；结算弹窗重新排版（任务侧增益归入各任务、全局增益汇总底部、幸运/置顶同列）；邮件改为标题列表点开的窗口式阅读。<br><br>祝各位考生都能在 S1「并肩有光」赛季里找到最适合自己的打法。你不是一个人，并肩之处，便有光。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
+function ensureV1521Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v1521_detail'])return;state.mailGranted['v1521_detail']=true;if(!state.mailbox.some(function(m){return m.id==='v1521_detail';})){state.mailbox.push({id:'v1521_detail',title:'v1.5.2.1 更新细节（修复与审计）',body:'<b>本次修复</b>：<br>① 长期任务：EP 入口从长期页移除，只能在每日登记填入（自动并入或转移今日）；副本完成结算后自动回写长期任务（已完成+入账EP），彻底解决"当天完成后长期页无变化、次日被误扣50%"的问题。<br>② 或昼或夜：未选中时段 -10% 修正为 -5%，与1.5.1表一致。<br>③ 结算账单文案：稳步积累 +25%→+4%、碎片吸收 +30%→+12%（数值本已对，纯显示）。<br>④ 邮件新增"✉️ 一键读取"：全部标记已读，无需逐个打开。<br><br><b>进行中的玩法加成审计</b>（后续版本修复）：乱斗21复制感染EP替换端移回乱斗通道；7双重装甲/9生命保险按文案重做；8摆脱危机/12异界猎手改惰性判定；35终结恩赐护盾扩围到完成时扣减；2错题复盘/26全域复盘口径扩入刷题改错；19防御补给改为任务侧返还款；预览补齐11/14；周期副本补幸运标记；任务解锁每日限1次；全文件重复函数定义清查。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 function ensureV150Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v150_update'])return;state.mailGranted['v150_update']=true;if(!state.mailbox.some(function(m){return m.id==='v150_update';})){state.mailbox.push({id:'v150_update',title:'v1.5.0「终极进化」更新奖励',body:'全新玩法「进化」上线：选定进化玩法后选择攻击/防御路径，完成任务按原始填入EP从Lv.1成长至Lv.10（满级成为终极英雄，三选一终极强化）。随邮件发放进化模式体验卡×1。',items:{evolve_trial:1},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 /* ================= 进化模式 END ================= */
 
@@ -1812,10 +1810,11 @@ function dailyResetCheck(){
     changed=true;
   }
   if(state.talentLockDate!==today){state.talentLocked=false;state.talentLockDate=today;changed=true;}
-  if(state.brawlActiveDate!==today){state.brawl={drawn:[],hist:[]};state.fusionAssign={};state.fusionLockedDate='';state.brawlDrawDate='';state.brawlActiveDate=today;selectedBrawlIdx=0;if(state.brawlSkills)state.brawlSkills.exemptTagId=null;changed=true;}
+  if(state.brawlActiveDate!==today){state.brawl={drawn:[],hist:[]};state.fusionAssign={};state.fusionLockedDate='';state.brawlDrawDate='';state.brawlActiveDate=today;selectedBrawlIdx=0;state.brawlConfirmedDate='';if(state.brawlSkills)state.brawlSkills.exemptTagId=null;changed=true;}
   if(state.potentialActiveDate!==today){state.potential={drawn:[],hist:[],candidates:[],candidateSlot:null,refreshLeft:3,fourthEligibleAt:0};state.potentialActiveDate=today;state.potentialEditLeft=0;changed=true;}
   if(state.evolveDate!==today){state.evolve={path:'',lv:1,attrs:[],boilUntil:0,boilCdUntil:0,stealthUntil:0,stealthCdUntil:0,bountyIdx:-1,hopeIdx:-1,cloneAnchor:-1,cloneAnchorIdx:-1,ultimate:'',lv9At:0,lv10At:0};state.evolveDate=today;changed=true;}
   if(!state.exState||state.exState.date!==today){getExclusive();changed=true;}
+  state.cloneAnchor=null;
   /* v1.5.0.2 体验卡到期：未达到等级的玩家功能属性从0开始 */
   if((state.slotTrialUntil||0)>0&&Date.now()>state.slotTrialUntil&&state.totalEP<UNLOCK.passive.s){state.passive=[null,null,null,null];state.slotTrialUntil=0;changed=true;}
   if(state.talentFlameDate!==today||!state.talentFlame){state.talentFlame={startAt:0,until:0,active:false,baseEp:0,immediatePenaltyEp:0,deductedEp:0,finalPenaltyEp:0,endAt:0,cdUntil:0,date:today};state.talentFlameDate=today;changed=true;}
@@ -1862,7 +1861,8 @@ function getModeBlock(type){
   return null;
 }
 
-function getPassiveItems(){const n=getPassiveUnlockedSlots();return (state.passive||[]).filter(Boolean).slice(0,n);}
+
+
 function hasPassive(id){return getPassiveItems().some(p=>p.id===id);}
 function getPassiveState(){
   const today=new Date().toDateString();
@@ -1936,12 +1936,12 @@ function usePotentialSprint(){
   sp.until=now+60*60000;sp.cdUntil=now+2*60*60000;saveState();renderDailySkills();alert('⚡ 短时冲刺启动：1小时内EP+30%、扣减-50%，考研标签任务再+20%。');
 }
 function doneRatio(){const all=state.todayTasks||[];if(!all.length)return 0;return all.filter(t=>t.completed&&t.completed&&t.baseEp!=='').length/all.length;}
-const INFECTION_SLOTS={morn:{name:'早时段',range:'06:00-12:00',start:6,end:12,weight:0.30},noon:{name:'中时段',range:'12:00-18:00',start:12,end:18,weight:0.35},even:{name:'晚时段',range:'18:00-24:00',start:18,end:24,weight:0.35},allday:{name:'全天',range:'00:00-24:00',start:0,end:24,weight:0.35}};
+const INFECTION_SLOTS={morn:{name:'早时段',range:'06:00-12:00',start:6,end:12,weight:0.30},noon:{name:'中时段',range:'12:00-18:00',start:12,end:18,weight:0.35},even:{name:'晚时段',range:'18:00-24:00',start:18,end:24,weight:0.35}};
 function randomInfectionSlot(){const keys=['morn','noon','even'],now=new Date().getTime();const valid=keys.filter(k=>todayAt(INFECTION_SLOTS[k].end)>now+5*60000);if(!valid.length)return 'even';return valid[Math.floor(Math.random()*valid.length)];}
 function getInfectionSlotInfo(key){return INFECTION_SLOTS[key]||INFECTION_SLOTS.morn;}
 function isTaskInInfectionSlot(t){const slot=getInfectionSlotInfo(t.infectSlot),h=new Date(t.doneAt||0).getHours();return h>=slot.start&&h<slot.end;}
 function isUltimateHeroActive(){return state.todayMode==='brawl'&&state.brawl&&state.brawl.hist&&state.brawl.hist.some(x=>x.id===10);}
-function getInfectionTaskBonus(t){const slot=getInfectionSlotInfo(t.infectSlot);return isUltimateHeroActive()?0.6:slot.weight;}
+function getInfectionTaskBonus(t){return isUltimateHeroActive()?0.6:0.3;}
 function fpTaskOwn(t,own,details){
   let mult=1;
   const tag=getTag(t.tagId),path=tag?tag.path:[],last=path[path.length-1]||'',ty=tType(tag),h=t.doneAt?new Date(t.doneAt).getHours():-1;
@@ -1954,7 +1954,7 @@ function fpTaskOwn(t,own,details){
   if(hasPotential(12)&&h>=8&&h<12)add('潜能·晨光加持',0.4);
   if(hasPotential(13)&&h>=19&&h<23)add('潜能·夜战深耕',0.4);
   if(hasPotential(14)){const nap=parseFloat(state.dailyNapHours)||0;add('潜能·充足休憩',nap>1?0.3:-0.15);}
-  if(hasPotential(15)){const sleep=parseFloat(state.dailySleepHours)||0;add('潜能·睡眠亏欠',sleep>0&&sleep<7?-0.15:0.2);}
+  if(hasPotential(15)){const sleep=parseFloat(state.dailySleepHours)||0;if(sleep>0)add('潜能·睡眠亏欠',sleep<7?-0.15:0.2);}
   if(hasPotential(20)&&h>=19&&h<23){const baseOnly=parseInt(t.baseEp)||0;if(details)details.push({label:'潜能·夜间断能',amount:baseOnly-own});return baseOnly;}
   if(hasPotential(21))add('潜能·教综主攻',path.join(' ').indexOf('教育综合')>-1?0.3:-0.1);
   if(hasPotential(22))add('潜能·语言学深钻',path.join(' ').indexOf('语言学')>-1?0.4:-0.1);
@@ -1982,16 +1982,16 @@ function fpGlobalMods(tasks,doneList,gross,penaltyTotal){
   if(hasPotential(18))mods.penaltyMult*=0.03;
   if(hasPotential(39))mods.penaltyMult*=0.6;
   if(hasPotential(31))mods.penaltyMult*=0.9;
-  if(hasPotential(9)&&tasks.some(t=>t.wanted))mods.penaltyMult*=0.85;
+  
   if(hasPotential(19)&&state.potentialSprint&&state.potentialSprint.until>Date.now()){mods.grossMult+=0.3;mods.penaltyMult*=0.5;mods.notes.push('短时冲刺：EP+30%，扣减-50%');}
   const ps=getPassiveState();if(ps.p12PendingEp)mods.grossAdd+=ps.p12PendingEp;if(ps.p12Resilience)mods.notes.push('猎手防护：韧性+'+ps.p12Resilience);
   if(getPassiveState().infectSuccess){mods.grossMult+=0.1;mods.penaltyMult*=0.85;mods.notes.push('母体威慑成功：其余任务+10%EP，扣减-15%');}
   if(getPassiveState().infectFailed){mods.postMult*=0.5;mods.notes.push('母体威慑失败：感染任务仅10%EP，其余任务EP减半');}
-  if(hasPotential(5)&&tags.size>=4){const bonus=Math.min(1.5,0.5+0.2*(tags.size-4));mods.grossMult+=bonus;}
+  if(hasPotential(5)&&tags.size>=4){const bonus=Math.min(1.1,0.1+0.2*(tags.size-4));mods.grossMult+=bonus;}
   if(hasPotential(8)&&!doneList.some(t=>tType(getTag(t.tagId))==='mk'))mods.grossMult-=0.7;
   if(hasPotential(11)){mods.grossMult+=0.3;mods.minEp=Math.max(mods.minEp,400);}
   if(hasPotential(14)){const nap=parseFloat(state.dailyNapHours)||0;mods.grossMult+=(nap>1?0.3:-0.15);}
-  if(hasPotential(15)){const sleep=parseFloat(state.dailySleepHours)||0;mods.grossMult+=(sleep>0&&sleep<7?-0.15:0.2);}
+  if(hasPotential(15)){const sleep=parseFloat(state.dailySleepHours)||0;if(sleep>0)mods.grossMult+=(sleep<7?-0.15:0.2);}
   const hs=doneList.map(t=>new Date(t.doneAt||0).getHours());
   if(hasPotential(16)&&hs.some(h=>h>=6&&h<12)&&hs.some(h=>h>=12&&h<18)&&hs.some(h=>h>=18&&h<24))mods.grossMult+=0.5;
   if(hasPotential(26)&&!paths.some(p=>p.indexOf('教育综合')>-1))mods.grossMult-=0.4;
@@ -2008,10 +2008,9 @@ function fpGlobalMods(tasks,doneList,gross,penaltyTotal){
     let best=null;
     doneList.forEach(t=>{const tag=getTag(t.tagId);if(!tag)return;const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0),ratio=own/tag.maxEp;if(!best||ratio<best.ratio)best={t:t,tag:tag,ratio:ratio};});
     if(best){
-      const prefix=best.tag.path.slice(0,2).join('/');
-      const targets=TASK_TAGS.filter(x=>x.path.length>=2&&x.path.slice(0,2).join('/')===prefix&&x.id!==best.tag.id);
+      const targets=TASK_TAGS.filter(x=>tagChildren(x.path).length===0&&x.id!==best.tag.id);
       const target=targets.sort((a,b)=>b.maxEp-a.maxEp)[0];
-      if(target){mods.grossAdd+=Math.round(target.maxEp*best.ratio)-Math.round(best.ratio*best.tag.maxEp);mods.notes.push('战术快速换位：按完成率换算到「'+target.path.join('·')+'」');}
+      if(target){mods.grossAdd+=Math.round(target.maxEp*best.ratio)-Math.round(best.ratio*best.tag.maxEp);best.t.swapTagId=target.id;mods.notes.push('战术快速换位：按完成率换算到「'+target.path.join('·')+'」（掉落/杯赛按新标签登记）');}
     }
   }
   return mods;
@@ -2111,7 +2110,13 @@ function checkCycleMigration(){
     const daysSince=Math.round((todayTs-startTs)/86400000);
     if(daysSince<0)return;
     if(daysSince%ct.cycleDays!==0)return;
-    state.todayTasks.push({name:ct.name,baseEp:'',qualityEp:'',tagId:ct.tagId,fromCycle:ct.id,cycleDate:todayS});
+    (function(){
+      const copy={name:ct.name,baseEp:'',qualityEp:'',tagId:ct.tagId,fromCycle:ct.id,cycleDate:todayS};
+      const entitled=getLuckyCount(state.todayTasks.length+1);
+      const current=state.todayTasks.filter(function(x){return x.lucky;}).length;
+      if(entitled>current&&!copy.tagId)copy.lucky=true;
+      state.todayTasks.push(copy);
+    })();
     changed=true;
   });
   if(changed)saveState();
@@ -2378,9 +2383,7 @@ function renderLongTasks(){
       html+='</div>';
         if(!t.completed){
         html+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">';
-        html+='<input type="number" value="'+(t.baseEp||'')+'" onchange="updateLongTask('+i+',\'baseEp\',this.value)" placeholder="完成EP（须为 '+requiredBaseOf(t)+'）" style="flex:1;padding:8px 10px;border:1px solid #d1d1d6;border-radius:8px;font-size:13px;">';
-        html+='<input type="number" value="'+(t.qualityEp||'')+'" onchange="updateLongTask('+i+',\'qualityEp\',this.value)" placeholder="质量EP" style="flex:1;padding:8px 10px;border:1px solid #d1d1d6;border-radius:8px;font-size:13px;">';
-        html+='<button class="btn-primary" style="padding:6px 12px;font-size:12px;white-space:nowrap;" onclick="confirmLongComplete('+i+')">✅ 完成</button>';
+        html+='<div style="flex:1;padding:8px 10px;border:1px dashed #d1d1d6;border-radius:8px;font-size:12px;color:#8e8e93;background:#fafbfd;">EP 仅在「每日登记」填入：截止前1天自动并入（或点「📥 转移今日」提前并入），在每日清单完成并结算后，此处自动显示已完成。</div>';
         html+='<button class="btn-secondary" style="padding:6px 10px;font-size:12px;white-space:nowrap;" onclick="transferLongTaskToDaily('+i+')">📥 转移今日</button>';
         html+='</div>';
       }else{
@@ -2470,7 +2473,7 @@ function renderTasks(){
         html+='<div style="display:flex;gap:6px;align-items:center;">';
         html+='<input type="number" value="'+(t.baseEp||'')+'" onchange="updateTask('+i+',\'baseEp\',this.value)" placeholder="完成EP（须为 '+requiredBaseOf(t)+'）" style="flex:1;padding:8px 10px;border:1px solid #d1d1d6;border-radius:8px;font-size:13px;">';
         html+='<input type="number" value="'+(t.qualityEp||'')+'" onchange="updateTask('+i+',\'qualityEp\',this.value)" placeholder="质量EP" style="flex:1;padding:8px 10px;border:1px solid #d1d1d6;border-radius:8px;font-size:13px;">';
-        html+='<button class="btn-primary" style="padding:6px 12px;font-size:12px;white-space:nowrap;border-radius:8px;" onclick="completeTask('+i+')">完成</button>';+(hasPotential(9)&&!t.completed?' <button class="btn-secondary" style="padding:6px 9px;font-size:11px;white-space:nowrap;" onclick="togglePotentialWanted('+i+')">'+(t.wanted?'取消悬赏':'标记悬赏')+'</button>':'')+((typeof canEditLockedTasks==='function'&&canEditLockedTasks())?' <button class="btn-secondary" style="padding:6px 9px;font-size:11px;white-space:nowrap;" onclick="delLockedTask('+i+')">🗑️删</button>':'');
+        html+='<button class="btn-primary" style="padding:6px 12px;font-size:12px;white-space:nowrap;border-radius:8px;" onclick="completeTask('+i+')">完成</button>';html+=(hasPotential(9)&&!t.completed?' <button class="btn-secondary" style="padding:6px 9px;font-size:11px;white-space:nowrap;" onclick="togglePotentialWanted('+i+')">'+(t.wanted?'取消悬赏':'标记悬赏')+'</button>':'')+(hasPotential(31)&&!t.completed?' <button class="btn-secondary" style="padding:6px 9px;font-size:11px;white-space:nowrap;" onclick="setTaskTune('+i+')">'+(state.fpMarks&&state.fpMarks.tagId===t.tagId?'🎨特调中':'🎨设为特调')+'</button>':'')+((typeof canEditLockedTasks==='function'&&canEditLockedTasks())?' <button class="btn-secondary" style="padding:6px 9px;font-size:11px;white-space:nowrap;" onclick="delLockedTask('+i+')">🗑️删</button>':'');
         html+='</div>';
       }else{
         html+='<div style="display:flex;gap:6px;align-items:center;">';
@@ -2512,7 +2515,7 @@ function renderTasks(){
         html+='<div style="display:flex;gap:6px;align-items:center;">';
         html+='<input type="number" value="'+(t.baseEp||'')+'" onchange="updateTask('+i+',\'baseEp\',this.value)" placeholder="完成EP（须为 '+requiredBaseOf(t)+'）" style="flex:1;padding:8px 10px;border:1px solid #d1d1d6;border-radius:8px;font-size:13px;">';
         html+='<input type="number" value="'+(t.qualityEp||'')+'" onchange="updateTask('+i+',\'qualityEp\',this.value)" placeholder="质量EP" style="flex:1;padding:8px 10px;border:1px solid #d1d1d6;border-radius:8px;font-size:13px;">';
-        html+='<button class="btn-primary" style="padding:6px 12px;font-size:12px;white-space:nowrap;border-radius:8px;" onclick="completeTask('+i+')">完成</button>';+(hasPotential(9)&&!t.completed?' <button class="btn-secondary" style="padding:6px 9px;font-size:11px;white-space:nowrap;" onclick="togglePotentialWanted('+i+')">'+(t.wanted?'取消悬赏':'标记悬赏')+'</button>':'')+((typeof canEditLockedTasks==='function'&&canEditLockedTasks())?' <button class="btn-secondary" style="padding:6px 9px;font-size:11px;white-space:nowrap;" onclick="delLockedTask('+i+')">🗑️删</button>':'');
+        html+='<button class="btn-primary" style="padding:6px 12px;font-size:12px;white-space:nowrap;border-radius:8px;" onclick="completeTask('+i+')">完成</button>';html+=(hasPotential(9)&&!t.completed?' <button class="btn-secondary" style="padding:6px 9px;font-size:11px;white-space:nowrap;" onclick="togglePotentialWanted('+i+')">'+(t.wanted?'取消悬赏':'标记悬赏')+'</button>':'')+(hasPotential(31)&&!t.completed?' <button class="btn-secondary" style="padding:6px 9px;font-size:11px;white-space:nowrap;" onclick="setTaskTune('+i+')">'+(state.fpMarks&&state.fpMarks.tagId===t.tagId?'🎨特调中':'🎨设为特调')+'</button>':'')+((typeof canEditLockedTasks==='function'&&canEditLockedTasks())?' <button class="btn-secondary" style="padding:6px 9px;font-size:11px;white-space:nowrap;" onclick="delLockedTask('+i+')">🗑️删</button>':'');
         html+='</div>';
       }else{
         html+='<div style="display:flex;gap:6px;align-items:center;">';
@@ -2604,6 +2607,7 @@ function completeTask(idx){
     showModal('确认完成任务','任务：<b>'+(t.name||'任务'+(idx+1))+'</b>'+(t.fromLong?'<br><span style="font-size:11px;color:#007aff;">📥 长期任务迁移副本 · 完成状态与EP将同步回长期任务模块</span>':'')+'<br>完成EP：<b>'+base+'</b><br>质量EP：<b>'+quality+'</b>'+(shieldBoostPreview>0?'<br>⛨ <b>无敌之盾：</b>确认后补足 <b style="color:#007aff;">+'+shieldBoostPreview+' EP</b> 至标签上限':'')+'<br><br>确认后该任务EP将锁定，不可再修改。',function(){
       state.todayTasks[idx].completed=true;
       state.todayTasks[idx].doneAt=Date.now();
+      if(state.fpMarks&&state.fpMarks.tagId===t.tagId)state.fpMarks.tuneLocked=true;
       arenaAddEp((parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0));
       applyPassiveShieldBoost(state.todayTasks[idx]);
       const psNow=getPassiveState(),tagNow=getTag(t.tagId);
@@ -2643,6 +2647,8 @@ function completeTask(idx){
     }
     evolveOnTaskComplete(state.todayTasks[idx]);
     exOnTaskComplete(state.todayTasks[idx]);
+    (function(){const _bm=calcBrawlMods();if(_bm.hasClone&&!state.cloneAnchor){state.cloneAnchor={ep:raw,idx:idx};pushEvolveNote('🧬 复制感染锚定：'+raw+' EP');}})();
+    (function(){const _tg=getTag(state.todayTasks[idx].tagId);if(_tg){const _own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);state.todayTasks[idx].hadDeduct=_own<_tg.maxEp;}})();
     saveState();
     renderTasks();
     closeModal();
@@ -2722,7 +2728,7 @@ function confirmTasks(){
       ps.infectSuccess=false;ps.infectFailed=false;
     }
     const firstTag=getTag(state.todayTasks[0]&&state.todayTasks[0].tagId);
-    state.fpMarks={tagId:firstTag?state.todayTasks[0].tagId:'',category:firstTag?firstTag.path[0]:''};
+    state.fpMarks={tagId:'',category:firstTag?firstTag.path[Math.max(0,firstTag.path.length-2)]:''};
     if(hasPotential(3)){const rec=state.todayTasks.find(t=>{const tag=getTag(t.tagId);return tag&&(tag.path.join(' ').indexOf('背诵')>-1||tag.path.join(' ').indexOf('输出')>-1);});if(rec)rec.potentialMark3=true;}
     if(hasPotential(9)){const candidates=state.todayTasks.filter(t=>!t.completed);candidates.slice(0,3).forEach(t=>t.wanted=true);}
     /* v1.4.8: 逆境追赶改为第1栏选后直接给3次免罚修改，不再按完成率判定 */
@@ -2793,7 +2799,8 @@ function pinTask(idx){
     t.pinned=true;t.pinConfirmed=true;saveState();renderTasks();closeModal();
   });
 }
-function removeTask(idx){const _t=state.todayTasks[idx];if(_t&&(_t.fromLong||_t.fromCycle)){alert('长期/周期任务副本不可删除，请在对应模块处理');return;}if(state.taskReedit&&_t){const _tag=getTag(_t.tagId);if(_tag){const _today=new Date().toDateString();if(!state.deletedToday||state.deletedToday.date!==_today)state.deletedToday={date:_today,items:[]};state.deletedToday.items.push({maxEp:_tag.maxEp});}state.todayTasks.splice(idx,1);saveState();renderTasks();return;}state.todayTasks.splice(idx,1);saveState();renderTasks();}function updateTask(idx,field,val){const t=state.todayTasks[idx];if(!t)return;if(t.fromLong&&(field==='name'||field==='tagId')){alert('长期任务迁移副本的名称与标签已锁定，请到「长期」页编辑');renderTasks();return;}t[field]=val;saveState();renderTasks();}function updateTask(idx,field,val){const t=state.todayTasks[idx];if(!t)return;if(t.completed&&t.baseEp!==''){alert('该任务已完成，不可更改');renderTasks();return;}if((t.fromLong||t.fromCycle)&&(field==='name'||field==='tagId')){alert('长期/周期任务副本的名称与标签已锁定，请到对应模块编辑');renderTasks();return;}t[field]=val;saveState();renderTasks();}
+function removeTask(idx){const _t=state.todayTasks[idx];if(_t&&(_t.fromLong||_t.fromCycle)){alert('长期/周期任务副本不可删除，请在对应模块处理');return;}if(state.taskReedit&&_t){const _tag=getTag(_t.tagId);if(_tag){const _today=new Date().toDateString();if(!state.deletedToday||state.deletedToday.date!==_today)state.deletedToday={date:_today,items:[]};state.deletedToday.items.push({maxEp:_tag.maxEp});}state.todayTasks.splice(idx,1);saveState();renderTasks();return;}state.todayTasks.splice(idx,1);saveState();renderTasks();}
+function updateTask(idx,field,val){const t=state.todayTasks[idx];if(!t)return;if(t.completed&&t.baseEp!==''){alert('该任务已完成，不可更改');renderTasks();return;}if((t.fromLong||t.fromCycle)&&(field==='name'||field==='tagId')){alert('长期/周期任务副本的名称与标签已锁定，请到对应模块编辑');renderTasks();return;}t[field]=val;saveState();renderTasks();}
 function updateLevelProgress(){
   const info=getLevelInfo(state.totalEP);
   const idx=LEVELS.findIndex(l=>l.lv===info.lv);
@@ -2850,7 +2857,7 @@ function mailItemsHtml(m){
 }
 function renderMailPage(){
   const box=document.getElementById('mail-page-list');if(!box)return;
-  ensureV143Mail();ensureV150Mail();ensureV1502Mail();ensureUltUndoMail();ensureMatMail();ensureV152Mail();ensureTalentNerfMail();
+  ensureV143Mail();ensureV150Mail();ensureV1502Mail();ensureUltUndoMail();ensureMatMail();ensureV1521Mail();ensureV152Mail();ensureTalentNerfMail();
   if(!state.mailbox.length){box.innerHTML='<div style="text-align:center;color:#8e8e93;padding:20px;">邮箱空空如也</div>';updateMailBadge();return;}
   box.innerHTML=state.mailbox.map(function(m){
     const open=state._mailOpen===m.id;
@@ -2863,6 +2870,11 @@ function renderMailPage(){
      +'</div>';
   }).join('');
   updateMailBadge();
+}
+function markAllMailsRead(){
+ (state.mailbox||[]).forEach(function(m){m.read=true;});
+ saveState();renderMailPage();
+ pushEvolveNote('✉️ 全部邮件已标记为已读');
 }
 function toggleMail(id){
   const m=(state.mailbox||[]).find(function(x){return x.id===id;});
@@ -3097,7 +3109,8 @@ function updatePointsPreview(){
       if(mods.hasSteelClaw)rate*=(1+0.2*brwAmp());
       if(mods.hasMutate)rate*=(1-0.2*brwAmp());
       if(mods.hasHarden)rate*=(1-0.45*brwAmp());
-      if(mods.hasOvercap)rate=Math.min(rate,0.30/brwAmp());
+      if(mods.hasOvercap){const _ocT=getTag(t.tagId,t);rate=Math.min(rate,((_ocT?_ocT.maxEp:0)*0.30)/(gross||1));}
+    if(hasPotential(9)&&t.wanted)rate*=0.85;
       if(evo.on){
           const _r0=rate;
           if(evo.taskpen||t.evoPenCut)rate*=(1-Math.min(0.9,(evo.taskpen||0)+(t.evoPenCut||0)));
@@ -3112,10 +3125,6 @@ function updatePointsPreview(){
     }
   });
   if(mods.hasNoPenalty||mods.hasInsurance)pen=0;
-  if(mods.hasSupply&&pen>0){
-    const layers=Math.min(done.length,10);
-    pen=pen*Math.max(0,1-0.05*brwAmp()*layers);
-  }
   const pinT=state.todayTasks.find(t=>t.pinned);
   if(pinT&&pinT.completed&&pinT.baseEp!==''){gross+=Math.round(ownOf(pinT)*0.05);}
   let agentB=0,stealthR=0,mutB=0,chainB=0,bloodB=0,survB=0;
@@ -3132,12 +3141,9 @@ function updatePointsPreview(){
   });
   if(mods.hasChain){done.forEach((t,i)=>{chainB+=Math.round(ownOf(t)*0.1*(i+1));});}
   if(mods.hasBlood&&firstDone){bloodB=ownOf(firstDone);}
-  if(mods.hasSurvivor){
-    for(let i=state.todayTasks.length-1;i>=0;i--){
-      const t=state.todayTasks[i];
-      const done=(t.completed&&t.completed&&t.baseEp!=='');
-      if(!done){survB=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);break;}
-    }
+  if(mods.hasSurvivor&&state.todayTasks.length&&state.todayTasks.every(function(x){return x.completed&&x.baseEp!=='';})){
+    const _last=state.todayTasks.slice().sort(function(a,b){return (b.doneAt||0)-(a.doneAt||0);})[0];
+    if(_last){survB=ownOf(_last);if(survB>0)_details.push({label:'乱斗·最后的幸存者（全部完成·最后完成+100%）',amount:survB});}
   }
     let gunB=0,reB=0,relB=0,relChain=0,prevT=null;
   if(mods.hasGun){
@@ -3236,8 +3242,9 @@ function attrBoostBrawl(){try{return state.todayMode==='brawl'&&!!calcTalentMods
 function brwAmp(){let a=attrBoostBrawl()?1.1:1;const w=state.talentWall;if(w&&w.id&&Date.now()<w.until)a*=0.3;return a;}
 function pasAmp(){try{return (state.todayMode==='classic'&&calcTalentMods()[33])?1.2:1;}catch(e){return 1;}}
 function deletedTaskDeduction(){try{var today=new Date().toDateString();if(!state.deletedToday||state.deletedToday.date!==today)return 0;return (state.deletedToday.items||[]).reduce(function(s,d){return s+Math.round((d.maxEp||0)*0.1);},0);}catch(e){return 0;}}
-function isDiscardReviewTag(tag){if(!tag)return false;const last=tag.path[tag.path.length-1]||'';return (last.indexOf('刷题')>-1&&last.indexOf('改错')>-1)||last==='旧list重刷'||last.indexOf('备考')>-1;}
+function isDiscardReviewTag(tag){if(!tag)return false;const last=tag.path[tag.path.length-1]||'';return (last.indexOf('刷题')>-1&&last.indexOf('改错')>-1)||last==='旧list重刷';}
 
+function isErrClass(ty){return ty==='err'||ty==='st';}
 function talentTagsForTask(t,tm){
   if(!t.completed)return'';
   if(!tm||!Object.keys(tm).length)return'';
@@ -3245,7 +3252,7 @@ function talentTagsForTask(t,tm){
   const h=t.doneAt?new Date(t.doneAt).getHours():-1;
   const out=[];
   const push=(on,txt)=>{if(on)out.push(txt);};
-  push(tm[2]&&ty==='err','错题+8%');push(tm[5]&&(ty==='err'||isWdReviewTag(tag)),'温故+6%');
+  push(tm[2]&&isErrClass(ty),'错题+8%');push(tm[5]&&(ty==='err'||isWdReviewTag(tag)),'温故+6%');
   push(tm[6]&&s==='zz','时政+8%');push(tm[7]&&s==='zz'&&ty==='mk','政考+10%');
   push(tm[8]&&s==='wd','词句+6%');push(tm[9]&&s==='yze'&&ty==='mk','英考+7%');
   push(tm[10]&&s==='j3','轮次+6%');push(tm[11]&&s==='j3'&&ty==='mk','教考+9%');
@@ -3260,7 +3267,7 @@ function talentTagsForTask(t,tm){
   push(tm[23]&&s==='j3','教综'+(ty==='wk'?'+7%':'-2%'));
   push(tm[24]&&s==='j3','教综题'+(ty==='st'||ty==='mk'?'+8%':'-4%'));
   push(tm[25]&&s==='l8','语言学'+(ty==='wk'?'-5%':'+7%'));
-  push(tm[26]&&ty==='err','全域+7%');
+  push(tm[26]&&isErrClass(ty),'全域+7%');
   push(tm[29],'政闭'+(s==='zz'?'+7%':'-3%'));
   push(tm[30],'教攻'+(s==='j3'?'+7%':'-3%'));
   push(tm[31],'英攻'+(s==='yze'?'+6%':'-2%'));
@@ -3278,7 +3285,7 @@ function applyTalents(gross,pen,ctx){
   done.forEach(t=>{
     currentTask=t;
     const tag=getTag(t.tagId),s=tSubj(tag),ty=tType(tag),own=ownOf(t),h=tHour(t);
-    if(tm[2]&&ty==='err')addT(Math.round(own*0.08),'错题复盘');
+    if(tm[2]&&isErrClass(ty))addT(Math.round(own*0.08),'错题复盘');
     if(tm[5]&&(ty==='err'||isWdReviewTag(tag)))addT(Math.round(own*0.06),'循环温故');
     if(tm[6]&&s==='zz')addT(Math.round(own*0.08),'时政识记');
     if(tm[7]&&s==='zz'&&ty==='mk')addT(Math.round(own*0.10),'政治考试');
@@ -3298,16 +3305,16 @@ function applyTalents(gross,pen,ctx){
     if(tm[23]&&s==='j3')addT(Math.round(own*(ty==='wk'?0.07:-0.02)),'教综学习');
     if(tm[24]&&s==='j3')addT(Math.round(own*((ty==='st'||ty==='mk')?0.08:-0.04)),'教综还得刷题');
     if(tm[25]&&s==='l8')addT(Math.round(own*(ty==='wk'?-0.05:0.07)),'光看不行');
-    if(tm[26]&&ty==='err')addT(Math.round(own*0.07),'全域复盘');
+    if(tm[26]&&isErrClass(ty))addT(Math.round(own*0.07),'全域复盘');
     if(tm[29])addT(Math.round(own*(s==='zz'?0.07:-0.03)),'时政闭环');
     if(tm[30])addT(Math.round(own*(s==='j3'?0.07:-0.03)),'教综强攻');
     if(tm[31])addT(Math.round(own*(s==='yze'?0.06:-0.02)),'英二强攻');
     if(tm[32])addT(Math.round(own*(s==='l8'?0.08:-0.03)),'语言攻坚');
-    if(tm[27]){const dn=(state.talentChoice&&state.talentChoice.dn==='even')?'even':'morn';const hit=(dn==='morn'&&h>=6&&h<12)||(dn==='even'&&h>=18&&h<24);if(hit)addT(Math.round(own*0.06),'或昼或夜');else if(h>=12&&h<18)addT(-Math.round(own*0.04),'或昼或夜');else addT(-Math.round(own*0.10),'或昼或夜');}
+    if(tm[27]){const dn=(state.talentChoice&&state.talentChoice.dn==='even')?'even':'morn';const hit=(dn==='morn'&&h>=6&&h<12)||(dn==='even'&&h>=18&&h<24);if(hit)addT(Math.round(own*0.06),'或昼或夜');else if(h>=12&&h<18)addT(-Math.round(own*0.04),'或昼或夜');else addT(-Math.round(own*0.05),'或昼或夜');}
     if(tm[34]&&t.flameBonus)addT(Math.round(own*t.flameBonus),'不灭阳炎');
   });
   if(tm[4]){const set=[...new Set(state.todayTasks.filter(t=>tType(getTag(t.tagId))!=='kt').map(t=>t.tagId))];if(set.length>=3){const b=0.05+0.03*(set.length-3);finalMult+=b;agg['多元巩固 +'+Math.round(b*100)+'%']=0;}}
-  if(tm[26]){const c=done.filter(t=>tType(getTag(t.tagId))==='err').length;if(c)finalAdd+=10*c;}
+  if(tm[26]){const c=done.filter(t=>isErrClass(tType(getTag(t.tagId)))).length;if(c)finalAdd+=10*c;}
   if(tm[14]&&done.some(t=>tType(getTag(t.tagId))==='mk'))penMult*=0.7;
   if(tm[34]&&state.talentFlame){
     const f=state.talentFlame;
@@ -3315,9 +3322,9 @@ function applyTalents(gross,pen,ctx){
     else if((f.finalPenaltyEp||0)>0){finalAdd-=Math.round(f.finalPenaltyEp);agg['不灭阳炎结算扣除 -'+Math.round(f.finalPenaltyEp)+' EP']=0;}
   }
   if(tm[35]&&state.talentShield&&Date.now()<state.talentShield.until)penMult*=0.03;
-  if(tm[1]&&state.todayTasks.length&&state.todayTasks.every(t=>t.completed&&t.baseEp!=='')){finalMult+=0.04;agg['稳步积累 +25%']=0;}
-  if(tm[18]){const nc=state.todayTasks.filter(t=>tType(getTag(t.tagId))!=='kt');if(nc.length>4&&nc.every(t=>t.completed&&t.baseEp!=='')){finalMult+=0.10;agg['厚积薄发 +40%']=0;}}
-  if(tm[3]){const hs=done.map(t=>tHour(t));const has=(a,b)=>hs.some(h=>h>=a&&h<b);if(has(8,12)&&has(14,18)&&has(19,23)){finalMult+=0.12;agg['碎片吸收 +30%']=0;}}
+  if(tm[1]&&state.todayTasks.length&&state.todayTasks.every(t=>t.completed&&t.baseEp!=='')){finalMult+=0.04;agg['稳步积累 +4%']=0;}
+  if(tm[18]){const nc=state.todayTasks.filter(t=>tType(getTag(t.tagId))!=='kt');if(nc.length>4&&nc.every(t=>t.completed&&t.baseEp!=='')){finalMult+=0.10;agg['厚积薄发 +10%']=0;}}
+  if(tm[3]){const hs=done.map(t=>tHour(t));const has=(a,b)=>hs.some(h=>h>=a&&h<b);if(has(8,12)&&has(14,18)&&has(19,23)){finalMult+=0.12;agg['碎片吸收 +12%']=0;}}
   const lines=Object.keys(agg).map(k=>agg[k]!==0?('<br>🧬 '+k+'：'+(agg[k]>0?'+':'')+agg[k]):('<br>🧬 '+k)).join('');
   return {add:add,penMult:penMult,finalAdd:finalAdd,finalMult:finalMult,lines:lines};
 }
@@ -3485,7 +3492,7 @@ function renderTalentBars(){
   if(tm[3]){const hs=done.map(tHour);const hit=(a,b)=>hs.some(h=>h>=a&&h<b);const slotN=(hit(8,12)?1:0)+(hit(14,18)?1:0)+(hit(19,23)?1:0);html+=bar('🧩 [天赋] 碎片吸收',slotN/3*100,'#007aff',slotN+'/3 时段 · 早/中/晚');}
   if(tm[4]&&tasks.length){const tagTypes=new Set(tasks.filter(t=>tType(getTag(t.tagId))!=='kt').map(t=>t.tagId).filter(Boolean));const need=Math.max(3,tagTypes.size);const bonus=Math.round((0.05+0.03*Math.max(0,tagTypes.size-3))*100);html+=bar('🧬 [天赋] 多元巩固',tagTypes.size/need*100,'#007aff',tagTypes.size+'/'+need+' 类 · 当前+'+bonus+'%');}
   if(tm[18]&&tasks.length){const nc=tasks.filter(t=>tType(getTag(t.tagId))!=='kt');if(nc.length){const ncDone=nc.filter(isDone).length;const need=Math.max(5,nc.length);const active=nc.length>4&&ncDone===nc.length;html+=bar('🧱 [天赋] 厚积薄发',active?100:ncDone/need*100,'#007aff',ncDone+'/'+need+' · '+(active?'已激活 +10%':'需>4项且全完成'));}}
-  if(tm[2])addTrigger(2,'🧠 错题复盘',x=>x.ty==='err',x=>x.ty==='err',(h,a)=>h?'已触发':'待完成');
+  if(tm[2])addTrigger(2,'🧠 错题复盘',x=>isErrClass(x.ty),x=>isErrClass(x.ty),(h,a)=>h?'已触发':'待完成');
   if(tm[5])addTrigger(5,'🔁 循环温故',x=>x.ty==='err'||isWdReviewTag(x.tag),x=>x.ty==='err'||isWdReviewTag(x.tag),(h,a)=>h?'已触发':'待完成');
   if(tm[6])addTrigger(6,'🏛️ 时政识记',x=>x.s==='zz',x=>x.s==='zz',(h,a)=>h?'已触发':'待完成');
   if(tm[7])addTrigger(7,'📝 政治考试',x=>x.s==='zz'&&x.ty==='mk',x=>x.s==='zz'&&x.ty==='mk',(h,a)=>h?'已触发':'待完成');
@@ -3769,6 +3776,9 @@ function submitDaily(){
   const mods=calcBrawlMods();
   const sk=state.brawlSkills||{exemptTagId:null};
   const evo=getEvolveMods();
+  if(mods.hasExempt&&!sk.exemptTagId){const _tags=[...new Set(state.todayTasks.map(function(t){return t.tagId;}).filter(Boolean))];if(_tags.length)sk.exemptTagId=_tags[Math.floor(Math.random()*_tags.length)];}
+  if(mods.hasEnhanced&&!state.todayTasks.some(function(t){return t.enhanced;})){const _pool=state.todayTasks.slice();const _n=Math.max(1,Math.round(_pool.length*0.3));for(let _k=0;_k<_n&&_pool.length;_k++){_pool.splice(Math.floor(Math.random()*_pool.length),1)[0].enhanced=true;}}
+    if(sk.exemptTagId)state.brawlSkills.exemptTagId=sk.exemptTagId;
 
   // 已完成任务（按完成时间排序）
   const doneList=getCompletedTasks().sort((a,b)=>(a.doneAt||0)-(b.doneAt||0));
@@ -3792,16 +3802,22 @@ function submitDaily(){
       if(!t._evoCache){
         const e2=getEvolve();
         let delta=0;const dl=[];
-        const _cloned=evo.clone&&(e2.cloneAnchor||0)>=0&&t!==state.todayTasks[e2.cloneAnchorIdx];
-        if(_cloned){delta=e2.cloneAnchor-finalOwn;dl.push({label:'进化·复制感染（锚定首任务）',amount:delta});}
+        const _ca=state.cloneAnchor;
+        const _cloned=(evo.clone||mods.hasClone)&&_ca&&t!==state.todayTasks[_ca.idx];
+        if(_cloned){delta=_ca.ep-finalOwn;dl.push({label:'乱斗·复制感染（锚定首任务）',amount:delta});}
         else{
           if(evo.task){const v=Math.round(finalOwn*evo.task);delta+=v;dl.push({label:'进化·任务增益',amount:v});}
           if(t.chainBonus){const v=Math.round((finalOwn+delta)*t.chainBonus);delta+=v;dl.push({label:'进化·致命一击（连锁）',amount:v});}
         }
+        if(t.clawAdjBonus){delta+=t.clawAdjBonus;dl.push({label:'进化·钢铁利爪（相邻+10%）',amount:t.clawAdjBonus});}
+        if(tm[35]&&state.talentShield&&(t.doneAt||0)<state.talentShield.until){const _tg=getTag(t.tagId,t);if(_tg){const _gap=_tg.maxEp-finalOwn-delta;if(_gap>0){const _fill=Math.round(_gap*0.97);delta+=_fill;dl.push({label:'天赋·终结恩赐（护盾补足）',amount:_fill});}}}
         if(evo.chances.length){const _base=finalOwn+delta;evo.chances.forEach(function(cb){if(!cb.pen&&Math.random()<cb.c){const v=Math.round(_base*cb.v);delta+=v;dl.push({label:'进化·概率增益',amount:v});}});}
         if(evo.fatal&&Math.random()<0.4){const v=Math.round((finalOwn+delta)*1);delta+=v;dl.push({label:'进化·致命攻击',amount:v});}
         if(evo.bounty&&e2.bountyIdx>=0&&state.todayTasks[e2.bountyIdx]===t){const tg2=getTag(t.tagId);const v=Math.round((tg2?tg2.maxEp:0)*0.2);delta+=v;dl.push({label:'进化·悬赏通缉',amount:v});}
-        t._evoCache={delta:delta,dl:dl,map:null};
+        const _shieldOn=(function(){try{return calcTalentMods()[35]&&state.talentShield&&Date.now()<state.talentShield.until;}catch(e){return false;}})();
+        const _posDl=(_shieldOn||t.insured)?dl.filter(function(d){return d.amount>=0;}):dl;
+        if(_posDl.length!==dl.length){delta=_posDl.reduce(function(s,d){return s+d.amount;},0);}
+        t._evoCache={delta:delta,dl:_posDl,map:null};
       }
       if(t._evoCache.map!==taskDetailMap){t._evoCache.map=taskDetailMap;(t._evoCache.dl||[]).forEach(function(d){addSTDetail(t,d.label,d.amount);});}
       evoOwn=finalOwn+t._evoCache.delta;
@@ -3851,7 +3867,8 @@ function submitDaily(){
       if(mods.hasSteelClaw)rate*=(1+0.2*brwAmp());
       if(mods.hasMutate)rate*=(1-0.2*brwAmp());
       if(mods.hasHarden)rate*=(1-0.45*brwAmp());
-      if(mods.hasOvercap)rate=Math.min(rate,0.30/brwAmp());
+      if(mods.hasOvercap){const _ocT=getTag(t.tagId,t);rate=Math.min(rate,((_ocT?_ocT.maxEp:0)*0.30)/(gross||1));}
+    if(hasPotential(9)&&t.wanted)rate*=0.85;
       let u_survive=false;
       if(evo.on){
         const _rate0=rate;
@@ -3913,11 +3930,6 @@ function submitDaily(){
   });
   if(mods.hasNoPenalty){penaltyTotal=0;unfinished.forEach(function(u){u.rate=0;});}
   if(mods.hasInsurance)penaltyTotal=0;
-  // 19号防御补给：每层(=完成数,上限10)减少5%扣除
-  if(mods.hasSupply&&penaltyTotal>0){
-    const layers=Math.min(doneList.length,10);
-    penaltyTotal=penaltyTotal*Math.max(0,1-0.05*brwAmp()*layers);
-  }
   penaltyTotal=Math.min(penaltyTotal,1.0);
   if(getPassPenReduce()>0)penaltyTotal=Math.min(1,penaltyTotal*(1-getPassPenReduce()));
   if(hasEx(21)&&(state.exState.demonUntil||0)>Date.now())penaltyTotal=Math.min(1,penaltyTotal*0.9);
@@ -4007,8 +4019,16 @@ function submitDaily(){
   if(penaltyTotal>0){
     const exSet=[];
     if(mods.hasArmor){
-      if(doneList.length>=1)exSet.push(doneList[0]);
-      if(doneList.length>=4)exSet.push(doneList[3]);
+      /* v1.5.2.1 按文案重做：首个有扣减的完成任务免罚；每连续3个有扣减的完成，下一个免罚 */
+      const firstDed=doneList.find(function(t){return t.hadDeduct;});
+      if(firstDed)exSet.push(firstDed);
+      let streak=0,armNext=false;
+      doneList.forEach(function(t){
+        if(exSet.indexOf(t)>-1)return;
+        if(armNext){exSet.push(t);armNext=false;streak=0;return;}
+        if(t.hadDeduct){streak++;if(streak>=3){armNext=true;streak=0;}}
+        else streak=0;
+      });
     }
     if(mods.hasLifeIns){
       doneList.forEach(t=>{if(t.insured&&exSet.indexOf(t)===-1)exSet.push(t);});
@@ -4068,7 +4088,7 @@ function submitDaily(){
     +(mods.hasBlood&&bloodBonus>0?'<br>🩸 第一滴血：+'+bloodBonus+'':'')
     +(mods.hasSurvivor&&survivorBonus>0?'<br>🏁 最后的幸存者：+'+survivorBonus+'':'')
     +(exemptSum>0?'<br>🛡️ 免惩罚EP：'+exemptSum+'（双重装甲/生命保险）':'')
-    +(mods.hasSupply&&doneList.length>0?'<br>🎒 防御补给 '+Math.min(doneList.length,10)+'层：扣除 -'+Math.min(doneList.length,10)*5+'%':'')
+    +(state._supplyRefund?'<br>🎒 防御补给返还：+'+state._supplyRefund+' EP':'')
     +(mods.hasSteelClaw?'<br>🐾 钢铁利爪：未完成惩罚 +20%':'')
     +(mods.hasHarden?'<br>🛡️ 硬化：扣减 -45%':'')
     +(mods.hasOvercap?'<br>📊 超额：单任务扣除≤30%':'')
@@ -4185,14 +4205,14 @@ const globalHtml='<div style="background:#f0f7ff;border:1px solid #007aff22;bord
     const _allDone=unfinished.length===0;
     doneList.forEach(function(t){
       const _tag=getTag(t.tagId);if(!_tag)return;
-      _addMat(t.tagId,'mark',2);
+      _addMat(t.swapTagId||t.tagId,'mark',2);
       const _own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
-      if(_tag.maxEp>0&&_own>=Math.round(_tag.maxEp*0.6))_addMat(t.tagId,'peak',1);
+      if(_tag.maxEp>0&&_own>=Math.round(_tag.maxEp*0.6))_addMat(t.swapTagId||t.tagId,'peak',1);
       const _dt=t.doneAt||0,_sk=state.brawlSkills||{},_ps=getPassiveState();
       const _inWin=(_dt>=_sk.agentPressAt&&_dt<=_sk.agentUntil)||(_dt>=_sk.stealthPressAt&&_dt<=_sk.stealthUntil)||(_ps.warActive&&_dt<=_ps.warUntil)||(state.potentialSprint&&_dt<=state.potentialSprint.until&&_dt>=state.potentialSprint.until-3600000)||(state.talentFlame&&state.talentFlame.active&&_dt>=state.talentFlame.startAt&&_dt<=state.talentFlame.until);
       const _early=getCompletedTasks().sort(function(a,b){return (a.doneAt||0)-(b.doneAt||0);}).slice(0,2).indexOf(t)>-1;
-      if(_inWin||_early)_addMat(t.tagId,'medal',1);
-      if(_allDone)_addMat(t.tagId,'badge',1);
+      if(_inWin||_early)_addMat(t.swapTagId||t.tagId,'medal',1);
+      if(_allDone)_addMat(t.swapTagId||t.tagId,'badge',1);
     });
     state._lastDrops=_dropLog;
     if(Object.keys(_dropLog).length){const _box=document.getElementById('notif-container');if(_box){const _c=document.createElement('div');_c.className='notif-card';_c.style.borderLeftColor='#007aff';const _items=Object.keys(_dropLog).map(function(k){return k+'×'+_dropLog[k];}).join(' · ');_c.innerHTML='<div class="notif-title">🏷️ 标签材料掉落</div><div class="notif-reward">'+_items+'</div>';_box.appendChild(_c);requestAnimationFrame(function(){_c.classList.add('show');});setTimeout(function(){_c.classList.add('hide');setTimeout(function(){_c.remove();},300);},5000);}}
@@ -4218,6 +4238,20 @@ const globalHtml='<div style="background:#f0f7ff;border:1px solid #007aff22;bord
     closeModal();
     const _g=[['今日EP','+'+finalEp],['积分','+'+pointsInfo.total]];if(tks)_g.push(['代币','+'+tks]);if(pointsInfo.lvUps)_g.push(['升级奖励','+'+pointsInfo.upPoints,'#af52de']);
     if(state._lastDrops){Object.keys(state._lastDrops).forEach(function(k){_g.push([k,'×'+state._lastDrops[k],'#ff9500']);});}
+    (function(){
+      if(mods.hasSupply&&doneList.length){
+        const _ord=doneList.slice().sort(function(a,b){return (a.doneAt||0)-(b.doneAt||0);});
+        let refund=0;
+        _ord.forEach(function(t,idx){
+          const layers=Math.min(10,idx+1);
+          const tg=getTag(t.tagId);if(!tg)return;
+          const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
+          const short=Math.max(0,tg.maxEp-own);
+          if(short>0){const r=Math.round(short*0.05*layers*brwAmp());refund+=r;if(r>0)addSTDetail(t,'乱斗·防御补给返还（'+(5*layers)+'%被扣EP）',r);}
+        });
+        if(refund>0){effectiveRawEp+=refund;state._supplyRefund=refund;}
+      }
+    })();
     evalTagMarks();
     (function(){getElite();const hit={};state.todayTasks.forEach(function(t){if(t.completed&&t.baseEp!==''&&t.tagId){const tn=eliteTune(t.tagId);if(tn&&Object.keys(tn).length)hit[t.tagId]=1;}});Object.keys(hit).forEach(function(tid){const st=eliteTagState(tid);st.durability=Math.max(0,st.durability-3);});})();
     if(state._exWreck){_g.push(['专属·残骸强化','+'+state._exWreck,'#af52de']);state._exWreck=0;}
@@ -4768,6 +4802,12 @@ function openPotentialMarkSelector(kind){
     saveState();renderTasks();renderTalentBars();closeModal();
   },'<select id="potential-mark-select" style="width:100%;padding:8px;border:1px solid #d1d1d6;border-radius:8px;">'+opts+'</select>');
 }
+function setTaskTune(idx){
+  if(state.fpMarks&&state.fpMarks.tuneLocked){alert('🎨 特调标签已由完成的任务锁定，今日不可更改');return;}
+  if(state.todayMode!=='potential'||!hasPotential(31)){alert('当前未生效「任务特调」潜能');return;}
+  const t=state.todayTasks[idx];if(!t||t.completed)return;
+  state.fpMarks=state.fpMarks||{};state.fpMarks.tagId=t.tagId;saveState();renderTasks();renderTalentBars();
+}
 function togglePotentialWanted(idx){
   const t=state.todayTasks[idx];if(!t||t.completed)return;
   const count=state.todayTasks.filter(x=>x.wanted).length;
@@ -4881,8 +4921,38 @@ function useBrawlTrial(){
     alert('✅ 今日乱斗模式已解锁！去「每日登记」选择乱斗玩法，再去乱斗页抽属性吧');
   });
 }
+function brawlLockedGate(){
+  if(state.brawlConfirmedDate!==new Date().toDateString())return false;
+  if(confirm('⚔️ 今日属性已确认锁定，不可更改。\n\n要撤销确认吗？撤销后就能重新抽取/变更了。')){
+    state.brawlConfirmedDate='';saveState();
+    try{updateBrawlConfirmBtn();updateBrawlUI();}catch(e){}
+    alert('✅ 已撤销确认，现在可以重新抽取/变更属性');
+    return false;
+  }
+  return true;
+}
+function confirmBrawlAttrs(){
+  const b=document.getElementById('brawl-confirm-btn');
+  if(state.brawlConfirmedDate===new Date().toDateString()){
+    if(confirm('⚔️ 今日属性已确认锁定。\n\n要撤销确认吗？撤销后可重新抽取/变更属性。')){
+      state.brawlConfirmedDate='';saveState();
+      if(b)b.textContent='✅ 确认属性（确认后今日锁定）';
+      alert('已撤销确认，现在可以重新抽取或变更属性');
+    }
+    return;
+  }
+  if(!state.brawl.hist.length){alert('请先抽取乱斗属性');return;}
+  state.brawlConfirmedDate=new Date().toDateString();saveState();
+  if(b)b.textContent='🔒 今日属性已确认（点此可撤销）';
+  alert('✅ 今日乱斗属性已确认并锁定\n（误触可再点该按钮撤销）');
+}
+function updateBrawlConfirmBtn(){
+  const b=document.getElementById('brawl-confirm-btn');if(!b)return;
+  b.textContent=(state.brawlConfirmedDate===new Date().toDateString())?'🔒 今日属性已确认（点此可撤销）':'✅ 确认属性（确认后今日锁定）';
+}
 function drawBrawl(n){
   if(!checkUnlock('brawl')){alert('当前无开放权限！需达到 '+UNLOCK.brawl.name+' 方可使用乱斗模式');return;}
+  if(brawlLockedGate())return;
   if(state.brawlDrawDate===new Date().toDateString()){alert('⚔️ 今日乱斗属性已锁定，无法再次抽取');return;}
   const maxAllowed = state.passive.some(p => p && p.id === 5) ? 2 : 1;
   if(state.brawl.hist.length >= maxAllowed){state.brawlDrawDate=new Date().toDateString();saveState();alert('今日乱斗属性已达上限（'+maxAllowed+'个）');return;}
@@ -4901,6 +4971,7 @@ function drawBrawl(n){
 }
 function useBrawlVip(){
   if(!checkUnlock('brawl')){alert('当前无开放权限！需达到 '+UNLOCK.brawl.name);return;}
+  if(brawlLockedGate())return;
   if(state.brawlDrawDate===new Date().toDateString()){alert('⚔️ 今日乱斗属性已锁定，无法修改');return;}
   if((state.inventory.brawl_vip||0)<1){alert('👑 乱斗特权券不足');return;}
   if(!state.brawl.hist.length){alert('请先抽取乱斗属性');return;}
@@ -4940,10 +5011,13 @@ function updateBrawlUI(){
   }
   document.getElementById('b-progress').textContent='池内剩余 '+(25-state.brawl.drawn.length)+' / 25';
   document.getElementById('b-hist').innerHTML=state.brawl.hist.map(x=>'<span style="font-size:11px;padding:2px 6px;border-radius:4px;background:#af52de15;color:#af52de">#'+x.id+' '+x.name+'</span>').join('');
+  updateBrawlConfirmBtn();
 }
-function resetBrawl(){if(!checkUnlock('brawl')){alert('当前无开放权限！需达到 '+UNLOCK.brawl.name);return;}if(state.brawlDrawDate===new Date().toDateString()){alert('⚔️ 今日乱斗属性已锁定，无法修改');return;}state.brawl={drawn:[],hist:[]};state.fusionAssign={};state.fusionLockedDate='';state.brawlActiveDate=new Date().toDateString();selectedBrawlIdx=0;saveState();updateBrawlUI();maybeOpenFusion();renderDailyAttrs();}
+function resetBrawl(){if(!checkUnlock('brawl')){alert('当前无开放权限！需达到 '+UNLOCK.brawl.name);return;}if(brawlLockedGate())return;
+  if(state.brawlDrawDate===new Date().toDateString()){alert('⚔️ 今日乱斗属性已锁定，无法修改');return;}state.brawl={drawn:[],hist:[]};state.fusionAssign={};state.fusionLockedDate='';state.brawlActiveDate=new Date().toDateString();selectedBrawlIdx=0;saveState();updateBrawlUI();maybeOpenFusion();renderDailyAttrs();}
 function useBrawlChange(){
   if(!checkUnlock('brawl')){alert('当前无开放权限！需达到 '+UNLOCK.brawl.name);return;}
+  if(brawlLockedGate())return;
   if(state.brawlDrawDate===new Date().toDateString()){alert('⚔️ 今日乱斗属性已锁定，无法修改');return;}
   if((state.inventory.change_ticket||0)<1){alert('属性变更券不足');return;}
   if(state.brawl.hist.length===0){alert('请先抽取乱斗属性');return;}
@@ -4972,6 +5046,7 @@ function useBrawlChange(){
 }
 function useBrawlDraw(){
   if(!checkUnlock('brawl')){alert('当前无开放权限！需达到 '+UNLOCK.brawl.name);return;}
+  if(brawlLockedGate())return;
   if(state.brawlDrawDate===new Date().toDateString()){alert('⚔️ 今日乱斗属性已锁定，无法修改');return;}
   const needed=Math.pow(2,state.brawlExtraDrawsToday);
   if((state.inventory.draw_ticket||0)<needed){alert('需'+needed+'张抽取券，当前'+(state.inventory.draw_ticket||0));return;}
@@ -5082,36 +5157,17 @@ function selectRerollKeep(useNew){
 function resetAllPassive(){if(!checkUnlock('passive')){alert('当前无开放权限！需达到 '+UNLOCK.passive.name);return;}alert('功能属性一旦装备将长期生效，不能像天赋一样自由卸下；如需更换，请使用「特殊属性重铸券」。');}
 /* ===== v1.4.6 新增系统：日历 / 杯赛 / 影子竞技 / 升级预览 ===== */
 let calCursor=new Date();calCursor.setDate(1);
-function calShift(n){calCursor.setMonth(calCursor.getMonth()+n);renderCalendar();}
+
+
 function normHistDate(s){const p=s.split('/').map(Number);if(p.length<3)return s;return p[0]+'-'+String(p[1]).padStart(2,'0')+'-'+String(p[2]).padStart(2,'0');}
 function getWeekDates(wk){const start=parseDateOnly(wk);const out=[];for(let i=0;i<7;i++){const d=new Date(start+i*86400000);out.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'));}return out;}
-function renderCalendar(){
-  if(!window.__calInited){calCursor=new Date();window.__calInited=true;}
-  const box=document.getElementById('cal-grid');if(!box)return;
-  const y=calCursor.getFullYear(),m=calCursor.getMonth();
-  document.getElementById('cal-title').textContent=y+' 年 '+(m+1)+' 月';
-  const pad=n=>String(n).padStart(2,'0');
-  const todayDs=new Date().getFullYear()+'-'+pad(new Date().getMonth()+1)+'-'+pad(new Date().getDate());
-  const settled={};(state.dailyHistory||[]).forEach(d=>{settled[normHistDate(d.date)]=1;});
-  const cupDates={};for(let d=1;d<=dim;d++){cupDates[y+'-'+pad(m+1)+'-'+pad(d)]=1;}getWeekDates(getCupState().weekKey).forEach(d=>{cupDates[d]=1;});
-  const firstDow=(new Date(y,m,1).getDay()+6)%7;const dim=new Date(y,m+1,0).getDate();
-  let html='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:11px;color:#8e8e93;margin-bottom:4px;text-align:center;">';
-  ['一','二','三','四','五','六','日'].forEach(d=>{html+='<div style="padding:4px 0;">'+d+'</div>';});
-  html+='</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;">';
-  for(let i=0;i<firstDow;i++)html+='<div></div>';
-  for(let d=1;d<=dim;d++){
-    const ds=y+'-'+pad(m+1)+'-'+pad(d);
-    const dots=(settled[ds]?'<span style="color:#34c759;">●</span>':'')+(cupDates[ds]?'<span style="color:#af52de;">●</span>':'')+(d===1?'<span style="color:#ff9500;">★</span>':'');
-    html+='<div style="min-height:44px;border:1px solid '+(ds===todayDs?'#007aff':'#e5e5ea')+';border-radius:8px;padding:4px;font-size:12px;'+(ds===todayDs?'background:#007aff10;font-weight:700;':'')+'"><div>'+d+'</div><div style="font-size:9px;letter-spacing:1px;min-height:12px;">'+dots+'</div></div>';
-  }
-  html+='</div>';
-  box.innerHTML=html;
-  document.getElementById('cal-legend').innerHTML='<div style="display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:#6e6e73;margin-top:10px;"><span><span style="color:#34c759;">●</span> 已结算日</span><span><span style="color:#af52de;">●</span> 本周杯赛</span><span><span style="color:#ff9500;">★</span> 竞技新赛季（每月1日）</span></div>';
-}
+
+
 function getEnergy(){const today=new Date().toDateString();if(!state.energy||state.energy.date!==today){state.energy={v:Math.min(10,((state.energy&&typeof state.energy.v==='number')?state.energy.v:10)),date:today};saveState();}return state.energy;}
 function countTagSettleDays(){const keys={};(state.dailyHistory||[]).forEach(d=>{(d.tasks||[]).forEach(t=>{if(t.completed&&t.tagId)keys[d.date+'|'+t.tagId]=1;});});const days={};Object.keys(keys).forEach(k=>{const tagId=k.split('|')[1];days[tagId]=(days[tagId]||0)+1;});return days;}
-function getCupState(){const wk=getShopWeekKey();if(!state.cupState||state.cupState.weekKey!==wk){const usage=countTagSettleDays();const pool=TASK_TAGS.filter(t=>t.path.length>=2);pool.sort((a,b)=>(usage[a.id]||0)-(usage[b.id]||0));const pick=pool[Math.floor(Math.random()*Math.min(5,pool.length))];state.cupState={weekKey:wk,tagId:pick.id,enrolled:false,claimed:false};saveState();}return state.cupState;}
-function cupWeekScore(){const cs=getCupState();const dates=getWeekDates(cs.weekKey);let score=0;(state.dailyHistory||[]).forEach(d=>{if(dates.indexOf(normHistDate(d.date))===-1)return;let counted=0;(d.tasks||[]).forEach(t=>{if(counted>=3)return;if(t.completed&&t.tagId===cs.tagId){const tag=getTag(t.tagId);const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);if(tag&&tag.maxEp>0){score+=Math.round(own/tag.maxEp*100);if(own>=tag.maxEp)score+=20;}counted++;}});});return score;}
+
+
+function cupWeekScore(){const cs=getCupState();const dates=getWeekDates(cs.weekKey);let score=0;(state.dailyHistory||[]).forEach(d=>{if(dates.indexOf(normHistDate(d.date))===-1)return;let counted=0;(d.tasks||[]).forEach(t=>{if(counted>=3)return;if(t.completed&&(t.swapTagId||t.tagId)===cs.tagId){const tag=getTag(t.tagId);const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);if(tag&&tag.maxEp>0){score+=Math.round(own/tag.maxEp*100);if(own>=tag.maxEp)score+=20;}counted++;}});});return score;}
 function getCupDaily(){const today=new Date().toDateString();if(!state.cupDaily||state.cupDaily.date!==today){state.cupDaily={date:today,claimed:{}};saveState();}return state.cupDaily;}
 function todayLiveDone(){return (state.todayTasks||[]).filter(t=>t.completed&&t.completed&&t.baseEp!=='');}
 function getDailyGoalSet(){const alt=new Date().getDate()%2===0;const done=todayLiveDone();const ep=done.reduce((s,t)=>s+(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0),0);
@@ -5119,21 +5175,14 @@ function getDailyGoalSet(){const alt=new Date().getDate()%2===0;const done=today
   const setB=[{id:'b1',desc:'今日完成 3 个任务',ok:function(){return done.length>=3;},rw:{points:60}},{id:'b2',desc:'今日覆盖 2 个不同标签',ok:function(){return new Set(done.map(function(t){return t.tagId;})).size>=2;},rw:{points:50}},{id:'b3',desc:'今日 1 个任务 EP 达到其标签上限',ok:function(){return done.some(function(t){const tag=getTag(t.tagId);return tag&&((parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0))>=tag.maxEp;});},rw:{points:80}}];
   return alt?setA:setB;}
 function claimDailyGoal(id){const g=getDailyGoalSet().filter(x=>x.id===id)[0];if(!g)return;const cd=getCupDaily();if(cd.claimed[id])return;if(!g.ok()){alert('目标尚未完成');return;}if(g.rw.points)state.points+=g.rw.points;cd.claimed[id]=true;saveState();updateTopBar();renderCupUI();showGainModal('📋 每日任务完成',[['积分','+'+g.rw.points]]);}
-function enrollCup(){const cs=getCupState();if(cs.enrolled)return;const en=getEnergy();if(en.v<3){alert('⚡ 能量不足（需 3 点），每日结算 +3 能量');return;}en.v-=3;cs.enrolled=true;saveState();renderCupUI();}
+
+
 function buyEnergy(){const today=new Date().toDateString();if(state.energyBuyDate===today){alert('今日已购买过能量');return;}if(state.tokens<40){alert('代币不足（需 40）');return;}const en=getEnergy();state.tokens-=40;en.v=Math.min(10,en.v+5);state.energyBuyDate=today;saveState();updateTopBar();renderCupUI();}
-function claimCup(){const cs=getCupState();if(!cs.enrolled||cs.claimed)return;const s=cupWeekScore();let rank,rw;if(s>=260){rank='冠军';rw={tokens:30,draw_ticket:1};}else if(s>=180){rank='亚军';rw={tokens:20};}else if(s>=100){rank='季军';rw={tokens:10};}else{rank='完赛';rw={points:100};}
-  Object.keys(rw).forEach(function(k){if(k==='points')state.points+=rw[k];else if(k==='tokens')state.tokens+=rw[k];else state.inventory[k]=(state.inventory[k]||0)+rw[k];});
-  cs.claimed=true;saveState();updateTopBar();updateShopUI();renderCupUI();alert('🏆 杯赛结算：【'+rank+'】（'+s+' 分）');}
+
+
 function claimMatTier(mat,idx){claimDayTier(mat,idx);}
-function renderCupUI(){
-  const en=getEnergy();
-  document.getElementById('cup-energy-panel').innerHTML='<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span style="font-weight:600;color:#ff9500;">⚡ 能量 '+en.v+' / 10</span><span style="color:#8e8e93;">每日结算 +3 · 报名消耗 3</span></div><div style="height:10px;background:#e5e5ea;border-radius:5px;overflow:hidden;"><div style="height:100%;width:'+(en.v*10)+'%;background:linear-gradient(90deg,#ff9500,#ff3b30);border-radius:5px;"></div></div><button class="btn-secondary" style="width:100%;margin-top:6px;font-size:12px;" onclick="buyEnergy()">🪙 40 代币购买 +5 能量（每日限 1 次）</button>';
-  const cd=getCupDaily();const goals=getDailyGoalSet();
-  document.getElementById('cup-daily').innerHTML=goals.map(function(g){const ok=g.ok();const claimed=!!cd.claimed[g.id];return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f2f2f7;"><span style="font-size:13px;">'+(claimed?'✅ ':ok?'🟢 ':'⚪ ')+g.desc+' <span style="font-size:11px;color:#af52de;">+'+g.rw.points+' 积分</span></span><button class="btn-primary" style="padding:4px 12px;font-size:12px;'+(ok&&!claimed?'':'opacity:.4')+'" '+(ok&&!claimed?'onclick="claimDailyGoal(\''+g.id+'\')"':'disabled')+'>'+(claimed?'已领取':'领取')+'</button></div>';}).join('');
-  const cs=getCupState();const tag=getTag(cs.tagId);const score=cupWeekScore();
-  let rankTxt='完赛奖';if(score>=260)rankTxt='冠军';else if(score>=180)rankTxt='亚军';else if(score>=100)rankTxt='季军';
-  document.getElementById('cup-weekly').innerHTML='<div style="font-size:13px;line-height:1.7;">指定标签：<b>'+(tag?tag.path.join(' · '):'')+'</b><br>当前得分：<b style="color:#007aff;">'+score+'</b>（每日最多计入 3 个任务 · 质量分/上限×100 + 达上限+20）<br>当前档位：<b style="color:#ff9500;">'+rankTxt+'</b>（冠≥260 / 亚≥180 / 季≥100）<br>奖励：冠军 🪙30+🎟️1 · 亚军 🪙20 · 季军 🪙10 · 完赛 💰100</div>'+(cs.enrolled?(cs.claimed?'<div style="margin-top:8px;font-size:12px;color:#34c759;">✅ 本周已结算领奖</div>':'<button class="btn-primary" style="width:100%;margin-top:8px;" onclick="claimCup()">🏁 按当前分数结算领奖</button>'):'<button class="btn-accent" style="width:100%;margin-top:8px;" onclick="enrollCup()">⚡ 消耗 3 能量报名参赛</button>');
-}
+
+
 const RACE_LEAGUES=[{n:'青铜',min:0,rw:{points:100}},{n:'白银',min:100,rw:{points:150}},{n:'黄金',min:200,rw:{points:200,draw_ticket:1}},{n:'铂金',min:350,rw:{tokens:30,draw_ticket:1,sp_core:1}},{n:'钻石',min:500,rw:{tokens:60,sp_core:1}},{n:'车王',min:700,rw:{tokens:100,brawl_vip:1,sp_core:2}}];
 function rankLeague(rating){let cur=RACE_LEAGUES[0];RACE_LEAGUES.forEach(function(l){if(rating>=l.min)cur=l;});return cur;}
 function nextLeague(rating){for(let i=0;i<RACE_LEAGUES.length;i++){if(rating<RACE_LEAGUES[i].min)return RACE_LEAGUES[i];}return null;}
@@ -5166,104 +5215,38 @@ function getRaceOpponents(){
   return [{id:'last',name:'上周的你',sub:'本周已过天数 vs 上周同期',ghost:g1,pts:20,neg:10},{id:'avg',name:'30天的你',sub:'近30天日均 × 本周已过天数',ghost:g2,pts:30,neg:15},{id:'best',name:'历史最佳的你',sub:'历史最佳周同期 × 0.9',ghost:g3,pts:40,neg:20}].map(function(o){o.mine=mine;o.win=mine>o.ghost;return o;});
 }
 function showRaceToast(op,win,delta){const box=document.getElementById('notif-container');if(!box)return;const card=document.createElement('div');card.className='notif-card';card.style.borderLeftColor=win?'#34c759':'#ff3b30';card.innerHTML='<div class="notif-title">'+(win?'🏆 竞技胜利':'💥 竞技失利')+' · vs '+op.name+'</div><div class="notif-body">'+op.mine+' : '+op.ghost+' · 积分 '+(delta>=0?'+':'')+delta+'</div>';box.appendChild(card);requestAnimationFrame(function(){card.classList.add('show');});setTimeout(function(){card.classList.add('hide');setTimeout(function(){card.remove();},300);},5000);}
-function race(id){
-  const r=getRacing();
-  if(r.raced>=3){alert('今日 3 场挑战已用完，明天再来');return;}
-  let op=null;(getRaceOpponents().forEach(function(o){if(o.id===id)op=o;}));
-  if(!op)return;
-  showModal('⚔️ 挑战确认','对手：<b>'+op.name+'</b><br>对手分数：<b>'+op.ghost+'</b> EP<br>你当前本周：<b>'+op.mine+'</b> EP<br><br>按当前实时分数判定胜负，确认挑战？',function(){
-    r.raced++;
-    const win=op.mine>op.ghost;
-    const delta=win?op.pts:-op.neg;
-    const today=new Date().toDateString();
-    if(win&&r.firstWinDate!==today){state.points+=100;r.firstWinDate=today;}
-    r.rating=Math.max(0,r.rating+delta);
-    r.results.unshift({name:op.name,win:win,mine:op.mine,ghost:op.ghost,delta:delta});
-    if(r.results.length>10)r.results.length=10;
-    saveState();updateTopBar();renderRaceUI();closeModal();showRaceToast(op,win,delta);
-  });
-}
-function renderRaceUI(){
-  const r=getRacing();const lg=rankLeague(r.rating);const nx=nextLeague(r.rating);
-  const leagueIdx=RACE_LEAGUES.indexOf(lg);
-  const pct=nx?Math.max(0,Math.min(100,(r.rating-lg.min)/(nx.min-lg.min)*100)):100;
-  const daysLeft=new Date(new Date().getFullYear(),new Date().getMonth()+1,0).getDate()-new Date().getDate();
-  document.getElementById('race-header').innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:17px;font-weight:600;">⚔️ 影子竞技</span><span style="font-size:12px;color:#8e8e93;">赛季 '+r.season+' · 剩 '+daysLeft+' 天</span></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;"><span style="font-size:24px;">'+(leagueIdx>=5?'👑':leagueIdx>=3?'💠':'🛡️')+'</span><div style="flex:1;"><div style="display:flex;justify-content:space-between;font-size:12px;"><b>'+lg.n+'</b><span style="color:#8e8e93;">'+r.rating+(nx?' / '+nx.min+' → '+nx.n:' / MAX')+'</span></div><div style="height:8px;background:#e5e5ea;border-radius:4px;overflow:hidden;margin-top:3px;"><div style="height:100%;width:'+pct+'%;background:linear-gradient(90deg,#007aff,#af52de);"></div></div></div></div><div style="font-size:11px;color:#8e8e93;">今日挑战 <b>'+(3-r.raced)+'</b> / 3 场 · 首胜每日 +100 积分 · 负场只扣竞技积分</div>';
-  const ops=getRaceOpponents();
-  document.getElementById('race-opponents').innerHTML=ops.map(function(o){return '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f2f2f7;"><div><div style="font-size:13px;font-weight:500;">👤 '+o.name+' <span style="font-size:11px;color:'+(o.win?'#34c759':'#ff3b30')+';">'+(o.win?'可胜':'落后')+'</span></div><div style="font-size:11px;color:#8e8e93;">'+o.sub+' · 对手 <b>'+o.ghost+'</b> vs 你 <b>'+o.mine+'</b></div><div style="font-size:10px;color:#8e8e93;">胜 +'+o.pts+(r.streak>0?'（连胜再+'+Math.min(r.streak,5)*5+'）':'')+' / 负 -'+o.neg+'</div></div><button class="btn-primary" style="padding:5px 14px;font-size:12px;'+(r.raced>=3?'opacity:.4':'')+'" '+(r.raced>=3?'disabled':'onclick="race(\''+o.id+'\')"')+'>挑战</button></div>';}).join('');
-  document.getElementById('race-history').innerHTML=r.results.length?r.results.map(function(x){return '<div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid #f2f2f7;"><span>'+(x.win?'🟢':'🔴')+' vs '+x.name+' · '+x.mine+' : '+x.ghost+'</span><b style="color:'+(x.delta>=0?'#007aff':'#ff3b30')+'">'+(x.delta>=0?'+':'')+x.delta+'</b></div>';}).join(''):'<div style="font-size:12px;color:#8e8e93;text-align:center;padding:8px;">本赛季还没有比赛记录</div>';
-}
-function renderUpgradeUI(){
-  const box=document.getElementById('upgrade-preview');if(!box)return;
-  const usage=countTagSettleDays();
-  const rows=TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;}).map(function(t){return {t:t,days:usage[t.id]||0};}).sort(function(a,b){return b.days-a.days;}).slice(0,8);
-  box.innerHTML='<div style="font-size:12px;color:#6e6e73;margin-bottom:8px;">熟练度已在后台按历史结算自动累计（每标签每日最多计 1 次），四维改装与 SP 运动版即将开放。</div>'+rows.map(function(r){const pct=Math.min(100,r.days/353*100);return '<div style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span style="font-weight:500;">'+r.t.path.join(' · ')+'</span><span style="color:#8e8e93;">'+r.days+' 天</span></div><div style="height:7px;background:#e5e5ea;border-radius:4px;overflow:hidden;"><div style="height:100%;width:'+pct+'%;background:#007aff;border-radius:4px;"></div></div></div>';}).join('');
-}
+
+
+
+
+
+
 /* ===== v1.4.6 完整版：四维改装 / 杯赛三赛制 / 竞技连胜 / 材料 ===== */
 const UP_PARTS=[{k:'spd',n:'训练印记',icon:'🎖️',desc:'主：极速 maxEp +3%/级 ｜ 副：氮增 +0.5pp/级',mat:'mark',matN:'训练印记'},{k:'acc',n:'冲刺奖章',icon:'⚡',desc:'主：加速 连击 +2%/级 ｜ 副：极速 +1%/级',mat:'medal',matN:'冲刺奖章'},{k:'ctl',n:'全勤徽章',icon:'🛡️',desc:'主：操控 罚率 -2%/级 ｜ 副：加速 +0.5%/级',mat:'badge',matN:'全勤徽章'},{k:'nit',n:'巅峰凭证',icon:'🧪',desc:'主：氮增 占比 +1pp/级 ｜ 副：操控 -0.5%/级',mat:'peak',matN:'巅峰凭证'}];
 const UP_DAYS=[2,7,16,30,50,80,122,178,253,353];
 const UP_NEED=[0,0,0,0,0,1,2,3,4,5];
 const UP_COST=[40,60,100,150,210,300,400,530,680,880];
 const UP_TOK=[0,0,0,0,0,5,8,12,16,20];
-function getTagUp(tagId){state.tagUp=state.tagUp||{};if(!state.tagUp[tagId])state.tagUp[tagId]={spd:0,acc:0,ctl:0,nit:0,sp:false};return state.tagUp[tagId];}
-function getTagMats(tagId){state.tagMats=state.tagMats||{};if(!state.tagMats[tagId])state.tagMats[tagId]={mark:0,medal:0,badge:0,peak:0};return state.tagMats[tagId];}
-function baseRatioOf(t,tag){if(!tag)return 0.1;const up=(state.tagUp||{})[tag.id];if(!up)return 0.1;if(up.sp)return 0.1;return Math.min(0.2,0.1+0.01*(up.nit||0)+0.005*(up.spd||0));}
+
+
+
+
+
+
 function requiredBaseOf(t){const tag=getTag(t.tagId);if(!tag)return 50;const et=eliteTune(t.tagId);const rr=et?(1+(et.ratioR-1)*eliteStrength(t.tagId)):1;return Math.round(tag.maxEp*baseRatioOf(t,tag)*rr);}
-function computeTagChains(done){const cnt={};(done||[]).forEach(function(t){const c=(cnt[t.tagId]||0)+1;cnt[t.tagId]=c;t._chain=c;});}
-function tagFreqClass(tag){const p=tag.path.join(' ');if(p.indexOf('背单词')>-1)return 'hi';if(p.indexOf('模考')>-1)return 'low';return 'mid';}
+
+
+
+
 const SP_RECIPE={S:{label:'S',mats:12,core:6,tokens:260,ult:4},A:{label:'A',mats:10,core:5,tokens:200,ult:3},B:{label:'B',mats:8,core:4,tokens:150,ult:3},C:{label:'C',mats:6,core:3,tokens:100,ult:2},D:{label:'D',mats:5,core:2,tokens:70,ult:2}};
-function upgradeLine(tagId,part){
-  const up=getTagUp(tagId);const lv=up[part.k];if(lv>=10){alert('该线已满级');return;}
-  const days=countTagSettleDays()[tagId]||0;
-  if(days<UP_DAYS[lv]){alert('结算天数不足：需要累计 '+UP_DAYS[lv]+' 天（当前 '+days+' 天）');return;}
-  const mats=getTagMats(tagId);
-  if((mats[part.mat]||0)<UP_NEED[lv]){alert(part.matN+' 不足：需要 '+UP_NEED[lv]+'（当前 '+mats[part.mat]+'）');return;}
-  if(state.points<UP_COST[lv]){alert('积分不足：需要 '+UP_COST[lv]);return;}
-  const mile=UP_MILE[lv];
-  if(mile){if(state.tokens<mile){alert('突破需代币 ×'+mile+'（当前 '+state.tokens+'）');return;}state.tokens-=mile;}
-  state.points-=UP_COST[lv];mats[part.mat]-=UP_NEED[lv];up[part.k]=lv+1;
-  saveState();updateTopBar();updateShopUI();renderUpgradeUI();
-  if(up.spd===10&&up.acc===10&&up.ctl===10&&up.nit===10)showGainModal('🏎️ 四线满级！',[['状态','可觉醒 SP 运动版','#ff9500']]);
-  else showGainModal('🔧 改装升级 · '+part.n,[[part.n,'Lv '+(lv+1)],['消耗',UP_COST[lv]+' 积分 · '+UP_NEED[lv]+' 材料']]);
-}
-function awakenSP(tagId){
-  const up=getTagUp(tagId);const tag=getTag(tagId);if(!tag)return;
-  if(!(up.spd===10&&up.acc===10&&up.ctl===10&&up.nit===10)){alert('需要四线全部 Lv10');return;}
-  if(up.sp){alert('已是 SP 运动版');return;}
-  const r=SP_RECIPE[tagFreqClass(tag)];const days=countTagSettleDays()[tagId]||0;
-  showModal('🏎️ SP 运动版觉醒','标签：<b>'+tag.path.join(' · ')+'</b>（'+r.n+'配方）<br><br>材料：结算天数 '+days+'/'+r.days+' · 精研核心 '+(state.inventory.sp_core||0)+'/'+r.core+' · 代币 '+state.tokens+'/'+r.tokens+'<br><br>觉醒后（SP觉醒后）：最大EP +25%（四线满基础上合计+65%）、罚率再减半、连击×2、完成占比回落至10%——减氮增换极速，极速+氮增合计略大于原车<br><br>确认觉醒？',function(){
-    if(days<r.days){alert('结算天数不足');closeModal();return;}
-    if((state.inventory.sp_core||0)<r.core){alert('精研核心不足');closeModal();return;}
-    if(state.tokens<r.tokens){alert('代币不足');closeModal();return;}
-    state.inventory.sp_core-=r.core;state.tokens-=r.tokens;up.sp=true;
-    saveState();updateTopBar();updateShopUI();renderUpgradeUI();closeModal();
-    sendSystemMail('🏎️ 运动版觉醒 · '+tag.path.join('·'),'你的标签「'+tag.path.join(' · ')+'」已觉醒为 SP 运动版！附件：积分×200。',{points:200});
-    showGainModal('🏎️ SP 运动版觉醒！',[['标签','「'+tag.path.join('·')+'」','#ff9500'],['maxEp',getTag(tagId).maxEp+'（+65%）'],['特性','罚率减半 · 连击×2 · 占比回落10%']],'贺电已发送至邮箱');
-  });
-}
-function sellSurplusMats(){
-  let gain=0,n=0;
-  Object.keys(state.tagMats||{}).forEach(function(tid){const m=state.tagMats[tid];Object.keys(m).forEach(function(k){const s=Math.max(0,(m[k]||0)-40);if(s>0){m[k]-=s;gain+=s*5;n+=s;}});});
-  if(!n){alert('没有溢出材料（各材料保留40个战备存量）');return;}
-  state.points+=gain;saveState();updateTopBar();renderUpgradeUI();showGainModal('♻️ 材料回收',[['回收数量','×'+n],['积分','+'+gain]]);
-}
-function renderUpgradeUI(){
-  const box=document.getElementById('upgrade-list');if(!box)return;
-  const usage=countTagSettleDays();
-  const rows=TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;}).map(function(t){return {raw:t,tag:getTag(t.id),days:usage[t.id]||0};}).sort(function(a,b){return b.days-a.days;});
-  box.innerHTML=rows.map(function(r){
-    const up=getTagUp(r.raw.id);const mats=getTagMats(r.raw.id);
-    const pips=function(lv){let h='';for(let i=0;i<10;i++)h+='<span style="display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:2px;background:'+(i<lv?'#007aff':'#e5e5ea')+';"></span>';return h;};
-    const lines=UP_PARTS.map(function(p){
-      const lv=up[p.k];const maxed=lv>=10;
-      const needTxt=maxed?'MAX':(UP_NEED[lv]+' '+p.matN+' · 💰'+UP_COST[lv]+(UP_MILE[lv]?' · 🪙'+UP_MILE[lv]:'')+' · '+UP_DAYS[lv]+'天');
-      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;"><span style="flex:1;">'+p.icon+' <b>'+p.n+'</b> Lv'+lv+' '+pips(lv)+'<br><span style="font-size:10px;color:#8e8e93;">'+p.desc+' ｜ 持有 '+p.matN+'×'+(mats[p.mat]||0)+' ｜ '+(maxed?'<span style="color:#34c759;">已满级</span>':'下级需 '+needTxt)+'</span></span>'+(maxed?'':'<button class="btn-primary" style="padding:3px 10px;font-size:11px;white-space:nowrap;" onclick="upgradeLine(\''+r.raw.id+'\',UP_PARTS['+UP_PARTS.indexOf(p)+'])">升级</button>')+'</div>';
-    }).join('');
-    const spReady=up.spd===10&&up.acc===10&&up.ctl===10&&up.nit===10&&!up.sp;
-    const spLine=up.sp?'<div style="font-size:11px;color:#ff9500;font-weight:700;margin-top:4px;">🏎️ SP 运动版已觉醒（maxEp+'+(r.tag.maxEp-r.raw.maxEp>0?Math.round((r.tag.maxEp/r.raw.maxEp-1)*100):0)+'% · 罚率减半 · 连击×2 · 完成占比按当前改装规则）</div>':(spReady?'<button class="btn-accent" style="width:100%;margin-top:6px;padding:7px;font-size:12px;" onclick="awakenSP(\''+r.raw.id+'\')">🏎️ SP 运动版觉醒（'+SP_RECIPE[tagFreqClass(r.raw)].n+'配方）</button>':'');
-    return '<div style="border:1px solid #e5e5ea;border-radius:10px;padding:10px;margin-bottom:8px;"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:4px;"><span>'+r.raw.path.join(' · ')+'</span><span style="font-size:11px;color:#8e8e93;font-weight:400;">结算 '+r.days+' 天 · max '+r.tag.maxEp+'</span></div>'+lines+spLine+'</div>';
-  }).join('');
-}
+
+
+
+
+
+
+
+
 /* ===== 杯赛 v2：四档报名 + 双周耐力赛 + 限时产出赛 ===== */
 const CUP_TIERS=[{n:'业余',days:0,th:[150,100,50],rw:[{points:100},{tokens:10},{points:60}]},{n:'新人',days:15,th:[200,140,70],rw:[{tokens:15,change_ticket:1},{tokens:12},{points:80}]},{n:'强手',days:60,th:[260,180,100],rw:[{tokens:25,exp25:1},{tokens:18,change_ticket:1},{points:120,exp12:1}]},{n:'车王',days:150,th:[340,240,140],rw:[{tokens:50,sp_core:1,ult_upgrade:1},{tokens:30,exp3:1},{tokens:20,draw_ticket:1}]}];
 function getCupState(){
@@ -5285,7 +5268,7 @@ function cupScoreFor(tagId,dates){
     let counted=0;
     (d.tasks||[]).forEach(function(t){
       if(counted>=3)return;
-      if(t.completed&&t.tagId===tagId){
+      if(t.completed&&(t.swapTagId||t.tagId)===tagId){
         const tag=getTag(t.tagId);const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
         if(tag&&tag.maxEp>0){score+=Math.round(own/tag.maxEp*100);if(own>=tag.maxEp)score+=20;}
         counted++;
@@ -5364,31 +5347,8 @@ function race(id){
   });
 }
 /* ===== 日历 v2：限时赛金色标记 ===== */
-function renderCalendar(){
-  const box=document.getElementById('cal-grid');if(!box)return;
-  const y=calCursor.getFullYear(),m=calCursor.getMonth();
-  document.getElementById('cal-title').textContent=y+' 年 '+(m+1)+' 月';
-  const pad=function(n){return String(n).padStart(2,'0');};
-  const todayDs=new Date().getFullYear()+'-'+pad(new Date().getMonth()+1)+'-'+pad(new Date().getDate());
-  const settled={};(state.dailyHistory||[]).forEach(function(d){settled[normHistDate(d.date)]=1;});
-  const cupDates={};getWeekDates(getCupState().weekKey).forEach(function(d){cupDates[d]=1;});
-  
-  const limDates={};const lc=getLimitedCup();if(lc&&lc.until>Date.now())limitedDates().forEach(function(d){limDates[d]=1;});
-  const firstDow=(new Date(y,m,1).getDay()+6)%7;const dim=new Date(y,m+1,0).getDate();
-  let html='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:11px;color:#8e8e93;margin-bottom:4px;text-align:center;">';
-  ['一','二','三','四','五','六','日'].forEach(function(d){html+='<div style="padding:4px 0;">'+d+'</div>';});
-  html+='</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;">';
-  for(let i=0;i<firstDow;i++)html+='<div></div>';
-  for(let d=1;d<=dim;d++){
-    const ds=y+'-'+pad(m+1)+'-'+pad(d);
-    const dt=new Date(y,m,d);const nowD=new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate());
-    const dots=(settled[ds]&&dt<nowD?'<span style="color:#34c759;">●</span>':'')+(cupDates[ds]?'<span style="color:#af52de;">●</span>':'')+(limDates[ds]?'<span style="color:#ff9500;">★</span>':'')+(d===1?'<span style="color:#ff9500;">★</span>':'');
-    html+='<div style="min-height:44px;border:1px solid '+(ds===todayDs?'#007aff':'#e5e5ea')+';border-radius:8px;padding:4px;font-size:12px;'+(ds===todayDs?'background:#007aff10;font-weight:700;':'')+'"><div>'+d+'</div><div style="font-size:9px;letter-spacing:1px;min-height:12px;">'+dots+'</div></div>';
-  }
-  html+='</div>';
-  box.innerHTML=html;
-  document.getElementById('cal-legend').innerHTML='<div style="display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:#6e6e73;margin-top:10px;"><span><span style="color:#34c759;">●</span> 已结算日</span><span><span style="color:#af52de;">●</span> 本周杯赛</span><span><span style="color:#ff9500;">★</span> 限时赛/新赛季</span></div>';
-}
+
+
 /* ===== 成就计数器（自动化） ===== */
 function countDiscardReviewTasks(){let n=0;(state.dailyHistory||[]).forEach(function(d){(d.tasks||[]).forEach(function(t){if(t.completed&&isDiscardReviewTag(getTag(t.tagId)))n++;});});return n;}
 function countMockTasks(){let n=0;(state.dailyHistory||[]).forEach(function(d){(d.tasks||[]).forEach(function(t){if(t.completed&&tType(getTag(t.tagId))==='mk')n++;});});return n;}
@@ -5414,7 +5374,8 @@ function getAchieveProgress(it){
 }
 /* ===== v1.4.6 定稿：日杯 / 月杯 / 公告栏 / 指南 / 升级树形折叠 ===== */
 function renderGuidePage(){/* 静态页，无需渲染 */}
-function dayCupHash(ds){let h=0;for(let i=0;i<ds.length;i++)h=(h*31+ds.charCodeAt(i))>>>0;return h;}
+
+
 const DAY_CUP_KINDS=['points','mark','medal','badge','peak'];
 function dayCupHash(ds){let h=0;for(let i=0;i<ds.length;i++)h=(h*31+ds.charCodeAt(i))>>>0;return h;}
 function getDayCupInfo(){
@@ -5558,234 +5519,40 @@ function getLimitedCup(){
   }
   return state.cupLimited;
 }
-function settleLimited(lc){
-  if(!lc||lc.settled)return;
-  lc.settled=true;lc.claimed=true;
-  const dates=[];for(let i=0;i<3;i++){const d=new Date(lc.from+i*86400000);dates.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'));}
-  const tag=getTag(lc.tagId);const s=cupScoreFor(lc.tagId,dates);
-  if(lc.enrolled){
-    const isPts=lc.type==='points';const th=isPts?[600,400,240]:[220,150,80];const rws=isPts?PTS_RW:LIM_RW;
-    const rank=cupRank(s,th);const names=['冠军','亚军','季军','完赛'];
-    grantCumulative(rws,rank,lc.tagId);saveState();updateTopBar();updateShopUI();
-    sendSystemMail((isPts?'🎯 积分杯':'⚡ 限时赛')+'结算 · 【'+names[rank]+'】','指定「'+(tag?tag.path.join(' · '):'')+'」最终得分 '+s+'，奖励已发放。',{});
-  }
-}
+
+
 function limitedDates(){const lc=getLimitedCup();const out=[];if(!lc)return out;for(let i=0;i<3;i++){const d=new Date(lc.from+i*86400000);out.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'));}return out;}
-function renderCupUI(){
-  settleDayCups();getWeekendCup();const en=getEnergy();
-  document.getElementById('cup-energy-panel').innerHTML='<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span style="font-weight:600;color:#ff9500;">⚡ 能量 '+en.v+' / 10</span><span style="color:#8e8e93;">每日结算 +3 · 日杯1 / 周杯3 / 限时2 / 月杯5</span></div><div style="height:10px;background:#e5e5ea;border-radius:5px;overflow:hidden;"><div style="height:100%;width:'+(en.v*10)+'%;background:linear-gradient(90deg,#ff9500,#ff3b30);border-radius:5px;"></div></div><button class="btn-secondary" style="width:100%;margin-top:6px;font-size:12px;" onclick="buyEnergy()">🪙 40 代币购买 +5 能量（每日限 1 次）</button>';
-  const cd=getCupDaily();const goals=getDailyGoalSet();
-  document.getElementById('cup-daily').innerHTML=goals.map(function(g){const ok=g.ok();const claimed=!!cd.claimed[g.id];return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f2f2f7;"><span style="font-size:13px;">'+(claimed?'✅ ':ok?'🟢 ':'⚪ ')+g.desc+' <span style="font-size:11px;color:#af52de;">+'+g.rw.points+' 积分</span></span><button class="btn-primary" style="padding:4px 12px;font-size:12px;'+(ok&&!claimed?'':'opacity:.4')+'" '+(ok&&!claimed?'onclick="claimDailyGoal(\''+g.id+'\')"':'disabled')+'>'+(claimed?'已领取':'领取')+'</button></div>';}).join('');
-  const dci=getDayCupInfo();const dtag=getTag(dci.tagId);const dkey='dcr_'+dci.dateStr;const dst=state[dkey];
-  document.getElementById('cup-dailyrace').innerHTML=dci.active?
-    ('<div style="font-size:13px;line-height:1.7;">今日指定标签：<b>'+(dtag?dtag.path.join(' · '):'')+'</b> ｜ 冠≥300 / 亚≥240 / 季≥160 ｜ '+cupLadder([300,240,160],DAY_RW)+'<br><span style="font-size:11px;color:#8e8e93;">⏳ 截止：今日 24:00 · 剩 '+fmtRemain(new Date().setHours(24,0,0,0)-Date.now())+'</span></div>'+(dst&&dst.enrolled?'<div style="margin-top:6px;font-size:12px;color:#007aff;">⏳ 成绩记录中 · 今晚 24:00 统一结算发放</div>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollDayCup()">⚡ 消耗 1 能量报名（仅记录成绩）</button>')):
-    ('<div style="font-size:13px;line-height:1.7;">今日无日杯。下一次：<b>'+dci.daysToActive+'</b> 天后（'+dci.dateStr+'）<br><span style="font-size:11px;color:#8e8e93;">提前一天邮件预告 · 结束后统一发放</span></div>');
-  const cs=getCupState();const tag=getTag(cs.tagId);const days=countTagSettleDays()[cs.tagId]||0;const score=cupScoreFor(cs.tagId,getWeekDates(cs.weekKey));
-  let tierHtml='';
-  CUP_TIERS.forEach(function(t,i){
-    const ok=days>=t.days;
-    tierHtml+='<button class="btn-secondary" style="flex:1;min-width:100px;padding:7px 4px;font-size:12px;'+(cs.enrolled&&cs.tier===i?'background:#007aff15;border-color:#007aff;':'')+(ok?'':'opacity:.45')+'" '+(cs.enrolled||!ok?'disabled':'onclick="enrollCup('+i+')"')+'><b>'+t.n+'</b><br><span style="font-size:10px;">'+t.days+'天门槛</span></button>';
-  });
-  const _wEnd=parseDateOnly(cs.weekKey)+7*86400000;
-  let wDeadline='<div style="margin-top:4px;font-size:11px;color:#8e8e93;">⏳ 截止：'+fmtDate(_wEnd)+' 0:00（下周一）· 剩 '+fmtRemain(_wEnd-Date.now())+'</div>';
-  let rankHtml='';
-  if(cs.enrolled){const t=CUP_TIERS[cs.tier];const rank=cupRank(score,t.th);const names=['冠军','亚军','季军','完赛'];
-    rankHtml='<div style="margin-top:6px;font-size:12px;">当前记录：<b style="color:#007aff;">'+score+'</b> 分 → 预计 <b style="color:#ff9500;">'+names[rank]+'</b>（'+t.th.join('/')+'）</div><div style="margin-top:4px;font-size:11px;color:#8e8e93;">⏳ 成绩记录中 · 周一 0:00 结束后统一邮件发放，以最终成绩定名次</div>'+wDeadline+cupLadder(t.th,t.rw);}
-  document.getElementById('cup-weekly').innerHTML='<div style="font-size:13px;line-height:1.7;">指定标签：<b>'+(tag?tag.path.join(' · '):'')+'</b> ｜ 你的结算天数：<b>'+days+'</b> 天<br>计分：每日最多计入 3 个该标签任务（质量分/上限×100 + 达上限+20）</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">'+tierHtml+'</div>'+rankHtml+wDeadline;
-  const mc=getMonthCup();const mtag=getTag(mc.tagId);const mscore=cupScoreFor(mc.tagId,getMonthDates());
-  document.getElementById('cup-month').innerHTML='<div style="font-size:13px;line-height:1.7;">本月指定标签：<b>'+(mtag?mtag.path.join(' · '):'')+'</b> ｜ 当前记录：<b style="color:#007aff;">'+mscore+'</b><span style="font-size:11px;color:#8e8e93;">⏳ 截止：'+fmtDate(new Date(new Date().getFullYear(),new Date().getMonth()+1,1).getTime())+' 0:00（月末）· 剩 '+fmtRemain(new Date(new Date().getFullYear(),new Date().getMonth()+1,1).getTime()-Date.now())+'</span></div>'+(mc.enrolled?'<div style="margin-top:6px;font-size:12px;color:#007aff;">⏳ 成绩记录中 · 月末 24:00 统一结算发放</div>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollMonthCup()">⚡ 消耗 5 能量报名（整月记录成绩）</button>');
-  const lc=getLimitedCup();
-  const lcCard=document.getElementById('cup-limited-card');
-  if(lc&&lc.until>Date.now()){
-    lcCard.style.display='';
-    const ltag=getTag(lc.tagId);const ls=cupScoreFor(lc.tagId,limitedDates());
-    const hoursLeft=Math.max(0,Math.ceil((lc.until-Date.now())/3600000));
-    const isPts=lc.type==='points';
-    const th=isPts?[600,400,240]:[220,150,80];const rws=isPts?PTS_RW:LIM_RW;
-    document.getElementById('cup-limited').innerHTML='<div style="font-size:13px;line-height:1.7;">'+(isPts?'🎯 积分杯（限时赛变体）':'⚡ 限时产出赛')+' · 指定标签：<b>'+(ltag?ltag.path.join(' · '):'')+'</b> ｜ 剩 <b style="color:#ff3b30;">'+hoursLeft+'</b> 小时<br>当前记录：<b style="color:#007aff;">'+ls+'</b>（冠≥'+th[0]+' / 亚≥'+th[1]+' / 季≥'+th[2]+'）｜ '+cupLadder(th,rws)+'</div>'+(lc.enrolled?'<div style="margin-top:6px;font-size:12px;color:#007aff;">⏳ 成绩记录中 · 结束后统一邮件发放</div>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollLimited()">⚡ 消耗 2 能量报名（错过不返场）</button>');
-  }else lcCard.style.display='none';
-  const wk=getWeekendCup();
-  const dow=(new Date().getDay()+6)%7;
-  const wkDates=[fmtDate(parseDateOnly(wk.weekKey)+5*86400000),fmtDate(parseDateOnly(wk.weekKey)+6*86400000)];
-  const wkScore=cupScoreFor(wk.tagId,wkDates);const wkState=state['wcr_'+wk.weekKey];
-  const wkActive=dow===5||dow===6;
-  document.getElementById('cup-weekend').innerHTML='<div style="font-size:13px;line-height:1.7;">指定标签：<b>'+(getTag(wk.tagId)?getTag(wk.tagId).path.join(' · '):'')+'</b> ｜ 报名 2⚡ · 纯💠结算<br>当前记录：<b style="color:#007aff;">'+wkScore+'</b>'+(wkActive?'':'（非周末，成绩不计入）')+'</div>'+(wkActive?(wkState&&wkState.enrolled?'<div style="margin-top:6px;font-size:12px;color:#007aff;">⏳ 成绩记录中 · 周一 0:00 统一发放</div>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollWeekend()">⚡ 消耗 2 能量报名</button>'):'<div style="margin-top:6px;font-size:11px;color:#8e8e93;">⏳ 本周六 0:00 开启</div>');
-}function renderCupUI(){
-  settleDayCups();getWeekendCup();const en=getEnergy();
-  document.getElementById('cup-energy-panel').innerHTML='<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span style="font-weight:600;color:#ff9500;">⚡ 能量 '+en.v+' / 10</span><span style="color:#8e8e93;">每日结算 +3 · 日杯1 / 周杯3 / 限时2 / 月杯5</span></div><div style="height:10px;background:#e5e5ea;border-radius:5px;overflow:hidden;"><div style="height:100%;width:'+(en.v*10)+'%;background:linear-gradient(90deg,#ff9500,#ff3b30);border-radius:5px;"></div></div><button class="btn-secondary" style="width:100%;margin-top:6px;font-size:12px;" onclick="buyEnergy()">🪙 40 代币购买 +5 能量（每日限 1 次）</button>';
-  const cd=getCupDaily();const goals=getDailyGoalSet();
-  document.getElementById('cup-daily').innerHTML=goals.map(function(g){const ok=g.ok();const claimed=!!cd.claimed[g.id];return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f2f2f7;"><span style="font-size:13px;">'+(claimed?'✅ ':ok?'🟢 ':'⚪ ')+g.desc+' <span style="font-size:11px;color:#af52de;">+'+g.rw.points+' 积分</span></span><button class="btn-primary" style="padding:4px 12px;font-size:12px;'+(ok&&!claimed?'':'opacity:.4')+'" '+(ok&&!claimed?'onclick="claimDailyGoal(\''+g.id+'\')"':'disabled')+'>'+(claimed?'已领取':'领取')+'</button></div>';}).join('');
-  const dci=getDayCupInfo();const dtag=getTag(dci.tagId);const dkey='dcr_'+dci.dateStr;const dst=state[dkey];
-  document.getElementById('cup-dailyrace').innerHTML=dci.active?
-    ('<div style="font-size:13px;line-height:1.7;">今日指定标签：<b>'+(dtag?dtag.path.join(' · '):'')+'</b> ｜ 冠≥300 / 亚≥240 / 季≥160 ｜ '+cupLadder([300,240,160],DAY_RW)+'<br><span style="font-size:11px;color:#8e8e93;">⏳ 截止：今日 24:00 · 剩 '+fmtRemain(new Date().setHours(24,0,0,0)-Date.now())+'</span></div>'+(dst&&dst.enrolled?'<div style="margin-top:6px;font-size:12px;color:#007aff;">⏳ 成绩记录中 · 今晚 24:00 统一结算发放</div>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollDayCup()">⚡ 消耗 1 能量报名（仅记录成绩）</button>')):
-    ('<div style="font-size:13px;line-height:1.7;">今日无日杯。下一次：<b>'+dci.daysToActive+'</b> 天后（'+dci.dateStr+'）<br><span style="font-size:11px;color:#8e8e93;">提前一天邮件预告 · 结束后统一发放</span></div>');
-  const cs=getCupState();const tag=getTag(cs.tagId);const days=countTagSettleDays()[cs.tagId]||0;const score=cupScoreFor(cs.tagId,getWeekDates(cs.weekKey));
-  let tierHtml='';
-  CUP_TIERS.forEach(function(t,i){
-    const ok=days>=t.days;
-    tierHtml+='<button class="btn-secondary" style="flex:1;min-width:100px;padding:7px 4px;font-size:12px;'+(cs.enrolled&&cs.tier===i?'background:#007aff15;border-color:#007aff;':'')+(ok?'':'opacity:.45')+'" '+(cs.enrolled||!ok?'disabled':'onclick="enrollCup('+i+')"')+'><b>'+t.n+'</b><br><span style="font-size:10px;">'+t.days+'天门槛</span></button>';
-  });
-  const _wEnd=parseDateOnly(cs.weekKey)+7*86400000;
-  let wDeadline='<div style="margin-top:4px;font-size:11px;color:#8e8e93;">⏳ 截止：'+fmtDate(_wEnd)+' 0:00（下周一）· 剩 '+fmtRemain(_wEnd-Date.now())+'</div>';
-  let rankHtml='';
-  if(cs.enrolled){const t=CUP_TIERS[cs.tier];const rank=cupRank(score,t.th);const names=['冠军','亚军','季军','完赛'];
-    rankHtml='<div style="margin-top:6px;font-size:12px;">当前记录：<b style="color:#007aff;">'+score+'</b> 分 → 预计 <b style="color:#ff9500;">'+names[rank]+'</b>（'+t.th.join('/')+'）</div><div style="margin-top:4px;font-size:11px;color:#8e8e93;">⏳ 成绩记录中 · 周一 0:00 结束后统一邮件发放，以最终成绩定名次</div>'+wDeadline+cupLadder(t.th,t.rw);}
-  document.getElementById('cup-weekly').innerHTML='<div style="font-size:13px;line-height:1.7;">指定标签：<b>'+(tag?tag.path.join(' · '):'')+'</b> ｜ 你的结算天数：<b>'+days+'</b> 天<br>计分：每日最多计入 3 个该标签任务（质量分/上限×100 + 达上限+20）</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">'+tierHtml+'</div>'+rankHtml+wDeadline;
-  const mc=getMonthCup();const mtag=getTag(mc.tagId);const mscore=cupScoreFor(mc.tagId,getMonthDates());
-  document.getElementById('cup-month').innerHTML='<div style="font-size:13px;line-height:1.7;">本月指定标签：<b>'+(mtag?mtag.path.join(' · '):'')+'</b> ｜ 当前记录：<b style="color:#007aff;">'+mscore+'</b><span style="font-size:11px;color:#8e8e93;">⏳ 截止：'+fmtDate(new Date(new Date().getFullYear(),new Date().getMonth()+1,1).getTime())+' 0:00（月末）· 剩 '+fmtRemain(new Date(new Date().getFullYear(),new Date().getMonth()+1,1).getTime()-Date.now())+'</span></div>'+(mc.enrolled?'<div style="margin-top:6px;font-size:12px;color:#007aff;">⏳ 成绩记录中 · 月末 24:00 统一结算发放</div>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollMonthCup()">⚡ 消耗 5 能量报名（整月记录成绩）</button>');
-  const lc=getLimitedCup();
-  const lcCard=document.getElementById('cup-limited-card');
-  if(lc&&lc.until>Date.now()){
-    lcCard.style.display='';
-    const ltag=getTag(lc.tagId);const ls=cupScoreFor(lc.tagId,limitedDates());
-    const hoursLeft=Math.max(0,Math.ceil((lc.until-Date.now())/3600000));
-    const isPts=lc.type==='points';
-    const th=isPts?[600,400,240]:[220,150,80];const rws=isPts?PTS_RW:LIM_RW;
-    document.getElementById('cup-limited-title').textContent=(isPts?'🎯 积分杯（限时赛变体 · 奖励全为积分）':'⚡ 限时产出赛');document.getElementById('cup-limited').innerHTML='<div style="font-size:13px;line-height:1.7;">'+(isPts?'🎯 积分杯（限时赛变体）':'⚡ 限时产出赛')+' · 指定标签：<b>'+(ltag?ltag.path.join(' · '):'')+'</b> ｜ 剩 <b style="color:#ff3b30;">'+hoursLeft+'</b> 小时<br>当前记录：<b style="color:#007aff;">'+ls+'</b>（冠≥'+th[0]+' / 亚≥'+th[1]+' / 季≥'+th[2]+'）｜ '+cupLadder(th,rws)+'</div>'+(lc.enrolled?'<div style="margin-top:6px;font-size:12px;color:#007aff;">⏳ 成绩记录中 · 结束后统一邮件发放</div>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollLimited()">⚡ 消耗 2 能量报名（错过不返场）</button>');
-  }else lcCard.style.display='none';
-  const wk=getWeekendCup();
-  const dow=(new Date().getDay()+6)%7;
-  const wkDates=[fmtDate(parseDateOnly(wk.weekKey)+5*86400000),fmtDate(parseDateOnly(wk.weekKey)+6*86400000)];
-  const wkScore=cupScoreFor(wk.tagId,wkDates);const wkState=state['wcr_'+wk.weekKey];
-  const wkActive=dow===5||dow===6;
-  document.getElementById('cup-weekend').innerHTML='<div style="font-size:13px;line-height:1.7;">指定标签：<b>'+(getTag(wk.tagId)?getTag(wk.tagId).path.join(' · '):'')+'</b> ｜ 报名 2⚡ · 纯💠结算<br>当前记录：<b style="color:#007aff;">'+wkScore+'</b>'+(wkActive?'':'（非周末，成绩不计入）')+'</div>'+(wkActive?(wkState&&wkState.enrolled?'<div style="margin-top:6px;font-size:12px;color:#007aff;">⏳ 成绩记录中 · 周一 0:00 统一发放</div>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollWeekend()">⚡ 消耗 2 能量报名</button>'):'<div style="margin-top:6px;font-size:11px;color:#8e8e93;">⏳ 本周六 0:00 开启</div>');
-}/* ===== v1.4.6 定稿：SP面板 / 升级数值三档 / 竞技胜负分明示 ===== */
+
+
+/* ===== v1.4.6 定稿：SP面板 / 升级数值三档 / 竞技胜负分明示 ===== */
 const SPABLE=function(){return TASK_TAGS.filter(function(t){return (t.path[0]==='考研'||t.path[0]==='背单词')&&t.path.length>=3;});};
-function upEffTxt(k,up){
-  const spd=up.spd||0,acc=up.acc||0,ctl=up.ctl||0,nit=up.nit||0;
-  if(k==='spd')return 'maxEp +'+(3*spd+1*acc)+'%';
-  if(k==='ctl')return '罚率 -'+(2*ctl+0.5*nit).toFixed(1).replace('.0','')+'%';
-  if(k==='acc')return '连击 +'+(2*acc+0.5*ctl).toFixed(1).replace('.0','')+'%/阶';
-  if(k==='nit')return '完成占比 '+Math.min(20,10+1*nit+0.5*spd).toFixed(1).replace('.0','')+'%';
-  return '';
-}
+
+
 function upNextTxt(k,lv,up){
   const u2={spd:up.spd,acc:up.acc,ctl:up.ctl,nit:up.nit};u2[k]=Math.min(10,lv+1);
   return upEffTxt(k,u2);
 }
-function upMaxTxt(k){
-  const u={spd:10,acc:10,ctl:10,nit:10};
-  return upEffTxt(k,u);
-}
-function _upCard2(t,usage){
-  const up=getTagUp(t.id);const mats=getTagMats(t.id);const tag=getTag(t.id);
-  const pips=function(lv){let h='';for(let i=0;i<10;i++)h+='<span style="display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:2px;background:'+(i<lv?'#007aff':'#e5e5ea')+';"></span>';return h;};
-  const lines=UP_PARTS.map(function(p){
-    const lv=up[p.k];const maxed=lv>=10;
-    const needTxt=maxed?'MAX':(UP_NEED[lv]+' '+p.matN+' · 💰'+UP_COST[lv]+(UP_MILE[lv]?' · 🪙'+UP_MILE[lv]:'')+' · '+UP_DAYS[lv]+'天');
-    const nums='<span style="font-size:10px;color:#8e8e93;">'+upEffTxt(p.k,up)+(maxed?'':' → 下级 '+upNextTxt(p.k,lv,up))+' → 满级 '+upMaxTxt(p.k)+'</span>';
-    return '<div style="padding:3px 0;font-size:11px;"><div style="display:flex;justify-content:space-between;align-items:center;"><span>'+p.icon+' <b>'+p.n+'</b> Lv'+lv+' '+pips(lv)+'</span>'+(maxed?'':'<button class="btn-primary" style="padding:2px 8px;font-size:10px;white-space:nowrap;" onclick="event.stopPropagation();upgradeLine(\''+t.id+'\',UP_PARTS['+UP_PARTS.indexOf(p)+'])">升级</button>')+'</div><div>'+nums+'</div><div style="font-size:10px;color:#8e8e93;">'+(maxed?'已满级':'需 '+needTxt+' · 持'+p.matN+'×'+(mats[p.mat]||0))+'</div></div>';
-  }).join('');
-  const spReady=up.spd===10&&up.acc===10&&up.ctl===10&&up.nit===10&&!up.sp;
-  const spLine=up.sp?'<div style="font-size:11px;color:#ff9500;font-weight:700;">🏎️ SP 运动版（max '+tag.maxEp+' · 罚率减半 · 连击×2 · 占比回落10%）</div>':(spReady?'<button class="btn-accent" style="width:100%;margin-top:4px;padding:5px;font-size:11px;" onclick="event.stopPropagation();openSPPanel(\''+t.id+'\')">🏎️ SP 觉醒预览（'+SP_RECIPE[tagFreqClass(t)].n+'配方）</button>':'');
-  const _prog=Math.round((up.spd+up.acc+up.ctl+up.nit)/40*100);
-  const _ultBtn=(state.inventory.ult_upgrade||0)>0?' <button class="btn-accent" style="padding:2px 8px;font-size:10px;" onclick="event.stopPropagation();useUltUpgrade(\''+t.id+'\')">🏆 终极改装</button>':'';
-  return '<div style="border:1px solid #e5e5ea;border-radius:8px;padding:8px;margin:6px 0;background:#fff;"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;"><span>'+t.path.join(' · ')+_ultBtn+'</span><span style="font-size:10px;color:#8e8e93;font-weight:400;">'+usage[t.id]+' 天 · max '+tag.maxEp+'</span></div>'
-  +'<div style="display:flex;align-items:center;gap:6px;margin:3px 0;"><div style="flex:1;height:5px;background:#e5e5ea;border-radius:3px;overflow:hidden;"><div style="height:100%;width:'+_prog+'%;background:linear-gradient(90deg,#007aff,#af52de);border-radius:3px;"></div></div><span style="font-size:10px;color:#8e8e93;white-space:nowrap;">综合 '+_prog+'%</span></div>'+lines+spLine+'</div>';
-}
-function renderUpgradeUI(){
-  const box=document.getElementById('upgrade-list');if(!box)return;
-  const usage=countTagSettleDays();
-  const tree={};
-  TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;}).forEach(function(t){
-    const g1=t.path[0];
-    const g2=t.path.slice(1,-1).join(' · ');
-    tree[g1]=tree[g1]||{};tree[g1][g2]=tree[g1][g2]||[];tree[g1][g2].push(t);
-  });
-  let html='<div style="display:flex;gap:6px;margin-bottom:8px;"><button class="btn-secondary" style="flex:1;font-size:12px;" onclick="upSetAll(true)">全部展开</button><button class="btn-secondary" style="flex:1;font-size:12px;" onclick="upSetAll(false)">全部收起</button></div>';
-  Object.keys(tree).forEach(function(g1){
-    const open1=!!window._upOpen.g1[g1];
-    let maxDays=0;Object.keys(tree[g1]).forEach(function(g2){tree[g1][g2].forEach(function(t){maxDays=Math.max(maxDays,usage[t.id]||0);});});
-    html+='<div style="border:1px solid #e5e5ea;border-radius:10px;margin-bottom:6px;overflow:hidden;"><div onclick="window._upOpen.g1[\''+g1+'\']=!window._upOpen.g1[\''+g1+'\'];renderUpgradeUI()" style="cursor:pointer;padding:10px 12px;background:#f9f9fb;display:flex;justify-content:space-between;align-items:center;"><b style="font-size:13px;">'+(open1?'▾':'▸')+' '+g1+'</b><span style="font-size:11px;color:#8e8e93;">'+Object.keys(tree[g1]).length+' 类 · 最高 '+maxDays+' 天</span></div>';
-    if(open1){
-      html+='<div style="padding:0 10px 10px;">';
-      Object.keys(tree[g1]).forEach(function(g2){
-        const key=g1+'|'+g2;const open2=!!window._upOpen.g2[key];
-        html+='<div style="margin-top:6px;"><div onclick="window._upOpen.g2[\''+key+'\']=!window._upOpen.g2[\''+key+'\'];renderUpgradeUI()" style="cursor:pointer;font-size:12px;font-weight:600;color:#6e6e73;padding:5px 0;">'+(open2?'▾':'▸')+' '+g2+'</div>';
-        if(open2)tree[g1][g2].forEach(function(t){html+=_upCard2(t,usage);});
-        html+='</div>';
-      });
-      html+='</div>';
-    }
-    html+='</div>';
-  });
-  box.innerHTML=html;
-}
-function openSPPanel(sel){
-  sel=sel||'';
-  const usage=countTagSettleDays();
-  const list=SPABLE().map(function(t){
-    const up=getTagUp(t.id);const all10=up.spd===10&&up.acc===10&&up.ctl===10&&up.nit===10;
-    const st=up.sp?'🏎️ SP':all10?'✅ 可觉醒':'🔧 '+(up.spd+up.acc+up.ctl+up.nit)+'/40';
-    return '<div onclick="openSPPanel(\''+t.id+'\')" style="cursor:pointer;padding:7px 9px;border:1px solid '+(sel===t.id?'#ff9500':'#e5e5ea')+';border-radius:8px;margin-bottom:5px;'+(sel===t.id?'background:#ff950010;':'')+'"><div style="display:flex;justify-content:space-between;font-size:12px;"><b>'+t.path.join(' · ')+'</b><span style="color:'+(up.sp?'#ff9500':all10?'#34c759':'#8e8e93')+';">'+st+'</span></div></div>';
-  }).join('');
-  let detail='';
-  if(sel){
-    const t=SPABLE().find(function(x){return x.id===sel;});
-    if(t){
-      const up=getTagUp(sel);const all10=up.spd===10&&up.acc===10&&up.ctl===10&&up.nit===10;
-      const r=SP_RECIPE[tagFreqClass(t)];const days=usage[sel]||0;
-      const tc=getTagColor(t.maxEp);const spMax=Math.round(t.maxEp*1.65);
-      const curCard='<div style="border:1px solid #e5e5ea;border-left:4px solid '+tc+';border-radius:10px;padding:8px 10px;background:'+tc+'10;"><div style="display:flex;justify-content:space-between;font-size:12px;color:#1d1d1f;"><span>政治刷题 2h</span><span style="font-size:10px;color:#34c759;">✓ 已完成</span></div><div style="margin-top:5px;"><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:'+tc+'15;color:'+tc+';">'+t.path.join(' · ')+' · max '+t.maxEp+'</span></div></div>';
-      const spTheme=getSPCardTheme(t);const spCard='<div class="task-card task-sp-'+spTheme+'" style="border:1px solid #1a1a1a;border-left:4px solid #000;border-radius:10px;padding:8px 10px;"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:#fff;"><span>政治刷题 2h</span><span style="font-size:10px;color:#34c759;">✓ 已完成</span></div><div style="margin-top:5px;"><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#000;color:#fff;box-shadow:0 0 0 1px #ff950055;font-weight:600;">★ '+t.path.join(' · ')+' · SP · max '+spMax+'</span></div></div>';
-      detail='<div style="margin-top:8px;border-top:1px solid #f2f2f7;padding-top:8px;"><div style="font-size:11px;font-weight:600;color:#6e6e73;margin-bottom:5px;">每日登记 · 任务卡片对比</div>'
-        +'<div class="mut" style="font-size:10px;margin-bottom:3px;">当前</div>'+curCard
-        +'<div class="mut" style="font-size:10px;margin:5px 0 3px;">↓ SP 觉醒后（同款SP涂装 · 白字 · ★金框）</div>'+spCard;
-      if(up.sp){detail+='<div style="font-size:12px;color:#ff9500;font-weight:700;margin-top:6px;">🏎️ 已觉醒为 SP 运动版</div>';}
-      else if(all10){
-        detail+='<div style="font-size:11px;color:#6e6e73;margin:6px 0;">材料进度（'+r.n+'配方）：结算天数 <b>'+days+'/'+r.days+'</b> · 💠 <b>'+(state.inventory.sp_core||0)+'/'+r.core+'</b> · 🪙 <b>'+state.tokens+'/'+r.tokens+'</b></div>'
-          +'<div style="font-size:12px;line-height:1.8;background:#f9f9fb;border-radius:8px;padding:8px;"><b>10级 → SP 差异（SP变化：减氮增换极速）</b><br>maxEp：+40% → <b>+65%</b>（大幅提升极速）<br>完成占比：20% → <b>10%</b>（当前规则）<br>罚率：-25% → <b>再减半</b> ｜ 连击：+25%/阶 → <b>×2</b><br><span style="color:#8e8e93;">极速+氮增合计略大于原车 · 完成占比按当前规则执行</span></div>'
-          +'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="awakenSP(\''+sel+'\')">🏎️ SP 运动版觉醒</button>';
-      } else {
-        detail+='<div style="font-size:12px;color:#8e8e93;margin-top:6px;">四线进度 <b>'+(up.spd+up.acc+up.ctl+up.nit)+'/40</b> 级 · '+upEffTxt('spd',up)+' / '+upEffTxt('acc',up)+'<br>四线全部 Lv10 后解锁材料查看与觉醒。</div>';
-      }
-      detail+='</div>';
-    }
-  }
-  showModal('🏎️ 运动版 · 可 SP 化标签','<div style="max-height:280px;overflow-y:auto;padding-right:4px;">'+list+'</div>'+detail,function(){closeModal();});
-}
+
+
+
+
+
+
+
+
 function grantCumulative(rwArr,rank){for(let i=rank;i<rwArr.length;i++)grantRW(rwArr[i]);}
 function fmtRW(rw){return Object.keys(rw).map(function(k){return (GAIN_NAMES[k]||k)+'×'+rw[k];}).join('、');}
 function cupLadder(th,rwArr){
   const names=['冠军','亚军','季军','完赛'];
   return '<div style="background:#f9f9fb;border-radius:8px;padding:6px 8px;margin-top:4px;font-size:11px;line-height:1.8;">'+th.map(function(t,i){return '<div><b>'+names[i]+'</b> ≥'+t+'：'+fmtRW(rwArr[i])+'</div>';}).join('')+'<div style="color:#8e8e93;font-size:10px;">线性奖励规则：达到某名次可<b>同时获得</b>低于该名次的全部奖励</div></div>';
 }
-function useUltUpgrade(tagId){
-  if((state.inventory.ult_upgrade||0)<1){alert('没有终极改装包');return;}
-  const up=getTagUp(tagId);const tag=getTag(tagId);
-  showModal('🏆 终极改装包','将标签 <b>'+tag.path.join(' · ')+'</b> 四条线直接升至 Lv10（综合100%）？<br><br>消耗：终极改装包×1<br><span style="font-size:11px;color:#8e8e93;">SP 觉醒不在本道具范围内（可SP化标签同样只到四线满级）</span>',function(){
-    state.inventory.ult_upgrade--;
-    state.tagUpSnap=state.tagUpSnap||{};
-    if(!state.tagUpSnap[tagId])state.tagUpSnap[tagId]=JSON.parse(JSON.stringify(up));
-    up.spd=10;up.acc=10;up.ctl=10;up.nit=10;
-    saveState();updateShopUI();updateTopBar();renderUpgradeUI();closeModal();
-    showGainModal('🏆 终极改装完成',[['标签','「'+tag.path.join('·')+'」','#ff9500'],['综合进度','100%'],['maxEp',getTag(tagId).maxEp]]);
-  });
-}/* ===== 标签专精经济：前5级金币 / 后5级零件+金币+代币 / SP=四卡+代币+直接升级 ===== */
+
+/* ===== 标签专精经济：前5级金币 / 后5级零件+金币+代币 / SP=四卡+代币+直接升级 ===== */
 function tagFreqClass(t){const v=t.maxEp;const pn=typeof t.pen==='number'?t.pen:Math.round(getPenaltyRate(t.maxEp)*100);if(v>=600||pn>=50)return 'S';if(v>=500||pn>=40)return 'A';if(v>=400||pn>=30)return 'B';if(v>=300||pn>=20)return 'C';return 'D';}
-function upgradeLine(tagId,part){
-  const up=getTagUp(tagId);const lv=up[part.k];if(lv>=10){alert('该零件已满级');return;}
-  const days=countTagSettleDays()[tagId]||0;
-  if(days<UP_DAYS[lv]){alert('结算天数不足：需要累计 '+UP_DAYS[lv]+' 天（当前 '+days+' 天）');return;}
-  const mats=getTagMats(tagId);const need=UP_NEED[lv];
-  if(need>0&&(mats[part.mat]||0)<need){alert(part.matN+' 不足：需要 ×'+need+'（当前 '+(mats[part.mat]||0)+'）');return;}
-  if(state.points<UP_COST[lv]){alert('积分不足：需要 '+UP_COST[lv]);return;}
-  const tk=UP_TOK[lv];if(tk>0){if(state.tokens<tk){alert('代币不足：需要 '+tk);return;}state.tokens-=tk;}
-  state.points-=UP_COST[lv];if(need>0)mats[part.mat]-=need;up[part.k]=lv+1;
-  saveState();updateTopBar();updateShopUI();renderUpgradeUI();
-  if(up.spd===10&&up.acc===10&&up.ctl===10&&up.nit===10)showGainModal('🏎️ 四线满级！',[['状态','可觉醒 SP 运动版','#ff9500']]);
-  else showGainModal('🔧 零件升级 · '+part.n,[[part.n,'Lv '+(lv+1)],['消耗',UP_COST[lv]+' 积分'+(need>0?' + '+part.matN+'×'+need:'')+(tk>0?' + 🪙'+tk:'')]]);
-}
-function useDirectUpgrade(tagId,part){
-  if((state.inventory.direct_up||0)<1){alert('没有「直接升级」道具，可在商店购买');return;}
-  const up=getTagUp(tagId);const lv=up[part.k];if(lv>=10){alert('该零件已满级');return;}
-  const tag=getTag(tagId);
-  showModal('🔧 直接升级','将 <b>'+tag.path.join(' · ')+'</b> 的「'+part.n+'」无条件提升 1 级？<br><br>跳过：天数门槛 / 材料 / 积分 / 代币<br>消耗：直接升级×1',function(){
-    state.inventory.direct_up--;up[part.k]=lv+1;
-    saveState();updateShopUI();updateTopBar();renderUpgradeUI();closeModal();
-    showGainModal('🔧 直接升级成功',[[part.n,'Lv '+(lv+1),'#ff9500'],['剩余道具','×'+state.inventory.direct_up]]);
-  });
-}
+
+
+
+
 function _upCard2(t,usage){
   const up=getTagUp(t.id);const mats=getTagMats(t.id);const tag=getTag(t.id);
   const pips=function(lv){let h='';for(let i=0;i<10;i++)h+='<span style="display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:2px;background:'+(i<lv?'#007aff':'#e5e5ea')+';"></span>';return h;};
@@ -5805,57 +5572,10 @@ function _upCard2(t,usage){
   return '<div style="border:1px solid #e5e5ea;border-radius:8px;padding:8px;margin:6px 0;background:#fff;"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;"><span>'+t.path.join(' · ')+_ultBtn+'</span><span style="font-size:10px;color:#8e8e93;font-weight:400;">'+usage[t.id]+' 天 · max '+tag.maxEp+'</span></div>'
   +'<div style="display:flex;align-items:center;gap:6px;margin:3px 0;"><div style="flex:1;height:5px;background:#e5e5ea;border-radius:3px;overflow:hidden;"><div style="height:100%;width:'+_prog+'%;background:linear-gradient(90deg,#007aff,#af52de);border-radius:3px;"></div></div><span style="font-size:10px;color:#8e8e93;white-space:nowrap;">综合 '+_prog+'%</span></div>'+lines+spLine+'</div>';
 }
-function awakenSP(tagId){
-  const up=getTagUp(tagId);const tag=getTag(tagId);if(!tag)return;
-  if(!(up.spd===10&&up.acc===10&&up.ctl===10&&up.nit===10)){alert('需要四线全部 Lv10');return;}
-  if(up.sp){alert('已是 SP 运动版');return;}
-  const r=SP_RECIPE[tagFreqClass(tag)];const mats=getTagMats(tagId);
-  const needTxt='四种材料各 ×'+r.mats+' · 💠核心 '+(state.inventory.sp_core||0)+'/'+r.core+'（SP最基础物资）· 🪙 '+state.tokens+'/'+r.tokens+' · 🔧直接升级 '+(state.inventory.direct_up||0)+'/'+r.ult;
-  showModal('🏎️ SP 运动版觉醒','标签：<b>'+tag.path.join(' · ')+'</b>（'+r.label+' 级配方 · 按任务价值与难度定档）<br><br>材料：'+needTxt+'<br><br>觉醒后（SP觉醒后）：maxEp 合计 +65%、罚率再减半、连击×2、完成占比回落至 10%——减氮增换极速，极速+氮增合计略大于原车',function(){
-    const m=getTagMats(tagId);
-    if(mats.mark<r.mats||mats.medal<r.mats||mats.badge<r.mats||mats.peak<r.mats){alert('材料不足');closeModal();return;}
-    if((state.inventory.sp_core||0)<r.core){alert('💠 精研核心不足（SP最基础物资：商店周限 / 精研核心杯 / 大型杯赛 / 竞技高段）');closeModal();return;}
-    if(state.tokens<r.tokens){alert('代币不足');closeModal();return;}
-    if((state.inventory.direct_up||0)<r.ult){alert('直接升级道具不足（商店有售）');closeModal();return;}
-    m.mark-=r.mats;m.medal-=r.mats;m.badge-=r.mats;m.peak-=r.mats;state.inventory.sp_core-=r.core;state.tokens-=r.tokens;state.inventory.direct_up-=r.ult;up.sp=true;
-    saveState();updateTopBar();updateShopUI();renderUpgradeUI();closeModal();
-    sendSystemMail('🏎️ 运动版觉醒 · '+tag.path.join('·'),'你的标签「'+tag.path.join(' · ')+'」已觉醒为 SP 运动版！附件：积分×200。',{points:200});
-    showGainModal('🏎️ SP 运动版觉醒！',[['标签','「'+tag.path.join('·')+'」','#ff9500'],['maxEp',getTag(tagId).maxEp+'（+65%）'],['特性','罚率减半 · 连击×2 · 占比回落10%']],'贺电已发送至邮箱');
-  });
-}
-function openSPPanel(sel){
-  sel=sel||'';
-  const usage=countTagSettleDays();
-  const list=SPABLE().map(function(t){
-    const up=getTagUp(t.id);const all10=up.spd===10&&up.acc===10&&up.ctl===10&&up.nit===10;
-    const st=up.sp?'🏎️ SP':all10?'✅ 可觉醒':'🔧 '+(up.spd+up.acc+up.ctl+up.nit)+'/40';
-    return '<div onclick="openSPPanel(\''+t.id+'\')" style="cursor:pointer;padding:7px 9px;border:1px solid '+(sel===t.id?'#ff9500':'#e5e5ea')+';border-radius:8px;margin-bottom:5px;'+(sel===t.id?'background:#ff950010;':'')+'"><div style="display:flex;justify-content:space-between;font-size:12px;"><b>'+t.path.join(' · ')+'</b><span style="color:'+(up.sp?'#ff9500':all10?'#34c759':'#8e8e93')+';">'+st+'</span></div></div>';
-  }).join('');
-  let detail='';
-  if(sel){
-    const t=SPABLE().find(function(x){return x.id===sel;});
-    if(t){
-      const up=getTagUp(sel);const all10=up.spd===10&&up.acc===10&&up.ctl===10&&up.nit===10;
-      const r=SP_RECIPE[tagFreqClass(t)];const mats=getTagMats(sel);
-      const tc=getTagColor(t.maxEp);const spMax=Math.round(t.maxEp*1.65);
-      const curCard='<div style="border:1px solid #e5e5ea;border-left:4px solid '+tc+';border-radius:10px;padding:8px 10px;background:'+tc+'10;"><div style="display:flex;justify-content:space-between;font-size:12px;color:#1d1d1f;"><span>政治刷题 2h</span><span style="font-size:10px;color:#34c759;">✓ 已完成</span></div><div style="margin-top:5px;"><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:'+tc+'15;color:'+tc+';">'+t.path.join(' · ')+' · max '+t.maxEp+'</span></div></div>';
-      const spTheme=getSPCardTheme(t);const spCard='<div class="task-card task-sp-'+spTheme+'" style="border:1px solid #1a1a1a;border-left:4px solid #000;border-radius:10px;padding:8px 10px;"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:#fff;"><span>政治刷题 2h</span><span style="font-size:10px;color:#34c759;">✓ 已完成</span></div><div style="margin-top:5px;"><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#000;color:#fff;box-shadow:0 0 0 1px #ff950066,inset 0 0 8px rgba(255,149,0,.25);font-weight:600;">★ '+t.path.join(' · ')+' · SP · max '+spMax+'</span></div></div>';
-      detail='<div style="margin-top:8px;border-top:1px solid #f2f2f7;padding-top:8px;"><div style="font-size:11px;font-weight:600;color:#6e6e73;margin-bottom:5px;">每日登记 · 任务卡片对比</div>'
-        +'<div class="mut" style="font-size:10px;margin-bottom:3px;">当前</div>'+curCard
-        +'<div class="mut" style="font-size:10px;margin:5px 0 3px;">↓ SP 觉醒后（同款SP涂装 · 白字 · ★金框）</div>'+spCard;
-      if(up.sp){detail+='<div style="font-size:12px;color:#ff9500;font-weight:700;margin-top:6px;">🏎️ 已觉醒为 SP 运动版</div>';}
-      else if(all10){
-        detail+='<div style="font-size:11px;color:#6e6e73;margin:6px 0;line-height:1.7;">SP 材料（'+r.label+' 级配方 · SP材料）：<br>四种材料各 ×'+r.mats+'（🎖️ '+Math.min(mats.mark,r.mats)+'/'+r.mats+' · ⚡ '+Math.min(mats.medal,r.mats)+'/'+r.mats+' · 🛡️ '+Math.min(mats.badge,r.mats)+'/'+r.mats+' · 🧪 '+Math.min(mats.peak,r.mats)+'/'+r.mats+'）<br>💠 核心 '+(state.inventory.sp_core||0)+'/'+r.core+'（最基础物资）· 🪙 '+state.tokens+'/'+r.tokens+' · 🔧 直接升级 '+(state.inventory.direct_up||0)+'/'+r.ult+'</div>'
-          +'<div style="font-size:12px;line-height:1.8;background:#f9f9fb;border-radius:8px;padding:8px;"><b>10级 → SP 差异（SP变化：减氮增换极速）</b><br>maxEp：+40% → <b>+65%</b>（大幅提升极速）<br>完成占比：20% → <b>10%</b>（当前规则）<br>罚率：-25% → <b>再减半</b> ｜ 连击：+25%/阶 → <b>×2</b><br><span style="color:#8e8e93;">极速+氮增合计略大于原车 · 完成占比按当前规则执行</span></div>'
-          +'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="awakenSP(\''+sel+'\')">🏎️ SP 运动版觉醒</button>';
-      } else {
-        detail+='<div style="font-size:12px;color:#8e8e93;margin-top:6px;">四线进度 <b>'+(up.spd+up.acc+up.ctl+up.nit)+'/40</b> 级 · '+upEffTxt('spd',up)+' / '+upEffTxt('acc',up)+'<br>四线全部 Lv10 后解锁材料查看与觉醒。</div>';
-      }
-      detail+='</div>';
-    }
-  }
-  showModal('🏎️ 运动版 · 可 SP 化标签','<div style="max-height:280px;overflow-y:auto;padding-right:4px;">'+list+'</div>'+detail,function(){closeModal();});
-}
+
+
+
+
 /* ===== 修复与杯赛UI v7 ===== */
 function _upCard(t,usage){return _upCard2(t,usage);}
 
@@ -5878,7 +5598,7 @@ function _tierButtons(arr,score,th,rw,fn,labels){let h='<div style="display:grid
 function _matLabel(mat,i){return MAT_TYPES.find(x=>x[0]===mat)[1]+' × '+DAY_MAT_RW[i];}
 function getDayCupClaims(){state.dayCupClaims=state.dayCupClaims||{};return state.dayCupClaims;}
 function claimDayTier(kind,idx){const dci=getDayCupInfo();const key=dci.dateStr;const score=cupScoreFor(dci.tagId,[key]);const store=getDayCupClaims();store[key]=store[key]||{};const th=kind==='points'?DAY_POINTS_TIERS:DAY_MAT_TIERS;const arr=_claimArr(store[key],kind,8);if(!_canClaimTier(arr,idx,score,th)){alert('尚未达到该段要求，或需要按顺序领取');return;}arr[idx]=true;if(kind==='points'){grantRW({points:DAY_POINTS_RW[idx]});}else{state.tagMats=state.tagMats||{};state.tagMats[dci.tagId]=state.tagMats[dci.tagId]||{mark:0,medal:0,badge:0,peak:0};state.tagMats[dci.tagId][kind]=(state.tagMats[dci.tagId][kind]||0)+DAY_MAT_RW[idx];}saveState();updateTopBar();updateShopUI();renderCupUI();showGainModal('🏆 日杯第'+(idx+1)+'段达成',rwLines(kind==='points'?{points:DAY_POINTS_RW[idx]}:{[kind]:DAY_MAT_RW[idx]}),score+' 分');}
-function bountyScoreFor(tagId,dates){let count=0,q=0,qmax=0;(state.dailyHistory||[]).forEach(function(d){if(dates.indexOf(normHistDate(d.date))===-1)return;(d.tasks||[]).forEach(function(t){if(t.completed&&t.tagId===tagId){count++;const tag=getTag(t.tagId);const quality=parseInt(t.qualityEp)||0;if(tag&&tag.maxEp>0){q+=quality;qmax+=tag.maxEp;}}});});const qpct=qmax>0?Math.round(q/qmax*100):0;return count*100+qpct;}
+function bountyScoreFor(tagId,dates){let count=0,q=0,qmax=0;(state.dailyHistory||[]).forEach(function(d){if(dates.indexOf(normHistDate(d.date))===-1)return;(d.tasks||[]).forEach(function(t){if(t.completed&&(t.swapTagId||t.tagId)===tagId){count++;const tag=getTag(t.tagId);const quality=parseInt(t.qualityEp)||0;if(tag&&tag.maxEp>0){q+=quality;qmax+=tag.maxEp;}}});});const qpct=qmax>0?Math.round(q/qmax*100):0;return count*100+qpct;}
 function claimBountyTier(idx){const cs=getCupState();if(!cs.enrolled){alert('请先报名本周悬赏杯');return;}const score=bountyScoreFor(cs.tagId,getWeekDates(cs.weekKey));state.weekBountyClaims=state.weekBountyClaims||{};const arr=_claimArr(state.weekBountyClaims,cs.weekKey,8);if(!_canClaimTier(arr,idx,score,WEEK_BOUNTY_TIERS)){alert('尚未达到该段要求，或需要按顺序领取');return;}arr[idx]=true;grantRW(WEEK_BOUNTY_RW[idx]);saveState();updateTopBar();updateShopUI();renderCupUI();showGainModal('🎯 周悬赏第'+(idx+1)+'段达成',rwLines(WEEK_BOUNTY_RW[idx]),score+' 分');}
 function claimLargeTier(idx){const lc=getLimitedCup();if(!lc||!lc.enrolled){alert('请先报名大型赛事');return;}const score=cupScoreFor(lc.tagId,limitedDates());state.largeCupClaims=state.largeCupClaims||{};const key=String(lc.from);const arr=_claimArr(state.largeCupClaims,key,10);if(!_canClaimTier(arr,idx,score,LARGE_TIERS)){alert('尚未达到该段要求，或需要按顺序领取');return;}if(idx===9){showModal('🏆 终极奖励二选一','大型赛事第10段达成：请选择最终奖励。<br><br><select id="large-final-select" style="width:100%;padding:8px;border:1px solid #d1d1d6;border-radius:8px;"><option value="ult_upgrade">🏆 终极改装包 ×1</option><option value="sp_core">💠 精研核心 ×3</option></select>',function(){const v=document.getElementById('large-final-select').value;arr[idx]=true;grantRW({tokens:120,brawl_vip:1,[v]:v==='sp_core'?3:1});saveState();updateTopBar();updateShopUI();renderCupUI();closeModal();showGainModal('🏆 大型赛事第10段达成',rwLines({tokens:120,brawl_vip:1,[v]:v==='sp_core'?3:1}),score+' 分');});return;}arr[idx]=true;grantRW(LARGE_RW[idx]);saveState();updateTopBar();updateShopUI();renderCupUI();showGainModal('🏆 大型赛事第'+(idx+1)+'段达成',rwLines(LARGE_RW[idx]),score+' 分');}
 /* ===== 双周标签杯（两周·双标签·10段） ===== */
@@ -5985,7 +5705,8 @@ function claimSprintTier(i){const sp=getSprint();if(!sp.enrolled||!sprintOver()|
 function claimSprintAll(){const sp=state.sprintArchive;if(!sp||!sp.enrolled)return;const tr=sprintTrophies(sp);let n=0;for(let i=0;i<SPRINT_TIERS.length;i++){if(sp.claims[i])continue;if(!_canClaimTier(sp.claims,i,tr,SPRINT_TIERS))break;sp.claims[i]=true;grantRW([SPRINT_RW[i]]);n++;}if(!n){alert('没有可补领的奖励');return;}saveState();updateTopBar();updateShopUI();renderCupUI();showGainModal('🏆 冲刺锦标赛 · 赛季补领',[['补领档位','×'+n]]);}
 function initCupStates(){try{getSprint();getWeekendCup();getMonthCup();getBiCup();}catch(e){}}
 function showCupRules(type){switchPage('guide');setTimeout(function(){var g=document.getElementById('guide-cup');if(g)g.scrollIntoView({behavior:'smooth',block:'start'});},80);}
-function usePartsPack(){if((state.inventory.parts_pack||0)<1){alert('没有零件材料包');return;}const tagOpts=TASK_TAGS.filter(t=>t.path.length>=2).map(t=>'<option value="'+t.id+'">'+t.path.join(' · ')+'</option>').join('');const matOpts=MAT_TYPES.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('');showModal('📦 使用零件材料包','一个材料包可兑换 <b>任意1个指定标签的指定材料</b>。请选择：',function(){const tagId=document.getElementById('parts-tag').value;const mat=document.getElementById('parts-mat').value;state.inventory.parts_pack--;state.tagMats=state.tagMats||{};state.tagMats[tagId]=state.tagMats[tagId]||{mark:0,medal:0,badge:0,peak:0};state.tagMats[tagId][mat]=(state.tagMats[tagId][mat]||0)+1;saveState();updateShopUI();renderUpgradeUI();closeModal();alert('✅ 已兑换材料');},'<select id="parts-tag" style="width:100%;padding:8px;border:1px solid #d1d1d6;border-radius:8px;margin-bottom:8px;">'+tagOpts+'</select><select id="parts-mat" style="width:100%;padding:8px;border:1px solid #d1d1d6;border-radius:8px;">'+matOpts+'</select>');}
+
+
 function renderCupUI(){try{renderCupUIImpl();}catch(e){console.error('cupUI',e);}}
 function renderCupUIImpl(){{
   const en=getEnergy();
@@ -6027,7 +5748,8 @@ function renderCupUIImpl(){{
 }function settleDayCups(){}
 function settleLimited(lc){if(lc&&!lc.claimed){lc.claimed=true;saveState();}}
 function calDayDetail(ds){const ev=[];(state.dailyHistory||[]).forEach(function(d){if(normHistDate(d.date)===ds)ev.push('✅ 已结算：+'+d.ep+' EP');});getWeekDates(getCupState().weekKey).forEach(function(d){if(d===ds)ev.push('🎯 周悬赏进行中');});const wk=getWeekendCup();[fmtDate(parseDateOnly(wk.weekKey)+5*86400000),fmtDate(parseDateOnly(wk.weekKey)+6*86400000)].forEach(function(d){if(d===ds)ev.push('💠 精研核心杯');});limitedDates().forEach(function(d){if(d===ds)ev.push('⚡ 大型赛事');});const _dk1=DAY_CUP_KINDS[dayCupHash(ds+'#type')%DAY_CUP_KINDS.length];ev.push('🏆 日杯① · '+(_dk1==='points'?'积分杯':dayCupKindName(_dk1)));if(dayCupHash(ds+'#double')%5===0){const _ks=DAY_CUP_KINDS.filter(k=>k!==_dk1);const _dk2=_ks[dayCupHash(ds+'#type2')%_ks.length];ev.push('🏆 日杯② · '+(_dk2==='points'?'积分杯':dayCupKindName(_dk2)));}if(ds.slice(8)==='01')ev.push('🗓️ 月杯进行中 / 竞技新赛季');if(!ev.length)ev.push('暂无赛事');showModal('📅 '+ds,ev.join('<br>'),function(){switchPage(ds.slice(8)==='01'?'race':'cup');closeModal();});}
-function renderCalendar(){const box=document.getElementById('cal-grid');if(!box)return;const y=calCursor.getFullYear(),m=calCursor.getMonth();document.getElementById('cal-title').textContent=y+' 年 '+(m+1)+' 月';const pad=n=>String(n).padStart(2,'0');const todayDs=new Date().getFullYear()+'-'+pad(new Date().getMonth()+1)+'-'+pad(new Date().getDate());const settled={};(state.dailyHistory||[]).forEach(d=>{settled[normHistDate(d.date)]=1;});const cupDates={};getWeekDates(getCupState().weekKey).forEach(d=>{cupDates[d]=1;});const wk=getWeekendCup();[fmtDate(parseDateOnly(wk.weekKey)+5*86400000),fmtDate(parseDateOnly(wk.weekKey)+6*86400000)].forEach(d=>{cupDates[d]=1;});limitedDates().forEach(d=>{cupDates[d]=1;});const firstDow=(new Date(y,m,1).getDay()+6)%7;const dim=new Date(y,m+1,0).getDate();let html='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:11px;color:#8e8e93;margin-bottom:4px;text-align:center;">';['一','二','三','四','五','六','日'].forEach(d=>{html+='<div style="padding:4px 0;">'+d+'</div>';});html+='</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;">';for(let i=0;i<firstDow;i++)html+='<div></div>';for(let d=1;d<=dim;d++){const ds=y+'-'+pad(m+1)+'-'+pad(d);const dots=(settled[ds]?'<span style="color:#34c759;">●</span>':'')+(cupDates[ds]?'<span style="color:#af52de;">●</span>':'')+(d===1?'<span style="color:#ff9500;">★</span>':'');html+='<div onclick="calDayDetail(\''+ds+'\')" style="cursor:pointer;min-height:44px;border:1px solid '+(ds===todayDs?'#007aff':'#e5e5ea')+';border-radius:8px;padding:4px;font-size:12px;'+(ds===todayDs?'background:#007aff10;font-weight:700;':'')+'"><div>'+d+'</div><div style="font-size:9px;letter-spacing:1px;min-height:12px;">'+dots+'</div></div>';}html+='</div>';box.innerHTML=html;}
+
+
 
 
 /* ===== 竞技：按测试版规则补齐 renderArenaUI / arenaAddEp，不自创额外机制 ===== */
@@ -6229,7 +5951,8 @@ function renderArenaUI(){
 }
 function arenaTick(){const a=getArena();let changed=false;if(a.qualActive&&Date.now()>a.qualEndAt){arenaFinishQual(a);changed=true;}if(a.pending&&Date.now()>a.pending.endAt){arenaFinishPending(a);changed=true;}if(a.revenge&&a.revenge.active&&Date.now()>a.revenge.endAt){arenaFinishRevenge(a);changed=true;}arenaSettleWeek(a);if(!a.pending&&!a.qualActive&&!(a.revenge&&a.revenge.active)&&Date.now()<arenaSundayEnd()&&a.attackCount<2&&Math.random()<0.00012){arenaMaybeAttack();}}
 
-function getSPCardTheme(tag){const map={htt:'htt',renault:'renault',bc:'bc',bolide:'bolide',mosler:'mosler',toyota:'toyota',tuatara:'tuatara',aj:'aj'};if(tag&&tag.sp&&map[tag.sp])return map[tag.sp];const themes=['mosler','bolide','toyota','renault','htt'];let h=0;const s=(tag&&tag.id)||'';for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return themes[h%themes.length];}
+
+
 
 /* ===== 日历：线性周视图，一次展示一周赛事（含竞技） ===== */
 function calShift(n){calCursor.setDate(calCursor.getDate()+n*7);renderCalendar();}
@@ -6282,11 +6005,10 @@ const _upNeed2=[0,0,1,1,2,2,3,4,5,6];
 const _upCost2=[50,80,120,180,260,380,540,760,1050,1450];
 const _upTok2=[0,0,0,0,0,0,0,0,0,0];
 for(let _i=0;_i<10;_i++){UP_NEED[_i]=_upNeed2[_i];UP_COST[_i]=_upCost2[_i];UP_TOK[_i]=_upTok2[_i];}
-function upStatLevels(up){
-  const p=up.parts||{mark:0,medal:0,badge:0,peak:0};
-  return {spd:Math.min(10,(p.mark||0)+(p.peak||0)),acc:Math.min(10,(p.medal||0)+(p.badge||0)),ctl:Math.min(10,(p.mark||0)+(p.badge||0)),nit:Math.min(10,(p.medal||0)+(p.peak||0))};
-}
-function syncUpStats(up){const lv=upStatLevels(up);up.spd=lv.spd;up.acc=lv.acc;up.ctl=lv.ctl;up.nit=lv.nit;return up;}
+
+
+
+
 function getTagUp(tagId){
   state.tagUp=state.tagUp||{};
   if(!state.tagUp[tagId])state.tagUp[tagId]={spd:0,acc:0,ctl:0,nit:0,parts:{mark:0,medal:0,badge:0,peak:0},sp:false};
@@ -6345,22 +6067,12 @@ function computeTagChains(done){
     if(lv.acc>0||lv.nit>0){const _m=1+(c-1)*(0.02*lv.acc+0.005*lv.ctl)*(_up.sp?2:1);t._chainMult=_m;}
   });
 }
-function upEffTxt(k,up){const lv=upStatLevels(up);if(k==='spd')return 'maxEp +'+(3*lv.spd+1*lv.acc)+'%';if(k==='ctl')return '罚率 -'+(2*lv.ctl+0.5*lv.nit).toFixed(1).replace('.0','')+'%';if(k==='acc')return '连击 +'+(2*lv.acc+0.5*lv.ctl).toFixed(1).replace('.0','')+'%/阶';if(k==='nit')return '完成占比 '+Math.min(20,10+1*lv.nit+0.5*lv.spd).toFixed(1).replace('.0','')+'%';return '';}
+
+
 function upPartNextTxt(part,lv,up){const p=Object.assign({},up.parts||{});p[part.k]=Math.min(10,lv+1);return part.affects.map(k=>UP_STAT_NAME[k]+' '+upEffTxt(k,{parts:p})).join(' ｜ ');}
 function upMaxTxt(k){const lv={spd:10,acc:10,ctl:10,nit:10};return upEffTxt(k,{parts:{mark:10,medal:10,badge:10,peak:10}});}
-function upgradeLine(tagId,part){
-  const up=getTagUp(tagId);const lv=up.parts[part.k];if(lv>=10){alert('该材料已满级');return;}
-  const days=countTagSettleDays()[tagId]||0;
-  if(days<UP_DAYS[lv]){alert('结算天数不足：需要累计 '+UP_DAYS[lv]+' 天（当前 '+days+' 天）');return;}
-  const mats=getTagMats(tagId);const need=UP_NEED[lv];
-  if(need>0&&(mats[part.mat]||0)<need){alert(part.matN+' 不足：需要 ×'+need+'（当前 '+(mats[part.mat]||0)+'）');return;}
-  if(state.points<UP_COST[lv]){alert('积分不足：需要 '+UP_COST[lv]);return;}
-  const tk=UP_TOK[lv];if(tk>0){if(state.tokens<tk){alert('代币不足：需要 '+tk);return;}state.tokens-=tk;}
-  state.points-=UP_COST[lv];if(need>0)mats[part.mat]-=need;up.parts[part.k]=lv+1;syncUpStats(up);
-  saveState();updateTopBar();updateShopUI();renderUpgradeUI();
-  if(Object.keys(up.parts).every(function(k){return up.parts[k]===10;}))showGainModal('🏎️ 四个材料全部满级！',[['状态','可觉醒 SP 运动版','#ff9500']]);
-  else showGainModal('🔧 材料升级 · '+part.n,[[part.n,'Lv '+(lv+1)],['同时提升',part.affects.map(k=>UP_STAT_NAME[k]).join(' + '),'#007aff'],['消耗',UP_COST[lv]+' 积分'+(need>0?' + '+part.matN+'×'+need:'')+(tk>0?' + 🪙'+tk:'')]]);
-}
+
+
 function useDirectUpgrade(tagId,part){
   if((state.inventory.direct_up||0)<1){alert('没有「直接升级」道具，可在商店购买');return;}
   const up=getTagUp(tagId);const lv=up.parts[part.k];if(lv>=10){alert('该材料已满级');return;}
@@ -6380,60 +6092,12 @@ function useUltUpgrade(tagId){
     showGainModal('🏆 终极改装完成',[['标签','「'+tag.path.join('·')+'」','#ff9500'],['综合进度','100%'],['maxEp',getTag(tagId).maxEp]]);
   });
 }
-function renderUpgradeUI(){
-  const box=document.getElementById('upgrade-list');if(!box)return;
-  const usage=countTagSettleDays();
-  const rows=TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;}).map(function(t){return {raw:t,tag:getTag(t.id),days:usage[t.id]||0};}).sort(function(a,b){return b.days-a.days;});
-  box.innerHTML=rows.map(function(r){
-    const up=getTagUp(r.raw.id);const mats=getTagMats(r.raw.id);
-    const pips=function(lv){let h='';for(let i=0;i<10;i++)h+='<span style="display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:2px;background:'+(i<lv?'#007aff':'#e5e5ea')+';"></span>';return h;};
-    const lines=UP_PARTS.map(function(p){
-      const lv=up.parts[p.k];const maxed=lv>=10;
-      const needTxt=maxed?'MAX':(UP_NEED[lv]>0?p.matN+'×'+UP_NEED[lv]+' + ':'')+'💰'+UP_COST[lv]+(UP_TOK[lv]?' + 🪙'+UP_TOK[lv]:'')+' · '+UP_DAYS[lv]+'天';
-      const affectTxt=p.affects.map(function(k){return UP_STAT_NAME[k]+' '+upEffTxt(k,up);}).join(' ｜ ');
-      const nextTxt=maxed?'':('<br><span style="font-size:10px;color:#007aff;">下级：'+upPartNextTxt(p,lv,up)+'</span>');
-      const dirBtn=(state.inventory.direct_up||0)>0&&!maxed?' <button class="btn-accent" style="padding:2px 6px;font-size:10px;" title="直接升级×1 无条件+1级" onclick="event.stopPropagation();useDirectUpgrade(\''+r.raw.id+'\',UP_PARTS['+UP_PARTS.indexOf(p)+'])">🔧</button>':'';
-      return '<div style="padding:4px 0;font-size:11px;"><div style="display:flex;justify-content:space-between;align-items:center;gap:4px;"><span style="white-space:nowrap;">'+p.icon+' <b>'+p.n+'</b> Lv'+lv+' '+pips(lv)+'</span><span style="flex:1;font-size:10px;color:#8e8e93;padding:0 6px;line-height:1.5;text-align:right;">'+(maxed?'<span style="color:#34c759;">已满级</span>':('需 '+needTxt+' · 持'+p.matN+'×'+(mats[p.mat]||0)))+'</span><span style="white-space:nowrap;">'+(maxed?'':'<button class="btn-primary" style="padding:2px 8px;font-size:10px;" onclick="upgradeLine(\''+r.raw.id+'\',UP_PARTS['+UP_PARTS.indexOf(p)+'])">升级</button>')+dirBtn+'</span></div><div style="font-size:10px;color:#6e6e73;">'+p.desc+' ｜ '+affectTxt+nextTxt+'</div></div>';
-    }).join('');
-    const spReady=Object.keys(up.parts).every(function(k){return up.parts[k]===10;})&&!up.sp;
-    const spLine=up.sp?'<div style="font-size:11px;color:#ff9500;font-weight:700;">🏎️ SP 运动版（max '+r.tag.maxEp+' · 罚率减半 · 连击×2 · 占比回落10%）</div>':(spReady?'<button class="btn-accent" style="width:100%;margin-top:4px;padding:5px;font-size:11px;" onclick="openSPPanel(\''+r.raw.id+'\')">🏎️ SP 觉醒预览（'+SP_RECIPE[tagFreqClass(r.raw)].label+' 级配方）</button>':'');
-    const _prog=Math.round(Object.keys(up.parts).reduce(function(s,k){return s+up.parts[k];},0)/40*100);
-    const _ultBtn=(state.inventory.ult_upgrade||0)>0?' <button class="btn-accent" style="padding:2px 8px;font-size:10px;" onclick="useUltUpgrade(\''+r.raw.id+'\')">🏆 终极改装</button>':'';
-    return '<div style="border:1px solid #e5e5ea;border-radius:10px;padding:10px;margin-bottom:8px;"><div style="display:flex;justify-content:space-between;gap:6px;align-items:flex-start;margin-bottom:6px;"><div style="font-size:13px;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+r.tag.path.join(' · ')+'</div><div style="font-size:10px;color:#8e8e93;white-space:nowrap;">'+r.days+'天 · '+_prog+'%</div></div><div style="height:6px;background:#e5e5ea;border-radius:3px;overflow:hidden;margin-bottom:6px;"><div style="height:100%;width:'+_prog+'%;background:linear-gradient(90deg,#007aff,#34c759);"></div></div>'+lines+spLine+'<div style="margin-top:4px;text-align:right;">'+_ultBtn+'</div></div>';
-  }).join('')||'<div style="text-align:center;color:#8e8e93;padding:20px;">暂无标签</div>';
-}
-function awakenSP(tagId){
-  const up=getTagUp(tagId);const tag=getTag(tagId);if(!tag)return;
-  if(!Object.keys(up.parts).every(function(k){return up.parts[k]===10;})){alert('需要四种材料全部 Lv10');return;}
-  if(up.sp){alert('已是 SP 运动版');return;}
-  const r=SP_RECIPE[tagFreqClass(tag)];const mats=getTagMats(tagId);
-  showModal('🏎️ SP 运动版觉醒','标签：<b>'+tag.path.join(' · ')+'</b>（'+r.label+' 级配方）<br><br>材料：四种材料各 ×'+r.mats+'<br>💠核心：'+(state.inventory.sp_core||0)+'/'+r.core+'<br>🪙代币：'+state.tokens+'/'+r.tokens+'<br>🔧直接升级：'+(state.inventory.direct_up||0)+'/'+r.ult,function(){
-    if(mats.mark<r.mats||mats.medal<r.mats||mats.badge<r.mats||mats.peak<r.mats){alert('材料不足');closeModal();return;}
-    if((state.inventory.sp_core||0)<r.core){alert('💠 精研核心不足');closeModal();return;}
-    if(state.tokens<r.tokens){alert('代币不足');closeModal();return;}
-    if((state.inventory.direct_up||0)<r.ult){alert('直接升级道具不足');closeModal();return;}
-    mats.mark-=r.mats;mats.medal-=r.mats;mats.badge-=r.mats;mats.peak-=r.mats;state.inventory.sp_core-=r.core;state.tokens-=r.tokens;state.inventory.direct_up-=r.ult;up.sp=true;syncUpStats(up);
-    saveState();updateTopBar();updateShopUI();renderUpgradeUI();closeModal();
-    sendSystemMail('🏎️ 运动版觉醒 · '+tag.path.join('·'),'你的标签「'+tag.path.join(' · ')+'」已觉醒为 SP 运动版！附件：积分×200。',{points:200});
-    showGainModal('🏎️ SP 运动版觉醒！',[['标签','「'+tag.path.join('·')+'」','#ff9500'],['maxEp',getTag(tagId).maxEp],['特性','罚率减半 · 连击×2 · 占比回落10%']],'贺电已发送至邮箱');
-  });
-}
-function openSPPanel(sel){
-  sel=sel||'';
-  const tags=TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;});
-  if(!sel)sel=tags[0]&&tags[0].id;
-  const t=getTag(sel);if(!t){closeModal();return;}
-  const up=getTagUp(t.id);const mats=getTagMats(t.id);const r=SP_RECIPE[tagFreqClass(t)];
-  const list=tags.map(function(x){const u=getTagUp(x.id);const ready=Object.keys(u.parts).every(k=>u.parts[k]===10);return '<button class="btn-secondary" style="padding:5px 8px;font-size:11px;'+(x.id===t.id?'border-color:#007aff;background:#007aff10;':'')+(u.sp?';color:#ff9500;border-color:#ff9500;':'')+'" onclick="openSPPanel(\''+x.id+'\')">'+(u.sp?'★ ':'')+x.path.join('·')+'</button>';}).join(' ');
-  const spMax=Math.round(t.maxEp*1.25);
-  const spTheme=getSPCardTheme(t);
-  const statLines=['spd','acc','ctl','nit'].map(function(k){return '<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;"><span style="color:#8e8e93;">'+UP_STAT_NAME[k]+'</span><b>'+upEffTxt(k,up)+'</b></div>';}).join('');
-  const matLines=UP_PARTS.map(function(p){return '<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;"><span>'+p.icon+' '+p.n+'</span><b>'+up.parts[p.k]+'/10</b></div>';}).join('');
-  const spCard='<div class="task-card task-sp-'+spTheme+'" style="border:1px solid #1a1a1a;border-left:4px solid #000;border-radius:10px;padding:8px 10px;"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:#fff;"><span>政治刷题 2h</span><span style="font-size:10px;color:#34c759;">✓ 已完成</span></div><div style="margin-top:5px;"><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#000;color:#fff;box-shadow:0 0 0 1px #ff950066,inset 0 0 8px rgba(255,149,0,.25);font-weight:600;">★ '+t.path.join(' · ')+' · SP · max '+spMax+'</span></div></div>';
-  const ready=Object.keys(up.parts).every(k=>up.parts[k]===10);
-  const body='<div style="font-size:11px;color:#8e8e93;margin-bottom:6px;">选择要预览的标签：</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">'+list+'</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:600;margin-bottom:4px;">当前属性</div>'+statLines+'</div><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:600;margin-bottom:4px;">材料等级</div>'+matLines+'</div></div><div style="font-size:12px;font-weight:600;margin:10px 0 4px;">SP 预览</div>'+spCard+'<div style="font-size:11px;color:#8e8e93;margin-top:6px;">配方（'+r.label+'）：四种材料各×'+r.mats+' + 💠'+r.core+' + 🪙'+r.tokens+' + 🔧'+r.ult+'</div>';
-  showModal('🏎️ 运动版（SP觉醒）',body,function(){awakenSP(t.id);});
-}
+
+
+
+
+
+
 
 
 /* ===== SP与主次属性修正：材料满10必满主属性；SP材料量按Sportline量级 ===== */
@@ -6446,34 +6110,11 @@ UP_PARTS[0].main='spd';UP_PARTS[0].secondary='ctl';UP_PARTS[0].desc='主：极�
 UP_PARTS[1].main='acc';UP_PARTS[1].secondary='nit';UP_PARTS[1].desc='主：加速 ｜ 副：氮增';
 UP_PARTS[2].main='ctl';UP_PARTS[2].secondary='acc';UP_PARTS[2].desc='主：操控 ｜ 副：加速';
 UP_PARTS[3].main='nit';UP_PARTS[3].secondary='spd';UP_PARTS[3].desc='主：氮增 ｜ 副：极速';
-function upStatLevels(up){
-  const p=up.parts||{mark:0,medal:0,badge:0,peak:0};
-  return {spd:Math.min(10,(p.mark||0)+Math.floor((p.peak||0)/2)),acc:Math.min(10,(p.medal||0)+Math.floor((p.badge||0)/2)),ctl:Math.min(10,(p.badge||0)+Math.floor((p.mark||0)/2)),nit:Math.min(10,(p.peak||0)+Math.floor((p.medal||0)/2))};
-}
+
+
 function syncUpStats(up){const lv=upStatLevels(up);up.spd=lv.spd;up.acc=lv.acc;up.ctl=lv.ctl;up.nit=lv.nit;return up;}
-function openSPPanel(sel){
-  sel=sel||'';
-  const tags=TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;});
-  if(!sel)sel=tags[0]&&tags[0].id;
-  const t=getTag(sel);if(!t){closeModal();return;}
-  const up=getTagUp(t.id);const ready=Object.keys(up.parts).every(k=>up.parts[k]===10);
-  const spMax=Math.round(t.maxEp*1.25);const spTheme=getSPCardTheme(t);
-  const list=tags.map(x=>{const u=getTagUp(x.id);return '<button class="btn-secondary" style="padding:5px 8px;font-size:11px;'+(x.id===t.id?'border-color:#007aff;background:#007aff10;':'')+(u.sp?';color:#ff9500;border-color:#ff9500;':'')+'" onclick="openSPPanel(\''+x.id+'\')">'+(u.sp?'★ ':'')+x.path.join('·')+'</button>';}).join(' ');
-  const currentCard='<div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px 10px;"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;"><span>政治刷题 2h</span><span style="font-size:10px;color:#34c759;">✓ 已完成</span></div><div style="margin-top:5px;"><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#f2f2f7;color:#6e6e73;">'+t.path.join(' · ')+' · max '+getTag(t.id).maxEp+'</span></div></div>';
-  const spCard='<div class="task-card task-sp-'+spTheme+'" style="border:1px solid #1a1a1a;border-left:4px solid #000;border-radius:10px;padding:8px 10px;"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:#fff;"><span>政治刷题 2h</span><span style="font-size:10px;color:#34c759;">✓ 已完成</span></div><div style="margin-top:5px;"><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#000;color:#fff;box-shadow:0 0 0 1px #ff950066,inset 0 0 8px rgba(255,149,0,.25);font-weight:600;">★ '+t.path.join(' · ')+' · SP · max '+spMax+'</span></div></div>';
-  let body='<div style="font-size:11px;color:#8e8e93;margin-bottom:6px;">选择要预览的标签：</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">'+list+'</div><div style="font-size:12px;font-weight:600;margin-bottom:4px;">当前视觉</div>'+currentCard+'<div style="font-size:12px;font-weight:600;margin:10px 0 4px;">SP视觉预览</div>'+spCard;
-  if(!ready&&!up.sp){
-    body+='<div style="margin-top:10px;padding:8px 10px;border-radius:8px;background:#f2f2f7;font-size:12px;color:#8e8e93;line-height:1.6;">🔒 四种材料未满级：当前仅可查看SP视觉，升级材料和增益效果将在满级后开放。</div>';
-    showModal('🏎️ 运动版（SP视觉预览）',body,closeModal);
-    return;
-  }
-  const mats=getTagMats(t.id);const r=SP_RECIPE[tagFreqClass(t)];
-  const statLines=['spd','acc','ctl','nit'].map(k=>'<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;"><span style="color:#8e8e93;">'+UP_STAT_NAME[k]+'</span><b>'+upEffTxt(k,up)+'</b></div>').join('');
-  const matLines=UP_PARTS.map(p=>'<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;"><span>'+p.icon+' '+p.n+'</span><b>'+up.parts[p.k]+'/10</b></div>').join('');
-  const recipe='<div style="margin-top:10px;padding:8px 10px;border:1px solid #ff950040;background:#ff950008;border-radius:8px;font-size:12px;line-height:1.7;"><b>SP升级材料（'+r.label+'级）</b><br>四种材料各 ×'+r.mats+'（当前 '+mats.mark+' / '+mats.medal+' / '+mats.badge+' / '+mats.peak+'）<br>💠 精研核心 ×'+r.core+'（持有 '+(state.inventory.sp_core||0)+'）<br>🪙 代币 ×'+r.tokens+'（持有 '+state.tokens+'）<br>🔧 直接升级 ×'+r.ult+'（持有 '+(state.inventory.direct_up||0)+'）</div>';
-  body+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;"><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:600;margin-bottom:4px;">增益效果</div>'+statLines+'</div><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:600;margin-bottom:4px;">材料等级</div>'+matLines+'</div></div>'+recipe;
-  showModal(up.sp?'🏎️ SP运动版详情':'🏎️ 运动版（SP觉醒）',body,function(){awakenSP(t.id);});
-}
+
+
 
 
 /* ===== 标签专精UI：属性状态为主体 + Lv10全满效果 + SP预览对齐每日登记 ===== */
@@ -6483,56 +6124,12 @@ function upFullEffectText(raw){
   const penFull=Math.round(pen0*(1-0.25));
   return 'Lv10全满效果（SP前）：maxEp '+raw.maxEp+' → '+maxFull+' ｜ 罚率 '+pen0+'% → '+penFull+'% ｜ 连击 +25%/阶 ｜ 完成占比20%';
 }
-function renderUpgradeUI(){
-  const box=document.getElementById('upgrade-list');if(!box)return;
-  const usage=countTagSettleDays();
-  const rows=TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;}).map(function(t){return {raw:t,tag:getTag(t.id),days:usage[t.id]||0};}).sort(function(a,b){return b.days-a.days;});
-  box.innerHTML=rows.map(function(r){
-    const up=getTagUp(r.raw.id);const mats=getTagMats(r.raw.id);const lv=upStatLevels(up);
-    const pips=function(n){let h='';for(let i=0;i<10;i++)h+='<span style="display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:2px;background:'+(i<n?'#007aff':'#e5e5ea')+';"></span>';return h;};
-    const statRows=[['spd','🏁','极速'],['acc','⚡','加速'],['ctl','🛡️','操控'],['nit','🚀','氮增']].map(function(x){
-      return '<div style="display:flex;justify-content:space-between;gap:6px;align-items:center;padding:5px 0;border-bottom:1px solid #f2f2f7;"><div style="font-size:12px;font-weight:600;white-space:nowrap;">'+x[1]+' '+x[2]+' Lv'+lv[x[0]]+'</div><div>'+pips(lv[x[0]])+'</div><div style="font-size:10px;color:#8e8e93;white-space:nowrap;">'+upEffTxt(x[0],up)+'</div></div>';
-    }).join('');
-    const matRows=UP_PARTS.map(function(p){
-      const plv=up.parts[p.k];const maxed=plv>=10;
-      const needTxt=maxed?'MAX':(UP_NEED[plv]>0?p.matN+'×'+UP_NEED[plv]+' + ':'')+'💰'+UP_COST[plv]+(UP_TOK[plv]?' + 🪙'+UP_TOK[plv]:'')+' · '+UP_DAYS[plv]+'天';
-      return '<div style="display:flex;justify-content:space-between;gap:6px;align-items:center;padding:5px 0;border-bottom:1px solid #f2f2f7;"><div style="font-size:12px;"><b>'+p.icon+' '+p.n+'</b> <span style="color:#8e8e93;font-size:10px;">'+p.desc+'</span><br><span style="font-size:10px;color:#8e8e93;">'+(maxed?'已满级':'材料 Lv'+plv+' · '+needTxt+' · 持有 '+p.matN+'×'+(mats[p.mat]||0))+'</span></div><div style="white-space:nowrap;">'+(maxed?'<span style="color:#34c759;font-size:11px;">✓</span>':'<button class="btn-primary" style="padding:3px 8px;font-size:11px;" onclick="upgradeLine(\''+r.raw.id+'\',UP_PARTS['+UP_PARTS.indexOf(p)+'])">升级</button>')+((state.inventory.direct_up||0)>0&&!maxed?' <button class="btn-accent" style="padding:3px 8px;font-size:11px;" onclick="useDirectUpgrade(\''+r.raw.id+'\',UP_PARTS['+UP_PARTS.indexOf(p)+'])">🔧</button>':'')+'</div></div>';
-    }).join('');
-    const spReady=Object.keys(up.parts).every(function(k){return up.parts[k]===10;})&&!up.sp;
-    const _prog=Math.round((lv.spd+lv.acc+lv.ctl+lv.nit)/40*100);
-    const _ultBtn=(state.inventory.ult_upgrade||0)>0?' <button class="btn-accent" style="padding:2px 8px;font-size:10px;" onclick="useUltUpgrade(\''+r.raw.id+'\')">🏆 终极改装</button>':'';
-    return '<div style="border:1px solid #e5e5ea;border-radius:10px;padding:10px;margin-bottom:8px;"><div style="display:flex;justify-content:space-between;gap:6px;align-items:flex-start;margin-bottom:6px;"><div style="font-size:13px;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+r.tag.path.join(' · ')+'</div><div style="font-size:10px;color:#8e8e93;white-space:nowrap;">'+r.days+'天 · '+_prog+'%</div></div><div style="height:6px;background:#e5e5ea;border-radius:3px;overflow:hidden;margin-bottom:8px;"><div style="height:100%;width:'+_prog+'%;background:linear-gradient(90deg,#007aff,#34c759);"></div></div><div style="margin-bottom:8px;">'+statRows+'</div><div style="font-size:12px;font-weight:600;margin:6px 0;">材料升级</div><div>'+matRows+'</div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#007aff;">查看Lv10全满效果</summary><div style="font-size:11px;color:#6e6e73;padding:6px 0;line-height:1.6;">'+upFullEffectText(r.raw)+'</div></details>'+(up.sp?'<div style="font-size:11px;color:#ff9500;font-weight:700;margin-top:6px;">🏎️ 已是SP运动版（以上仍显示SP前满级效果）</div>':(spReady?'<button class="btn-accent" style="width:100%;margin-top:6px;padding:6px;font-size:12px;" onclick="openSPPanel(\''+r.raw.id+'\')">🏎️ SP觉醒预览</button>':''))+'<div style="margin-top:6px;text-align:right;">'+_ultBtn+'</div></div>';
-  }).join('')||'<div style="text-align:center;color:#8e8e93;padding:20px;">暂无标签</div>';
-}
-function spPreviewTaskCard(t,isSP){
-  const sample=(state.todayTasks&&state.todayTasks[0])||null;
-  const name=(sample&&sample.name)||'当前任务';
-  const tag=t;const maxEp=isSP?Math.round(getTag(t.id).maxEp*1.25):getTag(t.id).maxEp;
-  const req=isSP?Math.round(maxEp*0.1):requiredBaseOf(sample||{},tag);
-  const quality=sample?((parseInt(sample.qualityEp)||0)):Math.round(maxEp*0.6);
-  const theme=isSP?('task-sp-'+getSPCardTheme(tag)):'';
-  const nameStyle=isSP?'color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.45);':'';
-  return '<div class="task-card '+theme+'" style="border:1px solid '+(isSP?'#1a1a1a':'#e5e5ea')+';border-left:4px solid '+(isSP?'#000':'#d1d1d6')+';border-radius:10px;padding:10px;"><div style="font-size:13px;font-weight:600;'+nameStyle+'">'+name+'</div><div style="display:flex;gap:6px;align-items:center;margin-top:6px;"><div style="flex:1;padding:8px 10px;border-radius:8px;font-size:13px;'+(isSP?'background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.18);':'background:#f2f2f7;color:#6e6e73;')+'">完成EP: '+req+'</div><div style="flex:1;padding:8px 10px;border-radius:8px;font-size:13px;'+(isSP?'background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.18);':'background:#f2f2f7;color:#6e6e73;')+'">质量EP: '+quality+'</div><div style="font-size:12px;font-weight:600;padding:4px 8px;border-radius:8px;'+(isSP?'background:rgba(52,199,89,.22);border:1px solid rgba(102,255,154,.38);color:#66ff9a;':'color:#34c759;')+'">✓ 已完成</div></div><div style="margin-top:6px;font-size:10px;color:'+(isSP?'#fff':'#8e8e93')+';">'+tag.path.join(' · ')+' · max '+maxEp+(isSP?' · SP':'')+'</div></div>';
-}
-function openSPPanel(sel){
-  sel=sel||'';
-  const tags=TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;});
-  if(!sel)sel=tags[0]&&tags[0].id;
-  const t=getTag(sel);if(!t){closeModal();return;}
-  const up=getTagUp(t.id);const ready=Object.keys(up.parts).every(k=>up.parts[k]===10);
-  const list=tags.map(x=>{const u=getTagUp(x.id);return '<button class="btn-secondary" style="padding:5px 8px;font-size:11px;'+(x.id===t.id?'border-color:#007aff;background:#007aff10;':'')+(u.sp?';color:#ff9500;border-color:#ff9500;':'')+'" onclick="openSPPanel(\''+x.id+'\')">'+(u.sp?'★ ':'')+x.path.join('·')+'</button>';}).join(' ');
-  let body='<div style="font-size:11px;color:#8e8e93;margin-bottom:6px;">选择要预览的标签：</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">'+list+'</div><div style="font-size:12px;font-weight:600;margin-bottom:4px;">当前视觉</div>'+spPreviewTaskCard(t,false)+'<div style="font-size:12px;font-weight:600;margin:10px 0 4px;">SP视觉预览</div>'+spPreviewTaskCard(t,true);
-  if(!ready&&!up.sp){
-    body+='<div style="margin-top:10px;padding:8px 10px;border-radius:8px;background:#f2f2f7;font-size:12px;color:#8e8e93;line-height:1.6;">🔒 四种材料未满级：当前仅可查看SP视觉，升级材料和增益效果将在满级后开放。</div>';
-    showModal('🏎️ 运动版（SP视觉预览）',body,closeModal);return;
-  }
-  const mats=getTagMats(t.id);const r=SP_RECIPE[tagFreqClass(t)];
-  const statLines=['spd','acc','ctl','nit'].map(k=>'<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;"><span style="color:#8e8e93;">'+UP_STAT_NAME[k]+'</span><b>'+upEffTxt(k,up)+'</b></div>').join('');
-  const matLines=UP_PARTS.map(p=>'<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;"><span>'+p.icon+' '+p.n+'</span><b>'+up.parts[p.k]+'/10</b></div>').join('');
-  const recipe='<div style="margin-top:10px;padding:8px 10px;border:1px solid #ff950040;background:#ff950008;border-radius:8px;font-size:12px;line-height:1.7;"><b>SP升级材料（'+r.label+'级）</b><br>四种材料各 ×'+r.mats+'（当前 '+mats.mark+' / '+mats.medal+' / '+mats.badge+' / '+mats.peak+'）<br>💠 精研核心 ×'+r.core+'（持有 '+(state.inventory.sp_core||0)+'）<br>🪙 代币 ×'+r.tokens+'（持有 '+state.tokens+'）<br>🔧 直接升级 ×'+r.ult+'（持有 '+(state.inventory.direct_up||0)+'）</div>';
-  body+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;"><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:600;margin-bottom:4px;">增益效果</div>'+statLines+'</div><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:600;margin-bottom:4px;">材料等级</div>'+matLines+'</div></div>'+recipe;
-  showModal(up.sp?'🏎️ SP运动版详情':'🏎️ 运动版（SP觉醒）',body,function(){awakenSP(t.id);});
-}
+
+
+
+
+
+
 
 
 /* ===== 标签专精交互版：属性词条系统化 / 材料卡选中升级 / 属性栏预览下级 ===== */
@@ -6553,13 +6150,12 @@ useDirectUpgrade=function(tagId,part){
   if(sel!==part.k){alert('请先选中要升级的材料卡，再使用直接升级');return;}
   return _directUpgradeImpl(tagId,part);
 };
-function markTagOpen(tagId,open){state.upOpen=state.upOpen||{};state.upOpen[tagId]=!!open;saveState();}
-function selectUpgradePart(tagId,partIdx){
-  state.upSel=state.upSel||{};state.upOpen=state.upOpen||{};state.upSel[tagId]=UP_PARTS[partIdx].k;state.upOpen[tagId]=true;saveState();renderUpgradeUI();
-}
-function upPartSimulation(up,partKey){
-  const p=Object.assign({},up.parts||{});p[partKey]=Math.min(10,(p[partKey]||0)+1);return {parts:p};
-}
+
+
+
+
+
+
 function upComparisonHtml(part,up){
   const next=upPartSimulation(up,part.k);
   return part.affects.map(function(k){
@@ -6568,29 +6164,8 @@ function upComparisonHtml(part,up){
     return '<div style="display:flex;justify-content:space-between;gap:8px;align-items:center;padding:4px 0;border-bottom:1px solid #f2f2f7;font-size:11px;"><span style="font-weight:600;">'+UP_STAT_NAME[k]+'</span><span style="color:#6e6e73;">当前 '+cur+'</span><span>→</span><b style="color:'+(changed?'#ff9500':'#8e8e93')+';">'+nxt+'</b></div>';
   }).join('');
 }
-function renderUpgradeUI(){
-  const box=document.getElementById('upgrade-list');if(!box)return;
-  const usage=countTagSettleDays();
-  const rows=TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;}).map(function(t){return {raw:t,tag:getTag(t.id),days:usage[t.id]||0};}).sort(function(a,b){return b.days-a.days;});
-  box.innerHTML=rows.map(function(r){
-    const up=getTagUp(r.raw.id);const mats=getTagMats(r.raw.id);const lv=upStatLevels(up);
-    state.upSel=state.upSel||{};const selectedPart=state.upSel[r.raw.id]||'';
-    const statRows=[['spd','🏁'],['acc','⚡'],['ctl','🛡️'],['nit','🚀']].map(function(x){
-      const k=x[0];return '<div style="padding:6px 0;border-bottom:1px solid #f2f2f7;"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="font-weight:600;">'+x[1]+' '+UP_STAT_NAME[k]+'</span><span style="font-size:10px;color:#8e8e93;">'+upEffTxt(k,up)+'</span></div><div class="up-stat-bar"><div class="up-stat-fill" style="width:'+(lv[k]*10)+'%;"></div></div></div>';
-    }).join('');
-    const partCards=UP_PARTS.map(function(p,pi){
-      const plv=up.parts[p.k];const selected=selectedPart===p.k;const maxed=plv>=10;
-      const needTxt=maxed?'MAX':(UP_NEED[plv]>0?p.matN+'×'+UP_NEED[plv]+' + ':'')+'💰'+UP_COST[plv]+(UP_TOK[plv]?' + 🪙'+UP_TOK[plv]:'')+' · '+UP_DAYS[plv]+'天';
-      return '<div class="upgrade-part-card'+(selected?' selected':'')+'" onclick="selectUpgradePart(\''+r.raw.id+'\','+pi+')"><div style="display:flex;justify-content:space-between;gap:6px;align-items:center;"><b style="font-size:12px;">'+p.icon+' '+p.n+'</b><span style="font-size:10px;color:#8e8e93;">材料 Lv'+plv+'</span></div><div style="font-size:10px;color:#8e8e93;margin-top:3px;">'+p.desc+' ｜ '+(maxed?'已满级':needTxt+' · 持有 '+p.matN+'×'+(mats[p.mat]||0))+'</div>'+(maxed?'':'<div style="margin-top:6px;display:flex;gap:6px;"><button class="btn-primary" style="flex:1;padding:5px;font-size:11px;" '+(selected?'':'disabled')+' onclick="event.stopPropagation();upgradeLine(\''+r.raw.id+'\',UP_PARTS['+pi+'])">升级</button>'+((state.inventory.direct_up||0)>0?'<button class="btn-accent" style="padding:5px 8px;font-size:11px;" '+(selected?'':'disabled')+' onclick="event.stopPropagation();useDirectUpgrade(\''+r.raw.id+'\',UP_PARTS['+pi+'])">🔧</button>':'')+'</div>')+'</div>';
-    }).join('');
-    const selectedObj=UP_PARTS.find(p=>p.k===selectedPart);
-    const compare=selectedObj?'<div style="margin-top:8px;border:1px solid #007aff30;background:#007aff08;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:600;color:#007aff;margin-bottom:4px;">升级1次后预览 · '+selectedObj.n+'</div>'+upComparisonHtml(selectedObj,up)+'</div>':'<div style="margin-top:8px;font-size:11px;color:#8e8e93;text-align:center;">先选择一张材料卡，再查看升级前后对比</div>';
-    const spReady=Object.keys(up.parts).every(function(k){return up.parts[k]===10;})&&!up.sp;
-    const _prog=Math.round((lv.spd+lv.acc+lv.ctl+lv.nit)/40*100);
-    const _ultBtn=(state.inventory.ult_upgrade||0)>0?' <button class="btn-accent" style="padding:2px 8px;font-size:10px;" onclick="useUltUpgrade(\''+r.raw.id+'\')">🏆 终极改装</button>':'';
-    return '<details style="border:1px solid #e5e5ea;border-radius:10px;margin-bottom:8px;" '+((state.upOpen||{})[r.raw.id]?'open':'')+' ontoggle="markTagOpen(\''+r.raw.id+'\',this.open)"><summary style="cursor:pointer;padding:10px;list-style:none;"><div style="display:flex;justify-content:space-between;gap:6px;align-items:center;"><div style="font-size:13px;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+r.tag.path.join(' · ')+'</div><div style="font-size:10px;color:#8e8e93;white-space:nowrap;">'+r.days+'天 · '+_prog+'%</div></div><div style="height:6px;background:#e5e5ea;border-radius:3px;overflow:hidden;margin-top:6px;"><div style="height:100%;width:'+_prog+'%;background:linear-gradient(90deg,#007aff,#34c759);border-radius:3px;transition:width .45s cubic-bezier(.22,1,.36,1);"></div></div></summary><div style="padding:0 10px 10px;"><div style="font-size:12px;font-weight:600;margin:6px 0;">属性状态</div>'+statRows+'<div style="font-size:12px;font-weight:600;margin:8px 0 4px;">材料升级（先选中卡片）</div>'+partCards+compare+'<details style="margin-top:8px;"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#007aff;">查看Lv10全满效果</summary><div style="font-size:11px;color:#6e6e73;padding:6px 0;line-height:1.6;">'+upFullEffectText(r.raw)+'</div></details>'+(up.sp?'<div style="font-size:11px;color:#ff9500;font-weight:700;margin-top:6px;">🏎️ 已是SP运动版（以上仍显示SP前满级效果）</div>':(spReady?'<button class="btn-accent" style="width:100%;margin-top:6px;padding:6px;font-size:12px;" onclick="openSPPanel(\''+r.raw.id+'\')">🏎️ SP觉醒预览</button>':''))+'<div style="margin-top:6px;text-align:right;">'+_ultBtn+'</div></div></details>';
-  }).join('')||'<div style="text-align:center;color:#8e8e93;padding:20px;">暂无标签</div>';
-}
+
+
 
 
 function spPreviewTaskCard(t,isSP){
@@ -6627,16 +6202,10 @@ function buildUpgradeTree(){
   });
   return root;
 }
-function upStatPreviewHtml(k,up,part){
-  const lv=upStatLevels(up);const cur=lv[k];
-  let nextLv=cur;
-  if(part){const sim=upPartSimulation(up,part.k);nextLv=upStatLevels(sim)[k];}
-  const changed=nextLv!==cur;
-  return '<div style="padding:6px 0;border-bottom:1px solid #f2f2f7;"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="font-weight:600;">'+({spd:'🏁',acc:'⚡',ctl:'🛡️',nit:'🚀'}[k])+' '+UP_STAT_NAME[k]+'</span><span style="font-size:10px;color:#8e8e93;">'+upEffTxt(k,up)+(changed?' → <b style="color:#ff9500;">'+upEffTxt(k,upPartSimulation(up,part.k))+'</b>':'')+'</span></div><div class="up-stat-bar" style="position:relative;"><div class="up-stat-fill" style="width:'+(cur*10)+'%;"></div>'+(changed?'<div style="position:absolute;top:0;left:'+(cur*10)+'%;height:100%;width:'+((nextLv-cur)*10)+'%;background:#ff9500;border-radius:5px;"></div>':'')+'</div></div>';
-}
-function upMiniPreview(part,up){
-  return '<div style="margin-top:6px;padding:6px 8px;border-radius:8px;background:#007aff08;border:1px solid #007aff25;font-size:10px;line-height:1.5;"><b style="color:#007aff;">本级预览</b><br>'+upComparisonHtml(part,up)+'</div>';
-}
+
+
+
+
 function renderUpgradeLeaf(t){
   const raw=t;const tag=getTag(t.id);const up=getTagUp(t.id);const mats=getTagMats(t.id);const lv=upStatLevels(up);const usage=countTagSettleDays();const days=usage[t.id]||0;
   state.upSel=state.upSel||{};const selectedPart=state.upSel[t.id]||'';const selectedObj=UP_PARTS.find(p=>p.k===selectedPart);
@@ -6670,17 +6239,13 @@ function renderUpgradeUI(){
 
 /* ===== 非线性双属性：主属性每级+1，副属性按3/6级跳段+2，两个条不同步 ===== */
 function upSecondaryBonus(lv){return lv>=6?4:(lv>=3?2:0);}
-function upStatLevels(up){
-  const p=up.parts||{mark:0,medal:0,badge:0,peak:0};
-  return {spd:Math.min(10,(p.mark||0)+upSecondaryBonus(p.peak||0)),acc:Math.min(10,(p.medal||0)+upSecondaryBonus(p.badge||0)),ctl:Math.min(10,(p.badge||0)+upSecondaryBonus(p.mark||0)),nit:Math.min(10,(p.peak||0)+upSecondaryBonus(p.medal||0))};
-}
+
+
 
 
 /* ===== 双属性恒定增长：主属性每级+1，副属性每级+0.5，不同步且每次都涨 ===== */
-function upStatLevels(up){
-  const p=up.parts||{mark:0,medal:0,badge:0,peak:0};
-  return {spd:Math.min(10,(p.mark||0)+(p.peak||0)*0.5),acc:Math.min(10,(p.medal||0)+(p.badge||0)*0.5),ctl:Math.min(10,(p.badge||0)+(p.mark||0)*0.5),nit:Math.min(10,(p.peak||0)+(p.medal||0)*0.5)};
-}
+
+
 function fmtUpNum(n){return (Math.round(n*10)/10).toFixed(1).replace('.0','');}
 function upEffTxt(k,up){
   const lv=upStatLevels(up);
@@ -6693,31 +6258,14 @@ function upEffTxt(k,up){
 
 
 /* ===== 随机副属性曲线：每次升级两条都涨，但涨幅随机且不等于主属性 ===== */
-function makeUpCurve(){
-  const pool=[0.4,0.5,0.6,0.7,0.8,0.9,1.2,1.3,1.5,1.7];
-  const vals=[];for(let i=0;i<10;i++)vals.push(pool[Math.floor(Math.random()*pool.length)]);
-  const target=5+Math.random()*2.5;
-  const sum=vals.reduce((a,b)=>a+b,0);
-  const scaled=vals.map(v=>Math.round(v/sum*target*10)/10);
-  for(let i=0;i<scaled.length;i++){
-    if(scaled[i]<=0)scaled[i]=0.4;
-    if(Math.abs(scaled[i]-1)<0.05)scaled[i]=Math.random()<0.5?0.9:1.1;
-  }
-  return scaled;
-}
-function ensureUpCurves(up){
-  if(!up.curves)up.curves={mark:makeUpCurve(),medal:makeUpCurve(),badge:makeUpCurve(),peak:makeUpCurve()};
-  return up;
-}
-function upCurveSum(key,lv,up){
-  const curves=ensureUpCurves(up).curves;
-  return (curves[key]||[]).slice(0,Math.max(0,Math.min(10,lv))).reduce((a,b)=>a+b,0);
-}
-function upStatLevels(up){
-  ensureUpCurves(up);
-  const p=up.parts||{mark:0,medal:0,badge:0,peak:0};
-  return {spd:Math.min(10,(p.mark||0)+upCurveSum('peak',p.peak||0,up)),acc:Math.min(10,(p.medal||0)+upCurveSum('badge',p.badge||0,up)),ctl:Math.min(10,(p.badge||0)+upCurveSum('mark',p.mark||0,up)),nit:Math.min(10,(p.peak||0)+upCurveSum('medal',p.medal||0,up))};
-}
+
+
+
+
+
+
+
+
 
 
 /* ===== 材料约束修正：最多2属性 / 副涨幅≤主50% / 主材料满级前属性不满 / 资源缺口红色提示 ===== */
@@ -6753,17 +6301,8 @@ function upPartSimulation(up,partKey){
   sim.parts[partKey]=Math.min(10,(sim.parts[partKey]||0)+1);
   return sim;
 }
-function upResourceHtml(part,up,mats,days){
-  const plv=up.parts[part.k];if(plv>=10)return '<span style="color:#34c759;">该材料已满级</span>';
-  const need=UP_NEED[plv]||0,own=mats[part.mat]||0,cost=UP_COST[plv],tok=UP_TOK[plv]||0,needDays=UP_DAYS[plv]||0;
-  const seg=[];
-  if(need>0)seg.push('<span style="color:'+(own<need?'#ff3b30':'#34c759')+';">材料 '+own+'/'+need+'</span>');
-  else seg.push('<span style="color:#8e8e93;">材料 无需</span>');
-  seg.push('<span style="color:'+(state.points<cost?'#ff3b30':'#34c759')+';">积分 '+state.points+'/'+cost+'</span>');
-  if(tok>0)seg.push('<span style="color:'+(state.tokens<tok?'#ff3b30':'#34c759')+';">代币 '+state.tokens+'/'+tok+'</span>');
-  seg.push('<span style="color:'+(days<needDays?'#ff3b30':'#34c759')+';">结算 '+days+'/'+needDays+'天</span>');
-  return '<div style="margin-top:5px;font-size:10px;line-height:1.6;"><b>资源核对</b><br>'+seg.join(' ｜ ')+'</div>';
-}
+
+
 function upMiniPreview(part,up,tagId,mats,days){
   return '<div style="margin-top:6px;padding:6px 8px;border-radius:8px;background:#007aff08;border:1px solid #007aff25;font-size:10px;line-height:1.5;"><b style="color:#007aff;">本级预览</b><br>'+upComparisonHtml(part,up)+(mats?upResourceHtml(part,up,mats,days||0):'')+'</div>';
 }
@@ -6775,15 +6314,8 @@ function spTreeOpen(key,pathArr){const v=(state.spTreeOpen||{})[key];return type
 function spIntroHtml(){
   return '<details open style="margin-bottom:10px;"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#ff9500;">🏎️ 运动版任务介绍</summary><div style="font-size:12px;color:#6e6e73;line-height:1.8;padding:8px 2px;">运动版任务是标签专精的最终养成阶段。玩家需要先把普通标签的四种材料全部提升到满级，才能解锁对应标签的运动版预览与觉醒入口。运动版不会直接替代日常任务，而是在原有任务结构上继续强化标签上限、完成质量与结算表现。觉醒前可以查看普通状态与运动版状态的视觉差异，觉醒后会保留该标签的独立成长记录，并在每日登记、任务卡和结算明细中显示专属标识。不同标签拥有不同材料配方，稀有度越高，觉醒所需的材料、精研核心与直接升级越多。运动版的核心目标是把一个普通标签逐步培养成可长期重复使用的高价值任务标签。</div></details>';
 }
-function spTagNode(node,pathArr,sel){
-  const key=pathArr.join('/');
-  if(node.tag){
-    const t=getTag(node.tag.id);const up=getTagUp(node.tag.id);const ready=Object.keys(up.parts).every(k=>up.parts[k]===10);
-    return '<button class="btn-secondary" style="width:100%;margin:4px 0;text-align:left;font-size:12px;'+(node.tag.id===sel?'border-color:#007aff;background:#007aff10;':'')+(up.sp?';color:#ff9500;border-color:#ff9500;':'')+'" onclick="openSPPanel(\''+node.tag.id+'\')">'+(up.sp?'★ ':'')+t.path.join(' · ')+(ready?' ✓':'')+'</button>';
-  }
-  const children=Object.keys(node.children).sort().map(k=>spTagNode(node.children[k],pathArr.concat(k),sel)).join('');
-  return '<details style="margin:5px 0;" '+(spTreeOpen(key,pathArr)?'open':'')+' ontoggle="markSPTreeOpen(\''+key+'\',this.open)"><summary style="cursor:pointer;font-size:12px;font-weight:700;padding:7px 9px;background:#f9f9fb;border:1px solid #e5e5ea;border-radius:8px;">'+pathArr.join(' · ')+'</summary><div style="padding:3px 0 3px 8px;">'+children+'</div></details>';
-}
+
+
 function spCostLine(label,own,need){
   const ok=own>=need;
   return '<div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:3px 0;"><span>'+label+'</span><b style="color:'+(ok?'#34c759':'#ff3b30')+';">'+own+' / '+need+'</b></div>';
@@ -6794,19 +6326,8 @@ function spRecipeHtml(t,up){
   const mats=getTagMats(t.id);const r=SP_RECIPE[tagFreqClass(t)];
   return '<div style="margin-top:10px;padding:10px;border:1px solid #ff950040;background:#ff950008;border-radius:10px;"><div style="font-size:13px;font-weight:700;margin-bottom:4px;">SP觉醒材料（'+r.label+'级）</div>'+spCostLine('训练印记',mats.mark||0,r.mats)+spCostLine('冲刺奖章',mats.medal||0,r.mats)+spCostLine('全勤徽章',mats.badge||0,r.mats)+spCostLine('巅峰凭证',mats.peak||0,r.mats)+spCostLine('💠 精研核心',state.inventory.sp_core||0,r.core)+spCostLine('🪙 代币',state.tokens,r.tokens)+spCostLine('🔧 直接升级',state.inventory.direct_up||0,r.ult)+'</div>';
 }
-function openSPPanel(sel){
-  sel=sel||'';
-  const tags=TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;});
-  if(!sel)sel=tags[0]&&tags[0].id;
-  const t=getTag(sel);if(!t){closeModal();return;}
-  const up=getTagUp(t.id);const ready=Object.keys(up.parts).every(k=>up.parts[k]===10);
-  const tree=buildUpgradeTree();
-  const left=Object.keys(tree.children).sort().map(k=>spTagNode(tree.children[k],[k],sel)).join('');
-  const visual='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;"><div><div style="text-align:center;font-size:11px;color:#8e8e93;margin-bottom:4px;">📘 SP前</div>'+spPreviewTaskCard(t,false)+'</div><div><div style="text-align:center;font-size:11px;color:#8e8e93;margin-bottom:4px;">🏎️ SP后</div>'+spPreviewTaskCard(t,true)+'</div></div>';
-  const stats=spGainCompareHtml(t,up);
-  const body=spIntroHtml()+'<div style="display:grid;grid-template-columns:minmax(180px,240px) 1fr;gap:12px;"><div><div style="font-size:12px;font-weight:700;margin-bottom:6px;">标签选择</div><div style="max-height:320px;overflow-y:auto;padding-right:4px;">'+left+'</div></div><div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">'+t.path.join(' · ')+'</div>'+visual+(ready||up.sp?'<div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:700;margin-bottom:4px;">增益预览（SP前 → SP后）</div>'+stats+'</div><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:700;margin-bottom:4px;">材料等级</div>'+UP_PARTS.map(p=>'<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;"><span>'+p.n+'</span><b>'+up.parts[p.k]+'/10</b></div>').join('')+'</div></div>':'')+spRecipeHtml(t,up)+'</div></div>';
-  showModal(up.sp?'🏎️ SP运动版详情':'🏎️ 运动版（SP觉醒）',body,function(){if(ready&&!up.sp)awakenSP(t.id);else closeModal();});
-}
+
+
 
 
 /* ===== SP视觉切换：基础任务 / 运动版任务 ===== */
@@ -6819,20 +6340,8 @@ function spVisualTabs(t){
   };
   return '<div style="display:flex;gap:8px;margin:8px 0;">'+btn('base','基础任务','📘')+btn('sp','运动版任务','🏎️')+'</div>';
 }
-function openSPPanel(sel){
-  sel=sel||'';
-  const tags=TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;});
-  if(!sel)sel=tags[0]&&tags[0].id;
-  const t=getTag(sel);if(!t){closeModal();return;}
-  const up=getTagUp(t.id);const ready=Object.keys(up.parts).every(k=>up.parts[k]===10);
-  const tree=buildUpgradeTree();
-  const left=Object.keys(tree.children).sort().map(k=>spTagNode(tree.children[k],[k],sel)).join('');
-  const tab=state.spVisualTab||'base';
-  const visual=spVisualTabs(t)+spPreviewTaskCard(t,tab==='sp');
-  const stats=spGainCompareHtml(t,up);
-  const body=spIntroHtml()+'<div style="display:grid;grid-template-columns:minmax(180px,240px) 1fr;gap:12px;"><div><div style="font-size:12px;font-weight:700;margin-bottom:6px;">标签选择</div><div style="max-height:320px;overflow-y:auto;padding-right:4px;">'+left+'</div></div><div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">'+t.path.join(' · ')+'</div>'+visual+(ready||up.sp?'<div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:700;margin-bottom:4px;">增益预览（SP前 → SP后）</div>'+stats+'</div><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:700;margin-bottom:4px;">材料等级</div>'+UP_PARTS.map(p=>'<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;"><span>'+p.n+'</span><b>'+up.parts[p.k]+'/10</b></div>').join('')+'</div></div>':'')+spRecipeHtml(t,up)+'</div></div>';
-  showModal(up.sp?'🏎️ SP运动版详情':'🏎️ 运动版（SP觉醒）',body,function(){if(ready&&!up.sp)awakenSP(t.id);else closeModal();});
-}
+
+
 
 
 function getSPCardTheme(tag){
@@ -6875,85 +6384,19 @@ function buyPartsPackBulk(){
     showGainModal('📦 批量购买成功',[['零件材料包','×'+qty],['消耗积分',item.cost*qty]]);
   });
 }
-function usePartsPack(){
-  const have=state.inventory.parts_pack||0;
-  if(have<1){alert('没有零件材料包');return;}
-  showModal('🧊 批量兑换通用材料','当前材料包：<b>'+have+'</b><br>每个材料包可兑换 1 个通用材料。<br><br><input id="parts-use-qty" type="number" min="1" max="'+have+'" value="1" style="width:100%;padding:10px;border:1px solid #d1d1d6;border-radius:8px;font-size:16px;">',function(){
-    let qty=parseInt(document.getElementById('parts-use-qty').value)||0;
-    if(qty<1||qty>have){alert('请输入 1～'+have+' 的数量');return;}
-    state.inventory.parts_pack-=qty;state.inventory.universal_mat=(state.inventory.universal_mat||0)+qty;
-    saveState();updateShopUI();closeModal();
-    showGainModal('🧊 通用材料兑换成功',[['通用材料','×'+qty],['消耗材料包','×'+qty]]);
-  });
-}
-function upResourceHtml(part,up,mats,days){
-  const plv=up.parts[part.k];if(plv>=10)return '<span style="color:#34c759;">该材料已满级</span>';
-  const need=UP_NEED[plv]||0,own=mats[part.mat]||0,cost=UP_COST[plv],tok=UP_TOK[plv]||0,needDays=UP_DAYS[plv]||0;
-  const uni=state.inventory.universal_mat||0,missing=Math.max(0,need-own),uniAfter=Math.max(0,missing-uni);
-  const seg=[];
-  if(need>0){
-    seg.push('<span style="color:'+(own>=need?'#34c759':'#ff3b30')+';">材料 '+own+'/'+need+'</span>');
-    if(own<need)seg.push('<span style="color:'+(uni>=missing?'#007aff':'#ff3b30')+';">通用 '+uni+'（补 '+missing+'）</span>');
-    if(uniAfter>0)seg.push('<span style="color:#ff3b30;">仍缺 '+uniAfter+'</span>');
-  }else seg.push('<span style="color:#8e8e93;">材料 无需</span>');
-  seg.push('<span style="color:'+(state.points<cost?'#ff3b30':'#34c759')+';">积分 '+state.points+'/'+cost+'</span>');
-  if(tok>0)seg.push('<span style="color:'+(state.tokens<tok?'#ff3b30':'#34c759')+';">代币 '+state.tokens+'/'+tok+'</span>');
-  seg.push('<span style="color:'+(days<needDays?'#ff3b30':'#34c759')+';">结算 '+days+'/'+needDays+'天</span>');
-  return '<div style="margin-top:5px;font-size:10px;line-height:1.6;"><b>资源核对</b><br>'+seg.join(' ｜ ')+'</div>';
-}
-function upgradeLine(tagId,part){
-  const sel=(state.upSel||{})[tagId];
-  if(sel!==part.k){alert('请先选中要升级的材料卡，再进行升级');return;}
-  const up=getTagUp(tagId);const lv=up.parts[part.k];if(lv>=10){alert('该材料已满级');return;}
-  const days=countTagSettleDays()[tagId]||0;
-  if(days<UP_DAYS[lv]){alert('结算天数不足：需要累计 '+UP_DAYS[lv]+' 天（当前 '+days+' 天）');return;}
-  const mats=getTagMats(tagId),need=UP_NEED[lv]||0,own=mats[part.mat]||0,missing=Math.max(0,need-own),uni=state.inventory.universal_mat||0;
-  if(uni<missing){alert(part.matN+' 不足：需要 ×'+need+'（当前 '+own+'，通用材料 '+uni+'）');return;}
-  if(state.points<UP_COST[lv]){alert('积分不足：需要 '+UP_COST[lv]);return;}
-  const tk=UP_TOK[lv]||0;if(tk>0){if(state.tokens<tk){alert('代币不足：需要 '+tk);return;}state.tokens-=tk;}
-  state.points-=UP_COST[lv];mats[part.mat]=Math.max(0,own-need);state.inventory.universal_mat=uni-missing;up.parts[part.k]=lv+1;syncUpStats(up);
-  saveState();updateTopBar();updateShopUI();renderUpgradeUI();
-  if(Object.keys(up.parts).every(function(k){return up.parts[k]===10;}))showGainModal('🏎️ 四个材料全部满级！',[['状态','可觉醒 SP 运动版','#ff9500']]);
-  else showGainModal('🔧 材料升级 · '+part.n,[[part.n,'Lv '+(lv+1)],['同时提升',part.affects.map(k=>UP_STAT_NAME[k]).join(' + '),'#007aff'],['消耗',UP_COST[lv]+' 积分'+(need>0?' + '+(own>=need?part.matN:part.matN+'+通用材料')+'×'+need:'')+(tk>0?' + 🪙'+tk:'')]]);
-}
-function awakenSP(tagId){
-  const up=getTagUp(tagId);const tag=getTag(tagId);if(!tag)return;
-  if(!Object.keys(up.parts).every(function(k){return up.parts[k]===10;})){alert('需要四种材料全部 Lv10');return;}
-  if(up.sp){alert('已是 SP 运动版');return;}
-  const r=SP_RECIPE[tagFreqClass(tag)],mats=getTagMats(tagId),req={mark:r.mats,medal:r.mats,badge:r.mats,peak:r.mats};
-  const missing=Object.keys(req).reduce((sum,k)=>sum+Math.max(0,req[k]-(mats[k]||0)),0);
-  if((state.inventory.universal_mat||0)<missing){alert('材料不足：四种材料缺口合计 '+missing+'，通用材料不足');return;}
-  showModal('🏎️ SP 运动版觉醒','标签：<b>'+tag.path.join(' · ')+'</b>（'+r.label+' 级配方）<br><br>四种材料各 ×'+r.mats+'<br>通用材料：'+(state.inventory.universal_mat||0)+'（可补缺口 '+missing+'）<br>💠核心：'+(state.inventory.sp_core||0)+'/'+r.core+'<br>🪙代币：'+state.tokens+'/'+r.tokens+'<br>🔧直接升级：'+(state.inventory.direct_up||0)+'/'+r.ult,function(){
-    if((state.inventory.sp_core||0)<r.core){alert('💠 精研核心不足');closeModal();return;}
-    if(state.tokens<r.tokens){alert('代币不足');closeModal();return;}
-    if((state.inventory.direct_up||0)<r.ult){alert('直接升级道具不足');closeModal();return;}
-    Object.keys(req).forEach(function(k){const use=Math.min(mats[k]||0,req[k]);mats[k]-=use;req[k]-=use;});
-    state.inventory.universal_mat-=missing;state.inventory.sp_core-=r.core;state.tokens-=r.tokens;state.inventory.direct_up-=r.ult;up.sp=true;syncUpStats(up);
-    saveState();updateTopBar();updateShopUI();renderUpgradeUI();closeModal();
-    sendSystemMail('🏎️ 运动版觉醒 · '+tag.path.join('·'),'你的标签「'+tag.path.join(' · ')+'」已觉醒为 SP 运动版！附件：积分×200。',{points:200});
-    showGainModal('🏎️ SP 运动版觉醒！',[['标签','「'+tag.path.join('·')+'」','#ff9500'],['maxEp',getTag(tagId).maxEp],['特性','罚率减半 · 连击×2 · 占比回落10%']],'贺电已发送至邮箱');
-  });
-}
+
+
+
+
+
+
+
+
 
 
 /* ===== 材料包批量自选：选择标签 + 四种材料之一 + 数量 ===== */
-function usePartsPack(){
-  const have=state.inventory.parts_pack||0;
-  if(have<1){alert('没有零件材料包');return;}
-  const tags=TASK_TAGS.filter(t=>tagChildren(t.path).length===0);
-  const tagOpts=tags.map(t=>'<option value="'+t.id+'">'+t.path.join(' · ')+'</option>').join('');
-  const matOpts=UP_PARTS.map(p=>'<option value="'+p.mat+'">'+p.icon+' '+p.matN+'</option>').join('');
-  showModal('📦 批量使用材料包','当前材料包：<b>'+have+'</b><br>请选择要兑换的标签、材料和数量。<br><br><select id="pack-tag" style="width:100%;padding:8px;border:1px solid #d1d1d6;border-radius:8px;margin-bottom:8px;">'+tagOpts+'</select><select id="pack-mat" style="width:100%;padding:8px;border:1px solid #d1d1d6;border-radius:8px;margin-bottom:8px;">'+matOpts+'</select><input id="pack-qty" type="number" min="1" max="'+have+'" value="1" style="width:100%;padding:10px;border:1px solid #d1d1d6;border-radius:8px;font-size:16px;">',function(){
-    const tagId=document.getElementById('pack-tag').value;
-    const mat=document.getElementById('pack-mat').value;
-    let qty=parseInt(document.getElementById('pack-qty').value)||0;
-    if(qty<1||qty>have){alert('请输入 1～'+have+' 的数量');return;}
-    const mats=getTagMats(tagId);mats[mat]=(mats[mat]||0)+qty;state.inventory.parts_pack-=qty;
-    saveState();updateShopUI();renderUpgradeUI();closeModal();
-    const matName=UP_PARTS.find(p=>p.mat===mat).matN;
-    showGainModal('📦 材料兑换成功',[[matName,'×'+qty],[getTag(tagId).path.join(' · '),'材料已入库']]);
-  });
-}
+
+
 function upResourceHtml(part,up,mats,days){
   const plv=up.parts[part.k];if(plv>=10)return '<span style="color:#34c759;">该材料已满级</span>';
   const need=UP_NEED[plv]||0,own=mats[part.mat]||0,cost=UP_COST[plv],tok=UP_TOK[plv]||0,needDays=UP_DAYS[plv]||0;
@@ -7046,23 +6489,8 @@ function openSPPanel(sel){
   const body=spIntroHtml()+'<div style="display:grid;grid-template-columns:minmax(180px,240px) 1fr;gap:12px;"><div><div style="font-size:12px;font-weight:700;margin-bottom:6px;">标签选择</div><div style="max-height:320px;overflow-y:auto;padding-right:4px;">'+left+'</div></div><div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">'+t.path.join(' · ')+'</div>'+(up.sp?'<div style="margin-bottom:8px;padding:6px 10px;border-radius:8px;background:linear-gradient(90deg,#0b1f3f,#2f8cff);color:#fff;font-size:12px;font-weight:700;">🏎️ 该任务已升到运动版</div>':'')+visual+(ready||up.sp?'<div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:700;margin-bottom:4px;">增益预览（SP前 → SP后）</div>'+stats+'</div><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:700;margin-bottom:4px;">材料等级</div>'+UP_PARTS.map(p=>'<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;"><span>'+p.n+'</span><b>'+up.parts[p.k]+'/10</b></div>').join('')+'</div></div>':'')+spRecipeHtml(t,up)+'</div></div>';
   showModal(up.sp?'🏎️ SP运动版详情':'🏎️ 运动版（SP觉醒）',body,function(){if(ready&&!up.sp)awakenSP(t.id);else closeModal();});
 }
-function usePartsPack(){
-  const have=state.inventory.parts_pack||0;
-  if(have<1){alert('没有零件材料包');return;}
-  const tagId=state.currentUpgradeTag;
-  if(!tagId){alert('请先在升级页选择一个标签');return;}
-  const tag=getTag(tagId);
-  const matOpts=UP_PARTS.map(p=>'<option value="'+p.mat+'">'+p.icon+' '+p.matN+'</option>').join('');
-  showModal('📦 批量使用材料包','当前标签：<b>'+tag.path.join(' · ')+'</b><br>当前材料包：<b>'+have+'</b><br><br><select id="pack-mat" style="width:100%;padding:8px;border:1px solid #d1d1d6;border-radius:8px;margin-bottom:8px;">'+matOpts+'</select><input id="pack-qty" type="number" min="1" max="'+have+'" value="1" style="width:100%;padding:10px;border:1px solid #d1d1d6;border-radius:8px;font-size:16px;">',function(){
-    const mat=document.getElementById('pack-mat').value;
-    let qty=parseInt(document.getElementById('pack-qty').value)||0;
-    if(qty<1||qty>have){alert('请输入 1～'+have+' 的数量');return;}
-    const mats=getTagMats(tagId);mats[mat]=(mats[mat]||0)+qty;state.inventory.parts_pack-=qty;
-    saveState();updateShopUI();renderUpgradeUI();closeModal();
-    const matName=UP_PARTS.find(p=>p.mat===mat).matN;
-    showGainModal('📦 材料兑换成功',[[matName,'×'+qty],[tag.path.join(' · '),'材料已入库']]);
-  });
-}
+
+
 
 
 /* ===== 材料全局化：材料包使用后，所有标签共享 ===== */
@@ -7143,7 +6571,7 @@ function spTagNode(node,pathArr,sel){
   return '<details style="margin:5px 0;" '+(spTreeOpen(key,pathArr)?'open':'')+' ontoggle="markSPTreeOpen(\''+key+'\',this.open)"><summary style="cursor:pointer;font-size:12px;font-weight:700;padding:7px 9px;background:#f9f9fb;border:1px solid #e5e5ea;border-radius:8px;">'+pathArr.join(' · ')+'</summary><div style="padding:3px 0 3px 8px;">'+children+'</div></details>';
 }
 
-loadState();dailyResetCheck();ensureV143Mail();notifyNewMails();ensureV146Mail();notifyNewMails();getEnergy();getCupState();getRacing();updateMailBadge();settleDayCups();ensureCupNotices();checkLongMigration();checkCycleMigration();setInterval(function(){tickPassiveSpeed();arenaTick();if(document.getElementById('page-race').classList.contains('active'))renderArenaUI();updateBrawlUI();updatePotentialUI();renderDailyAttrs();renderDailySkills();renderTalentBars();},1000);renderLongTasks();renderCycleTasks();updateTopBar();renderLock('talent');renderLock('potential');renderLock('brawl');renderLock('passive');updateTalentUI();updatePotentialUI();updateBrawlUI();updatePassiveUI();updateShopUI();updateDailyUI();renderTasks();renderAchievementUI();renderTalentBars();
+loadState();dailyResetCheck();try{updateBrawlConfirmBtn();}catch(e){}notifyNewMails();ensureV146Mail();notifyNewMails();getEnergy();getCupState();getRacing();updateMailBadge();settleDayCups();ensureCupNotices();checkLongMigration();checkCycleMigration();setInterval(function(){tickPassiveSpeed();arenaTick();if(document.getElementById('page-race').classList.contains('active'))renderArenaUI();updateBrawlUI();updatePotentialUI();renderDailyAttrs();renderDailySkills();renderTalentBars();},1000);renderLongTasks();renderCycleTasks();updateTopBar();renderLock('talent');renderLock('potential');renderLock('brawl');renderLock('passive');updateTalentUI();updatePotentialUI();updateBrawlUI();updatePassiveUI();updateShopUI();updateDailyUI();renderTasks();renderAchievementUI();renderTalentBars();
 
 
 /* ===== 恢复的函数（构建期误删回补） ===== */
@@ -7171,14 +6599,8 @@ function enrollDayCup(){
   const en=getEnergy();if(en.v<1){alert('⚡ 能量不足（需 1 点）');return;}
   en.v-=1;state[k]={enrolled:true,claimed:false};saveState();renderCupUI();
 }
-function enrollWeekend(){
-  const wk=getWeekendCup();const k='wcr_'+wk.weekKey;
-  if(state[k]&&state[k].enrolled)return;
-  const dow=(new Date().getDay()+6)%7;
-  if(dow!==5&&dow!==6){alert('周末核心杯仅在周六、周日开放报名');return;}
-  const en=getEnergy();if(en.v<2){alert('⚡ 能量不足（需 2 点）');return;}
-  en.v-=2;state[k]={enrolled:true};saveState();renderCupUI();
-}
+
+
 function equippedTitle(){return (state.titleEquipped&&(state.achievement.titles||[]).indexOf(state.titleEquipped)>-1)?state.titleEquipped:'';}
 function fmtRemain(ms){
   if(ms<0)ms=0;
@@ -7187,45 +6609,14 @@ function fmtRemain(ms){
   if(h>0)return h+' 小时 '+m+' 分';
   return m+' 分钟';
 }
-function getWeekendCup(){
-  const wk=getShopWeekKey();
-  if(!state.weekendCup||state.weekendCup.weekKey!==wk){
-    const old=state.weekendCup;
-    if(old&&old.weekKey!==wk&&!old.settled){
-      old.settled=true;
-      const dates=[fmtDate(parseDateOnly(old.weekKey)+5*86400000),fmtDate(parseDateOnly(old.weekKey)+6*86400000)];
-      const st=state['wcr_'+old.weekKey];
-      if(st&&st.enrolled){
-        const tag=getTag(old.tagId);const s=cupScoreFor(old.tagId,dates);const rank=cupRank(s,[500,340,200]);const names=['冠军','亚军','季军','完赛'];
-        grantCumulative(WKD_RW,rank,old.tagId);saveState();updateTopBar();updateShopUI();
-        sendSystemMail('💠 周末核心杯结算 · 【'+names[rank]+'】','周末核心杯指定「'+(tag?tag.path.join(' · '):'')+'」最终得分 '+s+'，精研核心已发放。',{});
-      }
-    }
-    const pool=TASK_TAGS.filter(function(t){return t.path.length>=3;});
-    state.weekendCup={weekKey:wk,tagId:pool[Math.floor(Math.random()*pool.length)].id,settled:false};
-    saveState();
-  }
-  return state.weekendCup;
-}
+
+
 function grantRW2(rw,tagId){Object.keys(rw).forEach(function(k){if(k==='_mats'){const m=getTagMats(tagId);m.mark+=2*rw[k];m.medal+=2*rw[k];m.badge+=2*rw[k];m.peak+=2*rw[k];}else if(k==='points')state.points+=rw[k];else if(k==='tokens')state.tokens+=rw[k];else state.inventory[k]=(state.inventory[k]||0)+rw[k];});}
-function next(){
-    const g=_gainQueue.shift();
-    if(!g){_gainBusy=false;return;}
-    if(!document.getElementById('gain-style')){const st=document.createElement('style');st.id='gain-style';st.textContent='@keyframes gainPop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}';document.head.appendChild(st);}
-    const ov=document.createElement('div');
-    ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:300;display:flex;align-items:center;justify-content:center;';
-    const card=document.createElement('div');
-    card.style.cssText='background:#fff;border-radius:18px;padding:24px 22px;width:min(340px,88vw);box-shadow:0 20px 60px rgba(0,0,0,.3);animation:gainPop .35s cubic-bezier(.34,1.56,.64,1);text-align:center;';
-    card.innerHTML='<div style="font-size:42px;margin-bottom:4px;">🎉</div><div style="font-size:17px;font-weight:700;margin-bottom:10px;">'+g.title+'</div>'+
-      (g.lines.length?g.lines.map(function(l){return '<div style="display:flex;justify-content:space-between;font-size:14px;padding:6px 4px;border-bottom:1px solid #f2f2f7;"><span style="color:#6e6e73;">'+l[0]+'</span><b style="color:'+(l[2]||'#007aff')+';">'+l[1]+'</b></div>';}).join(''):'<div style="font-size:13px;color:#6e6e73;">'+ (g.sub||'') +'</div>')+
-      (g.lines.length&&g.sub?'<div style="font-size:11px;color:#8e8e93;margin-top:8px;">'+g.sub+'</div>':'')+
-      '<button class="btn-primary" style="width:100%;margin-top:14px;padding:11px;" id="gain-ok">太棒了</button>';
-    ov.appendChild(card);document.body.appendChild(ov);
-    card.querySelector('#gain-ok').onclick=function(){ov.remove();next();};
-  }
+
+
 function renderAnnouncements(){
   const box=document.getElementById('ann-list');if(!box)return;
-  const list=[{t:'📢 v1.5.2 精英降临',d:'🎖️ 精英任务：考研英二/过级单词、专业课作业/备考、刷题改错标签开放性能调整（锁定前四元素±10%、SP±5%、此消彼长、性能分参考、100积分常驻面板、耐久系统、ELITE标识）；🎴 专属功能×6 代币商品（600-1200，第5槽Lv.28随首槽、每日可切换一次）：16追踪标记/17越战越勇/18残骸强化/19漫画爆炸/20封印无双/21善恶之交；功能属性四项调整（灵魂武者+进化5%、韧性20%、母体威慑15%/10%、以一当十20%）；质量权重60/25/8/7。',c:'#d9832a'},{t:'📢 v1.5.1.1 修复更新',d:'修复：背单词打卡连击不再因历史记录虚挂（断一天即清零）；无限火力（3号乱斗属性）正式接线；结算明细重排（任务侧增益归入各任务、幸运/置顶同列，全局增益汇总底部）；邮件改为标题列表、点开查看。',c:'#007aff'},{t:'📢 v1.5.1 天赋降温',d:'❄️ 33个天赋数值全面下调（稳步积累25%→4%、时政闭环70%→7%、语言攻坚80%→8%等，详见天赋页）；🔥 不灭阳炎重做：首扣15%→7%、每分钟追加1%→0.7%、持续100→143分钟、锁定期15→10分钟、首任务加成70%→20%，且燃烧期间可随时手动结束（扣除不低于7%）；🔮 心态壁垒借用的属性效果降为30%（乱斗模式持续40分钟/灵魂武者20分钟）；⚡ 属性强化：乱斗放大100%→10%、新增进化效果放大5%、结算扣除15%→6%。',c:'#007aff'},{t:'📢 v1.5.0.2 进化数值平衡',d:'📉 升级门槛全面上调：<300=1级 → 每+200升1级至1500=8级 → 1500–1899平台期 → 1900=9级大门槛 → 2300=10级满级（原2064EP一天满级的情况不再出现）；⚔️ 攻击10级复利利率 0.7%→0.3%/秒。另修复：体验卡期间装备的功能属性在正赛解锁后不再越槽生效（按实际解锁槽位数截断）；体验卡到期且未到Lv.28时属性清零从0开始。🏷️ 标签最大EP下调11处（明细见邮件）。📦 材料修复与降门槛：入全局池（仓库可见）、训练印记+2/任务、冲刺奖章改为「技能生效中或当天前2个完成」、巅峰凭证 90%→60%（明细见邮件）。',c:'#e8a33d'},{t:'📢 v1.5.0.1 进化9/10级重做',d:'⚔️ 攻击：9级「💰复利」——每秒额外获得当前EP的0.01%（10级升至0.03%/秒，9级阶段利息在升10级时定格（1.5.0.2起）），计息基数为经天赋/功能/全部等级增益后的获得EP；🛡️ 防御：9级「⚖️缓刑」——豁免最多2个未完成任务并自动顺延明日，再未完成罚率×1.5几何滚动（上限100%），10级豁免全部；幸运任务回归通用逻辑（≥5任务1个），母体威慑全玩法统一早/中/晚时段。',c:'#e8a33d'},{t:'📢 v1.5.0 终极进化',d:'🧬 全新玩法「进化」：与乱斗同级解锁（Lv.33），更新发放体验卡×1。选定后选择攻击/防御路径，完成任务按原始填入EP从Lv.1成长至Lv.10（1500=8级→1900=9级大门槛→2300满级）。每级小增益+3/6/9级随机大幅增益，最大EP/扣减变化实时显示在任务卡上。',c:'#e8a33d'},{t:'📢 v1.4.9.1 赛季UI与修复',d:'①顶栏与首页新增赛季可视化（序号/主题/持续月份，艺术字呈现），首页点击可查看赛季简介（主题配色+内涵意象，本赛季「并肩有光」：你不是一个人，并肩之处便有光）与通行证奖励一览；②通行证等级奖励改为段位式分层展示（每10级一档，单击展开查看每级内容）；③公告栏限高滚动；④修复周期任务副本逾期后仍留在每日登记、以及未完成副本到点不跳过的问题。',c:'#ff2d95'},{t:'📢 v1.4.9 通行证上线',d:'🎫 全新模块「通行证」：两月一季，共100级（每级4000 LP）。S1赛季「并肩有光」现已开启（2026.09.30–11.30，秋光同路主题全站换肤，面板为浅象牙色保证阅读体验）：日常结算最终EP×3计入LP（特殊玩法加成EP同样计入），每周6个词条任务各+5000 LP，每日签到+50里程币。升级自动发放积分/里程币/代币/票券/材料/💠核心/终极升级碎片，20/40/60/80/100级送赛季主题称号（并入成就称号）。里程商店每10级解锁一个模块（Lv.80全解锁）：可换经验卡、重铸券、核心、终极升级碎片（5片合成终极改装包）、扣罚降低10%/20%/50%（上限-50%），Lv.100可里程币+代币换终极升级。赛季结束冷却3天后开启新季 · 🔓 任务锁定机制改版：可随时解锁再编辑（仅未完成可改，已完成只读；删除仍扣标签上限10%EP，解锁后新增任务未完成罚率+50%；幸运任务按条件重新校验，满足则随机补发）',c:'#ff2d95'},{t:'📢 v1.4.8 大更新',d:'🧾 结算页改版：顶部展示真实EP/增益EP/扣减EP/最终EP四项汇总，任务EP明细改为点击展开折叠式，未完成任务额外标注"若完成可减少的损失" · 🔧 逆境追赶潜能改为只在第1栏出现、选择后当天免罚修改3次（任务修改机制见 v1.4.9 公告：解锁再编辑） · ⚡ 33号天赋"绝对免疫"重做"属性强化"：经典模式被动效果+20%，乱斗模式乱斗效果翻倍但结算EP-15% · 🔁 循环温故天赋新增适用「旧list重刷」「旧list新轮次」标签 · 🛒 商店：积分兑代币不限购，天赋额外抽取降至100代币 · ⚔️ 竞技时长90→120分钟，窗口内任务EP达标签上限90%时资格分+50 · 🏆 各杯赛卡片新增本期剩余时间显示',c:'#007aff'},{t:'📢 v1.4.7.4 修复',d:'🛠 修复冲刺锦标赛及杯赛只统计精确标签的问题：父级标签悬赏现在会计入其全部子标签任务（如 本科·专业课 悬赏可计入 课堂/作业/备考 任务），往届冲刺奖杯自动按新口径重算 · 🛠 修复冲刺锦标赛今日目标当天不点亮的问题（现在实时读取今日任务）· 🛠 修复精研核心杯往届补领按钮点击无反应，失败时会提示具体原因',c:'#ff9500'},{t:'📢 v1.4.7.3 修复',d:'🛠 修复杯赛与竞技结算奖励未正确入账的问题：历史漏发的杯赛奖励自动补发，竞技结算奖励补挂到原结算邮件（邮箱点领取即可）· 📮 竞技周结算奖励自动入账，结算邮件列明奖励明细 · 🛠 修复精研核心杯周末结束后补领入口被隐藏 · 🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断 · 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
+  const list=[{t:'📢 v1.5.2.1 修复更新',d:'修复长期任务EP入口（仅在每日登记填入，完成后自动回写、杜绝逾期误扣50%）；或昼或夜与账单文案对齐1.5.1表；邮件新增一键读取。玩法加成全面审计修复进行中，详见邮件。',c:'#007aff'},{t:'📢 v1.5.2 精英降临',d:'🎖️ 精英任务：考研英二/过级单词、专业课作业/备考、刷题改错标签开放性能调整（锁定前四元素±10%、SP±5%、此消彼长、性能分参考、100积分常驻面板、耐久系统、ELITE标识）；🎴 专属功能×6 代币商品（600-1200，第5槽Lv.28随首槽、每日可切换一次）：16追踪标记/17越战越勇/18残骸强化/19漫画爆炸/20封印无双/21善恶之交；功能属性四项调整（灵魂武者+进化5%、韧性20%、母体威慑15%/10%、以一当十20%）；质量权重60/25/8/7。',c:'#d9832a'},{t:'📢 v1.5.1.1 修复更新',d:'修复：背单词打卡连击不再因历史记录虚挂（断一天即清零）；无限火力（3号乱斗属性）正式接线；结算明细重排（任务侧增益归入各任务、幸运/置顶同列，全局增益汇总底部）；邮件改为标题列表、点开查看。',c:'#007aff'},{t:'📢 v1.5.1 天赋降温',d:'❄️ 33个天赋数值全面下调（稳步积累25%→4%、时政闭环70%→7%、语言攻坚80%→8%等，详见天赋页）；🔥 不灭阳炎重做：首扣15%→7%、每分钟追加1%→0.7%、持续100→143分钟、锁定期15→10分钟、首任务加成70%→20%，且燃烧期间可随时手动结束（扣除不低于7%）；🔮 心态壁垒借用的属性效果降为30%（乱斗模式持续40分钟/灵魂武者20分钟）；⚡ 属性强化：乱斗放大100%→10%、新增进化效果放大5%、结算扣除15%→6%。',c:'#007aff'},{t:'📢 v1.5.0.2 进化数值平衡',d:'📉 升级门槛全面上调：<300=1级 → 每+200升1级至1500=8级 → 1500–1899平台期 → 1900=9级大门槛 → 2300=10级满级（原2064EP一天满级的情况不再出现）；⚔️ 攻击10级复利利率 0.7%→0.3%/秒。另修复：体验卡期间装备的功能属性在正赛解锁后不再越槽生效（按实际解锁槽位数截断）；体验卡到期且未到Lv.28时属性清零从0开始。🏷️ 标签最大EP下调11处（明细见邮件）。📦 材料修复与降门槛：入全局池（仓库可见）、训练印记+2/任务、冲刺奖章改为「技能生效中或当天前2个完成」、巅峰凭证 90%→60%（明细见邮件）。',c:'#e8a33d'},{t:'📢 v1.5.0.1 进化9/10级重做',d:'⚔️ 攻击：9级「💰复利」——每秒额外获得当前EP的0.01%（10级升至0.03%/秒，9级阶段利息在升10级时定格（1.5.0.2起）），计息基数为经天赋/功能/全部等级增益后的获得EP；🛡️ 防御：9级「⚖️缓刑」——豁免最多2个未完成任务并自动顺延明日，再未完成罚率×1.5几何滚动（上限100%），10级豁免全部；幸运任务回归通用逻辑（≥5任务1个），母体威慑全玩法统一早/中/晚时段。',c:'#e8a33d'},{t:'📢 v1.5.0 终极进化',d:'🧬 全新玩法「进化」：与乱斗同级解锁（Lv.33），更新发放体验卡×1。选定后选择攻击/防御路径，完成任务按原始填入EP从Lv.1成长至Lv.10（1500=8级→1900=9级大门槛→2300满级）。每级小增益+3/6/9级随机大幅增益，最大EP/扣减变化实时显示在任务卡上。',c:'#e8a33d'},{t:'📢 v1.4.9.1 赛季UI与修复',d:'①顶栏与首页新增赛季可视化（序号/主题/持续月份，艺术字呈现），首页点击可查看赛季简介（主题配色+内涵意象，本赛季「并肩有光」：你不是一个人，并肩之处便有光）与通行证奖励一览；②通行证等级奖励改为段位式分层展示（每10级一档，单击展开查看每级内容）；③公告栏限高滚动；④修复周期任务副本逾期后仍留在每日登记、以及未完成副本到点不跳过的问题。',c:'#ff2d95'},{t:'📢 v1.4.9 通行证上线',d:'🎫 全新模块「通行证」：两月一季，共100级（每级4000 LP）。S1赛季「并肩有光」现已开启（2026.09.30–11.30，秋光同路主题全站换肤，面板为浅象牙色保证阅读体验）：日常结算最终EP×3计入LP（特殊玩法加成EP同样计入），每周6个词条任务各+5000 LP，每日签到+50里程币。升级自动发放积分/里程币/代币/票券/材料/💠核心/终极升级碎片，20/40/60/80/100级送赛季主题称号（并入成就称号）。里程商店每10级解锁一个模块（Lv.80全解锁）：可换经验卡、重铸券、核心、终极升级碎片（5片合成终极改装包）、扣罚降低10%/20%/50%（上限-50%），Lv.100可里程币+代币换终极升级。赛季结束冷却3天后开启新季 · 🔓 任务锁定机制改版：可随时解锁再编辑（仅未完成可改，已完成只读；删除仍扣标签上限10%EP，解锁后新增任务未完成罚率+50%；幸运任务按条件重新校验，满足则随机补发）',c:'#ff2d95'},{t:'📢 v1.4.8 大更新',d:'🧾 结算页改版：顶部展示真实EP/增益EP/扣减EP/最终EP四项汇总，任务EP明细改为点击展开折叠式，未完成任务额外标注"若完成可减少的损失" · 🔧 逆境追赶潜能改为只在第1栏出现、选择后当天免罚修改3次（任务修改机制见 v1.4.9 公告：解锁再编辑） · ⚡ 33号天赋"绝对免疫"重做"属性强化"：经典模式被动效果+20%，乱斗模式乱斗效果翻倍但结算EP-15% · 🔁 循环温故天赋新增适用「旧list重刷」「旧list新轮次」标签 · 🛒 商店：积分兑代币不限购，天赋额外抽取降至100代币 · ⚔️ 竞技时长90→120分钟，窗口内任务EP达标签上限90%时资格分+50 · 🏆 各杯赛卡片新增本期剩余时间显示',c:'#007aff'},{t:'📢 v1.4.7.4 修复',d:'🛠 修复冲刺锦标赛及杯赛只统计精确标签的问题：父级标签悬赏现在会计入其全部子标签任务（如 本科·专业课 悬赏可计入 课堂/作业/备考 任务），往届冲刺奖杯自动按新口径重算 · 🛠 修复冲刺锦标赛今日目标当天不点亮的问题（现在实时读取今日任务）· 🛠 修复精研核心杯往届补领按钮点击无反应，失败时会提示具体原因',c:'#ff9500'},{t:'📢 v1.4.7.3 修复',d:'🛠 修复杯赛与竞技结算奖励未正确入账的问题：历史漏发的杯赛奖励自动补发，竞技结算奖励补挂到原结算邮件（邮箱点领取即可）· 📮 竞技周结算奖励自动入账，结算邮件列明奖励明细 · 🛠 修复精研核心杯周末结束后补领入口被隐藏 · 🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断 · 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
   const dc=getDayCupInfo();const dtag=getTag(dc.tagId);
   if(dc.active)list.push({t:'🏆 日杯今日开启',d:'指定「'+(dtag?dtag.path.join(' · '):'')+'」，1 能量报名，冠军 🪙15。',c:'#ff9500'});
   else list.push({t:'🏆 日杯预告',d:'下一次日杯：'+dc.daysToActive+' 天后（'+dc.dateStr+'），前一天邮件提醒。',c:'#ff9500'});
