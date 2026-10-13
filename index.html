@@ -3879,7 +3879,7 @@ function submitDaily(){
       if(mods.hasSteelClaw)rate*=(1+0.2*brwAmp());
       if(mods.hasMutate)rate*=(1-0.2*brwAmp());
       if(mods.hasHarden)rate*=(1-0.45*brwAmp());
-      if(mods.hasOvercap){const _ocT=getTag(t.tagId,t);rate=Math.min(rate,((_ocT?_ocT.maxEp:0)*0.30)/(gross||1));}
+      if(mods.hasOvercap){const _ocT=getTag(t.tagId,t);rate=Math.min(rate,((_ocT?_ocT.maxEp:0)*0.30)/(grossRawEp||1));}
     if(hasPotential(9)&&t.wanted)rate*=0.85;
       let u_survive=false;
       if(evo.on){
