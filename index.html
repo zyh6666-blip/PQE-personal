@@ -1891,9 +1891,10 @@ function updatePotentialSleepPanel(){
 }
 function getVocabStreak(){
   const recs=state.dailyHistory||[];if(!recs.length)return 0;
-  const map={};recs.forEach(function(d){map[d.date]=d;});
+  const _norm=function(s){const p=String(s).split('/');if(p.length<3)return String(s);return p[0]+'/'+String(p[1]).padStart(2,'0')+'/'+String(p[2]).padStart(2,'0');};
+  const map={};recs.forEach(function(d){map[_norm(d.date)]=d;});
   const parse=function(s){const p=s.split('/').map(Number);return new Date(p[0],p[1]-1,p[2]).getTime();};
-  const fmt=function(t){const d=new Date(t);return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();};
+  const fmt=function(t){const d=new Date(t);return d.getFullYear()+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+String(d.getDate()).padStart(2,'0');};
   let streak=0;let d=parse(todayStr());
   const tRec=map[fmt(d)];
   if(tRec&&tRec.didVocab){streak=1;d-=86400000;}
@@ -1999,7 +2000,7 @@ function fpGlobalMods(tasks,doneList,gross,penaltyTotal){
   if(hasPotential(19)&&state.potentialSprint&&state.potentialSprint.until>Date.now()){mods.grossMult+=0.3;mods.penaltyMult*=0.5;mods.notes.push('短时冲刺：EP+30%，扣减-50%');}
   const ps=getPassiveState();if(ps.p12PendingEp)mods.grossAdd+=ps.p12PendingEp;if(ps.p12Resilience)mods.notes.push('猎手防护：韧性+'+ps.p12Resilience);
   if(getPassiveState().infectSuccess){mods.grossMult+=0.1;mods.penaltyMult*=0.85;mods.notes.push('母体威慑成功：其余任务+10%EP，扣减-15%');}
-  if(getPassiveState().infectFailed){mods.postMult*=0.5;mods.notes.push('母体威慑失败：感染任务仅10%EP，其余任务EP减半');}
+  
   if(hasPotential(5)&&tags.size>=4){const bonus=Math.min(1.1,0.1+0.2*(tags.size-4));mods.grossMult+=bonus;}
   if(hasPotential(8)&&!doneList.some(t=>tType(getTag(t.tagId))==='mk'))mods.grossMult-=0.7;
   if(hasPotential(11)){mods.grossMult+=0.3;mods.minEp=Math.max(mods.minEp,400);}
@@ -3193,6 +3194,11 @@ function updatePointsPreview(){
     exSet.forEach(t=>{exemptSum+=ownOf(t);});
   }
   pen=Math.min(pen,1.0);
+  gross=Math.max(0,Math.round((gross+tal.finalAdd)*tal.finalMult));
+  gross=Math.max(0,Math.round(gross*fp.postMult)+fp.postAdd);
+  if(hasPotential(10)&&gross>1200)gross+=500;
+  if(attrBoostBrawl())gross=Math.max(0,Math.round(gross*0.94));
+  gross=Math.max(0,gross-deletedTaskDeduction());
   let eff=Math.round((gross-exemptSum)*(1-pen))+exemptSum;if(eff<0)eff=0;
   const pp=applyPassiveProtection(gross,eff,true);eff=pp.effective;
   /* v1.4.8: 33号天赋改为属性强化，护盾逻辑移除 */
@@ -3203,14 +3209,13 @@ function updatePointsPreview(){
   let mult=1;
   if(selectedExpCard){const c=EXP_CARDS.find(x=>x.id===selectedExpCard);if(c)mult=c.mult;}
   let finalEp=Math.max(0,Math.round((Math.round(eff*mult)+tal.finalAdd)*tal.finalMult));
-  finalEp=Math.max(0,Math.round(finalEp*fp.postMult)+fp.postAdd);
-  if(hasPotential(10)&&finalEp>1200)finalEp+=500;
+  
+  
   if(fp.minEp)finalEp=Math.max(finalEp,fp.minEp);
-  if(attrBoostBrawl())finalEp=Math.max(0,Math.round(finalEp*0.94));
-  finalEp=Math.max(0,finalEp-deletedTaskDeduction());
-  let doneMaxSum=0;
-  if(mods.hasOvercap)done.forEach(function(t){const _tg=getTag(t.tagId,t);if(_tg)doneMaxSum+=_tg.maxEp;});
-  if(mods.hasOvercap&&doneMaxSum>0){const _floor=Math.round(doneMaxSum*0.7);if(finalEp<_floor)finalEp=_floor;}
+  
+  
+  
+  
   const markedWar=done.some(t=>t.warMarked);const remainingLoss=Math.max(0,gross-eff);
   if(hasPassive(2)&&markedWar&&remainingLoss>0)finalEp+=Math.round(remainingLoss*0.4*pasAmp());
   const luckyInfo=calcLuckyBonus(pen,mult);
@@ -3461,8 +3466,7 @@ function calcLuckyBonus(penaltyTotal,mult,addFn){
   const rateBase=0.2+(mods.hasLuckyBoost?0.2:0);
   const add=function(t,label){
     const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
-    const ownEff=Math.round(own*(1-penaltyTotal));
-    const ownFinal=Math.round(ownEff*mult);
+    const ownFinal=Math.round(own*mult);
     const r=t.pinned?rateBase/2:rateBase;
     const b=Math.round(ownFinal*r);
     total+=b;
@@ -3604,7 +3608,7 @@ function renderTalentBars(){
 function renderGrowthBar(){
   const el=document.getElementById('growth-bar');if(!el)return;
   const mods=calcBrawlMods();
-  if(state.todayMode!=='brawl'||!mods.hasGrowth){el.innerHTML='';return;}
+  if(!((state.todayMode==='brawl'&&mods.hasGrowth)||(state.talentWall&&state.talentWall.until>Date.now()&&state.talentWall.id===14))){el.innerHTML='';return;}
   let cur=0;
   getCompletedTasks().forEach(t=>{cur+=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);});
   const BASE=1000,STEP=250;
@@ -3627,7 +3631,7 @@ function renderGrowthBar(){
     html+='<div style="height:8px;background:#e5e5ea;border-radius:4px;overflow:hidden;"><div style="height:100%;width:'+(capped?100:Math.round(inStep/STEP*100))+'%;background:#af52de;border-radius:4px;transition:width .3s;"></div></div>';
     html+='<div style="font-size:10px;color:#8e8e93;margin-top:4px;">已完成任务EP '+cur+' · 当前档 '+BASE+'+'+(tier*STEP)+'（+'+bonus+'%）'+(capped?'':(' → '+nextAt+' EP 时 +' +nextBonus+'%'))+'</div>';
   }
-  html+='</div>';
+  if(state.talentWall&&state.talentWall.until>Date.now()&&state.talentWall.id===14)html=html.replace('[乱斗] 过度增长','[天赋·心态壁垒借用] 过度增长').replace('</div>$','')+'<div style="font-size:10px;color:#af52de;margin-top:4px;">借用激活 · 实际效果为上述的30%</div></div>';
   el.innerHTML=html;
 }
 function renderDailyAttrs(){
@@ -3864,10 +3868,22 @@ function submitDaily(){
       if(t._exCache.map!==taskDetailMap){t._exCache.map=taskDetailMap;(t._exCache.dl||[]).forEach(function(d){addSTDetail(t,d.label,d.amount);});}
       exOwn=evoOwn+t._exCache.delta;
     }
+    if(t._leMap!==taskDetailMap){
+      t._leMap=taskDetailMap;
+      let _d=0;
+      const _raw=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
+      if(getPassiveState().infectFailed&&!t.infected){const v=-Math.round(exOwn*0.5);_d+=v;addSTDetail(t,'功能·母体威慑（病毒爆发·其余任务减半）',v);}
+      let _rate=0;
+      if(t.lucky){_rate=0.2;if(calcBrawlMods().hasLuckyBoost)_rate+=0.2;if(t.pinned)_rate=_rate/2;}
+      if(_rate>0){const v=Math.round(_raw*_rate);_d+=v;addSTDetail(t,'功能·幸运任务 +'+Math.round(_rate*100)+'%',v);}
+      if(mods.hasOvercap){const _tg=getTag(t.tagId,t);if(_tg){const _fl=Math.round(_tg.maxEp*0.7);if(exOwn+_d<_fl){const v=_fl-exOwn-_d;_d+=v;addSTDetail(t,'乱斗·超额（该任务补足至70%）',v);}}}
+      t._leDelta=_d;
+    }
+    exOwn+=t._leDelta||0;
     const __r=exOwn+(t.longBonusEp||0);if(t.completed&&t.baseEp!=='')__gainAudit.push('📋 '+(t.name||'任务')+'：填入 '+((parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0))+' → 任务侧合计 '+Math.round(__r)+'（增益+'+Math.round(__r-((parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0)))+'）');return __r;
   };
   const taskDetailMap=new Map(),detailSeen=new Set();
-  const addSTDetail=function(t,label,amount){if(!amount)return;const arr=taskDetailMap.get(t)||[];arr.push({label:label,amount:Math.round(amount)});taskDetailMap.set(t,arr);};
+  const addSTDetail=function(t,label,amount){if(!amount)return;const arr=taskDetailMap.get(t)||[];const ex=arr.findIndex(function(d){return d.label===label;});if(ex>-1)arr[ex]={label:label,amount:Math.round(amount)};else arr.push({label:label,amount:Math.round(amount)});taskDetailMap.set(t,arr);};
 
   let unfinished=[];
   let penaltyTotal=0;
@@ -3989,8 +4005,7 @@ function submitDaily(){
     bloodBonus=ownOf(firstDone);addSTDetail(firstDone,'乱斗·第一滴血',bloodBonus);
   }
   // 15号超额：已完成任务maxEp总和（保底用）
-  let doneMaxSum=0;let overcapBonus=0;
-  if(mods.hasOvercap)doneList.forEach(function(t){const _tg=getTag(t.tagId,t);if(_tg)doneMaxSum+=_tg.maxEp;});
+  let doneMaxSum=0;
   // 20号最后的幸存者：全部完成时，最后完成的任务+100%
   if(mods.hasSurvivor&&state.todayTasks.length&&state.todayTasks.every(function(x){return x.completed&&x.baseEp!=='';})){
     const _last=state.todayTasks.slice().sort(function(a,b){return (b.doneAt||0)-(a.doneAt||0);})[0];
@@ -4058,7 +4073,11 @@ function submitDaily(){
   }
 
   // 有效原始EP（豁免部分的EP不参惩罚）
-  let effectiveRawEp=Math.round((grossRawEp-exemptSum)*(1-penaltyTotal))+exemptSum;
+  grossRawEp=Math.max(0,Math.round((grossRawEp+tal.finalAdd)*tal.finalMult));
+  grossRawEp=Math.max(0,Math.round(grossRawEp*fp.postMult)+fp.postAdd);
+  if(hasPotential(10)&&grossRawEp>1200)grossRawEp+=500;
+  if(attrBoostBrawl())grossRawEp=Math.max(0,Math.round(grossRawEp*0.94));
+  let effectiveRawEp=Math.round((grossRawEp-exemptSum-deletedTaskDeduction())*(1-penaltyTotal))+exemptSum;
   if(effectiveRawEp<0)effectiveRawEp=0;
 
 // v1.4.8: 33号天赋改为属性强化，绝对免疫护盾逻辑移除
@@ -4090,17 +4109,17 @@ function submitDaily(){
   let cardMult=1;
   if(selectedExpCard){const c0=EXP_CARDS.find(x=>x.id===selectedExpCard);if(c0)cardMult=c0.mult;}
   let previewFinal=Math.round(effectiveRawEp*cardMult);
-  const luckyPrev=calcLuckyBonus(penaltyTotal,cardMult,function(t,a,l){addSTDetail(t,l,a);});
- previewFinal=Math.max(0,Math.round((previewFinal+tal.finalAdd)*tal.finalMult));
- previewFinal=Math.max(0,Math.round(previewFinal*fp.postMult)+fp.postAdd);
- if(hasPotential(10)&&previewFinal>1200)previewFinal+=500;
+  
+ 
+ 
+ 
  if(fp.minEp)previewFinal=Math.max(previewFinal,fp.minEp);
- if(attrBoostBrawl())previewFinal=Math.max(0,Math.round(previewFinal*0.94));
- previewFinal=Math.max(0,previewFinal-deletedTaskDeduction());
+ 
+ 
  if(mods.hasOvercap&&doneMaxSum>0){const _floor=Math.round(doneMaxSum*0.7);if(previewFinal<_floor){overcapBonus=_floor-previewFinal;previewFinal=_floor;}}
  const markedWar=doneList.some(t=>t.warMarked),remainLoss=Math.max(0,grossRawEp-effectiveRawEp);
  if(hasPassive(2)&&markedWar&&remainLoss>0)previewFinal+=Math.round(remainLoss*0.4*pasAmp());
- const preview=calcAutoPoints(previewFinal+luckyPrev.total,state.totalEP,state.totalEP+previewFinal+luckyPrev.total);
+ const preview=calcAutoPoints(previewFinal,state.totalEP,state.totalEP+previewFinal);
   const brawlLines=
     (attrBoostBrawl()?'<br>⚡ 属性强化：乱斗效果放大10% · 最终EP ×0.94':'')
     +(mods.hasAgent&&agentBonusEp>0?'<br>🕵️ 特工加成：EP +<b>'+agentBonusEp+'</b>':'')
@@ -4108,7 +4127,7 @@ function submitDaily(){
     +(mods.hasMutate&&mutateBonus>0?'<br>🧬 基因突变：+'+mutateBonus+'':'')
     +(mods.hasChain&&chainBonus>0?'<br>⚔️ 致命一击：+'+chainBonus+'（按完成顺序递增）':'')
     +(mods.hasBlood&&bloodBonus>0?'<br>🩸 第一滴血：+'+bloodBonus+'':'')
-    +(mods.hasSurvivor&&survivorBonus>0?'<br>🏁 最后的幸存者：+'+survivorBonus+'':'')+(overcapBonus>0?'<br>📊 超额：所得不足70%已补足 +'+overcapBonus+' EP':'')
+    +(mods.hasSurvivor&&survivorBonus>0?'<br>🏁 最后的幸存者：+'+survivorBonus+'':'')
     +(exemptSum>0?'<br>🛡️ 免惩罚EP：'+exemptSum+'（双重装甲/生命保险）':'')
     +(state._supplyRefund?'<br>🎒 防御补给返还：+'+state._supplyRefund+' EP':'')
     +(mods.hasSteelClaw?'<br>🐾 钢铁利爪：未完成惩罚 +20%':'')
@@ -4117,7 +4136,7 @@ function submitDaily(){
     +(mods.hasClone?'<br>🧫 复制感染：已完成EP锚定首任务 · 惩罚按首任务标签':'')
     +(mods.hasInsurance?'<br>🎯 保底局：无完成率惩罚 · 保底550':'')
     +(growthBonus>0?'<br>📈 过度增长：+'+Math.round(growthPct*100)+'%（+'+growthBonus+' EP）':'')
-    +(luckyPrev.total>0?'<br>🍀 幸运/强化奖励：EP +<b style="color:#ff2d95;">'+luckyPrev.total+'</b>'+luckyPrev.names:'')
+    
     +(mods.hasGun&&gunBonus>0?'<br>🔫 枪械协同：+'+gunBonus+'（同标签加成）':'')
     +(mods.hasReborn&&rebornBonus>0?'<br>♻️ 重生契约：+'+rebornBonus+'（昨日EP×10%×'+Math.min(doneList.length,10)+'层）':'')
     +(mods.hasReload&&reloadBonus>0?'<br>🔄 快速换弹：+'+reloadBonus+'（连击'+reloadChain+'）':'')
@@ -4170,7 +4189,8 @@ const globalHtml='<div style="background:#f0f7ff;border:1px solid #007aff22;bord
   let confirmTitle='',confirmBody='';
   if(unfinished.length===0){
     confirmTitle='💰 结算确认';
-    const __auditHtml='<details style="margin-top:10px;font-size:12px;"><summary style="cursor:pointer;color:#007aff;font-weight:600;">🔍 增益构成审计（逐笔清单）</summary><div style="background:#f9f9fb;border-radius:8px;padding:8px 10px;margin-top:4px;line-height:2;color:#3a3a3c;">'+(__gainAudit.length?__gainAudit.map(function(x){return '<div>'+x+'</div>';}).join(''):'<div>无增益记录</div>')+'</div></details>';
+    const __gainAuditU=__gainAudit.filter(function(v,i,a){return a.indexOf(v)===i;});
+   __auditHtml='<details style="margin-top:10px;font-size:12px;"><summary style="cursor:pointer;color:#007aff;font-weight:600;">🔍 增益构成审计（逐笔清单）</summary><div style="background:#f9f9fb;border-radius:8px;padding:8px 10px;margin-top:4px;line-height:2;color:#3a3a3c;">'+(__gainAuditU.length?__gainAuditU.map(function(x){return '<div>'+x+'</div>';}).join(''):'<div>无增益记录</div>')+'</div></details>';
    confirmBody=settlementSummaryHtml+taskDetailHtml+globalHtml+__auditHtml+'今日 <b>'+state.todayTasks.length+'</b> 项任务全部完成。<br>原始EP总计：<b>'+(grossRawEp-pinBonusEp-agentBonusEp-stealthRestore-mutateBonus-chainBonus-bloodBonus-survivorBonus-gunBonus-rebornBonus-reloadBonus-deadlyBonus)+'</b>'+(pinBonusEp>0?'（含置顶 '+pinBonusEp+'）':'')+ptsLine+'<br><br>是否结算？';
   }else{
     confirmTitle='⚠️ 结算确认 · 有未完成任务';
@@ -4194,21 +4214,21 @@ const globalHtml='<div style="background:#f0f7ff;border:1px solid #007aff22;bord
       state.dailyCardUsedId=selectedExpCard;
       selectedExpCard=null;
     }
-    const luckyInfo=calcLuckyBonus(penaltyTotal,usedMult,function(t,a,l){addSTDetail(t,l,a);});
-    finalEp+=luckyInfo.total;
-      finalEp=Math.max(0,Math.round((finalEp+tal.finalAdd)*tal.finalMult));
-    finalEp=Math.max(0,Math.round(finalEp*fp.postMult)+fp.postAdd);
-    if(hasPotential(10)&&finalEp>1200)finalEp+=500;
+    
+    
+      
+    
+    
     if(fp.minEp)finalEp=Math.max(finalEp,fp.minEp);
-  if(attrBoostBrawl())finalEp=Math.max(0,Math.round(finalEp*0.94));
-  finalEp=Math.max(0,finalEp-deletedTaskDeduction());
-    if(mods.hasOvercap&&doneMaxSum>0){const _floor=Math.round(doneMaxSum*0.7);if(finalEp<_floor){overcapBonus=_floor-finalEp;finalEp=_floor;}}
+  
+  
+    
     if(hasPassive(2)&&markedWar&&remainLoss>0)finalEp+=Math.round(remainLoss*0.4*pasAmp());
     const overdueList=(state.longTasks||[]).filter(t=>!t.completed&&!t.penalized&&getDaysToDeadline(t.deadline)!==null&&getDaysToDeadline(t.deadline)<0);
     let overduePenaltyEp=0;
     if(overdueList.length){
-      overduePenaltyEp=Math.round(finalEp*0.5);
-      finalEp=Math.max(0,finalEp-overduePenaltyEp);
+      overduePenaltyEp=Math.round(effectiveRawEp*0.5);
+      effectiveRawEp=Math.max(0,effectiveRawEp-overduePenaltyEp);
       overdueList.forEach(t=>{t.penalized=true;});
     }
     if(mods.hasInsurance&&finalEp<550)finalEp=550;
