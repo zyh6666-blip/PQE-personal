@@ -1,6 +1,6 @@
 /* build 20261009-1802 */
 /* 考研EP系统 Service Worker · v1.4.9.1 */
-const CACHE_NAME = 'kaoyan-v1523-b3';
+const CACHE_NAME = 'kaoyan-v1523-final';
 const APP_SHELL = ['./', './index.html'];
 
 self.addEventListener('install', function (e) {
@@ -135,3 +135,37 @@ self.addEventListener('fetch', function (e) {
 /* bump v1523-b3 */
 
 /* bump v1523-b3 */
+
+/* bump v1523-b4 */
+
+/* bump v1523-b5 */
+
+/* bump v1523-b6 */
+
+/* bump v1523-b8 */
+
+/* bump v1523-b9 */
+
+/* bump v1523-b10 */
+
+/* bump v1523-b11 */
+
+/* bump v1523-b11 */
+
+/* bump v1523-b12 */
+
+/* bump v1523-b13 */
+
+/* bump v1523-b15 */
+
+/* bump v1523-b16 */
+
+/* bump v1523-b17 */
+
+/* bump v1523-b18 */
+
+/* bump v1523-b19 */
+
+/* bump v1523-b20 */
+
+/* bump v1523-final */

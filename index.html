@@ -1793,6 +1793,7 @@ function ensureTalentNerfMail(){state.mailbox=Array.isArray(state.mailbox)?state
 function ensureMatMail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['mat_adjust'])return;state.mailGranted['mat_adjust']=true;if(!state.mailbox.some(function(m){return m.id==='mat_adjust';})){state.mailbox.push({id:'mat_adjust',title:'标签材料获取调整明细（前→后）',body:'<b>掉落修复</b>：材料统一入全局池（此前误写入旧表导致看似"掉了拿不到"，仓库现在可实时查看）。<br><br><b>获取门槛调整（前→后）</b>：<br>· 训练印记：每完成1个任务 +1 → <b>+2</b><br>· 冲刺奖章：仅增益窗口内完成 → <b>主动技能生效中 或 当天前2个完成的任务</b><br>· 全勤徽章：全勤日每个完成任务 ×1（不变）<br>· 巅峰凭证：EP达上限90% → <b>达上限60%</b><br><br>四种材料用于升级页改装 Lv6-10。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 
 function ensureV152Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v152_notice'])return;state.mailGranted['v152_notice']=true;if(!state.mailbox.some(function(m){return m.id==='v152_notice';})){state.mailbox.push({id:'v152_notice',title:'v1.5.2「精英降临」完整更新公告',body:'各位考生：<br><br>本次更新带来了考研EP系统有史以来最大的玩法扩展——精英任务与专属功能两大系统，同时对既有内容做了大量平衡与修复。以下为详细说明。<br><br><b>一、精英任务（ELITE）</b><br>为最常见的五类标签（考研英二单词、过级考试单词、专业课作业、专业课备考、刷题/改错）开放了"每日性能调整"特权。每个精英子标签相互独立：在升级页点击「🎖️ 精英调整」进入清单，每个标签单独订阅 100 积分/3 天（到期自动关闭、调整值保留、耐久修复照常，一经付款不退款）。解锁后进入该标签专属的"精英设计"界面：最大EP、完成占比、连击增益、扣除比例四条属性条，各含 ◀ ▶ 箭头，每档 2%（SP 标签 1%），在 ±10%（SP ±5%）范围内调整。<br><br>四要素<b>此消彼长</b>：拉高任一项会自动按关联矩阵削减其他项（如最大EP升档会同时削减完成占比与连击增益），强度池 ±6 兜底，性能分仅作结构参考——你需要根据今天的任务结构，决定把"性能预算"花在哪一项上。每次"调整且当天完成该标签任务"会消耗 3% 耐久，耐久归零后调整效果打七折；耐久每小时自动回复 0.5%，也可花代币立即回满（上限 300）。每日登记中精英标签带深色 ELITE 反色徽标，升级页每个标签都标注了当前性能分与 SP 前后预估分。<br><br><b>二、专属功能（第5槽）</b><br>功能页新增专属功能槽（Lv.28 随首槽开放，首槽左侧小正方形，每日可切换一次，全系统唯一），六件专属功能以代币商品形式发售：16 追踪标记（900币/Lv.32，按标签挂伤害加深/降低标记的跨天系统）、17 越战越勇（800币，每100EP后续+1%上限10%、每分钟衰减0.1点）、18 残骸强化（600币，任务数定基础增幅+扣减喂养）、19 漫画爆炸（1000币/Lv.40，充能五档、完成时释放）、20 封印无双（1200币/Lv.45，88%补至100%）、21 善恶之交（700币，天使/恶魔双态）。<br><br><b>三、平衡与修复</b><br>33个天赋数值全面下调（详见另一封明细邮件）；功能属性四项调整（灵魂武者新增进化增速+5%、猎手韧性承担降至20%、母体威慑下调至15%/10%、以一当十降至20%）；质量评价权重改为正确率60/专注25/用时8/状态7；材料掉落全面修复（入全局池、训练印记×2、冲刺奖章改为技能生效中或当天前2个完成、巅峰凭证门槛降至60%）；标签数值颜色恢复默认（仅进化模式改动时高亮）；修复了无限火力从未生效的接线遗漏、置顶强化下置顶任务可随意修改的漏洞、打卡连击虚挂不清零等问题；结算弹窗重新排版（任务侧增益归入各任务、全局增益汇总底部、幸运/置顶同列）；邮件改为标题列表点开的窗口式阅读。<br><br>祝各位考生都能在 S1「并肩有光」赛季里找到最适合自己的打法。你不是一个人，并肩之处，便有光。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
+function ensureV1523FinalMail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v1523_final'])return;state.mailGranted['v1523_final']=true;if(!state.mailbox.some(function(m){return m.id==='v1523_final';})){state.mailbox.push({id:'v1523_final',title:'v1.5.2.3「进度可视化+杯赛重做」完整汇总',body:'各位考生：<br><br>以下是 v1.5.2.3 全部更新汇总（此前分散的热修全部包含）：<br><br><b>一、任务完成进度条</b><br>· 点「完成」弹窗+每日任务卡：纯填入值占标签当前maxEP的%（不含增益）<br>· 四档变色：0-20红/21-50黄/51-80蓝/81-100绿<br>· 封印无双：补满任务原始绿+补足金段<br><br><b>二、专属功能进度UI（主动技能位）</b><br>· 追踪标记：任务卡角标（加深+10%绿/降低-10%蓝）<br>· 越战越勇：圆环表盘（左书实时提升%）<br>· 残骸强化：已收集残骸x · 额外EP x/10%<br>· 漫画爆炸：档位%+下一档分钟+充能条<br>· 善恶之交：天使每秒xEP绿倒计时 / 恶魔减免10%红倒计时<br><br><b>三、杯赛全面重做</b><br>· 全杯赛标签父级化（往上一级）：周杯/冲刺5天(5个不同)/月杯4个/双周2个/日杯①②/大型赛事<br>· 计分统一科目级匹配；显示/邮件/日历标签名全部修复<br>· 核心杯：周五~周日开放，双标签任选其一报名<br>· 全部杯赛已重置重开<br><br><b>四、结算与修复</b><br>· 幸运任务任务侧化（显示满额/入罚率基数），周期任务可被抽中幸运<br>· 乱斗确认锁定、增益审计清单、全局错误弹窗、结算顺序铁律（罚率倒数第二/经验卡倒数第一）<br>· 修复结算崩溃、加速连击重复×4、杯赛null/undefined等<br><br>愿并肩之处，便有光。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 function ensureV1523Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v1523_ui'])return;state.mailGranted['v1523_ui']=true;if(!state.mailbox.some(function(m){return m.id==='v1523_ui';})){state.mailbox.push({id:'v1523_ui',title:'v1.5.2.3「进度条全家桶」详细说明',body:'各位考生：<br><br>本次更新把进度可视化一次补齐，全部为显示层改动，不影响任何结算数值：<br><br><b>一、任务完成进度条（点完成弹窗 + 每日任务卡）</b><br>· 显示纯填入值（完成EP+质量EP）占该标签当前maxEP的百分比，不含任何增益<br>· 四档变色：0-20%红 / 21-50%黄 / 51-80%蓝 / 81-100%绿<br>· 封印无双特效：被补满的任务，进度条原始部分绿色、补足部分金黄色，左侧显示🛡️封印<br><br><b>二、专属功能进度UI（主动技能位最左端，从左到右）</b><br>· 越战越勇：圆形表盘——未激活灰色、激活时中心点亮橙色，边缘弧线=当前加成进度（0-10%），圆圈左侧实时显示「当前EP获得提升x%」<br>· 残骸强化：「已收集残骸x · 额外获得EP x/10%」+紫色进度条<br>· 漫画爆炸：当前充能档位% + 到下一档的分钟数 + 充能进度条<br>· 善恶之交：天使态显示「当前每秒获得xEP」+绿色倒计时条；恶魔态显示「当前EP减免10%」+红色倒计时条<br><br><b>三、其他</b><br>· 16追踪标记为标记类机制，无累积量，不加进度条<br>· 进度条随任务状态即时刷新<br><br>愿并肩之处，便有光。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 function ensureV1522Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v1522_update'])return;state.mailGranted['v1522_update']=true;if(!state.mailbox.some(function(m){return m.id==='v1522_update';})){state.mailbox.push({id:'v1522_update',title:'v1.5.2.2「平衡与修复」详细更新说明',body:'各位考生：<br><br>本次更新以<b>修复、平衡、图面对齐</b>为主，所有数值均以五张图面说明为准。详细清单：<br><br><b>一、乱斗（随机属性）</b><br>① 新增<b>确认属性</b>按钮：抽属性后不再自动锁定，满意了点确认才锁死；确认前可用变更券/抽取券/特权券随意更换；已确认也可再点撤销。<br>② 15号超额重做：只统计<b>已完成</b>任务的max总和，所得不足其70%时自动补足至70%（四舍五入），补足额不再被未完成惩罚吃掉。<br>③ 19号防御补给：层数按完成顺序挂在任务上（第N个完成=N层、封顶10层），每层减免该任务自身扣减的5%，未完成任务不参与。<br>④ 20号最后的幸存者：改为<b>全部任务完成时</b>最后完成的任务+100%；有未完成则无增益。<br>⑤ 7号双重装甲/9号生命保险按图面重做：「EP扣减」统一定义为 完成获得EP < 该任务当前maxEP 的差值。<br><br><b>二、潜能</b><br>⑥ 5号多元标签：4个标签=10%、5个=30%、每多1个+20%，110%封顶（原150%）。<br>⑦ 15号睡眠亏欠：不填睡眠时长则整个潜能不生效。<br>⑧ 31号任务特调：改为<b>主动标记</b>（任务卡上点「🎨设为特调」），标记完成前可反复改，该标签任务完成后锁定。<br>⑨ 33号专念特教：标记大类下调到科目级（政治/英二/333/809/考研英二单词）。<br>⑩ 34号舍弃复盘：受罚范围收窄为「刷题/改错+旧list重刷」两类，不再含备考。<br>⑪ 9号悬赏通缉：扣减减免15%只作用于未完成且被标记的任务。<br><br><b>三、天赋与进化</b><br>⑫ 18号厚积薄发结算弹窗显示修正为+10%。<br>⑬ 27号或昼或夜：未选中时段-5%（与v1.5.2.1修正一致）。<br>⑭ 35号终结恩赐：护盾扩展至「完成任务的扣减」——护盾期间完成的任务，按当前max补足差额的97%；护盾激活期间不产生充能，结束后恢复。<br>⑮ 进化钢铁利爪补全第二条：完成时相邻任务获得该任务EP×10%。<br><br><b>四、修复</b><br>⑯ 修复结算预览崩溃（抽到11号致命攻击/14号过度增长当天点结算无反应）。<br>⑰ 修复任务卡上悬赏标记/删除/特调按钮不显示的问题。<br>⑱ 新增全局错误提示（右上角红色弹窗），再遇到异常请截图反馈。<br>⑲ 结算弹窗新增「增益构成审计」折叠清单：池子里每一笔钱逐笔列出，点开即可对账。<br>⑳ 清理了文件内大量重复函数定义（运行行为不变）。<br><br><b>统一规则</b>：所有Buff与任务属性相关的计算，一律按该标签<b>当前</b>的最大EP/完成占比/未完成扣减比例执行（含改装/SP/精英调整后的数值），不看标签初始值。<br><br>愿并肩之处，便有光。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
 function ensureV1521Mail(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};if(state.mailGranted['v1521_detail'])return;state.mailGranted['v1521_detail']=true;if(!state.mailbox.some(function(m){return m.id==='v1521_detail';})){state.mailbox.push({id:'v1521_detail',title:'v1.5.2.1 更新细节（修复与审计）',body:'<b>本次修复</b>：<br>① 长期任务：EP 入口从长期页移除，只能在每日登记填入（自动并入或转移今日）；副本完成结算后自动回写长期任务（已完成+入账EP），彻底解决"当天完成后长期页无变化、次日被误扣50%"的问题。<br>② 或昼或夜：未选中时段 -10% 修正为 -5%，与1.5.1表一致。<br>③ 结算账单文案：稳步积累 +25%→+4%、碎片吸收 +30%→+12%（数值本已对，纯显示）。<br>④ 邮件新增"✉️ 一键读取"：全部标记已读，无需逐个打开。<br><br><b>进行中的玩法加成审计</b>（后续版本修复）：乱斗21复制感染EP替换端移回乱斗通道；7双重装甲/9生命保险按文案重做；8摆脱危机/12异界猎手改惰性判定；35终结恩赐护盾扩围到完成时扣减；2错题复盘/26全域复盘口径扩入刷题改错；19防御补给改为任务侧返还款；预览补齐11/14；周期副本补幸运标记；任务解锁每日限1次；全文件重复函数定义清查。',items:{},claimed:false,read:false,createdAt:Date.now()});}saveState();}
@@ -1811,6 +1812,7 @@ const today=new Date().toDateString();if(state.lastBrawlDrawDate!==today){state.
 function saveState(){try{localStorage.setItem('kaoyan_ep_state',JSON.stringify(state));}catch(e){}}
 function getShopWeekKey(){const d=new Date();const day=(d.getDay()+6)%7;d.setHours(0,0,0,0);d.setDate(d.getDate()-day);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function dailyResetCheck(){
+  if(!state.cupResetV1523e){state.cupResetV1523e=true;state.sprint=null;state.cupState=null;state.sprint=null;state.monthCup=null;state.biCup=null;state.largeCupClaims={};}
   const today=new Date().toDateString();
   let changed=false;
   const weekKey=getShopWeekKey();
@@ -2155,7 +2157,7 @@ function checkCycleMigration(){
       const copy={name:ct.name,baseEp:'',qualityEp:'',tagId:ct.tagId,fromCycle:ct.id,cycleDate:todayS};
       const entitled=getLuckyCount(state.todayTasks.length+1);
       const current=state.todayTasks.filter(function(x){return x.lucky;}).length;
-      if(entitled>current&&!copy.tagId)copy.lucky=true;
+      if(entitled>current)copy.lucky=true;
       state.todayTasks.push(copy);
     })();
     changed=true;
@@ -2498,9 +2500,11 @@ function renderTasks(){
     const maxEpText=tag?(_chg?'<span style="color:#d9832a;font-weight:700;">':'')+(tag.pen?'max '+tag.maxEp+'EP · -'+tag.pen+'%':'max '+tag.maxEp+'EP')+(_chg?'</span>':''):'';
         const _spOn=tag&&(((state.tagUp||{})[tag.id]||{}).sp);
         const tagBadge=tag?(_spOn?'<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#000;color:#fff;box-shadow:0 0 0 1px #ff950066,inset 0 0 8px rgba(255,149,0,.25);font-weight:600;white-space:nowrap;">★ '+tag.path.join(' · ')+' · SP · '+maxEpText+'</span>':'<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:'+tc+'15;color:'+tc+';white-space:nowrap;">'+tag.path.join(' · ')+' · '+maxEpText+'</span>'):'<span style="font-size:10px;color:#c7c7cc;">未分类</span>';
+    const _mk=state.exState&&state.exState.marksPrev?state.exState.marksPrev[t.tagId]:null;
+    const _mkChip=_mk?(_mk.type==='up'?' <span style="font-size:10px;padding:1px 6px;border-radius:4px;background:#34c75918;color:#34c759;font-weight:600;white-space:nowrap;" title="追踪标记·伤害加深：该标签任务完成+10%EP">🏷加深+10%</span>':' <span style="font-size:10px;padding:1px 6px;border-radius:4px;background:#007aff18;color:#007aff;font-weight:600;white-space:nowrap;" title="追踪标记·伤害降低：该标签任务扣减-10%">🏷降低-10%</span>'):'';
       const fusionAttr=(state.fusionAssign&&t.tagId&&state.fusionAssign[t.tagId])?BRAWLS.find(x=>x.id===state.fusionAssign[t.tagId]):null;
        const infectInfo=t.infected?(function(){const sl=getInfectionSlotInfo(t.infectSlot);return '<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#ff3b3018;color:#ff3b30;white-space:nowrap;" title="感染任务必须在该时段完成">☣️ 感染 · '+sl.name+' '+sl.range+'</span>';})():'';
-      const tagBadgeFull=tagBadge+(_bt&&isEliteTagId(t.tagId)?' <b style="color:#b5772a;font-size:10px;">🎖ELITE</b>':'')+infectInfo+(getCheckinStreakBadge(t)?' '+getCheckinStreakBadge(t):'')+(fusionAttr?' <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#af52de18;color:#af52de;white-space:nowrap;" title="'+fusionAttr.effect+'">🎯'+fusionAttr.name+'</span>':'');
+      const tagBadgeFull=tagBadge+_mkChip+(_bt&&isEliteTagId(t.tagId)?' <b style="color:#b5772a;font-size:10px;">🎖ELITE</b>':'')+infectInfo+(getCheckinStreakBadge(t)?' '+getCheckinStreakBadge(t):'')+(fusionAttr?' <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#af52de18;color:#af52de;white-space:nowrap;" title="'+fusionAttr.effect+'">🎯'+fusionAttr.name+'</span>':'');
       if(t.fromLong||t.fromCycle){
       const cc=t.fromLong?'#007aff':'#00b578';
       const cb=t.fromLong?'#f0f7ff':'#f0fbf7';
@@ -2540,7 +2544,7 @@ function renderTasks(){
         html+='<button onclick="pinTask('+i+')" title="置顶" style="border:none;background:transparent;color:#007aff;font-size:14px;cursor:pointer;line-height:1;padding:0 4px;">⬆</button>';
       html+='<button onclick="removeTask('+i+')" style="border:none;background:transparent;color:#ff3b30;font-size:18px;cursor:pointer;line-height:1;padding:0 4px;">×</button>';
       html+='</div>';
-      html+='<div style="display:flex;justify-content:flex-end;overflow:hidden;">'+tagBadge+'</div>';
+      html+='<div style="display:flex;justify-content:flex-end;overflow:hidden;">'+tagBadge+_mkChip+'</div>';
        }else{
          // 已锁定：只读名称标签
      const tmNow=calcTalentMods();
@@ -2909,7 +2913,7 @@ function mailItemsHtml(m){
 }
 function renderMailPage(){
   const box=document.getElementById('mail-page-list');if(!box)return;
-  ensureV143Mail();ensureV150Mail();ensureV1502Mail();ensureUltUndoMail();ensureMatMail();ensureV1523Mail();ensureV1522Mail();ensureV1521Mail();ensureV152Mail();ensureTalentNerfMail();
+  ensureV143Mail();ensureV150Mail();ensureV1502Mail();ensureUltUndoMail();ensureMatMail();ensureV1523FinalMail();ensureV1523Mail();ensureV1522Mail();ensureV1521Mail();ensureV152Mail();ensureTalentNerfMail();
   if(!state.mailbox.length){box.innerHTML='<div style="text-align:center;color:#8e8e93;padding:20px;">邮箱空空如也</div>';updateMailBadge();return;}
   box.innerHTML=state.mailbox.map(function(m){
     const open=state._mailOpen===m.id;
@@ -5315,14 +5319,18 @@ const SP_RECIPE={S:{label:'S',mats:12,core:6,tokens:260,ult:4},A:{label:'A',mats
 
 /* ===== 杯赛 v2：四档报名 + 双周耐力赛 + 限时产出赛 ===== */
 const CUP_TIERS=[{n:'业余',days:0,th:[150,100,50],rw:[{points:100},{tokens:10},{points:60}]},{n:'新人',days:15,th:[200,140,70],rw:[{tokens:15,change_ticket:1},{tokens:12},{points:80}]},{n:'强手',days:60,th:[260,180,100],rw:[{tokens:25,exp25:1},{tokens:18,change_ticket:1},{points:120,exp12:1}]},{n:'车王',days:150,th:[340,240,140],rw:[{tokens:50,sp_core:1,ult_upgrade:1},{tokens:30,exp3:1},{tokens:20,draw_ticket:1}]}];
+function cupTagOf(tid){const t=getTag(tid);return (t&&t.path.length>=2)?t.path.slice(0,-1).join('·'):(t?t.path.join('·'):String(tid));}
+function cupName(id){const t=getTag(id);return t?t.path.join(' · '):String(id);}
+function cupParentPool(){const set={};TASK_TAGS.forEach(function(t){if(t.path.length<2)return;set[t.path.slice(0,-1).join('·')]=1;});return Object.keys(set);}
 function getCupState(){
   const wk=getShopWeekKey();
   if(!state.cupState||state.cupState.weekKey!==wk){
     settleWeekCup(state.cupState);
     const usage=countTagSettleDays();
-    const pool=TASK_TAGS.filter(function(t){return t.path.length>=2&&t.path.join(' ').indexOf('课堂')===-1&&t.path.join(' ').indexOf('作业')===-1;});
-    pool.sort(function(a,b){return (usage[a.id]||0)-(usage[b.id]||0);});
-    state.cupState={weekKey:wk,tagId:pool[Math.floor(Math.random()*Math.min(5,pool.length))].id,enrolled:false,claimed:false,tier:-1};
+    const useSub={};
+    TASK_TAGS.forEach(function(t){if(t.path.length<2)return;const s=t.path.slice(0,-1).join('·');useSub[s]=(useSub[s]||0)+(usage[t.id]||0);});
+    const pool=cupParentPool().sort(function(a,b){return useSub[a]-useSub[b];});
+    state.cupState={weekKey:wk,tagId:pool[Math.floor(Math.random()*Math.min(5,pool.length))],enrolled:false,claimed:false,tier:-1};
     saveState();
   }
   return state.cupState;
@@ -5379,7 +5387,7 @@ function claimEnduSupply(idx){
     lcCard.style.display='';
     const ltag=getTag(lc.tagId);const ls=cupScoreFor(lc.tagId,limitedDates());
     const hoursLeft=Math.max(0,Math.ceil((lc.until-Date.now())/3600000));
-    document.getElementById('cup-limited').innerHTML='<div style="font-size:13px;line-height:1.7;">指定标签：<b>'+(ltag?ltag.path.join(' · '):'')+'</b> ｜ 剩 <b style="color:#ff3b30;">'+hoursLeft+'</b> 小时<br>当前得分：<b style="color:#007aff;">'+ls+'</b>（冠≥220 / 亚≥150 / 季≥80）｜ 冠军 🪙40+💠1</div>'+(lc.enrolled?'<button class="btn-primary" style="width:100%;margin-top:6px;" onclick="claimLimited()">🏁 结算领奖</button>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollLimited()">⚡ 消耗 2 能量报名（错过不返场）</button>');
+    document.getElementById('cup-limited').innerHTML='<div style="font-size:13px;line-height:1.7;">指定标签：<b>'+cupName(state.cupLimited.tagId)+'</b> ｜ 剩 <b style="color:#ff3b30;">'+hoursLeft+'</b> 小时<br>当前得分：<b style="color:#007aff;">'+ls+'</b>（冠≥220 / 亚≥150 / 季≥80）｜ 冠军 🪙40+💠1</div>'+(lc.enrolled?'<button class="btn-primary" style="width:100%;margin-top:6px;" onclick="claimLimited()">🏁 结算领奖</button>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollLimited()">⚡ 消耗 2 能量报名（错过不返场）</button>');
   }else lcCard.style.display='none';
 }
 /* ===== 竞技 v2：连胜加成 ===== */
@@ -5448,13 +5456,13 @@ function getDayCupInfo(){
   const now=new Date();now.setHours(0,0,0,0);
   const pad=function(n){return String(n).padStart(2,'0');};
   const ds=now.getFullYear()+'-'+pad(now.getMonth()+1)+'-'+pad(now.getDate());
-  const pool=TASK_TAGS.filter(function(t){return t.path.length>=3;});
-  return {active:true,dateStr:ds,daysToActive:0,tagId:pool[dayCupHash(ds)%pool.length].id,type:DAY_CUP_KINDS[dayCupHash(ds+'#type')%DAY_CUP_KINDS.length]};
+  const pool=cupParentPool();
+  return {active:true,dateStr:ds,daysToActive:0,tagId:pool[dayCupHash(ds)%pool.length],type:DAY_CUP_KINDS[dayCupHash(ds+'#type')%DAY_CUP_KINDS.length]};
 }
 function getSecondDayCupInfo(){
   const first=getDayCupInfo();
   if(dayCupHash(first.dateStr+'#double')%5!==0)return null;
-  const pool=TASK_TAGS.filter(function(t){return t.path.length>=3&&t.id!==first.tagId;});
+  const pool=cupParentPool().filter(function(t){return t!==first.tagId;});
   const kinds=DAY_CUP_KINDS.filter(k=>k!==first.type);
   return {active:true,dateStr:first.dateStr,daysToActive:0,tagId:pool[dayCupHash(first.dateStr+'#tag2')%pool.length].id,type:kinds[dayCupHash(first.dateStr+'#type2')%kinds.length]};
 }
@@ -5480,7 +5488,7 @@ function renderDayCupTrack(dci,cupIdx){
   let h='<div style="border:1px solid #e5e5ea;border-radius:10px;padding:10px;margin-bottom:10px;background:'+(cupIdx?'#fffaf0':'#fff')+';">';
   h+='<div style="font-size:13px;font-weight:600;margin-bottom:4px;">🏆 日杯'+(cupIdx?'②（双杯日）':'①')+' · '+dayCupKindName(kind)+'</div>';
   h+='<button class="btn-secondary" style="width:100%;font-size:12px;margin-bottom:6px;" onclick="showCupRules(\'dailyrace\')">📖 日杯规则</button>';
-  h+='<div style="font-size:13px;line-height:1.7;">指定标签：<b>'+(tag?tag.path.join(' · '):'')+'</b> ｜ 当前得分：<b style="color:#007aff;">'+score+'</b><br></div>';
+  h+='<div style="font-size:13px;line-height:1.7;">指定标签：<b>'+cupName(dci.tagId)+'</b> ｜ 当前得分：<b style="color:#007aff;">'+score+'</b><br></div>';
   if(enrolled){
     const arr=getDayTrackClaims(dci.dateStr,cupIdx);const th=kind==='points'?DAY_POINTS_TIERS:DAY_MAT_TIERS;
     h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;">';
@@ -5494,7 +5502,7 @@ function enrollDayTrack(cupIdx){
   const key='dcr'+(cupIdx?'2_':'_')+dci.dateStr;if(state[key])return;
   const en=getEnergy();if(en.v<1){alert('能量不足（需要1⚡）');return;}
   en.v--;state[key]={enrolled:true,date:dci.dateStr};saveState();updateShopUI();renderCupUI();
-  showGainModal('🏆 报名成功',[['日杯',cupIdx?'②':'①'],['类型',dayCupKindName(dci.type)],['能量','-1⚡']],getTag(dci.tagId).path.join(' · '));
+  showGainModal('🏆 报名成功',[['日杯',cupIdx?'②':'①'],['类型',dayCupKindName(dci.type)],['能量','-1⚡']],cupName(dci.tagId));
 }
 function ensureCupNotices(){
   const info=getDayCupInfo();
@@ -5504,7 +5512,7 @@ function ensureCupNotices(){
   if(tmr.getTime()===new Date(info.dateStr.replace(/-/g,'/')).getTime()){
     state.dayCupNotice=key;
     const tag=getTag(info.tagId);
-    const second=getSecondDayCupInfo();sendSystemMail('🏆 日杯预告 · 明日开启','明天（'+info.dateStr+'）将开启日杯，指定标签「'+(tag?tag.path.join(' · '):'')+'」，报名消耗 1 能量，8段积分奖励50→1000。'+(second?'另随机加开日杯②。':'')+'记得参加！',{});
+    const second=getSecondDayCupInfo();sendSystemMail('🏆 日杯预告 · 明日开启','明天（'+info.dateStr+'）将开启日杯，指定标签「'+cupName(info.tagId)+'」，报名消耗 1 能量，8段积分奖励50→1000。'+(second?'另随机加开日杯②。':'')+'记得参加！',{});
     saveState();
   }
 }
@@ -5513,10 +5521,10 @@ function getMonthCup(){
   const now=new Date();const key=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
   if(!state.monthCup||state.monthCup.key!==key){
     if(state.monthCup&&state.monthCup.enrolled&&!state.monthCup.settled){state.monthCup.settled=true;state.monthArchive=state.monthCup;}
-    const pool=TASK_TAGS.filter(function(t){return t.path[0]==='考研'&&t.path.length>=3;});
+    const pool=cupParentPool();
     const seed=parseInt(key.replace('-',''))||1;
     const tagIds=[];const off=((seed%pool.length)+pool.length)%pool.length;
-    for(let d=0;d<pool.length&&tagIds.length<4;d++){const t=pool[(off+d)%pool.length];if(tagIds.indexOf(t.id)===-1)tagIds.push(t.id);}
+    for(let d=0;d<pool.length&&tagIds.length<4;d++){const t=pool[(off+d)%pool.length];if(tagIds.indexOf(t)===-1)tagIds.push(t);}
     state.monthCup={key:key,tagIds:tagIds,enrolled:false,claims:{},finalPrize:Math.random()<0.15?'ult':'core',settled:false};
     saveState();
   }
@@ -5569,19 +5577,20 @@ function claimMonthAll(){
 function getLimitedCup(){
   const now=new Date();const doy=Math.floor((now-new Date(now.getFullYear(),0,0))/86400000);
   const lc=state.cupLimited;
+  if(lc&&lc.tagId){if(typeof lc.tagId==='object')lc.tagId=lc.tagId.id||'';if(getTag(lc.tagId))lc.tagId=cupTagOf(lc.tagId);}
   if(lc&&lc.until>=now.getTime())return lc;
   if(lc&&lc.until<now.getTime()){if(!lc.settled)settleLimited(lc);if(lc.claimed)state.cupLimited=null;}
   if(!state.cupLimited&&doy%5===2){
-    const usage=countTagSettleDays();
-    const pool=TASK_TAGS.filter(function(t){return tagChildren(t.path).length===0;});
-    pool.sort(function(a,b){return (usage[a.id]||0)-(usage[b.id]||0);});
+    const usage=countTagSettleDays();const _useSub={};
+    TASK_TAGS.forEach(function(t){if(t.path.length<2)return;const s=t.path.slice(0,-1).join('·');_useSub[s]=(_useSub[s]||0)+(usage[t.id]||0);});
+    const pool=cupParentPool().sort(function(a,b){return _useSub[a]-_useSub[b];});
     const tag=pool[Math.floor(Math.random()*Math.min(6,pool.length))];
     const start=new Date();start.setHours(0,0,0,0);
     const isPts=Math.random()<0.35;
-    state.cupLimited={tagId:tag.id,from:start.getTime(),until:start.getTime()+3*86400000,enrolled:false,settled:false,claimed:false,type:isPts?'points':'normal'};
+    state.cupLimited={tagId:tag,from:start.getTime(),until:start.getTime()+3*86400000,enrolled:false,settled:false,claimed:false,type:isPts?'points':'normal'};
     saveState();
     const tg=getTag(tag.id);
-    sendSystemMail(isPts?'🎯 积分杯开启':'⚡ 限时产出赛开启','3 天限时杯赛：指定标签「'+(tg?tg.path.join(' · '):'')+'」'+(isPts?'（本次为积分杯变体，奖励全为积分）':'')+'，报名消耗 2 能量，错过不返场！',{});
+    sendSystemMail(isPts?'🎯 积分杯开启':'⚡ 限时产出赛开启','3 天限时杯赛：指定标签「'+cupName(state.cupLimited.tagId)+'」'+(isPts?'（本次为积分杯变体，奖励全为积分）':'')+'，报名消耗 2 能量，错过不返场！',{});
   }
   return state.cupLimited;
 }
@@ -5689,10 +5698,10 @@ function getBiCup(){
   const key=biWeekKey();
   if(!state.biCup||state.biCup.key!==key){
     if(state.biCup)state.biCupArchive=state.biCup;
-    const pool=TASK_TAGS.filter(function(t){return t.path.length>=3;});
+    const pool=cupParentPool();
     let h=0;for(let i=0;i<key.length;i++){h=(h*31+key.charCodeAt(i))>>>0;}
     const tagIds=[];const off=h%pool.length;
-    for(let d=0;d<pool.length&&tagIds.length<2;d++){const t=pool[(off+d)%pool.length];if(tagIds.indexOf(t.id)===-1)tagIds.push(t.id);}
+    for(let d=0;d<pool.length&&tagIds.length<2;d++){const t=pool[(off+d)%pool.length];if(tagIds.indexOf(t)===-1)tagIds.push(t);}
     state.biCup={key:key,tagIds:tagIds,finalPrize:Math.random()<0.2?'ult':'core',enrolled:false,claims:{}};
     saveState();
   }
@@ -5738,11 +5747,12 @@ function getSprint(){
   if(!state.sprint||state.sprint.key!==key){
     if(state.sprint)state.sprintArchive=state.sprint;
     state.sprint={key:key,enrolled:false,claims:{},days:{}};
-    const pool=TASK_TAGS.filter(function(t){return t.path.length>=2;});
-    for(let d=0;d<5;d++){const t=pool[arenaHashStr(key+'-d'+d)%pool.length];
+    const pool=cupParentPool();
+    let mh=arenaHashStr(key+'-mix');for(let mi=pool.length-1;mi>0;mi--){mh=(mh*31+7)>>>0;const mj=mh%(mi+1);const tmp=pool[mi];pool[mi]=pool[mj];pool[mj]=tmp;}
+    for(let d=0;d<5;d++){const t=pool[d%pool.length];
     let h=arenaHashStr(key+'-g'+d);const idxs=[0,1,2,3,4,5,6,7,8,9];
     for(let i=idxs.length-1;i>0;i--){h=(h*31+7)>>>0;const j=h%(i+1);const tmp=idxs[i];idxs[i]=idxs[j];idxs[j]=tmp;}
-    state.sprint.days[d]={tagId:t.id,goals:idxs.slice(0,3),eval:[false,false,false],locked:false};}
+    state.sprint.days[d]={tagId:t,goals:idxs.slice(0,3),eval:[false,false,false],locked:false};}
     saveState();
   }
   const sp=state.sprint;const idx=(new Date().getDay()+6)%7;
@@ -5752,16 +5762,18 @@ function getSprint(){
 }
 function sprintDayDate(key,idx){const _t=arenaWeekStart();const _base=(typeof _t==='number')?_t:_t.getTime();const d=new Date(_base+idx*86400000);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function sprintEvalDay(sp,idx){
-  const dd=sp.days[idx];if(!dd)return;const tag=getTag(dd.tagId);if(!tag)return;
+  const dd=sp.days[idx];if(!dd)return;const tag=getTag(dd.tagId);
   if(!dd.goals||dd.goals.length!==3){let h=arenaHashStr(sp.key+'-g'+idx);const idxs=[0,1,2,3,4,5,6,7,8,9];for(let i=idxs.length-1;i>0;i--){h=(h*31+7)>>>0;const j=h%(i+1);const tmp=idxs[i];idxs[i]=idxs[j];idxs[j]=tmp;}dd.goals=idxs.slice(0,3);}
   const rec=(state.dailyHistory||[]).find(function(h){return normHistDate(h.date)===sprintDayDate(sp.key,idx);});
-  const all=rec&&rec.tasks?rec.tasks.filter(function(t){return t.tagId===dd.tagId;}):[];
+  const all=rec&&rec.tasks?rec.tasks.filter(function(t){return cupTagOf(t.tagId)===dd.tagId;}):[];
   const tasks=all.filter(function(t){return t.completed;});
   const n=tasks.length;
   const qsum=tasks.reduce(function(s,t){return s+(parseInt(t.qualityEp)||0);},0);
   let qBest=0,ownBest=0;
   tasks.forEach(function(t){const q=parseInt(t.qualityEp)||0;if(q>qBest)qBest=q;const o=(parseInt(t.baseEp)||0)+q;if(o>ownBest)ownBest=o;});
-  const stats={n:n,qsum:qsum,qBest:qBest,ownBest:ownBest,max:tag.maxEp,total:all.length};
+  let _mx=tag?tag.maxEp:0;
+  if(!tag&&rec&&rec.tasks){rec.tasks.forEach(function(t){if(cupTagOf(t.tagId)===dd.tagId){const tg=getTag(t.tagId);if(tg&&tg.maxEp>_mx)_mx=tg.maxEp;}});}
+  const stats={n:n,qsum:qsum,qBest:qBest,ownBest:ownBest,max:_mx,total:all.length};
   dd.eval=dd.goals.map(function(g){return SPRINT_GOALS[g].t(stats);});
 }
 function sprintTrophies(sp){let n=0;Object.keys(sp.days).forEach(function(k){const dd=sp.days[k];if(dd.locked)dd.eval.forEach(function(v){if(v)n++;});});return n;}
@@ -5787,7 +5799,7 @@ function renderCupUIImpl(){{
   if(spWrapEl)spWrapEl.style.display='';
   let wh='<button class="btn-secondary" style="width:100%;font-size:12px;margin-bottom:6px;" onclick="showCupRules(\'weekly\')">📖 冲刺锦标赛规则</button>';
   wh+='<details style="margin-bottom:6px;"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#af52de;padding:6px 8px;background:#faf5ff;border-radius:8px;">🎁 15档奖励预览（点我展开）</summary><div style="font-size:11px;color:#6e6e73;line-height:1.9;padding:6px 8px;background:#fdfbff;border-radius:0 0 8px 8px;">'+SPRINT_TIERS.map(function(t,i){var parts=[];var rw=SPRINT_RW[i];if(rw.points)parts.push('💰'+rw.points);if(rw.tokens)parts.push('🪙'+rw.tokens);if(rw.draw_ticket)parts.push('🎟️抽取券×'+rw.draw_ticket);if(rw.change_ticket)parts.push('🎫变更券×'+rw.change_ticket);if(rw.reroll_ticket)parts.push('🔮重铸券×'+rw.reroll_ticket);if(rw.parts_pack)parts.push('📦材料包×'+rw.parts_pack);if(rw.direct_up)parts.push('🔧直接升级×'+rw.direct_up);if(rw.talent_extra)parts.push('🌟天赋额外抽取×'+rw.talent_extra);if(rw.exp2)parts.push('⚡2倍经验卡×'+rw.exp2);if(rw.brawl_vip)parts.push('👑乱斗特权券×'+rw.brawl_vip);return '<div style="display:flex;justify-content:space-between;padding:1px 0;"><span>🏆×'+t+'</span><b style="color:#1d1d1f;">'+parts.join(' ')+'</b></div>';}).join('')+'</div></details>';
-  wh+='<div style="font-size:12px;color:#6e6e73;line-height:1.8;margin-bottom:6px;">'+[0,1,2,3,4].map(function(d){const dd=sp.days[d];if(!dd)return '';const tg=getTag(dd.tagId);const n=dd.locked?dd.eval.filter(Boolean).length:null;const st=d<idxNow?('🏆×'+n):(d===idxNow?'今日开放':'未到开放日');return '<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f2f2f7;"><span>周'+'一二三四五'.charAt(d)+' · '+(tg?tg.path.join(' · '):'')+'</span><b style="color:'+(n===null?'#8e8e93':'#ff9500')+';">'+st+'</b></div>';}).join('')+'</div>';
+  wh+='<div style="font-size:12px;color:#6e6e73;line-height:1.8;margin-bottom:6px;">'+[0,1,2,3,4].map(function(d){const dd=sp.days[d];if(!dd)return '';const tg=getTag(dd.tagId);const n=dd.locked?dd.eval.filter(Boolean).length:null;const st=d<idxNow?('🏆×'+n):(d===idxNow?'今日开放':'未到开放日');return '<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f2f2f7;"><span>周'+'一二三四五'.charAt(d)+' · '+cupName(dd.tagId)+'</span><b style="color:'+(n===null?'#8e8e93':'#ff9500')+';">'+st+'</b></div>';}).join('')+'</div>';
   if(idxNow<5&&sp.days[idxNow]){sprintEvalDay(sp,idxNow);const dd=sp.days[idxNow];wh+='<div style="font-size:12px;color:#6e6e73;line-height:1.8;margin-bottom:6px;"><b>今日目标（10选3）：</b><br>'+dd.eval.map(function(v,i){return (v?'🏆':'⚪')+' '+SPRINT_GOALS[dd.goals[i]].d;}).join('<br>')+'</div>';}
   else wh+='<div style="font-size:12px;color:#8e8e93;margin-bottom:6px;">工作日已结束，奖杯全部锁定。合计 🏆×'+tr+' / 15</div>';
   const so=sprintOver();
@@ -5795,18 +5807,18 @@ function renderCupUIImpl(){{
   const sa=state.sprintArchive;
   if(sa&&sa.enrolled&&Object.keys(sa.claims||{}).length<SPRINT_TIERS.length){const atr=sprintTrophies(sa);wh+='<div style="margin-top:8px;padding:8px;background:#fff5e6;border:1px solid #ff950040;border-radius:8px;font-size:12px;color:#6e6e73;line-height:1.6;">🏁 上届冲刺锦标赛已结束 · 未领取奖励<br>最终奖杯：<b style="color:#ff9500;">🏆×'+atr+'</b> ｜ 已领 '+Object.keys(sa.claims||{}).length+'/15 档</div><button class="btn-primary" style="width:100%;margin-top:6px;" onclick="claimSprintAll()">📥 一键领取未领取的奖励</button>';}
   document.getElementById('cup-weekly').innerHTML=wh;}
-  const mc=getMonthCup();const mIds=mc.tagIds||[mc.tagId];const mnames=mIds.map(function(id){const t=getTag(id);return t?t.path.join(' · '):'';}).join(' ｜ ');const mscore=mIds.reduce(function(sum,id){return sum+cupScoreFor(id,getMonthDates());},0);
+  const mc=getMonthCup();const mIds=mc.tagIds||[mc.tagId];const mnames=mIds.map(function(id){return cupName(id);}).join(' ｜ ');const mscore=mIds.reduce(function(sum,id){return sum+cupScoreFor(id,getMonthDates());},0);
   let mh='<button class="btn-secondary" style="width:100%;font-size:12px;margin-bottom:6px;" onclick="showCupRules(\'month\')">📖 月杯规则</button><div style="font-size:13px;line-height:1.7;">本月指定标签（4个·总分合计）：<b>'+mnames+'</b><br>终档大奖：'+(mc.finalPrize==='ult'?'🏆 终极改装包 ×1（15%届）':'💠 精研核心拆档发放（85%届，共9个）')+' ｜ 当前：<b style="color:#007aff;">'+mscore+'</b></div>';
   mh+=mc.enrolled?_tierButtons(mc.claims||{},mscore,MONTH_TIERS,null,'claimMonthTier',function(i){return JSON.stringify(monthRW(i,mc.finalPrize));}):'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollMonthCup()">⚡ 消耗5能量报名月杯（10档累积）</button>';
   const ma=state.monthArchive;
   if(ma&&ma.enrolled&&Object.keys(ma.claims||{}).length<MONTH_TIERS.length){const aScore=monthScore(ma);mh+='<div style="margin-top:8px;padding:8px;background:#fff5e6;border:1px solid #ff950040;border-radius:8px;font-size:12px;color:#6e6e73;line-height:1.6;">🏁 上届月杯已结束 · 未领取奖励<br>最终得分：<b style="color:#007aff;">'+aScore+'</b> ｜ 已领 '+Object.keys(ma.claims||{}).length+'/10 档</div><button class="btn-primary" style="width:100%;margin-top:6px;" onclick="claimMonthAll()">📥 一键领取未领取的奖励</button>';}
   document.getElementById('cup-month').innerHTML=mh;
-  {const bc=getBiCup();const bScore=biCupScore(bc);const bNames=(bc.tagIds||[]).map(function(id){const t=getTag(id);return t?t.path.join(' · '):'';}).join(' ｜ ');let bh='<button class="btn-secondary" style="width:100%;font-size:12px;margin-bottom:6px;" onclick="showCupRules(\'biweekly\')">📖 双周杯规则</button><div style="font-size:13px;line-height:1.7;">本届指定标签（2个·总分合计）：<b>'+bNames+'</b><br>终档大奖：'+(bc.finalPrize==='ult'?'🏆 终极改装包 ×1':'💠 精研核心拆档发放（本届共5个）')+' ｜ 当前：<b style="color:#007aff;">'+bScore+'</b></div>';bh+=bc.enrolled?_tierButtons(bc.claims||{},bScore,BI_TIERS,null,'claimBiCupTier',function(i){return JSON.stringify(biRW(i,bc.finalPrize));}):'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollBiCup()">⚡ 消耗4能量报名</button>';const ba=state.biCupArchive;if(ba&&ba.enrolled&&Object.keys(ba.claims||{}).length<BI_TIERS.length){const aScore=biCupScore(ba);bh+='<div style="margin-top:8px;padding:8px;background:#fff5e6;border:1px solid #ff950040;border-radius:8px;font-size:12px;color:#6e6e73;line-height:1.6;">🏁 上届（'+ba.key+'）赛季已结束 · 未领取奖励<br>最终得分：<b style="color:#007aff;">'+aScore+'</b> ｜ 已领 '+Object.keys(ba.claims||{}).length+'/10 档</div><button class="btn-primary" style="width:100%;margin-top:6px;" onclick="claimBiCupAll()">📥 一键领取未领取的奖励</button>';}document.getElementById('cup-biweekly').innerHTML=bh;}+(mc.enrolled?'<div style="margin-top:6px;font-size:12px;color:#007aff;">⏳ 成绩记录中 · 月末结算</div>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollMonthCup()">⚡ 消耗5能量报名</button>');
+  {const bc=getBiCup();const bScore=biCupScore(bc);const bNames=(bc.tagIds||[]).map(function(id){return cupName(id);}).join(' ｜ ');let bh='<button class="btn-secondary" style="width:100%;font-size:12px;margin-bottom:6px;" onclick="showCupRules(\'biweekly\')">📖 双周杯规则</button><div style="font-size:13px;line-height:1.7;">本届指定标签（2个·总分合计）：<b>'+bNames+'</b><br>终档大奖：'+(bc.finalPrize==='ult'?'🏆 终极改装包 ×1':'💠 精研核心拆档发放（本届共5个）')+' ｜ 当前：<b style="color:#007aff;">'+bScore+'</b></div>';bh+=bc.enrolled?_tierButtons(bc.claims||{},bScore,BI_TIERS,null,'claimBiCupTier',function(i){return JSON.stringify(biRW(i,bc.finalPrize));}):'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollBiCup()">⚡ 消耗4能量报名</button>';const ba=state.biCupArchive;if(ba&&ba.enrolled&&Object.keys(ba.claims||{}).length<BI_TIERS.length){const aScore=biCupScore(ba);bh+='<div style="margin-top:8px;padding:8px;background:#fff5e6;border:1px solid #ff950040;border-radius:8px;font-size:12px;color:#6e6e73;line-height:1.6;">🏁 上届（'+ba.key+'）赛季已结束 · 未领取奖励<br>最终得分：<b style="color:#007aff;">'+aScore+'</b> ｜ 已领 '+Object.keys(ba.claims||{}).length+'/10 档</div><button class="btn-primary" style="width:100%;margin-top:6px;" onclick="claimBiCupAll()">📥 一键领取未领取的奖励</button>';}document.getElementById('cup-biweekly').innerHTML=bh;}+(mc.enrolled?'<div style="margin-top:6px;font-size:12px;color:#007aff;">⏳ 成绩记录中 · 月末结算</div>':'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollMonthCup()">⚡ 消耗5能量报名</button>');
   const lc=getLimitedCup();const lcCard=document.getElementById('cup-limited-card');
-  if(lc){lcCard.style.display='block';const ltag=getTag(lc.tagId);const lscore=cupScoreFor(lc.tagId,limitedDates());state.largeCupClaims=state.largeCupClaims||{};const larr=_claimArr(state.largeCupClaims,String(lc.from),10);document.getElementById('cup-limited-title').textContent='⚡ 大型赛事 · '+(ltag?ltag.path.join(' · '):'');document.getElementById('cup-limited').innerHTML='<button class="btn-secondary" style="width:100%;font-size:12px;margin-bottom:6px;" onclick="showCupRules(\'large\')">📖 大型赛事规则</button><div style="font-size:13px;line-height:1.7;">当前记录：<b style="color:#007aff;">'+lscore+'</b></div>'+(lc.enrolled?_tierButtons(larr,lscore,LARGE_TIERS,null,'claimLargeTier',function(i){return i===9?'终极二选一':JSON.stringify(LARGE_RW[i]);}):'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollLimited()">⚡ 消耗2能量报名</button>');}else lcCard.style.display='none';
-  const wk=getWeekendCup();const dow=(new Date().getDay()+6)%7;const weekendWrap=document.getElementById('cup-weekend-wrap');if(weekendWrap)weekendWrap.style.display=(dow===5||dow===6)?'':'none';const wkScore=wkdScore(wk);const wkActive=dow===5||dow===6;let vh='<button class="btn-secondary" style="width:100%;font-size:12px;margin-bottom:6px;" onclick="showCupRules(\'weekend\')">📖 精研核心杯规则</button><div style="font-size:13px;line-height:1.7;">指定标签：<b>'+(getTag(wk.tagId)?getTag(wk.tagId).path.join(' · '):'')+'</b>（周六、周日计分）｜ 当前记录：<b style="color:#007aff;">'+wkScore+'</b>'+(wkActive?'':'（非周末，不计入）')+'</div>';
+  if(lc){lcCard.style.display='block';const ltag=getTag(lc.tagId);const lscore=cupScoreFor(lc.tagId,limitedDates());state.largeCupClaims=state.largeCupClaims||{};const larr=_claimArr(state.largeCupClaims,String(lc.from),10);document.getElementById('cup-limited-title').textContent='⚡ 大型赛事 · '+cupName(lc.tagId);document.getElementById('cup-limited').innerHTML='<button class="btn-secondary" style="width:100%;font-size:12px;margin-bottom:6px;" onclick="showCupRules(\'large\')">📖 大型赛事规则</button><div style="font-size:13px;line-height:1.7;">当前记录：<b style="color:#007aff;">'+lscore+'</b></div>'+(lc.enrolled?_tierButtons(larr,lscore,LARGE_TIERS,null,'claimLargeTier',function(i){return i===9?'终极二选一':JSON.stringify(LARGE_RW[i]);}):'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollLimited()">⚡ 消耗2能量报名</button>');}else lcCard.style.display='none';
+  const wk=getWeekendCup();const dow=(new Date().getDay()+6)%7;const weekendWrap=document.getElementById('cup-weekend-wrap');if(weekendWrap)weekendWrap.style.display=(dow>=4)?'':'none';const wkScore=wkdScore(wk);const wkActive=dow>=4;let vh='<button class="btn-secondary" style="width:100%;font-size:12px;margin-bottom:6px;" onclick="showCupRules(\'weekend\')">📖 精研核心杯规则</button><div style="font-size:13px;line-height:1.7;">指定标签（<b>任选其一</b>）：<b>'+cupName(wk.tagIds[0])+'</b> ｜ <b>'+cupName(wk.tagIds[1])+'</b>（周五~周日计分）｜ 当前记录：<b style="color:#007aff;">'+wkScore+'</b>'+(wkActive?'':'（非开放日，不计入）')+'</div>';
   if(wkActive){
-    vh+=wk.enrolled?_tierButtons(wk.claims||{},wkScore,WKD_CORE_TIERS,null,'claimWkdTier',function(i){return JSON.stringify(WKD_CORE_RW[i]);}):'<button class="btn-accent" style="width:100%;margin-top:6px;" onclick="enrollWeekend()">⚡ 消耗2能量报名（参与即得 💠×1）</button>';
+    vh+=wk.enrolled?_tierButtons(wk.claims||{},wkScore,WKD_CORE_TIERS,null,'claimWkdTier',function(i){return JSON.stringify(WKD_CORE_RW[i]);}):'<div style="display:flex;gap:8px;margin-top:6px;"><button class="btn-accent" style="flex:1;" onclick="enrollWeekend(0)">⚡ 报名「'+cupName(wk.tagIds[0])+'」</button><button class="btn-accent" style="flex:1;" onclick="enrollWeekend(1)">⚡ 报名「'+cupName(wk.tagIds[1])+'」</button></div><div style="font-size:11px;color:#8e8e93;margin-top:4px;text-align:center;">消耗2能量 · 参与即得💠×1 · 报名后本周不可更改所选标签</div>';
   }else vh+='<div style="margin-top:6px;font-size:11px;color:#8e8e93;">⏳ 本周六开启</div>';
   const wa=state.wkdArchive;
   if(wa&&wa.enrolled&&Object.keys(wa.claims||{}).length<WKD_CORE_TIERS.length){const aScore=wkdScore(wa);vh+='<div style="margin-top:8px;padding:8px;background:#fff5e6;border:1px solid #ff950040;border-radius:8px;font-size:12px;color:#6e6e73;line-height:1.6;">🏁 上届精研核心杯已结束 · 未领取奖励<br>最终得分：<b style="color:#007aff;">'+aScore+'</b> ｜ 已领 '+Object.keys(wa.claims||{}).length+'/4 档</div><button class="btn-primary" style="width:100%;margin-top:6px;" onclick="claimWkdAll()">📥 一键领取未领取的奖励</button>';}
@@ -6042,12 +6054,12 @@ function renderCalendar(){
     if(dayCupHash(ds+'#double')%5===0){const rem=DAY_CUP_KINDS.filter(k=>k!==dk);const dk2=rem[dayCupHash(ds+'#type2')%rem.length];events.push({icon:'🏆',text:'日杯② · '+(dk2==='points'?'积分杯':dayCupKindName(dk2)),color:'#007aff'});}
     (state.deferredTasks||[]).forEach(x=>{if(x.date===ds)events.push({icon:'📥',text:'延期任务：'+x.name,color:'#8e8e93'});});
     const sp=getSprint();
-    if(idx<5){const dd=sp.days[idx];if(dd){const tg=getTag(dd.tagId);events.push({icon:'🏆',text:'冲刺 · '+(tg?tg.path.join(' · '):''),color:'#af52de'});}}
+    if(idx<5){const dd=sp.days[idx];if(dd){events.push({icon:'🏆',text:'冲刺 · '+cupName(dd.tagId),color:'#af52de'});}}
     if(idx===5)events.push({icon:'🏆',text:'冲刺锦标赛 · 周末结算日',color:'#af52de'});
     if(idx===5||idx===6)events.push({icon:'💠',text:'精研核心杯',color:'#ff9500'});
-    if(lc&&limitedDates().indexOf(ds)>-1)events.push({icon:'⚡',text:'大型赛事 · '+getTag(lc.tagId).path.join(' · '),color:'#ff3b30'});
-    if(ds.slice(0,7)===getMonthCup().key){const _mc=getMonthCup();const _ids=_mc.tagIds||[_mc.tagId];events.push({icon:'🗓️',text:'月杯进行中 · '+_ids.map(function(id){const t=getTag(id);return t?t.path.join('·'):'';}).join(' ｜ '),color:'#6e6e73'});}
-    const _bc=getBiCup();if(_bc&&biDates(_bc.key).indexOf(ds)>-1){events.push({icon:'🏅',text:'双周标签杯 · '+(_bc.tagIds||[]).map(function(id){const t=getTag(id);return t?t.path[t.path.length-1]:'';}).join('·'),color:'#007aff'});}
+    if(lc&&limitedDates().indexOf(ds)>-1)events.push({icon:'⚡',text:'大型赛事 · '+cupName(lc.tagId),color:'#ff3b30'});
+    if(ds.slice(0,7)===getMonthCup().key){const _mc=getMonthCup();const _ids=_mc.tagIds||[_mc.tagId];events.push({icon:'🗓️',text:'月杯进行中 · '+_ids.map(function(id){return cupName(id);}).join(' ｜ '),color:'#6e6e73'});}
+    const _bc=getBiCup();if(_bc&&biDates(_bc.key).indexOf(ds)>-1){events.push({icon:'🏅',text:'双周标签杯 · '+(_bc.tagIds||[]).map(function(id){return cupName(id);}).join('·'),color:'#007aff'});}
     if(ds===arenaWeek&&idx===0)events.push({icon:'⚔️',text:'竞技 · 120分钟资格赛',color:'#ff3b30'});
     if(ds>=arenaWeek&&idx>0&&idx<6)events.push({icon:'⚔️',text:'竞技 · 每日挑战',color:'#ff3b30'});
     if(ds===arenaWeek&&idx===6)events.push({icon:'⚔️',text:'竞技 · 每日挑战 / 周日结算',color:'#ff3b30'});
@@ -6682,15 +6694,15 @@ function grantRW2(rw,tagId){Object.keys(rw).forEach(function(k){if(k==='_mats'){
 
 function renderAnnouncements(){
   const box=document.getElementById('ann-list');if(!box)return;
-  const list=[{t:'📢 v1.5.2.3 进度条全家桶',d:'完成条四档变色（红/黄/蓝/绿）+封印补满金段 · 越战越勇圆环UI · 残骸/漫画爆炸/善恶之交专属进度条（详见邮件）',c:'#ff3b30'},{t:'📢 v1.5.2.3 任务完成进度条',d:'点「完成」与任务卡显示填入EP占上限的纯净进度条（不含增益）',c:'#ff9500'},{t:'📢 v1.5.2.2 平衡与修复',d:'乱斗属性确认后锁定/可撤销 · 超额改为70%保底 · 结算弹窗新增增益构成审计 · 大量bug修复与数值对齐图面（详见邮件）',c:'#ff3b30'},{t:'📢 v1.5.2.1 修复更新',d:'修复长期任务EP入口（仅在每日登记填入，完成后自动回写、杜绝逾期误扣50%）；或昼或夜与账单文案对齐1.5.1表；邮件新增一键读取。玩法加成全面审计修复进行中，详见邮件。',c:'#007aff'},{t:'📢 v1.5.2 精英降临',d:'🎖️ 精英任务：考研英二/过级单词、专业课作业/备考、刷题改错标签开放性能调整（锁定前四元素±10%、SP±5%、此消彼长、性能分参考、100积分常驻面板、耐久系统、ELITE标识）；🎴 专属功能×6 代币商品（600-1200，第5槽Lv.28随首槽、每日可切换一次）：16追踪标记/17越战越勇/18残骸强化/19漫画爆炸/20封印无双/21善恶之交；功能属性四项调整（灵魂武者+进化5%、韧性20%、母体威慑15%/10%、以一当十20%）；质量权重60/25/8/7。',c:'#d9832a'},{t:'📢 v1.5.1.1 修复更新',d:'修复：背单词打卡连击不再因历史记录虚挂（断一天即清零）；无限火力（3号乱斗属性）正式接线；结算明细重排（任务侧增益归入各任务、幸运/置顶同列，全局增益汇总底部）；邮件改为标题列表、点开查看。',c:'#007aff'},{t:'📢 v1.5.1 天赋降温',d:'❄️ 33个天赋数值全面下调（稳步积累25%→4%、时政闭环70%→7%、语言攻坚80%→8%等，详见天赋页）；🔥 不灭阳炎重做：首扣15%→7%、每分钟追加1%→0.7%、持续100→143分钟、锁定期15→10分钟、首任务加成70%→20%，且燃烧期间可随时手动结束（扣除不低于7%）；🔮 心态壁垒借用的属性效果降为30%（乱斗模式持续40分钟/灵魂武者20分钟）；⚡ 属性强化：乱斗放大100%→10%、新增进化效果放大5%、结算扣除15%→6%。',c:'#007aff'},{t:'📢 v1.5.0.2 进化数值平衡',d:'📉 升级门槛全面上调：<300=1级 → 每+200升1级至1500=8级 → 1500–1899平台期 → 1900=9级大门槛 → 2300=10级满级（原2064EP一天满级的情况不再出现）；⚔️ 攻击10级复利利率 0.7%→0.3%/秒。另修复：体验卡期间装备的功能属性在正赛解锁后不再越槽生效（按实际解锁槽位数截断）；体验卡到期且未到Lv.28时属性清零从0开始。🏷️ 标签最大EP下调11处（明细见邮件）。📦 材料修复与降门槛：入全局池（仓库可见）、训练印记+2/任务、冲刺奖章改为「技能生效中或当天前2个完成」、巅峰凭证 90%→60%（明细见邮件）。',c:'#e8a33d'},{t:'📢 v1.5.0.1 进化9/10级重做',d:'⚔️ 攻击：9级「💰复利」——每秒额外获得当前EP的0.01%（10级升至0.03%/秒，9级阶段利息在升10级时定格（1.5.0.2起）），计息基数为经天赋/功能/全部等级增益后的获得EP；🛡️ 防御：9级「⚖️缓刑」——豁免最多2个未完成任务并自动顺延明日，再未完成罚率×1.5几何滚动（上限100%），10级豁免全部；幸运任务回归通用逻辑（≥5任务1个），母体威慑全玩法统一早/中/晚时段。',c:'#e8a33d'},{t:'📢 v1.5.0 终极进化',d:'🧬 全新玩法「进化」：与乱斗同级解锁（Lv.33），更新发放体验卡×1。选定后选择攻击/防御路径，完成任务按原始填入EP从Lv.1成长至Lv.10（1500=8级→1900=9级大门槛→2300满级）。每级小增益+3/6/9级随机大幅增益，最大EP/扣减变化实时显示在任务卡上。',c:'#e8a33d'},{t:'📢 v1.4.9.1 赛季UI与修复',d:'①顶栏与首页新增赛季可视化（序号/主题/持续月份，艺术字呈现），首页点击可查看赛季简介（主题配色+内涵意象，本赛季「并肩有光」：你不是一个人，并肩之处便有光）与通行证奖励一览；②通行证等级奖励改为段位式分层展示（每10级一档，单击展开查看每级内容）；③公告栏限高滚动；④修复周期任务副本逾期后仍留在每日登记、以及未完成副本到点不跳过的问题。',c:'#ff2d95'},{t:'📢 v1.4.9 通行证上线',d:'🎫 全新模块「通行证」：两月一季，共100级（每级4000 LP）。S1赛季「并肩有光」现已开启（2026.09.30–11.30，秋光同路主题全站换肤，面板为浅象牙色保证阅读体验）：日常结算最终EP×3计入LP（特殊玩法加成EP同样计入），每周6个词条任务各+5000 LP，每日签到+50里程币。升级自动发放积分/里程币/代币/票券/材料/💠核心/终极升级碎片，20/40/60/80/100级送赛季主题称号（并入成就称号）。里程商店每10级解锁一个模块（Lv.80全解锁）：可换经验卡、重铸券、核心、终极升级碎片（5片合成终极改装包）、扣罚降低10%/20%/50%（上限-50%），Lv.100可里程币+代币换终极升级。赛季结束冷却3天后开启新季 · 🔓 任务锁定机制改版：可随时解锁再编辑（仅未完成可改，已完成只读；删除仍扣标签上限10%EP，解锁后新增任务未完成罚率+50%；幸运任务按条件重新校验，满足则随机补发）',c:'#ff2d95'},{t:'📢 v1.4.8 大更新',d:'🧾 结算页改版：顶部展示真实EP/增益EP/扣减EP/最终EP四项汇总，任务EP明细改为点击展开折叠式，未完成任务额外标注"若完成可减少的损失" · 🔧 逆境追赶潜能改为只在第1栏出现、选择后当天免罚修改3次（任务修改机制见 v1.4.9 公告：解锁再编辑） · ⚡ 33号天赋"绝对免疫"重做"属性强化"：经典模式被动效果+20%，乱斗模式乱斗效果翻倍但结算EP-15% · 🔁 循环温故天赋新增适用「旧list重刷」「旧list新轮次」标签 · 🛒 商店：积分兑代币不限购，天赋额外抽取降至100代币 · ⚔️ 竞技时长90→120分钟，窗口内任务EP达标签上限90%时资格分+50 · 🏆 各杯赛卡片新增本期剩余时间显示',c:'#007aff'},{t:'📢 v1.4.7.4 修复',d:'🛠 修复冲刺锦标赛及杯赛只统计精确标签的问题：父级标签悬赏现在会计入其全部子标签任务（如 本科·专业课 悬赏可计入 课堂/作业/备考 任务），往届冲刺奖杯自动按新口径重算 · 🛠 修复冲刺锦标赛今日目标当天不点亮的问题（现在实时读取今日任务）· 🛠 修复精研核心杯往届补领按钮点击无反应，失败时会提示具体原因',c:'#ff9500'},{t:'📢 v1.4.7.3 修复',d:'🛠 修复杯赛与竞技结算奖励未正确入账的问题：历史漏发的杯赛奖励自动补发，竞技结算奖励补挂到原结算邮件（邮箱点领取即可）· 📮 竞技周结算奖励自动入账，结算邮件列明奖励明细 · 🛠 修复精研核心杯周末结束后补领入口被隐藏 · 🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断 · 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
+  const list=[{t:'📢 v1.5.2.3 进度可视化+杯赛重做（最终版）',d:'完成条四档变色+封印金段 · 五件专属功能进度UI · 全杯赛父级化重置（冲刺5天5不同父级/核心杯周五~周日双标签任选/科目级计分）· 追踪标记入任务卡（详见邮件）',c:'#ff3b30'},{t:'📢 v1.5.2.2 平衡与修复',d:'乱斗属性确认后锁定/可撤销 · 超额改为70%保底 · 结算弹窗新增增益构成审计 · 大量bug修复与数值对齐图面（详见邮件）',c:'#ff3b30'},{t:'📢 v1.5.2.1 修复更新',d:'修复长期任务EP入口（仅在每日登记填入，完成后自动回写、杜绝逾期误扣50%）；或昼或夜与账单文案对齐1.5.1表；邮件新增一键读取。玩法加成全面审计修复进行中，详见邮件。',c:'#007aff'},{t:'📢 v1.5.2 精英降临',d:'🎖️ 精英任务：考研英二/过级单词、专业课作业/备考、刷题改错标签开放性能调整（锁定前四元素±10%、SP±5%、此消彼长、性能分参考、100积分常驻面板、耐久系统、ELITE标识）；🎴 专属功能×6 代币商品（600-1200，第5槽Lv.28随首槽、每日可切换一次）：16追踪标记/17越战越勇/18残骸强化/19漫画爆炸/20封印无双/21善恶之交；功能属性四项调整（灵魂武者+进化5%、韧性20%、母体威慑15%/10%、以一当十20%）；质量权重60/25/8/7。',c:'#d9832a'},{t:'📢 v1.5.1.1 修复更新',d:'修复：背单词打卡连击不再因历史记录虚挂（断一天即清零）；无限火力（3号乱斗属性）正式接线；结算明细重排（任务侧增益归入各任务、幸运/置顶同列，全局增益汇总底部）；邮件改为标题列表、点开查看。',c:'#007aff'},{t:'📢 v1.5.1 天赋降温',d:'❄️ 33个天赋数值全面下调（稳步积累25%→4%、时政闭环70%→7%、语言攻坚80%→8%等，详见天赋页）；🔥 不灭阳炎重做：首扣15%→7%、每分钟追加1%→0.7%、持续100→143分钟、锁定期15→10分钟、首任务加成70%→20%，且燃烧期间可随时手动结束（扣除不低于7%）；🔮 心态壁垒借用的属性效果降为30%（乱斗模式持续40分钟/灵魂武者20分钟）；⚡ 属性强化：乱斗放大100%→10%、新增进化效果放大5%、结算扣除15%→6%。',c:'#007aff'},{t:'📢 v1.5.0.2 进化数值平衡',d:'📉 升级门槛全面上调：<300=1级 → 每+200升1级至1500=8级 → 1500–1899平台期 → 1900=9级大门槛 → 2300=10级满级（原2064EP一天满级的情况不再出现）；⚔️ 攻击10级复利利率 0.7%→0.3%/秒。另修复：体验卡期间装备的功能属性在正赛解锁后不再越槽生效（按实际解锁槽位数截断）；体验卡到期且未到Lv.28时属性清零从0开始。🏷️ 标签最大EP下调11处（明细见邮件）。📦 材料修复与降门槛：入全局池（仓库可见）、训练印记+2/任务、冲刺奖章改为「技能生效中或当天前2个完成」、巅峰凭证 90%→60%（明细见邮件）。',c:'#e8a33d'},{t:'📢 v1.5.0.1 进化9/10级重做',d:'⚔️ 攻击：9级「💰复利」——每秒额外获得当前EP的0.01%（10级升至0.03%/秒，9级阶段利息在升10级时定格（1.5.0.2起）），计息基数为经天赋/功能/全部等级增益后的获得EP；🛡️ 防御：9级「⚖️缓刑」——豁免最多2个未完成任务并自动顺延明日，再未完成罚率×1.5几何滚动（上限100%），10级豁免全部；幸运任务回归通用逻辑（≥5任务1个），母体威慑全玩法统一早/中/晚时段。',c:'#e8a33d'},{t:'📢 v1.5.0 终极进化',d:'🧬 全新玩法「进化」：与乱斗同级解锁（Lv.33），更新发放体验卡×1。选定后选择攻击/防御路径，完成任务按原始填入EP从Lv.1成长至Lv.10（1500=8级→1900=9级大门槛→2300满级）。每级小增益+3/6/9级随机大幅增益，最大EP/扣减变化实时显示在任务卡上。',c:'#e8a33d'},{t:'📢 v1.4.9.1 赛季UI与修复',d:'①顶栏与首页新增赛季可视化（序号/主题/持续月份，艺术字呈现），首页点击可查看赛季简介（主题配色+内涵意象，本赛季「并肩有光」：你不是一个人，并肩之处便有光）与通行证奖励一览；②通行证等级奖励改为段位式分层展示（每10级一档，单击展开查看每级内容）；③公告栏限高滚动；④修复周期任务副本逾期后仍留在每日登记、以及未完成副本到点不跳过的问题。',c:'#ff2d95'},{t:'📢 v1.4.9 通行证上线',d:'🎫 全新模块「通行证」：两月一季，共100级（每级4000 LP）。S1赛季「并肩有光」现已开启（2026.09.30–11.30，秋光同路主题全站换肤，面板为浅象牙色保证阅读体验）：日常结算最终EP×3计入LP（特殊玩法加成EP同样计入），每周6个词条任务各+5000 LP，每日签到+50里程币。升级自动发放积分/里程币/代币/票券/材料/💠核心/终极升级碎片，20/40/60/80/100级送赛季主题称号（并入成就称号）。里程商店每10级解锁一个模块（Lv.80全解锁）：可换经验卡、重铸券、核心、终极升级碎片（5片合成终极改装包）、扣罚降低10%/20%/50%（上限-50%），Lv.100可里程币+代币换终极升级。赛季结束冷却3天后开启新季 · 🔓 任务锁定机制改版：可随时解锁再编辑（仅未完成可改，已完成只读；删除仍扣标签上限10%EP，解锁后新增任务未完成罚率+50%；幸运任务按条件重新校验，满足则随机补发）',c:'#ff2d95'},{t:'📢 v1.4.8 大更新',d:'🧾 结算页改版：顶部展示真实EP/增益EP/扣减EP/最终EP四项汇总，任务EP明细改为点击展开折叠式，未完成任务额外标注"若完成可减少的损失" · 🔧 逆境追赶潜能改为只在第1栏出现、选择后当天免罚修改3次（任务修改机制见 v1.4.9 公告：解锁再编辑） · ⚡ 33号天赋"绝对免疫"重做"属性强化"：经典模式被动效果+20%，乱斗模式乱斗效果翻倍但结算EP-15% · 🔁 循环温故天赋新增适用「旧list重刷」「旧list新轮次」标签 · 🛒 商店：积分兑代币不限购，天赋额外抽取降至100代币 · ⚔️ 竞技时长90→120分钟，窗口内任务EP达标签上限90%时资格分+50 · 🏆 各杯赛卡片新增本期剩余时间显示',c:'#007aff'},{t:'📢 v1.4.7.4 修复',d:'🛠 修复冲刺锦标赛及杯赛只统计精确标签的问题：父级标签悬赏现在会计入其全部子标签任务（如 本科·专业课 悬赏可计入 课堂/作业/备考 任务），往届冲刺奖杯自动按新口径重算 · 🛠 修复冲刺锦标赛今日目标当天不点亮的问题（现在实时读取今日任务）· 🛠 修复精研核心杯往届补领按钮点击无反应，失败时会提示具体原因',c:'#ff9500'},{t:'📢 v1.4.7.3 修复',d:'🛠 修复杯赛与竞技结算奖励未正确入账的问题：历史漏发的杯赛奖励自动补发，竞技结算奖励补挂到原结算邮件（邮箱点领取即可）· 📮 竞技周结算奖励自动入账，结算邮件列明奖励明细 · 🛠 修复精研核心杯周末结束后补领入口被隐藏 · 🛠 修复背单词打卡勾选不存档：重开/更新后勾选不再丢失，连续打卡不再误断 · 🎨 标签配色扩展为7档（新增红/黄两档），7款SP涂装视觉全面优化',c:'#ff9500'},{t:'📢 v1.4.7.1 修复',d:'🛠 修复每日登记首屏仍显示旧版质量EP输入框的问题，任务状态评价面板现在打开即显示',c:'#ff9500'},{t:'📢 v1.4.7 大版本更新',d:'📋 质量EP重做：改为任务状态评价（正确率50%/专注度30%/用时5%/基本状态15%，默认60可改），加权平均×（最大EP-完成EP）自动得出 · 🔄 周期任务错过的副本次日自动清理，不再滞留 · ⚔️ 竞技平衡：挑战频率下调+幽灵活跃度分档，排行榜更真实',c:'#ff3b30'},{t:'📢 v1.4.6.4 更新',d:'🎖️ 军衔升级提示弹窗 · 🎒 新增仓库页（商店可直达）· ⚔️ 竞技改版：移除基地袭击，挑战失利进复仇名单、均可复仇，离线对战自动补算、0-6点降频为每小时5%',c:'#ff3b30'},{t:'📢 v1.4.6 定稿',d:'杯赛五赛制 · 影子竞技 · 标签四维改装+SP · 邮箱/日历/公告栏/游戏指南 全部上线。',c:'#007aff'}];
   const dc=getDayCupInfo();const dtag=getTag(dc.tagId);
-  if(dc.active)list.push({t:'🏆 日杯今日开启',d:'指定「'+(dtag?dtag.path.join(' · '):'')+'」，1 能量报名，冠军 🪙15。',c:'#ff9500'});
+  if(dc.active)list.push({t:'🏆 日杯今日开启',d:'指定「'+cupName(dc.tagId)+'」，1 能量报名，冠军 🪙15。',c:'#ff9500'});
   else list.push({t:'🏆 日杯预告',d:'下一次日杯：'+dc.daysToActive+' 天后（'+dc.dateStr+'），前一天邮件提醒。',c:'#ff9500'});
   const cs=getCupState();const ctag=getTag(cs.tagId);const days=countTagSettleDays()[cs.tagId]||0;
   let bestTier='业余';CUP_TIERS.forEach(function(t){if(days>=t.days)bestTier=t.n;});
-  list.push({t:'🏆 本周杯赛',d:'指定「'+(ctag?ctag.path.join(' · '):'')+'」· 你 '+days+' 天 · 最高可报【'+bestTier+'】档。',c:'#af52de'});
+  list.push({t:'🏆 本周杯赛',d:'指定「'+cupName(state.cupState.tagId)+'」· 你 '+days+' 天 · 最高可报【'+bestTier+'】档。',c:'#af52de'});
   const mc=getMonthCup();const mtag=getTag(mc.tagId);
-  list.push({t:'🗓️ 本月杯赛',d:'指定「'+(mtag?mtag.path.join(' · '):'')+'」· 冠军 🪙100+💠1+🎟️2。',c:'#007aff'});
+  list.push({t:'🗓️ 本月杯赛',d:'指定「'+cupName(mc.tagIds[0])+'」等4个标签· 冠军 🪙100+💠1+🎟️2。',c:'#007aff'});
   const r=getRacing();const dl=new Date(new Date().getFullYear(),new Date().getMonth()+1,0).getDate()-new Date().getDate();
   list.push({t:'⚔️ 竞技赛季',d:'当前【'+rankLeague(r.rating).n+'】'+r.rating+' 分 · 剩 '+dl+' 天 · 今日剩 '+(3-r.raced)+' 场。',c:'#34c759'});
   const lc=getLimitedCup();
@@ -6714,7 +6726,7 @@ function settleEndu(old){
   old.settled=true;
   const tag=getTag(old.tagId);const rank=cupRank(s,[390,270,150]);const names=['冠军','亚军','季军','完赛'];
   grantCumulative([{tokens:40,sp_core:1},{tokens:25},{tokens:15},{points:150}],rank);saveState();updateTopBar();updateShopUI();
-  sendSystemMail('🛞 耐力赛结算 · 【'+names[rank]+'】','双周耐力赛指定「'+(tag?tag.path.join(' · '):'')+'」最终得分 '+s+'，奖励已发放。',{});
+  sendSystemMail('🛞 耐力赛结算 · 【'+names[rank]+'】','双周耐力赛指定「'+cupName(state.biCup.tagIds[0])+'」等标签最终得分 '+s+'，奖励已发放。',{});
 }
 function settleMonth(old){
   if(!old||!old.enrolled||old.settled)return;
@@ -6734,7 +6746,7 @@ function settleWeekCup(old){
   const t=CUP_TIERS[(old.tier>=0?old.tier:0)];
   const rank=cupRank(s,t.th);const names=['冠军','亚军','季军','完赛'];
   grantCumulative(t.rw,rank);saveState();updateTopBar();updateShopUI();
-  sendSystemMail('🏆 周杯结算 · 【'+names[rank]+'】','周杯（'+t.n+'档）指定「'+(tag?tag.path.join(' · '):'')+'」最终得分 '+s+'（'+t.th.join('/')+'），名次奖励已发放。',{});
+  sendSystemMail('🏆 周杯结算 · 【'+names[rank]+'】','周杯（'+t.n+'档）指定「'+cupName(state.cupState.tagId)+'」最终得分 '+s+'（'+t.th.join('/')+'），名次奖励已发放。',{});
 }
 function showGainModal(title,lines,sub){
   _gainQueue.push({title:title,lines:lines||[],sub:sub||''});
@@ -6777,25 +6789,27 @@ function upSetAll(open){
 /* ===== 精研核心杯 4档版（覆盖旧版） ===== */
 function getWeekendCup(){
   const wk=getShopWeekKey();
-  if(!state.weekendCup||state.weekendCup.weekKey!==wk){
+  if(!state.weekendCup||state.weekendCup.weekKey!==wk||!state.weekendCup.tagIds){
     if(state.weekendCup&&state.weekendCup.enrolled&&!state.weekendCup.settled){state.weekendCup.settled=true;state.wkdArchive=state.weekendCup;}
-    const pool=TASK_TAGS.filter(function(t){return t.path.length>=3;});
+    const pool=cupParentPool();
     let h=0;for(let i=0;i<wk.length;i++){h=(h*31+wk.charCodeAt(i))>>>0;}
-    state.weekendCup={weekKey:wk,tagId:pool[h%pool.length].id,enrolled:false,claims:{},settled:false};
+    const t1=pool[h%pool.length];let t2=pool[(h+1)%pool.length];let gi=2;while(t2===t1&&gi<pool.length){t2=pool[(h+gi)%pool.length];gi++;}
+    state.weekendCup={weekKey:wk,tagIds:[t1,t2],picked:null,enrolled:false,claims:{},settled:false};
     saveState();
   }
   return state.weekendCup;
 }
-function wkdScore(wk){const dates=[fmtDate(parseDateOnly(wk.weekKey)+5*86400000),fmtDate(parseDateOnly(wk.weekKey)+6*86400000)];return cupScoreFor(wk.tagId,dates);}
+function wkdScore(wk){const dates=[fmtDate(parseDateOnly(wk.weekKey)+4*86400000),fmtDate(parseDateOnly(wk.weekKey)+6*86400000)];return cupScoreFor(wk.picked||'__none__',dates);}
 var WKD_CORE_TIERS=[0,200,600,1000];
 var WKD_CORE_RW=[{sp_core:1},{sp_core:1},{sp_core:3},{sp_core:5}];
-function enrollWeekend(){
+function enrollWeekend(idx){
   const wk=getWeekendCup();
   if(wk.enrolled)return;
   const dow=(new Date().getDay()+6)%7;
-  if(dow!==5&&dow!==6){alert('精研核心杯仅在周六、周日开放');return;}
+  if(dow<4){alert('精研核心杯仅在周五、周六、周日开放');return;}
+  if(typeof idx!=='number'||!wk.tagIds[idx]){alert('请选择一个标签报名');return;}
   const en=getEnergy();if(en.v<2){alert('⚡ 能量不足（需 2 点）');return;}
-  en.v-=2;wk.enrolled=true;saveState();renderCupUI();
+  en.v-=2;wk.enrolled=true;wk.picked=wk.tagIds[idx];saveState();renderCupUI();
 }
 function claimWkdTier(i){const wk=getWeekendCup();if(!wk.enrolled||wk.claims[i])return;const s=wkdScore(wk);if(!_canClaimTier(wk.claims,i,s,WKD_CORE_TIERS))return;wk.claims[i]=true;grantRW([WKD_CORE_RW[i]]);saveState();updateTopBar();updateShopUI();renderCupUI();}
 function claimWkdAll(){const wk=state.wkdArchive;if(!wk||!wk.enrolled)return;const s=wkdScore(wk);let n=0;for(let i=0;i<WKD_CORE_TIERS.length;i++){if(wk.claims[i])continue;if(!_canClaimTier(wk.claims,i,s,WKD_CORE_TIERS))break;wk.claims[i]=true;grantRW([WKD_CORE_RW[i]]);n++;}if(!n){alert('没有可补领的奖励');return;}saveState();updateTopBar();updateShopUI();renderCupUI();showGainModal('💠 精研核心杯 · 赛季补领',[['补领档位','×'+n]]);}
