@@ -1162,7 +1162,7 @@ const PASS_SHOP=[
 {lv:60,items:[{n:'精研核心',i:'💠',cost:600,lim:1,item:'sp_core'},{n:'竞技补充票',i:'🎫',cost:100,lim:3,item:'race_ticket'},{n:'3倍经验卡',i:'⚡',cost:700,lim:1,item:'exp3'},{n:'直接升级',i:'🔧',cost:300,lim:2,item:'direct_up'},{n:'特殊属性重铸券',i:'🔮',cost:350,lim:1,item:'reroll_ticket'}]},
 {lv:70,items:[{n:'终极升级碎片',i:'🧩',cost:400,lim:3,run:function(){const p=getPass();p.frags=(p.frags||0)+1;if(p.frags>=5){p.frags-=5;state.inventory.ult_upgrade=(state.inventory.ult_upgrade||0)+1;return'碎片×5 自动合成为 🏆终极改装包';}return'终极升级碎片 +1（5个自动合成终极改装包）';}},{n:'扣罚降低20%',i:'🛡️',cost:900,lim:1,run:function(){getPass().penRed=(getPass().penRed||0)+0.2;return'结算扣罚 -20%（同类叠加，上限-50%）';}},{n:'精研核心',i:'💠',cost:600,lim:1,item:'sp_core'},{n:'代币 ×150',i:'🪙',cost:650,lim:1,run:function(){state.tokens+=150;return'代币 +150';}},{n:'乱斗特权券',i:'👑',cost:400,lim:1,item:'brawl_vip'}]},
 {lv:80,items:[{n:'扣罚降低50%',i:'🛡️',cost:2000,lim:1,run:function(){getPass().penRed=(getPass().penRed||0)+0.5;return'结算扣罚 -50%';}},{n:'天赋额外抽取',i:'🌟',cost:300,lim:2,item:'talent_extra'},{n:'3倍经验卡',i:'⚡',cost:700,lim:1,item:'exp3'},{n:'精研核心',i:'💠',cost:600,lim:1,item:'sp_core'},{n:'代币 ×200',i:'🪙',cost:850,lim:1,run:function(){state.tokens+=200;return'代币 +200';}}]},
-{lv:100,items:[{n:'终极升级（里程币+代币）',i:'🏆',cost:1500,tok:200,lim:1,item:'ult_upgrade'},{n:'精研核心 ×2',i:'💠',cost:1100,lim:1,run:function(){state.inventory.sp_core=(state.inventory.sp_core||0)+2;return'精研核心 ×2';}},{n:'3倍经验卡',i:'⚡',cost:700,lim:2,item:'exp3'},{n:'代币 ×300',i:'🪙',cost:1200,lim:1,run:function(){state.tokens+=300;return'代币 +300';}},{n:'天赋额外抽取',i:'🌟',cost:300,lim:1,item:'talent_extra'}]}
+{lv:100,items:[{n:'终极升级（里程币+代币）',i:'🏆',cost:2000,tok:200,lim:1,item:'ult_upgrade'},{n:'精研核心 ×2',i:'💠',cost:1100,lim:1,run:function(){state.inventory.sp_core=(state.inventory.sp_core||0)+2;return'精研核心 ×2';}},{n:'3倍经验卡',i:'⚡',cost:700,lim:2,item:'exp3'},{n:'代币 ×300',i:'🪙',cost:1200,lim:1,run:function(){state.tokens+=300;return'代币 +300';}},{n:'天赋额外抽取',i:'🌟',cost:300,lim:1,item:'talent_extra'}]}
 ];
 function updatePassBadge(){const b=document.getElementById('pass-badge');if(!b)return;const p=getPass();const n=p.pending||0;b.style.display=n>0?'':'none';b.textContent=n>0?('+'+n):'';}
 function renderPassUI(){applySeasonUI();const s=getPassSeason();const p=getPass();const _wk=getShopWeekKey();if(p.weekly.key!==_wk){p.weekly={key:_wk,claimed:[]};saveState();}const theme=s.theme;const _pp=document.getElementById('page-pass');if(_pp){_pp.style.background=theme.bg;_pp.style.borderRadius='14px';_pp.style.padding='12px 4px';_pp.style.position='relative';_pp.style.overflow='hidden';}const _dc=document.getElementById('pass-deco');if(_dc){_dc.innerHTML='<span class="pass-float" style="left:4%;top:120px;font-size:44px;opacity:.14;">'+theme.deco+'</span>'+'<span class="pass-float" style="right:6%;top:260px;font-size:34px;opacity:.12;animation-delay:1.2s;">'+theme.deco+'</span>'+'<span class="pass-float" style="left:10%;bottom:180px;font-size:52px;opacity:.10;animation-delay:2.1s;">'+theme.deco+'</span>'+'<span class="pass-float" style="right:12%;bottom:60px;font-size:40px;opacity:.13;animation-delay:.6s;">'+theme.deco+'</span>';}const _btnStyle='background:linear-gradient(90deg,'+theme.btnA+','+theme.btnB+');border:none;box-shadow:0 2px 8px '+theme.btnA+'40;';const lv=getPassLevel();const lvStart=(lv-1)*PASS_CFG.lpPerLevel;const lvEnd=lv*PASS_CFG.lpPerLevel;const pct=lv>=PASS_CFG.maxLevel?100:Math.min(100,Math.max(0,(p.lp-lvStart)/(lvEnd-lvStart)*100));
@@ -3839,7 +3839,8 @@ function submitDaily(){
   if(!state.tasksLocked){alert('请先确认今日任务后再结算');return;}
   applyEmergencyEvacuation();updateInfectionStatus();updatePassiveShieldRespawn();
   const tks=parseInt(document.getElementById('daily-tokens').value)||0;
-  const didVocab=document.getElementById('daily-vocab').checked;
+  let didVocab=document.getElementById('daily-vocab').checked;
+  if(!didVocab&&state.todayTasks.some(function(t){if(!(t.completed&&t.baseEp!==''))return false;const tg=getTag(t.tagId);return tg&&tg.path.join(' ').indexOf('背单词')>-1;}))didVocab=true;
   const listClearToday=parseInt(document.getElementById('daily-list').value)||0;
   const mods=calcBrawlMods();
   const sk=state.brawlSkills||{exemptTagId:null};
@@ -8354,6 +8355,7 @@ sprintEvalDay=function(sp,idx){
   var qBest=0,ownBest=0;
   tasks.forEach(function(t){var q=parseInt(t.qualityEp)||0;if(q>qBest)qBest=q;var o=(parseInt(t.baseEp)||0)+q;if(o>ownBest)ownBest=o;});
   var _mx2=tag?tag.maxEp:0;if(!tag&&all.length){all.forEach(function(t){var tg=getTag(t.tagId);if(tg&&tg.maxEp>_mx2)_mx2=tg.maxEp;});}var stats={n:n,qsum:qsum,qBest:qBest,ownBest:ownBest,max:_mx2,total:all.length};
+  if(stats.total===0){dd.eval=[false,false,false];return;}
   dd.eval=dd.goals.map(function(g){return SPRINT_GOALS[g].t(stats);});
 };
 /* 历届冲刺奖杯数按修正后的口径重算（纯读取历史，幂等）——修复旧精确匹配漏算的奖杯 */

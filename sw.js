@@ -1,6 +1,6 @@
 /* build 20261009-1802 */
 /* 考研EP系统 Service Worker · v1.4.9.1 */
-const CACHE_NAME = 'kaoyan-v1523-final7';
+const CACHE_NAME = 'kaoyan-v1523-final9';
 const APP_SHELL = ['./', './index.html'];
 
 self.addEventListener('install', function (e) {
@@ -181,3 +181,7 @@ self.addEventListener('fetch', function (e) {
 /* bump final6 */
 
 /* bump final7 */
+
+/* bump final8 */
+
+/* bump final9 */
