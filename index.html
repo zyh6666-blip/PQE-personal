@@ -1363,14 +1363,19 @@ function exOnTaskComplete(t){
   const tg=getTag(t.tagId);
   const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
   const now=Date.now();
-  if(tg&&own>=tg.maxEp*0.5){
+  if((state.exState.demonUntil||0)>now){
+    /* 恶魔持续期间：完成任务不切换，效果保持到窗口结束 */
+  }else if(tg&&own>=tg.maxEp*0.5){
    const total=getCompletedTasks().reduce(function(s,x){return s+(parseInt(x.baseEp)||0)+(parseInt(x.qualityEp)||0);},0);
-   state.exState.angel={startAt:now,until:now+20*60000,base:total};
+   state.exState.angel={startAt:now,until:now+20*60000,base:total};state.exState.angelAcc=(state.exState.angelAcc||[]);state.exState.angelAcc.push({startAt:now,until:now+20*60000,base:total});if(state.exState.angelAcc.length>20)state.exState.angelAcc.shift();
    state.exState.demonUntil=0;
    pushEvolveNote('😇 天使降临：20分钟内每分钟+'+Math.round(total*0.005)+' EP');
   }else{
    state.exState.angel=null;
    state.exState.demonUntil=now+20*60000;
+   state.exState.demonWindows=(state.exState.demonWindows||[]);
+   state.exState.demonWindows.push(state.exState.demonUntil);
+   if(state.exState.demonWindows.length>20)state.exState.demonWindows.shift();
    pushEvolveNote('😈 恶魔附身：20分钟扣减-10%');
   }
  }
@@ -1812,7 +1817,7 @@ const today=new Date().toDateString();if(state.lastBrawlDrawDate!==today){state.
 function saveState(){try{localStorage.setItem('kaoyan_ep_state',JSON.stringify(state));}catch(e){}}
 function getShopWeekKey(){const d=new Date();const day=(d.getDay()+6)%7;d.setHours(0,0,0,0);d.setDate(d.getDate()-day);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function dailyResetCheck(){
-  if(!state.cupResetV1523e){state.cupResetV1523e=true;state.sprint=null;state.cupState=null;state.sprint=null;state.monthCup=null;state.biCup=null;state.largeCupClaims={};}
+  if(!state.cupResetV1523f){state.cupResetV1523f=true;state.cupState=null;state.sprint=null;state.monthCup=null;state.biCup=null;state.weekendCup=null;state.sprint=null;state.cupState=null;state.sprint=null;state.monthCup=null;state.biCup=null;state.largeCupClaims={};}
   const today=new Date().toDateString();
   let changed=false;
   const weekKey=getShopWeekKey();
@@ -3167,6 +3172,7 @@ function updatePointsPreview(){
       if(mods.hasHarden)rate*=(1-0.45*brwAmp());
       
     if(hasPotential(9)&&t.wanted)rate*=0.85;
+    if((state.exState.demonUntil||0)>Date.now())rate*=0.9;
       if(evo.on){
           const _r0=rate;
           if(evo.taskpen||t.evoPenCut)rate*=(1-Math.min(0.9,(evo.taskpen||0)+(t.evoPenCut||0)));
@@ -3915,6 +3921,7 @@ function submitDaily(){
       if(t.lucky){_rate=0.2;if(calcBrawlMods().hasLuckyBoost)_rate+=0.2;if(t.pinned)_rate=_rate/2;}
       if(_rate>0){const v=Math.round(_raw*_rate);_d+=v;addSTDetail(t,'功能·幸运任务 +'+Math.round(_rate*100)+'%',v);}
       if(mods.hasOvercap){const _tg=getTag(t.tagId,t);if(_tg){const _fl=Math.round(_tg.maxEp*0.7);if(exOwn+_d<_fl){const v=_fl-exOwn-_d;_d+=v;addSTDetail(t,'乱斗·超额（该任务补足至70%）',v);}}}
+      if(t.completed&&t.baseEp!==''&&(state.exState.demonWindows||[]).some(function(w){return (t.doneAt||0)>=w-20*60000&&(t.doneAt||0)<=w;})){const _tg2=getTag(t.tagId,t);if(_tg2){const _gap2=_tg2.maxEp-exOwn;if(_gap2>0){const v=Math.round(_gap2*0.1);_d+=v;addSTDetail(t,'专属·善恶之交（恶魔·扣减-10%）',v);}}}
       t._leDelta=_d;
     }
     exOwn+=t._leDelta||0;
@@ -3944,6 +3951,7 @@ function submitDaily(){
       if(mods.hasHarden)rate*=(1-0.45*brwAmp());
       
     if(hasPotential(9)&&t.wanted)rate*=0.85;
+    if((state.exState.demonUntil||0)>Date.now())rate*=0.9;
       let u_survive=false;
       if(evo.on){
         const _rate0=rate;
@@ -4128,7 +4136,7 @@ function submitDaily(){
     if(evo.survive){unfinished.forEach(function(u){if(u.survive)effectiveRawEp+=Math.round(grossRawEp*u.rate*0.45);});}
   }
   if(hasEx(18)){const _loss=Math.max(0,grossRawEp-effectiveRawEp);const _rate=Math.min(10,(state.exState.wreckBase||0)+Math.floor(_loss/100)*0.2);if(_rate>0){const _v=Math.round(grossRawEp*_rate/100);if(_v>0){effectiveRawEp+=_v;state._exWreck=_v;}}}
-  if(hasEx(21)&&state.exState.angel){const _mins=Math.min(20,(Date.now()-state.exState.angel.startAt)/60000);const _v=Math.round(state.exState.angel.base*0.005*_mins);if(_v>0){effectiveRawEp+=_v;state._exAngel=_v;}}
+  if(hasEx(21)&&state.exState.angelAcc&&state.exState.angelAcc.length){let _v=0;state.exState.angelAcc.forEach(function(a,idx,arr){const _next=(idx+1<arr.length)?arr[idx+1].startAt:Date.now();const _m=Math.max(0,Math.min(20,(Math.min(_next,a.until)-a.startAt)/60000));_v+=Math.round(a.base*0.005*_m);});if(_v>0){effectiveRawEp+=_v;state._exAngel=_v;}}
   if(evo.on){
     const _ei=evoInterestCalc(ownOf);
     if(_ei.a9+_ei.a10>0){effectiveRawEp+=_ei.a9+_ei.a10;state._evoInterest=_ei;}
@@ -5237,7 +5245,7 @@ function getEnergy(){const today=new Date().toDateString();if(!state.energy||sta
 function countTagSettleDays(){const keys={};(state.dailyHistory||[]).forEach(d=>{(d.tasks||[]).forEach(t=>{if(t.completed&&t.tagId)keys[d.date+'|'+t.tagId]=1;});});const days={};Object.keys(keys).forEach(k=>{const tagId=k.split('|')[1];days[tagId]=(days[tagId]||0)+1;});return days;}
 
 
-function cupWeekScore(){const cs=getCupState();const dates=getWeekDates(cs.weekKey);let score=0;(state.dailyHistory||[]).forEach(d=>{if(dates.indexOf(normHistDate(d.date))===-1)return;let counted=0;(d.tasks||[]).forEach(t=>{if(counted>=3)return;if(t.completed&&(t.swapTagId||t.tagId)===cs.tagId){const tag=getTag(t.tagId);const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);if(tag&&tag.maxEp>0){score+=Math.round(own/tag.maxEp*100);if(own>=tag.maxEp)score+=20;}counted++;}});});return score;}
+function cupWeekScore(){const cs=getCupState();const dates=getWeekDates(cs.weekKey);let score=0;(function(){const _r=(state.dailyHistory||[]).slice();if((state.todayTasks||[]).some(function(t){return t.completed&&t.baseEp!=='';}))_r.push({date:todayStr(),tasks:state.todayTasks});return _r;})().forEach(d=>{if(dates.indexOf(normHistDate(d.date))===-1)return;let counted=0;(d.tasks||[]).forEach(t=>{if(counted>=3)return;if(t.completed&&cupTagOf(t.swapTagId||t.tagId)===cs.tagId){const tag=getTag(t.tagId);const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);if(tag&&tag.maxEp>0){score+=Math.round(own/tag.maxEp*100);if(own>=tag.maxEp)score+=20;}counted++;}});});return score;}
 function getCupDaily(){const today=new Date().toDateString();if(!state.cupDaily||state.cupDaily.date!==today){state.cupDaily={date:today,claimed:{}};saveState();}return state.cupDaily;}
 function todayLiveDone(){return (state.todayTasks||[]).filter(t=>t.completed&&t.completed&&t.baseEp!=='');}
 function getDailyGoalSet(){const alt=new Date().getDate()%2===0;const done=todayLiveDone();const ep=done.reduce((s,t)=>s+(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0),0);
@@ -5321,7 +5329,7 @@ const SP_RECIPE={S:{label:'S',mats:12,core:6,tokens:260,ult:4},A:{label:'A',mats
 const CUP_TIERS=[{n:'业余',days:0,th:[150,100,50],rw:[{points:100},{tokens:10},{points:60}]},{n:'新人',days:15,th:[200,140,70],rw:[{tokens:15,change_ticket:1},{tokens:12},{points:80}]},{n:'强手',days:60,th:[260,180,100],rw:[{tokens:25,exp25:1},{tokens:18,change_ticket:1},{points:120,exp12:1}]},{n:'车王',days:150,th:[340,240,140],rw:[{tokens:50,sp_core:1,ult_upgrade:1},{tokens:30,exp3:1},{tokens:20,draw_ticket:1}]}];
 function cupTagOf(tid){const t=getTag(tid);return (t&&t.path.length>=2)?t.path.slice(0,-1).join('·'):(t?t.path.join('·'):String(tid));}
 function cupName(id){const t=getTag(id);return t?t.path.join(' · '):String(id);}
-function cupParentPool(){const set={};TASK_TAGS.forEach(function(t){if(t.path.length<2)return;set[t.path.slice(0,-1).join('·')]=1;});return Object.keys(set);}
+function cupParentPool(){const set={};TASK_TAGS.forEach(function(t){if(t.path.length<2)return;if(tagChildren(t.path).length>0)return;set[t.path.slice(0,-1).join('·')]=1;});return Object.keys(set);}
 function getCupState(){
   const wk=getShopWeekKey();
   if(!state.cupState||state.cupState.weekKey!==wk){
@@ -5342,7 +5350,7 @@ function cupScoreFor(tagId,dates){
     let counted=0;
     (d.tasks||[]).forEach(function(t){
       if(counted>=3)return;
-      if(t.completed&&(t.swapTagId||t.tagId)===tagId){
+      if(t.completed&&cupTagOf(t.swapTagId||t.tagId)===tagId){
         const tag=getTag(t.tagId);const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
         if(tag&&tag.maxEp>0){score+=Math.round(own/tag.maxEp*100);if(own>=tag.maxEp)score+=20;}
         counted++;
@@ -5673,7 +5681,7 @@ function _tierButtons(arr,score,th,rw,fn,labels){let h='<div style="display:grid
 function _matLabel(mat,i){return MAT_TYPES.find(x=>x[0]===mat)[1]+' × '+DAY_MAT_RW[i];}
 function getDayCupClaims(){state.dayCupClaims=state.dayCupClaims||{};return state.dayCupClaims;}
 function claimDayTier(kind,idx){const dci=getDayCupInfo();const key=dci.dateStr;const score=cupScoreFor(dci.tagId,[key]);const store=getDayCupClaims();store[key]=store[key]||{};const th=kind==='points'?DAY_POINTS_TIERS:DAY_MAT_TIERS;const arr=_claimArr(store[key],kind,8);if(!_canClaimTier(arr,idx,score,th)){alert('尚未达到该段要求，或需要按顺序领取');return;}arr[idx]=true;if(kind==='points'){grantRW({points:DAY_POINTS_RW[idx]});}else{state.tagMats=state.tagMats||{};state.tagMats[dci.tagId]=state.tagMats[dci.tagId]||{mark:0,medal:0,badge:0,peak:0};state.tagMats[dci.tagId][kind]=(state.tagMats[dci.tagId][kind]||0)+DAY_MAT_RW[idx];}saveState();updateTopBar();updateShopUI();renderCupUI();showGainModal('🏆 日杯第'+(idx+1)+'段达成',rwLines(kind==='points'?{points:DAY_POINTS_RW[idx]}:{[kind]:DAY_MAT_RW[idx]}),score+' 分');}
-function bountyScoreFor(tagId,dates){let count=0,q=0,qmax=0;(state.dailyHistory||[]).forEach(function(d){if(dates.indexOf(normHistDate(d.date))===-1)return;(d.tasks||[]).forEach(function(t){if(t.completed&&(t.swapTagId||t.tagId)===tagId){count++;const tag=getTag(t.tagId);const quality=parseInt(t.qualityEp)||0;if(tag&&tag.maxEp>0){q+=quality;qmax+=tag.maxEp;}}});});const qpct=qmax>0?Math.round(q/qmax*100):0;return count*100+qpct;}
+function bountyScoreFor(tagId,dates){let count=0,q=0,qmax=0;(state.dailyHistory||[]).forEach(function(d){if(dates.indexOf(normHistDate(d.date))===-1)return;(d.tasks||[]).forEach(function(t){if(t.completed&&cupTagOf(t.swapTagId||t.tagId)===tagId){count++;const tag=getTag(t.tagId);const quality=parseInt(t.qualityEp)||0;if(tag&&tag.maxEp>0){q+=quality;qmax+=tag.maxEp;}}});});const qpct=qmax>0?Math.round(q/qmax*100):0;return count*100+qpct;}
 function claimBountyTier(idx){const cs=getCupState();if(!cs.enrolled){alert('请先报名本周悬赏杯');return;}const score=bountyScoreFor(cs.tagId,getWeekDates(cs.weekKey));state.weekBountyClaims=state.weekBountyClaims||{};const arr=_claimArr(state.weekBountyClaims,cs.weekKey,8);if(!_canClaimTier(arr,idx,score,WEEK_BOUNTY_TIERS)){alert('尚未达到该段要求，或需要按顺序领取');return;}arr[idx]=true;grantRW(WEEK_BOUNTY_RW[idx]);saveState();updateTopBar();updateShopUI();renderCupUI();showGainModal('🎯 周悬赏第'+(idx+1)+'段达成',rwLines(WEEK_BOUNTY_RW[idx]),score+' 分');}
 function claimLargeTier(idx){const lc=getLimitedCup();if(!lc||!lc.enrolled){alert('请先报名大型赛事');return;}const score=cupScoreFor(lc.tagId,limitedDates());state.largeCupClaims=state.largeCupClaims||{};const key=String(lc.from);const arr=_claimArr(state.largeCupClaims,key,10);if(!_canClaimTier(arr,idx,score,LARGE_TIERS)){alert('尚未达到该段要求，或需要按顺序领取');return;}if(idx===9){showModal('🏆 终极奖励二选一','大型赛事第10段达成：请选择最终奖励。<br><br><select id="large-final-select" style="width:100%;padding:8px;border:1px solid #d1d1d6;border-radius:8px;"><option value="ult_upgrade">🏆 终极改装包 ×1</option><option value="sp_core">💠 精研核心 ×3</option></select>',function(){const v=document.getElementById('large-final-select').value;arr[idx]=true;grantRW({tokens:120,brawl_vip:1,[v]:v==='sp_core'?3:1});saveState();updateTopBar();updateShopUI();renderCupUI();closeModal();showGainModal('🏆 大型赛事第10段达成',rwLines({tokens:120,brawl_vip:1,[v]:v==='sp_core'?3:1}),score+' 分');});return;}arr[idx]=true;grantRW(LARGE_RW[idx]);saveState();updateTopBar();updateShopUI();renderCupUI();showGainModal('🏆 大型赛事第'+(idx+1)+'段达成',rwLines(LARGE_RW[idx]),score+' 分');}
 /* ===== 双周标签杯（两周·双标签·10段） ===== */
@@ -8310,13 +8318,14 @@ try{renderCupUI();}catch(e){}
 function cupTagMatch(taskTagId,cupTagId){
   if(taskTagId===cupTagId)return true;
   var a=getTag(taskTagId),b=getTag(cupTagId);
-  if(!a||!b||!a.path||!b.path||b.path.length>=a.path.length)return false;
+  if(!b){return cupTagOf(taskTagId)===String(cupTagId);}
+  if(!a||!a.path||!b.path||b.path.length>=a.path.length)return false;
   for(var i=0;i<b.path.length;i++)if(a.path[i]!==b.path[i])return false;
   return true;
 }
 cupScoreFor=function(tagId,dates){
   var score=0;
-  (state.dailyHistory||[]).forEach(function(d){
+  (function(){var _r=(state.dailyHistory||[]).slice();if((state.todayTasks||[]).some(function(t){return t.completed&&t.baseEp!=='';}))_r.push({date:todayStr(),tasks:state.todayTasks});return _r;})().forEach(function(d){
     if(dates.indexOf(normHistDate(d.date))===-1)return;
     var counted=0;
     (d.tasks||[]).forEach(function(t){
@@ -8331,7 +8340,7 @@ cupScoreFor=function(tagId,dates){
   return score;
 };
 sprintEvalDay=function(sp,idx){
-  var dd=sp.days[idx];if(!dd)return;var tag=getTag(dd.tagId);if(!tag)return;
+  var dd=sp.days[idx];if(!dd)return;var tag=getTag(dd.tagId);
   if(!dd.goals||dd.goals.length!==3){var h=arenaHashStr(sp.key+'-g'+idx);var idxs=[0,1,2,3,4,5,6,7,8,9];for(var i=idxs.length-1;i>0;i--){h=(h*31+7)>>>0;var j=h%(i+1);var tmp=idxs[i];idxs[i]=idxs[j];idxs[j]=tmp;}dd.goals=idxs.slice(0,3);}
   var dateStr=sprintDayDate(sp.key,idx);
   var rec=(state.dailyHistory||[]).find(function(x){return normHistDate(x.date)===dateStr;});
@@ -8344,7 +8353,7 @@ sprintEvalDay=function(sp,idx){
   var qsum=tasks.reduce(function(s,t){return s+(parseInt(t.qualityEp)||0);},0);
   var qBest=0,ownBest=0;
   tasks.forEach(function(t){var q=parseInt(t.qualityEp)||0;if(q>qBest)qBest=q;var o=(parseInt(t.baseEp)||0)+q;if(o>ownBest)ownBest=o;});
-  var stats={n:n,qsum:qsum,qBest:qBest,ownBest:ownBest,max:tag.maxEp,total:all.length};
+  var _mx2=tag?tag.maxEp:0;if(!tag&&all.length){all.forEach(function(t){var tg=getTag(t.tagId);if(tg&&tg.maxEp>_mx2)_mx2=tg.maxEp;});}var stats={n:n,qsum:qsum,qBest:qBest,ownBest:ownBest,max:_mx2,total:all.length};
   dd.eval=dd.goals.map(function(g){return SPRINT_GOALS[g].t(stats);});
 };
 /* 历届冲刺奖杯数按修正后的口径重算（纯读取历史，幂等）——修复旧精确匹配漏算的奖杯 */
