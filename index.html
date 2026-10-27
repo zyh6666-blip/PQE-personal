@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.5.2.3</title>
+<title>考研成长系统 v1.5.3</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f7;color:#1d1d1f;min-height:100vh;padding-bottom:40px}
@@ -150,7 +150,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.5.2.3</span>
+      <span style="font-size:18px;font-weight:700;">📚 考研EP系统 v1.5.3</span>
             <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -317,7 +317,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 <!-- 潜能 -->
 <div id="page-potential" class="page">
-  <details style="margin:0 0 10px 0;"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#007aff;padding:7px 10px;background:#f0f7ff;border-radius:8px;">❓ 这个玩法是干嘛的（点我展开）</summary><div style="font-size:12px;color:#6e6e73;padding:8px 10px;line-height:1.7;background:#fafbfd;border-radius:0 0 8px 8px;">潜能是<b>白天的随机构筑系统</b>：每天9:00/14:00/18:00三个时段各开一栏，每栏从候选中2选1，决定今天下午和晚上"哪些行为被奖励、哪些被惩罚"。共40个潜能分五类：经验增益（刷题/复盘/背诵加成、保底、超额奖励）、作息调控（早中晚时段加成、睡眠午觉判定、扣除免疫、短时冲刺主动技）、科目权重（教综/语言学/政治/英二主攻，其余减益）、风险（高回报赌局：标记大类+100%但其余-50%、舍弃复盘、致命一击按完成顺序递增）、跨日影响（明日首潜能指定范围、休整减扣、逆境追赶可改任务）。<b>位置构筑</b>是核心：同一个潜能只在特定栏位出现（如晨光仅第1栏、夜战仅3/4栏、超额仅第4栏），第4栏18点后开放（总潜能达500或装备灵魂武者）。每日3次候选刷新做取舍。部分潜能需要登记昨晚睡眠/今日午觉时长供判定。仅在潜能玩法下生效（与乱斗互斥）。策略：上午抽栏时就想好下午和晚上各干什么。</div></details>
+  <details style="margin:0 0 10px 0;"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#007aff;padding:7px 10px;background:#f0f7ff;border-radius:8px;">❓ 这个玩法是干嘛的（点我展开）</summary><div style="font-size:12px;color:#6e6e73;padding:8px 10px;line-height:1.7;background:#fafbfd;border-radius:0 0 8px 8px;">潜能是<b>白天的随机构筑系统</b>：每天9:00/14:00/18:00三个时段各开一栏，每栏从候选中2选1，决定今天下午和晚上"哪些行为被奖励、哪些被惩罚"。共40个潜能分五类：经验增益（刷题/复盘/背诵加成、保底、超额奖励）、作息调控（早中晚时段加成、睡眠午觉判定、扣除免疫、短时冲刺主动技）、科目权重（教综/语言学/政治/英二主攻，其余减益）、风险（高回报赌局：标记大类+100%但其余-50%、舍弃复盘、致命一击按完成顺序递增）、跨日影响（明日首潜能指定范围、休整减扣、逆境追赶可改任务）。<b>位置构筑</b>是核心：同一个潜能只在特定栏位出现（如晨光仅第1栏、夜战仅3/4栏、超额仅第4栏），第4栏：当日完成任务的填入EP累计≥800解锁（早于18点则与第3栏同时开放）；装备灵魂武者18点直开。每日3次候选刷新做取舍。部分潜能需要登记昨晚睡眠/今日午觉时长供判定。仅在潜能玩法下生效（与乱斗互斥）。策略：上午抽栏时就想好下午和晚上各干什么。</div></details>
   <div id="potential-lock" class="card lock-card" style="display:none;">
     <div class="lock-icon">🔒</div>
     <div class="lock-title">潜能系统未解锁</div>
@@ -700,7 +700,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🎮 今日玩法（四选一互斥）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天四选一互斥：<b>📘 经典</b>——功能属性（常驻被动）+天赋生效，无随机规则，适合求稳或天赋池深的日子；<b>⚔️ 乱斗</b>——功能属性+天赋+每日随机乱斗属性（1个，灵魂武者2个，25个规则改写结算公式），适合想赌增益的日子；<b>✨ 潜能</b>——功能属性+潜能栏位构筑（9/14/18点开栏2选1，每日3次刷新），适合作息规律、能配合时段的日子；<b>🧬 进化</b>——功能属性+天赋+攻防进化：完成任务按原始填入EP从Lv.1成长至Lv.10（每级小增益·相同词条取最大，3/6/9级随机大幅增益，9级获得复利/缓刑，满级「终极英雄」三选一），感染任务与全玩法统一早/中/晚时段。四玩法互斥，经典为默认。在「每日登记」点卡片选择并「确认今日玩法」，确认后当日结算前不可更换。选择策略：看今天任务结构——任务杂选乱斗赌增益、作息固定选潜能吃时段加成、有重要模考选经典稳吃天赋、想体验稳定成长选进化。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🧬 天赋（35个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每日抽取天赋并装配（6槽6费）：普通60%/稀有30%/高级7%/传说3%四档，共35个；每升1级+1次抽取，池抽空即止。互斥组只能带一个：时段三选一（晨读/下午茶/夜猫子）、政治主客观、英二有无作文、教综学与刷等。确认后当日锁定。天赋分全局型（看任务结构给加成）、科目专属型（政治/英二/教综/语言学）、条件型（时段/题型按钮）与传说主动技：心态壁垒（借乱斗属性120分钟）、不灭阳炎（扣7%燃烧10分钟后首任务+20%）、终结恩赐（按上限差额充能、满300开-97%护盾120分钟）、属性强化（经典模式被动效果+20%；乱斗模式乱斗效果放大100%、结算EP-15%）。策略：先定今日主攻科目再围绕配装。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">⚔️ 乱斗属性（25个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每日抽1个乱斗属性（灵魂武者可抽2个）改写结算公式，25个等概率。增益型：致命一击（完成顺序递增）、快速换弹（同标签连击）、第一滴血、致命攻击（80%+50%）、过度增长（破千阶梯+10%~110%）、枪械协同、重生契约、特工（90分钟+20%，CD90）与隐身（40分钟减免60%，CD120）主动技；保险型：无限火力、保底局（保底550）、摆脱危机（一标签免罚）、生命保险、双重装甲、防御补给；负面型：钢铁利爪（惩罚+20%）、复制感染（锚定首任务EP）；特殊型：融合（每科目专属属性+25%）、异界猎手支援（30%强化任务）、最后的幸存者。属性抽取券/变更券/特权券（可直接选融合）在商店有售。每日重置，与潜能互斥，确认后不可更换。策略：先看属性再排任务。</div></details>
-      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">✨ 潜能（40个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天9:00/14:00/18:00开栏，每栏2选1、每日3次刷新；40个潜能按五类分布（经验增益/作息调控/科目权重/风险/跨日影响），且位置构筑——同一潜能只在特定栏位出现（晨光仅第1栏、夜战仅3/4栏、超额仅第4栏等）。第4栏18点后开放（总潜能达500或装备灵魂武者）。作息类潜能需登记昨晚睡眠/今日午觉时长判定。风险类是高回报赌局（专念特教大类+100%其余-50%、舍弃复盘、致命一击递增）。跨日类影响明天（蓄势待发指定首潜能范围、逆境追赶可免罚改3次任务）。仅在潜能玩法下生效，与乱斗互斥；确认今日玩法后不可更换。</div></details>
+      <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">✨ 潜能（40个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每天9:00/14:00/18:00开栏，每栏2选1、每日3次刷新；40个潜能按五类分布（经验增益/作息调控/科目权重/风险/跨日影响），且位置构筑——同一潜能只在特定栏位出现（晨光仅第1栏、夜战仅3/4栏、超额仅第4栏等）。第4栏：当日完成任务的填入EP累计≥800解锁（早于18点则与第3栏同时开放）；装备灵魂武者18点直开。作息类潜能需登记昨晚睡眠/今日午觉时长判定。风险类是高回报赌局（专念特教大类+100%其余-50%、舍弃复盘、致命一击递增）。跨日类影响明天（蓄势待发指定首潜能范围、逆境追赶可免罚改3次任务）。仅在潜能玩法下生效，与乱斗互斥；确认今日玩法后不可更换。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🛡️ 功能属性（15个）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">常驻生效、不可卸下，重铸券更换（叠加7天冷却）。最多4槽，随等级逐步解锁（Lv.28首槽、Lv.100第4槽）。15个分四类：主动技——战意觉醒（标记任务结算返还40%损失）、移速提升（加快其他主动技20%）；补救——无敌之盾（不足上限自动补足，240分钟重生）、修正（首任务补足50%）、猎手韧性（200韧性条承担30%扣减）、猎手防护（3连不同标签得韧性/150EP）；结构——战术快速换位（完成率换算到其他标签）、爆炸剑气（相邻任务加成）、置顶强化（+15%但惩罚+20%）、紧急撤离（首个未完成延期明日）、以一当十（模考+70%且当日免罚）；赌局——母体威慑（幸运变感染任务：限时完成重奖、失败重罚）、觉醒肾上腺素（CD-5%）、暴走持续延长（持续+10%）、灵魂武者（乱斗抽2个+潜能第4栏提前）。按作息短板选用。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🏷️ 标签专精（四维改装）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;">每个标签四条改装线各10级：<b>极速</b>=maxEp+3%/级；<b>加速</b>=当日同标签连击+2%/级；<b>操控</b>=罚率-2%/级；<b>氮增</b>=完成占比主成长（普通上限10%→最高20%，SP固定10%）。前5级纯积分，Lv6-10加吃材料。材料：公用=结算天数（门槛）+积分；专属四样在结算自动掉落——训练印记（每完成任务）、冲刺奖章（主动技能生效中/当天前2个完成）、全勤徽章（当日全勤）、巅峰凭证（EP达上限90%），溢出回收5积分/个，材料包可批量补。四线满级觉醒<b>SP运动版</b>：maxEp+25%、罚率减半、专属涂装卡，按标签频率分档——高频400结算天+💠3+🪙100 / 中频280+💠2+🪙60 / 低频160+💠1+🪙30。捷径：商店"直接升级"无条件+1级、"终极改装包"直升满级（不含SP）。进度只随时间走，每天结算即攒材料；优先养高频标签。</div></details>
       <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px;background:#f9f9fb;border-radius:8px;">🏆 杯赛（能量10点 · 每日结算+3）</summary><div style="font-size:12px;color:#6e6e73;padding:8px;line-height:1.7;"><b><b>每日任务</b>免费领；<b>日杯</b>每天出现（20%加开、前晚预告），1⚡报名后按成绩解锁8段累积奖励；<b>冲刺锦标赛</b>3⚡（报名一次）：周一至五每天随机悬赏1标签+3目标，每目标1奖杯、日结锁定，全周标签提前可见，最多15奖杯对应15档（高档稀有票券+代币≤200），周末结算领取、结算完毕后隐藏；<b>精研核心杯</b>2⚡，仅周末显示，4档全核心（参与💠1，后三档💠1/3/5）；<b>大型赛事</b>3天2⚡10段，终段二选一；<b>月杯</b>5⚡、4标签总分合计10档累积（积分≤2500/代币≤250/票券各≤10/材料包≤20/直接升级≤8/经验卡≤5；核心85%届拆档共≤10、终极升级15%届仅最高档1个），次月补领；计分：每日最多计3个该标签任务（质量分/上限×100，达上限+20）；40代币可补5点能量（每日1次）；<b>双周标签杯</b>4⚡、两周2标签10段，终档按80%核心/20%终极生成，赛后界面保留可一键补领。</div></details>
@@ -2683,6 +2683,7 @@ function completeTask(idx){
         const recent=getCompletedTasks().sort((a,b)=>(a.doneAt||0)-(b.doneAt||0)).slice(-3);
         if(recent.length===3&&new Set(recent.map(x=>x.tagId)).size===3){psNow.p12Rewarded=true;psNow.p12Resilience=hasPassive(7)?30:0;psNow.p12PendingEp=hasPassive(7)?0:150;}
       }
+        try{updateFourthPotentialEligibility();}catch(e){}
         updateFlameRuntime();
       if(state.talentFlame&&state.talentFlame.active&&Date.now()<state.talentFlame.until){
         state.todayTasks[idx].flameBonus=0.20;
@@ -2745,12 +2746,17 @@ function recalcLuckyMarks(){
 function unlockTasks(){
   if(!state.tasksLocked)return;
   const _today=new Date().toDateString();
-  if(state.tasksUnlockUsed===_today){alert('🔒 今日已解锁过一次，任务登记已定为最终版，无法再次修改');return;}
   if(new Date().getHours()>=18){alert('🔒 解锁入口限 18:00 前使用，现已关闭');return;}
-  showModal('🔓 解锁今日任务（每日限1次·限18:00前）','解锁后仅<b>未完成</b>的任务可编辑（名称/标签/增删/排序），已完成的任务不可更改。<br><br>• 删除任务：结算时扣该任务标签<b>当前</b>最大EP的10%<br>• 解锁后新增的任务若未完成，罚率+50%<br>• 幸运/感染标记按当前任务结构重新校验，重新锁定后生效<br><br><b>再次「确认今日任务」后即为当天最终任务，无法再次解锁修改</b>（特殊玩法除外）。',function(){
+  const hasFree=(hasPotential(40)&&(state.potentialEditLeft||0)>0);
+  if(!hasFree&&state.tasksUnlockUsed===_today){alert('🔒 今日已解锁过一次，任务登记已定为最终版，无法再次修改');return;}
+  const _tag2=hasFree?('（逆境追赶·免罚修改 剩 '+state.potentialEditLeft+' 次）'):'（每日限1次·限18:00前）';
+  const _note2=hasFree?'<br><br><b>✨ 本次为逆境追赶免罚修改：删除任务不扣10%、新增任务不增加罚率。</b>':'<br><br>• 删除任务：结算时扣该任务标签<b>当前</b>最大EP的10%<br>• 解锁后新增的任务若未完成，罚率+50%';
+  showModal('🔓 解锁今日任务'+_tag2,'解锁后仅<b>未完成</b>的任务可编辑（名称/标签/增删/排序），已完成的任务不可更改。'+_note2+'<br>• 幸运/感染标记按当前任务结构重新校验，重新锁定后生效<br><br><b>再次「确认今日任务」后即为当天最终任务。</b>',function(){
+    if(hasFree)state.potentialEditLeft--;
+    state._freeEditMode=!!hasFree;
     state.tasksLocked=false;
     state.taskReedit=true;
-    state.tasksUnlockUsed=_today;
+    if(!hasFree)state.tasksUnlockUsed=_today;
     saveState();renderTasks();closeModal();
   });
 }
@@ -2770,6 +2776,7 @@ function confirmTasks(){
   
   showModal('确认今日任务','确认后任务锁定（仍可填写完成EP与质量EP）。<b>本次锁定后即为当天最终任务</b>——如需修改，请在 18:00 前使用「🔓 解锁今日任务」（每日限1次，解锁并重新锁定后不可再改）。<br><br>'+listHtml,function(){
     state.tasksLocked=true;
+    state._freeEditMode=false;
     if(state.taskReedit){
       recalcLuckyMarks();
       state.taskReedit=false;
@@ -2789,7 +2796,7 @@ function confirmTasks(){
       ps.infectSuccess=false;ps.infectFailed=false;
     }
     const firstTag=getTag(state.todayTasks[0]&&state.todayTasks[0].tagId);
-    state.fpMarks={tagId:'',category:firstTag?firstTag.path[Math.max(0,firstTag.path.length-2)]:''};
+    state.fpMarks={tagId:(hasPotential(31)&&firstTag)?state.todayTasks[0].tagId:'',category:firstTag?firstTag.path[Math.max(0,firstTag.path.length-2)]:''};
     if(hasPotential(3)){const rec=state.todayTasks.find(t=>{const tag=getTag(t.tagId);return tag&&(tag.path.join(' ').indexOf('背诵')>-1||tag.path.join(' ').indexOf('输出')>-1);});if(rec)rec.potentialMark3=true;}
     if(hasPotential(9)){const candidates=state.todayTasks.filter(t=>!t.completed);candidates.slice(0,3).forEach(t=>t.wanted=true);}
     /* v1.4.8: 逆境追赶改为第1栏选后直接给3次免罚修改，不再按完成率判定 */
@@ -2814,7 +2821,7 @@ function confirmTasks(){
     closeModal();
   });
 }
-function addTask(){if(state.todayTasks.length>=15)return;const _nt={name:'',baseEp:'',qualityEp:''};if(state.tasksMarkInit)_nt.penBoost=1.5;state.todayTasks.push(_nt);saveState();renderTasks();}
+function addTask(){if(state.todayTasks.length>=15)return;const _nt={name:'',baseEp:'',qualityEp:''};if(state.tasksMarkInit&&!state._freeEditMode)_nt.penBoost=1.5;state.todayTasks.push(_nt);saveState();renderTasks();}
 let dragTaskIdx=null;
 function taskDragStart(e,idx){if(state.todayTasks[idx]&&state.todayTasks[idx].completed){e.preventDefault();return;}dragTaskIdx=idx;e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain',String(idx));}catch(err){}}
 function taskDragOver(e){e.preventDefault();e.dataTransfer.dropEffect='move';}
@@ -2860,7 +2867,7 @@ function pinTask(idx){
     t.pinned=true;t.pinConfirmed=true;saveState();renderTasks();closeModal();
   });
 }
-function removeTask(idx){const _t=state.todayTasks[idx];if(_t&&(_t.fromLong||_t.fromCycle)){alert('长期/周期任务副本不可删除，请在对应模块处理');return;}if(state.taskReedit&&_t){const _tag=getTag(_t.tagId);if(_tag){const _today=new Date().toDateString();if(!state.deletedToday||state.deletedToday.date!==_today)state.deletedToday={date:_today,items:[]};state.deletedToday.items.push({maxEp:_tag.maxEp});}state.todayTasks.splice(idx,1);saveState();renderTasks();return;}state.todayTasks.splice(idx,1);saveState();renderTasks();}
+function removeTask(idx){const _t=state.todayTasks[idx];if(_t&&(_t.fromLong||_t.fromCycle)){alert('长期/周期任务副本不可删除，请在对应模块处理');return;}if(state.taskReedit&&_t){const _tag=getTag(_t.tagId);if(_tag&&!state._freeEditMode){const _today=new Date().toDateString();if(!state.deletedToday||state.deletedToday.date!==_today)state.deletedToday={date:_today,items:[]};state.deletedToday.items.push({maxEp:_tag.maxEp});}state.todayTasks.splice(idx,1);saveState();renderTasks();return;}state.todayTasks.splice(idx,1);saveState();renderTasks();}
 function updateTask(idx,field,val){const t=state.todayTasks[idx];if(!t)return;if(t.completed&&t.baseEp!==''){alert('该任务已完成，不可更改');renderTasks();return;}if((t.fromLong||t.fromCycle)&&(field==='name'||field==='tagId')){alert('长期/周期任务副本的名称与标签已锁定，请到对应模块编辑');renderTasks();return;}t[field]=val;saveState();renderTasks();}
 function updateLevelProgress(){
   const info=getLevelInfo(state.totalEP);
@@ -4826,10 +4833,11 @@ function canPotentialInSlot(id,slot){
   return true;
 }
 function todayAt(hour){const d=new Date();d.setHours(hour,0,0,0);return d.getTime();}
+function getTodayFilledEp(){return (state.todayTasks||[]).reduce(function(s,t){return s+(t.completed?((parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0)):0);},0);}
 function updateFourthPotentialEligibility(){
   const p=state.potential;
   if(hasPassive(5)){if(!p.fourthEligibleAt)p.fourthEligibleAt=todayAt(18);return;}
-  if(state.totalEP>=500&&!p.fourthEligibleAt)p.fourthEligibleAt=Date.now();
+  if(getTodayFilledEp()>=800&&!p.fourthEligibleAt)p.fourthEligibleAt=Date.now();
 }
 function getPotentialSlotUnlockTime(slot){
   if(slot===0)return todayAt(9);
@@ -4922,6 +4930,7 @@ function choosePotentialCandidate(idx){
   state.potential.drawn.push(item.id);state.potential.hist.push(item);state.potential.candidates=[];state.potential.candidateSlot=null;collectToCodex('potential',item.id);
   if(item.id===7){addTotalEp(600);updateTopBar();}
   if(item.id===40){state.potentialEditLeft=3;}
+  if(item.id===9){const _cand=state.todayTasks.filter(function(t){return !t.completed&&t.baseEp==='';});_cand.slice(0,3).forEach(function(t){t.wanted=true;});}
   if(item.id===38){state.potentialFirstLimited=true;}
   saveState();closeModal();updatePotentialUI();renderDailySkills();renderTalentBars();
   if(item.id===31)setTimeout(function(){openPotentialMarkSelector('tag');},80);
@@ -8517,6 +8526,673 @@ renderTasks=function(){
   }catch(e){}
 };
 try{renderTasks();}catch(e){}
+</script>
+<script>
+/* ================================================================
+   v1.5.3「极限追猎」整合补丁：公告/邮件 + 铭影追猎者 + 杯赛修复
+   + 杯赛A8 UI + 竞技名单修复 + 善恶之交平衡
+   ================================================================ */
+(function(){
+'use strict';
+
+/* ============ 0. 工具 ============ */
+function _huntToday(){return todayStr();}
+function _huntLog(h,t){h.log.unshift('['+new Date().toTimeString().slice(0,5)+'] '+t);if(h.log.length>40)h.log.length=40;}
+
+/* ============ 1. 公告（简版，置顶） ============ */
+var ANN153='<div id="ann-153" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;"><b style="color:#ff3b30;">v1.5.3「极限追猎」</b> <span style="font-size:11px;color:#8e8e93;">11.05–11.26</span><div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">🏹 赛季限时玩法「铭影追猎者」开启：每日1张悬赏令，24h内击杀40000HP铭影Boss（失败不亏，阶段奖照领；击杀必得直接升级+25%精英券）。💀 精英战48h·80000HP·自带20000血条，血条清空无奖励。四据点：🍺酒馆（开战/代币强化）·💱黑市（泰坦碎片换全玩法补给/指定遗物）·🗼高塔10层（每层奖品明示，遗物1→10号）·⚒️车间（集指定遗物逐级铸造💠/🏆/直接SP）。局内道具：🛡护盾(仅精英) ⚔处决 🔨破甲 ⚡电弧，每场最多持2、每场清零。伤害=任务EP(含天赋/乱斗/潜能/进化加成)×标签倍率(背600%/研450%/本350%)+EP压制(总EP×0.03/任务)；仅电弧按原始EP结算。平衡：善恶之交天使降至5%、分界60%。修复：杯赛奖励显示JSON、竞技刷新名单消失、杯赛UI重做。</div></div>';
+window.__injectAnn153=function(){try{var el=document.getElementById('ann-list');if(!el||document.getElementById('ann-153'))return;el.insertAdjacentHTML('afterbegin',ANN153);}catch(e){}};
+try{__injectAnn153();}catch(e){}
+if(typeof renderAnnouncements==='function'){var __ra153=renderAnnouncements;window.renderAnnouncements=function(){__ra153.apply(this,arguments);__injectAnn153();};}
+
+/* ============ 2. 邮件（详版） ============ */
+window.ensureV153Mail=function(){state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];state.mailGranted=state.mailGranted||{};
+ if(state.mailGranted['v153_hunt'])return;state.mailGranted['v153_hunt']=true;
+ if(!state.mailbox.some(function(m){return m.id==='v153_hunt';})){
+  state.mailbox.push({id:'v153_hunt',title:'v1.5.3「极限追猎」完整攻略 · 铭影追猎者',items:{hunt_ticket:1},claimed:false,read:false,createdAt:Date.now(),
+  body:'各位考生：<br><br><b>🏹 一、总规则</b><br>· 每日免费1张悬赏令=1轮24h猎杀；未击杀=本轮失败，阶段奖照领，击杀奖（直接升级+25%精英券）无。<br>'
+  +'· 单次任务伤害=<b>任务EP（天赋/乱斗/潜能/进化等特殊玩法的加成全部计入）</b>×标签倍率（<b>背单词600%/考研450%/本科350%</b>）×(1+30%开局强化)+ <b>持有总EP×0.03</b>（EP压制，为基础伤害的一部分，<b>会被阶段减伤/破甲影响，绝不扣除你的EP</b>）；<b>⚡电弧例外：只按原始填入EP结算、不吃任何增益</b>。<br>'
+  +'· 道具是锦上添花：每场战斗最多同时持有2个，槽满掉落作废，每场清零。<br><br>'
+  +'<b>💀 二、精英战（原版数值）</b><br>80000HP/48h/玩家20000血条；阶段减伤10%/15%/20%/25%；韧性1500@50%→2000@50%→2500@60%每阶段刷新；P3脱战60秒后以10HP/s回血（不超过该阶段最大HP39999）+每3小时对你造成1000伤害；P4荆棘：韧性承受伤害的20%返还给你。弱点大类（任务树第二级标签）可穿透韧性条直击本体并等值削韧。血条清空或超时=失败，本次精英战无任何奖励。<br>'
+  +'· 精英每阶段必得泰坦碎片+代币；击杀得大量碎片+代币+💠精研核心×5~7。<br><br>'
+  +'<b>🎁 三、道具</b><br>掉落事件=进入P2/P3/P4各1次（共3次）。普通池：破甲60%/电弧35%/处决5%；精英池：护盾50%/破甲22.5%/电弧22.5%/处决5%。<br>'
+  +'🛡护盾（仅精英）：2h内所受伤害-50%。<br>⚔处决：蓄能20分钟（期间有释放预警），对Boss造成<b>当前HP×20%</b>真实伤害。<br>'
+  +'🔨破甲：3h内单次任务伤害的50%转化为真实伤害（无视阶段减伤/韧性条）。<br>'
+  +'⚡电弧：完成下一个任务时触发流血——30段×(50+该任务原始EP×1%)，每0.2秒一段共6秒，总伤约1500~1700，只认原始填入EP。<br>'
+  +'开局可在酒馆购买：⚔攻击+30%（🪙120）、🎁开局道具（🪙80/个，限购2，开战时按本模式掉落表立刻roll 1件）。<br><br>'
+  +'<b>🗺️ 四、据点</b><br>💱黑市：碎片换积分/代币/全玩法票券与体验卡（竞技/杯赛/乱斗/潜能/进化/被动）/材料包/直接升级/💠核心；🧩600碎片可买指定编号遗物（每编号限购1）；🏆终极改装包不在黑市产出，仅暗熔车间铸造。<br>'
+  +'🗼追猎者高塔：共10层，第1层10件、逐层递减至顶层1件；第n层压轴=遗物#n；拿齐本层全部道具才能开上一层；第k抽消耗=10+5(k-1)碎片，全通55抽。<br>'
+  +'⚒️暗熔车间：集齐指定5/8/10种遗物→💠精研核心×3→🏆终极改装包×1→🚀直接SP券×1（仅四线满级标签可用）；铸造成功会消耗对应部件。<br>'
+  +'遗物获取：高塔爬层（保底10件）+ Boss战完成任务2%概率掉落 + 黑市600碎片指定购买。<br><br>'
+  +'<b>⚖️ 五、其他</b><br>善恶之交：天使收益10%→5%、分界50%→60%；修复杯赛奖励显示原始JSON、竞技模式刷新后名单消失；杯赛UI全面重做（A8风格）。S2赛季11.30开启。<br><br>愿并肩之处，便有光。'});}
+ saveState();};
+try{ensureV153Mail();}catch(e){}
+
+/* ============ 3. 铭影追猎者 ============ */
+var EV_S='2026-11-05',EV_E='2026-11-26';
+var TAGM={'背单词':6,'本科':3.5,'考研':4.5};
+var BOSS={hp:40000,
+ s2:{until:29999,mult:0.7,min:60},
+ s3:{until:19999,mult:0.8,min:120,shield:1000,absorb:0.5},
+ s4:{until:9999,mult:0.5,min:60,steal:0.1,shield:2000,absorb:0.3}};
+var ELITE={hp:80000,php:20000,hours:48,
+ s2:{until:59999,red:0.15,shield:1500,absorb:0.5},
+ s3:{until:39999,red:0.20,shield:2000,absorb:0.5,regen:10,cap:39999,oocSec:60,atk:1000,atkMin:180},
+ s4:{until:19999,red:0.25,shield:2500,absorb:0.60,thorn:0.20}};
+var RED=[0,0.10,0.15,0.20,0.25];
+var ITEMN={shield:'🛡护盾',exec:'⚔处决',armor:'🔨破甲',arc:'⚡电弧'};
+var ITEMC={exec:'#ff3b30',shield:'#34c759',arc:'#007aff',armor:'#af52de'};
+var NORMP=[['armor',0.60],['arc',0.35],['exec',0.05]];
+var ELITEP=[['shield',0.50],['armor',0.225],['arc',0.225],['exec',0.05]];
+var STAGEROLL=[[80,150],[250,450],[25,50]];
+var PARTN=['轴承','齿轮','涡轮','芯片','线圈','活塞','镜片','合金','电容','引擎'];
+var MARKET=[
+ {n:'💰 积分×300',c:60,run:function(){state.points+=300;}},
+ {n:'🪙 代币×40',c:120,run:function(){state.tokens+=40;}},
+ {n:'🎟️ 属性抽取券×1',c:80,run:function(){state.inventory.draw_ticket=(state.inventory.draw_ticket||0)+1;}},
+ {n:'🎫 属性变更券×1',c:100,run:function(){state.inventory.change_ticket=(state.inventory.change_ticket||0)+1;}},
+ {n:'📦 零件材料包×1',c:150,run:function(){state.inventory.parts_pack=(state.inventory.parts_pack||0)+1;}},
+ {n:'⚡2倍经验卡×1',c:180,run:function(){state.inventory.exp2=(state.inventory.exp2||0)+1;}},
+ {n:'🔧 直接升级×1',c:250,run:function(){state.inventory.direct_up=(state.inventory.direct_up||0)+1;}},
+ {n:'💠 精研核心×1',c:400,run:function(){state.inventory.sp_core=(state.inventory.sp_core||0)+1;}},
+ {n:'🎫 竞技补充票×1',c:200,run:function(){state.raceTickets=(state.raceTickets||0)+1;try{state.inventory.race_ticket=(state.inventory.race_ticket||0)+1;}catch(e){}}},
+ {n:'⚡ 杯赛能量+5',c:200,run:function(){try{var en=getEnergy();en.v=Math.min(10,en.v+5);}catch(e){}}},
+ {n:'🧪 乱斗体验卡×1',c:150,run:function(){state.inventory.brawl_trial=(state.inventory.brawl_trial||0)+1;}},
+ {n:'🧪 潜能体验卡×1',c:250,run:function(){state.inventory.potential_trial=(state.inventory.potential_trial||0)+1;}},
+ {n:'🧬 进化模式体验卡×1',c:250,run:function(){state.inventory.evolve_trial=(state.inventory.evolve_trial||0)+1;}},
+ {n:'🎟️ 全功能体验卡×1',c:300,run:function(){state.inventory.slot_trial=(state.inventory.slot_trial||0)+1;}},
+ {n:'⏳ 被动体验持续卡×1',c:120,run:function(){state.inventory.passive_duration=(state.inventory.passive_duration||0)+1;}},
+ {n:'👑 乱斗特权券×1',c:350,run:function(){state.inventory.brawl_vip=(state.inventory.brawl_vip||0)+1;}},
+ {n:'🌟 天赋额外抽取×1',c:250,run:function(){state.inventory.talent_extra=(state.inventory.talent_extra||0)+1;}},
+ {n:'🔮 特殊属性重铸券×1',c:320,run:function(){state.inventory.reroll_ticket=(state.inventory.reroll_ticket||0)+1;}}];
+var TOWER_POOL=[
+ {n:'💰积分×150',run:function(){state.points+=150;}},
+ {n:'🪙代币×25',run:function(){state.tokens+=25;}},
+ {n:'🎟️属性抽取券×1',run:function(){state.inventory.draw_ticket=(state.inventory.draw_ticket||0)+1;}},
+ {n:'📦零件材料包×1',run:function(){state.inventory.parts_pack=(state.inventory.parts_pack||0)+1;}},
+ {n:'⚡2倍经验卡×1',run:function(){state.inventory.exp2=(state.inventory.exp2||0)+1;}},
+ {n:'🔮特殊属性重铸券×1',run:function(){state.inventory.reroll_ticket=(state.inventory.reroll_ticket||0)+1;}},
+ {n:'💰积分×400',run:function(){state.points+=400;}},
+ {n:'🪙代币×60',run:function(){state.tokens+=60;}},
+ {n:'🎫属性变更券×1',run:function(){state.inventory.change_ticket=(state.inventory.change_ticket||0)+1;}},
+ {n:'⚡3倍经验卡×1',run:function(){state.inventory.exp3=(state.inventory.exp3||0)+1;}},
+ {n:'🌟天赋额外抽取×1',run:function(){state.inventory.talent_extra=(state.inventory.talent_extra||0)+1;}},
+ {n:'🎟️全功能体验卡×1',run:function(){state.inventory.slot_trial=(state.inventory.slot_trial||0)+1;}},
+ {n:'🧪乱斗体验卡×1',run:function(){state.inventory.brawl_trial=(state.inventory.brawl_trial||0)+1;}},
+ {n:'🪙代币×100',run:function(){state.tokens+=100;}},
+ {n:'💰积分×800',run:function(){state.points+=800;}},
+ {n:'💠精研核心×1',run:function(){state.inventory.sp_core=(state.inventory.sp_core||0)+1;}},
+ {n:'🎫竞技补充票×1',run:function(){state.raceTickets=(state.raceTickets||0)+1;try{state.inventory.race_ticket=(state.inventory.race_ticket||0)+1;}catch(e){}}},
+ {n:'👑乱斗特权券×1',run:function(){state.inventory.brawl_vip=(state.inventory.brawl_vip||0)+1;}}];
+var TOWER_SLOTS=(function(){var fl=[],idx=0;
+ for(var f=0;f<10;f++){var cnt=10-f,arr=[];
+  for(var j=0;j<cnt-1;j++){arr.push(TOWER_POOL[idx%TOWER_POOL.length]);idx++;}
+  arr.push({n:'🧩遗物#'+(f+1),relic:f+1});fl.push(arr);}
+ return fl;})();
+
+function huntActive(){var t=_huntToday();return t>=EV_S&&t<=EV_E;}
+function getH(){if(!state.hunt153)state.hunt153={shards:0,parts:{},kills:0,ekills:0,b:null,eb:null,
+ items:{shield:0,exec:0,armor:0,arc:0},act:{shieldUntil:0,armorUntil:0,execAt:0,execPending:0,burst:null},
+ atkMult:1,pendingBuff:0,pendingStart:0,tower:[],forgeDone:[],relicBought:{},mk:{},lastTicket:'',log:[]};
+ return state.hunt153;}
+function itemCount(){var h=getH();return h.items.shield+h.items.exec+h.items.armor+h.items.arc;}
+function addItem(k){var h=getH();if(itemCount()>=2){_huntLog(h,'🗑 道具槽已满，'+ITEMN[k]+'掉落作废');return false;}
+ h.items[k]=(h.items[k]||0)+1;_huntLog(h,'🎁 获得道具 '+ITEMN[k]+'（持'+itemCount()+'/2）');return true;}
+function rollDrop(elite){var tbl=elite?ELITEP:NORMP,r=Math.random();
+ for(var i=0;i<tbl.length;i++){if(r<tbl[i][1])return tbl[i][0];r-=tbl[i][1];}return 'armor';}
+function grantPart(){var h=getH();var r=1+Math.floor(Math.random()*10);h.parts[r]=(h.parts[r]||0)+1;return r;}
+function grantFiller(it){var h=getH();it.run();_huntLog(h,'🗼 抽到 '+it.n);}
+function calcWeak(){var cats={};(state.todayTasks||[]).forEach(function(t){var g=getTag(t.tagId);if(g&&g.path[1])cats[g.path[1]]=(cats[g.path[1]]||0)+1;});
+ var best='公共课',bn=0;Object.keys(cats).forEach(function(k){if(cats[k]>bn){bn=cats[k];best=k;}});return best;}
+function resetAct(h){h.items={shield:0,exec:0,armor:0,arc:0};h.act={shieldUntil:0,armorUntil:0,execAt:0,execPending:0,burst:null};}
+
+/* ---- 开战 ---- */
+window.huntStart=function(elite){
+ var h=getH();
+ if(elite){if((state.inventory.hunt_elite_ticket||0)<1){alert('没有精英悬赏令');return;}
+  if(h.eb){alert('精英战已在进行');return;}
+  state.inventory.hunt_elite_ticket--;var now=Date.now();
+  resetAct(h);
+  for(var i=0;i<h.pendingStart;i++)addItem(rollDrop(true));
+  h.pendingStart=0;
+  h.eb={hp:ELITE.hp,stage:1,php:ELITE.php,shield:1500,startAt:now,endAt:now+ELITE.hours*3600*1000,atkNext:now+ELITE.s3.atkMin*60000,lastDmgAt:now,weakCat:calcWeak(),claims:[]};
+  _huntLog(h,'💀 精英战开启（48h）！弱点：'+h.eb.weakCat+(h.atkMult>1?' · 攻击+30%':''));
+ }else{
+  if((state.inventory.hunt_ticket||0)<1){alert('没有悬赏令');return;}
+  if(h.b){alert('本轮战斗尚未结束');return;}
+  state.inventory.hunt_ticket--;var n2=Date.now();
+  resetAct(h);
+  for(var j=0;j<h.pendingStart;j++)addItem(rollDrop(false));
+  h.pendingStart=0;
+  h.b={hp:BOSS.hp,stage:1,shield:0,phaseMult:1,phaseUntil:0,startAt:n2,endAt:n2+24*3600*1000,weakCat:calcWeak(),
+   rolls:{1:rollType(),2:rollType(),3:rollType(),4:rollType()},claims:[]};
+  grantStageReward(1,h.b.rolls[1]);
+  _huntLog(h,'🏹 猎杀开始！24h内击杀40000HP · 弱点：'+h.b.weakCat+(h.atkMult>1?' · 攻击+30%':''));
+ }
+ saveState();renderHuntUI();
+};
+function rollType(){return Math.floor(Math.random()*3);}
+function grantStageReward(stage,type){var h=getH(),v=STAGEROLL[type],n=v[0]+Math.floor(Math.random()*(v[1]-v[0]+1));
+ if(type===0){h.shards+=n;_huntLog(h,'💠 阶段'+stage+'奖励：泰坦碎片+'+n);}
+ else if(type===1){state.points+=n;_huntLog(h,'💰 阶段'+stage+'奖励：积分+'+n);}
+ else{state.tokens+=n;_huntLog(h,'🪙 阶段'+stage+'奖励：代币+'+n);}}
+
+/* ---- 酒馆 ---- */
+window.huntTavern=function(){
+ var h=getH();
+ var extra='<div style="font-size:12px;line-height:2;text-align:left;">'
+ +'<button class="btn-accent" style="width:100%;margin:4px 0;" onclick="huntBuyBuff()">⚔ 基础攻击+30%（🪙120）'+(h.pendingBuff?' ✓已购':'')+'</button>'
+ +'<button class="btn-accent" style="width:100%;margin:4px 0;" onclick="huntBuyStart()">🎁 开局道具（🪙80）已购'+h.pendingStart+'/2</button>'
+ +'<button class="btn-primary" style="width:100%;margin:8px 0;" onclick="huntStart(false)">🏹 常规战（悬赏令×'+(state.inventory.hunt_ticket||0)+'）</button>'
+ +'<button class="btn-primary" style="width:100%;" onclick="huntStart(true)">💀 精英战（精英令×'+(state.inventory.hunt_elite_ticket||0)+'）</button>'
+ +'<div style="font-size:11px;color:#8e8e93;margin-top:6px;">强化与开局道具仅本场有效；开局道具在战斗开始时按该模式掉落表roll出。</div></div>';
+ showModal('🍺 暗桩酒馆','选择你的猎杀委托：',function(){},extra);
+ document.getElementById('modal-confirm').style.display='none';
+ var cb=document.getElementById('modal-cancel');if(cb){cb.textContent='离开';cb.onclick=function(){document.getElementById('modal-confirm').style.display='';cb.textContent='取消';cb.onclick=null;closeModal();};}
+};
+window.huntBuyBuff=function(){var h=getH();if(h.pendingBuff)return;if(state.tokens<120){alert('代币不足');return;}
+ state.tokens-=120;h.pendingBuff=1;h.atkMult=1.3;saveState();closeModal();huntTavern();};
+window.huntBuyStart=function(){var h=getH();if(h.pendingStart>=2)return;if(state.tokens<80){alert('代币不足');return;}
+ state.tokens-=80;h.pendingStart++;saveState();closeModal();huntTavern();};
+
+/* ---- 任务完成→伤害 ---- */
+function dealDamage(own,top,cat){
+ var h=getH(),now=Date.now();
+ if(!h.b&&!h.eb)return;
+ var totalEp=state.totalEP||0;
+ var base=Math.round(own*(TAGM[top]||1)*(h.atkMult||1)+totalEp*0.03);   /* EP压制并入单次基础伤害 */
+ if(h.b){
+  var b=h.b,mult=1;
+  if(b.phaseUntil>now)mult*=b.phaseMult;
+  var weak=(cat===b.weakCat);
+  var trueD=0;
+  if(h.act.armorUntil>now)trueD=Math.round(base*0.5);
+  var normal=Math.round((base-trueD)*mult);
+  var body=normal+trueD,shieldCut=0;
+  if(b.stage>=3&&b.shield>0){
+   if(weak){shieldCut=body;}
+   else{var ab=BOSS['s'+b.stage].absorb;var absorbed=Math.min(b.shield,Math.round(normal*ab));b.shield-=absorbed;body=normal-absorbed+trueD;}
+   b.shield=Math.max(0,b.shield-shieldCut);
+  }
+  if(b.stage===4){var heal=Math.round(body*BOSS.s4.steal);b.hp=Math.min(BOSS.hp,b.hp+heal);}
+  b.hp-=body;bossStageCheck();
+ }else{
+  var e=h.eb;e.lastDmgAt=now;
+  var red=RED[e.stage]||0;
+  var trueE=0;
+  if(h.act.armorUntil>now)trueE=Math.round(base*0.5);
+  var normalE=Math.round((base-trueE)*(1-red));
+  var bodyE=normalE+trueE,shieldCutE=0;
+  if(e.shield>0){
+   if(cat===e.weakCat){shieldCutE=bodyE;}
+   else{var ab2=ELITE['s'+e.stage].absorb||0.5;var absorbedE=Math.min(e.shield,Math.round(normalE*ab2));e.shield-=absorbedE;bodyE=normalE-absorbedE+trueE;
+    if(e.stage===4){e.php-=Math.round(absorbedE*ELITE.s4.thorn);}}
+   e.shield=Math.max(0,e.shield-shieldCutE);
+  }
+  e.hp-=bodyE;eliteStageCheck();
+ }
+ if(Math.random()<0.02){var p=grantPart();_huntLog(h,'🧩 遗物部件「'+PARTN[p-1]+'」掉落！');}
+ saveState();renderHuntUI();
+}
+function nStage(hp){return hp>BOSS.s2.until?1:hp>BOSS.s3.until?2:hp>BOSS.s4.until?3:4;}
+function bossStageCheck(){
+ var h=getH(),b=h.b;if(!b)return;var ns=nStage(Math.max(b.hp,0));
+ if(ns>b.stage){b.stage=ns;var s=BOSS['s'+ns];
+  if(s.mult){b.phaseMult=s.mult;b.phaseUntil=Date.now()+s.min*60000;}
+  if(s.shield)b.shield=s.shield;
+  if(b.claims.indexOf(ns)<0){b.claims.push(ns);grantStageReward(ns,b.rolls[ns]);}
+  addItem(rollDrop(false));
+  _huntLog(h,'💢 Boss进入第'+ns+'阶段！');}
+ if(b.hp<=0){
+  h.kills++;h.b=null;h.atkMult=1;h.pendingBuff=0;
+  state.inventory.direct_up=(state.inventory.direct_up||0)+1;
+  h.shards+=300;state.points+=300;state.tokens+=40;
+  var drop=Math.random()<0.25;if(drop)state.inventory.hunt_elite_ticket=(state.inventory.hunt_elite_ticket||0)+1;
+  _huntLog(h,'🏆 击杀铭影Boss！+300碎片 +直接升级×1'+(drop?' +💀精英悬赏令！':''));
+  try{showGainModal('🏆 BOSS猎杀成功',[['泰坦碎片','+300'],['💰 积分','+300'],['🪙 代币','+40'],['🔧 直接升级','×1'],drop?['💀 精英悬赏令','+1']:null].filter(Boolean));}catch(e){}
+ }
+}
+function eStage(hp){return hp>ELITE.s2.until?1:hp>ELITE.s3.until?2:hp>ELITE.s4.until?3:4;}
+function eliteStageCheck(){
+ var h=getH(),e=h.eb;if(!e)return;var ns=eStage(Math.max(e.hp,0));
+ if(ns>e.stage){e.stage=ns;var s=ELITE['s'+ns];if(s.shield)e.shield=s.shield;
+  h.shards+=120*ns;state.tokens+=40*ns;
+  if(e.claims.indexOf(ns)<0){e.claims.push(ns);addItem(rollDrop(true));}
+  _huntLog(h,'💀 精英第'+ns+'阶段！+'+(120*ns)+'碎片 +'+(40*ns)+'代币');}
+ if(e.php<=0){h.eb=null;_huntLog(h,'☠️ 血条清空，精英挑战失败…');return;}
+ if(e.hp<=0){
+  h.ekills++;h.eb=null;h.atkMult=1;h.pendingBuff=0;
+  h.shards+=1500;state.tokens+=500;
+  var cores=5+Math.floor(Math.random()*3);state.inventory.sp_core=(state.inventory.sp_core||0)+cores;
+  _huntLog(h,'👑 精英猎杀成功！+1500碎片 +500代币 +💠核心×'+cores);
+  try{showGainModal('👑 精英猎杀成功',[['泰坦碎片','+1500'],['🪙 代币','+500'],['💠 精研核心','×'+cores]]);}catch(e){}
+ }
+}
+var __ct153=window.completeTask;
+window.completeTask=function(i){__ct153.apply(this,arguments);
+ try{var t=state.todayTasks[i];var h=getH();
+  if(t&&t.completed&&(h.b||h.eb)){
+   var g=getTag(t.tagId);if(!g)return;
+   var raw=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
+   if(raw>0){
+    if(h.act.burst){ /* 电弧已武装：触发流血（只吃原始EP） */
+     var per=Math.round(50+raw*0.01);
+     h.act.burst={per:per,left:30,nextAt:Date.now()+200};
+     h.act.armedArc=0;_huntLog(h,'⚡ 电弧释放：30段×'+per+'（6秒结算）');
+    }
+    var own=raw;
+    try{if(typeof fpTaskOwn==='function')own=fpTaskOwn(t,raw,null);}catch(e2){own=raw;}
+    dealDamage(own,g.path[0]||'',g.path[1]||'');
+   }
+  }}catch(e){}};
+
+/* ---- 道具使用 ---- */
+window.huntUseItem=function(k){
+ var h=getH(),now=Date.now();
+ if(!h.b&&!h.eb){alert('没有进行中的战斗');return;}
+ if((h.items[k]||0)<1)return;
+ if(k==='shield'){if(!h.eb){alert('护盾仅可在精英战使用');return;}h.items.shield--;h.act.shieldUntil=now+2*3600*1000;_huntLog(h,'🛡 护盾展开：2h内减伤50%');}
+ else if(k==='armor'){h.items.armor--;h.act.armorUntil=now+3*3600*1000;_huntLog(h,'🔨 破甲：3h内50%伤害转真实伤害');}
+ else if(k==='arc'){if(h.act.burst||h.act.armedArc){alert('电弧已在生效');return;}h.items.arc--;h.act.armedArc=1;_huntLog(h,'⚡ 电弧已武装：完成下一个任务时触发');}
+ else if(k==='exec'){if(h.act.execPending){alert('处决已在蓄能');return;}h.items.exec--;h.act.execPending=1;h.act.execAt=now+20*60000;_huntLog(h,'⚔ 处决蓄能中（20分钟）…');}
+ saveState();renderHuntUI();
+};
+
+/* ---- 心跳：处决/精英攻击/回血/到期 ---- */
+setInterval(function(){try{
+ var h=getH(),now=Date.now(),changed=false;
+ if(h.act.execPending&&now>=h.act.execAt){
+  h.act.execPending=0;changed=true;
+  var tgt=h.eb||h.b;
+  if(tgt){var dmg=Math.round(tgt.hp*0.2);tgt.hp-=dmg;
+   _huntLog(h,'⚔ 处决释放！真实伤害 '+dmg);
+   if(h.eb){h.eb.lastDmgAt=now;eliteStageCheck();}else{bossStageCheck();}}
+ }
+ if(h.eb){var e=h.eb;
+  if(e.stage>=3){while(now>=e.atkNext){var d=ELITE.s3.atk;if(h.act.shieldUntil>now)d=Math.round(d*0.5);e.php-=d;e.atkNext+=ELITE.s3.atkMin*60000;}}
+  if(e.stage===3&&(now-e.lastDmgAt)/1000>ELITE.s3.oocSec){var sec=Math.floor((now-e.lastDmgAt)/1000);e.hp=Math.min(ELITE.s3.cap,e.hp+ELITE.s3.regen*sec);e.lastDmgAt=now;}
+  if(e.php<=0){h.eb=null;_huntLog(h,'☠️ 血条清空，精英挑战失败…');changed=true;}
+  else if(e.hp<=0){eliteStageCheck();changed=true;}
+ }
+ if(h.b&&now>h.b.endAt){h.b=null;h.atkMult=1;h.pendingBuff=0;_huntLog(h,'⏰ 24h内未能击杀，本轮失败（阶段奖已领取）');changed=true;}
+ if(h.eb&&now>h.eb.endAt){h.eb=null;h.atkMult=1;h.pendingBuff=0;_huntLog(h,'⏰ 精英战超时，挑战失败');changed=true;}
+ if(changed){saveState();var bd=document.getElementById('hunt-badge');if(bd)bd.style.display=(h.b||h.eb)?'':'none';
+  if(document.getElementById('page-hunt')&&document.getElementById('page-hunt').classList.contains('active'))renderHuntUI();}
+}catch(e){}},30000);
+/* ---- 电弧0.2秒一跳 ---- */
+setInterval(function(){try{
+ var h=getH(),b=h.act.burst;if(!b)return;var now=Date.now();
+ if(!(h.b||h.eb)){h.act.burst=null;return;}
+ while(b.left>0&&now>=b.nextAt){
+  b.left--;b.nextAt+=200;
+  var tgt=h.eb||h.b;if(!tgt){h.act.burst=null;return;}
+  tgt.hp-=b.per;
+  if(h.eb){if(b.left%5===0)eliteStageCheck();}else{if(b.left%5===0)bossStageCheck();}
+ }
+ if(b.left<=0){h.act.burst=null;_huntLog(h,'⚡ 电弧结算完毕');saveState();if(document.getElementById('page-hunt').classList.contains('active'))renderHuntUI();}
+}catch(e){}},200);
+
+/* ---- 每日悬赏令 ---- */
+var __drc153=window.dailyResetCheck;
+window.dailyResetCheck=function(){__drc153.apply(this,arguments);
+ var h=getH(),today=_huntToday();
+ if(huntActive()&&h.lastTicket!==today){h.lastTicket=today;state.inventory.hunt_ticket=(state.inventory.hunt_ticket||0)+1;_huntLog(h,'📮 今日悬赏令 +1');saveState();}};
+
+/* ---- 黑市/高塔/车间 ---- */
+window.huntBuy=function(i){var h=getH(),it=MARKET[i];
+ if(h.shards<it.c||(it.once&&h.mk[i]))return;
+ showModal('💱 黑市兑换','消耗 <b>'+it.c+'</b> 泰坦碎片兑换 <b>'+it.n+'</b>？',function(){h.shards-=it.c;if(it.once)h.mk[i]=1;it.run();saveState();updateTopBar();closeModal();renderHuntUI();});};
+window.huntBuyRelic=function(n){var h=getH();
+ if(h.relicBought[n]||h.parts[n]){alert('已拥有该编号');return;}
+ if(h.shards<600){alert('碎片不足（需600）');return;}
+ h.shards-=600;h.relicBought[n]=1;h.parts[n]=1;_huntLog(h,'🧩 购得遗物#'+n+'「'+PARTN[n-1]+'」');saveState();renderHuntUI();};
+window.huntDraw=function(){var h=getH();
+ var floor=-1;for(var f=0;f<10;f++){var cnt=10-f;var done=h.tower.filter(function(x){return x[0]===f;}).length;if(done<cnt){floor=f;break;}}
+ if(floor<0){alert('高塔已登顶！');return;}
+ var cnt2=10-floor,pool=[];for(var ii=0;ii<cnt2;ii++){if(!h.tower.some(function(x){return x[0]===floor&&x[1]===ii;}))pool.push(ii);}
+ var slot=pool[Math.floor(Math.random()*pool.length)],cost=10+5*h.tower.length;
+ if(h.shards<cost){alert('碎片不足');return;}
+ h.shards-=cost;h.tower.push([floor,slot]);
+ var it=TOWER_SLOTS[floor][slot];
+ if(it.relic){h.parts[it.relic]=(h.parts[it.relic]||0)+1;_huntLog(h,'🗼 第'+(floor+1)+'层通关！获得 '+it.n+'「'+PARTN[it.relic-1]+'」');}
+ else grantFiller(it);
+ saveState();renderHuntUI();
+};
+window.huntForge=function(si){var h=getH(),need=[5,8,10][si],owned=0;
+ for(var k=1;k<=10;k++)if(h.parts[k])owned++;
+ if(owned<need||h.forgeDone.indexOf(si)>-1)return;
+ for(var k2=1;k2<=need;k2++)h.parts[k2]=0;              /* 铸造消耗指定部件 */
+ h.forgeDone.push(si);
+ var rw=[function(){state.inventory.sp_core=(state.inventory.sp_core||0)+3;return'💠 精研核心 ×3';},
+         function(){state.inventory.ult_upgrade=(state.inventory.ult_upgrade||0)+1;return'🏆 终极改装包 ×1';},
+         function(){state.inventory.sp_direct=(state.inventory.sp_direct||0)+1;return'🚀 直接SP券 ×1';}][si]();
+ saveState();try{showGainModal('⚒️ 暗熔车间铸造成功',[[rw,'','#ff2d95']]);}catch(e){}renderHuntUI();};
+window.huntUseSpDirect=function(tid){if(!(state.inventory.sp_direct>0))return;
+ var u=state.tagUp[tid];if(!u||u.sp||(u.spd||0)<10||(u.acc||0)<10||(u.ctl||0)<10||(u.nit||0)<10){alert('该标签不满足四线满级');return;}
+ state.inventory.sp_direct--;u.sp=true;saveState();try{pushEvolveNote('🚀 直接SP觉醒：'+getTag(tid).path.join('·'));}catch(e){}renderHuntUI();};
+window.huntTab=function(t){document.querySelectorAll('[data-ht]').forEach(function(b){b.classList.toggle('active',b.dataset.ht===t);});renderHuntTab(t);};
+
+/* ---- UI ---- */
+function _bar(c,m,color){var p=Math.max(0,Math.min(100,Math.round(c/m*100)));return '<div style="height:12px;background:#e5e5ea;border-radius:6px;overflow:hidden;"><div style="height:100%;width:'+p+'%;background:'+color+';"></div></div>';}
+function _theme(h){var now=Date.now();
+ if(h.act.execPending)return ITEMC.exec;
+ if(h.act.shieldUntil>now)return ITEMC.shield;
+ if(h.act.burst||h.act.armedArc)return ITEMC.arc;
+ if(h.act.armorUntil>now)return ITEMC.armor;
+ return null;}
+function _itemBtns(h){var now=Date.now(),s='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">';
+ ['exec','shield','arc','armor'].forEach(function(k){var n=h.items[k]||0,tag='',dis=false;
+  if(k==='exec'&&h.act.execPending){tag=' ⏳'+fmtCD(h.act.execAt-now);dis=true;}
+  if(k==='shield'){if(!h.eb)dis=true;if(h.act.shieldUntil>now)tag=' ⏳'+fmtCD(h.act.shieldUntil-now);}
+  if(k==='arc'&&h.act.armedArc){tag=' 已武装';dis=true;}
+  if(k==='arc'&&h.act.burst)tag=' '+h.act.burst.left+'段';
+  if(k==='armor'&&h.act.armorUntil>now)tag=' ⏳'+fmtCD(h.act.armorUntil-now);
+  s+='<button class="btn-secondary" style="font-size:12px;'+(n<1||dis?'opacity:.45;':'')+'" '+(n<1||dis?'disabled':'')+' onclick="huntUseItem(\''+k+'\')">'+ITEMN[k]+'×'+n+tag+'</button>';});
+ return s+'</div>';}
+window.renderHuntUI=function(){
+ var box=document.getElementById('hunt-status');if(!box)return;var h=getH(),now=Date.now();
+ var chipEl=document.getElementById('hunt-shards-chip');if(chipEl)chipEl.textContent='🧿 '+h.shards;
+ if(!huntActive()){box.innerHTML='<div class="card-title">🏹 铭影追猎者</div><div style="color:#8e8e93;font-size:13px;padding:10px;">限时玩法（11.05–11.26）未开启或已结束。</div>';return;}
+ var tc=_theme(h);
+ var s='<div class="card-title" style="'+(tc?'color:'+tc+';':'')+'">🏹 铭影追猎者 <span class="badge">🧿碎片 '+h.shards+'</span> <span class="badge">🏹'+(state.inventory.hunt_ticket||0)+' 💀'+(state.inventory.hunt_elite_ticket||0)+'</span>'+(h.atkMult>1?' <span class="badge" style="color:#ff9500;">⚔攻击+30%</span>':'')+'</div>';
+ if(h.act.execPending)s+='<div style="margin:6px 0;padding:8px 10px;border-radius:8px;background:'+ITEMC.exec+'18;border:1px solid '+ITEMC.exec+';color:'+ITEMC.exec+';font-size:13px;font-weight:700;text-align:center;animation:huntBlink 1s infinite;">⚔ 处决技能即将释放（'+fmtCD(h.act.execAt-now)+'）</div>';
+ if(h.eb){var e=h.eb;
+  s+='<div style="font-size:13px;font-weight:700;">💀 精英铭影 第'+e.stage+'/4阶段 · 减伤'+Math.round(RED[e.stage]*100)+'% · ⏳'+fmtCD(e.endAt-now)+'</div>';
+  s+='<div style="font-size:11px;color:#8e8e93;margin:3px 0;">Boss '+Math.max(0,e.hp)+' / '+ELITE.hp+'</div>'+_bar(Math.max(0,e.hp),ELITE.hp,'#ff3b30');
+  s+='<div style="font-size:11px;color:#af52de;margin:3px 0;">🛡韧性 '+e.shield+'</div>';
+  s+='<div style="font-size:11px;color:#34c759;margin:3px 0;">❤️ 你的血条 '+Math.max(0,e.php)+' / '+ELITE.php+(e.stage>=3?' · 下次被袭'+fmtCD(Math.max(0,e.atkNext-now)):'')+'</div>'+_bar(Math.max(0,e.php),ELITE.php,'#34c759');
+  if(e.stage===3)s+='<div style="font-size:11px;color:#ff9500;">🩸 脱战60秒后Boss以10HP/s回血（上限39999）</div>';
+  s+='<div style="font-size:11px;color:#8e8e93;margin-top:4px;">弱点：'+e.weakCat+'（可穿透韧性条直击本体）</div>'+_itemBtns(h);}
+ else if(h.b){var b=h.b;
+  s+='<div style="font-size:13px;font-weight:700;">👹 铭影Boss 第'+b.stage+'/4阶段 · ⏳'+fmtCD(b.endAt-now)+'</div>';
+  s+='<div style="font-size:11px;color:#8e8e93;margin:3px 0;">HP '+Math.max(0,b.hp)+' / '+BOSS.hp+'</div>'+_bar(Math.max(0,b.hp),BOSS.hp,'linear-gradient(90deg,#ff3b30,#ff9500)');
+  if(b.shield>0)s+='<div style="font-size:11px;color:#af52de;margin:3px 0;">🛡韧性 '+b.shield+'</div>';
+  if(b.phaseUntil>now)s+='<div style="font-size:11px;color:#ff3b30;">⚠️ 阶段减伤'+Math.round((1-b.phaseMult)*100)+'% 生效中 '+fmtCD(b.phaseUntil-now)+'</div>';
+  s+='<div style="font-size:11px;color:#8e8e93;margin-top:4px;">弱点：'+b.weakCat+'</div>';
+  s+='<div style="font-size:11px;color:#8e8e93;">本轮阶段奖励：'+[1,2,3,4].map(function(n){var c=b.claims.indexOf(n)>-1;return 'P'+n+'='+(c?['💠碎片','💰积分','🪙代币'][b.rolls[n]]:'?');}).join(' ')+'</div>'+_itemBtns(h);}
+ else{s+='<div style="font-size:13px;color:#8e8e93;padding:4px 0;">无进行中的战斗 · 前往🍺暗桩酒馆开战</div>';
+  if(!h.b)s+='<div style="font-size:11px;color:#c7c7cc;margin-top:4px;">单次任务伤害=任务EP×标签倍率×(1+强化)+持有总EP×0.03 · 标签倍率：背单词600%/考研450%/本科350%</div>';}
+ if(h.log.length)s+='<div style="font-size:11px;color:#8e8e93;margin-top:8px;border-top:1px solid #f2f2f7;padding-top:6px;line-height:1.8;">'+h.log.slice(0,6).join('<br>')+'</div>';
+ box.innerHTML=s;renderHuntTab(document.querySelector('[data-ht].active')?document.querySelector('[data-ht].active').dataset.ht:'tavern');};
+function renderHuntTab(t){
+ var el=document.getElementById('hunt-tab-body');if(!el)return;var h=getH(),out='';
+ if(t==='tavern'){out='<button class="btn-primary" style="width:100%;" onclick="huntTavern()">🍺 进入暗桩酒馆（开战 · 代币强化 · 开局道具）</button>'
+  +'<div style="font-size:11px;color:#8e8e93;margin-top:6px;line-height:1.7;">掉落事件=进入P2/P3/P4各1次（共3次）· 道具槽2个，满时掉落作废 · 每场清零</div>';}
+ if(t==='market'){MARKET.forEach(function(it,i){var sold=it.once&&h.mk[i];
+   out+='<div class="shop-item"><div class="shop-info"><div class="shop-name">'+it.n+'</div></div><div style="display:flex;align-items:center;gap:8px;"><span class="shop-cost">'+it.c+'碎片</span><button class="btn-accent" style="padding:5px 12px;font-size:12px;" '+(sold||h.shards<it.c?'disabled style="opacity:.4"':'')+' onclick="huntBuy('+i+')">'+(sold?'已购':'兑换')+'</button></div></div>';});
+  out+='<div style="font-size:11px;color:#8e8e93;margin:6px 0;">覆盖全玩法补给：任务升级 / 竞技 / 杯赛 / 乱斗·潜能·进化·被动体验卡。终极改装包不在黑市产出，仅暗熔车间铸造。</div>';
+  out+='<div style="font-size:12px;font-weight:600;margin:10px 0 4px;">🧩 指定遗物购买（600碎片/个，每编号限购1）</div><div style="display:flex;flex-wrap:wrap;gap:4px;">';
+  for(var n=1;n<=10;n++)out+='<button class="btn-secondary" style="font-size:11px;'+(h.parts[n]||h.relicBought[n]?'opacity:.4':'')+'" '+(h.parts[n]||h.relicBought[n]?'disabled':'')+' onclick="huntBuyRelic('+n+')">#'+n+' '+PARTN[n-1]+'</button>';
+  out+='</div>';}
+ if(t==='tower'){var totalDraws=h.tower.length,nextCost=10+5*totalDraws;
+  var curFloor=-1;for(var q=0;q<10;q++){var cq=10-q,dq=h.tower.filter(function(x){return x[0]===q;}).length;if(dq<cq){curFloor=q;break;}}
+  out='<div style="font-size:11px;color:#8e8e93;margin-bottom:8px;line-height:1.7;">共10层，每层道具10→1件；本层抽齐才能开上层；第n层最后一件固定为遗物#n（爬满=10件全齐）。下一抽消耗'+nextCost+'碎片。</div>';
+  for(var f=0;f<10;f++){var cnt=10-f,done=h.tower.filter(function(x){return x[0]===f;}).length;
+   out+='<div style="border:1px solid #e5e5ea;border-radius:10px;padding:10px;margin-bottom:8px;'+(done>=cnt?'background:#f0fbf4;':'')+'"><div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:13px;font-weight:600;">🗼 第'+(f+1)+'层 · '+cnt+'件'+(done>=cnt?' ✅已通关':'')+'</span>'+(f===curFloor?'<button class="btn-primary" style="padding:4px 12px;font-size:12px;" '+(h.shards<nextCost?'disabled style="opacity:.4"':'')+' onclick="huntDraw()">'+nextCost+'碎片 抽取</button>':'')+'</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;">';
+   for(var ii=0;ii<cnt;ii++){var drawn=h.tower.some(function(x){return x[0]===f&&x[1]===ii;});
+    var it2=TOWER_SLOTS[f][ii];
+    out+='<span style="font-size:11px;padding:4px 8px;border-radius:6px;background:'+(drawn?'#e8f7ec;color:#34c759':'#f2f2f7;color:#6e6e73')+';">'+(drawn?'✅ ':''+it2.n)+'</span>';}
+   out+='</div></div>';}}
+ if(t==='forge'){
+  var needSets=[[5,'💠精研核心×3',0],[8,'🏆终极改装包×1',1],[10,'🚀直接SP券×1（仅四线满级标签）',2]];
+  var cur=0;for(var fi=0;fi<3;fi++){if(h.forgeDone.indexOf(fi)>-1)cur=fi+1;}
+  var si=Math.min(cur,2),need=needSets[si][0];
+  var stageOwned=0;for(var k3=1;k3<=need;k3++)if(h.parts[k3])stageOwned++;
+  var doneAll=cur>=3;
+  var can=!doneAll&&stageOwned>=need;
+  out='<div style="font-size:12px;color:#6e6e73;margin-bottom:8px;line-height:1.7;">车间分三档<b>逐级解锁</b>，铸造成功会<b>消耗</b>本档指定遗物。当前目标：集齐 <b style="color:#ff9500;">遗物 #1 ~ #'+need+'</b>（共'+need+'种，已集 '+stageOwned+'/'+need+'）→ '+needSets[si][1]+'</div>';
+  out+='<div style="border:1px solid #d1d1d6;border-radius:14px;padding:12px;background:#fff;">';
+  out+='<div style="text-align:center;padding:12px;border:2px dashed '+(can?'#34c759':'#d1d1d6')+';border-radius:12px;margin-bottom:10px;background:'+(can?'#f0fbf4':'#fafbfd')+';">'
+   +'<div style="font-size:16px;font-weight:800;color:#1d1d1f;">'+(doneAll?'🏆 车间全部铸造完成':'⚒️ '+needSets[si][1])+'</div>'
+   +(doneAll?'':'<div style="font-size:11px;color:#8e8e93;margin:5px 0;">指定遗物 '+stageOwned+' / '+need+'</div>'
+    +'<div style="height:8px;background:#e5e5ea;border-radius:4px;overflow:hidden;max-width:280px;margin:0 auto;"><div style="height:100%;width:'+Math.min(100,Math.round(stageOwned/need*100))+'%;background:linear-gradient(90deg,#007aff,#34c759);border-radius:4px;"></div></div>'
+    +'<button class="btn-primary" style="margin-top:9px;padding:9px 26px;'+(can?'':'opacity:.4')+'" '+(can?'':'disabled')+' onclick="huntForge('+si+')">'+(can?'🔥 组装':'未集齐')+'</button>')
+   +'</div>';
+  out+='<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">';
+  for(var i2=1;i2<=10;i2++){
+   var req=i2<=need,has=h.parts[i2]||0;
+   var border=has>0?(req?'#ff9500':'#34c759'):'#e5e5ea';
+   out+='<div style="text-align:center;padding:7px 2px;border-radius:10px;border:1.5px solid '+border+';background:'+(has>0?'#fff':'#fafbfd')+';'+(req?'':'opacity:.55;')+'">'
+    +'<div style="font-size:16px;line-height:1;">🧩</div>'
+    +'<div style="font-size:10px;font-weight:700;color:#1d1d1f;margin-top:2px;">#'+i2+' '+PARTN[i2-1]+'</div>'
+    +'<div style="font-size:10px;color:'+(has>0?'#007aff':'#c7c7cc')+';">持有×'+has+(req?'':' ·后续档')+'</div></div>';
+  }
+  out+='</div>';
+  if(!doneAll)out+='<div style="font-size:11px;color:#af52de;margin-top:8px;">'+(cur===0?'🔒 铸造本档后才会显示下一档目标':'🔓 下一档：'+needSets[Math.min(cur+1,2)][1].replace(/×.*/,'')+'（铸造后解锁）')+'</div>';
+  out+='</div>';
+  if((state.inventory.sp_direct||0)>0){var elig=TASK_TAGS.filter(function(tg){var u=(state.tagUp||{})[tg.id];return u&&!u.sp&&(u.spd||0)>=10&&(u.acc||0)>=10&&(u.ctl||0)>=10&&(u.nit||0)>=10;});
+   out+='<div style="margin-top:8px;font-size:12px;color:#6e6e73;">🚀 直接SP券 ×'+state.inventory.sp_direct+'：</div>';
+   elig.forEach(function(tg){out+='<button class="btn-secondary" style="width:100%;margin-top:4px;font-size:12px;" onclick="huntUseSpDirect(\''+tg.id+'\')">★ '+tg.path.join(' · ')+'</button>';});}
+ }
+ el.innerHTML=out;}
+/* ---- 追猎指南 ---- */
+var GUIDE='<details style="margin:0 0 10px 0;"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#ff3b30;padding:7px 10px;background:#fff1f0;border-radius:8px;">📖 追猎指南（点我展开：总规则/四据点/BOSS详解/道具表）</summary><div style="font-size:12px;color:#6e6e73;padding:10px;line-height:1.9;background:#fafbfd;border-radius:0 0 8px 8px;max-height:520px;overflow-y:auto;">'
++'<b style="color:#1d1d1f;">🏹 一、总规则</b><br>'
++'铭影追猎者是考研EP系统首个赛季限时玩法，于S1赛季下半程开启（11月5日至11月26日，共21天）。活动期间，每位考生每天可免费获得1张boss悬赏令，使用悬赏令即开启一场为期24小时的猎杀：你需要在一天之内击杀40000点HP的铭影Boss。未能击杀不会受到任何惩罚——已经解锁的阶段奖励照领归你，但击杀奖励（必定掉落的「直接升级」与25%概率的精英悬赏令）将与你无缘。成功击杀后Boss重置，你可以用新的悬赏令开启下一轮。持有精英悬赏令还可挑战终极的精英铭影：它拥有80000点HP与四个阶段，战斗窗口48小时，而你只有20000点血条——血条被清空或超时即挑战失败，且无法获得本次精英战的任何奖励。<br>'
++'对Boss造成的伤害完全来自你的日常沉淀，与打什么玩法无关：每完成一个任务，该任务获得的EP（天赋、乱斗、潜能、进化等特殊玩法的加成全部计入）会按标签大类倍率折算——背单词类600%、考研类450%、本科类350%；唯一的例外是电弧道具，它只按原始填入EP结算、不吃任何增益；若开战前在酒馆消耗代币，还可再获得30%攻击加成。除此之外，你的历史总持有EP会按每点0.03的系数叠加为"EP压制"伤害（只读取、绝不扣除你的EP），它与任务伤害合并为单次基础伤害，会正常受到Boss的阶段减伤影响。战斗中掉落的护盾、处决、破甲、电弧四种道具是锦上添花：每场战斗最多同时持有2个，槽满时掉落直接作废，且每场战斗结束全部清零。活动产出的泰坦碎片与遗物部件可在黑市、追猎者高塔、暗熔车间兑换包括精研核心、终极改装包、直接SP在内的顶级资源。击杀主要看基础伤害，道具只是帮你跨过最后一段。<br><br>'
++'<b style="color:#1d1d1f;">🍺 二、暗桩酒馆</b><br>'
++'暗桩酒馆是铭影追猎者一切行动的起点，所有猎杀委托都在这里接取。每天登录后你都会免费获得1张boss悬赏令（活动期间每日1张，可累积），点击常规战按钮即可开启24小时猎杀；若你持有精英悬赏令（击杀常规Boss有25%概率掉落），也可以在这里开启48小时的精英战。开战的时机由你决定：建议先规划好今天的任务结构再使用悬赏令，因为24小时的计时从点击那一刻就开始走，而伤害只在完成任务的瞬间产生——早上开战能覆盖全天，深夜开战可能浪费大半窗口。<br>'
++'真正让酒馆与众不同的，是开战前的两项代币强化（仅本场战斗有效）。第一项是基础攻击+30%，售价120代币：它直接放大你所有任务伤害与EP压制，是性价比最高的长期投资，建议每场必买。第二项是开局道具，售价80代币、每场限购2个：购买后不会立刻入手，而是在战斗开始时按照当前模式的掉落概率表立即roll出一件道具——注意普通模式与精英模式的掉落表不同，普通模式没有护盾，所以如果你买开局道具是为了赌护盾，务必在精英战中开启。已购买的强化与开局道具都只保留到下一次战斗，战斗结束后无论是否击杀都会重置。<br>'
++'酒馆内还会显示你当前的悬赏令与精英悬赏令库存。常规策略是：无精英令时每天稳定打一轮常规战攒阶段奖；掉出精英令后挑一个任务饱满、能连续两天高产的周末再打精英战。记住普通战的失败规则——24小时没杀掉，Boss满血重置，但阶段奖励已入袋，等于"输了战斗、赢了补给"；精英战则残酷得多，失败等于血本无归。因此精英战开局的每一次强化、每一个道具的使用时机都值得反复斟酌。酒馆就是你权衡风险与收益的决策中枢。<br><br>'
++'<b style="color:#1d1d1f;">💱 三、黑市交易所</b><br>'
++'黑市交易所是泰坦碎片的核心出口，这里没有标价虚高的噱头，所有商品都只收活动专属货币泰坦碎片。泰坦碎片的来源贯穿整个活动：常规Boss每个阶段解锁时，你会获得系统在开战时roll定的一种奖励（泰坦碎片、积分、代币三者之一），击杀更可直接获得300碎片；精英Boss每个阶段必定同时发放碎片与代币，击杀更是一口气给出1500碎片与500代币。攒下的碎片可以在黑市兑换日常刚需——积分、代币、属性抽取券、变更券、零件材料包、2倍经验卡，也可以兑换硬通货直接升级与精研核心；终极改装包不在黑市产出，只能通过暗熔车间铸造获得。<br>'
++'黑市还承担着遗物部件的兜底功能：遗物共有编号1至10的十种，正常获取靠爬高塔或在Boss战中低概率掉落，但如果你只差最后一件、高塔层数又不够，可以花600泰坦碎片直接购买指定编号的遗物，每种编号限购1次。这个价格并不便宜—— roughly相当于一次精英Boss击杀的全部碎片产出——所以它适合作为"临门一脚"而不是常规渠道。规划建议：先把碎片留给高塔抽取（高塔的遗物是爬层保底的），等塔层数卡壳或车间差最后几件时，再用黑市定向补齐；终极改装包虽然诱人，但如果你的车间路线还差遗物，优先保证车间的三档铸造能够完成，因为直接SP的机会整个活动可能只有一次。<br><br>'
++'<b style="color:#1d1d1f;">🗼 四、追猎者高塔</b><br>'
++'追猎者高塔是活动的抽奖爬塔玩法，也是遗物部件最主要的保底来源。高塔共10层，每层可抽取的道具数量从第1层的10件逐级递减，第2层9件、第3层8件……直到顶层只剩1件。规则有三条：其一，每层内抽到的道具不会重复；其二，每抽一次消耗的泰坦碎片随行数递增——第k抽消耗10+5×(k-1)碎片，越往上越贵；其三，只有拿齐本层全部道具才能解锁上一层。每层的最深处（压轴奖励）固定为一件指定编号的遗物：第1层压轴是遗物#1，第2层是#2，依此类推到顶层#10——这意味着只要一路爬上去，十种遗物必定一样一个全部集齐，不存在抽卡的脸黑问题。<br>'
++'爬满全塔共需抽取10+9+8+…+1=55次，总消耗约7975碎片，正好约等于整个活动全勤所能产出的碎片总量——这是设计者故意留下的取舍：全勤玩家可以"塔毕业"或"黑市买齐材料"，但很难两者兼得。中低层（第1~5层）的填充奖励以积分、代币、票券、经验卡为主，性价比不错；第6层以上填充奖励价值上升，而真正的目标始终是每层的遗物压轴。策略上，建议每天把Boss阶段奖与击杀的碎片全部投入高塔，尽早爬完前5层拿到遗物#1~#5完成车间第一档铸造（精研核心×3）；之后根据车间第二档（需8种）的缺口决定是否继续冲刺第6~8层，还是转而用黑市600碎片定向补缺。顶层遗物#10是整个活动最贵的单件（爬到顶层约需累计近8000碎片），它是车间最终档"直接SP券"的钥匙，价值无法用碎片衡量。<br><br>'
++'<b style="color:#1d1d1f;">⚒️ 五、暗熔车间</b><br>'
++'暗熔车间是铭影追猎者的终点，三件顶级奖励都铸在这里，而铸造的唯一材料就是遗物部件。车间分三个阶段：第一阶段需要集齐指定5种遗物（编号1~5），铸造奖励为精研核心×3——精研核心是整个游戏最稀缺的SP觉醒材料，商店每周限购1个，这里一次给3个，价值极高；第二阶段需要集齐指定8种（编号1~8），奖励为终极改装包×1，可任选标签直接四线满级（不含SP）；第三阶段需要10种全部集齐，奖励为直接SP券×1——注意它只能用于四条改装线都已达到10级满级的标签，直接完成SP运动版觉醒，这是除高成本觉醒外唯一的SP捷径，也是全活动最终极的奖励。<br>'
++'铸造会消耗对应的遗物部件：第一阶段成功后，编号1~5的部件被熔掉，你需要重新收集它们才能凑齐第二阶段的8种。整个活动按毕业规划，三种遗物获取渠道要全部用上：高塔爬层保底产出每层一件（共10件，但注意铸造消耗后可能需要二刷低层）；Boss战中每完成一个任务有2%概率掉落一件随机遗物，一场精英战下来期望掉落1~2件；黑市600碎片可定向购买指定编号，每种限购1次。现实的活动周期内，第一阶段（5种）约在第一周即可完成，第二阶段（8种）需要重新集齐1~5中的缺口加6~8，大约在活动第14~17天达成，第三阶段（10种）是全活动的毕业挑战——除非你用黑市定向+高塔二刷补件，否则需要几乎全勤。建议把黑市的定向购买机会留到第三阶段冲刺期再用，前两阶段靠塔和Boss掉落即可。<br><br>'
++'<b style="color:#1d1d1f;">👹 六、BOSS详解</b><br>'
++'<b>铭影Boss（常规战）：</b>40000点HP，战斗窗口24小时，未击杀则满血重置（阶段奖励保留）。它共有四个阶段。第一阶段（30000~40000）没有任何特殊机制，是你倾泻伤害的黄金期，建议留一个处决在这个阶段末尾压低血线。第二阶段（20000~29999）持续1小时的30%减伤，期间能打多少打多少，减伤结束后输出效率回升。第三阶段（10000~19999）最为棘手：进阶段时Boss立即获得1000点韧性条，会替它承受50%的伤害，同时伴随持续2小时的20%减伤——弱点机制在此阶段价值千金：开战时系统会根据你今日任务结构指定一个"弱点大类"（任务树第二级标签，如"公共课""考研英二单词"），完成该类任务造成的伤害可以无视韧性条直击本体，并对韧性条造成等值伤害，也就是说弱点任务一刀两用，既削韧又磨血。第四阶段（0~9999）是斩杀线：进阶段获得2000点韧性条（承受比例降为30%）、1小时50%减伤，且你造成的伤害有10%会转化为Boss的血量恢复——这一阶段不要吝惜道具，破甲的真实伤害不吃减伤、处决的真实伤害直接结算，都是为斩杀而生的。<br>'
++'<b>精英铭影（精英战）：</b>80000点HP、48小时战斗窗口，你自身拥有20000点血条，血条清空或超时即失败且无奖励——精英战是真正意义上的背水一战。四个阶段各有恐怖的复合机制：第一阶段（60000~80000）10%减伤，尽量保留道具；第二阶段（40000~59999）减伤升至15%，进阶段刷新1500点韧性条（承受50%）；第三阶段（20000~39999）进入生死时速——减伤20%，韧性条2000，且Boss拥有两种压制手段：其一，只要你脱战超过60秒，它就以每秒10点HP的速度回血，直至回到该阶段上限39999，这意味着睡眠时段Boss会回满，第三阶段必须在一个清醒时段内连续灌伤害一口气压过去；其二，它每隔3小时对你发动一次1000点伤害的反扑，你的20000血条理论上撑得住16次，但算上荆棘与失误余量，必须在被磨死之前完成击杀——🛡护盾道具（仅精英掉落）能在2小时内把所受伤害减半，是保命的唯一手段；第四阶段（0~19999）减伤25%，韧性条2500且承受比例升至60%，并获得荆棘能力：韧性条替你承受的伤害的20%会反弹到你的血条上。弱点大类机制在精英战同样生效，是穿透高比例韧性条的关键。击杀精英的奖励也配得上风险：每个阶段必得碎片+代币，击杀发放1500碎片、500代币与至少5个精研核心。<br><br>'
++'<b style="color:#1d1d1f;">🎁 七、道具表</b><br>'
++'<table style="width:100%;border-collapse:collapse;font-size:11px;"><tr style="background:#f9f9fb;"><th style="border:1px solid #e5e5ea;padding:5px;">道具</th><th style="border:1px solid #e5e5ea;padding:5px;">普通掉落</th><th style="border:1px solid #e5e5ea;padding:5px;">精英掉落</th><th style="border:1px solid #e5e5ea;padding:5px;">效果</th><th style="border:1px solid #e5e5ea;padding:5px;">持续/触发</th></tr>'
++'<tr><td style="border:1px solid #e5e5ea;padding:5px;">🛡护盾</td><td style="border:1px solid #e5e5ea;padding:5px;text-align:center;">—</td><td style="border:1px solid #e5e5ea;padding:5px;text-align:center;">50%</td><td style="border:1px solid #e5e5ea;padding:5px;">主动：所受伤害减少50%（包括Boss攻击与荆棘反弹）</td><td style="border:1px solid #e5e5ea;padding:5px;">2小时</td></tr>'
++'<tr><td style="border:1px solid #e5e5ea;padding:5px;">⚔处决</td><td style="border:1px solid #e5e5ea;padding:5px;text-align:center;">5%</td><td style="border:1px solid #e5e5ea;padding:5px;text-align:center;">5%</td><td style="border:1px solid #e5e5ea;padding:5px;">主动：蓄能20分钟后，对Boss造成蓄能完毕瞬间HP×20%的真实伤害（无视减伤/韧性/回血），蓄能期间有释放预警</td><td style="border:1px solid #e5e5ea;padding:5px;">蓄能20分钟</td></tr>'
++'<tr><td style="border:1px solid #e5e5ea;padding:5px;">🔨破甲</td><td style="border:1px solid #e5e5ea;padding:5px;text-align:center;">60%</td><td style="border:1px solid #e5e5ea;padding:5px;text-align:center;">22.5%</td><td style="border:1px solid #e5e5ea;padding:5px;">主动：单次任务伤害的50%转化为真实伤害（不吃阶段减伤、不被韧性条吸收）</td><td style="border:1px solid #e5e5ea;padding:5px;">3小时</td></tr>'
++'<tr><td style="border:1px solid #e5e5ea;padding:5px;">⚡电弧</td><td style="border:1px solid #e5e5ea;padding:5px;text-align:center;">35%</td><td style="border:1px solid #e5e5ea;padding:5px;text-align:center;">22.5%</td><td style="border:1px solid #e5e5ea;padding:5px;">主动：武装后，完成下一个任务时触发流血——30段×(50+该任务原始填入EP×1%)，每0.2秒一段共6秒，总伤约1500~1700，只认原始EP、不吃任何增益</td><td style="border:1px solid #e5e5ea;padding:5px;">触发后6秒打完</td></tr></table>'
++'<div style="font-size:11px;color:#8e8e93;margin-top:6px;">掉落事件=进入P2/P3/P4各1次（每场共3次）；每场最多同时持有2个，槽满掉落作废，每场清零；开局道具（🪙80/个，限购2）在开战时按本模式掉落表roll出。</div>'
++'</div></details>';
+
+var PAGE='<div id="page-hunt" class="page">'+GUIDE
++'<div class="card" id="hunt-status"></div>'
++'<div class="card" style="margin-top:12px;"><div class="card-title">🗺️ 铭影据点 <span class="badge" id="hunt-shards-chip" style="color:#ff9500;font-weight:700;">🧿 0</span> <span class="badge">11.05–11.26</span></div>'
++'<div style="display:flex;gap:6px;flex-wrap:wrap;">'
++'<button class="navbtn active" data-ht="tavern" onclick="huntTab(\'tavern\')">🍺 暗桩酒馆</button>'
++'<button class="navbtn" data-ht="market" onclick="huntTab(\'market\')">💱 黑市交易所</button>'
++'<button class="navbtn" data-ht="tower" onclick="huntTab(\'tower\')">🗼 追猎者高塔</button>'
++'<button class="navbtn" data-ht="forge" onclick="huntTab(\'forge\')">⚒️ 暗熔车间</button>'
++'</div><div id="hunt-tab-body" style="margin-top:10px;"></div></div></div>';
+
+/* ---- 注入 ---- */
+(function inject(){
+ var st=document.createElement('style');
+ st.textContent='@keyframes huntBlink{0%,100%{opacity:1}50%{opacity:.45}}';
+ document.head.appendChild(st);
+ document.getElementById('page-achievement').parentNode.insertAdjacentHTML('beforeend',PAGE);
+ var fab=document.createElement('div');
+ fab.id='hunt-fab';
+ fab.style.cssText='position:fixed;right:14px;bottom:22px;z-index:210;cursor:pointer;width:58px;height:58px;';
+ fab.innerHTML='<div style="width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#ff3b30,#ff9500);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 5px 16px rgba(255,59,48,.5);border:2px solid #fff;"><span style="font-size:22px;line-height:1;">🏹</span><span style="font-size:10px;color:#fff;font-weight:700;line-height:1.3;">追猎</span></div><span id="hunt-badge" style="display:none;position:absolute;top:-2px;right:-2px;background:#ff3b30;color:#fff;border-radius:9px;padding:1px 6px;font-size:10px;font-weight:700;border:1.5px solid #fff;">⚔</span>';
+ fab.onclick=function(){switchPage('hunt');};
+ document.body.appendChild(fab);
+ var _sw=window.switchPage;window.switchPage=function(n){_sw(n);if(n==='hunt')renderHuntUI();};
+ setInterval(function(){try{if(document.getElementById('page-hunt').classList.contains('active'))renderHuntUI();}catch(e){}},5000);
+ var _rh=window.renderHome;window.renderHome=function(){_rh.apply(this,arguments);try{if(window.__injectAnn153)__injectAnn153();}catch(e){}var h=getH(),b=document.getElementById('hunt-badge');if(b)b.style.display=(h.b||h.eb)?'':'none';};
+ try{INVENTORY_CATALOG[0].items.push({k:'hunt_ticket',n:'boss悬赏令',i:'🏹',d:'铭影追猎者：开启24h boss战'},{k:'hunt_elite_ticket',n:'精英boss悬赏令',i:'💀',d:'开启48h精英战（20000血条）'});}catch(e){}
+ try{INVENTORY_CATALOG[2].items.push({k:'sp_direct',n:'直接SP券',i:'🚀',d:'四线满级标签直接觉醒SP'});}catch(e){}
+})();
+
+/* ============ 4. 杯赛奖励JSON修复 ============ */
+(function(){
+ var GL={points:'💰积分',tokens:'🪙代币',draw_ticket:'🎟️抽取券',change_ticket:'🎫变更券',reroll_ticket:'🔮重铸券',parts_pack:'📦材料包',direct_up:'🔧直接升级',sp_core:'💠精研核心',ult_upgrade:'🏆终极改装包',exp12:'⚡1.2倍卡',exp15:'⚡1.5倍卡',exp2:'⚡2倍卡',exp25:'⚡2.5倍卡',exp3:'⚡3倍卡',slot_trial:'🎟️全功能体验卡',talent_extra:'🌟天赋额外抽取',brawl_vip:'👑乱斗特权券',race_ticket:'🎫竞技票',hunt_ticket:'🏹悬赏令',hunt_elite_ticket:'💀精英悬赏令',sp_direct:'🚀直接SP券'};
+ function rwLabel(o){if(!o||typeof o!=='object')return String(o);
+  var p=[];Object.keys(o).forEach(function(k){var v=o[k];if(!v)return;
+   if(k==='mats'&&typeof v==='object'){Object.keys(v).forEach(function(m){p.push((GL[m]||m)+'×'+v[m]);});}
+   else p.push((GL[k]||k)+(v>1?'×'+v:''));});
+  return p.join(' · ')||'—';}
+ function fix(root){if(!root)return;root.querySelectorAll('*').forEach(function(el){
+  if(el.children.length)return;var txt=(el.textContent||'').trim();
+  if(txt.charAt(0)==='{'&&txt.charAt(txt.length-1)==='}'){try{el.textContent=rwLabel(JSON.parse(txt));}catch(e){}}});}
+ if(typeof renderCupUI==='function'){
+  var _r=renderCupUI;window.renderCupUI=function(){_r.apply(this,arguments);try{fix(document.getElementById('page-cup'));}catch(e){}};
+  try{fix(document.getElementById('page-cup'));}catch(e){}}
+})();
+
+/* ============ 5. 杯赛UI（赛季主题色 / 左栏过滤 / 结束后统一领取 / 周末杯赛仅周末显示） ============ */
+(function(){
+ var st=document.createElement('style');st.id='cup-theme-style';document.head.appendChild(st);
+ var DEFS=[['cup-daily','📋 每日任务',0],['cup-dailyrace','🎯 日杯',1],['cup-weekly','🏆 冲刺锦标赛',1],['cup-weekend','💠 精研核心杯',1],['cup-month','🗓️ 月杯',1],['cup-biweekly','🏅 双周标签杯',1],['cup-limited','⚡ 大型赛事',1]];
+ window._cupSel=(typeof window._cupSel==='number')?window._cupSel:-1;
+ function theme(){try{return getPassSeason().theme;}catch(e){return {btnA:'#007aff',btnB:'#34c759'};}}
+ function applyThemeCss(){var t=theme();
+  st.textContent='.cup-shell{display:flex;gap:10px;align-items:flex-start;margin-top:4px;}'
+  +'.cup-rail2{display:flex;flex-direction:column;gap:6px;flex:0 0 150px;position:sticky;top:64px;}'
+  +'.cup-rail2 button{text-align:left;padding:10px 12px;border-radius:9px;border:1px solid #d1d1d6;background:#fff;color:#6e6e73;font-size:13px;cursor:pointer;}'
+  +'.cup-rail2 button:hover{background:#f2f2f7;color:#1d1d1f;}'
+  +'.cup-rail2 button.on{background:linear-gradient(90deg,'+t.btnA+','+t.btnB+');border-color:transparent;color:#fff;font-weight:700;}'
+  +'.cup-rail2 button.claim{background:linear-gradient(90deg,#ffd60a,#ff9500);border-color:transparent;color:#1d1d1f;font-weight:700;}'
+  +'.cup-stage{flex:1;min-width:0;}'
+  +'.cup-panel{display:none;border:1px solid #d1d1d6;border-radius:12px;padding:12px;background:#fff;}'
+  +'.cup-panel.on{display:grid;grid-template-columns:1fr 158px;gap:12px;box-shadow:0 0 0 1.5px '+t.btnA+'55;}'
+  +'.cup-main{min-width:0;}'
+  +'.cup-side{border-left:1px dashed #d1d1d6;padding-left:10px;font-size:11px;color:#8e8e93;}'
+  +'.cup-side .tagchip{display:inline-block;margin:2px 3px 2px 0;padding:3px 8px;border-radius:6px;background:'+t.btnA+'15;color:#1d1d1f;font-size:11px;}'
+  +'.cup-prog{height:10px;border-radius:5px;background:#e5e5ea;overflow:hidden;margin:6px 0 2px;}'
+  +'.cup-prog>div{height:100%;background:linear-gradient(90deg,'+t.btnA+','+t.btnB+');border-radius:5px;}'
+  +'.cup-progtxt{font-size:11px;color:#8e8e93;display:flex;justify-content:space-between;margin-bottom:8px;}'
+  +'.cup-claimall{width:100%;padding:10px;border:none;border-radius:10px;background:linear-gradient(90deg,#ffd60a,#ff9500);color:#1d1d1f;font-size:14px;font-weight:800;cursor:pointer;margin-bottom:8px;}'
+  +'@media(max-width:680px){.cup-shell{flex-direction:column;}.cup-rail2{flex-direction:row;flex-wrap:wrap;flex:none;position:static;width:100%;}.cup-rail2 button{flex:1;white-space:nowrap;}.cup-panel.on{grid-template-columns:1fr;}.cup-side{border-left:none;border-top:1px dashed #d1d1d6;padding:8px 0 0;}}';
+ }
+ function tagChipsOf(text){var out=[],seen={};try{TASK_TAGS.forEach(function(t){var p=t.path.join(' · ');if(text.indexOf(p)>-1&&!seen[p]){seen[p]=1;out.push(p);}});}catch(e){}return out.slice(0,6);}
+ function progHTML(det,title){
+  var btns=det.querySelectorAll('button');
+  var score=null,top=0,claimed=0,total=0;
+  Array.prototype.forEach.call(btns,function(bt){
+   var m=(bt.textContent||'').match(/(\d+)\s*\/\s*(\d+)/);
+   if(m){total++;var th=parseInt(m[2]);if(th>top)top=th;if(score===null)score=parseInt(m[1]);if((bt.textContent||'').indexOf('\u2705')>-1)claimed++;}
+  });
+  if(top<=0)return '';
+  var pct=Math.max(0,Math.min(100,Math.round((score||0)/top*100)));
+  return '<div style="font-size:13px;font-weight:700;color:#1d1d1f;">'+title+' · 进度</div>'
+  +'<div class="cup-prog"><div style="width:'+pct+'%;"></div></div>'
+  +'<div class="cup-progtxt"><span>当前 '+(score||0)+' / '+top+'</span><span>已达成 '+claimed+' / '+total+' 档</span></div>';
+ }
+ function isWeekend(){var d=new Date().getDay();return d===0||d===5||d===6;}
+ function claimBtns(panel){return Array.prototype.filter.call(panel.querySelectorAll('button'),function(bt){var t=bt.textContent||'';return t.indexOf('领取')>-1&&t.indexOf('\u2705')<0&&!bt.disabled;});}
+ function isOngoing(panel){var t=panel.textContent||'';if(/已结束|已截止|已完结/.test(t))return false;return /剩余|小时后|天后|小时|分钟/.test(t);}
+ function ensure(){
+  var pg=document.getElementById('page-cup');if(!pg)return;
+  var shell=document.getElementById('cup-shell');
+  if(!shell){
+   shell=document.createElement('div');shell.id='cup-shell';shell.className='cup-shell';
+   shell.innerHTML='<div class="cup-rail2" id="cup-rail2"></div><div class="cup-stage" id="cup-stage2"></div>';
+   pg.insertBefore(shell,pg.children[1]||null);
+   DEFS.forEach(function(d){
+    var el=document.getElementById(d[0]);if(!el)return;
+    var det=el.closest('details')||el;
+    var card=det.closest('.card');if(card){card.dataset.cupHidden='1';card.style.display='none';}
+    det.open=true;
+    var panel=document.createElement('div');panel.className='cup-panel';
+    var main=document.createElement('div');main.className='cup-main';
+    while(det.firstChild)main.appendChild(det.firstChild);
+    if(det.parentNode)det.parentNode.removeChild(det);
+    main.insertAdjacentHTML('afterbegin','<div class="cup-progbox"></div>');
+    panel.appendChild(main);
+    var side=document.createElement('div');side.className='cup-side';
+    panel.appendChild(side);
+    document.getElementById('cup-stage2').appendChild(panel);
+   });
+  }
+ }
+ function refresh(){
+  ensure();applyThemeCss();
+  var pg=document.getElementById('page-cup');if(!pg)return;
+  var rail=document.getElementById('cup-rail2');if(!rail)return;
+  rail.innerHTML='';
+  var visible=[],anyClaim=false;
+  DEFS.forEach(function(d,i){
+   var el=document.getElementById(d[0]);if(!el)return;
+   var main=el.closest('.cup-main');if(!main)return;
+   var panel=main.closest('.cup-panel');if(!panel)return;
+   if(d[0]==='cup-weekend'&&!isWeekend()){panel.classList.remove('on');return;}
+   var ongoing=isOngoing(panel);
+   var claimable=claimBtns(panel);
+   if(d[2]===1&&ongoing){claimable.forEach(function(bt){bt.disabled=true;bt.style.opacity='.45';bt.textContent='结束后领取';});claimable=[];}
+   var hasUnclaimed=claimable.length>0;
+   if(!ongoing&&hasUnclaimed)anyClaim=true;
+   var show=(d[2]===0)||ongoing||hasUnclaimed;
+   if(!show){panel.classList.remove('on');return;}
+   visible.push(i);
+   var b=document.createElement('button');b.textContent=d[1];
+   if(!ongoing&&hasUnclaimed)b.className='claim';
+   b.onclick=function(){window._cupSel=i;if(!ongoing&&hasUnclaimed){claimBtns(panel).forEach(function(x,k){setTimeout(function(){x.click();},k*250);});}refresh();};
+   if(window._cupSel===i)b.classList.add('on');
+   rail.appendChild(b);
+   if(d[2]===1&&!ongoing&&hasUnclaimed){
+    var btn=panel.querySelector('.cup-claimall');
+    if(!btn){btn=document.createElement('button');btn.className='cup-claimall';
+     btn.onclick=function(){claimBtns(panel).forEach(function(x,k){setTimeout(function(){x.click();},k*250);});};
+     main.insertBefore(btn,main.children[1]||null);}
+    btn.textContent='🎁 一键领取全部奖励（'+claimable.length+'）';
+   } else {var oldb=panel.querySelector('.cup-claimall');if(oldb)oldb.remove();}
+   var box=panel.querySelector('.cup-progbox');if(box)box.innerHTML=progHTML(panel,d[1]);
+   var side=panel.querySelector('.cup-side');
+   if(side){var tags=tagChipsOf(panel.textContent);
+    side.innerHTML='<div style="font-weight:700;color:#1d1d1f;margin-bottom:4px;">🏷️ 相关标签</div>'+(tags.length?tags.map(function(t){return '<span class="tagchip">'+t+'</span>';}).join(''):'<span style="color:#c7c7cc;">（报名后显示）</span>');}
+  });
+  if(visible.length&&visible.indexOf(window._cupSel)<0){window._cupSel=visible[0];refresh();return;}
+  DEFS.forEach(function(d,i){var el=document.getElementById(d[0]);if(!el)return;var m=el.closest('.cup-main');if(!m)return;var p=m.closest('.cup-panel');if(p)p.classList.toggle('on',i===window._cupSel);});
+  var navb=document.querySelector('.navbtn[data-page="cup"]');
+  if(navb){var od=document.getElementById('cup-dot');
+   if(anyClaim&&!od){var s=document.createElement('span');s.id='cup-dot';s.textContent='🎁';s.style.cssText='margin-left:2px;';navb.appendChild(s);}
+   else if(!anyClaim&&od)od.remove();}
+ }
+ if(typeof renderCupUI==='function'){var _r5=renderCupUI;window.renderCupUI=function(){_r5.apply(this,arguments);try{refresh();}catch(e){}};}
+ try{refresh();}catch(e){}
+})();
+/* ============ 6. 竞技名单刷新消失修复 ============ */
+(function(){
+ var _sv=window.saveState;
+ window.saveState=function(){_sv();try{localStorage.setItem('kaoyan_ep_arena',JSON.stringify(state.arenaRoster||null));}catch(e){}};
+ try{var s=localStorage.getItem('kaoyan_ep_arena');if(s){var r=JSON.parse(s);
+  if(r&&Array.isArray(r.list)&&r.list.length&&(!state.arenaRoster||!state.arenaRoster.list||!state.arenaRoster.list.length))state.arenaRoster=r;}}catch(e){}
+ function ensure(){try{var a=getArena();try{arenaEnsureRoster(a);}catch(e){}}catch(e){}
+  if(!state.arenaRoster||!Array.isArray(state.arenaRoster.list))state.arenaRoster={weekKey:'',list:[]};}
+ if(typeof renderArenaUI==='function'){
+  var _ra=renderArenaUI;window.renderArenaUI=function(){ensure();try{_ra.apply(this,arguments);}catch(e){
+   var bb=document.getElementById('arena-board');if(!bb)return;
+   var list=(state.arenaRoster&&state.arenaRoster.list)||[];
+   bb.innerHTML=list.slice().sort(function(x,y){return y.score-x.score;}).slice(0,50).map(function(g,i){
+    return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f2f2f7;font-size:12px;"><span>'+(i+1)+'. '+g.name+'</span><span style="color:#8e8e93;">'+g.score+'</span></div>';}).join('')||'<div style="color:#8e8e93;font-size:12px;padding:10px;">名册重建中，请稍候…</div>';}};
+  try{ensure();}catch(e){}}
+})();
+
+/* ============ 7. 善恶之交平衡（天使5%/分界60%） ============ */
+(function(){
+ if(typeof exOnTaskComplete!=='function')return;
+ var _ex=exOnTaskComplete;
+ window.exOnTaskComplete=function(t){
+  var st=state.exState,now=Date.now();
+  if(hasEx(21)){
+   var tg=getTag(t.tagId),own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);
+   if((st.demonUntil||0)>now){}
+   else if(tg&&own>=tg.maxEp*0.6){
+    var total=getCompletedTasks().reduce(function(s,x){return s+(parseInt(x.baseEp)||0)+(parseInt(x.qualityEp)||0);},0);
+    st.angel={startAt:now,until:now+20*60000,base:total};st.demonUntil=0;
+    pushEvolveNote('😇 天使降临：20分钟内每分钟+'+Math.round(total*0.0025)+' EP');return;}
+   else{st.angel=null;st.demonUntil=now+20*60000;pushEvolveNote('😈 恶魔附身：20分钟扣减-10%');return;}}
+  _ex(t);};
+ if(typeof renderExclusiveWidgets==='function'){
+  var _w=renderExclusiveWidgets;
+  window.renderExclusiveWidgets=function(){var h=_w();var st=state.exState||{},now=Date.now(),a=st.angel;
+   if(hasEx(21)&&a&&a.until>now){var rate=a.base*0.0025/60;
+    h=h.replace(/当前每秒获得<b style="color:#34c759;">[\d.]+EP<\/b>/,'当前每秒获得<b style="color:#34c759;">'+rate.toFixed(2)+'EP</b>');}
+   return h;};}
+})();
+
+})();
 </script>
 </body>
 </html>
