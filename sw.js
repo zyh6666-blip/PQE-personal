@@ -1,6 +1,6 @@
 /* build 20261009-1802 */
 /* 考研EP系统 Service Worker · v1.4.9.1 */
-const CACHE_NAME = 'kaoyan-v153-final3';
+const CACHE_NAME = 'kaoyan-v1531e';
 const APP_SHELL = ['./', './index.html'];
 
 self.addEventListener('install', function (e) {
@@ -199,3 +199,13 @@ self.addEventListener('fetch', function (e) {
 /* bump v153-final3 · 内容更新触发ServiceWorker重装 */
 
 /* 无关紧要的一句话：今天天气不错，适合猎杀铭影。 */
+
+/* bump v155 · 悬赏板2.0 */
+
+/* bump v156 · 最终实装版 */
+
+/* bump v157 · 弹窗层级+死亡动画 */
+
+/* bump v158 · 商店返回修复 */
+
+/* bump v1531 · 版本号回1.5.3.1+图鉴窗口+抗性配色 */
