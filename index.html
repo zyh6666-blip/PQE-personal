@@ -14934,6 +14934,83 @@ try{if(typeof updateMailBadge==='function')updateMailBadge();}catch(e){}
 
 })();
 
+/* ===== v1.5.4-hotfix1：弹窗防卡死（全站通用）===== */
+(function(){
+'use strict';
+if(window.__modalGuard154)return;
+window.__modalGuard154=true;
+function __mgClose(){
+  try{
+    var mo=document.getElementById('modal-overlay');
+    if(mo){mo.classList.remove('m-open');mo.style.display='none';}
+  }catch(e){}
+}
+/* 1) 点遮罩空白处关闭（点在对话框上不关） */
+document.addEventListener('click',function(e){
+  try{
+    var mo=document.getElementById('modal-overlay');
+    if(!mo||getComputedStyle(mo).display==='none')return;
+    if(e.target===mo)__mgClose();
+  }catch(err){}
+},true);
+/* 2) ESC 关闭 */
+document.addEventListener('keydown',function(e){if(e.key==='Escape')__mgClose();});
+/* 3) 弹窗打开后强制补一个右上角 ✕ */
+try{
+  if(typeof showModal==='function'&&!showModal.__mgWrapped){
+    var _sm=showModal;
+    var _w=function(){
+      _sm.apply(this,arguments);
+      try{
+        var mo=document.getElementById('modal-overlay');
+        var dlg=mo&&mo.firstElementChild;
+        if(dlg&&!dlg.querySelector('.mg-x')){
+          var x=document.createElement('button');
+          x.className='mg-x';x.textContent='✕';
+          x.setAttribute('style','position:absolute;top:10px;right:12px;width:32px;height:32px;border-radius:50%;border:1px solid #d1d1d6;background:#fff;color:#6e6e73;font-size:14px;cursor:pointer;z-index:5;line-height:1;padding:0;');
+          x.onclick=function(ev){ev.stopPropagation();__mgClose();};
+          if(getComputedStyle(dlg).position==='static')dlg.style.position='relative';
+          dlg.appendChild(x);
+        }
+      }catch(err){}
+    };
+    _w.__mgWrapped=true;window.showModal=_w;
+  }
+}catch(e){}
+/* 4) closeModal 兜底：确保 display 归位 */
+try{
+  if(typeof closeModal==='function'&&!closeModal.__mgWrapped){
+    var _cm=closeModal;
+    var _c=function(){_cm.apply(this,arguments);__mgClose();};
+    _c.__mgWrapped=true;window.closeModal=_c;
+  }
+}catch(e){}
+})();
+
+/* ===== v1.5.4-hotfix2：竞技页段位页签切换失效 ===== */
+(function(){
+'use strict';
+if(window.__arenaDivTabFix154)return;
+window.__arenaDivTabFix154=true;
+window.arenaSetDiv=function(d){
+  try{window.__arDiv=d;}catch(e){}
+  try{if(typeof renderArenaUI==='function')renderArenaUI();}catch(e){}
+  try{
+    var rw=document.querySelector('#page-race .rc-rw');
+    if(rw&&typeof arenaRewardsHTML==='function'){
+      var h=arenaRewardsHTML();
+      if(h&&h.indexOf('rc-divtab')>-1){var tmp=document.createElement('div');tmp.innerHTML=h;rw.replaceWith(tmp.firstElementChild);}
+    }
+  }catch(e){}
+  try{
+    document.querySelectorAll('#page-race .rc-divtab').forEach(function(t){
+      var on=(t.getAttribute('onclick')||'').indexOf("'"+d+"'")>-1;
+      t.classList.toggle('on',!!on);
+    });
+  }catch(e){}
+};
+})();
+
 </script>
 </body>
 </html>
