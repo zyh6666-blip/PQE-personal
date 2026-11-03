@@ -14485,6 +14485,7 @@ var st=document.createElement('style');st.id='tv3-style';st.textContent=CSS;docu
 /* ================= 状态 ================= */
 function T(){ if(!state.treasure)state.treasure={}; var tr=state.treasure; var today=new Date().toDateString();
  if(tr.date!==today){ tr.date=today; tr.pos=0; tr.dir=1; tr.bought=false; tr.claimed=false; }
+  if(tr.claimed&&tr.claimedDate!==today){tr.claimed=false;}
  if(tr.tp===undefined)tr.tp=0;
  if(tr.tpStage===undefined)tr.tpStage=0;
  return tr; }
@@ -14616,7 +14617,7 @@ function render(){
 function claim(){
  var tr=T();
  if(tr.claimed){return;}
- tr.claimed=true;addBlue(1);saveState();render();
+ tr.claimed=true;tr.claimedDate=new Date().toDateString();addBlue(1);saveState();render();
  showGainModal('🎲 宝藏冲刺 · 每日领取',[['普通骰子','×1']]);
 }
 function buy(){
