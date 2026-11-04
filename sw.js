@@ -644,3 +644,4 @@ function __fuseSpFx(){
 });
 try{__fuseSpFx();}catch(e){}
 })();
+/* cache-bust 2026-11-03 12:46 · 宝藏每日骰子日期戳修复 */
