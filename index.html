@@ -1,12 +1,12 @@
-<!-- FILE-MARKER: kaoyan-ep-index · 成就树v3.3 · build 20261101-0315 · 文件必须完整下载，见页脚徽标 -->
+<!-- FILE-MARKER: kaoyan-ep-index · 成就树v3.3 · build 20261105-0202 · 文件必须完整下载，见页脚徽标 -->
 <!DOCTYPE html>
-<!-- build 20261103-0100 -->
-<!-- v1.5.4.1 -->
+<!-- build 20261105-0202 -->
+<!-- v1.5.4.2 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.5.4.1</title>
+<title>考研成长系统 v1.5.4.2</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314100a'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='34'%3E%F0%9F%93%8B%3C/text%3E%3C/svg%3E">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -1181,6 +1181,74 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 @media(min-width:1024px){#page-daily{padding:26px 20px 32px}#page-daily .dl-panel{padding:16px}}
 @media(prefers-reduced-motion:reduce){#page-daily *,#page-daily *::before,#page-daily *::after{animation:none!important;transition:none!important}}
 /* ================= 每日登记 END ================= */
+/* ================= v1.5.4.2 · 结算战报（EP星堆爆分 · 替代旧结算对话框） ================= */
+.ssrp-ov{position:fixed;inset:0;z-index:420;background:rgba(4,3,2,.8);backdrop-filter:blur(6px);display:flex;align-items:flex-start;justify-content:center;padding:7vh 14px 14px;overflow-y:auto;animation:ssrpIn .24s ease both}
+@keyframes ssrpIn{from{opacity:0}to{opacity:1}}
+.ssrp-box{width:min(860px,95vw);border-radius:20px;border:1.5px solid rgba(240,179,92,.55);background:radial-gradient(circle at 50% -10%,rgba(240,179,92,.15),transparent 55%),linear-gradient(165deg,#211a10,#120e08);box-shadow:0 0 60px -12px rgba(240,179,92,.5),0 24px 70px rgba(0,0,0,.7);padding:18px 20px 16px;animation:ssrpBox .45s cubic-bezier(.2,1.3,.3,1) both;position:relative}
+@keyframes ssrpBox{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:none}}
+.ssrp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;border-bottom:1px dashed rgba(240,179,92,.35);padding-bottom:10px;margin-bottom:12px;flex-wrap:wrap}
+.ssrp-kicker{font-size:9.5px;letter-spacing:.32em;color:#a98d5f;font-family:var(--mono)}
+.ssrp-title{font-size:20px;font-weight:800;letter-spacing:.08em;background:linear-gradient(110deg,#f7dfae,var(--gold) 45%,#fff6e2 55%,var(--gold-d));-webkit-background-clip:text;background-clip:text;color:transparent;margin-top:3px}
+.ssrp-no{text-align:right;font-size:10px;color:#8d7c5f;font-family:var(--mono);line-height:1.7}
+.ssrp-body{display:grid;grid-template-columns:300px 1fr 110px;gap:14px;align-items:stretch}
+@media(max-width:760px){.ssrp-body{grid-template-columns:1fr 110px}.ssrp-mid{grid-column:1/-1;order:3}}
+.ssrp-left{border:1px dashed rgba(240,179,92,.3);border-radius:14px;background:rgba(10,8,5,.4);padding:16px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center}
+.ssrp-lbl{font-size:9.5px;letter-spacing:.3em;color:#8d7c5f;font-family:var(--mono)}
+.ssrp-gain{font-family:var(--mono);font-weight:900;font-size:42px;color:#f7dfae;text-shadow:0 0 22px rgba(240,179,92,.55);line-height:1}
+.ssrp-gain small{font-size:14px;color:#c9a86a;margin-left:4px}
+.ssrp-rank{padding:5px 14px;border-radius:999px;border:1px solid rgba(240,179,92,.55);background:rgba(240,179,92,.1);font-size:12px;font-weight:700;color:#f0d9a2;font-family:var(--mono)}
+.ssrp-prog{width:100%;height:6px;background:#241c10;border-radius:3px;overflow:hidden}
+.ssrp-prog i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-l));border-radius:3px;transition:width .5s}
+.ssrp-progtx{font-size:10px;color:#8d7c5f;font-family:var(--mono)}
+.ssrp-streak{font-size:11px;color:#a98d5f}
+.ssrp-streak b{color:#f0d9a2}
+.ssrp-mid{display:flex;flex-direction:column;gap:6px;position:relative}
+.ssrp-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;border:1px solid rgba(232,163,61,.13);border-radius:10px;background:rgba(28,21,11,.55);font-size:12.5px}
+.ssrp-row .v{font-family:var(--mono);color:#f0d9a2;white-space:nowrap}
+.ssrp-burst{position:relative;flex:1;min-height:150px;margin-top:6px;display:flex;align-items:center;justify-content:center}
+.ssrp-stars{position:relative;border:1px dashed rgba(232,163,61,.3);border-radius:14px;background:rgba(10,8,5,.45);overflow:hidden;min-height:340px}
+.ssrp-stars .ssrp-lbl2{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:8.5px;color:#6b5a3d;font-family:var(--mono);letter-spacing:.12em;white-space:nowrap;z-index:2}
+.ssrp-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;border-top:1px dashed rgba(240,179,92,.3);padding-top:12px;flex-wrap:wrap}
+.ssrp-note{font-size:11px;color:#8d7c5f;line-height:1.8}
+.ssrp-ok{padding:11px 30px;border:none;border-radius:12px;font-size:14px;font-weight:800;letter-spacing:.2em;cursor:pointer;background:linear-gradient(135deg,var(--gold-l),var(--gold-d));color:#2a1c08;box-shadow:0 3px 14px rgba(217,131,42,.4)}
+.ssrp-ok:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+.ssrp-ok.pulse{animation:ssrpOkP 1.4s ease-in-out infinite}
+@keyframes ssrpOkP{0%,100%{box-shadow:0 3px 14px rgba(217,131,42,.4)}50%{box-shadow:0 3px 26px rgba(255,214,10,.75)}}
+/* 星星 */
+.ss-star{position:absolute;width:34px;height:34px;display:flex;align-items:center;justify-content:center;transition:opacity .2s;z-index:5;will-change:left,top,transform}
+.ss-star svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 4px rgba(220,210,190,.3))}
+.ss-star.s500{width:42px;height:42px}
+.ss-star.s500 svg{filter:drop-shadow(0 0 7px rgba(255,214,10,.55))}
+.ss-star .n{position:relative;z-index:2;font-family:var(--mono);font-weight:900;font-size:11px;color:#241503}
+.ss-star.s500 .n{font-size:13px}
+.ss-star.mergeGlow svg{filter:drop-shadow(0 0 10px rgba(255,214,10,1))}
+.ss-giant{width:74px;height:74px;z-index:9}
+.ss-giant svg{filter:drop-shadow(0 0 14px rgba(255,246,214,1)) drop-shadow(0 0 42px rgba(255,214,10,.9)) drop-shadow(0 0 80px rgba(232,163,61,.55));animation:ssGiant .16s ease-in-out infinite alternate}
+@keyframes ssGiant{from{filter:drop-shadow(0 0 14px rgba(255,246,214,1)) drop-shadow(0 0 42px rgba(255,214,10,.9)) drop-shadow(0 0 80px rgba(232,163,61,.55)) brightness(1)}to{filter:drop-shadow(0 0 20px rgba(255,252,235,1)) drop-shadow(0 0 60px rgba(255,224,60,1)) drop-shadow(0 0 110px rgba(240,179,92,.8)) brightness(1.45)}}
+.ss-giant .n{font-size:17px;color:#3a2405;text-shadow:0 0 8px #fff6d8,0 1px 0 #a8741a}
+/* 圆形爆分UI（每次爆分弹，0.45s，可覆盖） */
+.ss-ring{position:absolute;left:50%;top:50%;width:190px;height:190px;transform:translate(-50%,-50%) scale(0);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:20}
+.ss-ring.go{animation:ssRingIn .32s cubic-bezier(.2,1.8,.3,1) forwards,ssRingOut .13s .32s ease forwards}
+@keyframes ssRingIn{0%{transform:translate(-50%,-50%) scale(.3);opacity:1}55%{transform:translate(-50%,-50%) scale(1.18)}75%{transform:translate(-50%,-50%) scale(.96)}100%{transform:translate(-50%,-50%) scale(1.06);opacity:1}}
+@keyframes ssRingOut{to{opacity:0;transform:translate(-50%,-56%) scale(1.05)}}
+.ss-ring svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 20px rgba(240,179,92,.6))}
+.ss-ring .k{position:relative;z-index:2;font-family:var(--mono);font-weight:900;font-size:32px;background:linear-gradient(180deg,#fff3c9,#ffd60a 55%,#d9832a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 rgba(60,30,0,.9))}
+.ss-ring .e{position:relative;z-index:2;font-family:var(--mono);font-weight:800;font-size:15px;color:#f7e3b2;margin-top:2px;text-shadow:0 2px 3px #000}
+.ss-shock{position:absolute;left:50%;top:50%;width:190px;height:190px;border-radius:50%;border:4px solid rgba(255,214,10,.9);transform:translate(-50%,-50%) scale(.4);opacity:0;z-index:19;pointer-events:none}
+.ss-shock.go{animation:ssShock .7s ease-out forwards}
+@keyframes ssShock{0%{opacity:.9;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(-50%,-50%) scale(2.2)}}
+.ss-flash{position:absolute;left:50%;top:50%;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(255,246,214,.95),rgba(255,214,10,.5) 40%,transparent 68%);transform:translate(-50%,-50%) scale(.3);opacity:0;z-index:18;pointer-events:none}
+.ss-flash.go{animation:ssFlash .3s ease-out forwards}
+@keyframes ssFlash{0%{opacity:1;transform:translate(-50%,-50%) scale(.3)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.6)}}
+/* 椭圆爆分牌（只在结算完毕且 ≥1 爆分时出现一次，保留） */
+.ss-badge{position:absolute;right:8px;top:36%;transform:translateY(-50%) scale(.5);display:flex;flex-direction:column;align-items:center;padding:12px 18px;border-radius:50%;border:2px solid rgba(255,214,10,.75);background:radial-gradient(circle at 35% 30%,rgba(255,214,10,.28),rgba(20,12,4,.92) 70%);box-shadow:0 0 26px -2px rgba(255,214,10,.6);opacity:0;transition:opacity .15s ease-out,transform .3s cubic-bezier(.2,1.5,.3,1);z-index:6;pointer-events:none}
+.ss-badge.show{opacity:1;transform:translateY(-50%) scale(1)}
+.ss-badge .kx{font-family:var(--mono);font-weight:900;font-size:19px;background:linear-gradient(180deg,#fff3c9,#ffd60a 55%,#d9832a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ss-badge .ke{font-family:var(--mono);font-weight:800;font-size:10px;color:#f7e3b2;margin-top:2px}
+.ss-badge.bump{animation:ssBump .45s cubic-bezier(.2,1.6,.3,1)}
+@keyframes ssBump{0%{transform:translateY(-50%) scale(1)}40%{transform:translateY(-50%) scale(1.18)}100%{transform:translateY(-50%) scale(1)}}
+/* ================= v1.5.4.2 CSS END ================= */
+
 </style>
 <base target="_blank">
 <base target="_blank">
@@ -1191,7 +1259,7 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:800;letter-spacing:.05em;color:#f3e7c8;text-shadow:0 0 14px rgba(232,163,61,.35);">📚 考研EP系统</span> <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.22em;color:var(--gold-l);font-weight:700;">1.5.4.1</span>
+      <span style="font-size:18px;font-weight:800;letter-spacing:.05em;color:#f3e7c8;text-shadow:0 0 14px rgba(232,163,61,.35);">📚 考研EP系统</span> <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.22em;color:var(--gold-l);font-weight:700;">1.5.4.2</span>
             <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -13661,11 +13729,36 @@ function openRankPanel(){
   +(size>1?('<div class="rp-secname">'+f+' 第 '+Math.max(1,sub)+' 阶 / 共 '+size+' 阶</div>'+segBarHTML(sub,size,frac)):'')
   +'<div class="rp-bar"><i style="width:'+Math.round(frac*100)+'%"></i></div>'
   +'<div class="rp-sub">'+state.totalEP+' / '+info.e+' EP<br>'+epText+'</div>'
-  +'</div>';
+  +'<button class="rp-album-btn" onclick="openRankAlbum()">🎖️ 打开军衔图鉴</button>'
  ov.querySelector('.rp-x').onclick=function(){ov.remove();};
  ov.addEventListener('click',function(e){if(e.target===ov)ov.remove();});
  document.body.appendChild(ov);
 }
+window.openRankAlbum=function(){
+ try{
+  if(document.querySelector('.rk-album-ov'))return;
+  var info=getLevelInfo(state.totalEP);
+  var rows=LEVELS.map(function(L){
+   var cur=(L.lv===info.lv);
+   return '<div class="rp-tr'+(cur?' cur':'')+'">'
+    +'<span class="rp-tl">Lv.'+L.lv+'</span>'
+    +'<span class="rp-tp">'+rankPlateSVG(L.lv,false)+'</span>'
+    +'<span class="rp-tn">'+L.name+(cur?' ◀':'')+'</span>'
+    +'<span class="rp-te">'+(L.e>=99999999?L.s+' ~ MAX':L.s+' ~ '+L.e)+'</span></div>';
+  }).join('');
+  var ov=document.createElement('div');ov.className='rk-album-ov';
+  ov.innerHTML='<div class="rk-album-box">'
+   +'<div class="rk-album-head"><span>🎖️ 军衔图鉴 · 全 '+LEVELS.length+' 级</span>'
+   +'<span class="rk-album-x" onclick="this.closest(&#39;.rk-album-ov&#39;).remove()">✕</span></div>'
+   +'<div class="rp-table rk-album-table">'+rows+'</div></div>';
+  ov.addEventListener('click',function(e){if(e.target===ov)ov.remove();});
+  document.body.appendChild(ov);
+  setTimeout(function(){
+   var cur=ov.querySelector('.rp-tr.cur');var box=ov.querySelector('.rp-table');
+   if(cur&&box)box.scrollTop=cur.offsetTop-box.clientHeight/2;
+  },80);
+ }catch(e){}
+};
 
 /* ================= 升级动画调度 ================= */
 var rkQueue=[],rkBusy=false;
@@ -14138,7 +14231,7 @@ var CSS=[
 '@keyframes stOv{from{opacity:0}to{opacity:1}}',
 '.st-ov.st-out{animation:stOut .35s ease both}',
 '@keyframes stOut{to{opacity:0;visibility:hidden}}',
-'.st{width:min(680px,94vw);border-radius:20px;overflow:hidden;background:linear-gradient(160deg,#191510,#0e0b07);border:1.5px solid rgba(240,179,92,.5);box-shadow:0 0 80px -14px rgba(240,179,92,.5),0 30px 90px rgba(0,0,0,.75);position:relative;animation:stIn .5s cubic-bezier(.2,1.2,.3,1) both;color:#f3ede2;font-family:inherit}',
+'.st-ov .st{width:min(680px,94vw);border-radius:20px;overflow:hidden;background:linear-gradient(160deg,#191510,#0e0b07);border:1.5px solid rgba(240,179,92,.5);box-shadow:0 0 80px -14px rgba(240,179,92,.5),0 30px 90px rgba(0,0,0,.75);position:relative;animation:stIn .5s cubic-bezier(.2,1.2,.3,1) both;color:#f3ede2;font-family:inherit}',
 '@keyframes stIn{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:none}}',
 '.st-head{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 12px;border-bottom:1px dashed rgba(240,179,92,.3);background:linear-gradient(90deg,rgba(240,179,92,.09),transparent 60%)}',
 '.st-kicker{font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.32em;color:#a98d5f}',
@@ -14863,7 +14956,7 @@ try{T();}catch(e){}
 })();
 
 /* ============================================================
-   v1.5.4「焕新出发」发布补丁 · build 20261101-0315
+   v1.5.4「焕新出发」发布补丁 · build 20261105-0202
    ① 版本号恢复 v1.5.4（浏览器标题）
    ② 公告：移除追猎旧公告（ann-153 / ann-1531），置顶 v1.5.4 简略公告
    ③ 邮箱：发放《v1.5.4「焕新出发」完整更新公告》长信
@@ -14872,7 +14965,7 @@ try{T();}catch(e){}
 (function(){
 'use strict';
 
-try{document.title='考研成长系统 v1.5.4.1';}catch(e){}
+try{document.title='考研成长系统 v1.5.4.2';}catch(e){}
 try{Array.prototype.forEach.call(document.querySelectorAll('span'),function(s){if((s.textContent||'').indexOf('UI-v2.4')>-1)s.textContent='1.5.4';});}catch(e){}
 
 /* ---------- ② 公告栏 ---------- */
@@ -15043,6 +15136,7 @@ st.textContent=[
   '#cupV3-rail,.cv3-panel,#cupV3-pending{min-width:0}',
   '#cupV3-rail{flex-wrap:wrap}',
   '.cv3-rail-btn{max-width:100%;min-width:0;width:100%}',
+  '#cupV3-rail .st{width:auto!important;max-width:100%;white-space:normal}',
   '#page-cup header .cv3-daybtn,#page-cup header .cv3-energyPill{white-space:normal}'
 ].join('\n');
 document.head.appendChild(st);
@@ -15324,7 +15418,7 @@ window.addEventListener('load',function(){
 });
 })();
 
-/* ===== v1.5.4.1 更新邮件（修复清单 + 补偿）===== */
+/* ===== v1.5.4.2 更新邮件（修复清单 + 补偿）===== */
 (function(){
 'use strict';
 if(window.__v1541Mail)return;
@@ -15338,8 +15432,8 @@ window.ensureV1541Mail=function(){
     if(!state.mailbox.some(function(m){return m.id==='v1541_update';})){
       state.mailbox.push({
         id:'v1541_update',
-        title:'v1.5.4.1 热修复清单与补偿（请查收）',
-        body:'各位考生：<br><br>针对焕新后首个版本的反馈，v1.5.4.1 完成以下热修复：<br><br><b>一、杯赛记账时序修复</b><br>修复前：打开结算预览时杯赛就尝试记账，而当日记录在你点击「确认结算」后才写入——导致今日成绩永远记不上、杯赛恒 0 分。现已把记账钩子移到结算落账之后，当天结算当天入账。<br><br><b>二、宝藏活动「每日骰子」修复</b><br>每日跨天时只重置了购买次数、漏重置领取标记，导致首次领取后每日免费骰子永久无法领取。现已修复，明天起可正常领取。<br><br><b>三、弹窗防卡死</b><br>任意弹窗现支持：点遮罩空白关闭 / ESC 关闭 / 右上角自动出现 ✕，不再出现遮罩罩住全屏点不动的情况。<br><br><b>四、竞技页签修复</b><br>全国榜下方段位页签（青铜/白银/黄金…）此前点击不切换，已修复。<br><br><b>五、其他修复</b><br>· 杯赛锁定卡片点击报「cvGuard 未定义」→ 现为正常提示；<br>· 杯赛布局小屏边框溢出加固；<br>· 每日登记任务卡焕新：四维评价面板（正确率/专注度/用时/基本状态加权出质量EP）、占上限进度条、完成置灰折叠动画。<br><br><b>补偿</b>：因杯赛记账与骰子问题影响昨日收益，随信发放 🎲宝藏蓝骰×3、🎟️属性抽取券×1、🎫属性变更券×1。<br><br>焕新路上，感谢有你并肩。',
+        title:'v1.5.4.2 热修复清单与补偿（请查收）',
+        body:'各位考生：<br><br>针对焕新后首个版本的反馈，v1.5.4.2 完成以下热修复：<br><br><b>一、杯赛记账时序修复</b><br>修复前：打开结算预览时杯赛就尝试记账，而当日记录在你点击「确认结算」后才写入——导致今日成绩永远记不上、杯赛恒 0 分。现已把记账钩子移到结算落账之后，当天结算当天入账。<br><br><b>二、宝藏活动「每日骰子」修复</b><br>每日跨天时只重置了购买次数、漏重置领取标记，导致首次领取后每日免费骰子永久无法领取。现已修复，明天起可正常领取。<br><br><b>三、弹窗防卡死</b><br>任意弹窗现支持：点遮罩空白关闭 / ESC 关闭 / 右上角自动出现 ✕，不再出现遮罩罩住全屏点不动的情况。<br><br><b>四、竞技页签修复</b><br>全国榜下方段位页签（青铜/白银/黄金…）此前点击不切换，已修复。<br><br><b>五、其他修复</b><br>· 杯赛锁定卡片点击报「cvGuard 未定义」→ 现为正常提示；<br>· 杯赛布局小屏边框溢出加固；<br>· 每日登记任务卡焕新：四维评价面板（正确率/专注度/用时/基本状态加权出质量EP）、占上限进度条、完成置灰折叠动画。<br><br><b>补偿</b>：因杯赛记账与骰子问题影响昨日收益，随信发放 🎲宝藏蓝骰×3、🎟️属性抽取券×1、🎫属性变更券×1。<br><br>焕新路上，感谢有你并肩。',
         items:{treasure_die_blue:3,draw_ticket:1,change_ticket:1},
         claimed:false,read:false,createdAt:Date.now()
       });
@@ -15359,7 +15453,7 @@ try{
 try{if(typeof updateMailBadge==='function')updateMailBadge();}catch(e){}
 })();
 
-/* ===== 36号天赋「标签熔炉」v1.5.4.1 ===== */
+/* ===== 36号天赋「标签熔炉」v1.5.4.2 ===== */
 (function(){
 'use strict';
 if(window.__fuseTalent36)return;
@@ -15549,6 +15643,780 @@ function __fuseSpFx(){
 });
 try{__fuseSpFx();}catch(e){}
 })();
+
+
+/* ===== 军衔图鉴（按钮 + 独立对话框 · 同款面板风格）===== */
+(function(){
+'use strict';
+if(window.__rankTableCss154)return;
+window.__rankTableCss154=true;
+var st=document.createElement('style');
+st.textContent=[
+'.rp-album-btn{display:block;width:100%;margin-top:12px;padding:9px 0;border-radius:999px;border:1px solid rgba(240,179,92,.5);background:rgba(240,179,92,.1);color:#f0d9a2;font-size:12px;font-weight:700;letter-spacing:.14em;cursor:pointer;transition:all .2s;font-family:var(--mono)}',
+'.rp-album-btn:hover{background:rgba(240,179,92,.22);box-shadow:0 0 16px -4px rgba(240,179,92,.65)}',
+'.rk-album-ov{position:fixed;inset:0;z-index:399;background:rgba(5,9,14,.78);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:16px;animation:rkOvIn .25s ease both}',
+'.rk-album-box{width:min(480px,92vw);max-height:86vh;display:flex;flex-direction:column;border-radius:20px;padding:16px 16px 14px;background:radial-gradient(circle at 50% -10%,rgba(240,179,92,.14),transparent 55%),linear-gradient(165deg,#211a10,#120e08);border:1.5px solid rgba(240,179,92,.5);box-shadow:0 0 60px -12px rgba(240,179,92,.5),0 24px 70px rgba(0,0,0,.65);color:#f3ede2;position:relative;animation:rkPnlIn .4s cubic-bezier(.2,1.3,.3,1) both}',
+'.rk-album-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:700;letter-spacing:.3em;color:#c9a86a;margin-bottom:10px;font-family:ui-monospace,monospace}',
+'.rk-album-x{cursor:pointer;width:26px;height:26px;border:1px solid rgba(240,179,92,.4);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#d8c9a8;font-size:12px;transition:all .2s}',
+'.rk-album-x:hover{border-color:#e8a33d;color:#f0d9a2}',
+'.rk-album-table{flex:1;min-height:0}',
+'.rp-table{max-height:60vh;overflow-y:auto;border:1px solid rgba(240,179,92,.25);border-radius:12px;background:rgba(10,8,5,.45);padding:2px}',
+'.rp-tr{display:flex;align-items:center;gap:8px;padding:3px 8px;border-bottom:1px solid rgba(240,179,92,.08);font-size:10px}',
+'.rp-tr:last-child{border-bottom:none}',
+'.rp-tr.cur{background:rgba(240,179,92,.14);border-radius:8px}',
+'.rp-tl{flex:0 0 40px;font-family:var(--mono);color:#8d7c5f}',
+'.rp-tr.cur .rp-tl{color:#ffd60a;font-weight:700}',
+'.rp-tp{flex:0 0 30px;line-height:0}',
+'.rp-tp svg{width:28px;height:auto;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}',
+'.rp-tn{flex:1;color:#c9b791}',
+'.rp-tr.cur .rp-tn{color:#f0d9a2;font-weight:700}',
+'.rp-te{flex:0 0 132px;text-align:right;font-family:var(--mono);font-size:9px;color:#8d7c5f}',
+'.rp-tr.cur .rp-te{color:#ffd60a}'
+].join('\n');
+document.head.appendChild(st);
+document.addEventListener('click',function(e){
+  var t=e.target&&e.target.closest?e.target.closest('.rp-album-btn'):null;
+  if(t){e.preventDefault();try{if(typeof window.openRankAlbum==='function'){window.openRankAlbum();}else{alert('军衔图鉴加载中，请重试');}}catch(err){}}
+},true);
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){var o=document.querySelector('.rk-album-ov');if(o)o.remove();}
+});
+})();
+
+
+/* ===== EP 星堆爆分 · 接入主线（每日登记右侧常驻 + 结算确认动画）===== */
+(function(){
+'use strict';
+if(window.__epkMain154)return;
+window.__epkMain154=true;
+
+/* ---------- CSS ---------- */
+var st=document.createElement('style');
+st.textContent=[
+'#epk-stage{position:absolute;right:10px;top:118px;width:64px;bottom:120px;z-index:5;pointer-events:none;}',
+'#epk-stage .epk-base{position:absolute;inset:0;border:1px dashed rgba(232,163,61,.28);border-radius:12px;}',
+'#epk-stage .epk-lbl{position:absolute;top:-17px;left:50%;transform:translateX(-50%);font-size:8.5px;color:#6b5a3d;font-family:var(--mono);letter-spacing:.12em;white-space:nowrap;}',
+'.epk-star{position:absolute;width:30px;height:30px;display:flex;align-items:center;justify-content:center;transition:left .3s cubic-bezier(.25,.9,.3,1),top .3s cubic-bezier(.25,.9,.3,1),transform .22s,opacity .22s;z-index:5;will-change:left,top;}',
+'.epk-star svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 4px rgba(220,210,190,.3))}',
+'.epk-star.s500{width:38px;height:38px;}',
+'.epk-star.s500 svg{filter:drop-shadow(0 0 7px rgba(255,214,10,.55))}',
+'.epk-star .n{position:relative;z-index:2;font-family:var(--mono);font-weight:900;font-size:10px;color:#241503}',
+'.epk-star.s500 .n{font-size:11px}',
+'.epk-star.popIn{animation:epkPop .26s cubic-bezier(.2,1.6,.3,1)}',
+'@keyframes epkPop{from{transform:scale(0)}to{transform:scale(1)}}',
+'.epk-star.mergeGlow svg{filter:drop-shadow(0 0 10px rgba(255,214,10,1))}',
+'.epk-orb{position:absolute;width:38px;height:38px;border-radius:50%;z-index:8;transition:left .26s,top .26s,transform .22s;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,#fff6d8,#ffd60a 45%,#d9832a 80%);box-shadow:0 0 16px 4px rgba(255,214,10,.6),0 0 44px 12px rgba(232,163,61,.3);border:2px solid #fff3c9}',
+'.epk-orb::after{content:"\u2605";font-size:14px;color:#7a4a12}',
+'.epk-ring{position:absolute;left:50%;top:50%;width:170px;height:170px;transform:translate(-50%,-50%) scale(0);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:20;}',
+'.epk-ring.go{animation:epkRIn .38s cubic-bezier(.2,1.4,.3,1) forwards,epkROut 1.8s .8s ease forwards}',
+'@keyframes epkRIn{to{transform:translate(-50%,-50%) scale(1)}}',
+'@keyframes epkROut{to{opacity:0;transform:translate(-50%,-56%) scale(1.05)}}',
+'.epk-ring svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 16px rgba(240,179,92,.6))}',
+'.epk-ring .k{position:relative;z-index:2;font-family:var(--mono);font-weight:900;font-size:28px;background:linear-gradient(180deg,#fff3c9,#ffd60a 55%,#d9832a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 rgba(60,30,0,.9))}',
+'.epk-ring .e{position:relative;z-index:2;font-family:var(--mono);font-weight:800;font-size:13px;color:#f7e3b2;margin-top:1px;text-shadow:0 2px 3px #000}',
+'.epk-shock{position:absolute;left:50%;top:50%;width:170px;height:170px;border-radius:50%;border:3px solid rgba(255,214,10,.8);transform:translate(-50%,-50%) scale(.4);opacity:0;z-index:19;pointer-events:none}',
+'.epk-shock.go{animation:epkShk .7s ease-out forwards}',
+'@keyframes epkShk{0%{opacity:.9;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(-50%,-50%) scale(2.2)}}',
+'@media(max-width:700px){#epk-stage{display:none}}'
+].join('\n');
+document.head.appendChild(st);
+
+/* ---------- 引擎（bank 单一权威） ---------- */
+function __epkSVG(big){
+  var spikes=big?12:10,outer=big?28:23,inner=big?22:17;
+  var pts=[],rot=-Math.PI/2,step=Math.PI/spikes;
+  for(var i=0;i<spikes;i++){pts.push((32+Math.cos(rot)*outer).toFixed(1)+','+(32+Math.sin(rot)*outer).toFixed(1));rot+=step;pts.push((32+Math.cos(rot)*inner).toFixed(1)+','+(32+Math.sin(rot)*inner).toFixed(1));rot+=step;}
+  if(big)return '<svg viewBox="0 0 64 64"><polygon points="'+pts.join(' ')+'" fill="#ffd60a" stroke="#a8741a" stroke-width="2.5"/></svg>';
+  return '<svg viewBox="0 0 64 64"><polygon points="'+pts.join(' ')+'" fill="#f5f0e6" stroke="#8a8272" stroke-width="2.5"/></svg>';
+}
+var __epkBox=null,__epkStack=[],__epkBank=0,__epkBusy=false,__epkMerging=false,__epkInflight=0;
+function __epkStage(){return null;
+  if(__epkBox&&document.body.contains(__epkBox))return __epkBox;
+  var host=document.getElementById('page-daily');
+  if(!host)return null;
+  if(!__epkBox){
+    __epkBox=document.createElement('div');
+    __epkBox.id='epk-stage';
+    __epkBox.innerHTML='<span class="epk-lbl">星堆 · EP % 1000</span><div class="epk-base"></div>';
+    host.appendChild(__epkBox);
+  }
+  return __epkBox;
+}
+function __epkSlot(i){
+  var box=__epkStage();if(!box)return {x:0,y:0};
+  var w=box.clientWidth,h=box.clientHeight;
+  var x=(w-30)/2;
+  var has500=__epkStack.length>0&&__epkStack[0].v===500;
+  var y=has500?(16+(i===0?0:52+(i-1)*40)):(16+i*40);
+  if(y+44>h-6)y=h-50;
+  return {x:x,y:y};
+}
+function __epkRender(){__epkStack.forEach(function(s,i){var p=__epkSlot(i);s.el.style.left=p.x+'px';s.el.style.top=p.y+'px';s.el.style.transform='scale(1)';s.el.style.opacity='1';});}
+function __epkMk(v,big){
+  var el=document.createElement('div');
+  el.className='epk-star'+(big?' s500':'');
+  el.innerHTML=__epkSVG(big)+'<span class="n">'+v+'</span>';
+  var box=__epkStage();
+  el.style.left=(box.clientWidth/2-15)+'px';
+  el.style.top=(box.clientHeight/2-15)+'px';
+  el.style.transform='scale(0)';
+  box.appendChild(el);
+  requestAnimationFrame(function(){el.classList.add('popIn');});
+  return el;
+}
+function __epkClear(){__epkStack.forEach(function(s){s.el.remove();});__epkStack=[];}
+function __epkRebuild(){
+  __epkClear();
+  var b=__epkBank;
+  if(b>=500){var e1=__epkMk(500,true);__epkStack.push({el:e1,v:500});b-=500;}
+  while(b>=100){var e2=__epkMk(100,false);__epkStack.push({el:e2,v:100});b-=100;}
+  __epkRender();
+}
+function __epkRing(x){
+  var box=__epkStage();if(!box)return;
+  var s=document.createElement('div');s.className='epk-shock go';box.appendChild(s);
+  var r=document.createElement('div');r.className='epk-ring go';
+  r.innerHTML='<svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="102" fill="rgba(20,12,4,.88)" stroke="#ffd60a" stroke-width="7"/><circle cx="110" cy="110" r="89" fill="none" stroke="#d9832a" stroke-width="3" stroke-dasharray="10 7"/></svg><div class="k">'+x+' KILL</div><div class="e">'+(x*1000)+' EP</div>';
+  box.appendChild(r);
+  setTimeout(function(){r.remove();s.remove();},1800);
+}
+function __epkGather(cb){
+  var box=__epkStage();
+  if(!__epkStack.length){cb();return;}
+  var gx=box.clientWidth/2-19,gy=14;
+  __epkStack.forEach(function(s,i){
+    setTimeout(function(){s.el.classList.add('mergeGlow');s.el.style.left=gx+'px';s.el.style.top=gy+'px';s.el.style.transform='scale(.72)';},i*35);
+  });
+  setTimeout(function(){
+    __epkStack.forEach(function(s){s.el.remove();});__epkStack=[];
+    var orb=document.createElement('div');orb.className='epk-orb';
+    orb.style.left=(gx-2)+'px';orb.style.top=(gy-2)+'px';
+    box.appendChild(orb);
+    setTimeout(function(){
+      orb.style.left=(box.clientWidth/2-19)+'px';orb.style.top=(box.clientHeight/2-19)+'px';orb.style.transform='scale(1.2)';
+      setTimeout(function(){orb.remove();cb();},230);
+    },170);
+  },Math.min(__epkStack.length*35,180)+180);
+}
+function __epkCeremony(x,done){
+  __epkGather(function(){
+    __epkBank=Math.max(0,__epkBank-1000);
+    __epkRebuild();
+    __epkRing(x);
+    if(done)setTimeout(done,520);
+  });
+}
+function __epkVanish(){
+  __epkStack.forEach(function(s,i){setTimeout(function(){s.el.style.transform='scale(0)';s.el.style.opacity='0';},i*25);});
+  __epkBank=Math.max(0,__epkBank-1000);
+  setTimeout(function(){__epkRebuild();},220);
+}
+function __epkMerge(done){
+  if(__epkMerging){if(done)done();return;}
+  if(__epkStack.some(function(s){return s.v===500;})){if(done)done();return;}
+  var hundreds=__epkStack.filter(function(s){return s.v===100;});
+  if(hundreds.length<5){if(done)done();return;}
+  __epkMerging=true;
+  var five0=hundreds.slice(0,5);
+  five0.forEach(function(s,i){
+    setTimeout(function(){var p=__epkSlot(0);s.el.style.top=p.y+'px';s.el.classList.add('mergeGlow');s.el.style.transform='scale(.85)';},i*35);
+  });
+  setTimeout(function(){
+    five0.forEach(function(s){var ix=__epkStack.indexOf(s);if(ix>-1)__epkStack.splice(ix,1);s.el.remove();});
+    __epkStack.unshift({el:__epkMk(500,true),v:500});
+    __epkRender();
+    __epkMerging=false;
+    if(done)setTimeout(done,50);
+  },300);
+}
+function __epkStream(n,ringX,onDone){
+  if(!__epkStage()){if(onDone)onDone();return;}
+  if(!n){if(onDone)setTimeout(onDone,80);return;}
+  var per=Math.min(50,Math.max(18,Math.floor(1600/n)));
+  var batchAt=Math.max(0,(n-3))*per;
+  var spawned=0,doneF=false,burstDone=false;
+  function finish(){if(!doneF){doneF=true;if(onDone)setTimeout(onDone,80);}}
+  function afterLand(){
+    if(__epkBank>=1000){
+      if(!burstDone){burstDone=true;__epkCeremony(ringX,function(){if(spawned>=n)finish();else setTimeout(afterLand,280);});return;}
+      __epkVanish();
+    }
+    if(spawned>=n)finish();
+  }
+  for(var idx=0;idx<n;idx++){
+    var t=idx<n-3?idx*per:batchAt;
+    setTimeout(function(){
+      __epkInflight++;
+      __epkBank+=100;spawned++;
+      if(__epkBank<1000){
+        var el=__epkMk(100,false);
+        __epkStack.push({el:el,v:100});
+        var p=__epkSlot(__epkStack.length-1);
+        requestAnimationFrame(function(){el.style.transform='scale(1)';el.style.left=p.x+'px';el.style.top=p.y+'px';});
+      }
+      setTimeout(function(){
+        __epkInflight--;
+        __epkMerge(function(){afterLand();});
+      },370);
+    },t);
+  }
+}
+/* 结算入口：before/after 为总EP；先快充满千→爆圈→流式 */
+function __epkOnSettle(before,after){
+  var box=__epkStage();if(!box)return;
+  if(__epkBusy){__epkBank=after%1000-(after%100);__epkRebuild();return;}
+  __epkBusy=true;
+  var x=Math.min(10,Math.floor(after/1000)-Math.floor(before/1000));
+  var beforeH=Math.floor((before%1000)/100),afterH=Math.floor((after%1000)/100);
+  var n=Math.max(0,x*10+afterH-beforeH);
+  function fin(){__epkBusy=false;try{__epkSync();}catch(e){}}
+  if(x>0&&n>0){
+    var need=Math.max(0,Math.ceil((1000-__epkBank)/100));
+    var fast=Math.min(need,n);
+    for(var i=0;i<fast;i++){__epkBank+=100;var e=__epkMk(100,false);__epkStack.push({el:e,v:100});}
+    __epkRender();
+    __epkCeremony(x,function(){__epkStream(n-fast,x,fin);});
+  }else if(n>0){
+    __epkStream(n,Math.max(x,1),fin);
+  }else{
+    __epkBank=after%1000-(after%100);__epkRebuild();fin();
+  }
+}
+function __epkSync(){ /* 无动画对齐（页面切换/静默更新） */
+  var t=(typeof state!=='undefined'&&state.totalEP)||0;
+  __epkBank=t%1000-(t%100);
+  if(__epkStage())__epkRebuild();
+}
+
+/* ---------- 挂钩 ---------- */
+/* 结算确认按钮武装标记 */
+document.addEventListener('click',function(e){
+  var mo=document.getElementById('modal-overlay');
+  if(mo&&mo.classList.contains('dl-settlement-modal')){
+    var c=e.target&&e.target.closest?e.target.closest('#modal-confirm'):null;
+    if(c){window.__epkArmAt=Date.now();window.__epkMorphing=true;}
+  }
+},true);
+/* addTotalEp 钩子：结算落账时播放动画 */
+try{
+  var __epkATE=window.addTotalEp;
+  if(typeof __epkATE==='function'){
+    window.addTotalEp=function(amount,defer){
+      var before=(typeof state!=='undefined'?state.totalEP:0);
+      var r=__epkATE.apply(this,arguments);
+      try{
+        var after=(typeof state!=='undefined'?state.totalEP:before);
+        if(window.__epkArmAt&&(Date.now()-window.__epkArmAt)<3000){
+          window.__epkArmAt=0;
+          setTimeout(function(){try{if(typeof window.__ssShowReport==='function'){window.__ssShowReport(before,after);}else{window.__epkShowDone(before,after);}}catch(e){}},80);
+        }else{
+          __epkSync();
+        }
+      }catch(e){}
+      return r;
+    };
+  }
+}catch(e){}
+/* 页面就绪/切页时同步星堆 */
+function __epkInit(){
+  __epkStage();
+  __epkSync();
+}
+window.addEventListener('load',function(){
+  setTimeout(__epkInit,600);
+  var _sp=window.switchPage;
+  if(_sp&&!_sp.__epkw){
+    var w=function(name){var r=_sp.apply(this,arguments);if(name==='daily')setTimeout(__epkInit,120);return r;};
+    w.__epkw=true;window.switchPage=w;
+  }
+});
+window.__epkSaved=null;
+window.__epkUseBox=function(box){
+  if(window.__epkSaved)return;
+  window.__epkSaved={box:__epkBox,stack:__epkStack,bank:__epkBank};
+  __epkBox=box;__epkStack=[];__epkBank=0;
+};
+window.__epkRestoreBox=function(){
+  if(!window.__epkSaved)return;
+  var s=window.__epkSaved;window.__epkSaved=null;
+  __epkBox=s.box;__epkStack=s.stack;__epkBank=s.bank;
+  try{__epkSync();}catch(e){}
+};
+window.__epkOnSettle=__epkOnSettle;
+window.__epkSync=__epkSync;
+window.__epkDBG=function(){return {bank:__epkBank,stack:__epkStack.length,busy:__epkBusy,spawning:__epkInflight};};
+})();
+
+/* ===== 结算完成对话框（爆分动画演出）===== */
+(function(){
+'use strict';
+if(window.__epkDone154)return;
+window.__epkDone154=true;
+
+var st=document.createElement('style');
+st.textContent=[
+'.epk-done-ov{position:fixed;inset:0;z-index:420;background:rgba(4,3,2,.8);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px;animation:epkdIn .25s ease both}',
+'@keyframes epkdIn{from{opacity:0}to{opacity:1}}',
+'.epk-done-box{width:min(460px,94vw);max-height:88vh;display:flex;flex-direction:column;position:relative;border-radius:20px;padding:20px 18px 16px;background:radial-gradient(circle at 50% -10%,rgba(240,179,92,.16),transparent 55%),linear-gradient(165deg,#211a10,#120e08);border:1.5px solid rgba(240,179,92,.55);box-shadow:0 0 60px -12px rgba(240,179,92,.5),0 24px 70px rgba(0,0,0,.7);color:#f3ede2;animation:epkdBox .4s cubic-bezier(.2,1.3,.3,1) both;overflow:hidden}',
+'@keyframes epkdBox{from{opacity:0;transform:scale(.86) translateY(20px)}to{opacity:1;transform:none}}',
+'.epk-done-kicker{text-align:center;font-size:9.5px;letter-spacing:.34em;color:#a98d5f;font-family:var(--mono);margin-bottom:6px}',
+'.epk-done-title{text-align:center;font-size:19px;font-weight:800;letter-spacing:.1em;background:linear-gradient(110deg,#f7dfae,var(--gold) 45%,#fff6e2 55%,var(--gold-d));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px}',
+'.epk-done-gain{text-align:center;font-family:var(--mono);font-weight:900;font-size:34px;color:#f7dfae;text-shadow:0 0 20px rgba(240,179,92,.5);margin-bottom:2px}',
+'.epk-done-gain small{font-size:14px;color:#c9a86a;margin-left:6px}',
+'.epk-done-sub{text-align:center;font-size:11px;color:#8d7c5f;font-family:var(--mono);margin-bottom:10px}',
+'.epk-done-stage{position:relative;height:290px;margin:4px 0 10px;border:1px dashed rgba(232,163,61,.25);border-radius:14px;background:rgba(10,8,5,.4);overflow:hidden}',
+'.epk-done-stage .epk-lbl{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:8.5px;color:#6b5a3d;font-family:var(--mono);letter-spacing:.16em;white-space:nowrap;z-index:2}',
+'.epk-done-ok{width:100%;padding:12px;border:none;border-radius:12px;font-size:14px;font-weight:800;letter-spacing:.14em;cursor:pointer;background:linear-gradient(135deg,var(--gold-l),var(--gold-d));color:#2a1c08;box-shadow:0 3px 14px rgba(217,131,42,.4);transition:filter .2s}',
+'.epk-done-ok:hover{filter:brightness(1.08)}',
+'.epk-done-ok.pulse{animation:epkdPulse 1.4s ease-in-out infinite}',
+'@keyframes epkdPulse{0%,100%{box-shadow:0 3px 14px rgba(217,131,42,.4)}50%{box-shadow:0 3px 26px rgba(255,214,10,.75)}}',
+'/* 对话框内大号星星 */',
+'.epk-done-stage .epk-star{width:44px;height:44px}',
+'.epk-done-stage .epk-star.s500{width:54px;height:54px}',
+'.epk-done-stage .epk-star .n{font-size:14px}',
+'.epk-done-stage .epk-star.s500 .n{font-size:16px}',
+'.epk-done-stage .epk-orb{width:52px;height:52px}',
+'.epk-done-stage .epk-ring{width:200px;height:200px}',
+'.epk-done-stage .epk-ring .k{font-size:34px}',
+'.epk-done-stage .epk-ring .e{font-size:16px}',
+'.epk-done-stage .epk-shock{width:200px;height:200px}'
+].join('\n');
+document.head.appendChild(st);
+
+/* morph：在原结算框内变身结算完成 */
+window.__epkMorphDone=function(before,after){
+  try{
+    var mo=document.getElementById('modal-overlay');
+    if(!mo||!mo.classList.contains('dl-settlement-modal')){window.__epkShowDone(before,after);return;}
+    var gain=after-before;
+    var x=Math.min(10,Math.floor(after/1000)-Math.floor(before/1000));
+    var title=document.getElementById('modal-title');
+    var body=document.getElementById('modal-body');
+    var extra=document.getElementById('modal-extra');
+    var cf=document.getElementById('modal-confirm'),cn=document.getElementById('modal-cancel');
+    if(cf)cf.style.display='none';
+    if(cn)cn.style.display='none';
+    if(title)title.innerHTML='<span style="display:block;text-align:center;font-size:20px;font-weight:800;letter-spacing:.1em;background:linear-gradient(110deg,#f7dfae,#e8a33d 45%,#fff6e2 55%,#d9832a);-webkit-background-clip:text;background-clip:text;color:transparent;">💰 结算完成 · 恭喜获得</span>';
+    if(extra)extra.innerHTML='';
+    if(body)body.innerHTML='<div style="text-align:center;font-family:var(--mono);font-weight:900;font-size:32px;color:#f7dfae;text-shadow:0 0 20px rgba(240,179,92,.5);margin:2px 0 2px;">+'+gain.toLocaleString()+'<small style="font-size:13px;color:#c9a86a;margin-left:6px;">EP</small></div>'
+      +'<div style="text-align:center;font-size:11px;color:#8d7c5f;font-family:var(--mono);margin-bottom:8px;">持有 '+after.toLocaleString()+' EP · 星堆 '+String(after%1000).padStart(3,'0')+' / 1000</div>'
+      +'<div id="epk-morph-stage" style="position:relative;height:240px;margin:2px 0 10px;border:1px dashed rgba(232,163,61,.25);border-radius:14px;background:rgba(10,8,5,.4);overflow:hidden;"><span class="epk-lbl" style="position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:8.5px;color:#6b5a3d;font-family:var(--mono);letter-spacing:.16em;white-space:nowrap;z-index:2;">EP 星堆</span></div>'
+      +'<button class="epk-done-ok" id="epk-morph-ok">✓ 收下</button>';
+    var okBtn=document.getElementById('epk-morph-ok');
+    if(okBtn)okBtn.onclick=function(){try{window.__epkRestoreBox();}catch(e){}try{window.closeModal();}catch(e){}};
+    setTimeout(function(){
+      try{
+        var stg=document.getElementById('epk-morph-stage');
+        if(stg&&typeof __epkUseBox==='function'){
+          __epkUseBox(stg);
+          window.__epkOnSettle(before,after);
+        }
+      }catch(e){}
+    },320);
+    setTimeout(function(){try{var s2=document.getElementById('epk-morph-stage');if(s2&&document.body.contains(s2)&&typeof __epkUseBox==='function'){__epkUseBox(s2);__epkSync();__epkRestoreBox();}}catch(e){}},7500);
+  }catch(e){}
+};
+/* closeModal 吞咽：finalize 想关框时若处于 morph 则按住 */
+try{
+  var __epkOC=window.closeModal;
+  if(typeof __epkOC==='function'){
+    window.closeModal=function(){
+      if(window.__epkMorphing){window.__epkMorphing=false;return;}
+      return __epkOC.apply(this,arguments);
+    };
+  }
+}catch(e){}
+function __epkDoneClose(){
+  var ov=document.getElementById('epk-done-ov');
+  if(ov)ov.remove();
+  try{window.__epkRestoreBox();}catch(e){}
+}
+window.__epkShowDone=function(before,after){
+  try{
+    __epkDoneClose();
+    var gain=after-before;
+    var x=Math.min(10,Math.floor(after/1000)-Math.floor(before/1000));
+    var beforeH=Math.floor((before%1000)/100),afterH=Math.floor((after%1000)/100);
+    var n=Math.max(0,x*10+afterH-beforeH);
+    var info=getLevelInfo(after);
+    var nl=getLevelInfo(after);var nxt=(nl.e>=99999999)?null:nl.e+1;
+    var sub=nxt?('距离 '+getLevelInfo(nxt).name+' 还差 '+(nxt-after)+' EP'):('已达最高军衔区');
+    var ov=document.createElement('div');ov.id='epk-done-ov';ov.className='epk-done-ov';
+    ov.innerHTML='<div class="epk-done-box">'
+      +'<div class="epk-done-kicker">SETTLEMENT COMPLETE</div>'
+      +'<div class="epk-done-title">💰 结算完成 · 恭喜获得</div>'
+      +'<div class="epk-done-gain">+'+gain.toLocaleString()+'<small>EP</small></div>'
+      +'<div class="epk-done-sub">'+info.name+' · '+sub+'</div>'
+      +'<div class="epk-done-stage" id="epk-done-stage"><span class="epk-lbl">EP 星堆 · '+String(after%1000).padStart(3,'0')+' / 1000</span></div>'
+      +'<button class="epk-done-ok" id="epk-done-ok">✓ 收下</button>'
+      +'</div>';
+    ov.addEventListener('click',function(e){if(e.target===ov)__epkDoneClose();});
+    document.body.appendChild(ov);
+    document.getElementById('epk-done-ok').onclick=function(){__epkDoneClose();};
+    setTimeout(function(){var b=document.getElementById('epk-done-ok');if(b)b.classList.add('pulse');},1200);
+    setTimeout(__epkDoneClose,12000);
+
+    /* 在对话框舞台内演出：借用主线引擎，临时切换舞台 */
+    setTimeout(function(){
+      try{
+        var dailyBox=document.getElementById('epk-stage');
+        var dlgBox=document.getElementById('epk-done-stage');
+        if(!dlgBox||typeof __epkUseBox!=='function'){return;}
+        __epkUseBox(dlgBox);
+        __epkOnSettle(before,after);
+      }catch(e){}
+    },350);
+  }catch(e){}
+};
+})();
+
+</script>
+<script>
+/* ================= v1.5.4.2 · 结算战报（EP星堆爆分引擎，替代旧结算对话框） ================= */
+(function(){
+'use strict';
+if(window.__ssReport1542)return;
+window.__ssReport1542=true;
+
+var S={box:null,stack:[],merging:false,bursting:false,killN:0,
+  killBadgeTimer:0,pendingBursts:0,rollDone:false,ringShown:false,
+  starQueue:0,spawnedTotal:0,drainTimer:0,spd:1,ov:null,numEl:null};
+
+function fly(el,from,to,opt){
+  opt=opt||{};
+  var dur=opt.dur||430,scaleFrom=opt.scaleFrom!==undefined?opt.scaleFrom:0.3;
+  var delay=opt.delay||0,done=opt.done||null,t0=null;
+  setTimeout(function(){
+    function fr(ts){
+      if(!t0)t0=ts;
+      var p=Math.min(1,(ts-t0)/dur);
+      var e=1-Math.pow(1-p,3);
+      el.style.left=(from.x+(to.x-from.x)*e)+'px';
+      el.style.top=(from.y+(to.y-from.y)*e)+'px';
+      var sc;
+      if(p<0.65)sc=scaleFrom+(1.08-scaleFrom)*(p/0.65);
+      else if(p<0.85)sc=1.08-0.13*((p-0.65)/0.2);
+      else sc=0.95+0.05*((p-0.85)/0.15);
+      el.style.transform='scale('+sc.toFixed(3)+')';
+      if(p<1)requestAnimationFrame(fr);
+      else{el.style.transform='scale(1)';if(done)done();}
+    }
+    requestAnimationFrame(fr);
+  },delay);
+}
+function starSVG(big){
+  var spikes=big?12:10,outer=big?28:23,inner=big?22:17;
+  var pts=[],rot=-Math.PI/2,step=Math.PI/spikes;
+  for(var i=0;i<spikes;i++){pts.push((32+Math.cos(rot)*outer).toFixed(1)+','+(32+Math.sin(rot)*outer).toFixed(1));rot+=step;pts.push((32+Math.cos(rot)*inner).toFixed(1)+','+(32+Math.sin(rot)*inner).toFixed(1));rot+=step;}
+  if(big)return '<svg viewBox="0 0 64 64"><polygon points="'+pts.join(' ')+'" fill="#ffd60a" stroke="#a8741a" stroke-width="2.5"/></svg>';
+  return '<svg viewBox="0 0 64 64"><polygon points="'+pts.join(' ')+'" fill="#f5f0e6" stroke="#8a8272" stroke-width="2.5"/></svg>';
+}
+function slotPos(i){
+  var w=S.box.clientWidth;
+  return {x:(w-34)/2,y:26+(i===0?0:54+(i-1)*44)};
+}
+function numOrigin(){
+  var r=S.numEl.getBoundingClientRect(),br=S.box.getBoundingClientRect();
+  return {x:r.left-br.left+r.width/2-17,y:r.top-br.top+r.height/2-17};
+}
+function stackSum(){return S.stack.reduce(function(a,s){return a+s.v;},0);}
+function mkStar(v,big){
+  var el=document.createElement('div');
+  el.className='ss-star'+(big?' s500':'');
+  el.innerHTML=starSVG(big)+'<span class="n">'+v+'</span>';
+  S.box.appendChild(el);
+  var o=numOrigin();
+  el.style.left=o.x+'px';el.style.top=o.y+'px';
+  el.style.transform='scale(.3)';el.style.opacity='.9';
+  var p=slotPos(S.stack.length);
+  el.__flying=true;
+  fly(el,o,p,{dur:big?480:400,scaleFrom:big?0.2:0.3,done:function(){el.__flying=false;el.style.opacity='1';}});
+  return el;
+}
+function renderStack(){
+  S.stack.forEach(function(s,i){
+    if(s.merging||s.el.__flying)return;
+    var cur=s.el.getBoundingClientRect(),br=S.box.getBoundingClientRect();
+    var from={x:cur.left-br.left,y:cur.top-br.top};
+    var p=slotPos(i);
+    if(Math.abs(from.x-p.x)<2&&Math.abs(from.y-p.y)<2){s.el.style.left=p.x+'px';s.el.style.top=p.y+'px';return;}
+    s.el.__flying=true;
+    fly(s.el,from,p,{dur:220,scaleFrom:1,done:function(){s.el.__flying=false;}});
+  });
+}
+function placeInitial(before){
+  var bank=before%1000;
+  if(bank>=500){
+    var g5=document.createElement('div');
+    g5.className='ss-star s500';
+    g5.innerHTML=starSVG(true)+'<span class="n">500</span>';
+    var p0=slotPos(0);
+    g5.style.left=p0.x+'px';g5.style.top=p0.y+'px';g5.style.opacity='1';
+    S.box.appendChild(g5);
+    S.stack.push({el:g5,v:500});
+    bank-=500;
+  }
+  var n=Math.floor(bank/100);
+  for(var i=0;i<n;i++){
+    var el=document.createElement('div');
+    el.className='ss-star';
+    el.innerHTML=starSVG(false)+'<span class="n">100</span>';
+    var p=slotPos(S.stack.length);
+    el.style.left=p.x+'px';el.style.top=p.y+'px';el.style.opacity='1';
+    S.box.appendChild(el);
+    S.stack.push({el:el,v:100});
+  }
+}
+function releaseStars(){
+  while(S.starQueue>0&&S.stack.length<6){
+    S.starQueue--;
+    S.spawnedTotal++;
+    S.stack.push({el:mkStar(100,false),v:100});
+  }
+  renderStack();
+}
+function tryCompose(){
+  if(S.merging||S.bursting)return;
+  var sum=stackSum();
+  var hundreds=S.stack.filter(function(s){return s.v===100;});
+  if(sum>=1000)burst();
+  else if(hundreds.length>=5)mergeStars(hundreds.slice(0,5));
+}
+function mergeStars(hun){
+  S.merging=true;
+  hun.forEach(function(s,i){
+    s.merging=true;
+    var cur=s.el.getBoundingClientRect(),br=S.box.getBoundingClientRect();
+    s.el.classList.add('mergeGlow');
+    fly(s.el,{x:cur.left-br.left,y:cur.top-br.top},slotPos(0),{dur:Math.round(150*S.spd),delay:Math.round(i*25*S.spd),scaleFrom:1,done:function(){s.el.style.transform='scale(.3)';}});
+  });
+  setTimeout(function(){
+    hun.forEach(function(s){var ix=S.stack.indexOf(s);if(ix>-1)S.stack.splice(ix,1);s.el.remove();});
+    var g5=document.createElement('div');
+    g5.className='ss-star s500';
+    g5.innerHTML=starSVG(true)+'<span class="n">500</span>';
+    var p0=slotPos(0);
+    g5.style.left=p0.x+'px';g5.style.top=p0.y+'px';g5.style.opacity='1';
+    S.box.appendChild(g5);
+    S.stack.unshift({el:g5,v:500});
+    S.merging=false;
+    releaseStars();
+    tryCompose();
+    tryDrainDone();
+  },Math.round(320*S.spd));
+}
+function burstCenter(){
+  var zone=S.ov.querySelector('.ssrp-burst');
+  var r=zone.getBoundingClientRect(),br=S.box.getBoundingClientRect();
+  return {x:r.left-br.left+r.width/2-37,y:r.top-br.top+r.height/2-37};
+}
+function burst(){
+  S.killN++;S.pendingBursts++;pumpBurst();
+}
+function pumpBurst(){
+  if(S.bursting||S.pendingBursts<=0)return;
+  S.pendingBursts--;
+  S.bursting=true;
+  var show=Math.min(10,S.killN);
+  var zone=S.ov.querySelector('.ssrp-burst');
+  ['.ss-ring','.ss-shock','.ss-flash'].forEach(function(sel){
+    var old=zone.querySelector(sel);if(old)old.remove();
+  });
+  var fl=document.createElement('div');fl.className='ss-flash go';zone.appendChild(fl);
+  var sk=document.createElement('div');sk.className='ss-shock go';zone.appendChild(sk);
+  var rg=document.createElement('div');rg.className='ss-ring go';
+  rg.innerHTML='<svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="102" fill="rgba(20,12,4,.9)" stroke="#ffd60a" stroke-width="9"/><circle cx="110" cy="110" r="88" fill="none" stroke="#fff3c9" stroke-width="3" stroke-dasharray="12 7"/></svg><div class="k">'+show+' KILL</div><div class="e">'+(show*1000)+' EP</div>';
+  zone.appendChild(rg);
+  setTimeout(function(){rg.remove();sk.remove();fl.remove();},480);
+  var consumed=[],need=1000;
+  S.stack.filter(function(s){return s.v===500;}).forEach(function(s){if(need>=500){consumed.push(s);need-=500;}});
+  S.stack.filter(function(s){return s.v===100;}).forEach(function(s){if(need>=100){consumed.push(s);need-=100;}});
+  consumed.forEach(function(s,i){
+    s.merging=true;
+    var cur=s.el.getBoundingClientRect(),br=S.box.getBoundingClientRect();
+    s.el.classList.add('mergeGlow');
+    fly(s.el,{x:cur.left-br.left,y:cur.top-br.top},slotPos(0),{dur:Math.round(120*S.spd),delay:Math.round(i*15*S.spd),scaleFrom:1,done:function(){s.el.style.opacity='0';s.el.style.transform='scale(.2)';}});
+  });
+  setTimeout(function(){
+    consumed.forEach(function(s){var ix=S.stack.indexOf(s);if(ix>-1)S.stack.splice(ix,1);s.el.remove();});
+    releaseStars();
+    var start=slotPos(0);
+    var g=document.createElement('div');
+    g.className='ss-star s500 ss-giant';
+    g.innerHTML=starSVG(true)+'<span class="n">1000</span>';
+    g.style.left=start.x+'px';g.style.top=start.y+'px';g.style.transform='scale(.4)';
+    S.box.appendChild(g);
+    fly(g,start,burstCenter(),{dur:Math.round(225*S.spd),scaleFrom:0.4,done:function(){
+      g.style.transition='opacity .1s ease-out,transform .1s ease-out';
+      g.style.opacity='0';g.style.transform='scale(1.35)';
+      setTimeout(function(){
+        g.remove();
+        S.bursting=false;
+        tryCompose();
+        pumpBurst();
+        tryDrainDone();
+      },Math.max(60,Math.round(110*S.spd)));
+    }});
+  },Math.round(30*S.spd));
+}
+function tryDrainDone(){
+  if(!S.rollDone||S.ringShown||S.merging||S.bursting||S.pendingBursts>0||S.starQueue>0||S.killN<=0)return;
+  S.ringShown=true;
+  var show=Math.min(10,S.killN);
+  var badge=S.ov.querySelector('.ss-badge');
+  badge.querySelector('.kx').textContent=show+' KILL';
+  badge.querySelector('.ke').textContent=(show*1000)+' EP';
+  badge.style.display='';
+  requestAnimationFrame(function(){badge.classList.add('show');});
+  badge.classList.remove('bump');void badge.offsetWidth;badge.classList.add('bump');
+}
+function fmt(n){return n.toLocaleString('en-US');}
+
+window.__ssShowReport=function(before,after){
+  try{
+    var gain=after-before;
+    if(gain<=0)return;
+    var old=document.getElementById('ssrp-ov');if(old)old.remove();
+    clearTimeout(S.drainTimer);
+    /* 关掉结算账单弹窗（第一次可能被 morph 吞咽，连调两次兜底） */
+    try{if(typeof closeModal==='function'){closeModal();closeModal();}}catch(e){}
+    var nl=getLevelInfo(after);
+    var nxt=nl.e>=99999999?null:getLevelInfo(nl.e+1);
+    var lvPct=Math.max(0,Math.min(100,Math.round((after-nl.s)/(nl.e-nl.s)*100)));
+    var progTx=nxt?('距 '+nxt.name+' 还差 '+fmt(nxt.s-after)+' EP'):('已达最高军衔区');
+    var streak=(typeof getMaxConsecutiveDays==='function')?getMaxConsecutiveDays():0;
+    var d=new Date();
+    var ov=document.createElement('div');
+    ov.id='ssrp-ov';ov.className='ssrp-ov';
+    ov.innerHTML='<div class="ssrp-box">'
+      +'<div class="ssrp-head"><div><div class="ssrp-kicker">DAILY SETTLEMENT · 每日结算</div>'
+      +'<div class="ssrp-title">📋 今日战报已封存</div></div>'
+      +'<div class="ssrp-no">'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' 周'+'日一二三四五六'[d.getDay()]
+      +'<br>结算单号 EP-'+d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+String(Math.floor(Math.random()*900)+100)+'</div></div>'
+      +'<div class="ssrp-body">'
+      +'<div class="ssrp-left"><div class="ssrp-lbl">GAINED EP · 本次获得</div>'
+      +'<div class="ssrp-gain">+<span id="ssrp-num">0</span><small>EP</small></div>'
+      +'<div class="ssrp-rank">🏅 '+nl.name+'</div>'
+      +'<div class="ssrp-prog"><i id="ssrp-progfill" style="width:'+lvPct+'%"></i></div>'
+      +'<div class="ssrp-progtx">'+progTx+'</div>'
+      +'<div class="ssrp-streak">🔥 连续打卡 <b>'+streak+'</b> 天</div></div>'
+      +'<div class="ssrp-mid">'
+      +'<div class="ssrp-row"><span>💰 积分 / 代币入账</span><span class="v">详见顶栏余额</span></div>'
+      +'<div class="ssrp-row"><span>📦 材料与杯赛</span><span class="v">已入仓库 · 已计分</span></div>'
+      +'<div class="ssrp-row"><span>🎫 通行证 LP</span><span class="v">已计入待领取</span></div>'
+      +'<div class="ssrp-burst"><div class="ss-badge" style="display:none;"><span class="kx">0 KILL</span><span class="ke">0 EP</span></div></div></div>'
+      +'<div class="ssrp-stars"><span class="ssrp-lbl2">EP 星堆</span></div>'
+      +'</div>'
+      +'<div class="ssrp-foot"><div class="ssrp-note">结算数据已全部入账 · 杯赛按成绩计分<br>明日 0 点解锁新的乱斗与潜能</div>'
+      +'<button class="ssrp-ok" id="ssrp-ok" disabled>太棒了</button></div></div>';
+    document.body.appendChild(ov);
+    ov.addEventListener('click',function(e){if(e.target===ov)__ssCloseReport();});
+    S.ov=ov;
+    S.box=ov.querySelector('.ssrp-stars');
+    S.numEl=ov.querySelector('#ssrp-num');
+    S.stack=[];S.merging=false;S.bursting=false;S.killN=0;S.pendingBursts=0;
+    S.rollDone=false;S.ringShown=false;S.starQueue=0;S.spawnedTotal=0;S.spd=1;
+    var badge=ov.querySelector('.ss-badge');
+    badge.classList.remove('show');badge.style.display='none';
+    var okBtn=ov.querySelector('#ssrp-ok');
+    okBtn.disabled=true;okBtn.classList.remove('pulse');
+    okBtn.onclick=function(){__ssCloseReport();};
+    placeInitial(before);
+    tryCompose();
+    var totalStars=Math.floor(after/100)-Math.floor(before/100);
+    var rollMs=Math.max(2500,totalStars*90+400);
+    var t0=null;
+    function step(ts){
+      if(!t0)t0=ts;
+      var p=Math.min(1,(ts-t0)/rollMs);
+      var held=before+gain*p;
+      var shouldBe=Math.floor(held/100)-Math.floor(before/100);
+      S.starQueue=Math.max(S.starQueue,shouldBe-S.spawnedTotal);
+      S.numEl.textContent=fmt(Math.round(gain*p));
+      releaseStars();
+      tryCompose();
+      if(p<1)requestAnimationFrame(step);
+      else{
+        S.numEl.textContent=fmt(gain);
+        S.rollDone=true;
+        S.spd=0.45;
+        drainTick();
+      }
+    }
+    function drainTick(){
+      releaseStars();
+      tryCompose();
+      pumpBurst();
+      tryDrainDone();
+      var finished=S.starQueue<=0&&!S.merging&&!S.bursting&&S.pendingBursts<=0;
+      if(!finished){
+        S.drainTimer=setTimeout(drainTick,80);
+      }else{
+        setTimeout(function(){okBtn.disabled=false;okBtn.classList.add('pulse');},400);
+      }
+    }
+    requestAnimationFrame(step);
+  }catch(e){}
+};
+window.__ssCloseReport=function(){
+  var ov=document.getElementById('ssrp-ov');
+  if(ov)ov.remove();
+  clearTimeout(S.drainTimer);
+  try{if(typeof closeModal==='function')closeModal();}catch(e){}
+};
+
+/* ---------- 公告 ---------- */
+var ANN1542='<div id="ann-1542" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;">'
+ +'<b style="color:#ff3b30;">v1.5.4.2「结算战报」</b> <span style="font-size:11px;color:#8e8e93;">结算演出 · 11.05</span>'
+ +'<div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">结算对话框全面替换为「今日战报」：EP 星堆按动态持有 EP 逐颗飞出（右侧 6 星缓冲槽），满千合成 1000 大星星触发 KILL 爆分（圆形爆分UI可连爆覆盖、上限 10KILL），椭圆战报牌收尾；滚动节奏与星星严格同步。详情见邮箱《v1.5.4.2「结算战报」更新公告》。</div></div>';
+function __v1542Ann(){
+  try{
+    var el=document.getElementById('ann-list');
+    if(!el)return;
+    var old=document.getElementById('ann-1542');if(old)old.parentNode.removeChild(old);
+    el.insertAdjacentHTML('afterbegin',ANN1542);
+  }catch(e){}
+}
+__v1542Ann();
+try{
+  if(typeof renderAnnouncements==='function'&&!renderAnnouncements.__v1542w){
+    var __ra=renderAnnouncements;
+    var __w=function(){__ra.apply(this,arguments);__v1542Ann();};
+    __w.__v1542w=true;window.renderAnnouncements=__w;
+  }
+}catch(e){}
+
+/* ---------- 邮件 ---------- */
+window.ensureV1542Mail=function(){
+  try{
+    state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];
+    state.mailGranted=state.mailGranted||{};
+    if(state.mailGranted['v1542_update'])return;
+    state.mailGranted['v1542_update']=true;
+    if(!state.mailbox.some(function(m){return m.id==='v1542_update';})){
+      state.mailbox.push({
+        id:'v1542_update',
+        title:'v1.5.4.2「结算战报」更新公告',
+        body:'各位考生：<br><br>v1.5.4.2 带来全新结算演出，替代原结算对话框：<br><br><b>一、EP 星堆</b><br>· 星星按<b>动态持有 EP</b>实时飞出：持有每跨过一个 100 边界（含跨千），一颗星星从获得数字直线飞入右侧星堆；<br>· 右侧为 6 星缓冲槽（1×500 + 5×100），槽满即合成 1000 大星星爆分清空，多出的星星排队等位，永远不会堆积；<br>· 结算前持有的百位组成（如 599 的一颗 500 星）会先落位展示。<br><br><b>二、KILL 爆分</b><br>· 1000 大星星高亮直飞爆分中心：圆形爆分UI 0.45s 有力道弹出，连爆立即覆盖，上限 10KILL；<br>· 椭圆战报牌只在结算完毕且至少 1 次爆分时出现一次。<br><br><b>三、节奏同步</b><br>· 滚动时长按星数动态伸缩（约 90ms/星），数字与星星严格同步，星星全部出场数字才停。<br><br>随信发放 🎟️属性抽取券×1、🎫属性变更券×1，请查收。<br><br>愿每一颗星都算数。',
+        items:{draw_ticket:1,change_ticket:1},
+        claimed:false,read:false,createdAt:Date.now()
+      });
+    }
+    saveState();
+  }catch(e){}
+};
+try{window.ensureV1542Mail();}catch(e){}
+try{
+  if(typeof renderMailPage==='function'&&!renderMailPage.__v1542w){
+    var __rm=renderMailPage;
+    var __w2=function(){try{window.ensureV1542Mail();}catch(e){}return __rm.apply(this,arguments);};
+    __w2.__v1542w=true;window.renderMailPage=__w2;
+  }
+}catch(e){}
+try{if(typeof updateMailBadge==='function')updateMailBadge();}catch(e){}
+
+})();
+/* ================= v1.5.4.2 JS END ================= */
 
 </script>
 </body>
