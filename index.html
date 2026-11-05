@@ -1,12 +1,12 @@
-<!-- FILE-MARKER: kaoyan-ep-index · 成就树v3.3 · build 20261105-0202 · 文件必须完整下载，见页脚徽标 -->
+<!-- FILE-MARKER: kaoyan-ep-index · 成就树v3.3 · build 20261105-1015 · 文件必须完整下载，见页脚徽标 -->
 <!DOCTYPE html>
-<!-- build 20261105-0202 -->
-<!-- v1.5.4.2 -->
+<!-- build 20261105-1015 -->
+<!-- v1.5.4.3 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.5.4.2</title>
+<title>考研成长系统 v1.5.4.3</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314100a'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='34'%3E%F0%9F%93%8B%3C/text%3E%3C/svg%3E">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -1181,7 +1181,7 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 @media(min-width:1024px){#page-daily{padding:26px 20px 32px}#page-daily .dl-panel{padding:16px}}
 @media(prefers-reduced-motion:reduce){#page-daily *,#page-daily *::before,#page-daily *::after{animation:none!important;transition:none!important}}
 /* ================= 每日登记 END ================= */
-/* ================= v1.5.4.2 · 结算战报（EP星堆爆分 · 替代旧结算对话框） ================= */
+/* ================= v1.5.4.3 · 结算战报（EP星堆爆分 · 替代旧结算对话框） ================= */
 .ssrp-ov{position:fixed;inset:0;z-index:420;background:rgba(4,3,2,.8);backdrop-filter:blur(6px);display:flex;align-items:flex-start;justify-content:center;padding:7vh 14px 14px;overflow-y:auto;animation:ssrpIn .24s ease both}
 @keyframes ssrpIn{from{opacity:0}to{opacity:1}}
 .ssrp-box{width:min(860px,95vw);border-radius:20px;border:1.5px solid rgba(240,179,92,.55);background:radial-gradient(circle at 50% -10%,rgba(240,179,92,.15),transparent 55%),linear-gradient(165deg,#211a10,#120e08);box-shadow:0 0 60px -12px rgba(240,179,92,.5),0 24px 70px rgba(0,0,0,.7);padding:18px 20px 16px;animation:ssrpBox .45s cubic-bezier(.2,1.3,.3,1) both;position:relative}
@@ -1247,7 +1247,7 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 .ss-badge .ke{font-family:var(--mono);font-weight:800;font-size:10px;color:#f7e3b2;margin-top:2px}
 .ss-badge.bump{animation:ssBump .45s cubic-bezier(.2,1.6,.3,1)}
 @keyframes ssBump{0%{transform:translateY(-50%) scale(1)}40%{transform:translateY(-50%) scale(1.18)}100%{transform:translateY(-50%) scale(1)}}
-/* ================= v1.5.4.2 CSS END ================= */
+/* ================= v1.5.4.3 CSS END ================= */
 
 </style>
 <base target="_blank">
@@ -1259,7 +1259,7 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:800;letter-spacing:.05em;color:#f3e7c8;text-shadow:0 0 14px rgba(232,163,61,.35);">📚 考研EP系统</span> <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.22em;color:var(--gold-l);font-weight:700;">1.5.4.2</span>
+      <span style="font-size:18px;font-weight:800;letter-spacing:.05em;color:#f3e7c8;text-shadow:0 0 14px rgba(232,163,61,.35);">📚 考研EP系统</span> <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.22em;color:var(--gold-l);font-weight:700;">1.5.4.3</span>
             <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -14433,7 +14433,7 @@ function exportPNG(ov){
  * 大奖：右下角0.5%预判定 · 本期=4费秘藏天赋#36「连环进宝」
  * ============================================================ */
 (function(){
-if(window.__tv3)return;window.__tv3=1;
+if(window.__tv3)return;window.__tv3=1;window.__tv3Dbg={landReward:landReward,T:T,get CELLS(){return CELLS;}};
 
 /* ================= 天赋#36 秘藏级 ================= */
 try{
@@ -14577,7 +14577,7 @@ var st=document.createElement('style');st.id='tv3-style';st.textContent=CSS;docu
 
 /* ================= 状态 ================= */
 function T(){ if(!state.treasure)state.treasure={}; var tr=state.treasure; var today=new Date().toDateString();
- if(tr.date!==today){ tr.date=today; tr.pos=0; tr.dir=1; tr.bought=false; tr.claimed=false; }
+ if(tr.date!==today){ tr.date=today; tr.bought=false; tr.claimed=false; } /* v1.5.4.3 pos跨天保留 */
   if(tr.claimed&&tr.claimedDate!==today){tr.claimed=false;}
  if(tr.tp===undefined)tr.tp=0;
  if(tr.tpStage===undefined)tr.tpStage=0;
@@ -14632,8 +14632,8 @@ var CELLS=[
  {i:1,ic:'💰',n:'积分',v:'+100'},
  {i:2,ic:'🎲',n:'蓝骰',v:'×1'},
  {i:3,ic:'💰',n:'积分',v:'+150'},
- {i:4,ic:'💰',n:'积分',v:'+200'},
- {i:5,t:'turn',ic:'🔄',n:'掉头',v:'反向'},
+ {i:4,t:'turn',ic:'🔄',n:'掉头',v:'反向'},
+ {i:5,ic:'💰',n:'积分',v:'+200'},
  {i:6,ic:'🎁',n:'宝藏池',v:'普通'},
  {i:7,ic:'📦',n:'材料',v:'随机'},
  {i:8,t:'adv',ic:'💎',n:'高级池',v:'翻牌'},
@@ -14641,7 +14641,7 @@ var CELLS=[
  {i:10,ic:'🎲',n:'蓝骰',v:'×1'},
  {i:11,ic:'🎁',n:'宝藏池',v:'普通'},
  {i:12,t:'spd',ic:'🌟',n:'特殊骰',v:'黄骰×1'},
- {i:13,ic:'📦',n:'材料',v:'随机'},
+ {i:13,ic:'💠',n:'宝积',v:'+100'},
  {i:14,ic:'💰',n:'积分',v:'+200'},
  {i:15,ic:'💰',n:'积分',v:'+300'}
 ];
@@ -14666,6 +14666,7 @@ function buildBoard(){
  +'· 每日免费领取 <b>🎲普通骰×1</b>；<b>300 积分</b>再买 1 个（日限 1）；点卡片切换骰子，🌟特殊骰可<b>自定 1-6 步</b><br>'
  +'· 四端点：<b>🚩起点</b>（左上·过+300）· <b>🔄掉头</b>（右上·行进方向反转）· <b>💎高级池</b>（右下·翻牌轮盘）· <b>🌟特殊骰格</b>（左下·得黄骰）<br>'
  +'· <b>翻牌轮盘</b>：16 卡全翻，🏆最终大奖固定右下角（0.5% 预判定，中高亮驶向大奖格），其余 15 格按权重随机 200-3200；高亮按当前方向 3 圈/秒旋转，停止后减速落定<br>'
+ +'· <b>宝藏池（普通）</b>：积分120 / 代币15 / 属性抽取券 / 属性变更券 / 通用材料；💠宝积格 +100 宝藏积分<br>'
  +'· 宝藏积分入<b>中央进度条</b>：满 <b>5000</b> 得 <b>直接升级×10</b>；二阶段再积 <b>8000</b> 得 <b>🏆本期终极大奖（三周轮换）</b>：4费秘藏天赋 <b>「标签熔炉」</b>——锁定后融合2~3个同级标签：maxEP=Σ×110%、罚率=均值×80%（上限100%）· 可连锁融合<br>'
  +'· 骰子来源：每日领取 / 300积分购买 / 棋盘拾取 / <b>通行证里程币商店</b>（Lv.20 起上架）';
  render();
@@ -14741,14 +14742,18 @@ function landReward(i){
  if(i===0)return;
  if(c.n==='蓝骰'){addBlue(1);saveState();render();showGainModal('🎲 宝藏冲刺 · 恭喜获得',[['普通骰子','×1']]);return;}
  if(c.n==='材料'){gainItem('universal_mat','通用材料',1);return;}
+ if(c.n==='特殊骰'){addYel(1);saveState();render();showGainModal('\u{1F31F} 宝藏冲刺 · 恭喜获得',[['特殊骰子','×1']]);return;}
+ if(c.n==='宝积'){addTP(100);showGainModal('\u{1F4A0} 宝藏冲刺 · 恭喜获得',[['宝藏积分','+100']]);return;}
  if(c.n==='宝藏池'){
   var r=Math.random();
-  if(r<0.45)gainPoints(120);
-  else if(r<0.8)gainItem('universal_mat','通用材料',1);
-  else gainItem('draw_ticket','属性抽取券',1);
+  if(r<0.30)gainPoints(120);
+  else if(r<0.50){state.tokens+=15;saveState();updateTopBar();showGainModal('\u{1F381} 宝藏冲刺 · 恭喜获得',[['代币','+15']]);}
+  else if(r<0.68)gainItem('draw_ticket','属性抽取券',1);
+  else if(r<0.85)gainItem('change_ticket','属性变更券',1);
+  else gainItem('universal_mat','通用材料',1);
   return;
  }
- var m=c.v.match(/\\d+/);
+ var m=c.v.match(/\d+/);
  if(m)gainPoints(parseInt(m[0]));
 }
 /* ================= 宝藏积分 ================= */
@@ -14956,7 +14961,7 @@ try{T();}catch(e){}
 })();
 
 /* ============================================================
-   v1.5.4「焕新出发」发布补丁 · build 20261105-0202
+   v1.5.4「焕新出发」发布补丁 · build 20261105-1015
    ① 版本号恢复 v1.5.4（浏览器标题）
    ② 公告：移除追猎旧公告（ann-153 / ann-1531），置顶 v1.5.4 简略公告
    ③ 邮箱：发放《v1.5.4「焕新出发」完整更新公告》长信
@@ -14965,7 +14970,7 @@ try{T();}catch(e){}
 (function(){
 'use strict';
 
-try{document.title='考研成长系统 v1.5.4.2';}catch(e){}
+try{document.title='考研成长系统 v1.5.4.3';}catch(e){}
 try{Array.prototype.forEach.call(document.querySelectorAll('span'),function(s){if((s.textContent||'').indexOf('UI-v2.4')>-1)s.textContent='1.5.4';});}catch(e){}
 
 /* ---------- ② 公告栏 ---------- */
@@ -15418,7 +15423,7 @@ window.addEventListener('load',function(){
 });
 })();
 
-/* ===== v1.5.4.2 更新邮件（修复清单 + 补偿）===== */
+/* ===== v1.5.4.3 更新邮件（修复清单 + 补偿）===== */
 (function(){
 'use strict';
 if(window.__v1541Mail)return;
@@ -15432,8 +15437,8 @@ window.ensureV1541Mail=function(){
     if(!state.mailbox.some(function(m){return m.id==='v1541_update';})){
       state.mailbox.push({
         id:'v1541_update',
-        title:'v1.5.4.2 热修复清单与补偿（请查收）',
-        body:'各位考生：<br><br>针对焕新后首个版本的反馈，v1.5.4.2 完成以下热修复：<br><br><b>一、杯赛记账时序修复</b><br>修复前：打开结算预览时杯赛就尝试记账，而当日记录在你点击「确认结算」后才写入——导致今日成绩永远记不上、杯赛恒 0 分。现已把记账钩子移到结算落账之后，当天结算当天入账。<br><br><b>二、宝藏活动「每日骰子」修复</b><br>每日跨天时只重置了购买次数、漏重置领取标记，导致首次领取后每日免费骰子永久无法领取。现已修复，明天起可正常领取。<br><br><b>三、弹窗防卡死</b><br>任意弹窗现支持：点遮罩空白关闭 / ESC 关闭 / 右上角自动出现 ✕，不再出现遮罩罩住全屏点不动的情况。<br><br><b>四、竞技页签修复</b><br>全国榜下方段位页签（青铜/白银/黄金…）此前点击不切换，已修复。<br><br><b>五、其他修复</b><br>· 杯赛锁定卡片点击报「cvGuard 未定义」→ 现为正常提示；<br>· 杯赛布局小屏边框溢出加固；<br>· 每日登记任务卡焕新：四维评价面板（正确率/专注度/用时/基本状态加权出质量EP）、占上限进度条、完成置灰折叠动画。<br><br><b>补偿</b>：因杯赛记账与骰子问题影响昨日收益，随信发放 🎲宝藏蓝骰×3、🎟️属性抽取券×1、🎫属性变更券×1。<br><br>焕新路上，感谢有你并肩。',
+        title:'v1.5.4.3 热修复清单与补偿（请查收）',
+        body:'各位考生：<br><br>针对焕新后首个版本的反馈，v1.5.4.3 完成以下热修复：<br><br><b>一、杯赛记账时序修复</b><br>修复前：打开结算预览时杯赛就尝试记账，而当日记录在你点击「确认结算」后才写入——导致今日成绩永远记不上、杯赛恒 0 分。现已把记账钩子移到结算落账之后，当天结算当天入账。<br><br><b>二、宝藏活动「每日骰子」修复</b><br>每日跨天时只重置了购买次数、漏重置领取标记，导致首次领取后每日免费骰子永久无法领取。现已修复，明天起可正常领取。<br><br><b>三、弹窗防卡死</b><br>任意弹窗现支持：点遮罩空白关闭 / ESC 关闭 / 右上角自动出现 ✕，不再出现遮罩罩住全屏点不动的情况。<br><br><b>四、竞技页签修复</b><br>全国榜下方段位页签（青铜/白银/黄金…）此前点击不切换，已修复。<br><br><b>五、其他修复</b><br>· 杯赛锁定卡片点击报「cvGuard 未定义」→ 现为正常提示；<br>· 杯赛布局小屏边框溢出加固；<br>· 每日登记任务卡焕新：四维评价面板（正确率/专注度/用时/基本状态加权出质量EP）、占上限进度条、完成置灰折叠动画。<br><br><b>补偿</b>：因杯赛记账与骰子问题影响昨日收益，随信发放 🎲宝藏蓝骰×3、🎟️属性抽取券×1、🎫属性变更券×1。<br><br>焕新路上，感谢有你并肩。',
         items:{treasure_die_blue:3,draw_ticket:1,change_ticket:1},
         claimed:false,read:false,createdAt:Date.now()
       });
@@ -15453,7 +15458,7 @@ try{
 try{if(typeof updateMailBadge==='function')updateMailBadge();}catch(e){}
 })();
 
-/* ===== 36号天赋「标签熔炉」v1.5.4.2 ===== */
+/* ===== 36号天赋「标签熔炉」v1.5.4.3 ===== */
 (function(){
 'use strict';
 if(window.__fuseTalent36)return;
@@ -16072,7 +16077,7 @@ window.__epkShowDone=function(before,after){
 
 </script>
 <script>
-/* ================= v1.5.4.2 · 结算战报（EP星堆爆分引擎，替代旧结算对话框） ================= */
+/* ================= v1.5.4.3 · 结算战报（EP星堆爆分引擎，替代旧结算对话框） ================= */
 (function(){
 'use strict';
 if(window.__ssReport1542)return;
@@ -16367,8 +16372,8 @@ window.__ssCloseReport=function(){
 
 /* ---------- 公告 ---------- */
 var ANN1542='<div id="ann-1542" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;">'
- +'<b style="color:#ff3b30;">v1.5.4.2「结算战报」</b> <span style="font-size:11px;color:#8e8e93;">结算演出 · 11.05</span>'
- +'<div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">结算对话框全面替换为「今日战报」：EP 星堆按动态持有 EP 逐颗飞出（右侧 6 星缓冲槽），满千合成 1000 大星星触发 KILL 爆分（圆形爆分UI可连爆覆盖、上限 10KILL），椭圆战报牌收尾；滚动节奏与星星严格同步。详情见邮箱《v1.5.4.2「结算战报」更新公告》。</div></div>';
+ +'<b style="color:#ff3b30;">v1.5.4.3「结算战报」</b> <span style="font-size:11px;color:#8e8e93;">结算演出 · 11.05</span>'
+ +'<div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">结算对话框全面替换为「今日战报」：EP 星堆按动态持有 EP 逐颗飞出（右侧 6 星缓冲槽），满千合成 1000 大星星触发 KILL 爆分（圆形爆分UI可连爆覆盖、上限 10KILL），椭圆战报牌收尾；滚动节奏与星星严格同步。详情见邮箱《v1.5.4.3「结算战报」更新公告》。</div></div>';
 function __v1542Ann(){
   try{
     var el=document.getElementById('ann-list');
@@ -16396,8 +16401,8 @@ window.ensureV1542Mail=function(){
     if(!state.mailbox.some(function(m){return m.id==='v1542_update';})){
       state.mailbox.push({
         id:'v1542_update',
-        title:'v1.5.4.2「结算战报」更新公告',
-        body:'各位考生：<br><br>v1.5.4.2 带来全新结算演出，替代原结算对话框：<br><br><b>一、EP 星堆</b><br>· 星星按<b>动态持有 EP</b>实时飞出：持有每跨过一个 100 边界（含跨千），一颗星星从获得数字直线飞入右侧星堆；<br>· 右侧为 6 星缓冲槽（1×500 + 5×100），槽满即合成 1000 大星星爆分清空，多出的星星排队等位，永远不会堆积；<br>· 结算前持有的百位组成（如 599 的一颗 500 星）会先落位展示。<br><br><b>二、KILL 爆分</b><br>· 1000 大星星高亮直飞爆分中心：圆形爆分UI 0.45s 有力道弹出，连爆立即覆盖，上限 10KILL；<br>· 椭圆战报牌只在结算完毕且至少 1 次爆分时出现一次。<br><br><b>三、节奏同步</b><br>· 滚动时长按星数动态伸缩（约 90ms/星），数字与星星严格同步，星星全部出场数字才停。<br><br>随信发放 🎟️属性抽取券×1、🎫属性变更券×1，请查收。<br><br>愿每一颗星都算数。',
+        title:'v1.5.4.3「结算战报」更新公告',
+        body:'各位考生：<br><br>v1.5.4.3 带来全新结算演出，替代原结算对话框：<br><br><b>一、EP 星堆</b><br>· 星星按<b>动态持有 EP</b>实时飞出：持有每跨过一个 100 边界（含跨千），一颗星星从获得数字直线飞入右侧星堆；<br>· 右侧为 6 星缓冲槽（1×500 + 5×100），槽满即合成 1000 大星星爆分清空，多出的星星排队等位，永远不会堆积；<br>· 结算前持有的百位组成（如 599 的一颗 500 星）会先落位展示。<br><br><b>二、KILL 爆分</b><br>· 1000 大星星高亮直飞爆分中心：圆形爆分UI 0.45s 有力道弹出，连爆立即覆盖，上限 10KILL；<br>· 椭圆战报牌只在结算完毕且至少 1 次爆分时出现一次。<br><br><b>三、节奏同步</b><br>· 滚动时长按星数动态伸缩（约 90ms/星），数字与星星严格同步，星星全部出场数字才停。<br><br>随信发放 🎟️属性抽取券×1、🎫属性变更券×1，请查收。<br><br>愿每一颗星都算数。',
         items:{draw_ticket:1,change_ticket:1},
         claimed:false,read:false,createdAt:Date.now()
       });
@@ -16416,7 +16421,63 @@ try{
 try{if(typeof updateMailBadge==='function')updateMailBadge();}catch(e){}
 
 })();
-/* ================= v1.5.4.2 JS END ================= */
+/* ================= v1.5.4.3 JS END ================= */
+
+</script>
+<script>
+/* ================= v1.5.4.3 · 宝藏冲刺修复 ================= */
+(function(){
+'use strict';
+var ANN='<div id="ann-1543" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;">'
+ +'<b style="color:#ff3b30;">v1.5.4.3「宝藏冲刺修复」</b> <span style="font-size:11px;color:#8e8e93;">棋盘修复 · 11.05</span>'
+ +'<div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">宝藏冲刺：①棋盘进度跨天保留，不再每天回起点；②全部 16 格奖励修复生效（积分格正则 bug、特殊骰格、宝积格）；③掉头移至右上角；④普通奖池新增代币/属性票券，13 号格改为 💠+100 宝藏积分。详情见邮箱。</div></div>';
+function __inj(){
+  try{
+    var el=document.getElementById('ann-list');
+    if(!el)return;
+    var old=document.getElementById('ann-1543');if(old)old.parentNode.removeChild(old);
+    el.insertAdjacentHTML('afterbegin',ANN);
+  }catch(e){}
+}
+__inj();
+try{
+  if(typeof renderAnnouncements==='function'&&!renderAnnouncements.__v1543w){
+    var __ra=renderAnnouncements;
+    var __w=function(){__ra.apply(this,arguments);__inj();};
+    __w.__v1543w=true;window.renderAnnouncements=__w;
+  }
+}catch(e){}
+window.ensureV1543Mail=function(){
+  try{
+    state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];
+    state.mailGranted=state.mailGranted||{};
+    if(state.mailGranted['v1543_update'])return;
+    state.mailGranted['v1543_update']=true;
+    if(!state.mailbox.some(function(m){return m.id==='v1543_update';})){
+      state.mailbox.push({
+        id:'v1543_update',
+        title:'v1.5.4.3「宝藏冲刺修复」更新公告',
+        body:'各位考生：<br><br>宝藏冲刺玩法修复与优化：<br><br><b>一、进度跨天保留</b><br>棋盘位置与方向不再每日重置，昨天的进度今天接着走；每日仅刷新免费骰子领取与限购。<br><br><b>二、全部格子修复生效</b><br>· 修复积分格发放 bug（原正则误写导致 +100/+150/+200/+300 全部静默吞奖）；<br>· 特殊骰格（黄骰×1）正常发放；<br>· 新增 💠宝积格：踩上 +100 宝藏积分。<br><br><b>三、棋盘调整</b><br>· 掉头格移至右上角；<br>· 普通奖池扩容：积分120 / 代币15 / 属性抽取券 / 属性变更券 / 通用材料。<br><br>随信发放 🎲普通骰子×2（已直接存入宝藏面板）。',
+        items:{},
+        claimed:false,read:false,createdAt:Date.now()
+      });
+      /* 附件为空，改为直接送 2 颗普通骰子 */
+      state.inventory.treasure_die_blue=(state.inventory.treasure_die_blue||0)+2;saveState();
+    }
+    saveState();
+  }catch(e){}
+};
+try{window.ensureV1543Mail();}catch(e){}
+try{
+  if(typeof renderMailPage==='function'&&!renderMailPage.__v1543w){
+    var __rm=renderMailPage;
+    var __w2=function(){try{window.ensureV1543Mail();}catch(e){}return __rm.apply(this,arguments);};
+    __w2.__v1543w=true;window.renderMailPage=__w2;
+  }
+}catch(e){}
+try{if(typeof updateMailBadge==='function')updateMailBadge();}catch(e){}
+})();
+/* ================= v1.5.4.3 JS END ================= */
 
 </script>
 </body>
