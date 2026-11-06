@@ -1,12 +1,12 @@
-<!-- FILE-MARKER: kaoyan-ep-index · 成就树v3.3 · build 20261105-1015 · 文件必须完整下载，见页脚徽标 -->
+<!-- FILE-MARKER: kaoyan-ep-index · 成就树v3.3 · build 20261106-0120 · 文件必须完整下载，见页脚徽标 -->
 <!DOCTYPE html>
-<!-- build 20261105-1015 -->
-<!-- v1.5.4.3 -->
+<!-- build 20261106-0120 -->
+<!-- v1.5.5 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.5.4.3</title>
+<title>考研成长系统 v1.5.5「黑币来袭」</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314100a'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='34'%3E%F0%9F%93%8B%3C/text%3E%3C/svg%3E">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -1181,7 +1181,7 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 @media(min-width:1024px){#page-daily{padding:26px 20px 32px}#page-daily .dl-panel{padding:16px}}
 @media(prefers-reduced-motion:reduce){#page-daily *,#page-daily *::before,#page-daily *::after{animation:none!important;transition:none!important}}
 /* ================= 每日登记 END ================= */
-/* ================= v1.5.4.3 · 结算战报（EP星堆爆分 · 替代旧结算对话框） ================= */
+/* ================= v1.5.5 · 结算战报（EP星堆爆分 · 替代旧结算对话框） ================= */
 .ssrp-ov{position:fixed;inset:0;z-index:420;background:rgba(4,3,2,.8);backdrop-filter:blur(6px);display:flex;align-items:flex-start;justify-content:center;padding:7vh 14px 14px;overflow-y:auto;animation:ssrpIn .24s ease both}
 @keyframes ssrpIn{from{opacity:0}to{opacity:1}}
 .ssrp-box{width:min(860px,95vw);border-radius:20px;border:1.5px solid rgba(240,179,92,.55);background:radial-gradient(circle at 50% -10%,rgba(240,179,92,.15),transparent 55%),linear-gradient(165deg,#211a10,#120e08);box-shadow:0 0 60px -12px rgba(240,179,92,.5),0 24px 70px rgba(0,0,0,.7);padding:18px 20px 16px;animation:ssrpBox .45s cubic-bezier(.2,1.3,.3,1) both;position:relative}
@@ -1247,8 +1247,339 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 .ss-badge .ke{font-family:var(--mono);font-weight:800;font-size:10px;color:#f7e3b2;margin-top:2px}
 .ss-badge.bump{animation:ssBump .45s cubic-bezier(.2,1.6,.3,1)}
 @keyframes ssBump{0%{transform:translateY(-50%) scale(1)}40%{transform:translateY(-50%) scale(1.18)}100%{transform:translateY(-50%) scale(1)}}
-/* ================= v1.5.4.3 CSS END ================= */
+/* ================= v1.5.5 CSS END ================= */
 
+/* ================= v1.5.5+ 促销 · 黑币 · 标签装扮 ================= */
+.bc-ic svg{width:14px;height:14px;vertical-align:-2px}
+#top-black{font-size:13px;margin-left:14px;color:#e8dcc0}
+#top-black b{color:#ffd60a;font-family:var(--mono)}
+/* 促销区容器 */
+#promo-wrap{margin-bottom:14px}
+#promo-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+#promo-title{font-size:13px;font-weight:800;letter-spacing:.18em;color:#ff8a80;display:flex;align-items:center;gap:8px}
+#promo-title .dot{width:8px;height:8px;border-radius:50%;background:#ff3b30;box-shadow:0 0 10px #ff3b30;animation:bcB 1.2s infinite}
+@keyframes bcB{0%,100%{opacity:1}50%{opacity:.3}}
+#promo-sub{font-size:10px;color:#8d7c5f;font-family:var(--mono);letter-spacing:.06em}
+#promo-cd{font-size:11px;color:#ff9a8a;border:1px solid rgba(255,59,48,.45);background:rgba(255,59,48,.1);padding:5px 12px;border-radius:999px;font-family:var(--mono)}
+#promo-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:680px){#promo-grid{grid-template-columns:1fr}}
+#promo-exch{font-size:10.5px;color:#8d7c5f;font-family:var(--mono);margin-top:10px;line-height:1.7}
+#promo-exch button{margin-left:8px;padding:4px 12px;font-size:11px;border-radius:8px;border:1px solid #4a3b22;background:#171208;color:#d8c9a8;cursor:pointer}
+#promo-exch button:hover{border-color:#e8a33d;color:#f0d9a2}
+/* 海报卡（翻牌揭晓） */
+.pc{perspective:1000px;min-height:0}
+.pc-in{position:relative;width:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.3,1.25,.45,1)}
+.pc.pre .pc-in{transform:rotateY(180deg)}
+.pc-face{position:relative;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;background:#14100a;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.pc-cover{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);border-radius:18px;z-index:5;background:radial-gradient(circle at 50% 40%,rgba(240,179,92,.16),transparent 60%),linear-gradient(155deg,#241b0e,#14100a 70%);border:1.5px solid rgba(240,179,92,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.pc-cover .qm{font-size:52px;filter:grayscale(.3) drop-shadow(0 0 16px rgba(240,179,92,.5))}
+.pc-cover .ct{font-size:10.5px;letter-spacing:.3em;color:#c9a86a;font-family:var(--mono)}
+.pc-cover .wm{position:absolute;font-size:100px;opacity:.05;font-weight:900;color:#f0d9a2;transform:rotate(-14deg)}
+.pc-banner{position:relative;min-height:150px;padding:16px 18px 12px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.pc-kicker{font-size:9px;letter-spacing:.3em;font-family:var(--mono);color:rgba(255,255,255,.75);text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.pc-title{font-size:21px;font-weight:900;letter-spacing:.04em;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.45);line-height:1.25}
+.pc-sub{font-size:11px;color:rgba(255,255,255,.88);text-shadow:0 1px 3px rgba(0,0,0,.5);font-weight:600}
+.pc-deco{position:absolute;border-radius:50%;pointer-events:none}
+.pc-info{position:absolute;top:12px;left:12px;width:26px;height:26px;border-radius:50%;border:1.5px solid rgba(255,255,255,.85);background:rgba(0,0,0,.28);color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:4}
+.pc-info:hover{background:rgba(0,0,0,.55)}
+.pc-badge{position:absolute;top:12px;right:12px;width:76px;height:76px;z-index:3;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
+.pc-badge svg{width:100%;height:100%}
+.pc-badge .tx{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:900;text-shadow:0 1px 2px rgba(120,0,0,.6)}
+.pc-badge .z{font-size:17px;font-family:var(--mono)}
+.pc-badge .o{font-size:8.5px;font-family:var(--mono)}
+.pc-body{padding:12px 16px 0;display:flex;flex-direction:column;gap:8px;flex:1}
+.pc-chips{display:flex;flex-wrap:wrap;gap:5px}
+.pc-chips .chip{font-size:11px;padding:3px 9px;border-radius:999px;background:rgba(240,179,92,.1);border:1px solid rgba(232,163,61,.3);color:#ecdcba;font-family:var(--mono)}
+.pc-chips .chip b{color:#ffd60a}
+.pc-for{font-size:11px;color:#c9a86a;line-height:1.5}
+.pc-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px 12px}
+.pc-price{display:flex;flex-direction:column;line-height:1.15}
+.pc-price b{font-family:var(--mono);font-size:22px;color:#ffd60a;text-shadow:0 0 14px rgba(255,214,10,.4)}
+.pc-price s{font-size:11px;color:#8d7c5f;font-family:var(--mono)}
+.pc-cur{font-size:10px;color:#c9a86a;font-family:var(--mono)}
+.pc-buy{padding:10px 22px;border:none;border-radius:11px;font-size:13px;font-weight:900;letter-spacing:.1em;cursor:pointer;background:linear-gradient(135deg,#7ee2a0,#34c759);color:#0c2a12;box-shadow:0 3px 12px rgba(52,199,89,.35);font-family:var(--mono);transition:filter .2s}
+.pc-buy:hover{filter:brightness(1.08)}
+.pc-buy:disabled{background:#33291a;color:#8d7c5f;box-shadow:none;cursor:not-allowed;letter-spacing:.3em;font-size:11.5px}
+.pc-strip{height:34px;background:linear-gradient(90deg,#e02a1e,#ff3b30 45%,#c81e12);display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;font-size:12.5px;font-weight:800;letter-spacing:.14em;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.pc-strip .dot{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff;animation:bcB 1.2s infinite}
+.pc-sp-row{grid-column:1/-1;min-height:196px}
+.pc-sp-row .pc-in{min-height:196px}
+.pc-sp-row .pc-face{flex-direction:row}
+.pc-sp-row .pc-banner{flex:1.35;min-height:196px;justify-content:center}
+.pc-sp-row .pc-body{flex:1;justify-content:center}
+.pc-sp-row .pc-strip{position:absolute;left:0;right:0;bottom:0;height:30px;font-size:11px}
+.pc-sp-row .pc-foot{padding-bottom:44px}
+.pc-sp-row .pc-back{flex-direction:column}
+@media(max-width:680px){.pc-sp-row .pc-face{flex-direction:column}.pc-sp-row .pc-foot{padding-bottom:12px}}
+/* 价值分档 */
+.vt-tag{position:absolute;right:96px;bottom:10px;z-index:4;font-size:9px;font-weight:800;letter-spacing:.14em;padding:2px 8px;border-radius:999px;font-family:var(--mono)}
+.pc.vt-0{box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.pc.vt-1{box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 1.5px rgba(126,226,160,.55),0 0 22px -6px rgba(52,199,89,.55)}
+.pc.vt-2{box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 1.5px rgba(124,196,255,.6),0 0 22px -6px rgba(47,140,255,.6)}
+.pc.vt-3{box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 1.5px rgba(194,154,255,.65),0 0 24px -6px rgba(175,92,222,.65)}
+.pc.vt-4{box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 1.8px rgba(255,214,10,.75),0 0 30px -4px rgba(255,214,10,.6)}
+.vt-0 .vt-tag{background:#33291a;color:#a98d5f}
+.vt-1 .vt-tag{background:rgba(52,199,89,.2);color:#7ee2a0;border:1px solid rgba(52,199,89,.5)}
+.vt-2 .vt-tag{background:rgba(47,140,255,.2);color:#7cc4ff;border:1px solid rgba(47,140,255,.5)}
+.vt-3 .vt-tag{background:rgba(175,92,222,.22);color:#e2c4ff;border:1px solid rgba(175,92,222,.55)}
+.vt-4 .vt-tag{background:rgba(255,214,10,.18);color:#ffd60a;border:1px solid rgba(255,214,10,.6)}
+.pc-sp-row .vt-tag{right:auto;left:12px;top:38px;bottom:auto}
+/* 主题皮肤 */
+.gem{position:absolute;filter:drop-shadow(0 4px 10px rgba(0,0,0,.55)) drop-shadow(0 0 12px rgba(175,92,222,.7))}
+.spk{position:absolute;color:rgba(255,255,255,.9);text-shadow:0 0 6px #fff;font-size:10px;animation:bcTw 2.2s infinite}
+@keyframes bcTw{0%,100%{opacity:.25}50%{opacity:1}}
+.th-dice .pc-banner{background-image:radial-gradient(rgba(255,255,255,.16) 2px,transparent 2.5px);background-size:22px 22px}
+.die{position:absolute;filter:drop-shadow(0 6px 12px rgba(0,0,0,.5)) drop-shadow(0 0 14px rgba(47,140,255,.65))}
+.th-ticket .pc-banner{border-radius:18px 18px 0 0}
+.th-ticket .pc-banner::before,.th-ticket .pc-banner::after{content:'';position:absolute;top:50%;width:26px;height:26px;border-radius:50%;background:#14100a;transform:translateY(-50%)}
+.th-ticket .pc-banner::before{left:-13px}.th-ticket .pc-banner::after{right:-13px}
+.tearline{position:absolute;top:0;bottom:0;left:64%;border-left:2px dashed rgba(255,255,255,.5)}
+.th-env .pc-banner{overflow:visible}
+.env{position:absolute;right:16px;top:-14px;font-size:82px;transform:rotate(9deg);filter:drop-shadow(0 8px 16px rgba(0,0,0,.55)) drop-shadow(0 0 18px rgba(255,214,10,.5))}
+.coin{position:absolute;font-size:19px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5));animation:bcFl 3s ease-in-out infinite}
+@keyframes bcFl{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.th-rays .pc-banner{background-image:repeating-conic-gradient(from 0deg at 78% 55%,rgba(255,255,255,.13) 0 9deg,transparent 9deg 22deg)}
+.bolt-ring{position:absolute;right:14%;top:50%;transform:translateY(-50%);width:96px;height:96px;border-radius:50%;border:3px solid rgba(255,246,214,.8);box-shadow:0 0 26px rgba(255,220,120,.8),inset 0 0 22px rgba(255,220,120,.5);display:flex;align-items:center;justify-content:center;font-size:48px;animation:bcRp 2s ease-in-out infinite}
+@keyframes bcRp{0%,100%{box-shadow:0 0 20px rgba(255,220,120,.6),inset 0 0 16px rgba(255,220,120,.4)}50%{box-shadow:0 0 38px rgba(255,220,120,1),inset 0 0 28px rgba(255,220,120,.7)}}
+.crown{position:absolute;left:50%;top:8px;transform:translateX(-50%);font-size:56px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.6)) drop-shadow(0 0 16px rgba(255,214,10,.55));z-index:2}
+.cardfan{position:absolute;right:20px;bottom:6px;font-size:40px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
+.cardfan span{position:absolute;bottom:0;transform-origin:bottom left}
+.suit{position:absolute;color:rgba(255,120,120,.85);font-size:13px;text-shadow:0 0 6px rgba(255,59,48,.8);animation:bcFl 2.6s infinite}
+.mgc{position:absolute;border-radius:50%;border:2px dashed rgba(160,255,230,.55)}
+.orb{position:absolute;right:12%;top:50%;transform:translateY(-50%);font-size:56px;filter:drop-shadow(0 0 18px rgba(32,201,151,.85)) drop-shadow(0 6px 12px rgba(0,0,0,.5));animation:bcOf 3.2s ease-in-out infinite}
+@keyframes bcOf{0%,100%{transform:translateY(-50%) scale(1)}50%{transform:translateY(-56%) scale(1.06)}}
+.th-blue .pc-banner{background-image:linear-gradient(rgba(199,210,0,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(199,210,0,.14) 1px,transparent 1px);background-size:20px 20px}
+.brc{position:absolute;width:18px;height:18px;border:3px solid rgba(226,240,120,.9)}
+.gear{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:38px;filter:drop-shadow(0 0 14px rgba(199,210,0,.7));animation:bcGr 9s linear infinite}
+@keyframes bcGr{to{transform:translateY(-50%) rotate(360deg)}}
+.th-blue .pc-title,.th-blue .pc-sub,.th-blue .pc-kicker{padding-right:78px}
+.sp-medal{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3c9,#ffd60a 45%,#d9832a 85%);border:4px solid #fff3c9;box-shadow:0 0 30px rgba(255,214,10,.7),0 8px 18px rgba(0,0,0,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#5a3a08;font-weight:900;z-index:2}
+.sp-medal .m{font-size:26px;font-family:var(--mono)}
+.sp-medal .s{font-size:10px;letter-spacing:.1em}
+.ribbon{position:absolute;top:0;width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-top:16px solid #ff3b30;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+/* 黑币购买按钮（货架同款胶囊） */
+.bc-buy{flex-shrink:0;padding:9px 18px;border-radius:999px;font-size:12.5px;font-weight:700;letter-spacing:.04em;cursor:pointer;border:none;
+  background:linear-gradient(135deg,#3a3a3a,#161210);color:#ffd60a;
+  box-shadow:0 3px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.14);transition:filter .2s,transform .15s;font-family:var(--mono)}
+.bc-buy:hover{filter:brightness(1.2)}
+.bc-buy:active{transform:scale(.96)}
+.bc-buy.bc-off{background:#33291a;color:#8d7c5f;box-shadow:none;letter-spacing:.2em;font-size:11.5px}
+/* 标签装扮 */
+#skin-wrap{margin-top:20px;border-top:1px dashed rgba(240,179,92,.25);padding-top:14px}
+#skin-title{font-size:12px;font-weight:800;letter-spacing:.18em;color:#c9a86a;margin-bottom:4px}
+#skin-sub{font-size:10.5px;color:#8d7c5f;font-family:var(--mono);margin-bottom:10px}
+#skin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:680px){#skin-grid{grid-template-columns:1fr}}
+.skin-card{display:flex;gap:12px;padding:14px 16px;align-items:center;border:1px solid rgba(232,163,61,.16);border-radius:14px;background:rgba(22,17,10,.6)}
+.skin-ic{font-size:34px;filter:drop-shadow(0 0 10px rgba(240,179,92,.4))}
+.skin-info{flex:1}
+.skin-name{font-size:14px;font-weight:800}
+.skin-desc{font-size:11px;color:#a98d5f;margin-top:3px}
+.skin-cost{font-family:var(--mono);font-size:15px;font-weight:900;color:#ffd60a;white-space:nowrap}
+.skin-cost svg{width:13px;height:13px;vertical-align:-2px}
+.skin-buy{padding:8px 16px;border:none;border-radius:10px;font-size:12px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#7ee2a0,#34c759);color:#0c2a12;font-family:var(--mono)}
+.skin-buy:disabled{background:#33291a;color:#8d7c5f;cursor:default}
+.skin-eq{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+/* 装扮生效样式 */
+@property --bcra{syntax:'<angle>';initial-value:0deg;inherits:false}
+.bc-sk4{border:2px solid transparent!important;
+  background:linear-gradient(#221b11,#221b11) padding-box,conic-gradient(from var(--bcra),#ff3b30,#ff9500,#ffd60a,#34c759,#0a9df0,#8b5cf6,#ff2d95,#ff3b30) border-box!important;
+  color:#f5f5f7!important;animation:bcRa 3.2s linear infinite!important;box-shadow:0 0 14px -4px rgba(255,255,255,.35)!important}
+@keyframes bcRa{to{--bcra:360deg}}
+.bc-sk1{background:linear-gradient(90deg,rgba(255,214,10,.14),transparent)!important;color:#ffd60a!important;border:1px solid rgba(255,214,10,.7)!important;text-shadow:0 0 8px rgba(255,214,10,.8)!important}
+.bc-sk2{box-shadow:0 0 0 1.5px rgba(175,92,222,.7),0 0 18px -4px rgba(175,92,222,.65)!important}
+
+/* ================= 特惠总窗口 ================= */
+#page-deals{position:relative;overflow:hidden;border-radius:18px;padding:22px 16px 26px;color:var(--ink);
+  background:radial-gradient(circle at 82% -10%,rgba(240,179,92,.12),transparent 46%),radial-gradient(circle at 8% 108%,rgba(216,138,126,.09),transparent 42%),linear-gradient(180deg,#12100b,#0d0b08)}
+.dw-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.dw-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:#a98d5f;margin-bottom:6px}
+.dw-title{font-size:clamp(24px,4.6vw,32px);font-weight:800;letter-spacing:.06em;
+  background:linear-gradient(110deg,#f7dfae,var(--gold) 45%,#fff6e2 55%,var(--gold-d));background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 16px rgba(232,163,61,.35));
+  animation:bwShine 6s linear infinite}
+.dw-sub{font-size:11px;color:#a98d5f;letter-spacing:.12em;margin-top:4px}
+.dw-bal{padding:7px 14px;border-radius:999px;border:1px solid rgba(240,179,92,.55);background:rgba(240,179,92,.1);font-size:12.5px;color:#f0d9a2;font-family:var(--mono)}
+.dw-bal svg{width:14px;height:14px;vertical-align:-2px}
+/* 活动占位 */
+#deals-soon{margin-top:20px;border:1.5px dashed rgba(240,179,92,.3);border-radius:16px;padding:26px 18px;text-align:center}
+#deals-soon .t1{font-size:13px;font-weight:800;letter-spacing:.18em;color:#c9a86a;margin-bottom:6px}
+#deals-soon .t2{font-size:11px;color:#8d7c5f;line-height:1.8}
+
+/* ================= v1.5.5 天命归一 轮盘 ================= */
+#page-gacha 
+#page-gacha :root{--gold:#e8a33d;--gold-l:#f0b35c;--gold-d:#d9832a;--mono:ui-monospace,Menlo,Consolas,monospace;--red:#ff3b30;--ink:#f3ede2}
+#page-gacha *{margin:0;padding:0;box-sizing:border-box}
+#page-gacha body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:radial-gradient(circle at 50% -10%,#1a130a,#0b0906 60%);color:var(--ink);min-height:100vh;padding:20px 12px 60px}
+#page-gacha .wrap{max-width:860px;margin:0 auto}
+#page-gacha h1{font-size:21px;letter-spacing:.06em;background:linear-gradient(110deg,#f7dfae,var(--gold) 45%,#fff6e2 55%,var(--gold-d));-webkit-background-clip:text;background-clip:text;color:transparent}
+#page-gacha .sub{font-size:10px;color:#8d7c5f;letter-spacing:.22em;font-family:var(--mono);margin:4px 0 12px}
+#page-gacha .topbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+#page-gacha .g-cur{padding:7px 14px;border-radius:999px;border:1px solid rgba(232,163,61,.35);background:rgba(240,179,92,.08);font-size:12.5px;color:#c9b791;font-family:var(--mono)}
+#page-gacha .cur b{color:#ffd60a;font-size:14px}
+#page-gacha .cur small{color:#8d7c5f}
+#page-gacha .stage{position:relative;border-radius:20px;border:1px solid rgba(240,179,92,.3);background:radial-gradient(circle at 50% 30%,rgba(240,179,92,.1),transparent 60%),linear-gradient(165deg,#1d150c,#120d07);padding:20px 16px 18px;overflow:hidden;margin-bottom:16px}
+#page-gacha .stage-kicker{text-align:center;font-size:9px;letter-spacing:.34em;color:#a98d5f;font-family:var(--mono);margin-bottom:2px}
+#page-gacha .stage-title{text-align:center;font-size:17px;font-weight:900;letter-spacing:.24em;color:#f0d9a2;margin-bottom:14px;text-shadow:0 0 16px rgba(232,163,61,.4)}
+#page-gacha .orbit-wrap{position:relative;height:330px;margin-bottom:14px}
+.center-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:190px;padding:18px 14px;border-radius:16px;text-align:center;z-index:3;background:linear-gradient(160deg,#2a1e0d,#171008);border:2px solid var(--gold);box-shadow:0 0 34px -6px rgba(232,163,61,.55),inset 0 0 24px rgba(232,163,61,.12)}
+#page-gacha .center-card .ci{font-size:44px;filter:drop-shadow(0 0 14px rgba(255,214,10,.55));margin-bottom:6px}
+#page-gacha .center-card .cn{font-size:15px;font-weight:900;color:#ffd60a}
+#page-gacha .center-card .cp{font-size:9px;color:#8d7c5f;font-family:var(--mono);margin-top:4px;letter-spacing:.08em}
+#page-gacha .center-card .cring{position:absolute;inset:-9px;border-radius:20px;border:1px dashed rgba(240,179,92,.5);animation:gspin 26s linear infinite;pointer-events:none}
+#page-gacha @keyframes gspin{to{transform:rotate(360deg)}}
+#page-gacha .oitem{position:absolute;width:104px;padding:7px 5px;border-radius:11px;text-align:center;font-size:10px;line-height:1.35;background:rgba(26,19,11,.92);border:1px solid rgba(232,163,61,.22);color:#d8c9a8;transition:all .15s;z-index:2}
+#page-gacha .oitem .oi{font-size:19px;display:block;margin-bottom:2px}
+#page-gacha .oitem.hl{border-color:#ffd60a;box-shadow:0 0 16px -2px rgba(255,214,10,.75);color:#fff;transform:scale(1.12);z-index:4;background:#241a0c}
+#page-gacha .oitem.tk-gold .oi{filter:drop-shadow(0 0 6px rgba(255,214,10,.8))}
+#page-gacha .op-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;align-items:center}
+#page-gacha .draw-btn{padding:13px 34px;border:none;border-radius:13px;font-size:15px;font-weight:900;letter-spacing:.1em;cursor:pointer;font-family:var(--mono);transition:filter .2s,transform .1s}
+#page-gacha .draw-btn:active{transform:scale(.96)}
+#page-gacha .draw-btn:hover{filter:brightness(1.1)}
+#page-gacha .draw-btn:disabled{opacity:.4;cursor:not-allowed;filter:none}
+#page-gacha .db1{background:linear-gradient(135deg,#f7dfae,#d9832a);color:#2a1c08;box-shadow:0 4px 18px rgba(217,131,42,.5)}
+#page-gacha .db10{background:linear-gradient(135deg,#ff8a5c,#e02a1e);color:#fff;box-shadow:0 4px 18px rgba(224,42,30,.5)}
+#page-gacha .aux-row{display:flex;justify-content:center;gap:14px;align-items:center;margin-top:12px;font-size:11px;color:#a98d5f;font-family:var(--mono);flex-wrap:wrap}
+#page-gacha .aux-row button{padding:6px 14px;border:1px solid #4a3b22;border-radius:9px;background:#171208;color:#d8c9a8;cursor:pointer;font-size:11.5px}
+#page-gacha .aux-row button:hover{border-color:var(--gold);color:#f0d9a2}
+#page-gacha .aux-row label{display:flex;gap:5px;align-items:center;cursor:pointer}
+#page-gacha .aux-row input{accent-color:var(--gold-d)}
+#page-gacha .ex-title{text-align:center;font-size:15px;font-weight:900;letter-spacing:.3em;color:#f0d9a2;margin:6px 0 4px}
+#page-gacha .ex-my{text-align:right;font-size:12px;color:#c9a86a;font-family:var(--mono);margin-bottom:10px}
+#page-gacha .ex-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:760px){.ex-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:460px){.ex-grid{grid-template-columns:repeat(2,1fr)}}
+#page-gacha .ex-item{position:relative;border-radius:12px;padding:10px 6px 8px;text-align:center;background:rgba(26,19,11,.9);border:1px solid rgba(232,163,61,.22);cursor:pointer;transition:all .2s}
+#page-gacha .ex-item:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 18px -8px rgba(0,0,0,.7)}
+#page-gacha .ex-item .ei{font-size:26px;display:block;margin-bottom:4px;filter:drop-shadow(0 2px 5px rgba(0,0,0,.5))}
+#page-gacha .ex-item .en{font-size:10.5px;color:#ecdcba;line-height:1.35;min-height:28px}
+#page-gacha .ex-cost{display:inline-block;margin-top:6px;padding:3px 10px;font-size:10px;font-weight:700;color:#2a1c08;font-family:var(--mono);background:linear-gradient(135deg,#f7dfae,#d9832a);clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,8px 100%,0 50%)}
+#page-gacha .ex-item.off{opacity:.45;cursor:not-allowed}
+#page-gacha .ex-item.off .ex-cost{background:#4a4038;color:#8d7c5f}
+.gmo{position:fixed;inset:0;z-index:300;background:rgba(4,3,2,.78);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:16px}
+.gmo.show{display:flex}
+.gmo-box{width:min(560px,94vw);max-height:86vh;overflow-y:auto;border-radius:18px;border:1.5px solid rgba(240,179,92,.5);background:radial-gradient(circle at 50% -10%,rgba(240,179,92,.14),transparent 55%),linear-gradient(165deg,#211a10,#120e08);padding:18px;box-shadow:0 24px 70px rgba(0,0,0,.7);animation:gpop .3s cubic-bezier(.2,1.3,.3,1) both}
+#page-gacha @keyframes gpop{from{opacity:0;transform:scale(.88)}to{opacity:1}}
+.gmo-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.gmo-t{font-size:16px;font-weight:900;letter-spacing:.14em;color:#f0d9a2}
+.gmo-x{width:28px;height:28px;border-radius:50%;border:1px solid rgba(240,179,92,.4);background:none;color:#d8c9a8;cursor:pointer}
+.res-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+@media(max-width:560px){.res-grid{grid-template-columns:repeat(3,1fr)}}
+.res-cell{padding:10px 5px;border-radius:11px;text-align:center;background:rgba(26,19,11,.9);border:1px solid rgba(232,163,61,.25);font-size:10.5px;line-height:1.4;position:relative}
+.res-cell .ri{font-size:26px;display:block;margin-bottom:3px}
+.res-cell .tag{position:absolute;top:4px;right:4px;font-size:8px;padding:1px 5px;border-radius:6px;background:#ff3b30;color:#fff;font-weight:700}
+.res-cell .tag.st{background:#8b5cf6}
+.stash-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 11px;border:1px solid rgba(232,163,61,.16);border-radius:11px;background:rgba(26,19,11,.7);margin-bottom:7px;font-size:12.5px;flex-wrap:wrap}
+#page-gacha .stash-row .n{flex:1;min-width:140px}
+#page-gacha .stash-row .k{font-size:10px;color:#8d7c5f;font-family:var(--mono)}
+.sbtn{padding:6px 13px;border-radius:9px;border:1px solid #4a3b22;background:#171208;color:#d8c9a8;font-size:11px;cursor:pointer}
+.sbtn:hover{border-color:var(--gold);color:#f0d9a2}
+.sbtn.dec{border-color:rgba(255,94,58,.4);color:#ff8a6e}
+.sbtn.dec:hover{border-color:#ff5e3a}
+.gmo-ok{width:100%;margin-top:12px;padding:11px;border:none;border-radius:11px;font-size:14px;font-weight:900;letter-spacing:.2em;cursor:pointer;background:linear-gradient(135deg,var(--gold-l),var(--gold-d));color:#2a1c08}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;margin-top:8px}
+.tbl th{color:#c9a86a;padding:6px;border-bottom:1px solid rgba(232,163,61,.25);text-align:left;letter-spacing:.06em}
+.tbl td{padding:5px 6px;border-bottom:1px solid rgba(232,163,61,.08);color:#c9b791;font-family:var(--mono)}
+#page-gacha .inv-bar{margin-top:14px;font-size:10.5px;color:#8d7c5f;font-family:var(--mono);line-height:1.8}
+#page-gacha .inv-bar b{color:#f0d9a2}
+.g-toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);background:rgba(24,19,11,.97);border:1px solid rgba(52,199,89,.5);color:#7ee2a0;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:400;pointer-events:none}
+#page-gacha .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#page-gacha .hist{margin-top:10px;font-size:10px;color:#6b5a3d;font-family:var(--mono);max-height:60px;overflow-y:auto;line-height:1.7}
+#page-gacha /* ===== 封面主视觉 ===== */
+#page-gacha .cover{position:relative;border-radius:20px;overflow:hidden;border:1px solid rgba(240,179,92,.4);margin-bottom:16px;background:#171008}
+#page-gacha .hero{position:relative;min-height:330px;padding:24px 22px 18px;overflow:hidden;
+#page-gacha   background:
+#page-gacha    radial-gradient(ellipse 120% 70% at 78% 30%,rgba(255,220,130,.28),transparent 60%),
+#page-gacha    radial-gradient(ellipse 90% 60% at 20% 90%,rgba(217,131,42,.24),transparent 55%),
+#page-gacha    linear-gradient(165deg,#33240f 0%,#20150a 45%,#150e07 100%)}
+#page-gacha .hero-rays{position:absolute;inset:-40%;background:repeating-conic-gradient(from -10deg at 74% 42%,rgba(255,214,10,.14) 0 7deg,transparent 7deg 20deg);pointer-events:none;animation:gspin 60s linear infinite}
+#page-gacha .hero-title-wrap{position:relative;z-index:3;max-width:52%}
+.cover-kicker{font-size:10px;letter-spacing:.4em;color:#e8c98f;font-family:Georgia,serif;font-style:italic;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.cover-title{font-size:clamp(38px,7vw,56px);font-weight:800;letter-spacing:.14em;margin:8px 0 10px;font-style:italic;line-height:1.1;
+#page-gacha   font-family:'STKaiti','KaiTi','Songti SC','Comic Sans MS',Georgia,serif;
+#page-gacha   background:linear-gradient(110deg,#fff3c9,#f0b35c 40%,#fff6e2 52%,#d9832a 65%,#fff3c9);background-size:220% 100%;
+#page-gacha   -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 10px rgba(0,0,0,.55)) drop-shadow(0 0 24px rgba(232,163,61,.4));animation:bwShine 5.5s linear infinite}
+#page-gacha .hero-prize-name{margin-top:4px;font-size:13px;font-weight:800;letter-spacing:.1em;color:#ffe9b0;font-family:'STKaiti','KaiTi','Songti SC',Georgia,serif;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+#page-gacha .hero-prize-sub{font-size:10px;color:#c9a86a;font-family:var(--mono);margin-top:5px;letter-spacing:.06em}
+#page-gacha .hero-tags{position:relative;z-index:3;margin-top:12px;display:flex;gap:6px}
+#page-gacha .hero-art{position:absolute;right:5%;top:50%;transform:translateY(-50%);z-index:2;width:230px;height:230px;display:flex;align-items:center;justify-content:center}
+#page-gacha .ha-glow{position:absolute;inset:6%;border-radius:50%;background:radial-gradient(circle,rgba(255,214,10,.4),rgba(255,180,60,.12) 55%,transparent 72%);filter:blur(2px);animation:ghaP 3s ease-in-out infinite}
+#page-gacha @keyframes ghaP{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+#page-gacha .ha-ring{position:absolute;inset:0;border-radius:50%;border:2px dashed rgba(255,214,10,.55);animation:gspin 20s linear infinite}
+#page-gacha .ha-ring2{position:absolute;inset:9%;border-radius:50%;border:1px solid rgba(255,240,200,.3);animation:gspin 32s linear infinite reverse}
+#page-gacha .ha-ic{position:relative;z-index:2;filter:drop-shadow(0 0 22px rgba(255,214,10,.75)) drop-shadow(0 8px 18px rgba(0,0,0,.6))}
+#page-gacha .ha-ic svg{width:120px;height:120px}
+#page-gacha .ha-spark{position:absolute;color:#fff3c9;text-shadow:0 0 8px #ffd60a;font-size:12px;animation:tw 2.4s infinite}
+#page-gacha .cover-btns{position:relative;z-index:4;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:14px 12px 16px;background:linear-gradient(180deg,rgba(18,12,6,.25),rgba(18,12,6,.7));border-top:1px solid rgba(240,179,92,.2)}
+#page-gacha .cv-btn{padding:11px 22px;font-size:13px;font-weight:800;letter-spacing:.08em;cursor:pointer;border:none;color:#2a1c08;font-family:var(--mono);
+#page-gacha   background:linear-gradient(135deg,#f7dfae,#d9832a);clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,12px 100%,0 50%);
+#page-gacha   transition:filter .2s,transform .1s}
+#page-gacha .cv-btn:hover{filter:brightness(1.12)}
+#page-gacha .cv-btn:active{transform:scale(.95)}
+#page-gacha .cv-btn.gold{background:linear-gradient(135deg,#ffe9b0,#f0b35c)}
+#page-gacha .cv-btn.red{background:linear-gradient(135deg,#ff8a5c,#e02a1e);color:#fff}
+#page-gacha .cv-btn.dim{background:#2c2415;color:#8d7c5f}
+#page-gacha .ptag{display:inline-block;font-size:8px;padding:1px 6px;border-radius:6px;background:#b5772a;color:#fff;font-weight:700;letter-spacing:.05em;margin:0 1px}
+#page-gacha .ptag.uq{background:#8b5cf6}
+#page-gacha /* ===== 大奖特写 ===== */
+#page-gacha /* ===== 大奖特写（立绘撑满） ===== */
+.grand-box{width:min(560px,94vw);border-radius:22px;overflow:hidden;border:2px solid #ffd60a;box-shadow:0 0 70px -6px rgba(255,214,10,.65),0 24px 70px rgba(0,0,0,.8);animation:gpop .45s cubic-bezier(.2,1.4,.3,1) both;background:#160a05}
+.grand-banner{position:relative;min-height:430px;display:flex;flex-direction:column;align-items:center;overflow:hidden;
+#page-gacha   background:radial-gradient(ellipse 120% 90% at 50% 110%,rgba(255,160,40,.5),transparent 60%),
+#page-gacha              radial-gradient(ellipse 90% 70% at 50% -10%,rgba(255,60,20,.35),transparent 60%),
+#page-gacha              linear-gradient(175deg,#2b0d05 0%,#1a0805 45%,#0f0505 100%)}
+.gb-rays{position:absolute;inset:-45%;background:repeating-conic-gradient(from 0deg at 50% 42%,rgba(255,190,60,.22) 0 5deg,transparent 5deg 14deg);animation:gspin 40s linear infinite}
+.gb-beam{position:absolute;top:-20%;width:120px;height:130%;background:linear-gradient(180deg,rgba(255,220,120,.4),transparent 75%);filter:blur(18px);transform:rotate(14deg);pointer-events:none}
+.gb-beam.b1{left:12%}
+.gb-beam.b2{right:14%;transform:rotate(-12deg);width:90px;opacity:.7}
+.gb-floor{position:absolute;bottom:64px;left:50%;transform:translateX(-50%);width:78%;height:90px;border-radius:50%;
+#page-gacha   background:radial-gradient(ellipse,rgba(255,190,60,.55),rgba(255,120,30,.18) 55%,transparent 75%);filter:blur(6px);animation:ghaP 2.6s ease-in-out infinite}
+.gb-kicker{position:absolute;top:16px;z-index:4;font-size:10px;letter-spacing:.55em;color:#ffe0a0;font-family:Georgia,serif;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,.7)}
+.gb-ic{position:relative;z-index:3;margin-top:64px;filter:drop-shadow(0 0 34px rgba(255,210,60,.95)) drop-shadow(0 16px 30px rgba(0,0,0,.65))}
+.gb-ic svg{width:225px;height:225px}
+.gb-mirror{position:relative;z-index:2;height:70px;overflow:hidden;margin-top:-6px;opacity:.32;transform:scaleY(-1);
+#page-gacha   -webkit-mask-image:linear-gradient(180deg,transparent 30%,#000 100%);mask-image:linear-gradient(180deg,transparent 30%,#000 100%)}
+.gb-mirror svg{width:225px;height:225px;filter:blur(1.5px) saturate(.8)}
+.gb-spark{position:absolute;color:#ffe9b0;text-shadow:0 0 10px #ffd60a;z-index:3;animation:tw 1.8s infinite}
+.gb-shade{position:absolute;left:0;right:0;bottom:0;height:118px;z-index:3;background:linear-gradient(180deg,transparent,rgba(10,4,3,.92) 75%);pointer-events:none}
+.gb-name{position:absolute;bottom:44px;z-index:5;font-size:30px;font-weight:800;letter-spacing:.1em;color:#fff3c9;font-family:'STKaiti','KaiTi','Songti SC',Georgia,serif;font-style:italic;text-shadow:0 2px 12px rgba(0,0,0,.7),0 0 30px rgba(255,190,60,.6)}
+.gb-sub{position:absolute;bottom:22px;z-index:5;font-size:11px;color:#ffb36b;font-family:var(--mono);letter-spacing:.32em}
+.gb-note{padding:12px 16px;text-align:center;font-size:11px;color:#c9a86a;line-height:1.8;border-top:1px solid rgba(255,214,10,.25);background:#160a05}
+#page-gacha /* ===== 暂存箱双栏 ===== */
+.stash-cols{display:flex;gap:14px;flex-wrap:wrap}
+.stash-left{flex:1.4;min-width:250px}
+.stash-right{flex:1;min-width:200px}
+.sc-h{font-size:12px;font-weight:900;letter-spacing:.24em;color:#f0d9a2;text-align:center;margin-bottom:8px}
+.sc-tbl{width:100%;border-collapse:collapse;font-size:10.5px}
+.sc-tbl th{color:#c9a86a;padding:4px 6px;border-bottom:1px solid rgba(232,163,61,.3);text-align:left;font-family:var(--mono);font-size:9.5px}
+.sc-tbl td{padding:4px 6px;border-bottom:1px solid rgba(232,163,61,.08);color:#c9b791;font-family:var(--mono)}
+#page-gacha /* 兑换区角标 */
+#page-gacha .ctag{position:absolute;top:0;font-size:8px;padding:1.5px 6px;font-weight:800;letter-spacing:.04em;z-index:2}
+#page-gacha .ctag.uq{left:0;border-radius:12px 0 8px 0;background:linear-gradient(135deg,#8b5cf6,#6d3fd4);color:#fff}
+#page-gacha .ctag.fs{right:0;border-radius:0 12px 0 8px;background:linear-gradient(135deg,#f0b35c,#d9832a);color:#2a1c08}
+#page-gacha .ex-item .ei{margin-top:5px}
+#page-gacha 
+#page-gacha /* 图标尺寸分级 */
+.tbl svg,.sc-tbl svg{width:15px;height:15px;vertical-align:-3px}
+#page-gacha .stash-row .n svg{width:16px;height:16px;vertical-align:-3px}
+#page-gacha .oitem .oi,.oitem .oi svg{width:20px;height:20px}
+#page-gacha .ex-item .ei,.ex-item .ei svg{width:27px;height:27px}
+#page-gacha .center-card .ci{font-size:44px;line-height:1}
+#page-gacha .center-card .ci svg{width:44px;height:44px}
+.gb-ic{font-size:180px;line-height:1}
+.gb-ic svg{width:180px;height:180px}
+.gb-mirror svg{width:180px;height:180px}
+.intro-ic,.intro-ic svg{width:30px;height:30px}
+#page-gacha 
+#page-gacha /* 新品介绍字体 */
+.gmo-t{font-family:'STKaiti','KaiTi','Songti SC',Georgia,serif;font-style:italic;letter-spacing:.2em}
+.intro-n{font-family:'STKaiti','KaiTi','Songti SC',Georgia,serif;font-style:italic;font-size:17px}
+.intro-badges .intro-b{border-radius:999px;font-size:9px;padding:2px 9px;letter-spacing:.06em}
+.intro-t{font-size:12.5px}
+#page-gacha 
+#page-gacha 
+@keyframes tw{from{opacity:0}to{opacity:1}}
+.gmo{z-index:1350!important}
 </style>
 <base target="_blank">
 <base target="_blank">
@@ -1259,7 +1590,7 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:800;letter-spacing:.05em;color:#f3e7c8;text-shadow:0 0 14px rgba(232,163,61,.35);">📚 考研EP系统</span> <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.22em;color:var(--gold-l);font-weight:700;">1.5.4.3</span>
+      <span style="font-size:18px;font-weight:800;letter-spacing:.05em;color:#f3e7c8;text-shadow:0 0 14px rgba(232,163,61,.35);">📚 考研EP系统</span> <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.22em;color:var(--gold-l);font-weight:700;">1.5.5</span>
             <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -1323,6 +1654,15 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
     </div>
     <button class="nd-btn nd-standalone" data-nd="home" onclick="switchPage('home')">🏠 首页</button>
     <button class="nd-btn nd-standalone" data-nd="mail" onclick="switchPage('mail')">📮 邮件 <span id="mail-badge" style="display:none;background:#ff3b30;color:#fff;border-radius:9px;padding:0 6px;font-size:10px;margin-left:2px;line-height:16px;"></span></button>
+    <div class="nd-item">
+      <button class="nd-btn" data-nd="deals" onclick="ndToggle(event,this)">🎁 特惠 <span style="font-size:9px;background:#ff3b30;color:#fff;border-radius:8px;padding:0 5px;margin-left:2px;line-height:14px;">HOT</span> <i>▾</i></button>
+      <div class="nd-menu">
+      <div class="nd-opt" onclick="switchPage('deals')"><span>🔥</span>限时促销</div>
+      <div class="nd-opt" onclick="switchPage('gacha')"><span>🎡</span>主题活动 · 天命归一 <span style="font-size:9px;background:#ff3b30;color:#fff;border-radius:8px;padding:0 5px;line-height:14px;">HOT</span></div>
+      <div class="nd-opt" style="opacity:.5;cursor:not-allowed;"><span>🎠</span>幸运转盘 · 即将上线</div>
+      <div class="nd-opt" style="opacity:.5;cursor:not-allowed;"><span>💎</span>累充回馈 · 即将上线</div>
+      </div>
+    </div>
     <button class="nd-btn nd-standalone" data-nd="achievement" onclick="switchPage('achievement')">🏆 成就</button>
   </div>
 <div style="max-width:900px;margin:0 auto;padding:16px;">
@@ -1566,6 +1906,101 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
         <button class="btn-secondary" style="padding:4px 12px;font-size:12px;" onclick="toggleCodex('passive')">展开/收起</button>
       </div>
       <div id="passive-codex" style="display:none;margin-top:10px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 特惠 -->
+<div id="page-deals" class="page">
+  <div class="dw-head">
+    <div>
+      <div class="dw-kicker">DEALS CENTER · 特惠中心</div>
+      <div class="dw-title">🎁 特惠</div>
+      <div class="dw-sub">限时促销每周精选 · 黑币专属活动场（黑币 = 本系统稀缺硬通货，代充通道）</div>
+    </div>
+    <span class="dw-bal" id="deals-bal"></span>
+  </div>
+  <div id="promo-wrap"></div>
+</div>
+
+<!-- 主题活动：天命归一 -->
+<div id="page-gacha" class="page">
+  <div class="wrap" style="max-width:860px;margin:0 auto">
+    <h1>🎰 天命归一 · 特惠轮盘</h1>
+    <div class="sub">LIMITED GACHA · 黑币专属 · 2026.11.06 ~ 2027.01.31</div>
+    <div class="topbar">
+      <span class="g-cur">⚫ 黑币 <b id="g-bc">0</b></span>
+      <span class="g-cur">🎟️ 属性抽取券 <b id="g-tk">0</b></span>
+      <span class="g-cur">🎯 抽奖积分 <b id="g-jp">0</b> <small>（独立于日常积分）</small></span>
+      <span class="g-cur">🗝️ 钥匙 <b id="g-key">0</b></span>
+      <span class="g-cur">🎫 代金券 <b id="g-cp">0</b></span>
+      <span class="g-cur" style="border-color:rgba(255,59,48,.4);color:#ff9a8a">⏱ <b id="g-cd">--</b></span>
+    </div>
+    <div id="g-ended" style="display:none;text-align:center;padding:40px 16px;border:1.5px dashed rgba(255,59,48,.5);border-radius:16px;color:#ff9a8a;font-size:14px;line-height:2"></div>
+    <div id="g-live">
+      <div class="cover">
+        <div class="hero">
+          <div class="hero-rays"></div>
+          <div class="hero-title-wrap">
+            <div class="cover-kicker">LIMITED EVENT · 首期特惠轮盘</div>
+            <div class="cover-title">天命归一</div>
+            <div class="hero-prize-name">本期传说大奖 · 天赋槽位扩展券</div>
+            <div class="hero-prize-sub">主奖池概率 0.1% · 分解 12 钥匙 · 全档唯一生效</div>
+            <div class="hero-tags"><span class="ptag uq" style="font-size:9px;padding:2px 8px">唯一性</span><span class="ptag" style="font-size:9px;padding:2px 8px">首发</span></div>
+          </div>
+          <div class="hero-art">
+            <div class="ha-glow"></div><div class="ha-ring"></div><div class="ha-ring2"></div>
+            <div class="ha-spark" style="top:12%;left:8%">✦</div>
+            <div class="ha-spark" style="bottom:16%;right:6%;animation-delay:.9s">✦</div>
+            <div class="ha-spark" style="top:52%;left:-4%;animation-delay:1.6s;font-size:9px">✦</div>
+            <div class="ha-ic" id="g-coverIc"></div>
+          </div>
+        </div>
+        <div class="cover-btns">
+          <button class="cv-btn dim" onclick="document.querySelector('#gacha-stage').scrollIntoView({behavior:'smooth'})">🎰 本轮奖池</button>
+          <button class="cv-btn" onclick="__gIntro()">📖 新品介绍</button>
+          <button class="cv-btn gold" onclick="__gBuy(1)">⚫ 10 购买</button>
+          <button class="cv-btn red" onclick="__gBuy(10)">⚫ 100 购买 · 赠1</button>
+        </div>
+      </div>
+      <div class="stage" id="gacha-stage">
+        <div class="stage-kicker">FEATURED GRAND PRIZE</div>
+        <div class="stage-title">主 奖 池</div>
+        <div class="orbit-wrap" id="g-orbit">
+          <div class="center-card"><div class="cring"></div><div class="ci" id="g-centerIc"></div><div class="cn">天赋槽位扩展券</div><div class="cp">概率 0.1% · 分解 12 钥匙</div></div>
+        </div>
+        <div class="op-row">
+          <button class="draw-btn db1" id="g-d1">抽一次 · 1 🗝</button>
+          <button class="draw-btn db10" id="g-d10">抽十次 · 10 🗝</button>
+        </div>
+        <div class="op-row" style="margin-top:10px;font-size:11px;color:#8d7c5f;font-family:var(--mono)">钥匙 = 抽奖次数 · 黑币购买券时赠送 · 暂存箱分解也可获得钥匙</div>
+        <div class="aux-row">
+          <button onclick="__gStash()">📦 查看暂存箱（<span id="g-stashN">0</span>）</button>
+          <button onclick="__gTable()">📜 奖池概率公示</button>
+          <label><input type="checkbox" id="g-noPopup"> 中奖后不再单独弹出奖励弹窗</label>
+          <span>剩余钥匙：<b id="g-auxKey" style="color:#ffd60a">0</b></span>
+        </div>
+        <div class="hist" id="g-hist"></div>
+      </div>
+      <div class="stage" style="padding-top:16px">
+        <div class="ex-title">兑 换 区</div>
+        <div class="ex-my">我的抽奖积分：<b id="g-exJP" style="color:#ffd60a">0</b></div>
+        <div class="ex-grid" id="g-exGrid"></div>
+      </div>
+      <div class="stage" style="padding-top:16px">
+        <div class="ex-title">活 动 规 则</div>
+        <div id="g-rules" style="font-size:11.5px;color:#c9b791;line-height:2.05;text-align:justify;padding:4px 6px 0"></div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:12px">
+          <div style="flex:1;min-width:250px">
+            <div style="font-size:11px;color:#c9a86a;letter-spacing:.1em;margin-bottom:4px">— 主奖池概率公示 —</div>
+            <table class="tbl"><thead><tr><th>奖品</th><th>概率</th><th>分解钥匙</th></tr></thead><tbody id="g-rulesPool"></tbody></table>
+          </div>
+          <div style="flex:1;min-width:220px">
+            <div style="font-size:11px;color:#c9a86a;letter-spacing:.1em;margin-bottom:4px">— 积分兑换池（积分降序） —</div>
+            <table class="tbl"><thead><tr><th>奖品</th><th>所需抽奖积分</th></tr></thead><tbody id="g-rulesEx"></tbody></table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -2373,10 +2808,16 @@ items+='<div style="display:flex;justify-content:space-between;align-items:cente
 sh+='<details'+(isLast?' open':'')+' style="margin-bottom:8px;border:1px solid '+(unlocked?theme.color+'55':'#e5e5ea')+';border-radius:10px;overflow:hidden;'+(unlocked?'':'opacity:.75;')+'"><summary style="cursor:pointer;list-style:none;padding:10px 12px;font-size:13px;font-weight:700;background:'+(unlocked?theme.color+'12':'#f9f9fb')+';color:'+(unlocked?theme.deep:'#8e8e93')+';display:flex;justify-content:space-between;align-items:center;"><span>'+(unlocked?'🔓':'🔒')+' Lv.'+mod.lv+' 解锁模块'+(isLast&&unlocked?' · 当前最高已解锁':'')+'</span><span style="font-size:11px;font-weight:400;color:#8e8e93;">🛍️×'+mod.items.length+' ▾ 点击查看</span></summary><div style="padding:4px 10px 8px;">'+items+'</div></details>';});
 document.getElementById('pass-shop').innerHTML=sh;
 updatePassBadge();}
-function passClaimPending(){const p=getPass();if(p.pending<=0)return;const s=getPassSeason();const gain=p.pending;p.pending=0;p.lp+=gain;const newLv=getPassLevel();const theme=s.theme;const lines=[['LP','+'+gain]];const items={};
+function passClaimPending(){const __lv0=getPassLevel();const __cp0=(state.lotteryCoupon||0);
+const __r=(function(){const p=getPass();if(p.pending<=0)return;const s=getPassSeason();const gain=p.pending;p.pending=0;p.lp+=gain;const newLv=getPassLevel();const theme=s.theme;const lines=[['LP','+'+gain]];const items={};
 for(let l=p.grantLv+1;l<=newLv;l++){const r=passLevelReward(l);state.points+=r.points;p.miles+=r.miles;if(r.tokens)state.tokens+=r.tokens;if(r.items)Object.keys(r.items).forEach(function(k){if(k==='slot_trial'){state.points+=150;items['积分']=Math.round((items['积分']||0)+150);}else items[k]=(items[k]||0)+r.items[k];});if(r.frag){p.frags=(p.frags||0)+r.frag;items['终极升级碎片']=Math.round((items['终极升级碎片']||0)+r.frag);}if(r.titleLv){const t=theme.titles[r.titleLv/20-1];if(state.achievement.titles.indexOf(t)===-1){state.achievement.titles.push(t);lines.push(['称号','「'+t+'」','#af52de']);}}}
 p.grantLv=newLv;Object.keys(items).forEach(function(k){state.inventory[k]=(state.inventory[k]||0)+items[k];});
-saveState();updateTopBar();updateShopUI();renderPassUI();showGainModal('🎫 通行证领取 · 恭喜获得',lines.concat(rwLines(items)),'当前 Lv.'+newLv+' · 里程币 '+p.miles);}
+saveState();updateTopBar();updateShopUI();renderPassUI();showGainModal('🎫 通行证领取 · 恭喜获得',lines.concat(rwLines(items)),'当前 Lv.'+newLv+' · 里程币 '+p.miles);
+})();
+const __m=Math.floor(getPassLevel()/20)-Math.floor(__lv0/20);
+if(__m>0){state.lotteryCoupon=__cp0+3*__m;try{updateShopUI();}catch(e){}}
+return __r;
+}
 function passSignIn(){const p=getPass();const today=new Date().toDateString();if(p.signKey===today)return;p.signKey=today;p.miles+=PASS_CFG.signMiles;saveState();renderPassUI();showGainModal('📅 签到成功 · 恭喜获得',[['里程币','+'+PASS_CFG.signMiles]]);}
 function passClaimWeekly(id){const p=getPass();const en=getWeeklyEntries().find(function(x){return x.id===id;});if(!en||p.weekly.claimed.indexOf(id)>-1)return;if(en.f()<en.t)return;p.weekly.claimed.push(id);saveState();passAddPending(PASS_CFG.weeklyLp,'本周词条「'+en.n+'」');renderPassUI();}
 function passBuyItem(mi,ii){const p=getPass();const it=PASS_SHOP[mi].items[ii];const key='ps'+mi+'_'+ii;if((p['shop_'+key]||0)>=it.lim)return;if(p.miles<it.cost||(it.tok&&state.tokens<it.tok)){alert('里程币或代币不足');return;}
@@ -4213,7 +4654,7 @@ function renderHome(){
     uh+='<div class="hm-ur'+(done?' done':'')+'"><span class="n">'+u.name+'<small>'+u.lv+'</small></span><span class="bar"><i style="width:'+Math.round(pct)+'%"></i></span><span class="p">'+(done?'✓ 已解锁':'还差 '+(u.need-state.totalEP))+'</span></div>';
   });
   document.getElementById('home-unlock-list').innerHTML=uh;
-  document.getElementById('home-talent-count').textContent=state.talent.equipped.length+'/6槽 · '+getEquippedCost()+'/6费';
+  document.getElementById('home-talent-count').textContent=state.talent.equipped.length+'/'+(state.talentSlotExt?8:6)+'槽 · '+getEquippedCost()+'/'+(state.talentCostExt?8:6)+'费';
   document.getElementById('home-talents').innerHTML=state.talent.equipped.length?state.talent.equipped.map(id=>{const t=TALENTS.find(x=>x.id===id);if(!t)return'';const c=TIER_CFG[t.tier];return '<span class="hm-chip" style="border-color:'+c.color+'55;color:'+c.color+';background:'+c.color+'14;">#'+t.id+' '+t.name+' · '+getTierCost(t.tier)+'费</span>';}).join(''):'<span class="hm-dim">未装备天赋</span>';
   const unlockedSlots=getPassiveUnlockedSlots();
   document.getElementById('home-passive-count').textContent=getPassiveItems().length+'/'+unlockedSlots+' 生效';
@@ -5973,7 +6414,7 @@ function updateTalentUI(){
   renderHome();
 }
 function resetTalent(){if(!checkUnlock('talent')){alert('当前无开放权限！需达到 '+UNLOCK.talent.name);return;}state.talent={drawn:[],hist:[],equipped:[],extraDraws:0,usedDraws:0};state.talentLocked=false;state.talentLockDate=new Date().toDateString();state.talentShield={until:0};state.talentShieldCharge=0;state.talentFlame={startAt:0,until:0,active:false,baseEp:0,immediatePenaltyEp:0,deductedEp:0,finalPenaltyEp:0,endAt:0,cdUntil:0,date:new Date().toDateString()};saveState();updateTalentUI();renderTalentBars();}
-function toggleEquip(id){if(!checkUnlock('talent')){alert('当前无开放权限！需达到 '+UNLOCK.talent.name);return;}if(state.talentLocked){alert('今日天赋已锁定，结算今日后方可更换');return;}const eq=state.talent.equipped;const idx=eq.indexOf(id);if(idx!==-1){eq.splice(idx,1);saveState();updateTalentUI();eqFX('out');return;}if(eq.length>=6){alert('最多装配6个天赋');return;}const item=TALENTS.find(x=>x.id===id);if(!item)return;const cost=getTierCost(item.tier);if(getEquippedCost()+cost>6){alert('费用超出上限（当前'+getEquippedCost()+'/'+cost+'费，上限6费）');return;}
+function toggleEquip(id){if(!checkUnlock('talent')){alert('当前无开放权限！需达到 '+UNLOCK.talent.name);return;}if(state.talentLocked){alert('今日天赋已锁定，结算今日后方可更换');return;}const eq=state.talent.equipped;const idx=eq.indexOf(id);if(idx!==-1){eq.splice(idx,1);saveState();updateTalentUI();eqFX('out');return;}var __MAXS=state.talentSlotExt?8:6,__MAXF=state.talentCostExt?8:6;if(eq.length>=__MAXS){alert('最多装配'+__MAXS+'个天赋');return;}const item=TALENTS.find(x=>x.id===id);if(!item)return;const cost=getTierCost(item.tier);if(getEquippedCost()+cost>__MAXF){alert('费用超出上限（当前'+getEquippedCost()+'/'+cost+'费，上限'+__MAXF+'费）');return;}
  for(let g=0;g<TALENT_EXCL.length;g++){const grp=TALENT_EXCL[g];if(grp.indexOf(id)>-1){const other=grp.find(x=>x!==id&&eq.indexOf(x)>-1);if(other){const ot=TALENTS.find(x=>x.id===other);alert('「'+item.name+'」与已装备的「'+ot.name+'」互斥，只能携带一个');return;}}}
 eq.push(id);saveState();updateTalentUI();eqFX('in');}
 function clearEquipped(){if(!checkUnlock('talent')){alert('当前无开放权限！需达到 '+UNLOCK.talent.name);return;}if(state.talentLocked){alert('今日天赋已锁定，结算今日后方可更换');return;}state.talent.equipped=[];saveState();updateTalentUI();}
@@ -5996,17 +6437,20 @@ function updateEquipUI(){
   if(state.talentLockDate!==today){state.talentLocked=false;state.talentLockDate=today;saveState();}
   const eq=state.talent.equipped;
   const totalCost=getEquippedCost();
-  const ec=document.getElementById('eq-count');if(ec)ec.textContent=eq.length;
-  const ek=document.getElementById('eq-cost');if(ek)ek.textContent=totalCost;
+  var __MS=state.talentSlotExt?8:6,__MF=state.talentCostExt?8:6;
+  var __gn=document.getElementById('tl-gnum');
+  if(__gn)__gn.innerHTML='费用 <b id="eq-cost">'+totalCost+'</b>/'+__MF+' · 槽 <b id="eq-count">'+eq.length+'</b>/'+__MS;
+  else{const ec=document.getElementById('eq-count');if(ec)ec.textContent=eq.length;
+  const ek=document.getElementById('eq-cost');if(ek)ek.textContent=totalCost;}
   const stLv=totalCost<=2?1:(totalCost<=4?2:3);
   const gauge=document.getElementById('tl-gauge');
   if(gauge)gauge.className='tl-gauge st'+stLv;
   const gf=document.getElementById('tl-gauge-fill');
-  if(gf)gf.style.width=Math.min(100,totalCost/6*100)+'%';
+  if(gf)gf.style.width=Math.min(100,totalCost/(state.talentCostExt?8:6)*100)+'%';
   const lo=document.getElementById('tl-loadout');
   if(lo)lo.className='tl-loadout st'+stLv;
   let html='';
-  for(let i=0;i<6;i++){
+  for(let i=0;i<__MS;i++){
     const id=i<eq.length?eq[i]:null;
     if(id){
       const item=TALENTS.find(x=>x.id===id);const c=TIER_CFG[item.tier];const cost=getTierCost(item.tier);
@@ -10092,7 +10536,7 @@ function tlDropTo(ev,slotIdx){
   }
   var item=TALENTS.find(function(x){return x.id===id;});if(!item)return;
   var cost=getTierCost(item.tier);
-  if(eq.length>=6){alert('最多装配6个天赋');return;}
+  var __MAXS=state.talentSlotExt?8:6,__MAXF=state.talentCostExt?8:6;if(eq.length>=__MAXS){alert('最多装配'+__MAXS+'个天赋');return;}
   if(getEquippedCost()+cost>6){alert('费用不足：当前 '+getEquippedCost()+'/6，「'+item.name+'」需 '+cost+' 费');return;}
   for(var g=0;g<TALENT_EXCL.length;g++){
     if(TALENT_EXCL[g].indexOf(id)!==-1){
@@ -14577,7 +15021,7 @@ var st=document.createElement('style');st.id='tv3-style';st.textContent=CSS;docu
 
 /* ================= 状态 ================= */
 function T(){ if(!state.treasure)state.treasure={}; var tr=state.treasure; var today=new Date().toDateString();
- if(tr.date!==today){ tr.date=today; tr.bought=false; tr.claimed=false; } /* v1.5.4.3 pos跨天保留 */
+ if(tr.date!==today){ tr.date=today; tr.bought=false; tr.claimed=false; } /* v1.5.5 pos跨天保留 */
   if(tr.claimed&&tr.claimedDate!==today){tr.claimed=false;}
  if(tr.tp===undefined)tr.tp=0;
  if(tr.tpStage===undefined)tr.tpStage=0;
@@ -14961,7 +15405,7 @@ try{T();}catch(e){}
 })();
 
 /* ============================================================
-   v1.5.4「焕新出发」发布补丁 · build 20261105-1015
+   v1.5.4「焕新出发」发布补丁 · build 20261106-0120
    ① 版本号恢复 v1.5.4（浏览器标题）
    ② 公告：移除追猎旧公告（ann-153 / ann-1531），置顶 v1.5.4 简略公告
    ③ 邮箱：发放《v1.5.4「焕新出发」完整更新公告》长信
@@ -14970,7 +15414,7 @@ try{T();}catch(e){}
 (function(){
 'use strict';
 
-try{document.title='考研成长系统 v1.5.4.3';}catch(e){}
+try{document.title='考研成长系统 v1.5.5';}catch(e){}
 try{Array.prototype.forEach.call(document.querySelectorAll('span'),function(s){if((s.textContent||'').indexOf('UI-v2.4')>-1)s.textContent='1.5.4';});}catch(e){}
 
 /* ---------- ② 公告栏 ---------- */
@@ -15423,7 +15867,7 @@ window.addEventListener('load',function(){
 });
 })();
 
-/* ===== v1.5.4.3 更新邮件（修复清单 + 补偿）===== */
+/* ===== v1.5.5 更新邮件（修复清单 + 补偿）===== */
 (function(){
 'use strict';
 if(window.__v1541Mail)return;
@@ -15437,8 +15881,8 @@ window.ensureV1541Mail=function(){
     if(!state.mailbox.some(function(m){return m.id==='v1541_update';})){
       state.mailbox.push({
         id:'v1541_update',
-        title:'v1.5.4.3 热修复清单与补偿（请查收）',
-        body:'各位考生：<br><br>针对焕新后首个版本的反馈，v1.5.4.3 完成以下热修复：<br><br><b>一、杯赛记账时序修复</b><br>修复前：打开结算预览时杯赛就尝试记账，而当日记录在你点击「确认结算」后才写入——导致今日成绩永远记不上、杯赛恒 0 分。现已把记账钩子移到结算落账之后，当天结算当天入账。<br><br><b>二、宝藏活动「每日骰子」修复</b><br>每日跨天时只重置了购买次数、漏重置领取标记，导致首次领取后每日免费骰子永久无法领取。现已修复，明天起可正常领取。<br><br><b>三、弹窗防卡死</b><br>任意弹窗现支持：点遮罩空白关闭 / ESC 关闭 / 右上角自动出现 ✕，不再出现遮罩罩住全屏点不动的情况。<br><br><b>四、竞技页签修复</b><br>全国榜下方段位页签（青铜/白银/黄金…）此前点击不切换，已修复。<br><br><b>五、其他修复</b><br>· 杯赛锁定卡片点击报「cvGuard 未定义」→ 现为正常提示；<br>· 杯赛布局小屏边框溢出加固；<br>· 每日登记任务卡焕新：四维评价面板（正确率/专注度/用时/基本状态加权出质量EP）、占上限进度条、完成置灰折叠动画。<br><br><b>补偿</b>：因杯赛记账与骰子问题影响昨日收益，随信发放 🎲宝藏蓝骰×3、🎟️属性抽取券×1、🎫属性变更券×1。<br><br>焕新路上，感谢有你并肩。',
+        title:'v1.5.5 热修复清单与补偿（请查收）',
+        body:'各位考生：<br><br>针对焕新后首个版本的反馈，v1.5.5 完成以下热修复：<br><br><b>一、杯赛记账时序修复</b><br>修复前：打开结算预览时杯赛就尝试记账，而当日记录在你点击「确认结算」后才写入——导致今日成绩永远记不上、杯赛恒 0 分。现已把记账钩子移到结算落账之后，当天结算当天入账。<br><br><b>二、宝藏活动「每日骰子」修复</b><br>每日跨天时只重置了购买次数、漏重置领取标记，导致首次领取后每日免费骰子永久无法领取。现已修复，明天起可正常领取。<br><br><b>三、弹窗防卡死</b><br>任意弹窗现支持：点遮罩空白关闭 / ESC 关闭 / 右上角自动出现 ✕，不再出现遮罩罩住全屏点不动的情况。<br><br><b>四、竞技页签修复</b><br>全国榜下方段位页签（青铜/白银/黄金…）此前点击不切换，已修复。<br><br><b>五、其他修复</b><br>· 杯赛锁定卡片点击报「cvGuard 未定义」→ 现为正常提示；<br>· 杯赛布局小屏边框溢出加固；<br>· 每日登记任务卡焕新：四维评价面板（正确率/专注度/用时/基本状态加权出质量EP）、占上限进度条、完成置灰折叠动画。<br><br><b>补偿</b>：因杯赛记账与骰子问题影响昨日收益，随信发放 🎲宝藏蓝骰×3、🎟️属性抽取券×1、🎫属性变更券×1。<br><br>焕新路上，感谢有你并肩。',
         items:{treasure_die_blue:3,draw_ticket:1,change_ticket:1},
         claimed:false,read:false,createdAt:Date.now()
       });
@@ -15458,7 +15902,7 @@ try{
 try{if(typeof updateMailBadge==='function')updateMailBadge();}catch(e){}
 })();
 
-/* ===== 36号天赋「标签熔炉」v1.5.4.3 ===== */
+/* ===== 36号天赋「标签熔炉」v1.5.5 ===== */
 (function(){
 'use strict';
 if(window.__fuseTalent36)return;
@@ -16077,7 +16521,7 @@ window.__epkShowDone=function(before,after){
 
 </script>
 <script>
-/* ================= v1.5.4.3 · 结算战报（EP星堆爆分引擎，替代旧结算对话框） ================= */
+/* ================= v1.5.5 · 结算战报（EP星堆爆分引擎，替代旧结算对话框） ================= */
 (function(){
 'use strict';
 if(window.__ssReport1542)return;
@@ -16304,7 +16748,8 @@ window.__ssShowReport=function(before,after){
       +'<div class="ssrp-rank">🏅 '+nl.name+'</div>'
       +'<div class="ssrp-prog"><i id="ssrp-progfill" style="width:'+lvPct+'%"></i></div>'
       +'<div class="ssrp-progtx">'+progTx+'</div>'
-      +'<div class="ssrp-streak">🔥 连续打卡 <b>'+streak+'</b> 天</div></div>'
+      +'<div class="ssrp-streak">🔥 连续打卡 <b>'+streak+'</b> 天</div>'
+      +'<div class="ssrp-streak">⚫ 黑币 <b>+'+Math.floor(gain/300)+'</b>（结算 EP ÷ 300）</div></div>'
       +'<div class="ssrp-mid">'
       +'<div class="ssrp-row"><span>💰 积分 / 代币入账</span><span class="v">详见顶栏余额</span></div>'
       +'<div class="ssrp-row"><span>📦 材料与杯赛</span><span class="v">已入仓库 · 已计分</span></div>'
@@ -16372,8 +16817,8 @@ window.__ssCloseReport=function(){
 
 /* ---------- 公告 ---------- */
 var ANN1542='<div id="ann-1542" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;">'
- +'<b style="color:#ff3b30;">v1.5.4.3「结算战报」</b> <span style="font-size:11px;color:#8e8e93;">结算演出 · 11.05</span>'
- +'<div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">结算对话框全面替换为「今日战报」：EP 星堆按动态持有 EP 逐颗飞出（右侧 6 星缓冲槽），满千合成 1000 大星星触发 KILL 爆分（圆形爆分UI可连爆覆盖、上限 10KILL），椭圆战报牌收尾；滚动节奏与星星严格同步。详情见邮箱《v1.5.4.3「结算战报」更新公告》。</div></div>';
+ +'<b style="color:#ff3b30;">v1.5.5「结算战报」</b> <span style="font-size:11px;color:#8e8e93;">结算演出 · 11.05</span>'
+ +'<div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">结算对话框全面替换为「今日战报」：EP 星堆按动态持有 EP 逐颗飞出（右侧 6 星缓冲槽），满千合成 1000 大星星触发 KILL 爆分（圆形爆分UI可连爆覆盖、上限 10KILL），椭圆战报牌收尾；滚动节奏与星星严格同步。详情见邮箱《v1.5.5「结算战报」更新公告》。</div></div>';
 function __v1542Ann(){
   try{
     var el=document.getElementById('ann-list');
@@ -16401,8 +16846,8 @@ window.ensureV1542Mail=function(){
     if(!state.mailbox.some(function(m){return m.id==='v1542_update';})){
       state.mailbox.push({
         id:'v1542_update',
-        title:'v1.5.4.3「结算战报」更新公告',
-        body:'各位考生：<br><br>v1.5.4.3 带来全新结算演出，替代原结算对话框：<br><br><b>一、EP 星堆</b><br>· 星星按<b>动态持有 EP</b>实时飞出：持有每跨过一个 100 边界（含跨千），一颗星星从获得数字直线飞入右侧星堆；<br>· 右侧为 6 星缓冲槽（1×500 + 5×100），槽满即合成 1000 大星星爆分清空，多出的星星排队等位，永远不会堆积；<br>· 结算前持有的百位组成（如 599 的一颗 500 星）会先落位展示。<br><br><b>二、KILL 爆分</b><br>· 1000 大星星高亮直飞爆分中心：圆形爆分UI 0.45s 有力道弹出，连爆立即覆盖，上限 10KILL；<br>· 椭圆战报牌只在结算完毕且至少 1 次爆分时出现一次。<br><br><b>三、节奏同步</b><br>· 滚动时长按星数动态伸缩（约 90ms/星），数字与星星严格同步，星星全部出场数字才停。<br><br>随信发放 🎟️属性抽取券×1、🎫属性变更券×1，请查收。<br><br>愿每一颗星都算数。',
+        title:'v1.5.5「结算战报」更新公告',
+        body:'各位考生：<br><br>v1.5.5 带来全新结算演出，替代原结算对话框：<br><br><b>一、EP 星堆</b><br>· 星星按<b>动态持有 EP</b>实时飞出：持有每跨过一个 100 边界（含跨千），一颗星星从获得数字直线飞入右侧星堆；<br>· 右侧为 6 星缓冲槽（1×500 + 5×100），槽满即合成 1000 大星星爆分清空，多出的星星排队等位，永远不会堆积；<br>· 结算前持有的百位组成（如 599 的一颗 500 星）会先落位展示。<br><br><b>二、KILL 爆分</b><br>· 1000 大星星高亮直飞爆分中心：圆形爆分UI 0.45s 有力道弹出，连爆立即覆盖，上限 10KILL；<br>· 椭圆战报牌只在结算完毕且至少 1 次爆分时出现一次。<br><br><b>三、节奏同步</b><br>· 滚动时长按星数动态伸缩（约 90ms/星），数字与星星严格同步，星星全部出场数字才停。<br><br>随信发放 🎟️属性抽取券×1、🎫属性变更券×1，请查收。<br><br>愿每一颗星都算数。',
         items:{draw_ticket:1,change_ticket:1},
         claimed:false,read:false,createdAt:Date.now()
       });
@@ -16421,15 +16866,15 @@ try{
 try{if(typeof updateMailBadge==='function')updateMailBadge();}catch(e){}
 
 })();
-/* ================= v1.5.4.3 JS END ================= */
+/* ================= v1.5.5 JS END ================= */
 
 </script>
 <script>
-/* ================= v1.5.4.3 · 宝藏冲刺修复 ================= */
+/* ================= v1.5.5 · 宝藏冲刺修复 ================= */
 (function(){
 'use strict';
 var ANN='<div id="ann-1543" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;">'
- +'<b style="color:#ff3b30;">v1.5.4.3「宝藏冲刺修复」</b> <span style="font-size:11px;color:#8e8e93;">棋盘修复 · 11.05</span>'
+ +'<b style="color:#ff3b30;">v1.5.5「宝藏冲刺修复」</b> <span style="font-size:11px;color:#8e8e93;">棋盘修复 · 11.05</span>'
  +'<div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">宝藏冲刺：①棋盘进度跨天保留，不再每天回起点；②全部 16 格奖励修复生效（积分格正则 bug、特殊骰格、宝积格）；③掉头移至右上角；④普通奖池新增代币/属性票券，13 号格改为 💠+100 宝藏积分。详情见邮箱。</div></div>';
 function __inj(){
   try{
@@ -16456,7 +16901,7 @@ window.ensureV1543Mail=function(){
     if(!state.mailbox.some(function(m){return m.id==='v1543_update';})){
       state.mailbox.push({
         id:'v1543_update',
-        title:'v1.5.4.3「宝藏冲刺修复」更新公告',
+        title:'v1.5.5「宝藏冲刺修复」更新公告',
         body:'各位考生：<br><br>宝藏冲刺玩法修复与优化：<br><br><b>一、进度跨天保留</b><br>棋盘位置与方向不再每日重置，昨天的进度今天接着走；每日仅刷新免费骰子领取与限购。<br><br><b>二、全部格子修复生效</b><br>· 修复积分格发放 bug（原正则误写导致 +100/+150/+200/+300 全部静默吞奖）；<br>· 特殊骰格（黄骰×1）正常发放；<br>· 新增 💠宝积格：踩上 +100 宝藏积分。<br><br><b>三、棋盘调整</b><br>· 掉头格移至右上角；<br>· 普通奖池扩容：积分120 / 代币15 / 属性抽取券 / 属性变更券 / 通用材料。<br><br>随信发放 🎲普通骰子×2（已直接存入宝藏面板）。',
         items:{},
         claimed:false,read:false,createdAt:Date.now()
@@ -16477,7 +16922,1042 @@ try{
 }catch(e){}
 try{if(typeof updateMailBadge==='function')updateMailBadge();}catch(e){}
 })();
-/* ================= v1.5.4.3 JS END ================= */
+/* ================= v1.5.5 JS END ================= */
+
+</script>
+<script>
+/* ================= v1.5.5+ 促销 · 黑币 · 标签装扮 ================= */
+(function(){
+'use strict';
+if(window.__promoBC1543)return;
+window.__promoBC1543=true;
+
+var BC='<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="#161210" stroke="#f0b35c" stroke-width="4"/><circle cx="32" cy="32" r="21.5" fill="none" stroke="rgba(240,179,92,.5)" stroke-width="1.6" stroke-dasharray="3 4"/><path d="M32 19 L43 23.5 V33.5 C43 40.5 38 44.5 32 47 C26 44.5 21 40.5 21 33.5 V23.5 Z" fill="#f0b35c"/><path d="M32 24.5 L38.5 27.3 V33.5 C38.5 37.8 35.6 40.7 32 42.3 C28.4 40.7 25.5 37.8 25.5 33.5 V27.3 Z" fill="#161210"/></svg>';
+
+/* ---------- 黑币经济 ---------- */
+function bcGet(){state.blackCoin=state.blackCoin||0;return state.blackCoin;}
+function bcSync(){try{var n=document.getElementById('top-black-n');if(n)n.textContent=bcGet();var s=document.getElementById('shop-black-n');if(s)s.textContent=bcGet();}catch(e){}}
+function bcAdd(n){if(!n)return;state.blackCoin=bcGet()+n;saveState();bcSync();}
+function bcPay(n){if(bcGet()<n)return false;state.blackCoin-=n;saveState();bcSync();return true;}
+/* 黑币不足：错误态弹窗（非恭喜弹窗） */
+function bcNoCoin(need){
+  try{
+    var lack=Math.max(1,need-bcGet());
+    showModal('⚫ 黑币不足','还差 <b style="color:#ffd60a;font-family:var(--mono)">'+lack+'</b> 黑币<br><br><span style="font-size:12px;color:#c9b791;line-height:1.9">⚡ 结算产出：最终结算 EP ÷ 300，不设上限<br>⇄ 商店「黑币商店」区：500 代币 → 100 黑币</span>',function(){closeModal();});
+    document.getElementById('modal-confirm').style.display='none';
+    var cb=document.getElementById('modal-cancel');if(cb)cb.textContent='知道了';
+  }catch(e){}
+}
+function bcHeader(){
+  try{
+    var host=document.getElementById('top-points');if(!host)return;
+    var box=host.parentNode;if(!box)return;
+    var el=document.getElementById('top-black');
+    if(!el){el=document.createElement('span');el.id='top-black';box.appendChild(el);}
+    el.innerHTML='<span class="bc-ic">'+BC+'</span> 黑币:<b id="top-black-n">'+bcGet()+'</b>';
+  }catch(e){}
+}
+try{
+  if(typeof updateTopBar==='function'&&!updateTopBar.__bcw){
+    var __utb=updateTopBar;
+    var __w=function(){var r=__utb.apply(this,arguments);try{bcHeader();}catch(e){}return r;};
+    __w.__bcw=true;window.updateTopBar=__w;
+  }
+}catch(e){}
+bcHeader();
+/* 结算产出：最终 EP ÷ 300 */
+try{
+  if(typeof window.addTotalEp==='function'&&!window.addTotalEp.__bcw){
+    var __ate=window.addTotalEp;
+    var __w2=function(amount,defer){
+      var r=__ate.apply(this,arguments);
+      try{var n=Math.floor((parseInt(amount)||0)/300);if(n>0)bcAdd(n);}catch(e){}
+      return r;
+    };
+    __w2.__bcw=true;window.addTotalEp=__w2;
+  }
+}catch(e){}
+
+/* ---------- 促销数据 ---------- */
+var POOL=[
+ {id:'core20',theme:'gems',icon:'💠',kicker:'SP CORE CRATE',name:'核心箱',sub:'精研核心 ×20',base:200,
+  grad:'linear-gradient(135deg,#1c1040 0%,#4a2d8f 55%,#8b5cf6 100%)',
+  contents:function(){return [['💠 精研核心','×20'],['💰 积分','+800']];},
+  grant:function(){state.inventory.sp_core=(state.inventory.sp_core||0)+20;state.points+=800;}},
+ {id:'dice',theme:'dice',icon:'🎲',kicker:'TREASURE DICE PACK',name:'骰子狂欢包',sub:'蓝骰 ×10 + 黄骰 ×5',base:90,
+  grad:'linear-gradient(135deg,#0b2a4a 0%,#1457b7 55%,#2f8cff 100%)',
+  contents:function(){return [['🎲 普通骰子（蓝）','×10'],['🌟 特殊骰子（黄）','×5'],['💰 积分','+300']];},
+  grant:function(){state.inventory.treasure_die_blue=(state.inventory.treasure_die_blue||0)+10;state.inventory.treasure_die_yellow=(state.inventory.treasure_die_yellow||0)+5;state.points+=300;}},
+ {id:'excl',theme:'ticket',icon:'🎴',kicker:'EXCLUSIVE 50% OFF',name:'高级功能半价券',sub:'专属商店任购 1 件 5 折',base:35,
+  grad:'linear-gradient(135deg,#3a0d2e 0%,#8f2060 55%,#ff2d95 100%)',
+  contents:function(){return [['🎴 高级功能半价券','×1'],['　专属商店任购 1 件 5 折',''],['　不限期 · 可囤','']];},
+  grant:function(){state.inventory.excl_coupon=(state.inventory.excl_coupon||0)+1;}},
+ {id:'tickets',theme:'env',icon:'🎟️',kicker:'TICKET BUNDLE',name:'票券满仓包',sub:'抽取券 ×8 + 变更券 ×4',base:30,
+  grad:'linear-gradient(135deg,#4a1008 0%,#a8321e 55%,#ff5e3a 100%)',
+  contents:function(){return [['🎟️ 属性抽取券','×8'],['🎫 属性变更券','×4'],['💰 积分','+500']];},
+  grant:function(){state.inventory.draw_ticket=(state.inventory.draw_ticket||0)+8;state.inventory.change_ticket=(state.inventory.change_ticket||0)+4;state.points+=500;}},
+ {id:'exp3',theme:'rays',icon:'⚡',kicker:'TRIPLE EXP ×3',name:'经验核弹',sub:'3倍经验卡 ×3',base:160,
+  grad:'linear-gradient(135deg,#4a2c05 0%,#b5772a 55%,#ff9500 100%)',
+  contents:function(){return [['⚡ 3倍经验卡','×3'],['💰 积分','+400']];},
+  grant:function(){state.inventory.exp3=(state.inventory.exp3||0)+3;state.points+=400;}},
+ {id:'vip',theme:'royal',icon:'👑',kicker:'BRAWL ROYALE PACK',name:'乱斗王炸包',sub:'特权券 ×3 + 变更券 ×3',base:100,
+  grad:'linear-gradient(135deg,#2e0b0b 0%,#7a1e1e 55%,#ff3b30 100%)',
+  contents:function(){return [['👑 乱斗特权券','×3'],['🎫 属性变更券','×3'],['💰 积分','+400']];},
+  grant:function(){state.inventory.brawl_vip=(state.inventory.brawl_vip||0)+3;state.inventory.change_ticket=(state.inventory.change_ticket||0)+3;state.points+=400;}},
+ {id:'reroll',theme:'magic',icon:'🔮',kicker:'REROLL BUCKET',name:'重铸全家桶',sub:'特殊属性重铸券 ×4',base:80,
+  grad:'linear-gradient(135deg,#0d2e2a 0%,#1e7a6e 55%,#20c997 100%)',
+  contents:function(){return [['🔮 特殊属性重铸券','×4'],['💰 积分','+300']];},
+  grant:function(){state.inventory.reroll_ticket=(state.inventory.reroll_ticket||0)+4;state.points+=300;}},
+ {id:'ult5',theme:'blue',icon:'🔧',kicker:'DIRECT UPGRADE ×5',name:'直升零件箱',sub:'直接升级 ×5',base:35,
+  grad:'linear-gradient(135deg,#26260b 0%,#6e6e1e 55%,#c7d200 100%)',
+  contents:function(){return [['🔧 直接升级','×5'],['💰 积分','+200']];},
+  grant:function(){state.inventory.direct_up=(state.inventory.direct_up||0)+5;state.points+=200;}}
+];
+var SP_BASE={D:400,C:700,B:950,A:1250,S:1500};
+var SP_PTS={D:1000,C:1500,B:2000,A:2500,S:3000};
+var SP_ORDER=['S','A','B','C','D'];
+var SP_ITEM={id:'sppack',sp:true,theme:'goldsp',icon:'🏎️',kicker:'SP AWAKENING KIT',name:'SP觉醒整合包',
+ sub:'一次补齐该档全部觉醒材料',base:700,
+ grad:'linear-gradient(135deg,#3d2a08 0%,#8f6a1e 55%,#f0b35c 100%)',
+ contents:null,grant:null,tagRef:null};
+
+function pickZhe(rnd){return (21+Math.round(rnd()*54))/10;}
+function price(base,zhe){return Math.max(1,Math.round(base*zhe/10));}
+function srand(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function promoWeek(){var w=getShopWeekKey();if(state.promoWeek!==w){state.promoWeek=w;state.promoBought={};saveState();}return w;}
+function weekRnd(){var w=promoWeek(),h=0;for(var i=0;i<w.length;i++)h=(h*31+w.charCodeAt(i))>>>0;return srand(h||1);}
+
+/* SP 检测：四线全 Lv10 未觉醒，取最高档 */
+function spReadyTag(){
+  try{
+    var best=null;
+    TASK_TAGS.forEach(function(t){
+      if(tagChildren(t.path).length>0)return;
+      var up=(state.tagUp||{})[t.id];
+      if(!up||up.sp)return;
+      if((up.spd||0)>=10&&(up.acc||0)>=10&&(up.ctl||0)>=10&&(up.nit||0)>=10){
+        var cls=tagFreqClass(t);
+        if(!best||SP_ORDER.indexOf(cls)<SP_ORDER.indexOf(best.cls))best={cls:cls,tag:t};
+      }
+    });
+    return best;
+  }catch(e){return null;}
+}
+function buildSpItem(ready){
+  if(!ready)return null;
+  var r=SP_RECIPE[ready.cls];
+  var pts=SP_PTS[ready.cls]||1000;
+  var it=Object.assign({},SP_ITEM);
+  it.base=SP_BASE[ready.cls]||400;
+  it.tagRef=ready.tag;
+  it.contents=function(){return [
+    ['🧊 训练印记','×'+r.mats],['🏅 冲刺奖章','×'+r.mats],['📛 全勤徽章','×'+r.mats],['🎖️ 巅峰凭证','×'+r.mats],
+    ['💠 精研核心','×'+r.core],['🪙 代币','+'+r.tokens],['🔧 直接升级','×'+r.ult],['💰 积分','+'+pts.toLocaleString()],['🎫 抽奖代金券','×2']
+  ];};
+  it.for='为标签「'+ready.tag.path.join(' · ')+'」备好 · '+ready.cls+'级档 · 材料入公共池';
+  it.grant=function(){
+    var m=migrateGlobalMats();
+    m.mark=(m.mark||0)+r.mats;m.medal=(m.medal||0)+r.mats;m.badge=(m.badge||0)+r.mats;m.peak=(m.peak||0)+r.mats;
+    state.inventory.sp_core=(state.inventory.sp_core||0)+r.core;
+    state.inventory.direct_up=(state.inventory.direct_up||0)+r.ult;
+    state.tokens+=r.tokens;
+    state.points+=pts;
+    state.lotteryCoupon=(state.lotteryCoupon||0)+2;
+  };
+  return it;
+}
+
+/* ---------- 渲染 ---------- */
+var curItems={};
+function burstPts(cx,cy,rO,rI,n){
+  var pts=[],rot=-Math.PI/2,step=Math.PI/n;
+  for(var i=0;i<n;i++){pts.push((cx+Math.cos(rot)*rO).toFixed(1)+','+(cy+Math.sin(rot)*rO).toFixed(1));rot+=step;pts.push((cx+Math.cos(rot)*rI).toFixed(1)+','+(cy+Math.sin(rot)*rI).toFixed(1));rot+=step;}
+  return pts.join(' ');
+}
+function bannerInner(it){
+  var T=it.theme;
+  if(T==='gems')return '<div class="pc-kicker">'+it.kicker+'</div><div class="pc-title">'+it.name+'</div>'
+    +'<span class="gem" style="right:96px;top:52%;font-size:30px;transform:translateY(-50%)">💠</span>'
+    +'<span class="gem" style="right:58px;top:34%;font-size:22px">💠</span>'
+    +'<span class="gem" style="right:34px;top:58%;font-size:38px">💠</span>'
+    +'<span class="gem" style="right:66px;top:66%;font-size:18px">💠</span>'
+    +'<span class="gem" style="right:118px;top:30%;font-size:15px">💎</span>'
+    +'<span class="spk" style="right:44px;top:22%">✦</span><span class="spk" style="right:120px;top:56%;animation-delay:.7s">✦</span><span class="spk" style="right:80px;top:76%;animation-delay:1.3s">✦</span>'
+    +'<div class="pc-sub">'+it.sub+'</div>';
+  if(T==='dice')return '<div class="pc-kicker">'+it.kicker+'</div>'
+    +'<span class="die" style="right:118px;top:16%;font-size:26px;transform:rotate(-14deg)">🎲</span>'
+    +'<span class="die" style="right:34px;top:10%;font-size:44px;transform:rotate(11deg)">🎲</span>'
+    +'<span class="die" style="right:70px;top:48%;font-size:34px;transform:rotate(-7deg)">🎲</span>'
+    +'<span class="die" style="right:8px;top:52%;font-size:24px;transform:rotate(17deg)">🌟</span>'
+    +'<div class="pc-title" style="margin-top:44px">'+it.name+'</div><div class="pc-sub">'+it.sub+'</div>';
+  if(T==='ticket')return '<div class="tearline"></div><div style="width:62%"><div class="pc-kicker">'+it.kicker+'</div>'
+    +'<div class="pc-title" style="font-size:19px">'+it.name+'</div><div class="pc-sub">'+it.sub+'</div></div>'
+    +'<span style="position:absolute;right:16%;top:50%;transform:translateY(-50%);font-size:52px;filter:drop-shadow(0 5px 10px rgba(0,0,0,.55)) drop-shadow(0 0 14px rgba(255,45,149,.7))">🎴</span>';
+  if(T==='env')return '<span class="env">🧧</span>'
+    +'<span class="coin" style="right:130px;top:26%">🪙</span><span class="coin" style="right:118px;top:58%;animation-delay:.8s">🪙</span><span class="coin" style="right:150px;top:44%;animation-delay:1.6s">🪙</span>'
+    +'<div class="pc-kicker">'+it.kicker+'</div><div class="pc-title" style="margin-top:38px">'+it.name+'</div><div class="pc-sub">'+it.sub+'</div>';
+  if(T==='rays')return '<div class="pc-kicker">'+it.kicker+'</div><div class="bolt-ring">⚡</div>'
+    +'<div class="pc-title" style="margin-top:44px">'+it.name+'</div><div class="pc-sub">'+it.sub+'</div>';
+  if(T==='royal')return '<span class="crown">👑</span>'
+    +'<div class="cardfan"><span style="transform:rotate(-16deg);right:64px">🃏</span><span style="transform:rotate(0deg);right:36px">🂿</span><span style="transform:rotate(15deg);right:8px">🎴</span></div>'
+    +'<span class="suit" style="left:20px;top:44%">♦</span><span class="suit" style="left:44px;top:64%;animation-delay:.9s">♥</span><span class="suit" style="left:70px;top:38%;animation-delay:1.7s">♠</span>'
+    +'<div class="pc-kicker" style="margin-top:56px">'+it.kicker+'</div><div class="pc-title" style="font-size:19px">'+it.name+'</div><div class="pc-sub">'+it.sub+'</div>';
+  if(T==='magic')return '<div class="mgc" style="right:6%;top:50%;transform:translateY(-50%);width:104px;height:104px"></div>'
+    +'<div class="mgc" style="right:10.5%;top:50%;transform:translateY(-50%);width:76px;height:76px;border-style:dotted"></div>'
+    +'<div class="orb">🔮</div><div class="pc-kicker">'+it.kicker+'</div><div class="pc-title" style="margin-top:40px">'+it.name+'</div><div class="pc-sub">'+it.sub+'</div>';
+  if(T==='blue')return '<span class="brc" style="left:12px;top:34px;border-right:none;border-bottom:none"></span>'
+    +'<span class="brc" style="right:12px;top:34px;border-left:none;border-bottom:none"></span>'
+    +'<span class="brc" style="left:12px;bottom:8px;border-right:none;border-top:none"></span>'
+    +'<span class="brc" style="right:12px;bottom:8px;border-left:none;border-top:none"></span>'
+    +'<div class="gear">🔧</div><div class="pc-kicker">'+it.kicker+'</div><div class="pc-title" style="margin-top:38px">'+it.name+'</div><div class="pc-sub">'+it.sub+'</div>';
+  if(T==='goldsp')return '<div class="ribbon" style="right:96px"></div><div class="ribbon" style="right:118px"></div>'
+    +'<div class="sp-medal"><span class="m">SP</span><span class="s">AWAKEN</span></div>'
+    +'<div class="pc-kicker">'+it.kicker+'</div><div class="pc-title" style="font-size:20px">'+it.name+'</div>'
+    +'<div class="pc-sub" style="padding-right:96px">'+it.sub+'</div>';
+  return '<div class="pc-kicker">'+it.kicker+'</div><div class="pc-title">'+it.name+'</div><div class="pc-sub">'+it.sub+'</div>';
+}
+function renderPromo(){
+  try{
+    var page=document.getElementById('page-deals');if(!page)return;
+    var wrap=document.getElementById('promo-wrap');
+    if(!wrap){wrap=document.createElement('div');wrap.id='promo-wrap';page.insertBefore(wrap,page.querySelector('#deals-soon'));}
+    /* 页头黑币余额 */
+    try{var db=document.getElementById('deals-bal');if(db)db.innerHTML='<span class="bc-ic">'+BC+'</span> '+bcGet()+' 黑币';}catch(e){}
+    var rnd=weekRnd();
+    /* 每周从池中随机抽 3 款 */
+    var idx=POOL.map(function(_,i){return i;});
+    for(var i=idx.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1));var t=idx[i];idx[i]=idx[j];idx[j]=t;}
+    var items=idx.slice(0,3).map(function(k){var it=POOL[k];var z=pickZhe(rnd);return Object.assign({},it,{_z:z,_p:price(it.base,z),_ref:it.base*3});});
+    var ready=spReadyTag();
+    if(rnd()<0.5){
+      var sp=buildSpItem(ready);
+      if(sp){var sz=pickZhe(rnd);sp._z=sz;sp._p=price(sp.base,sz);sp._ref=sp.base*3;items.unshift(sp);}
+    }
+    curItems={};
+    var html='<div id="promo-head"><div id="promo-title"><span class="dot"></span>🔥 限时促销 <span id="promo-sub">每周一 0 点刷新 · 刷新后所有商品折扣重新随机（2.1~7.5 折）· 每件每周限购 1 次 · 仅收黑币</span></div>'
+      +'<span id="promo-cd">--</span></div><div id="promo-grid">';
+    items.forEach(function(it,i){
+      curItems[it.id]=it;
+      var off=Math.round((1-it._z/10)*100);
+      var ref=it._ref;
+      var vt=ref>=8000?4:ref>=3000?3:ref>=1000?2:ref>=400?1:0;
+      var vtName=['普通','优秀','稀有','史诗','传说'][vt];
+      var bought=!!(state.promoBought||{})[promoWeek()+'_'+it.id];
+      html+='<div class="pc th-'+it.theme+' vt-'+vt+(it.sp?' pc-sp-row':'')+' pre">'
+        +'<div class="pc-in"><div class="pc-face">'
+        +'<div class="pc-banner" style="background:'+it.grad+'">'
+        +'<div class="pc-info" data-id="'+it.id+'">i</div>'
+        +bannerInner(it)
+        +'<div class="pc-badge"><svg viewBox="0 0 100 100"><polygon points="'+burstPts(50,50,46,40,18)+'" fill="#e02a1e" stroke="#fff" stroke-width="2.5"/></svg>'
+        +'<div class="tx"><span class="z">'+it._z.toFixed(1)+'折</span><span class="o">立省'+off+'%</span></div></div>'
+        +'<span class="vt-tag">'+vtName+' · 价值档</span>'
+        +'</div>'
+        +'<div class="pc-body"><div class="pc-chips">'+it.contents().slice(0,3).map(function(c){return '<span class="chip">'+c[0]+' <b>'+c[1]+'</b></span>';}).join('')+'</div>'
+        +(it.for?'<div class="pc-for">'+it.for+'</div>':'')
+        +'<div class="pc-foot"><div class="pc-price"><span class="pc-cur"><span class="bc-ic">'+BC+'</span> 黑币</span>'
+        +'<b>'+it._p.toLocaleString()+'</b><s>原价 '+ref.toLocaleString()+'</s></div>'
+        +'<button class="pc-buy" data-id="'+it.id+'" '+(bought?'disabled':'')+'>'+(bought?'已 购':'立即抢购')+'</button>'
+        +'</div></div>'
+        +'<div class="pc-strip"><span class="dot"></span>限时促销 · 限购 1 次 · 周一 0 点刷新<span class="dot"></span></div>'
+        +'</div>'
+        +'<div class="pc-cover"><span class="wm">PROMO</span><span class="qm">🎁</span><span class="ct">WEEKLY PROMO · 本周促销</span></div>'
+        +'</div></div>';
+    });
+    html+='</div><div id="promo-exch">⚫ 黑币产出：结算 EP ÷ 300（按最终结算 EP · 不设上限）· 代币兑换黑币请至商店「黑币商店」区</div>';
+    wrap.innerHTML=html;
+    /* 事件 */
+    Array.prototype.forEach.call(wrap.querySelectorAll('.pc-info'),function(b){
+      b.onclick=function(ev){ev.stopPropagation();openPromoMdl(b.getAttribute('data-id'));};
+    });
+    Array.prototype.forEach.call(wrap.querySelectorAll('.pc-buy'),function(b){
+      b.onclick=function(ev){ev.stopPropagation();buyPromo(b.getAttribute('data-id'));};
+    });
+    /* 逐张翻开 */
+    var cards=wrap.querySelectorAll('.pc.pre');
+    Array.prototype.forEach.call(cards,function(c,i){setTimeout(function(){c.classList.remove('pre');},140*i+150);});
+  }catch(e){}
+}
+/* 明细弹窗 */
+function openPromoMdl(id){
+  var it=curItems[id];if(!it||typeof showModal!=='function')return;
+  var rows=it.contents().map(function(c){return '<div style="display:flex;justify-content:space-between;padding:8px 10px;border:1px solid rgba(232,163,61,.14);border-radius:10px;background:rgba(28,21,11,.55);margin-bottom:6px;font-size:13px"><span style="color:#c9a86a;font-size:12px">'+c[0]+'</span><b style="font-family:var(--mono);color:#f0d9a2">'+c[1]+'</b></div>';}).join('');
+  showModal(it.icon+' '+it.name,
+    '<div style="font-size:9px;letter-spacing:.26em;color:#a98d5f;font-family:var(--mono);margin-bottom:10px">'+it.kicker+'</div>'
+    +rows+'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span style="font-family:var(--mono)"><b style="font-size:19px;color:#ffd60a">'+it._p.toLocaleString()+'</b> <s style="font-size:11px;color:#8d7c5f">'+it._ref.toLocaleString()+'</s></span><span style="font-size:11px;color:#ff9a8a;font-family:var(--mono)">本周 '+it._z.toFixed(1)+' 折 · 限购 1 次</span></div>',
+    function(){closeModal();});
+  try{document.getElementById('modal-confirm').style.display='none';var cb=document.getElementById('modal-cancel');if(cb){cb.textContent='关闭';}}catch(e){}
+}
+/* 购买 */
+function buyPromo(id){
+  var it=curItems[id];if(!it)return;
+  var key=promoWeek()+'_'+id;
+  if((state.promoBought||{})[key])return;
+  if(!bcPay(it._p)){bcNoCoin(it._p);return;}
+  state.promoBought=state.promoBought||{};state.promoBought[key]=true;
+  it.grant();
+  saveState();updateTopBar();updateShopUI();
+  renderPromo();
+  var lines=it.contents().map(function(c){return [c[0]+' '+c[1],'','#7ee2a0'];});
+  if(typeof showGainModal==='function')showGainModal('🎉 促销购入 · 恭喜获得',lines);
+}
+/* 倒计时 */
+setInterval(function(){
+  try{
+    var el=document.getElementById('promo-cd');if(!el)return;
+    var now=new Date();var d=new Date(now);var day=(d.getDay()+6)%7;d.setDate(d.getDate()-day+7);d.setHours(0,0,0,0);
+    var ms=d-now;var dd=Math.floor(ms/86400000),hh=Math.floor(ms/3600000)%24,mm=Math.floor(ms/60000)%60,ss=Math.floor(ms/1000)%60;
+    el.textContent='⏱ 距刷新 '+dd+'天 '+String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');
+  }catch(e){}
+},1000);
+try{
+  if(typeof updateShopUI==='function'&&!updateShopUI.__promow){
+    var __usu=updateShopUI;
+    var __w3=function(){var r=__usu.apply(this,arguments);try{
+      var sc=document.querySelector('#page-shop .sp-cur');
+      if(sc&&!document.getElementById('shop-black')){var b=document.createElement('span');b.className='sp-chip';b.innerHTML='<span class="bc-ic">'+BC+'</span> <b id="shop-black-n">'+bcGet()+'</b>';sc.appendChild(b);}
+      renderSkins();bcSync();
+    }catch(e){}return r;};
+    __w3.__promow=true;window.updateShopUI=__w3;
+  }
+}catch(e){}
+
+/* ---------- 高级功能半价券 ---------- */
+try{
+  if(typeof window.buyExclusive==='function'&&!window.buyExclusive.__bcw){
+    var __be=window.buyExclusive;
+    var __w4=function(id){
+      try{
+        if((state.inventory.excl_coupon||0)>0){
+          var it=EXCLUSIVES.find(function(x){return x.id===id;});if(!it)return;
+          if(state.exclusive.owned.indexOf(id)>-1||getLevelInfo(state.totalEP).lv<it.lv){__be(id);return;}
+          var half=Math.ceil(it.cost/2);
+          showModal('🎴 高级功能折扣券','使用折扣券以 <b>'+half+'</b> 代币（原价 '+it.cost+'）购买 <b>'+it.icon+' '+it.n+'</b>？<br><br>持券 '+state.inventory.excl_coupon+' 张 · 用后剩余 '+(state.inventory.excl_coupon-1)+' 张',function(){
+            if(state.tokens<half){alert('代币不足');return;}
+            state.tokens-=half;state.inventory.excl_coupon--;
+            state.exclusive.owned.push(id);
+            if(!state.exclusive.equipped){state.exclusive.equipped=id;if(typeof pushEvolveNote==='function')pushEvolveNote('🎴 专属功能已装备：'+it.n);}
+            saveState();updateTopBar();updateShopUI();closeModal();
+            if(typeof openExclusiveShop==='function')openExclusiveShop();
+          });
+          return;
+        }
+      }catch(e){}
+      __be(id);
+    };
+    __w4.__bcw=true;window.buyExclusive=__w4;
+  }
+}catch(e){}
+
+/* ---------- 标签装扮 ---------- */
+var SKINS=[
+ {id:'sk1',icon:'✨',name:'鎏金名框',desc:'标签名金色描边 + 微光',cost:60},
+ {id:'sk2',icon:'🌌',name:'暗夜光环',desc:'任务卡暗紫金边光晕',cost:120},
+ {id:'sk3',icon:'🖋️',name:'专属签名',desc:'标签后缀自定义短句（8字内）',cost:200},
+ {id:'sk4',icon:'🌈',name:'虹彩流光',desc:'标签芯片旋转彩虹描边',cost:320}
+];
+function renderSkins(){
+  try{
+    var g=document.getElementById('skin-wrap');
+    if(!g){
+      var sp=document.getElementById('page-shop');
+      if(!sp)return;
+      g=document.createElement('div');g.id='skin-wrap';
+      sp.appendChild(g);
+    }
+    state.tagSkins=state.tagSkins||{owned:[],active:null,sig:''};
+    var tk=state.tagSkins;
+    var h='<div id="skin-title">⚫ 黑币商店 · 标签装扮</div>'
+      +'<div id="skin-sub">黑币专属 · 购买即拥有 · 一次装备一件（全标签生效）· 按标签装备细化版后续开放</div>';
+    /* 代币兑换行 */
+    h+='<div class="sp-item" style="border-color:rgba(240,179,92,.35)">'
+      +'<span class="sp-ic">⇄</span>'
+      +'<div class="sp-info"><div class="sp-name">代币兑换黑币 <span class="sp-limit" style="border-color:rgba(240,179,92,.5);color:#c9a86a">单向 · 不可回退</span></div>'
+      +'<div class="sp-desc">500 代币 → 100 黑币 · 烧币买时间</div></div>'
+      +'<button class="bc-buy" id="bc-exchange">兑 换</button></div>';
+    SKINS.forEach(function(s){
+      var owned=tk.owned.indexOf(s.id)>-1;
+      var active=tk.active===s.id;
+      h+='<div class="sp-item">'
+        +'<span class="sp-ic" style="font-size:26px">'+s.icon+'</span>'
+        +'<div class="sp-info"><div class="sp-name">'+s.name+' <span class="sp-limit" style="border-color:rgba(240,179,92,.5);color:#c9a86a">'+(active?'已装备':'黑币专属 · 不限购')+'</span></div>'
+        +'<div class="sp-desc">'+s.desc+'</div></div>'
+        +'<div style="display:flex;align-items:center;gap:10px;flex-shrink:0">'
+        +(owned
+          ?'<button class="bc-buy'+(active?' bc-off':'')+'" data-eq="'+s.id+'">'+(active?'卸 下':'装 备')+'</button>'
+          :'<span class="bc-ic" style="font-size:15px">'+BC+'</span><b style="font-family:var(--mono);font-size:16px;color:#ffd60a">'+s.cost+'</b>'
+            +'<button class="bc-buy" data-buy="'+s.id+'">购 买</button>')
+        +'</div></div>';
+    });
+    g.innerHTML=h;
+    var ex=document.getElementById('bc-exchange');
+    if(ex)ex.onclick=function(){
+      showModal('⇄ 代币兑换黑币','消耗 <b>500</b> 代币兑换 <b>100</b> 黑币？<br><br>单向兑换 · 不可回退 · 当前代币 '+state.tokens,function(){
+        if(state.tokens<500){alert('代币不足');return;}
+        state.tokens-=500;bcAdd(100);
+        saveState();updateTopBar();updateShopUI();
+        closeModal();
+        if(typeof showGainModal==='function')showGainModal('⇄ 兑换成功 · 恭喜获得',[['⚫ 黑币','+100']]);
+      });
+    };
+    Array.prototype.forEach.call(g.querySelectorAll('[data-buy]'),function(b){
+      b.onclick=function(){
+        var s=SKINS.find(function(x){return x.id===b.getAttribute('data-buy');});
+        if(!s)return;
+        if(!bcPay(s.cost)){bcNoCoin(s.cost);return;}
+        state.tagSkins.owned.push(s.id);state.tagSkins.active=s.id;
+        if(s.id==='sk3'){var t=prompt('输入专属签名（8字内）：',state.tagSkins.sig||'');state.tagSkins.sig=(t||'').slice(0,8);}
+        saveState();updateShopUI();
+        if(typeof showGainModal==='function')showGainModal(s.icon+' 已购入并装备 · '+s.name,'');
+      };
+    });
+    Array.prototype.forEach.call(g.querySelectorAll('[data-eq]'),function(b){
+      b.onclick=function(){
+        var id=b.getAttribute('data-eq');
+        state.tagSkins.active=(state.tagSkins.active===id)?null:id;
+        saveState();updateShopUI();
+      };
+    });
+  }catch(e){}
+}
+/* 装扮应用到任务卡 */
+function bcApplySkins(){
+  try{
+    var tk=state.tagSkins;if(!tk||!tk.active)return;
+    var list=document.getElementById('task-list');if(!list)return;
+    (state.todayTasks||[]).forEach(function(t){
+      var tag=getTag(t.tagId);if(!tag)return;
+      var path=tag.path.join(' · ');
+      Array.prototype.forEach.call(list.querySelectorAll('span'),function(sp){
+        if(sp.textContent.indexOf(path)===-1)return;
+        if(tk.active==='sk1')sp.classList.add('bc-sk1');
+        if(tk.active==='sk2'&&sp.closest('.task-card'))sp.closest('.task-card').classList.add('bc-sk2');
+        if(tk.active==='sk3'&&tk.sig&&sp.textContent.indexOf(tk.sig)===-1)sp.textContent=path+' · '+tk.sig;
+        if(tk.active==='sk4')sp.classList.add('bc-sk4');
+      });
+    });
+  }catch(e){}
+}
+function __bcWrapRT(){
+  try{
+    if(typeof window.renderTasks==='function'&&!window.renderTasks.__bcw){
+      var __rt=window.renderTasks;
+      var __w5=function(){var r=__rt.apply(this,arguments);setTimeout(bcApplySkins,60);return r;};
+      __w5.__bcw=true;window.renderTasks=__w5;
+    }
+  }catch(e){}
+}
+/* v154 的 V2 渲染器在 load/switchPage 时都会重挂顶包，两层都拦 */
+function __bcWrapSP(){
+  try{
+    if(typeof window.switchPage==='function'&&!window.switchPage.__bcw){
+      var __sp=window.switchPage;
+      var w=function(name){var r=__sp.apply(this,arguments);__bcWrapRT();
+        if(name==='deals')renderPromo();
+        setTimeout(bcApplySkins,120);return r;};
+      w.__bcw=true;window.switchPage=w;
+    }
+  }catch(e){}
+}
+window.addEventListener('load',function(){setTimeout(function(){__bcWrapRT();__bcWrapSP();renderSkins();renderPromo();},350);});
+__bcWrapRT();
+__bcWrapSP();
+try{renderSkins();}catch(e){}
+
+})();
+/* ================= 促销·黑币·装扮 END ================= */
+
+</script>
+<script>
+/* ================= v1.5.5 天命归一 · 特惠轮盘（主题活动） ================= */
+(function(){
+'use strict';
+if(window.__gacha155)return;
+window.__gacha155=true;
+
+var G_START=Date.parse('2026-11-06T00:00:00+08:00');
+var G_END  =Date.parse('2027-01-31T23:59:59+08:00');
+
+/* ---------- 存档读写 ---------- */
+function K(){state.lotteryKey=state.lotteryKey||0;return state.lotteryKey;}
+function P(){state.lotteryPoint=state.lotteryPoint||0;return state.lotteryPoint;}
+function C(){state.lotteryCoupon=state.lotteryCoupon||0;return state.lotteryCoupon;}
+function SH(){state.lotteryStash=state.lotteryStash||[];return state.lotteryStash;}
+function BC(){state.blackCoin=state.blackCoin||0;return state.blackCoin;}
+function bcAdd(n){state.blackCoin=BC()+n;saveState();gSync();try{updateTopBar();}catch(e){}}
+function bcPay(n){if(BC()<n)return false;state.blackCoin-=n;saveState();gSync();try{updateTopBar();}catch(e){}return true;}
+function gSave(){saveState();gSync();}
+
+/* ---------- 图标 ---------- */
+var IC={
+ slot:'<svg viewBox="0 0 64 64"><rect x="5" y="12" width="54" height="42" rx="9" fill="#241a0c" stroke="#ffd60a" stroke-width="3"/><g fill="#f0b35c"><rect x="12" y="22" width="9" height="9" rx="2"/><rect x="24" y="22" width="9" height="9" rx="2"/><rect x="36" y="22" width="9" height="9" rx="2"/><rect x="48" y="22" width="6" height="9" rx="2"/><rect x="12" y="36" width="9" height="9" rx="2"/><rect x="24" y="36" width="9" height="9" rx="2"/><rect x="36" y="36" width="9" height="9" rx="2"/><rect x="48" y="36" width="6" height="9" rx="2"/></g><path d="M32 3 v7 M27.5 7 L32 2.5 L36.5 7" stroke="#ffd60a" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ cost:'<svg viewBox="0 0 64 64"><circle cx="32" cy="35" r="23" fill="#241a0c" stroke="#ffd60a" stroke-width="3"/><text x="32" y="43" text-anchor="middle" font-size="17" font-weight="900" fill="#ffd60a" font-family="ui-monospace,monospace">8费</text><path d="M32 3 v7 M27.5 7 L32 2.5 L36.5 7" stroke="#ffd60a" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+/* ---------- 奖池 / 兑换池 ---------- */
+var POOL=[
+ {key:'slot_ext',ic:IC.slot,n:'天赋槽位扩展券',c:1,p:0.1,k:12,tags:['唯一性','首发'],grand:true},
+ {key:'cost_ext',ic:IC.cost,n:'天赋费用扩展券',c:1,p:0.1,k:12,tags:['唯一性','首发'],grand:true},
+ {key:'tok500',ic:'🪙',n:'代币',c:500,p:0.3,k:0},
+ {key:'tok250',ic:'🪙',n:'代币',c:250,p:0.8,k:0},
+ {key:'reroll3',ic:'🔮',n:'特殊属性重铸券',c:3,p:1.3,k:1},
+ {key:'change5',ic:'🎫',n:'属性变更券',c:5,p:2.15,k:2},
+ {key:'tok100',ic:'🪙',n:'代币',c:100,p:1.2,k:0},
+ {key:'core5',ic:'💠',n:'精研核心',c:5,p:0.85,k:6},
+ {key:'theme',ic:'🐉',n:'【主题】天人合一',c:1,p:1.9,k:3,tags:['首发'],grand:true},
+ {key:'ticket6',ic:'🎟️',n:'属性抽取券',c:6,p:2.1,k:3},
+ {key:'up10',ic:'🔧',n:'直接升级',c:10,p:1.7,k:4},
+ {key:'jp25',ic:'✨',n:'抽奖积分',c:25,p:5.5,k:0},
+ {key:'jp15',ic:'✨',n:'抽奖积分',c:15,p:7,k:0},
+ {key:'jp10',ic:'✨',n:'抽奖积分',c:10,p:15,k:0},
+ {key:'jp8',ic:'✨',n:'抽奖积分',c:8,p:25,k:0},
+ {key:'jp5',ic:'✨',n:'抽奖积分',c:5,p:35,k:0}
+];
+var EX=[
+ {key:'ult',ic:'🏆',n:'终极改装包',c:1,cost:600},
+ {key:'slot_ext',ic:IC.slot,n:'天赋槽位扩展券',c:1,cost:500,tags:['唯一性','首发']},
+ {key:'cost_ext',ic:IC.cost,n:'天赋费用扩展券',c:1,cost:450,tags:['唯一性','首发']},
+ {key:'ex18',ic:'😇',n:'功能【善恶之交】',c:1,cost:350},
+ {key:'ex17',ic:'⚔️',n:'功能【越战越勇】',c:1,cost:280},
+ {key:'ex21',ic:'🛡️',n:'功能【残骸强化】',c:1,cost:280},
+ {key:'ex16',ic:'🎯',n:'功能【追踪标记】',c:1,cost:220},
+ {key:'ex20',ic:'📜',n:'功能【封印无双】',c:1,cost:220},
+ {key:'core5',ic:'💠',n:'精研核心',c:5,cost:220},
+ {key:'ex19',ic:'💥',n:'功能【漫画爆炸】',c:1,cost:220},
+ {key:'parts10',ic:'📦',n:'升级材料包',c:10,cost:150},
+ {key:'theme',ic:'🐉',n:'【主题】天人合一',c:1,cost:150,tags:['首发']},
+ {key:'golddie',ic:'🎲',n:'金骰子',c:1,cost:100},
+ {key:'change5',ic:'🎫',n:'属性变更券',c:5,cost:100},
+ {key:'up10',ic:'🔧',n:'直接升级',c:10,cost:50},
+ {key:'reroll3',ic:'🔮',n:'特殊属性重铸券',c:3,cost:50},
+ {key:'ticket5',ic:'🎟️',n:'属性抽取券',c:5,cost:18},
+ {key:'ticket1',ic:'🎟️',n:'属性抽取券',c:1,cost:4},
+ {key:'parts1',ic:'📦',n:'升级材料包',c:1,cost:2}
+];
+var EXSORT=EX.slice().sort(function(a,b){return b.cost-a.cost});
+var EXCL_ID={ex16:16,ex17:17,ex18:18,ex19:19,ex20:20,ex21:21};
+
+/* ---------- 真实发放 ---------- */
+function grant(key,c){
+  var inv=state.inventory;
+  switch(key){
+    case 'slot_ext': inv.talent_slot_ext=(inv.talent_slot_ext||0)+c; break;
+    case 'cost_ext': inv.talent_cost_ext=(inv.talent_cost_ext||0)+c; break;
+    case 'tok500': case 'tok250': case 'tok100': state.tokens+=c; break;
+    case 'reroll3': inv.reroll_ticket=(inv.reroll_ticket||0)+3*c; break;
+    case 'change5': inv.change_ticket=(inv.change_ticket||0)+5*c; break;
+    case 'core5': inv.sp_core=(inv.sp_core||0)+5*c; break;
+    case 'theme': inv.theme_tianren=(inv.theme_tianren||0)+c; break;
+    case 'ticket6': inv.draw_ticket=(inv.draw_ticket||0)+6*c; break;
+    case 'up10': inv.direct_up=(inv.direct_up||0)+10*c; break;
+    case 'ult': inv.ult_upgrade=(inv.ult_upgrade||0)+c; break;
+    case 'golddie': inv.treasure_die_yellow=(inv.treasure_die_yellow||0)+c; break;
+    case 'ticket5': inv.draw_ticket=(inv.draw_ticket||0)+5*c; break;
+    case 'ticket1': inv.draw_ticket=(inv.draw_ticket||0)+c; break;
+    case 'parts10': inv.parts_pack=(inv.parts_pack||0)+10*c; break;
+    case 'parts1': inv.parts_pack=(inv.parts_pack||0)+c; break;
+    default:
+      if(key.indexOf('ex')===0){
+        var id=EXCL_ID[key];
+        state.exclusive=state.exclusive||{owned:[],equipped:0,swapDate:'',swapUsed:false};
+        if(state.exclusive.owned.indexOf(id)===-1)state.exclusive.owned.push(id);
+      }
+  }
+}
+function exclOwned(key){var id=EXCL_ID[key];return id&&(state.exclusive&&state.exclusive.owned.indexOf(id)>-1);}
+function extUsed(key){return key==='slot_ext'?!!state.talentSlotExt:key==='cost_ext'?!!state.talentCostExt:false;}
+
+/* ---------- 工具 ---------- */
+function fmt(n){return (n||0).toLocaleString('en-US');}
+function gActive(){var n=Date.now();return n>=G_START&&n<=G_END;}
+function gEnded(){
+  if(Date.now()<=G_END)return false;
+  if(!state.gachaCleared){
+    state.lotteryKey=0;state.lotteryPoint=0;state.lotteryStash=[];state.gachaCleared=true;saveState();
+  }
+  return true;
+}
+function gNote(t,ok){
+  try{
+    var box=document.getElementById('notif-container');if(!box)return;
+    var c=document.createElement('div');
+    c.className='notif-card';c.style.borderLeftColor=ok===false?'#ff3b30':'#34c759';
+    c.innerHTML='<div class="notif-title">'+(ok===false?'⚠️':'✅')+' 天命归一</div><div class="notif-body">'+t+'</div>';
+    box.appendChild(c);
+    requestAnimationFrame(function(){c.classList.add('show');});
+    setTimeout(function(){c.classList.add('hide');setTimeout(function(){c.remove();},300);},4500);
+  }catch(e){}
+}
+function gConfirm(t,body,fn){
+  Array.prototype.forEach.call(document.querySelectorAll('.gmo.show'),function(o){o.classList.remove('show');});
+  showModal(t,body,function(){try{closeModal();}catch(e){}fn();});
+}
+
+/* ---------- 弹窗 ---------- */
+function gmo(id,html,cls){
+  var ov=document.getElementById(id);
+  if(!ov){
+    ov=document.createElement('div');
+    ov.id=id;ov.className='gmo';
+    ov.addEventListener('click',function(e){if(e.target===ov)ov.classList.remove('show');});
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML='<div class="'+(cls||'gmo-box')+'">'+html+'</div>';
+  Array.prototype.forEach.call(document.querySelectorAll('.gmo.show'),function(o){if(o!==ov)o.classList.remove('show');});
+  requestAnimationFrame(function(){ov.classList.add('show');});
+  return ov;
+}
+function gmoClose(id){var ov=document.getElementById(id);if(ov)ov.classList.remove('show');}
+window.__gClose=function(id){gmoClose(id);};
+
+/* ---------- 同步 ---------- */
+function gSync(){
+  try{
+    document.getElementById('g-bc').textContent=fmt(BC());
+    document.getElementById('g-tk').textContent=fmt(state.inventory.draw_ticket||0);
+    document.getElementById('g-jp').textContent=fmt(P());
+    document.getElementById('g-key').textContent=fmt(K());
+    document.getElementById('g-cp').textContent=fmt(C());
+    document.getElementById('g-auxKey').textContent=fmt(K());
+    document.getElementById('g-stashN').textContent=SH().length;
+    document.getElementById('g-exJP').textContent=fmt(P());
+    document.getElementById('g-d1').disabled=K()<1||!gActive();
+    document.getElementById('g-d10').disabled=K()<10||!gActive();
+  }catch(e){}
+}
+
+/* ---------- 渲染 ---------- */
+var cells=[];
+function gRenderOrbit(){
+  var orbit=document.getElementById('g-orbit');
+  POOL.forEach(function(it,i){
+    var a=Math.PI*2*i/POOL.length-Math.PI/2;
+    var x=50+42*Math.cos(a),y=50+44*Math.sin(a);
+    var d=document.createElement('div');
+    d.className='oitem'+(it.k>0?' tk-gold':'');
+    d.style.left='calc('+x+'% - 52px)';d.style.top='calc('+y+'% - 24px)';
+    d.innerHTML='<span class="oi">'+it.ic+'</span>'+it.n+'×'+it.c
+      +(it.tags?'<div style="margin-top:2px">'+(it.tags.map(function(t){return '<span class="ptag'+(t==='唯一性'?' uq':'')+'">'+t+'</span>'}).join(''))+'</div>':'');
+    orbit.appendChild(d);cells.push(d);
+  });
+}
+function gRenderEx(){
+  var grid=document.getElementById('g-exGrid');
+  grid.innerHTML=EXSORT.map(function(it,i){
+    var off=P()<it.cost||!gActive();
+    if(exclOwned(it.key)||extUsed(it.key))off=true;
+    var uq=(it.tags||[]).indexOf('唯一性')>-1, fs=(it.tags||[]).indexOf('首发')>-1;
+    var label=off?((exclOwned(it.key)||extUsed(it.key))?'已拥有':'积分不足'):(it.cost+' 积分兑换');
+    return '<div class="ex-item'+(off?' off':'')+'" data-i="'+i+'">'
+      +(uq?'<span class="ctag uq">唯一性</span>':'')+(fs?'<span class="ctag fs">首发</span>':'')
+      +'<span class="ei">'+it.ic+'</span><div class="en">'+it.n+'×'+it.c+'</div>'
+      +'<span class="ex-cost">'+label+'</span></div>';
+  }).join('');
+  Array.prototype.forEach.call(grid.querySelectorAll('.ex-item:not(.off)'),function(el){
+    el.onclick=function(){
+      var it=EXSORT[+el.getAttribute('data-i')];
+      gConfirm('🎁 积分兑换','消耗 <b style="color:#ffd60a;font-family:var(--mono)">'+it.cost+'</b> 抽奖积分，兑换「'+it.n+'×'+it.c+'」？<br><span style="font-size:10px;color:#8d7c5f">当前积分 '+fmt(P())+' · 兑换后不予退还</span>',function(){
+        state.lotteryPoint=P()-it.cost;
+        grant(it.key,it.c);
+        gSave();try{updateShopUI();updateTopBar();}catch(e){}
+        gNote('兑换成功：'+it.n+'×'+it.c);
+        gRenderEx();
+      });
+    };
+  });
+}
+function gRulesHTML(){
+  return '<b style="color:#f0d9a2">一、活动时间</b>：2026-11-06 00:00:00 至 2027-01-31 23:59:59。抽奖钥匙、抽奖积分、暂存箱内所有物品<b style="color:#ff9a8a">仅限该时间段内使用，逾期全部作废</b>（直接入库的道具不受限）。<br>'
+   +'<b style="color:#f0d9a2">二、购买方式</b>：10 黑币购买属性抽取券 ×1 并赠送抽奖钥匙 ×1；100 黑币购买属性抽取券 ×10 并赠送抽奖钥匙 ×11（十连）。<b style="color:#ffd60a">特惠抽奖代金券：每张抵 1 黑币，每抽最多抵 9 张，单抽底价 1 黑币</b>（十连按 11 抽计）。代金券通过限时促销、通行证里程碑、杯赛等渠道投放，不进常规商店。<br>'
+   +'<b style="color:#f0d9a2">三、抽奖方式</b>：1 把钥匙可抽奖 1 次，支持单抽与十连，奖池共 16 档奖品，概率详见下方公示。<br>'
+   +'<b style="color:#f0d9a2">四、暂存箱与分解</b>：抽中"分解钥匙不为 0"的奖品存入暂存箱，可发送至仓库或分解为抽奖钥匙继续抽奖；钥匙为 0 的奖品直接入账。<br>'
+   +'<b style="color:#f0d9a2">五、抽奖积分</b>：活动专属货币，<b style="color:#ff9a8a">与日常结算积分完全独立、不可互转</b>，活动结束后清零，用于下方兑换区。<br>'
+   +'<b style="color:#f0d9a2">六、唯一性道具</b>：天赋槽位扩展券（6→8 槽）、天赋费用扩展券（6→8 费）全存档各只能生效一次，重复获得自动失效仅可分解；获得后请至天赋页使用。<br>'
+   +'<b style="color:#f0d9a2">七、黑币说明</b>：结算 EP÷300 产出（不设上限），或 500 代币单向兑换 100 黑币；黑币同时用于限时促销，请合理规划。';
+}
+
+/* ---------- 购买 ---------- */
+window.__gBuy=function(pack){
+  if(!gActive()){gNote('活动未在进行中',false);return;}
+  var tkN=pack===1?1:10, keyN=pack===1?1:11, draws=keyN;
+  var use=Math.min(C(), 9*draws);
+  var base=pack===1?10:100;
+  var pay=Math.max(draws, base-use);
+  showModal('⚫ 确认购买',
+    '应付 <b style="color:#ffd60a;font-family:var(--mono)">'+pay+'</b> 黑币'
+    +(use>0?'<span style="font-size:11px;color:#7ee2a0;font-family:var(--mono)">（已用 '+use+' 张代金券抵扣 '+use+'⚫）</span>':'')
+    +'<br><br><span style="font-size:12.5px;color:#c9b791;line-height:2">🎟️ <b>购买</b> 属性抽取券 ×'+tkN+'<br>🗝️ <b>赠送</b> 抽奖钥匙 ×'+keyN+'</span>'
+    +'<div style="margin-top:8px;font-size:10px;color:#8d7c5f;font-family:var(--mono)">代金券每张抵 1⚫ · 每抽最多抵 9 张 · 单抽底价 1⚫<br>当前黑币 '+fmt(BC())+' · 代金券 '+fmt(C())+' 张</div>',
+    function(){
+      try{closeModal();}catch(e){}
+      if(!bcPay(pay)){gNote('黑币不足',false);return;}
+      state.lotteryCoupon=C()-use;
+      state.inventory.draw_ticket=(state.inventory.draw_ticket||0)+tkN;
+      state.lotteryKey=K()+keyN;
+      gSave();
+      gNote('购买成功：券×'+tkN+' · 钥匙×'+keyN+(use>0?' · 券抵'+use+'⚫':''));
+    });
+};
+
+/* ---------- 抽奖 ---------- */
+var gDrawing=false;
+function gRollOne(){
+  var r=Math.random()*100,acc=0;
+  for(var i=0;i<POOL.length;i++){acc+=POOL[i].p;if(r<acc)return POOL[i];}
+  return POOL[POOL.length-1];
+}
+function gSettle(it){
+  if(it.key.indexOf('jp')===0){state.lotteryPoint=P()+it.c;return {label:it.n+'×'+it.c,it:it};}
+  if(it.key.indexOf('tok')===0){state.tokens+=it.c;return {label:it.n+'×'+it.c,it:it};}
+  if(it.k>0){SH().push({key:it.key,ic:it.ic,n:it.n,c:it.c,k:it.k});var b={label:it.n+'×'+it.c,it:it};b.stash=true;return b;}
+  grant(it.key,1);
+  return {label:it.n+'×'+it.c,it:it};
+}
+window.__gDraw=function(times){
+  if(gDrawing)return;
+  if(!gActive()){gNote('活动未在进行中',false);return;}
+  if(K()<times){gNote('🗝️ 钥匙不足 · 请先购买',false);return;}
+  state.lotteryKey=K()-times;gSave();
+  gDrawing=true;
+  var step=0,total=22+Math.floor(Math.random()*8),cur=0;
+  cells.forEach(function(c){c.classList.remove('hl');});
+  var iv=setInterval(function(){
+    cells[cur%cells.length].classList.remove('hl');
+    cur=Math.floor(step*POOL.length/total)%POOL.length;
+    cells[cur].classList.add('hl');
+    step++;
+    if(step>=total){
+      clearInterval(iv);
+      cells[cur].classList.remove('hl');
+      var results=[];
+      for(var i=0;i<times;i++)results.push(gSettle(gRollOne()));
+      gDrawing=false;gSave();
+      try{updateShopUI();updateTopBar();}catch(e){}
+      gRenderStash();gRenderEx();
+      var hist=document.getElementById('g-hist');
+      hist.innerHTML=results.map(function(r){return '🎲 '+r.label+(r.stash?' → 暂存箱':'')}).join('<br>')+(hist.innerHTML?'<br>'+hist.innerHTML:'');
+      var grandHit=null;
+      results.forEach(function(r){if(r.it&&r.it.grand&&!grandHit)grandHit=r.it;});
+      var noPop=document.getElementById('g-noPopup').checked;
+      if(grandHit){gShowGrand(grandHit,function(){if(!noPop)gShowRes(results);else gNote(times+'连抽完成');});}
+      else if(!noPop)gShowRes(results);
+      else gNote(times+'连抽完成');
+    }
+  },70);
+};
+function gShowGrand(it,done){
+  gmo('gmoGrand',
+    '<div class="grand-box">'
+    +'<div class="grand-banner"><div class="gb-rays"></div>'
+    +'<div class="gb-kicker">★ GRAND PRIZE ★</div>'
+    +'<div class="gb-spark" style="top:18%;left:16%;font-size:14px">✦</div>'
+    +'<div class="gb-spark" style="top:30%;right:14%;font-size:11px;animation-delay:.6s">✦</div>'
+    +'<div class="gb-spark" style="top:12%;right:30%;font-size:9px;animation-delay:.9s">✦</div>'
+    +'<div class="gb-ic">'+it.ic+'</div>'
+    +'<div class="gb-mirror">'+it.ic+'</div>'
+    +'<div class="gb-shade"></div>'
+    +'<div class="gb-name">'+it.n+'×'+it.c+'</div>'
+    +'<div class="gb-sub">天命归一 · 传说大奖</div></div>'
+    +'<div class="gb-note">该奖品已存入 <b style="color:#ffd60a">暂存箱</b><br>可发送至仓库使用，或分解为 '+it.k+' 把钥匙继续追梦</div>'
+    +'<div style="padding:0 16px 16px"><button class="mo-ok" style="margin-top:4px" id="g-grandOk">收入囊中</button></div></div>');
+  document.getElementById('g-grandOk').onclick=function(){gmoClose('gmoGrand');if(done)setTimeout(done,120);};
+}
+function gShowRes(results){
+  gmo('gmoRes',
+    '<div class="gmo-h"><span class="gmo-t">🎉 恭喜获得</span><button class="gmo-x" onclick="__gClose(\'gmoRes\')">✕</button></div>'
+    +'<div style="font-size:10px;color:#8d7c5f;font-family:var(--mono);margin-bottom:10px">抽奖结果已实时入账，请以实际到账为准</div>'
+    +'<div class="res-grid">'+results.map(function(r){
+      return '<div class="res-cell">'+(r.stash?'<span class="tag st">暂存</span>':'')+(r.it&&r.it.tags?'<span class="tag" style="left:4px;right:auto;background:#b5772a">'+r.it.tags[0]+'</span>':'')+'<span class="ri">'+(r.stash?'📦':'🎁')+'</span>'+r.label+'</div>';
+    }).join('')+'</div>'
+    +'<button class="mo-ok" onclick="__gClose(\'gmoRes\')">确 定</button>');
+}
+
+/* ---------- 暂存箱 ---------- */
+function gRenderStash(){
+  var list=document.getElementById('g-stashList');
+  if(!list)return;
+  var st=SH();
+  list.innerHTML=st.length?st.map(function(it,i){
+    return '<div class="stash-row"><span class="n">'+it.ic+' '+it.n+'×'+it.c+'</span><span class="k">分解 +'+it.k+' 钥匙</span>'
+      +'<button class="sbtn" data-gsend="'+i+'">发送至仓库</button><button class="sbtn" style="border-color:rgba(255,94,58,.4);color:#ff8a6e" data-gdec="'+i+'">分解</button></div>';
+  }).join(''):'<div style="text-align:center;color:#6b5a3d;font-size:12px;padding:18px 0">暂存箱空空如也 · 抽中带钥匙奖励的物品会进这里</div>';
+  Array.prototype.forEach.call(list.querySelectorAll('[data-gsend]'),function(b){
+    b.onclick=function(){
+      if(!gActive()){gNote('活动已结束，暂存箱已作废',false);return;}
+      var i=+b.getAttribute('data-gsend');var it=SH()[i];
+      gConfirm('📦 发送至仓库','将「'+it.n+'×'+it.c+'」发送至仓库？',function(){
+        SH().splice(i,1);grant(it.key,it.c);gSave();
+        try{updateShopUI();}catch(e){}
+        gNote('已发送至仓库：'+it.n+'×'+it.c);__gStash();
+      });
+    };
+  });
+  Array.prototype.forEach.call(list.querySelectorAll('[data-gdec]'),function(b){
+    b.onclick=function(){
+      if(!gActive()){gNote('活动已结束，暂存箱已作废',false);return;}
+      var i=+b.getAttribute('data-gdec');var it=SH()[i];
+      gConfirm('🗝️ 分解道具','将「'+it.n+'×'+it.c+'」分解为 '+it.k+' 把抽奖钥匙？',function(){
+        SH().splice(i,1);state.lotteryKey=K()+it.k;gSave();
+        gNote('分解 +'+it.k+' 钥匙');__gStash();
+      });
+    };
+  });
+}
+window.__gStash=function(){
+  var st=SH();
+  gmo('gmoStash',
+    '<div class="gmo-h"><span class="gmo-t">📦 暂存箱</span><button class="gmo-x" onclick="__gClose(\'gmoStash\')">✕</button></div>'
+    +'<div class="stash-cols"><div class="stash-left">'
+    +'<div class="sc-h">暂 存 列 表</div><div id="g-stashList"></div>'
+    +'<div style="display:flex;gap:8px;margin-top:8px">'
+    +'<button class="sbtn" style="flex:1" id="g-sendAll">全部发送</button>'
+    +'<button class="sbtn" style="flex:1;border-color:rgba(255,94,58,.4);color:#ff8a6e" id="g-decAll">全部分解</button></div></div>'
+    +'<div class="stash-right"><div class="sc-h">道 具 分 解 表</div>'
+    +'<table class="sc-tbl"><thead><tr><th>道具</th><th>分解钥匙</th></tr></thead><tbody>'
+    +POOL.filter(function(it){return it.k>0}).map(function(it){return '<tr><td>'+it.n+'×'+it.c+'</td><td style="text-align:right">'+it.k+'</td></tr>'}).join('')
+    +'</tbody></table></div></div>');
+  gRenderStash();
+  document.getElementById('g-sendAll').onclick=function(){
+    if(!SH().length)return;
+    if(!gActive()){gNote('活动已结束，暂存箱已作废',false);return;}
+    gConfirm('📦 全部发送','将暂存箱 '+SH().length+' 件奖品全部发送至仓库？',function(){
+      SH().forEach(function(it){grant(it.key,it.c);});
+      state.lotteryStash=[];gSave();
+      try{updateShopUI();}catch(e){}
+      gNote('已全部发送至仓库');__gStash();
+    });
+  };
+  document.getElementById('g-decAll').onclick=function(){
+    if(!SH().length)return;
+    if(!gActive()){gNote('活动已结束，暂存箱已作废',false);return;}
+    var kk=0;SH().forEach(function(it){kk+=it.k;});
+    gConfirm('🗝️ 全部分解','将暂存箱全部奖品分解为 '+kk+' 把抽奖钥匙？',function(){
+      state.lotteryKey=K()+kk;state.lotteryStash=[];gSave();
+      gNote('全部分解 +'+kk+' 钥匙');__gStash();
+    });
+  };
+};
+
+/* ---------- 新品介绍 / 公示 ---------- */
+window.__gIntro=function(){
+  gmo('gmoIntro',
+    '<div class="gmo-h"><span class="gmo-t">📖 新品介绍</span><button class="gmo-x" onclick="__gClose(\'gmoIntro\')">✕</button></div>'
+    +'<div class="intro-card"><div class="intro-h"><span class="intro-ic">'+IC.slot+'</span><span class="intro-n">天赋槽位扩展券</span>'
+    +'<span class="intro-badges"><span class="intro-b uq">唯一性</span><span class="intro-b fs">首发</span></span></div>'
+    +'<div class="intro-t">使用后，每日天赋装配槽位由 6 个永久扩展至 8 个——每天可以多带两件天赋构筑，全局型、科目型与传说主动技的搭配空间大幅解放。本道具为唯一性道具：整个存档仅可生效一次，使用后的第二张（无论通过抽奖、积分兑换或任何途径再次获得）将无法继续使用，只能放入暂存箱分解为 12 把钥匙。</div></div>'
+    +'<div class="intro-card"><div class="intro-h"><span class="intro-ic">'+IC.cost+'</span><span class="intro-n">天赋费用扩展券</span>'
+    +'<span class="intro-badges"><span class="intro-b uq">唯一性</span><span class="intro-b fs">首发</span></span></div>'
+    +'<div class="intro-t">使用后，装配台费用上限由 6 费永久提升至 8 费——传说天赋（3 费）不再挤占全部预算，双传说、三稀有等高费构筑从此可行。与槽位扩展券同为唯一性道具：全存档仅第一张可生效，之后再获得的同款券自动失效，仅可分解为 12 把钥匙。两件扩展券相互独立，可分别生效。</div></div>'
+    +'<button class="mo-ok" onclick="__gClose(\'gmoIntro\')">我知道了</button>');
+};
+window.__gTable=function(){
+  gmo('gmoTbl',
+    '<div class="gmo-h"><span class="gmo-t">📜 奖池概率公示</span><button class="gmo-x" onclick="__gClose(\'gmoTbl\')">✕</button></div>'
+    +'<div style="font-size:11px;color:#c9a86a;letter-spacing:.1em;margin-bottom:4px">— 主奖池 —</div>'
+    +'<table class="tbl"><thead><tr><th>奖品</th><th>概率</th><th>分解钥匙</th></tr></thead><tbody>'
+    +POOL.map(function(it){return '<tr><td>'+it.ic+' '+it.n+'×'+it.c+'</td><td>'+it.p+'%</td><td>'+(it.k||'—')+'</td></tr>'}).join('')
+    +'</tbody></table>'
+    +'<div style="font-size:11px;color:#c9a86a;letter-spacing:.1em;margin:12px 0 4px">— 积分兑换池（降序） —</div>'
+    +'<table class="tbl"><thead><tr><th>奖品</th><th>所需抽奖积分</th></tr></thead><tbody>'
+    +EXSORT.map(function(it){return '<tr><td>'+it.ic+' '+it.n+'×'+it.c+'</td><td>'+it.cost+'</td></tr>'}).join('')
+    +'</tbody></table>');
+};
+
+/* ---------- 页面渲染 ---------- */
+function gRenderPage(){
+  var ended=gEnded();
+  var live=document.getElementById('g-live');
+  var endedBox=document.getElementById('g-ended');
+  if(ended){
+    live.style.display='none';
+    endedBox.style.display='block';
+    endedBox.innerHTML='🎡 本期「天命归一」已结束（2026.11.06 ~ 2027.01.31）<br>抽奖钥匙、抽奖积分与暂存箱物品已按规则作废<br>直接入库的道具与已生效的扩展券不受影响';
+    return;
+  }
+  live.style.display='';
+  endedBox.style.display='none';
+  if(!cells.length)gRenderOrbit();
+  document.getElementById('g-coverIc').innerHTML=IC.slot;
+  document.getElementById('g-centerIc').innerHTML=IC.slot;
+  document.getElementById('g-rules').innerHTML=gRulesHTML();
+  document.getElementById('g-rulesPool').innerHTML=POOL.map(function(it){return '<tr><td>'+it.ic+' '+it.n+'×'+it.c+'</td><td>'+it.p+'%</td><td>'+(it.k||'—')+'</td></tr>'}).join('');
+  document.getElementById('g-rulesEx').innerHTML=EXSORT.map(function(it){return '<tr><td>'+it.ic+' '+it.n+'×'+it.c+'</td><td>'+it.cost+'</td></tr>'}).join('');
+  document.getElementById('g-d1').onclick=function(){__gDraw(1)};
+  document.getElementById('g-d10').onclick=function(){__gDraw(10)};
+  gRenderEx();
+  gSync();
+}
+setInterval(function(){
+  try{
+    var el=document.getElementById('g-cd');if(!el)return;
+    if(Date.now()>G_END){el.textContent='已结束';return;}
+    if(Date.now()<G_START){el.textContent='未开始';return;}
+    var ms=G_END-Date.now();
+    el.textContent='距结束 '+Math.floor(ms/86400000)+'天 '+Math.floor(ms/3600000)%24+'时';
+  }catch(e){}
+},1000);
+
+/* switchPage 钩子 */
+try{
+  if(typeof window.switchPage==='function'&&!window.switchPage.__g155w){
+    var __sp=window.switchPage;
+    var __w=function(name){
+      var r=__sp.apply(this,arguments);
+      if(name==='gacha')gRenderPage();
+      return r;
+    };
+    __w.__g155w=true;window.switchPage=__w;
+  }
+}catch(e){}
+window.addEventListener('load',function(){setTimeout(function(){
+  try{gRenderPage();}catch(e){}
+},400);});
+
+})();
+/* ================= v1.5.5 天命归一 END ================= */
+
+</script>
+<script>
+/* ---------- v1.5.5 扩展券使用卡片 ---------- */
+(function(){
+'use strict';
+function __extCard(){
+  try{
+    var load=document.querySelector('#page-talent .tl-loadout')||document.getElementById('tl-loadout');
+    if(!load)return;
+    var old=document.getElementById('tl-extcard');if(old)old.remove();
+    var inv=state.inventory||{};
+    var items=[];
+    if((inv.talent_slot_ext||0)>0&&!state.talentSlotExt)items.push({k:'slot',ic:'槽位',n:'天赋槽位扩展券',d:'每日装配槽位 6 → 8'});
+    if((inv.talent_cost_ext||0)>0&&!state.talentCostExt)items.push({k:'cost',ic:'费用',n:'天赋费用扩展券',d:'费用上限 6 费 → 8 费'});
+    if(!items.length)return;
+    var d=document.createElement('div');
+    d.id='tl-extcard';
+    d.setAttribute('style','margin:0 0 12px;padding:12px 14px;border:1.5px solid rgba(255,214,10,.55);border-radius:14px;background:linear-gradient(135deg,rgba(255,214,10,.12),rgba(217,131,42,.06));');
+    d.innerHTML='<div style="font-size:12px;font-weight:800;letter-spacing:.14em;color:#ffd60a;margin-bottom:8px">🎫 扩展券 · 待使用 <span style="font-size:9px;color:#8d7c5f;font-weight:400;font-family:var(--mono)">唯一性道具 · 全档仅生效一次</span></div>'
+      +items.map(function(it){
+        return '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span style="font-size:11px;font-weight:800;color:#2a1c08;background:linear-gradient(135deg,#ffe9b0,#f0b35c);padding:3px 10px;border-radius:999px;font-family:var(--mono)">'+it.ic+'</span>'
+          +'<span style="flex:1;font-size:12px;color:#ecdcba">'+it.n+' <span style="color:#8d7c5f;font-size:10.5px">'+it.d+'</span></span>'
+          +'<button class="btn-accent" style="padding:5px 14px;font-size:11px" data-ext="'+it.k+'">使 用</button></div>';
+      }).join('');
+    load.parentNode.insertBefore(d,load);
+    Array.prototype.forEach.call(d.querySelectorAll('[data-ext]'),function(b){
+      b.onclick=function(){
+        var k=b.getAttribute('data-ext');
+        var name=k==='slot'?'天赋槽位扩展券':'天赋费用扩展券';
+        showModal('🎫 使用扩展券','使用 <b>'+name+'</b>？<br><br><span style="font-size:12px;color:#c9b791;line-height:1.9">唯一性道具：全存档仅可生效一次<br>使用后每日装配'+(k==='slot'?'槽位 6 → <b>8</b>':'费用上限 6 费 → <b>8 费</b>')+'，立即生效</span>',function(){
+          if(k==='slot'){if((state.inventory.talent_slot_ext||0)<1)return;state.inventory.talent_slot_ext--;state.talentSlotExt=true;}
+          else{if((state.inventory.talent_cost_ext||0)<1)return;state.inventory.talent_cost_ext--;state.talentCostExt=true;}
+          saveState();
+          try{updateTalentUI();updateEquipUI();renderHome();}catch(e){}
+          if(typeof pushEvolveNote==='function')pushEvolveNote('🎫 '+name+'已生效');
+          closeModal();
+        });
+      };
+    });
+  }catch(e){}
+}
+try{
+  if(typeof window.updateTalentUI==='function'&&!window.updateTalentUI.__extw){
+    var __ut=window.updateTalentUI;
+    var __w=function(){var r=__ut.apply(this,arguments);setTimeout(__extCard,80);return r;};
+    __w.__extw=true;window.updateTalentUI=__w;
+  }
+}catch(e){}
+window.__gExtCard=__extCard;
+window.addEventListener('load',function(){setTimeout(__extCard,600);});
+try{
+  if(typeof window.switchPage==='function'&&!window.switchPage.__extw2){
+    var __sp2=window.switchPage;
+    var __w2=function(name){var r=__sp2.apply(this,arguments);if(name==='talent')setTimeout(__extCard,200);return r;};
+    __w2.__extw2=true;window.switchPage=__w2;
+  }
+}catch(e){}
+})();
+
+</script>
+<script>
+/* ================= v1.5.5「黑币来袭」公告+邮件 ================= */
+(function(){
+'use strict';
+var ANN='<div id="ann-155" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;">'
+ +'<b style="color:#ff3b30;">v1.5.5「黑币来袭」</b> <span style="font-size:11px;color:#8e8e93;">黑币经济 · 天命归一 · 11.06</span>'
+ +'<div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">新货币黑币登场：结算最终 EP÷300 产出（不设上限）、500代币单向兑换；商店黑币商店区可购标签装扮；「特惠」下拉新增主题活动「天命归一」——黑币买属性抽取券送抽奖钥匙，传说大奖天赋槽位/费用扩展券（6→8，全档唯一）。活动期 2026.11.06~2027.01.31，钥匙/抽奖积分/暂存箱逾期作废。详见邮箱。</div></div>';
+function __inj155(){
+  try{
+    var el=document.getElementById('ann-list');
+    if(!el)return;
+    var old=document.getElementById('ann-155');if(old)old.parentNode.removeChild(old);
+    el.insertAdjacentHTML('afterbegin',ANN);
+  }catch(e){}
+}
+__inj155();
+try{
+  if(typeof renderAnnouncements==='function'&&!renderAnnouncements.__v155w){
+    var __ra=renderAnnouncements;
+    var __w=function(){__ra.apply(this,arguments);__inj155();};
+    __w.__v155w=true;window.renderAnnouncements=__w;
+  }
+}catch(e){}
+window.ensureV155Mail=function(){
+  try{
+    state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];
+    state.mailGranted=state.mailGranted||{};
+    if(state.mailGranted['v155_blackcoin'])return;
+    state.mailGranted['v155_blackcoin']=true;
+    if(!state.mailbox.some(function(m){return m.id==='v155_blackcoin';})){
+      state.mailbox.push({
+        id:'v155_blackcoin',
+        title:'v1.5.5「黑币来袭」更新公告',
+        body:'各位考生：<br><br><b>一、新货币：黑币</b><br>全系统最稀有货币登场：结算时最终 EP÷300 自动产出（不设上限）；商店「黑币商店」区支持 500 代币 ⇄ 100 黑币单向兑换。顶栏/商店/特惠三处实时余额。<br><br><b>二、主题活动「天命归一」（特惠下拉进入）</b><br>· 10 黑币购买属性抽取券 ×1 并赠送抽奖钥匙 ×1（十连 100 黑币赠 11 把钥匙）；<br>· 钥匙 = 抽奖次数；传说大奖「天赋槽位/费用扩展券」各可将天赋装配 6 槽/6 费 永久扩至 8（全档唯一生效，重复获得仅可分解）；<br>· 暂存箱可发送仓库或分解为钥匙；抽奖积分独立于日常积分，兑换区积分降序；<br>· <b>活动时间 2026.11.06 00:00:00 ~ 2027.01.31 23:59:59，抽奖钥匙、抽奖积分、暂存箱物品逾期全部作废</b>；<br>· 特惠抽奖代金券：每张抵 1 黑币、每抽最多抵 9 张，经促销/通行证里程碑/杯赛投放。<br><br><b>三、标签装扮黑币商店</b><br>鎏金名框/暗夜光环/专属签名/虹彩流光，一件装备全标签生效。<br><br>随信发放 🎫抽奖代金券×10，请查收。',
+        items:{},
+        claimed:false,read:false,createdAt:Date.now()
+      });
+      state.lotteryCoupon=(state.lotteryCoupon||0)+10;
+      saveState();
+    }
+  }catch(e){}
+};
+try{window.ensureV155Mail();}catch(e){}
+try{
+  if(typeof renderMailPage==='function'&&!renderMailPage.__v155w){
+    var __rm=renderMailPage;
+    var __w2=function(){try{window.ensureV155Mail();}catch(e){}return __rm.apply(this,arguments);};
+    __w2.__v155w=true;window.renderMailPage=__w2;
+  }
+}catch(e){}
+try{if(typeof updateMailBadge==='function')updateMailBadge();}catch(e){}
+})();
+/* ================= v1.5.5 公告邮件 END ================= */
+
+</script>
+<script>
+/* ================= v1.5.5 杯赛投放抽奖代金券 ================= */
+(function(){
+'use strict';
+if(window.__cupCp155)return;
+window.__cupCp155=true;
+function __cupGrant(n){
+  try{state.lotteryCoupon=(state.lotteryCoupon||0)+n;saveState();}catch(e){}
+}
+['claimAllV','claimSprintAll','claimDayCupTrack'].forEach(function(fn){
+  try{
+    if(typeof window[fn]==='function'&&!window[fn].__cpw){
+      var __o=window[fn];
+      var __w=function(){
+        var __had=(state.cupV3&&state.cupV3.pending&&state.cupV3.pending.length)||0;
+        var r=__o.apply(this,arguments);
+        try{
+          var __left=(state.cupV3&&state.cupV3.pending&&state.cupV3.pending.length)||0;
+          if(__left<__had)__cupGrant(2*(__had-__left));   /* 每领一张黄卡 +2 代金券 */
+        }catch(e){}
+        return r;
+      };
+      __w.__cpw=true;window[fn]=__w;
+    }
+  }catch(e){}
+});
+})();
+/* ================= 杯赛代金券 END ================= */
 
 </script>
 </body>
