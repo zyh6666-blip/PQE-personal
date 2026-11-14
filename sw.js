@@ -1,5 +1,5 @@
 /* ============================================================
-   考研EP系统 v1.5.6「协议时代」补丁 · build 20261112-1305-r6
+   考研EP系统 v1.5.6.1 热修复补丁 · build 20261113-1015
    = index.html 内嵌全套（金融中心/杯赛竞技v2/两位小数/公告注入）
    守卫 __fin156 / __v2cuparena / __money2dp，已内嵌时自动跳过
    ============================================================ */
@@ -68,13 +68,29 @@ var GOODS=[
  {id:'g_coupon',cat:'pot',ic:'🎴',n:'高级功能半价券',baseBC:0.3,qty:2},
  {id:'g_trial',cat:'pot',ic:'🧪',n:'潜能体验卡',baseBC:0.4,qty:1},
  {id:'g_golddie',cat:'bra',ic:'🎲',n:'金骰子',baseBC:0.16,qty:1,rare:true},
- {id:'g_slotext',cat:'talent',ic:'🗳️',n:'天赋槽位扩展券',baseBC:6,qty:0,rare:true,unique:true},
- {id:'g_costext',cat:'talent',ic:'⚖️',n:'天赋费用扩展券',baseBC:6,qty:0,rare:true,unique:true},
- {id:'g_theme',cat:'pot',ic:'🐉',n:'【主题】天人合一',baseBC:3,qty:0,rare:true,unique:true}
+ {id:'g_slotext',cat:'talent',ic:'🗳️',n:'天赋槽位扩展券',baseBC:355,qty:0,rare:true,unique:true},
+ {id:'g_costext',cat:'talent',ic:'⚖️',n:'天赋费用扩展券',baseBC:320,qty:0,rare:true,unique:true},
+ {id:'g_theme',cat:'pot',ic:'🐉',n:'【主题】天人合一',baseBC:105,qty:0,rare:true,unique:true}
 ];
 function FE(id){var e=document.getElementById(id);if(e)return e;
   return {style:{},classList:{add:function(){},remove:function(){},contains:function(){return false}},value:'',textContent:'',innerHTML:'',onclick:null,oninput:null,querySelectorAll:function(){return [];}};}
 var FIN=(state.fin=state.fin||{day:1,pos:{},fin:{},pool:200,idx:3000,idxHist:[3000],news:'',listings:[],bag:[],mkt:{},volLog:{}});
+/* 老存档字段防御性补全：缺哪个补哪个，防止 renderAll 崩溃 */
+if(typeof FIN.day!=='number')FIN.day=1;
+if(!FIN.pos)FIN.pos={};
+if(!FIN.fin)FIN.fin={};
+if(typeof FIN.pool!=='number')FIN.pool=200;
+if(typeof FIN.idx!=='number')FIN.idx=3000;
+if(!Array.isArray(FIN.idxHist))FIN.idxHist=[3000];
+if(typeof FIN.news!=='string')FIN.news='';
+if(!Array.isArray(FIN.listings))FIN.listings=[];
+if(!Array.isArray(FIN.bag))FIN.bag=[];
+if(!FIN.mkt)FIN.mkt={};
+if(!FIN.volLog)FIN.volLog={};
+if(!FIN.ghosts)FIN.ghosts=null;
+if(!FIN.gList)FIN.gList=[];
+if(!FIN.tq)FIN.tq={};
+if(!FIN.xEventLog)FIN.xEventLog=[];
 var S={get bc(){return state.blackCoin||0},set bc(v){state.blackCoin=v},
  get tk(){return state.tokens||0},set tk(v){state.tokens=v},
  get pt(){return state.points||0},set pt(v){state.points=v},
@@ -97,7 +113,7 @@ GOODS.forEach(function(g){
   if(!X.volLog[g.id])X.volLog[g.id]=[X.mkt[g.id].vol];
 });
 /* 指导价（代币）= 黑币基准 × 实时汇率 × 需求因子 */
-function guideTK(g){return g.baseBC*rateTK()*X.mkt[g.id].demand;}
+function guideTK(g){var fund=(FIN.fund&&typeof FIN.fund[g.id]==='number')?FIN.fund[g.id]:g.baseBC;return fund*rateTK()*X.mkt[g.id].demand;}
 function goodOf(id){return GOODS.find(function(x){return x.id===id;});}
 
 
@@ -163,10 +179,12 @@ function tickMarket(){
   GOODS.forEach(function(g){
     var m=X.mkt[g.id];
     var rng2=srand(SEED+FIN.day*7919+g.id.length*131+g.baseBC*1000);
-    /* 成交量：价格跌→买入放量，价格涨→获利抛压，加随机与事件 */
+    /* 成交量：每日锚定基准盘(20-80) × 价格波动放大，杜绝复利爆炸；撮合成交另加 */
     var move=(m.demand-1);
-    var vol=m.vol*(0.6+rng2()*0.9)*(1+Math.abs(move)*6);
+    var vol=(20+rng2()*60)*(1+Math.abs(move)*6);
     m.vol=Math.round(vol);
+    var _tq=(FIN.tq||{})[g.id]||0;
+    if(_tq){m.vol+=_tq;FIN.tq[g.id]=0;}
     X.volLog[g.id].push(m.vol);if(X.volLog[g.id].length>40)X.volLog[g.id].shift();
     m.demand+=(rng2()*2-1)*0.06+( (m.vol/(X.volLog[g.id].slice(-7, -1).reduce(function(a,b){return a+b;},0)/Math.max(1,X.volLog[g.id].slice(-7,-1).length)||m.vol))-1 )*0.04;
     m.demand+=(1-m.demand)*0.15;                      /* 向1回归 */
@@ -183,25 +201,10 @@ function tickMarket(){
     var mom=(window.__catMom[it.code==='TAL'?'talent':(it.code==='CUP'?'cup':(it.code==='BRA'?'bra':(it.code==='SPE'?'sp':(it.code==='EVO'?'evo':'pot'))))]||1)-1;
     it.__xmom=Math.max(-0.02,Math.min(0.02,mom*0.02));
   });
-  /* 我的挂单撮合与到期 */
-  X.listings.forEach(function(L){
-    if(L.sold)return;
-    L.daysLeft--;
-    var g=goodOf(L.gid);
-    var comp=L.price/guideTK(g);
-    var rng3=srand(SEED+FIN.day*104729+L.price*7);
-    var p=comp<=0.9?1:(comp<=1.1?0.7:Math.max(0.05,0.45-(comp-1.1)));
-    if(rng3()<p){
-      L.sold=true;L.soldDay=FIN.day;
-      var gain=L.qty*L.price*0.85;
-      S.tk+=gain;
-      toast&&toast('🔄 交易所：【'+g.n+'】×'+L.qty+' 已售出，+'+fmt(gain)+' 代币（到手85%）');
-    }else if(L.daysLeft<=0){
-      L.expired=true;setQty(g,qtyOf(g)+L.qty);   /* 72小时无人购买退回仓库 */
-    }
-  });
-  (function(){var kept=X.listings.filter(function(L){return !L.sold&&!L.expired;});X.listings.length=0;kept.forEach(function(L){X.listings.push(L);});})();
-  S.idx=Math.round(3000*INSTR.filter(function(x){return x.tab==='stock'}).reduce(function(s,x){return s+x.price/x.base;},0)/6*100)/100;
+    xMatchRound(true,1);
+    econTick();
+    dauTick();
+S.idx=Math.round(3000*INSTR.filter(function(x){return x.tab==='stock'}).reduce(function(s,x){return s+x.price/x.base;},0)/6*100)/100;
   S.idxHist.push(S.idx);if(S.idxHist.length>40)S.idxHist.shift();
   FIN.day++;
 }
@@ -221,6 +224,461 @@ function finAccrue(){
     }
   });
 }
+/* ================= 幽灵交易所 v1.5.6-g1 ================= */
+var GX_SURN=['张','李','王','赵','刘','陈','杨','黄','周','吴','徐','孙','马','朱','胡','郭','何','林','罗','郑'];
+var GX_NICK=['夜航','灯下','卷王','刷题','早起','续杯','词霸','上岸','黑马','稳过','三点钟','打铃','满勤','错题本','框架','回放','二刷','蹲馆','守夜','拾光','观澜','沉舟'];
+function gxName(){return GX_SURN[Math.floor(Math.random()*GX_SURN.length)]+'·'+GX_NICK[Math.floor(Math.random()*GX_NICK.length)]+(100+Math.floor(Math.random()*900));}
+var GX_POOL_SIZE=5000;
+function gxPool(){
+  if(!FIN.ghosts)FIN.ghosts=[];
+  while(FIN.ghosts.length<GX_POOL_SIZE)FIN.ghosts.push({n:gxName(),t:Math.floor(Math.random()*10)<4?0:(Math.random()<0.67?1:2)});
+  if(!FIN.gList)FIN.gList=[];
+  return FIN.ghosts;
+}
+function gxPost(){
+  var gs=gxPool();
+  var target=150+Math.floor(Math.random()*51);
+  var guard=0;
+  /* 阶段一：每个商品保底 2 单（深度优先） */
+  GOODS.forEach(function(good){
+    var have=FIN.gList.filter(function(L){return L.gid===good.id;}).length;
+    for(var k=have;k<2;k++){
+      var g=gs[Math.floor(Math.random()*gs.length)];
+      var guide=guideTK(good);
+      var f=[0.78,0.88,0.96,1.05,1.15,1.3][Math.floor(Math.random()*6)];
+      var price=Math.round(Math.max(guide*0.5,Math.min(guide*2,guide*f))*100)/100;
+      var q=good.unique?1:(good.rare?1:(1+Math.floor(Math.random()*Math.min(5,good.qty||3))));
+      FIN.gList.push({gid:good.id,qty:q,price:price,g:g.n,daysLeft:2+Math.floor(Math.random()*2),cool:1});
+    }
+  });
+  /* 阶段二：随机补到目标量 */
+  while(FIN.gList.length<target&&guard++<200){
+    var g=gs[Math.floor(Math.random()*gs.length)];
+    var good=GOODS[Math.floor(Math.random()*GOODS.length)];
+    var guide=guideTK(good);
+    var f=[0.90+Math.random()*0.15,1.00+Math.random()*0.15,1.10+Math.random()*0.30][g.t];
+    var price=Math.round(Math.max(guide*0.5,Math.min(guide*2,guide*f))*100)/100;
+    var q=good.unique?1:(good.rare?1:(1+Math.floor(Math.random()*Math.min(5,good.qty||3))));
+    FIN.gList.push({gid:good.id,qty:q,price:price,g:g.n,daysLeft:2+Math.floor(Math.random()*2),cool:1});
+  }
+}
+function xMatchRound(doExpire,scale){
+  try{
+    scale=scale||1;
+    gxPost();
+    /* 1) 幽灵买家接玩家挂单（低价优先、价高滞销） */
+    var kept=[];
+    X.listings.forEach(function(L){
+      if(L.sold||L.expired)return;
+      if(doExpire)L.daysLeft--;
+      var good=goodOf(L.gid);
+      var comp=L.price/guideTK(good);
+      var p=comp<=0.95?0.90:(comp<=1.05?0.65:Math.max(0.03,0.42-(comp-1.05)));
+      p*=scale;
+      if(Math.random()<p){
+        L.sold=true;L.soldDay=FIN.day;
+        var gain=L.qty*L.price*0.85;
+        S.tk+=gain;
+        (FIN.tq=FIN.tq||{})[L.gid]=((FIN.tq||{})[L.gid]||0)+L.qty;
+        var gs=gxPool();
+        var buyer=gs[Math.floor(Math.random()*gs.length)];
+        toast('🤝 交易所：【'+good.n+'】×'+L.qty+' 被幽灵买家【'+buyer.n+'】接走，+'+fmt(gain)+' 代币（到手85%）');
+      }else if(L.daysLeft<=0){
+        L.expired=true;setQty(good,qtyOf(good)+L.qty);
+      }
+      if(!L.sold&&!L.expired)kept.push(L);
+    });
+    FIN.listings.length=0;kept.forEach(function(L){FIN.listings.push(L);});
+    /* 2) 幽灵互买：低价挂单更容易被其他幽灵接走，成交量传导板块动量→股市 */
+    FIN.gList.slice().forEach(function(L){
+      var good=goodOf(L.gid);
+      var comp=L.price/guideTK(good);
+      var p=(comp<=0.95?0.25:(comp<=1.05?0.08:0.02))*scale;
+      if(Math.random()<p){
+        var idx=FIN.gList.indexOf(L);
+        if(idx>=0){FIN.gList.splice(idx,1);(FIN.tq=FIN.tq||{})[L.gid]=((FIN.tq||{})[L.gid]||0)+L.qty;}
+      }else if(doExpire){
+        L.daysLeft--;
+        if(L.daysLeft<=0){var j=FIN.gList.indexOf(L);if(j>=0)FIN.gList.splice(j,1);}
+      }
+    });
+  }catch(e){}
+}
+function xBuyListing(gid,price,qty){
+  gxPool();
+  var g=goodOf(gid);if(!g)return;
+  var L=null,idx=-1;
+  for(var i=0;i<FIN.gList.length;i++){var x=FIN.gList[i];if(x.gid===gid&&x.price===price&&x.qty===qty){L=x;idx=i;break;}}
+  if(!L){toast('该挂单已被买走或撤下');renderAll();return;}
+  finPrompt('购买 · '+g.n,'卖家 <b>'+L.g+'</b> · 单价 <b style="color:#ffd60a;font-family:var(--mono)">'+fmt(L.price)+'</b> 🪙 · 可购 '+L.qty+' 件<br><span style="font-size:10px;color:#8d7c5f">成交后先入交易背包，需手动交割入仓</span>',''+Math.min(L.qty,3),function(q){
+    q=Math.floor(q);
+    if(!q||q<=0)return;
+    if(q>L.qty){toast('超出该挂单剩余数量');return;}
+    var cost=q*L.price;
+    if(cost>S.tk+1e-9){toast('代币不足');return;}
+    S.tk-=cost;S.pool+=cost*0.005;
+    L.qty-=q;if(L.qty<=0)FIN.gList.splice(idx,1);
+    var has=X.bag.find(function(b){return b.gid===gid;});
+    if(has)has.qty+=q;else X.bag.push({gid:gid,qty:q});
+    (FIN.tq=FIN.tq||{})[gid]=((FIN.tq||{})[gid]||0)+q;
+    renderAll();
+    toast('🤝 成交：'+g.n+' ×'+q+' @ '+fmt(L.price)+' 🪙 · 已入交易背包');
+  });
+}
+/* ================= 幽灵交易所 END ================= */
+
+/* ---- 挂单清洗器：指导价大变（如唯一道具重定价）后清除带外旧单 ---- */
+function xSanitizeBook(){
+  try{
+    var removed=0,returned=[];
+    FIN.gList.slice().forEach(function(L){
+      var g=goodOf(L.gid);if(!g)return;
+      var guide=guideTK(g);
+      if(L.price<guide*0.45||L.price>guide*2.2){
+        var idx=FIN.gList.indexOf(L);
+        if(idx>=0)FIN.gList.splice(idx,1);
+        removed++;
+      }
+    });
+    var kept=[];
+    X.listings.forEach(function(L){
+      if(L.sold||L.expired){kept.push(L);return;}
+      var g=goodOf(L.gid);if(!g){kept.push(L);return;}
+      var guide=guideTK(g);
+      if(L.price<guide*0.45||L.price>guide*2.2){
+        L.expired=true;
+        setQty(g,qtyOf(g)+L.qty);
+        returned.push(g.n);
+      }else kept.push(L);
+    });
+    FIN.listings.length=0;kept.forEach(function(L){FIN.listings.push(L);});
+    if(returned.length)toast('⚠️ 挂单偏离当前指导价过大已退回仓库：'+returned.join('、')+'（请按新指导价重新上架）');
+    if(removed>=3)toast('🧹 市场已清算 '+removed+' 笔过时挂单（指导价调整）');
+    return removed+returned.length;
+  }catch(e){return 0;}
+}
+
+
+/* ================= 经济学模型引擎 v1.5.6-e1 =================
+   价值 = 稀有度基准 × 板块情绪 × 库存清算调节
+   供应流量：基础 + 版本促销聚焦周(×5) + 周末杯赛(杯类×3/核心×4)
+   促销周低价放量 → 买入囤货；周结束流量回落 → 库存消化 → 价格回升 → 卖出 */
+var ECON_VER='1.5.6.1';
+var ECON_SPOT=[['talent','天赋科技周'],['cup','杯赛狂欢周'],['bra','乱斗爆火周'],['sp','SP材料周'],['evo','进化主题周'],['pot','潜能改版周']];
+function econSpot(){var wk=Math.floor(Date.now()/(7*864e5));return ECON_SPOT[wk%6];}
+function econInit(){
+  if(FIN.econVer!==ECON_VER){FIN.econVer=ECON_VER;FIN.fund=FIN.fund||{};FIN.gStock=FIN.gStock||{};}
+  GOODS.forEach(function(g){if(typeof FIN.gStock[g.id]!=='number')FIN.gStock[g.id]=g.qty*3;});
+}
+function econFlow(g){
+  var f=g.unique?0.02:(g.rare?0.06:0.2);
+  var spot=econSpot()[0];
+  if(g.cat===spot)f*=7;
+  var dow=new Date().getDay();
+  if(dow===0||dow===6){
+    if(g.cat==='cup')f*=3;
+    if(g.id==='g_core')f*=4;
+  }
+  return f;
+}
+var ECON_MAP={talent:'st_talent',cup:'st_cup',bra:'st_brawl',sp:'st_sp',evo:'st_evo',pot:'st_pot'};
+function econTick(){
+  try{
+    econInit();
+    var spot=econSpot();
+    GOODS.forEach(function(g){
+      /* 供应流入 + 库存向基准均值回归（促销周压出深坑，周结束数日内回填） */
+      var _ref=g.qty*3+5;
+      FIN.gStock[g.id]=Math.min(300,Math.max(0,FIN.gStock[g.id]+econFlow(g)+(_ref-FIN.gStock[g.id])*0.12));
+      /* 板块情绪（±25% 封顶） */
+      var it=INSTR.find(function(x){return x.id===ECON_MAP[g.cat];});
+      var sent=it?Math.max(-0.25,Math.min(0.25,(it.price/it.base-1)*0.5)):0;
+      /* 库存清算调节：货多则贱、货稀则贵（0.7~1.6） */
+      var ref=g.qty*3+5;
+      var adj=Math.max(0.7,Math.min(1.6,Math.sqrt(ref/(FIN.gStock[g.id]+1))));
+      FIN.fund[g.id]=Math.max(g.baseBC*0.3,Math.min(g.baseBC*3,g.baseBC*(1+sent)*adj));
+    });
+    /* 聚焦板块切换 → 一次性温和事件 */
+    if(FIN.econLastSpot!==spot[0]){
+      if(FIN.econLastSpot)xSectorEvent(spot[0],1,5+Math.random()*5);
+      FIN.econLastSpot=spot[0];
+      try{S.news='🎪 版本促销·'+spot[1]+'：该板块货品供应放量、指导价走低，囤货良机';}catch(e){}
+    }
+    FIN.econSpotName=spot[1];
+  }catch(e){}
+}
+
+/* ---- 玩法日活层：幽灵每日选玩法（复制动态），各股票按日活响应 ---- */
+var DAU_MODES=[
+ {key:'talent',stock:'st_talent',name:'天赋'},
+ {key:'cup',stock:'st_cup',name:'杯赛'},
+ {key:'bra',stock:'st_brawl',name:'乱斗'},
+ {key:'evo',stock:'st_evo',name:'进化'},
+ {key:'pot',stock:'st_pot',name:'潜能'},
+ {key:'race',stock:null,name:'竞技'}
+];
+function dauTick(){
+  try{
+    FIN.dau=FIN.dau||{shares:{},fun:{},metrics:{},day:0};
+    var D=FIN.dau;
+    D.day++;
+    /* 1. 爽度漂移：新鲜感衰减 + 随机体验反馈 + 周末杯赛加成 */
+    DAU_MODES.forEach(function(m){
+      var f=D.fun[m.key]||1;
+      f=f*0.94+(0.5+(Math.random()*2-1)*0.35);   /* 衰减后补随机体验 */
+      var dow=new Date().getDay();
+      if(m.key==='cup'&&(dow===5||dow===6||dow===0))f*=1.15;
+      if(m.key==='race'&&(dow>=1&&dow<=6))f*=1.05;
+      D.fun[m.key]=Math.max(0.4,Math.min(2.2,f));
+    });
+    /* 2. 复制动态：份额 ∝ 前日份额 × 爽度 */
+    var gs=gxPool();
+    var sum=0;
+    DAU_MODES.forEach(function(m){
+      m._s=(D.shares[m.key]||1/6)*D.fun[m.key]*(0.75+Math.random()*0.5);
+      sum+=m._s;
+    });
+    DAU_MODES.forEach(function(m){m.share=m._s/sum;D.shares[m.key]=Math.round(m.share*1000)/1000;});
+    /* 3. 今日指标：天赋看携带费用、杯赛看报名能量、其余看人数 */
+    var best=null;
+    DAU_MODES.forEach(function(m){
+      var n=Math.max(0,Math.round(gs.length*m.share));
+      var metric=n;
+      if(m.key==='talent')metric=Math.round(n*(3.5+Math.random()*3)*10)/10;
+      if(m.key==='cup')metric=Math.round(n*(1+Math.random()*1.8)*10)/10;
+      D.metrics[m.key]={n:n,metric:metric};
+      if(!best||m.share>best.share)best=m;
+    });
+    /* 4. 股票日级响应：份额偏离基线(1/6) → ±3% 内 */
+    DAU_MODES.forEach(function(m){
+      if(!m.stock)return;
+      var it=INSTR.find(function(x){return x.id===m.stock;});
+      if(!it)return;
+      var dev=m.share-1/6;
+      var r=Math.max(-0.03,Math.min(0.03,dev*0.4));
+      it.price=Math.round(Math.max(it.base*0.2,Math.min(it.base*5,it.price*(1+r)))*100)/100;
+      it.hist.push({o:it.price,c:it.price,h:it.price,l:it.price});
+      if(it.hist.length>40)it.hist.shift();
+      /* 该板块商品需求联动 */
+      GOODS.forEach(function(g){
+        if(g.cat!==m.key)return;
+        var mk=X.mkt[g.id];
+        mk.demand=Math.max(0.8,Math.min(1.25,mk.demand+dev*0.5));
+      });
+    });
+    /* 5. 快讯：今日热度王 */
+    try{
+      var news=(FIN.xEvent?'':(D.day%3===0?('👥 今日玩法热度：'+best.name+' '+Math.round(best.share*100)+'%（'+D.metrics[best.key].metric+'）· 幽灵迁徙持续中'):''));
+      if(news)S.news=news;
+    }catch(e){}
+    S.idx=Math.round(3000*INSTR.filter(function(x){return x.tab==='stock';}).reduce(function(s,x){return s+x.price/x.base;},0)/6*100)/100;
+    if(S.idxHist.length)S.idxHist[S.idxHist.length-1]=S.idx;
+  }catch(e){}
+}
+/* ---- 板块巨变事件：特殊玩法冲击 → 全市场传导 → 数日消化 ---- */
+function xSectorEvent(cat,dir,mag){
+  try{
+    var map={talent:['st_talent','天赋科技'],cup:['st_cup','杯赛重工'],bra:['st_brawl','乱斗娱乐'],sp:['st_sp','SP能源'],evo:['st_evo','进化生物'],pot:['st_pot','潜能制药']};
+    var m=map[cat];if(!m)return;
+    var it=INSTR.find(function(x){return x.id===m[0];});
+    if(!it)return;
+    it.price=Math.round(Math.max(it.base*0.2,Math.min(it.base*5,it.price*(1+dir*mag/100)))*100)/100;
+    it.hist.push({o:it.price,c:it.price,h:it.price,l:it.price});
+    if(it.hist.length>40)it.hist.shift();
+    /* 板块货品指导价联动 */
+    GOODS.forEach(function(g){
+      if(g.cat!==cat)return;
+      var mk=X.mkt[g.id];
+      mk.demand=Math.max(0.8,Math.min(1.25,mk.demand+dir*0.04));
+    });
+    /* 一次性传染：其他板块同向 30% */
+    INSTR.forEach(function(x){
+      if(x.tab!=='stock'||x===it)return;
+      x.price=Math.round(Math.max(x.base*0.2,Math.min(x.base*5,x.price*(1+dir*mag/100*0.3)))*100)/100;
+    });
+    var total=8+Math.floor(Math.random()*6);
+    FIN.xEvent={cat:cat,catMap:m[0],dir:dir,mag:mag,total:total,left:total,name:''};
+    var names={talent:'天赋系统改版',cup:'杯赛赛季开启',bra:'乱斗玩法爆火',sp:'SP材料告急',evo:'进化新赛季',pot:'潜能栏位改版'};
+    FIN.xEvent.name=names[cat]||'板块异动';
+    FIN.xEventLog=FIN.xEventLog||[];
+    FIN.xEventLog.push({cat:cat,dir:dir,mag:Math.round(mag),name:FIN.xEvent.name});
+    if(FIN.xEventLog.length>12)FIN.xEventLog.shift();
+    try{
+      S.news=(dir>0?'':'')+' '+FIN.xEvent.name+'：'+m[1]+(dir>0?' 大涨 +':' 重挫 ')+Math.round(mag)+'%'+(dir>0?'，资金涌入全市场':'，恐慌向全市场传导');
+    }catch(e){}
+    S.idx=Math.round(3000*INSTR.filter(function(x){return x.tab==='stock';}).reduce(function(s,x){return s+x.price/x.base;},0)/6*100)/100;
+    if(S.idxHist.length)S.idxHist[S.idxHist.length-1]=S.idx;
+    if(typeof document!=='undefined'&&document.visibilityState==='visible')toast((dir>0?'':'')+' 板块事件：'+FIN.xEvent.name+' · '+m[1]+(dir>0?' +':' ')+Math.round(mag)+'%');
+  }catch(e){}
+}
+/* ================= 万人在线虚拟市场 v1.5.6-m1 =================
+   上万虚拟玩家与幽灵共同撮合：每笔交易即时影响板块股/指导价/汇率
+   离线无变化；上线时按时间跨度一次性补跑（对齐旧竞技离线补算思路） */
+var SIM_POP=10000;          /* 虚拟玩家总数 */
+var SIM_TK_PER=50;          /* 人均代币持有(压力计基准) */
+var SIM_PART=0.006;         /* 每轮参与率：0.3% ≈ 30人/轮 */
+var SIM_OPEN_MIN=3;         /* 行情心跳(分钟/轮)：在线与离线同频 */
+var SIM_CAP_DAYS=7;         /* 离线补跑上限 */
+function xStockImpact(it,side){
+  try{
+    var np=Math.round(it.price*(1+0.005*side)*100)/100;
+    it.price=Math.max(it.base*0.2,Math.min(it.base*5,np));
+    it.hist.push({o:it.price,c:it.price,h:it.price,l:it.price});
+    if(it.hist.length>40)it.hist.shift();
+    S.idx=Math.round(3000*INSTR.filter(function(x){return x.tab==='stock';}).reduce(function(s,x){return s+x.price/x.base;},0)/6*100)/100;
+    if(S.idxHist.length)S.idxHist[S.idxHist.length-1]=S.idx;
+  }catch(e){}
+}
+function xImpact(gid,qty,side){
+  try{
+    var g=goodOf(gid);if(!g)return;
+    var m=X.mkt[gid];
+    m.demand=Math.max(0.8,Math.min(1.25,m.demand+qty*0.004*side));
+    var map={talent:'st_talent',cup:'st_cup',bra:'st_brawl',sp:'st_sp',evo:'st_evo',pot:'st_pot'};
+    var it=INSTR.find(function(x){return x.id===map[g.cat];});
+    if(it){
+      var r=Math.min(0.001,qty*0.00025)*side;
+      var np=Math.round(it.price*(1+r)*100)/100;
+      it.price=Math.max(it.base*0.2,Math.min(it.base*5,np));
+      it.hist.push({o:it.price,c:it.price,h:it.price,l:it.price});
+      if(it.hist.length>40)it.hist.shift();
+    }
+    if(Math.random()<0.1){
+      var fx=INSTR[Math.floor(Math.random()*3)];
+      fx.price=Math.round(Math.max(fx.base*0.2,Math.min(fx.base*5,fx.price*(1+(Math.random()*2-1)*0.001)))*100)/100;
+    }
+    S.idx=Math.round(3000*INSTR.filter(function(x){return x.tab==='stock';}).reduce(function(s,x){return s+x.price/x.base;},0)/6*100)/100;
+    if(S.idxHist.length)S.idxHist[S.idxHist.length-1]=S.idx;
+  }catch(e){}
+}
+function xRound(){
+  try{
+    gxPost();
+    if(typeof FIN.simTk!=='number')FIN.simTk=SIM_POP*SIM_TK_PER;
+    if(typeof FIN.simPop!=='number')FIN.simPop=SIM_POP;
+    var pop=FIN.simPop||SIM_POP;
+    /* 资金压力计：低于基准一半则缩量，另开小水龙头防枯竭 */
+    FIN.simTk=Math.min(pop*SIM_TK_PER,FIN.simTk+pop*SIM_TK_PER*0.002);
+    var fundRatio=Math.max(0.15,Math.min(1,FIN.simTk/(pop*SIM_TK_PER*0.5)));
+    var active=Math.max(3,Math.round(pop*SIM_PART*fundRatio*(0.6+Math.random()*0.8)));
+    var gs=gxPool();
+    FIN.gList.forEach(function(L){if(L.cool>0)L.cool--;});
+    /* 供给弹性：贵了的商品会有新卖家低价补位（价格不棘轮） */
+    for(var uc=0;uc<3;uc++){
+      var ug=GOODS[Math.floor(Math.random()*GOODS.length)];
+      var ugd=guideTK(ug);
+      var umin=null;
+      FIN.gList.forEach(function(L){if(L.gid===ug.id&&(!umin||L.price<umin))umin=L.price;});
+      if(umin===null||umin>ugd*1.0){
+        var _gs=gxPool();
+        FIN.gList.push({gid:ug.id,qty:ug.unique?1:(1+Math.floor(Math.random()*3)),price:Math.round(ugd*(0.82+Math.random()*0.13)*100)/100,g:_gs[Math.floor(Math.random()*_gs.length)].n,daysLeft:2+Math.floor(Math.random()*2),cool:2});
+      }
+    }    for(var i=0;i<active;i++){
+      var good=GOODS[Math.floor(Math.random()*GOODS.length)];
+      var guide=guideTK(good);
+      var _dem=X.mkt[good.id].demand;
+      var _buyP=_dem<0.95?0.75:(_dem>1.08?0.35:0.55);
+      if(Math.random()<_buyP){
+        /* 虚拟买入：接玩家挂单(40%)或最低幽灵单 */
+        var mine=X.listings.filter(function(L){return L.gid===good.id&&!L.sold&&!L.expired;}).sort(function(a,b){return a.price-b.price;});
+        var Ls=FIN.gList.filter(function(L){return L.gid===good.id;}).sort(function(a,b){return a.price-b.price;});
+        var target=null,fromMine=false;
+        if(mine.length&&Math.random()<0.5){target=mine[0];fromMine=true;}
+        else if(Ls.length){target=Ls[0];}
+        if(!target)continue;
+        if(target.cool>0)continue;
+        if(target.price>guide*1.8)continue;
+        var q=Math.min(target.qty,good.unique?1:(1+Math.floor(Math.random()*3)));
+        var cost=q*target.price;
+        if(cost>FIN.simTk)continue;
+        FIN.simTk-=cost;
+        if(fromMine){
+          target.sold=true;target.soldDay=FIN.day;
+          var gain=q*target.price*0.85;
+          S.tk+=gain;
+          var buyer=gs[Math.floor(Math.random()*gs.length)];
+          toast('🤝 交易所：【'+good.n+'】×'+q+' 被玩家【'+buyer.n+'】接走，+'+fmt(gain)+' 代币（到手85%）');
+        }else{
+          target.qty-=q;if(target.qty<=0)FIN.gList.splice(FIN.gList.indexOf(target),1);
+        }
+        X.mkt[good.id].vol=(X.mkt[good.id].vol||0)+q;
+        xImpact(good.id,q,+1);
+      }else{
+        /* 虚拟上架（资金越紧越倾向出货） */
+        var f=[0.78,0.88,0.96,1.05,1.15,1.3][Math.floor(Math.random()*6)];
+        /* 促销/聚焦周：虚拟玩家跟风低价放量出货（低买高卖的货源） */
+        if((typeof econSpot==='function'?econSpot()[0]:null)===g.cat)f=[0.8,0.88,0.95,1.02][Math.floor(Math.random()*4)];
+        var price=Math.round(Math.max(guide*0.5,Math.min(guide*2,guide*f))*100)/100;
+        var q2=good.unique?1:(1+Math.floor(Math.random()*4));
+        var seller=gs[Math.floor(Math.random()*gs.length)];
+        FIN.gList.push({gid:good.id,qty:q2,price:price,g:seller.n,daysLeft:2+Math.floor(Math.random()*2),cool:4});
+        X.mkt[good.id].vol=(X.mkt[good.id].vol||0)+q2;
+        xImpact(good.id,q2,-1);
+      }
+    }
+    /* 板块事件：随机异动(0.8%/轮≈4次/日) + 周末杯赛热潮 */
+    if(!FIN.xEvent&&Math.random()<0.008){
+      var _cats=['talent','cup','bra','sp','evo','pot'];
+      xSectorEvent(_cats[Math.floor(Math.random()*_cats.length)],Math.random()<0.5?1:-1,8+Math.random()*8);
+    }
+    var _dow=new Date().getDay();
+    if(!FIN.xEvent&&(_dow===0||_dow===6)&&Math.random()<0.004)xSectorEvent('cup',1,10+Math.random()*8);
+    /* 活跃事件残余冲击（衰减传染） */
+    if(FIN.xEvent&&FIN.xEvent.left>0){
+      var ev=FIN.xEvent,w=ev.left/ev.total;
+      INSTR.forEach(function(it){
+        if(it.tab!=='stock')return;
+        var shock=ev.dir*(ev.mag/100)*0.05*w*(it.id===ev.catMap?1:0.35);
+        it.price=Math.round(Math.max(it.base*0.2,Math.min(it.base*5,it.price*(1+shock)))*100)/100;
+      });
+      ev.left--;
+      if(ev.left<=0){
+        try{S.news='📰 '+ev.name+'：影响已消化，市场回归常态';}catch(e){}
+        /* 余波：超跌反弹 / 过热退热 */
+        var back=ev.dir<0?(0.3+Math.random()*0.25):-(0.15+Math.random()*0.15);
+        var it2=INSTR.find(function(x){return x.id===ev.catMap;});
+        if(it2)it2.price=Math.round(Math.max(it2.base*0.2,Math.min(it2.base*5,it2.price*(1+back*ev.mag/100)))*100)/100;
+        FIN.xEvent=null;
+      }
+    }
+    /* 每轮收盘：板块股向锚 0.3% 均值回归（弱锚定，留出走势空间） */
+    INSTR.forEach(function(it){
+      var jit=(Math.random()*2-1)*0.004+(it.base/it.price-1)*0.0006;
+      it.price=Math.round(Math.max(it.base*0.2,Math.min(it.base*5,it.price*(1+jit)))*100)/100;
+    });
+    INSTR.slice(0,3).forEach(function(fx){
+      var j=(Math.random()*2-1)*0.0006+(fx.base/fx.price-1)*0.0006;
+      fx.price=Math.round(Math.max(fx.base*0.2,Math.min(fx.base*5,fx.price*(1+j)))*100)/100;
+    });
+    S.idx=Math.round(3000*INSTR.filter(function(x){return x.tab==='stock';}).reduce(function(s,x){return s+x.price/x.base;},0)/6*100)/100;
+    if(S.idxHist.length)S.idxHist[S.idxHist.length-1]=S.idx;
+    /* 订单簿截顶 */
+    if(FIN.gList.length>500){
+      FIN.gList.sort(function(a,b){var ga=guideTK(goodOf(a.gid)),gb=guideTK(goodOf(b.gid));return (a.price/ga)-(b.price/gb);});
+      FIN.gList.length=160;
+    }
+    FIN.lastVisit=Date.now();
+  }catch(e){}
+}
+var __xOpenT=null;
+function xCatchUp(){
+  try{
+    xSanitizeBook();
+    var now=Date.now();
+    var last=(typeof FIN.lastVisit==='number'&&FIN.lastVisit>0)?FIN.lastVisit:now;
+    var elapsedMin=Math.max(0,Math.round((now-last)/60000));
+    var rounds=Math.min(Math.round(SIM_CAP_DAYS*24*60/SIM_OPEN_MIN),Math.floor(elapsedMin/SIM_OPEN_MIN));
+    if(rounds>0){
+      for(var i=0;i<rounds;i++){xRound();xMatchRound(false,0.2);}
+      toast('📈 离线行情已补跑 '+rounds+' 轮（约 '+Math.round(rounds*SIM_OPEN_MIN/60)+' 小时）：上万玩家交易与股票行情已同步');
+    }
+    FIN.lastVisit=now;
+    if(__xOpenT)clearInterval(__xOpenT);
+    __xOpenT=setInterval(function(){try{xRound();xMatchRound(false,0.2);renderAll();}catch(e){}},SIM_OPEN_MIN*60000);
+  }catch(e){}
+}
+/* ================= 万人在线虚拟市场 END ================= */
+
 /* ================= 渲染 ================= */
 function fmt(n){return (Math.round(n*100)/100).toLocaleString('en-US');}
 function clsOf(r){return r>=0?'up':'down';}
@@ -254,26 +712,65 @@ function renderAll(){
   try{saveState();updateTopBar();}catch(e){}
 }
 /* ================= 交易所 ================= */
+var XQ='';
+function goodCatName(c){return {talent:'天赋',cup:'杯赛',bra:'乱斗',sp:'SP',evo:'进化',pot:'潜能'}[c]||c;}
+function ensureXSearch(){
+  var el=FE('f-xList');if(!el||document.getElementById('f-xSearch'))return;
+  var wrap=document.createElement('div');
+  wrap.style.cssText='margin-bottom:10px';
+  wrap.innerHTML='<input id="f-xSearch" placeholder="🔍 搜索商品：名称 / 板块（如 经验卡、核心、天赋）" style="width:100%;padding:10px 12px;border:1px solid #4a3b20;border-radius:10px;background:#1e180e;color:#f0e6cf;font-size:12.5px;font-family:var(--mono);box-sizing:border-box">';
+  el.parentNode.insertBefore(wrap,el);
+  document.getElementById('f-xSearch').oninput=function(){XQ=this.value;xRender();};
+}
+function xRowBook(g){
+  gxPool();
+  var guide=guideTK(g);
+  var mine=X.listings.filter(function(L){return L.gid===g.id&&!L.sold&&!L.expired;});
+  var glist=FIN.gList.filter(function(L){return L.gid===g.id;}).sort(function(a,b){return a.price-b.price;}).slice(0,6);
+  var rows='';
+  glist.forEach(function(L){
+    rows+='<div class="inst" style="margin-bottom:5px;padding:7px 10px"><span class="inst-ic" style="font-size:15px;width:26px">'+g.ic+'</span>'
+     +'<div class="inst-info"><div class="inst-name" style="font-size:12px">👤 '+L.g+' <span class="inst-code">幽灵卖家 · 剩 '+L.daysLeft+' 天</span></div></div>'
+     +'<div class="inst-right" style="display:flex;gap:8px;align-items:center">'
+     +'<span class="inst-price" style="font-size:13.5px;'+(L.price<guide*0.95?'color:#7ee2a0':(L.price>guide*1.1?'color:#ff8a80':''))+'">'+fmt(L.price)+' 🪙</span>'
+     +'<span style="font-size:10.5px;color:#8d7c5f;font-family:var(--mono)">×'+L.qty+'</span>'
+     +'<button class="btn" style="padding:5px 12px;font-size:11px;background:rgba(126,226,160,.15);border-color:rgba(52,199,89,.4);color:#7ee2a0" onclick="xBuyListing(\''+g.id+'\','+L.price+','+L.qty+')">购 买</button></div></div>';
+  });
+  mine.forEach(function(L){
+    rows+='<div class="inst" style="margin-bottom:5px;padding:7px 10px;opacity:.65"><span class="inst-ic" style="font-size:15px;width:26px">'+g.ic+'</span>'
+     +'<div class="inst-info"><div class="inst-name" style="font-size:12px">🙋 我的挂单 <span class="inst-code">剩 '+L.daysLeft+' 天 · 到手85%</span></div></div>'
+     +'<div class="inst-right"><span class="inst-price" style="font-size:13.5px">'+fmt(L.price)+' 🪙</span>'
+     +'<span style="font-size:10.5px;color:#8d7c5f;font-family:var(--mono)">×'+L.qty+'</span></div></div>';
+  });
+  if(!rows){
+    rows+='<div class="inst" style="margin-bottom:14px;padding:7px 10px;border-style:dashed;opacity:.55"><span class="inst-ic" style="font-size:15px;width:26px">🏛️</span>'
+     +'<div class="inst-info"><div class="inst-name" style="font-size:12px">暂无挂单 <span class="inst-code">幽灵补货中 · 稍后刷新</span></div></div>'
+     +'<div class="inst-right"><span style="font-size:10.5px;color:#8d7c5f;font-family:var(--mono)">—</span></div></div>';
+  }
+  return rows;
+}
 function xRender(){
   var el=FE('f-xList');if(!el)return;
-  FE('f-xSummary').textContent='背包 '+X.bag.length+' 件 · 挂单 '+X.listings.length+' 笔 · 🪙 '+fmt(S.tk);
-  el.innerHTML=GOODS.map(function(g){
+  gxPool();
+  ensureXSearch();
+  FE('f-xSummary').textContent='背包 '+X.bag.length+' 件 · 我的挂单 '+X.listings.length+' 笔 · 幽灵挂单 '+FIN.gList.length+' 笔 · 🪙 '+fmt(S.tk)+(FIN.econSpotName?' · 本周：'+FIN.econSpotName:'');
+  var q=(XQ||'').trim();
+  var goods=GOODS.filter(function(g){return !q||g.n.indexOf(q)>=0||goodCatName(g.cat).indexOf(q)>=0||(g.id||'').indexOf(q)>=0;});
+  el.innerHTML=goods.map(function(g){
     var m=X.mkt[g.id],guide=guideTK(g);
-    var chg=m.prevGuide?(guide/m.prevGuide-1):0;
-    var mine=X.listings.filter(function(L){return L.gid===g.id;}).reduce(function(s,L){return s+L.qty;},0);
-    return '<div class="inst">'
-     +'<span class="inst-ic">'+g.ic+'</span>'
-     +'<div class="inst-info"><div class="inst-name">'+g.n+(g.rare?' <span class="pos-chip" style="background:rgba(255,214,10,.14);color:#ffd60a;border-color:rgba(255,214,10,.4)">稀有</span>':'')+'</div>'
-     +'<div class="inst-pos">指导价 '+fmt(guide)+' 🪙 · 今量 '+m.vol+' · 仓存 '+g.qty+(mine?' · 在售 '+mine:'')+'</div></div>'
-     +'<div class="inst-right" style="display:flex;gap:5px;align-items:center">'
-     +'<span class="inst-chg '+clsOf(chg)+'">'+(chg>=0?'▲ +':'▼ ')+(chg*100).toFixed(1)+'%</span>'
-     +'<button class="btn" style="padding:7px 14px;font-size:12px;background:linear-gradient(135deg,#7ee2a0,#34c759);border:none;color:#0c2a12;font-weight:800" onclick="xBuy(\''+g.id+'\')">'+fmt(guideTK(g)*1.02)+' 🪙 购买</button>'
-     +'</div></div>';
-  }).join('');
+    var gcnt=FIN.gList.filter(function(L){return L.gid===g.id;}).length;
+    var mcnt=X.listings.filter(function(L){return L.gid===g.id&&!L.sold&&!L.expired;}).length;
+    return '<div style="margin-bottom:4px">'
+     +'<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid rgba(232,163,61,.28);border-radius:11px;background:rgba(240,179,92,.05);margin-bottom:6px">'
+     +'<span style="font-size:18px">'+g.ic+'</span><b style="font-size:13px;color:#ecdcba">'+g.n+'</b>'
+     +(g.rare?'<span class="pos-chip" style="background:rgba(255,214,10,.14);color:#ffd60a;border-color:rgba(255,214,10,.4)">稀有</span>':'')
+     +'<span style="margin-left:auto;font-size:10px;color:#8d7c5f;font-family:var(--mono);text-align:right">指导价 '+fmt(guide)+' · 今量 '+m.vol+' · 在售 '+(gcnt+mcnt)+' 单</span></div>'
+     +xRowBook(g)+'</div>';
+  }).join('')||'<div style="text-align:center;color:#6b5a3d;padding:18px;font-size:12px">没有匹配「'+q+'」的商品 · 换个关键字试试</div>';
   var mine=FE('f-xMine');
   var html='';
   if(X.listings.length){
-    html+='<div style="font-size:11px;color:#c9a86a;letter-spacing:.14em;margin-bottom:6px">— 我的挂单（72小时） —</div>'
+    html+='<div style="font-size:11px;color:#c9a86a;letter-spacing:.14em;margin-bottom:6px">— 我的挂单（72小时 · 幽灵买家实时接货） —</div>'
      +X.listings.map(function(L){
         var g=goodOf(L.gid);
         return '<div class="hold-row"><span>'+g.ic+' '+g.n+' ×'+L.qty+' · 单价 '+fmt(L.price)+' 🪙 · 剩 '+L.daysLeft+' 天</span>'
@@ -284,10 +781,9 @@ function xRender(){
     html+='<div style="font-size:11px;color:#c9a86a;letter-spacing:.14em;margin:8px 0 6px">— 交易背包（买入不入仓，需手动交割） —</div>'
      +X.bag.map(function(b,i){
         var g=goodOf(b.gid);
-        var blocked=g.unique&&g.qty>=1;
-        return '<div class="hold-row"><span>'+g.ic+' '+g.n+' ×'+b.qty+(g.unique?' <span class="pos-chip">唯一</span>':'')+'</span>'
+        return '<div class="hold-row"><span>'+g.ic+' '+g.n+' ×'+b.qty+(g.unique?' <span class="pos-chip">限用一次 · 可囤</span>':'')+'</span>'
          +'<span style="display:flex;gap:6px">'
-         +'<button class="btn" style="padding:5px 12px;font-size:11px" '+(blocked?'disabled style="opacity:.4" title="唯一道具仅能入仓一个"':'onclick="xDeposit('+i+')"')+'>存入仓库</button>'
+         +'<button class="btn" style="padding:5px 12px;font-size:11px" onclick="xDeposit('+i+')">存入仓库</button>'
          +'<button class="btn" style="padding:5px 12px;font-size:11px;background:rgba(240,179,92,.12);border-color:rgba(232,163,61,.4);color:#f0d9a2" onclick="xSellBag('+i+')">转卖</button>'
          +'</span></div>';
       }).join('');
@@ -300,7 +796,7 @@ function xBuy(gid){
   __xb={gid:gid,ask:ask};
   FE('f-xbT').textContent='购买 · '+g.n;
   FE('f-xbInfo').innerHTML='单价 <b style="color:#ffd60a;font-family:var(--mono)">'+fmt(ask)+'</b> 🪙/件 · 最低卖单'
-    +(g.rare?'<br><span style="color:#ffd60a;font-size:10.5px">稀有道具：先入交易背包；唯一性道具仓库仅能持有一个</span>':'');
+    +(g.rare?'<br><span style="color:#ffd60a;font-size:10.5px">稀有道具：先入交易背包；唯一性道具限用一次，可囤积多个低买高卖</span>':'');
   FE('f-xbQty').value='';
   xbCalc();
   FE('f-xbQty').oninput=xbCalc;
@@ -462,16 +958,8 @@ function xDump(gid){
 function xDeposit(i){
   var b=X.bag[i];if(!b)return;
   var g=goodOf(b.gid);
-  if(g.unique){
-    var allow=1-g.qty;                     /* 唯一道具入仓额度 */
-    if(allow<=0){toast('【'+g.n+'】唯一性道具，仓库仅能持有一个，多余只能转卖');return;}
-    var dep=Math.min(b.qty,allow);
-    setQty(g,qtyOf(g)+dep);b.qty-=dep;
-    if(b.qty<=1e-9)X.bag.splice(i,1);
-    renderAll();
-    toast('已入仓 '+dep+' 件'+(b.qty>0?(' · 唯一道具仅能入仓一个，剩余 '+b.qty+' 件留交易背包只能转卖'):''));
-    return;
-  }
+  /* 天人合一主题：仓库唯一性，多余只能转卖 */
+  if(g.id==='g_theme'&&(qtyOf(g)||0)>=1){toast('【天人合一】主题仅能持有一个，多余的请在交易所转卖');return;}
   setQty(g,qtyOf(g)+b.qty);X.bag.splice(i,1);
   renderAll();
   toast('已存入仓库：'+g.n+' ×'+b.qty);
@@ -649,6 +1137,7 @@ function doTrade(side){
     S.pos[it.id]=S.pos[it.id]||{};
     lot.cost=(lot.cost*lot.qty+q*it.price)/(lot.qty+q);lot.qty+=q;
     S.pos[it.id][payCur]=lot;
+    xStockImpact(it,+1);
     toast('买入 '+q+' 份 '+it.name+'（'+curName(payCur)+'建仓）');
   }else{
     /* 换币卖出：总仓即可卖，先到账所选币种（同币仓优先扣减） */
@@ -664,6 +1153,7 @@ function doTrade(side){
       lot.qty-=take;left-=take;
       if(lot.qty<1e-9){lot.qty=0;lot.cost=0;}
     });
+    xStockImpact(it,-1);
     toast('换币卖出 '+q+' 份 · '+curName(sellCur)+'到账 '+fmt(gainC));
   }
   closeMo('fmoTr');renderAll();
@@ -768,12 +1258,12 @@ document.querySelectorAll('#page-stock .tab').forEach(function(t){t.onclick=func
 
 renderAll();
 
-window.openTrade=openTrade;window.doTrade=doTrade;window.finBuy=finBuy;window.finDoBuy=finDoBuy;window.finRedeem=finRedeem;window.xBuy=xBuy;window.xSell=xSell;window.xDump=xDump;window.xSellBag=xSellBag;window.xDeposit=xDeposit;window.closeMo=closeMo;window.openContract=openContract;window.finPrompt=finPrompt;window.finPromptOk=finPromptOk;
+window.openTrade=openTrade;window.doTrade=doTrade;window.finBuy=finBuy;window.finDoBuy=finDoBuy;window.finRedeem=finRedeem;window.xBuy=xBuy;window.xSell=xSell;window.xDump=xDump;window.xSellBag=xSellBag;window.xBuyListing=xBuyListing;window.xDeposit=xDeposit;window.closeMo=closeMo;window.openContract=openContract;window.finPrompt=finPrompt;window.finPromptOk=finPromptOk;
 window.finGo=function(sec){
   try{switchPage(sec==='stock'?'stock':(sec==='fin'?'wealth':'exchange'));}catch(e){}
 };
 window.__finRender=renderAll;
-window.__finDbg={goodOf:goodOf,setQty:setQty,qtyOf:qtyOf,guideTK:guideTK,X:X,FIN:FIN,tickMarket:tickMarket,finAccrue:finAccrue,S:S,GOODS:GOODS};
+window.__finDbg={goodOf:goodOf,setQty:setQty,qtyOf:qtyOf,guideTK:guideTK,X:X,FIN:FIN,tickMarket:tickMarket,finAccrue:finAccrue,S:S,GOODS:GOODS,INSTR:INSTR,xMatchRound:xMatchRound,finPulse:finPulse,finTick:finTick,xRound:xRound,xCatchUp:xCatchUp,xImpact:xImpact,xStockImpact:xStockImpact,xSanitizeBook:xSanitizeBook,xSectorEvent:xSectorEvent,econTick:econTick,econSpot:econSpot,dauTick:dauTick};
 /* ---- 结算心跳：每日结算 EP 驱动行情/计息/撮合 ---- */
 function finTick(gain){
   try{
@@ -817,6 +1307,7 @@ function __whEntry(){
 window.addEventListener('load',function(){
   setTimeout(function(){
     try{__whEntry();renderAll();}catch(e){}
+    try{xCatchUp();}catch(e){}
     /* 老存档补初始化 */
     try{
       if(!FIN.mkt)FIN.mkt={};
@@ -833,6 +1324,101 @@ try{
     var __w2=function(name){var r=__sp.apply(this,arguments);if(name==='stock'||name==='wealth'||name==='exchange'){try{renderAll();}catch(e){}}if(name==='warehouse'){try{__whEntry();}catch(e){}}return r;};
     __w2.__finw=true;window.switchPage=__w2;
   }
+}catch(e){}
+
+/* ---- 盘中行情脉冲 v1.5.6-p1：15分钟冷却 · 小幅波动 · 不推进交易日/不撮合 ---- */
+var PULSE_CD=15*60*1000;
+function finPulse(manual){
+  try{
+    var fin=state.fin;
+    if(typeof fin.pulseN!=='number')fin.pulseN=0;
+    var now=Date.now();
+    if(now<(fin.pulseCd||0)){
+      if(manual)toast('\u23f3 行情冷却中\uff1a'+Math.ceil(((fin.pulseCd||0)-now)/60000)+' 分钟后可刷新');
+      return false;
+    }
+    fin.pulseCd=now+PULSE_CD;
+    fin.pulseN++;
+    var rng=srand(SEED+FIN.day*7919+fin.pulseN*104729);
+    var sentiment=(rng()*2-1)*0.008;
+    INSTR.forEach(function(it){
+      var r=(rng()*2-1)*0.012+sentiment;
+      var anchor=it.base;
+      if(it.id==='fx_tp'){anchor=it.base*(INSTR[1].price/INSTR[1].base)/(INSTR[0].price/INSTR[0].base);}
+      r+=(anchor/it.price-1)*0.05;
+      if(it.__xmom)r+=it.__xmom;
+      r=Math.max(-0.03,Math.min(0.03,r));
+      var o=it.price,c=Math.round(o*(1+r)*100)/100;
+      c=Math.max(it.base*0.2,Math.min(it.base*5,c));
+      var h=Math.round(Math.max(o,c)*(1+rng()*0.008)*100)/100;
+      var l=Math.round(Math.min(o,c)*(1-rng()*0.008)*100)/100;
+      it.hist.push({o:o,c:c,h:h,l:l});
+      if(it.hist.length>40)it.hist.shift();
+      it.price=c;
+    });
+    S.idx=Math.round(3000*INSTR.filter(function(x){return x.tab==='stock';}).reduce(function(s,x){return s+x.price/x.base;},0)/6*100)/100;
+    S.idxHist.push(S.idx);if(S.idxHist.length>40)S.idxHist.shift();
+    if(rng()<0.3){
+      var tmp=INSTR.filter(function(x){return x.tab==='stock';});
+      var pick=tmp[Math.floor(rng()*tmp.length)];
+      var mv=(rng()*2-1)*3;
+      S.news=rng()<0.5?('📰 盘中\uff1a'+pick.name+' 短线放量\uff0c'+(mv>=0?'+':'')+mv.toFixed(2)+'% 波动'):'📰 盘中\uff1a多空拉锯\uff0c市场等待方向';
+    }
+    xMatchRound(false,0.2);
+    renderAll();
+    if(manual)toast('\U0001f504 行情已刷新\uff08今日第 '+fin.pulseN+' 次盘中跳动\uff09');
+    return true;
+  }catch(e){return false;}
+}
+function pulseBtn(){
+  try{
+    var page=document.getElementById('page-stock');
+    if(!page)return;
+    var act=page.querySelector('.panel .p-act');
+    if(!act)return;
+    var b=document.getElementById('f-pulseBtn');
+    if(!b){
+      b=document.createElement('button');
+      b.id='f-pulseBtn';
+      b.className='btn';
+      b.style.cssText='padding:5px 12px;font-size:11px;border-color:rgba(255,214,10,.5);color:#ffd60a';
+      b.onclick=function(){finPulse(true);};
+      act.insertBefore(b,act.firstChild);
+    }
+    var left=(state.fin.pulseCd||0)-Date.now();
+    if(left>0){
+      var m=Math.floor(left/60000),s=Math.floor(left%60000/1000);
+      b.disabled=true;b.style.opacity='.45';
+      b.textContent='\u23f3 冷却 '+m+':'+String(s).padStart(2,'0');
+    }else{
+      b.disabled=false;b.style.opacity='1';
+      b.textContent='\U0001f504 刷新行情 \u00b715分钟冷却';
+    }
+  }catch(e){}
+}
+setInterval(function(){
+  try{
+    var page=document.getElementById('page-stock');
+    if(page&&page.classList.contains('active'))pulseBtn();
+  }catch(e){}
+},1000);
+try{
+  if(typeof window.switchPage==='function'&&!window.switchPage.__pulsew){
+    var __sp2=window.switchPage;
+    var __w3=function(name){var r=__sp2.apply(this,arguments);if(name==='stock'){try{finPulse(false);}catch(e){}}return r;};
+    __w3.__pulsew=true;window.switchPage=__w3;
+  }
+}catch(e){}
+
+try{gxPool();gxPost();xSanitizeBook();econTick();dauTick();}catch(e){}
+
+/* 诊断包裹：Edge 会把全局 onerror 抹成 "Script error."，这里把金融系函数的真实错误透传到通知 */
+try{
+  ['renderAll','xRender','xMatchRound','finPulse','xBuyListing','renderInst','renderFin','renderHold','pulseBtn'].forEach(function(fn){
+    var raw=eval(fn);
+    if(typeof raw!=='function')return;
+    eval(fn+'=function(){try{return raw.apply(this,arguments);}catch(err){toast("🏛️ 金融报错@"+fn+"："+(err&&err.message)+" ｜ "+((((err&&err.stack)||"").split("\n")[1])||"").slice(0,140));throw err;}};');
+  });
 }catch(e){}
 })();
 /* ================= v1.5.6 金融中心 END ================= */
@@ -1404,6 +1990,7 @@ try{
 }catch(e){}
 /* window 导出 */
 ['v2openPact','v2closePact','v2pactToggle','v2sign','v2claimAll','v2buyEnergy','v2preReg','v2join','v2place','v2endFx','v2showLg','v2closeLg','v2challenge','v2defense','v2optimize','v2revenge','v2settle'].forEach(function(f){window[f]=eval(f);});
+window.__v2Dbg={v2Tick:v2Tick,v2renderArena:v2renderArena,AV:AV,CV:CV,get cands(){return AV_CANDS;}};
 
 function v2compMail(){
  try{
@@ -1427,7 +2014,7 @@ v2rollCheck();
 
 /* ===== v1.5.6「协议时代」公告（注入式，置顶） ===== */
 (function(){
- var ANN='<div id="ann-156pact" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;"><b style="color:#ff3b30;">v1.5.6「协议时代」</b> <span style="font-size:11px;color:#8e8e93;">竞技杯赛重做 · 金融中心 · 11.12</span><div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">⚔️ 竞技重做：周赛季联赛制——周日休赛+预报名、周一填入EP 1:1定级五联赛（业余600~精英2201+）、周二~六挑战/防御/复仇（防御优化只抬基准不改段位）、周六按联赛排名结算16档。🏆 杯赛重做：填入EP 1:1+满档奖励（80/90/100%→+100/200/300）、父标签悬赏、协议报名、赛事名每周轮换、赛后一键全领。🏛️ 金融中心：股票/汇率、理财、交易所三页暗金重排，黑币硬通货贯穿全部交易。📜 全交易协议化：股票/理财/交易所/杯赛一律先填数字→弹出带具体数字的协议（≥1200字）→打钩确认后才成交。💰 旧杯赛进度补偿已发放（详见邮箱）。</div></div>';
+ var ANN='<div id="ann-1561hf" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;"><b style="color:#e8a33d;">v1.5.6.1 热修复</b> <span style="font-size:11px;color:#8e8e93;">11.13</span><div style="font-size:12px;color:#6e6e73;line-height:1.8;margin-top:3px;">① 股票行情改为盘中跳动：每15分钟冷却，打开股票页自动/手动刷新（日结仍全量刷新）。<br>② 促销与黑币商店购买增加确认弹窗防误触。<br>③ 交易所重做：万人在线虚拟市场（每笔交易即时影响板块股/指导价/汇率）、幽灵互买、搜索框、订单簿展示、移除系统直购；挂单统一按0.5×~2×指导价合法带定价，指导价大改后过时单自动清算退回仓库。<br>④ 在线与离线交易同频（3分钟/轮），离线再上线按时间跨度一次性补跑（上限7天）。<br>⑤ 成交量复利爆炸修复（今量锚定基准盘）。<br>⑥ 轮盘三件套（天赋槽位扩展券/费用扩展券/天人合一主题）按轮盘保底×60%重定价，交易所指导价同步修正。<br>⑦ 新增【主题】天人合一：仓库装备/卸下，基于当前赛季配色衍生全站UI（底色/字体/卡片/对话框）；主题仓库唯一（多余自动折算80抽奖积分）。<br>⑧ 天赋槽位/费用扩展券仓库可见（使用效果待后续版本实装）。<br>⑨ 板块巨变事件系统：特殊玩法/随机黑天鹅冲击单一板块（±8~16%），即时传染全市场并数日衰减消化，超跌反弹/过热退热；离线补跑同样触发，上线可在快讯查看事件记录。</div></div>'+'<div id="ann-156pact" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;"><b style="color:#ff3b30;">v1.5.6「协议时代」</b> <span style="font-size:11px;color:#8e8e93;">竞技杯赛重做 · 金融中心 · 11.12</span><div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">⚔️ 竞技重做：周赛季联赛制——周日休赛+预报名、周一填入EP 1:1定级五联赛（业余600~精英2201+）、周二~六挑战/防御/复仇（防御优化只抬基准不改段位）、周六按联赛排名结算16档。🏆 杯赛重做：填入EP 1:1+满档奖励（80/90/100%→+100/200/300）、父标签悬赏、协议报名、赛事名每周轮换、赛后一键全领。🏛️ 金融中心：股票/汇率、理财、交易所三页暗金重排，黑币硬通货贯穿全部交易。📜 全交易协议化：股票/理财/交易所/杯赛一律先填数字→弹出带具体数字的协议（≥1200字）→打钩确认后才成交。💰 旧杯赛进度补偿已发放（详见邮箱）。</div></div>';
  function inject(){try{var el=document.getElementById('ann-list');if(!el||document.getElementById('ann-156pact'))return;el.insertAdjacentHTML('afterbegin',ANN);}catch(e){}}
  inject();
  try{if(typeof renderAnnouncements==='function'){var __r156=renderAnnouncements;window.renderAnnouncements=function(){__r156.apply(this,arguments);inject();};}}catch(e){}
