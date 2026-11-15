@@ -3699,7 +3699,7 @@ function renderExclusiveWidgets(){
   if(hasEx(19)){
     const start=st.comicStart||now;const el=(now-start)/60000;const tier=Math.min(5,Math.floor(el/30));const bonus=[0,2,4,6,8,10][tier];
     const seg=tier<5?(el%30)/30:1;
-    html+='<span style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;" title="专属·漫画爆炸"><span style="font-size:10px;color:#8e8e93;line-height:1.25;text-align:right;">漫画爆炸 当前<b style="color:#e8a33d;">+'+bonus+'%</b>'+(tier<5?'<br>下一档 '+((tier+1)*30)+' 分钟':'<br>已满档')+'</span><span style="display:inline-block;width:44px;height:7px;background:#e5e5ea;border-radius:4px;overflow:hidden;flex-shrink:0;"><span style="display:block;height:100%;width:'+Math.round(seg*100)+'%;background:#e8a33d;border-radius:4px;"></span></span></span>';
+    html+='<span style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;" title="专属·漫画爆炸"><span id="exComicLab" style="font-size:10px;color:#8e8e93;line-height:1.25;text-align:right;">漫画爆炸 当前<b style="color:#e8a33d;">+'+bonus+'%</b>'+(tier<5?'<br>下一档 '+((tier+1)*30)+' 分钟':'<br>已满档')+'</span><span style="display:inline-block;width:44px;height:7px;background:#e5e5ea;border-radius:4px;overflow:hidden;flex-shrink:0;"><span id="exComicBar" style="display:block;height:100%;width:'+Math.round(seg*100)+'%;background:#e8a33d;border-radius:4px;"></span></span></span>';
   }
   if(hasEx(21)){
     const a=st.angel;
@@ -5678,6 +5678,38 @@ function renderDailySkills(){
     card.style.boxShadow=activeColor?'0 0 0 1.5px '+activeColor+'35':'';
   }
 }
+/* v1.5.6.1-h3: 时间型专属功能（漫画爆炸档位/天使恶魔倒计时）自刷新 */
+setInterval(function(){
+  try{
+    var pg=document.getElementById('page-daily');
+    if(!pg||!pg.classList.contains('active'))return;
+    var st=state.exState||{};
+    var need=(typeof hasEx==='function'&&hasEx(19)&&(st.comicStart||st.comicLastClaim||st.comicCharge));
+    if(st.angel&&st.angel.until>Date.now())need=true;
+    if(st.demon&&st.demon.until>Date.now())need=true;
+    if(need)renderDailySkills();
+  }catch(e){}
+},15000);
+/* 漫画爆炸进度条 1 秒级平滑刷新（只改条宽和数字，不重建 DOM、不吞点击） */
+setInterval(function(){
+  try{
+    var pg=document.getElementById('page-daily');
+    if(!pg||!pg.classList.contains('active'))return;
+    if(typeof hasEx!=='function'||!hasEx(19))return;
+    var bar=document.getElementById('exComicBar'),lab=document.getElementById('exComicLab');
+    if(!bar||!lab)return;
+    var st=state.exState||{};
+    var now=Date.now();
+    var start=st.comicStart||now;
+    var el=Math.max(0,(now-start)/60000);
+    var tier=Math.min(5,Math.floor(el/30));
+    var bonus=[0,2,4,6,8,10][tier];
+    var seg=tier<5?(el%30)/30:1;
+    bar.style.width=Math.round(seg*100)+'%';
+    lab.innerHTML='漫画爆炸 当前<b style="color:#e8a33d;">+'+bonus+'%</b>'+(tier<5?'<br>下一档 '+((tier+1)*30)+' 分钟':'<br>已满档');
+  }catch(e){}
+},1000);
+
 function activateAgent(){
   if(!state.brawlSkills)state.brawlSkills={agentPressAt:0,agentUntil:0,agentCdUntil:0,stealthPressAt:0,stealthUntil:0,stealthCdUntil:0,exemptTagId:null};
   const sk=state.brawlSkills,now=Date.now();
@@ -18437,12 +18469,12 @@ var GM={g_mark:'mark',g_medal:'medal',g_badge:'badge',g_peak:'peak'};
 function qtyOf(g){if(GM[g.id])return migrateGlobalMats()[GM[g.id]]||0;return state.inventory[GI[g.id]]||0;}
 function setQty(g,v){if(GM[g.id]){migrateGlobalMats()[GM[g.id]]=v;}else{state.inventory[GI[g.id]]=v;}}
 var PRODUCTS=[
- {id:'f_demand',ic:'⚫',name:'黑币宝',cur:'bc',tag:'活期 · 随存随取',rate:0.05,term:0,desc:'每日结算计息，万份收益制。10⚫起投，单账户上限 500 ⚫。',limit:500,min:10},
- {id:'f_7',ic:'⚫',name:'稳盈 7 天',cur:'bc',tag:'定期 · 7天',rate:0.08,term:7,min:10,desc:'10⚫起投。到期本息自动回包，提前赎回收益清零。'},
- {id:'f_30',ic:'⚫',name:'稳盈 30 天',rate:0.15,term:30,cur:'bc',tag:'定期 · 30天',min:10,desc:'10⚫起投。年化最高稳健档，适合压箱底的黑币。'},
- {id:'f_tk',ic:'🪙',name:'代币季息',cur:'tk',tag:'定期 · 14天',rate:0.05,term:14,min:50,desc:'50🪙起投。给代币一条出路，低息稳健。'},
- {id:'f_pt',ic:'💰',name:'积分周息',cur:'pt',tag:'定期 · 7天',rate:0.04,term:7,min:1000,desc:'1000💰起投。小额顺手，积分不闲置。'},
- {id:'f_idx',ic:'📈',name:'股指挂钩',cur:'bc',tag:'浮动 · 14天',rate:0.20,term:14,risk:true,min:10,desc:'10⚫起投。预期年化 20%，到期收益挂钩大盘：区间 -5% ~ +28%，非保本。'}
+ {id:'f_demand',ic:'⚫',name:'黑币宝',cur:'bc',tag:'活期 · 随存随取',rate:0.001,term:0,desc:'每日结算计息。10⚫起投，单账户上限 500 ⚫。',limit:500,min:10},
+ {id:'f_7',ic:'⚫',name:'稳盈 7 天',cur:'bc',tag:'定期 · 7天',rate:0.015,term:7,min:10,desc:'10⚫起投。到期本息自动回包，提前赎回收益清零。'},
+ {id:'f_30',ic:'⚫',name:'稳盈 30 天',rate:0.08,term:30,cur:'bc',tag:'定期 · 30天',min:10,desc:'10⚫起投。收益最高的稳健档，适合压箱底的黑币。'},
+ {id:'f_tk',ic:'🪙',name:'代币季息',cur:'tk',tag:'定期 · 14天',rate:0.03,term:14,min:50,desc:'50🪙起投。给代币一条出路，低息稳健。'},
+ {id:'f_pt',ic:'💰',name:'积分周息',cur:'pt',tag:'定期 · 7天',rate:0.012,term:7,min:1000,desc:'1000💰起投。小额顺手，积分不闲置。'},
+ {id:'f_idx',ic:'📈',name:'股指挂钩',cur:'bc',tag:'浮动 · 14天',rate:0.28,term:14,risk:true,min:10,desc:'10⚫起投。预期每期 +28% 浮动收益，挂钩大盘区间 -10% ~ +30%，非保本。'}
 ];
 var GOODS=[
  /* cat 映射虚拟股：talent=TAL cup=CUP bra=BRA sp=SPE evo=EVO pot=POT */
@@ -18979,7 +19011,7 @@ function instBCPrice(it){return it.cur==='bc'?it.price:(it.cur==='tk'?it.price/r
 function priceIn(it,cur){return cur===it.cur?it.price:bcTo(cur,instBCPrice(it));}
 /* 汇率：1⚫ 兑多少代币/积分（随汇率盘波动） */
 function rateTK(){return INSTR[0].price/INSTR[0].base*50;}   /* 基准：指数100 ⇔ 1⚫=50🪙 */
-function ratePT(){return INSTR[1].price/INSTR[1].base*9000;} /* 基准：指数100 ⇔ 1⚫=9000💰 */
+function ratePT(){return INSTR[1].price/INSTR[1].base*900;} /* 基准：指数100 ⇔ 1⚫=9000💰 */
 function curName(k){return {bc:'⚫ 黑币',tk:'🪙 代币',pt:'💰 积分'}[k];}
 function curBal(k){return {bc:S.bc,tk:S.tk,pt:S.pt}[k];}
 function bcTo(k,amt){return k==='bc'?amt:(k==='tk'?amt*rateTK():amt*ratePT());}
@@ -19064,13 +19096,13 @@ function finAccrue(){
   Object.keys(S.fin).forEach(function(pid){
     var h=S.fin[pid],p=PRODUCTS.find(function(x){return x.id===pid;});
     h.days++;
-    if(p.term===0){h.accrued+=h.amt*p.rate/365*(S.pool>100?1.1:S.pool<40?0.7:1);}
+    if(p.term===0){h.accrued+=h.amt*p.rate*(S.pool>100?1.1:S.pool<40?0.7:1);}
     else if(h.days>=p.term){
       var gain=0;
       if(p.risk){
         var ret=(S.idx/h.idxStart-1);
-        gain=h.amt*Math.max(-0.05,Math.min(0.28,0.20*ret/0.06));
-      }else gain=h.amt*p.rate*(p.term/365);
+        gain=h.amt*Math.max(-0.10,Math.min(0.30,ret*1.2));
+      }else gain=h.amt*p.rate;
       h.mature=true;h.matureGain=Math.round(gain*100)/100;
     }
   });
@@ -19241,12 +19273,12 @@ function v2finPactHtml(p){
  var d=new Date();var ds=d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日';
  var termTxt=p.term===0?'活期（随存随取）':p.term+' 天定期';
  return '<h3 style="text-align:center;color:#f0d9a2;font-size:13.5px;letter-spacing:.18em;margin-bottom:10px">《理财产品申购协议与风险揭示书》</h3>'
- +'<p style="text-align:center;font-family:var(--mono);font-size:10px;color:#8d7c5f;letter-spacing:.12em;margin:-4px 0 10px">签署日期：'+ds+' · 产品：'+p.name+' · 参考年化 '+(p.rate*100).toFixed(0)+'% · '+termTxt+'</p>'
+ +'<p style="text-align:center;font-family:var(--mono);font-size:10px;color:#8d7c5f;letter-spacing:.12em;margin:-4px 0 10px">签署日期：'+ds+' · 产品：'+p.name+' · 每期收益率 '+(p.rate*100).toFixed(1)+'% · '+termTxt+'</p>'
  +'<p><b style="color:#e6d3ac">甲方（投资者）：</b>本系统参赛者<br><b style="color:#e6d3ac">乙方（管理人）：</b>考研EP系统金融中心理财业务运营方</p>'
- +'<p><b style="color:#e6d3ac">一、产品要素</b><br>1.1 产品名称：'+p.name+'；参考年化收益率 '+(p.rate*100).toFixed(0)+'%；产品期限：'+termTxt+'；起投金额：'+p.min+(p.limit?('；单账户持仓上限 '+p.limit):'')+'。<br>1.2 收益类型：'+(p.risk?'浮动收益型（非保本）':'稳健收益型')+'；风险等级：'+(p.risk?'R4 中高风险':'R1-R2 低风险')+'。</p>'
- +'<p><b style="color:#e6d3ac">二、收益计算与分配</b><br>2.1 活期产品采用万份收益制，自申购确认之日起按日计息，收益并入持仓，随存随取。<br>2.2 定期产品到期一次性还本付息：利息 = 本金 × 参考年化 × 实际持有天数 ÷ 365，到期自动回包。<br>2.3 理财收益池来源于股市手续费收入的 50% 再分配，池子规模每日公示；池子充裕时活期收益上浮、紧张时下浮。</p>'
- +'<p><b style="color:#e6d3ac">三、赎回规则</b><br>3.1 活期：随时赎回，本息即时到账。<br>3.2 定期：仅支持到期赎回；若提前赎回，仅返还本金，已计提收益全部清零，请谨慎安排资金。<br>3.3 股指挂钩（如适用）：到期收益与大盘指数区间表现挂钩，区间为 -5% ~ +28%，不承诺保本，最坏情况下可能亏损本金 5%。</p>'
- +'<p><b style="color:#e6d3ac">四、风险提示（重要）</b><br>4.1 本金风险：除股指挂钩产品明确可能亏损外，其余产品为系统内稳健计息设计，但仍可能因规则调整而变动。<br>4.2 流动性风险：定期产品持有期内资金不可用，请预留日常开销。<br>4.3 收益不达预期：参考年化不代表承诺收益，实际收益以到期结算为准。</p>'
+ +'<p><b style="color:#e6d3ac">一、产品要素</b><br>1.1 产品名称：'+p.name+'；每期参考收益率 '+(p.rate*100).toFixed(1)+'%；产品期限：'+termTxt+'；起投金额：'+p.min+(p.limit?('；单账户持仓上限 '+p.limit):'')+'。<br>1.2 收益类型：'+(p.risk?'浮动收益型（非保本）':'稳健收益型')+'；风险等级：'+(p.risk?'R4 中高风险':'R1-R2 低风险')+'。</p>'
+ +'<p><b style="color:#e6d3ac">二、收益计算与分配</b><br>2.1 活期产品采用万份收益制，自申购确认之日起按日计息，收益并入持仓，随存随取。<br>2.2 定期产品到期一次性还本付息：利息 = 本金 × 每期收益率，到期自动回包。<br>2.3 理财收益池来源于股市手续费收入的 50% 再分配，池子规模每日公示；池子充裕时活期收益上浮、紧张时下浮。</p>'
+ +'<p><b style="color:#e6d3ac">三、赎回规则</b><br>3.1 活期：随时赎回，本息即时到账。<br>3.2 定期：仅支持到期赎回；若提前赎回，仅返还本金，已计提收益全部清零，请谨慎安排资金。<br>3.3 股指挂钩（如适用）：到期收益与大盘指数区间表现挂钩，区间为 -10% ~ +30%，不承诺保本，最坏情况下可能亏损本金 10%。</p>'
+ +'<p><b style="color:#e6d3ac">四、风险提示（重要）</b><br>4.1 本金风险：除股指挂钩产品明确可能亏损外，其余产品为系统内稳健计息设计，但仍可能因规则调整而变动。<br>4.2 流动性风险：定期产品持有期内资金不可用，请预留日常开销。<br>4.3 收益不达预期：每期收益率不代表承诺收益，实际收益以到期结算为准。</p>'
  +'<p><b style="color:#e6d3ac">五、信息披露</b><br>5.1 产品要素、收益池规模、持仓与收益明细均在理财面板实时公示，甲方应自行关注。</p>'
  +'<p><b style="color:#e6d3ac">六、禁止与违约</b><br>6.1 严禁利用漏洞套取收益；违者平台有权清零违规收益并追回。</p>'
  +'<p><b style="color:#e6d3ac">七、电子签署效力</b><br>7.1 甲方勾选「我已阅读协议」并点击「确认申购」，即视为已阅读并同意本协议全部条款，申购记录以系统数据为准。</p>'
@@ -19451,7 +19483,7 @@ function renderFin(){
     var held=S.fin[p.id];
     var curName={bc:'⚫',tk:'🪙',pt:'💰'}[p.cur];
     return '<div class="fin-card"><div class="fin-top"><span class="fin-name">'+p.ic+' '+p.name+'</span><span class="fin-tag'+(p.risk?' risk':'')+'">'+p.tag+'</span></div>'
-     +'<div class="fin-rate">'+(p.rate*100).toFixed(0)+'%<small> 参考年化</small></div>'
+     +'<div class="fin-rate">'+(p.rate*100).toFixed(1)+'%<small> 每期</small></div>'
      +'<div class="fin-desc">'+p.desc+(held?'<br><b style="color:#7cc4ff">已投 '+fmt(held.amt)+' '+curName+' · '+held.days+'/'+ (p.term||'∞') +' 天'+(held.accrued>0?' · 已计息 +'+fmt(held.accrued):'')+'</b>':'')+'</div>'
      +'<div class="fin-act"><button class="btn gold" onclick="finBuy(\''+p.id+'\')">申 购</button>'
      +(held?'<button class="btn" onclick="finRedeem(\''+p.id+'\')">'+(held.mature?'赎 回':'提前赎回')+'</button>':'')
@@ -19575,7 +19607,7 @@ var finTarget=null;
 function finBuy(pid){
   finTarget=PRODUCTS.find(function(x){return x.id===pid;});
   FE('f-finT').textContent='申购 · '+finTarget.name;
-  FE('f-finInfo').innerHTML='参考年化 <b style="color:#ffd60a;font-family:var(--mono)">'+(finTarget.rate*100).toFixed(0)+'%</b> · '+(finTarget.term?('期限 '+finTarget.term+' 天'):'活期随存随取')+'<br><span style="font-size:10.5px;color:#8d7c5f">'+finTarget.desc+'</span>';
+  FE('f-finInfo').innerHTML='每期收益率 <b style="color:#ffd60a;font-family:var(--mono)">'+(finTarget.rate*100).toFixed(0)+'%</b> · '+(finTarget.term?('期限 '+finTarget.term+' 天'):'活期随存随取')+'<br><span style="font-size:10.5px;color:#8d7c5f">'+finTarget.desc+'</span>';
   FE('f-finAmt').value='';
   updFinConv();
   FE('fmoFin').classList.add('show');
