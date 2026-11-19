@@ -1,7 +1,10 @@
 /* ============================================================
-   考研EP系统 v1.5.6.1 热修复补丁 · build 20261113-1015
+   考研EP系统 v1.5.6.2 热修复补丁 · build 20261119-0030
    = index.html 内嵌全套（金融中心/杯赛竞技v2/两位小数/公告注入）
+   代码原样抽取自 index.html build 20261112-0112（含冲刺杯悬赏逻辑）
+   公告段合并自旧 sw.js build 20261118-0030（v1.5.6.2 / v1.5.6.1 热修复置顶）
    守卫 __fin156 / __v2cuparena / __money2dp，已内嵌时自动跳过
+   源 index.html md5 e6acd5e4a74db29d880e2e118b154405
    ============================================================ */
 /* ================= v1.5.6「协议时代」· 金融中心 ================= */
 (function(){
@@ -66,6 +69,7 @@ var GOODS=[
  {id:'g_exp2',cat:'evo',ic:'⚡',n:'2倍经验卡',baseBC:0.44,qty:1},
  {id:'g_exp3',cat:'evo',ic:'⚡',n:'3倍经验卡',baseBC:1.4,qty:1},
  {id:'g_coupon',cat:'pot',ic:'🎴',n:'高级功能半价券',baseBC:0.3,qty:2},
+ {id:'g_potrial',cat:'pot',ic:'🧪',n:'潜能体验卡',baseBC:0.4,qty:2},
  {id:'g_trial',cat:'pot',ic:'🧪',n:'潜能体验卡',baseBC:0.4,qty:1},
  {id:'g_golddie',cat:'bra',ic:'🎲',n:'金骰子',baseBC:0.16,qty:1,rare:true},
  {id:'g_slotext',cat:'talent',ic:'🗳️',n:'天赋槽位扩展券',baseBC:355,qty:0,rare:true,unique:true},
@@ -91,139 +95,6 @@ if(!FIN.ghosts)FIN.ghosts=null;
 if(!FIN.gList)FIN.gList=[];
 if(!FIN.tq)FIN.tq={};
 if(!FIN.xEventLog)FIN.xEventLog=[];
-var S={get bc(){return state.blackCoin||0},set bc(v){state.blackCoin=v},
- get tk(){return state.tokens||0},set tk(v){state.tokens=v},
- get pt(){return state.points||0},set pt(v){state.points=v},
- get pos(){return FIN.pos},get fin(){return FIN.fin},
- get pool(){return FIN.pool},set pool(v){FIN.pool=v},
- get idx(){return FIN.idx},set idx(v){FIN.idx=v},
- get idxHist(){return FIN.idxHist},set idxHist(v){FIN.idxHist=v},
- get news(){return FIN.news},set news(v){FIN.news=v}};
-var X={get bag(){if(!FIN.bag)FIN.bag=[];return FIN.bag},
- get listings(){if(!FIN.listings)FIN.listings=[];return FIN.listings},
- get mkt(){if(!FIN.mkt)FIN.mkt={};return FIN.mkt},
- get volLog(){if(!FIN.volLog)FIN.volLog={};return FIN.volLog}};
-GOODS.forEach(function(g){
-  X.mkt[g.id]={demand:1,vol:20+Math.random()*60,prevGuide:0};
-  X.volLog[g.id]=[X.mkt[g.id].vol];
-});
-/* 首启初始化行情 */
-GOODS.forEach(function(g){
-  if(!X.mkt[g.id])X.mkt[g.id]={demand:1,vol:20+Math.floor(Math.random()*60),prevGuide:0};
-  if(!X.volLog[g.id])X.volLog[g.id]=[X.mkt[g.id].vol];
-});
-/* 指导价（代币）= 黑币基准 × 实时汇率 × 需求因子 */
-function guideTK(g){var fund=(FIN.fund&&typeof FIN.fund[g.id]==='number')?FIN.fund[g.id]:g.baseBC;return fund*rateTK()*X.mkt[g.id].demand;}
-function goodOf(id){return GOODS.find(function(x){return x.id===id;});}
-
-
-var curTab='fx', curInst=null, payCur='bc', sellCur='bc', viewCur='bc', finCur='bc';
-var rowView={};   /* 每行独立计价币种 */
-/* 持仓按币种分仓：S.pos[id] = {bc:{qty,cost}, tk:{...}, pt:{...}} */
-function posLot(id,cur){var p=S.pos[id];return (p&&p[cur])?p[cur]:{qty:0,cost:0};}
-function posTotal(id){var p=S.pos[id],t=0;if(p)['bc','tk','pt'].forEach(function(c){t+=p[c]?p[c].qty:0;});return t;}
-function instCurs(it){return it.tab==='fx'?(it.id==='fx_bt'?['bc','tk']:(it.id==='fx_bp'?['bc','pt']:['tk','pt'])):[it.cur];}
-function instUnit(it){return {bc:'⚫',tk:'🪙',pt:'💰'}[it.cur];}
-function instBCPrice(it){return it.cur==='bc'?it.price:(it.cur==='tk'?it.price/rateTK():it.price/ratePT());}
-function priceIn(it,cur){return cur===it.cur?it.price:bcTo(cur,instBCPrice(it));}
-/* 汇率：1⚫ 兑多少代币/积分（随汇率盘波动） */
-function rateTK(){return INSTR[0].price/INSTR[0].base*50;}   /* 基准：指数100 ⇔ 1⚫=50🪙 */
-function ratePT(){return INSTR[1].price/INSTR[1].base*900;} /* 基准：指数100 ⇔ 1⚫=9000💰 */
-function curName(k){return {bc:'⚫ 黑币',tk:'🪙 代币',pt:'💰 积分'}[k];}
-function curBal(k){return {bc:S.bc,tk:S.tk,pt:S.pt}[k];}
-function bcTo(k,amt){return k==='bc'?amt:(k==='tk'?amt*rateTK():amt*ratePT());}
-function payFrom(k,amt){
-  if(k==='bc')S.bc-=amt;else if(k==='tk')S.tk-=amt;else S.pt-=amt;
-}
-function gainTo(k,amt){
-  if(k==='bc')S.bc+=amt;else if(k==='tk')S.tk+=amt;else S.pt+=amt;
-}
-
-/* ================= 行情引擎 ================= */
-function idxOfDay(d){return S.idxHist[d-1]||3000;}
-function tickMarket(){
-  var rng=srand(SEED+FIN.day*7919);
-  var sentiment=(window.__finSent!==null&&window.__finSent!==undefined)?window.__finSent:(rng()*2-1)*0.02;
-  var newsPool=[
-   {t:'🏛️ 央行降准，流动性宽松，市场全线走强',r:+0.06},
-   {t:'⚠️ 外围市场大跌，避险情绪升温',r:-0.05},
-   {t:'📰 行业利好：天赋改革政策出台',r:+0.04,tab:'stock'},
-   {t:'📰 杯赛赛季开启，相关板块活跃',r:+0.04,tab:'stock'},
-   {t:'📰 汇率波动加剧，汇市交易活跃',r:+0.03,tab:'fx'},
-   {t:'🦢 黑天鹅：某概念股业绩暴雷，板块承压',r:-0.07,tab:'stock'}
-  ];
-  var ev=rng()<0.10?newsPool[Math.floor(rng()*newsPool.length)]:null;
-  S.news=ev?ev.t+'（影响相关板块）':'📰 今日无重大消息，市场观望情绪浓厚。';
-  INSTR.forEach(function(it,i){
-    var r=(rng()*2-1)*0.03+sentiment;
-    if(ev&&(!ev.tab||ev.tab===it.tab))r+=ev.r*(0.6+rng()*0.8);
-    var anchor=it.base;
-    if(it.id==='fx_tp'){
-      /* 交叉盘锚定隐含汇率：BC/PT ÷ BC/TK，杜绝三角套利 */
-      anchor=it.base*(INSTR[1].price/INSTR[1].base)/(INSTR[0].price/INSTR[0].base);
-    }
-    r+=(anchor/it.price-1)*0.06;               /* 均值回归：向锚拉回，防失血/冻结 */
-    if(it.__xmom)r+=it.__xmom;                 /* 交易所板块热度传导 */
-    r=Math.max(-0.10,Math.min(0.10,r));
-    var o=it.price,c=o*(1+r);
-    c=Math.max(it.base*0.2,Math.min(it.base*5,c));   /* 宽区间护栏 */
-    c=Math.round(c*100)/100;
-    var h=Math.round(Math.max(o,c)*(1+rng()*0.02)*100)/100;
-    var l=Math.round(Math.min(o,c)*(1-rng()*0.02)*100)/100;
-    it.hist.push({o:o,c:c,h:h,l:l});
-    if(it.hist.length>40)it.hist.shift();
-    it.price=c;
-  });
-  /* 交易所：各货成交量驱动需求因子（影响指导价），并汇总板块动量喂给概念股 */
-  var catVol={talent:0,cup:0,bra:0,sp:0,evo:0,pot:0},catAvg={talent:0,cup:0,bra:0,sp:0,evo:0,pot:0};
-  GOODS.forEach(function(g){
-    var m=X.mkt[g.id];
-    var rng2=srand(SEED+FIN.day*7919+g.id.length*131+g.baseBC*1000);
-    /* 成交量：每日锚定基准盘(20-80) × 价格波动放大，杜绝复利爆炸；撮合成交另加 */
-    var move=(m.demand-1);
-    var vol=(20+rng2()*60)*(1+Math.abs(move)*6);
-    m.vol=Math.round(vol);
-    var _tq=(FIN.tq||{})[g.id]||0;
-    if(_tq){m.vol+=_tq;FIN.tq[g.id]=0;}
-    X.volLog[g.id].push(m.vol);if(X.volLog[g.id].length>40)X.volLog[g.id].shift();
-    m.demand+=(rng2()*2-1)*0.06+( (m.vol/(X.volLog[g.id].slice(-7, -1).reduce(function(a,b){return a+b;},0)/Math.max(1,X.volLog[g.id].slice(-7,-1).length)||m.vol))-1 )*0.04;
-    m.demand+=(1-m.demand)*0.15;                      /* 向1回归 */
-    m.demand=Math.max(0.8,Math.min(1.25,m.demand));    /* ±20%带 */
-    catVol[g.cat]+=m.vol;catAvg[g.cat]+=m.vol;
-  });
-  Object.keys(catAvg).forEach(function(c){catAvg[c]=catAvg[c]||1;});
-  var catMom={};
-  Object.keys(catVol).forEach(function(c){catMom[c]=catVol[c]/ (catAvg[c]||1); });
-  window.__catMom=catMom;
-  /* 概念股：板块交易热度推动股价（±2%上限） */
-  INSTR.forEach(function(it){
-    if(it.tab!=='stock')return;
-    var mom=(window.__catMom[it.code==='TAL'?'talent':(it.code==='CUP'?'cup':(it.code==='BRA'?'bra':(it.code==='SPE'?'sp':(it.code==='EVO'?'evo':'pot'))))]||1)-1;
-    it.__xmom=Math.max(-0.02,Math.min(0.02,mom*0.02));
-  });
-    xMatchRound(true,1);
-    econTick();
-    dauTick();
-S.idx=Math.round(3000*INSTR.filter(function(x){return x.tab==='stock'}).reduce(function(s,x){return s+x.price/x.base;},0)/6*100)/100;
-  S.idxHist.push(S.idx);if(S.idxHist.length>40)S.idxHist.shift();
-  FIN.day++;
-}
-/* ================= 理财引擎 ================= */
-function finAccrue(){
-  Object.keys(S.fin).forEach(function(pid){
-    var h=S.fin[pid],p=PRODUCTS.find(function(x){return x.id===pid;});
-    h.days++;
-    if(p.term===0){h.accrued+=h.amt*p.rate*(S.pool>100?1.1:S.pool<40?0.7:1);}
-    else if(h.days>=p.term){
-      var gain=0;
-      if(p.risk){
-        var ret=(S.idx/h.idxStart-1);
-        gain=h.amt*Math.max(-0.10,Math.min(0.30,ret*1.2));
-      }else gain=h.amt*p.rate;
-      h.mature=true;h.matureGain=Math.round(gain*100)/100;
-    }
-  });
-}
 /* ================= 幽灵交易所 v1.5.6-g1 ================= */
 var GX_SURN=['张','李','王','赵','刘','陈','杨','黄','周','吴','徐','孙','马','朱','胡','郭','何','林','罗','郑'];
 var GX_NICK=['夜航','灯下','卷王','刷题','早起','续杯','词霸','上岸','黑马','稳过','三点钟','打铃','满勤','错题本','框架','回放','二刷','蹲馆','守夜','拾光','观澜','沉舟'];
@@ -679,6 +550,139 @@ function xCatchUp(){
 }
 /* ================= 万人在线虚拟市场 END ================= */
 
+var S={get bc(){return state.blackCoin||0},set bc(v){state.blackCoin=v},
+ get tk(){return state.tokens||0},set tk(v){state.tokens=v},
+ get pt(){return state.points||0},set pt(v){state.points=v},
+ get pos(){return FIN.pos},get fin(){return FIN.fin},
+ get pool(){return FIN.pool},set pool(v){FIN.pool=v},
+ get idx(){return FIN.idx},set idx(v){FIN.idx=v},
+ get idxHist(){return FIN.idxHist},set idxHist(v){FIN.idxHist=v},
+ get news(){return FIN.news},set news(v){FIN.news=v}};
+var X={get bag(){if(!FIN.bag)FIN.bag=[];return FIN.bag},
+ get listings(){if(!FIN.listings)FIN.listings=[];return FIN.listings},
+ get mkt(){if(!FIN.mkt)FIN.mkt={};return FIN.mkt},
+ get volLog(){if(!FIN.volLog)FIN.volLog={};return FIN.volLog}};
+GOODS.forEach(function(g){
+  X.mkt[g.id]={demand:1,vol:20+Math.random()*60,prevGuide:0};
+  X.volLog[g.id]=[X.mkt[g.id].vol];
+});
+/* 首启初始化行情 */
+GOODS.forEach(function(g){
+  if(!X.mkt[g.id])X.mkt[g.id]={demand:1,vol:20+Math.floor(Math.random()*60),prevGuide:0};
+  if(!X.volLog[g.id])X.volLog[g.id]=[X.mkt[g.id].vol];
+});
+/* 指导价（代币）= 黑币基准 × 实时汇率 × 需求因子 */
+function guideTK(g){var fund=(FIN.fund&&typeof FIN.fund[g.id]==='number')?FIN.fund[g.id]:g.baseBC;return fund*rateTK()*X.mkt[g.id].demand;}
+function goodOf(id){return GOODS.find(function(x){return x.id===id;});}
+
+
+var curTab='fx', curInst=null, payCur='bc', sellCur='bc', viewCur='bc', finCur='bc';
+var rowView={};   /* 每行独立计价币种 */
+/* 持仓按币种分仓：S.pos[id] = {bc:{qty,cost}, tk:{...}, pt:{...}} */
+function posLot(id,cur){var p=S.pos[id];return (p&&p[cur])?p[cur]:{qty:0,cost:0};}
+function posTotal(id){var p=S.pos[id],t=0;if(p)['bc','tk','pt'].forEach(function(c){t+=p[c]?p[c].qty:0;});return t;}
+function instCurs(it){return it.tab==='fx'?(it.id==='fx_bt'?['bc','tk']:(it.id==='fx_bp'?['bc','pt']:['tk','pt'])):[it.cur];}
+function instUnit(it){return {bc:'⚫',tk:'🪙',pt:'💰'}[it.cur];}
+function instBCPrice(it){return it.cur==='bc'?it.price:(it.cur==='tk'?it.price/rateTK():it.price/ratePT());}
+function priceIn(it,cur){return cur===it.cur?it.price:bcTo(cur,instBCPrice(it));}
+/* 汇率：1⚫ 兑多少代币/积分（随汇率盘波动） */
+function rateTK(){return INSTR[0].price/INSTR[0].base*50;}   /* 基准：指数100 ⇔ 1⚫=50🪙 */
+function ratePT(){return INSTR[1].price/INSTR[1].base*900;} /* 基准：指数100 ⇔ 1⚫=9000💰 */
+function curName(k){return {bc:'⚫ 黑币',tk:'🪙 代币',pt:'💰 积分'}[k];}
+function curBal(k){return {bc:S.bc,tk:S.tk,pt:S.pt}[k];}
+function bcTo(k,amt){return k==='bc'?amt:(k==='tk'?amt*rateTK():amt*ratePT());}
+function payFrom(k,amt){
+  if(k==='bc')S.bc-=amt;else if(k==='tk')S.tk-=amt;else S.pt-=amt;
+}
+function gainTo(k,amt){
+  if(k==='bc')S.bc+=amt;else if(k==='tk')S.tk+=amt;else S.pt+=amt;
+}
+
+/* ================= 行情引擎 ================= */
+function idxOfDay(d){return S.idxHist[d-1]||3000;}
+function tickMarket(){
+  var rng=srand(SEED+FIN.day*7919);
+  var sentiment=(window.__finSent!==null&&window.__finSent!==undefined)?window.__finSent:(rng()*2-1)*0.02;
+  var newsPool=[
+   {t:'🏛️ 央行降准，流动性宽松，市场全线走强',r:+0.06},
+   {t:'⚠️ 外围市场大跌，避险情绪升温',r:-0.05},
+   {t:'📰 行业利好：天赋改革政策出台',r:+0.04,tab:'stock'},
+   {t:'📰 杯赛赛季开启，相关板块活跃',r:+0.04,tab:'stock'},
+   {t:'📰 汇率波动加剧，汇市交易活跃',r:+0.03,tab:'fx'},
+   {t:'🦢 黑天鹅：某概念股业绩暴雷，板块承压',r:-0.07,tab:'stock'}
+  ];
+  var ev=rng()<0.10?newsPool[Math.floor(rng()*newsPool.length)]:null;
+  S.news=ev?ev.t+'（影响相关板块）':'📰 今日无重大消息，市场观望情绪浓厚。';
+  INSTR.forEach(function(it,i){
+    var r=(rng()*2-1)*0.03+sentiment;
+    if(ev&&(!ev.tab||ev.tab===it.tab))r+=ev.r*(0.6+rng()*0.8);
+    var anchor=it.base;
+    if(it.id==='fx_tp'){
+      /* 交叉盘锚定隐含汇率：BC/PT ÷ BC/TK，杜绝三角套利 */
+      anchor=it.base*(INSTR[1].price/INSTR[1].base)/(INSTR[0].price/INSTR[0].base);
+    }
+    r+=(anchor/it.price-1)*0.06;               /* 均值回归：向锚拉回，防失血/冻结 */
+    if(it.__xmom)r+=it.__xmom;                 /* 交易所板块热度传导 */
+    r=Math.max(-0.10,Math.min(0.10,r));
+    var o=it.price,c=o*(1+r);
+    c=Math.max(it.base*0.2,Math.min(it.base*5,c));   /* 宽区间护栏 */
+    c=Math.round(c*100)/100;
+    var h=Math.round(Math.max(o,c)*(1+rng()*0.02)*100)/100;
+    var l=Math.round(Math.min(o,c)*(1-rng()*0.02)*100)/100;
+    it.hist.push({o:o,c:c,h:h,l:l});
+    if(it.hist.length>40)it.hist.shift();
+    it.price=c;
+  });
+  /* 交易所：各货成交量驱动需求因子（影响指导价），并汇总板块动量喂给概念股 */
+  var catVol={talent:0,cup:0,bra:0,sp:0,evo:0,pot:0},catAvg={talent:0,cup:0,bra:0,sp:0,evo:0,pot:0};
+  GOODS.forEach(function(g){
+    var m=X.mkt[g.id];
+    var rng2=srand(SEED+FIN.day*7919+g.id.length*131+g.baseBC*1000);
+    /* 成交量：每日锚定基准盘(20-80) × 价格波动放大，杜绝复利爆炸；撮合成交另加 */
+    var move=(m.demand-1);
+    var vol=(20+rng2()*60)*(1+Math.abs(move)*6);
+    m.vol=Math.round(vol);
+    var _tq=(FIN.tq||{})[g.id]||0;
+    if(_tq){m.vol+=_tq;FIN.tq[g.id]=0;}
+    X.volLog[g.id].push(m.vol);if(X.volLog[g.id].length>40)X.volLog[g.id].shift();
+    m.demand+=(rng2()*2-1)*0.06+( (m.vol/(X.volLog[g.id].slice(-7, -1).reduce(function(a,b){return a+b;},0)/Math.max(1,X.volLog[g.id].slice(-7,-1).length)||m.vol))-1 )*0.04;
+    m.demand+=(1-m.demand)*0.15;                      /* 向1回归 */
+    m.demand=Math.max(0.8,Math.min(1.25,m.demand));    /* ±20%带 */
+    catVol[g.cat]+=m.vol;catAvg[g.cat]+=m.vol;
+  });
+  Object.keys(catAvg).forEach(function(c){catAvg[c]=catAvg[c]||1;});
+  var catMom={};
+  Object.keys(catVol).forEach(function(c){catMom[c]=catVol[c]/ (catAvg[c]||1); });
+  window.__catMom=catMom;
+  /* 概念股：板块交易热度推动股价（±2%上限） */
+  INSTR.forEach(function(it){
+    if(it.tab!=='stock')return;
+    var mom=(window.__catMom[it.code==='TAL'?'talent':(it.code==='CUP'?'cup':(it.code==='BRA'?'bra':(it.code==='SPE'?'sp':(it.code==='EVO'?'evo':'pot'))))]||1)-1;
+    it.__xmom=Math.max(-0.02,Math.min(0.02,mom*0.02));
+  });
+    xMatchRound(true,1);
+    econTick();
+    dauTick();
+S.idx=Math.round(3000*INSTR.filter(function(x){return x.tab==='stock'}).reduce(function(s,x){return s+x.price/x.base;},0)/6*100)/100;
+  S.idxHist.push(S.idx);if(S.idxHist.length>40)S.idxHist.shift();
+  FIN.day++;
+}
+/* ================= 理财引擎 ================= */
+function finAccrue(){
+  Object.keys(S.fin).forEach(function(pid){
+    var h=S.fin[pid],p=PRODUCTS.find(function(x){return x.id===pid;});
+    h.days++;
+    if(p.term===0){h.accrued+=h.amt*p.rate*(S.pool>100?1.1:S.pool<40?0.7:1);}
+    else if(h.days>=p.term){
+      var gain=0;
+      if(p.risk){
+        var ret=(S.idx/h.idxStart-1);
+        gain=h.amt*Math.max(-0.10,Math.min(0.30,ret*1.2));
+      }else gain=h.amt*p.rate;
+      h.mature=true;h.matureGain=Math.round(gain*100)/100;
+    }
+  });
+}
 /* ================= 渲染 ================= */
 function fmt(n){return (Math.round(n*100)/100).toLocaleString('en-US');}
 function clsOf(r){return r>=0?'up':'down';}
@@ -1421,7 +1425,6 @@ try{
   });
 }catch(e){}
 })();
-/* ================= v1.5.6 金融中心 END ================= */
 
 /* ================= 杯赛×竞技 v2 正式移植 build 20261112 ================= */
 (function(){
@@ -1501,26 +1504,60 @@ function v2rollDay(){
  if(CV.extra){var rest=opts.filter(function(i){return i!==CV.dayType;});CV.dayType2=rest[v2hash('Y'+v2dkey())%rest.length];}
  else CV.dayType2=-1;
 }
+function v2settleCup(id){try{
+  var cup=v2cupById(id),score=v2cupScore(cup),granted=[];
+  v2tiers(cup).forEach(function(t,i){var k=id+':'+i;if(!CV.claimed[k]&&score>=cup.ths[i]){CV.claimed[k]=true;granted.push(t);v2grant(t);}});
+  if(granted.length){
+    CV.lastSettle=CV.lastSettle||{};
+    CV.lastSettle[id]={name:v2cupName(cup),score:score,granted:granted,at:Date.now()};
+    try{toast('📦 上期「'+v2cupName(cup)+'」奖励已自动结算 '+granted.length+' 档：'+granted.slice(0,3).join('、')+(granted.length>3?' 等':''));}catch(e){}
+  }
+  delete CV.joined[id];delete CV.ended[id];delete CV.scores[id];Object.keys(CV.claimed).forEach(function(k){if(k.indexOf(id+':')===0)delete CV.claimed[k];});
+ }catch(e){}}
+function v2dismissSettle(id){try{if(CV.lastSettle)delete CV.lastSettle[id];v2save();v2renderCup(v2cupById(id));}catch(e){}}
 function v2rollCheck(){
+ /* 一次性清扫：joined+ended 并存=旧周期遗留（历史版本无重置机制），立即结算清账 */
+ ['day','day2','sprint','champ','wkpt','core','biwk'].forEach(function(id){if(CV.ended[id])v2settleCup(id);});
  var wk=v2wkey(),bk=v2bikey(),dk=v2dkey();
  if(CV.dk!==dk){
   if(CV.dk){
    Object.keys(CV.joined).forEach(function(id){if((id==='day'||id==='day2')&&CV.joined[id]&&!CV.ended[id])CV.ended[id]=true;});
+   ['day','day2'].forEach(function(id){if(CV.ended[id])v2settleCup(id);});
   }
   CV.dk=dk;v2rollDay();
  }
  if(CV.wk!==wk){
-  if(CV.wk){['sprint','champ','wkpt','core'].forEach(function(id){if(CV.joined[id]&&!CV.ended[id])CV.ended[id]=true;});}
+  if(CV.wk){['sprint','champ','wkpt','core'].forEach(function(id){if(CV.joined[id]&&!CV.ended[id])CV.ended[id]=true;});
+   ['sprint','champ','wkpt','core'].forEach(function(id){if(CV.ended[id])v2settleCup(id);});}
   CV.wk=wk;CV.trophies=0;CV.tby={};
  }
  if(CV.bk!==bk){
   if(CV.bk&&CV.joined.biwk&&!CV.ended.biwk)CV.ended.biwk=true;
+  if(CV.bk&&CV.ended.biwk)v2settleCup('biwk');
   CV.bk=bk;
  }
  if(AV.wk!==wk){
   AV.wk=wk;AV.preReg=false;AV.joined=false;AV.placed=false;AV.league=-1;AV.placeScore=0;AV.pts=1000;AV.placeEP=0;AV.revenge=[];AV.pendingG=null;AV.chDay='';AV.optDay='';
   v2initGhosts();
  }
+ v2rollSprintTag();
+}
+function v2rollSprintTag(){
+ try{
+  if(!CV.joined['sprint']||CV.ended['sprint'])return;
+  if(!state.tasksLocked)return;
+  var dk=v2dkey();
+  if(CV.sprintTag&&CV.sprintTag.dk===dk&&CV.sprintTag.tag)return;
+  var tags=[];
+  (state.todayTasks||[]).forEach(function(t){
+   if(!t.tagId)return;
+   try{var tg=getTag(t.tagId);if(tg&&tg.path){var p=tg.path.join('·');if(tags.indexOf(p)<0)tags.push(p);}}catch(e){}
+  });
+  if(!tags.length){CV.sprintTag={dk:dk,tag:null};return;}
+  var pick=tags[Math.floor(Math.random()*tags.length)];
+  CV.sprintTag={dk:dk,tag:pick};
+  try{toast('🏆 冲刺杯今日悬赏标签：'+pick+' · 完成≥1个得1杯，总EP≥60%得2杯、≥90%得3杯（日上限3）');}catch(e){}
+ }catch(e){}
 }
 /* ---------- 今日任务得分 ---------- */
 function v2todayRaw(){var s=0;(state.todayTasks||[]).forEach(function(t){var e=parseFloat(t.baseEp);if(e>0)s+=e;});return s;}
@@ -1609,8 +1646,10 @@ function v2sign(){
  if(CV.joined[id]){v2closePact();v2toast('已报名');return;}
  var en=state.cupV3.energy||0;
  if(en<cup.e){v2toast('能量不足（剩 '+en+' 点）');return;}
- state.cupV3.energy=en-cup.e;CV.joined[id]=true;CV.scores[id]=CV.scores[id]||0;
+ state.cupV3.energy=en-cup.e;CV.joined[id]=true;
+ delete CV.ended[id];CV.scores[id]=0;
  v2closePact();v2toast('🎉 报名成功：'+v2cupName(cup)+'（-'+cup.e+' 能量）');
+ try{if(typeof window.cupSignFX==='function')window.cupSignFX(v2cupName(cup),cup.e);}catch(e){}
  v2renderCup();v2save();
 }
 function v2claimAll(id){
@@ -1653,7 +1692,18 @@ function v2renderCup(){
   +(joined?(ended?(claimN>0?'<span class="chip pill" style="border-color:rgba(255,214,10,.6);color:#ffd60a">已结束 · 待领取 '+claimN+' 档</span>':'<span class="chip pill">已结束 · 已领完</span>'):'<span class="chip pill" style="border-color:rgba(124,196,255,.4);color:#7cc4ff">进行中 · 已报名 ⚡'+cup.e+'</span>')
     :'<button class="btn gold" onclick="v2openPact(\''+cup.id+'\')">📜 报名 ⚡'+cup.e+'</button>')+'</div>';
  html+='<div class="cup-rest'+((!joined&&!ended)?' dimmed':'')+'">';
- if(tags)html+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">'+tags.map(function(t,i){var cur=isSpr?(i===(v2now().getDay()-1)):true;return '<span class="chip" style="'+(cur?'border-color:rgba(255,214,10,.55);color:#ffd60a':'opacity:.55')+'">'+t+(isSpr?(' · '+v2DAYS[i+1]):'')+(cur&&isSpr?' ◀':'')+'</span>';}).join('')+'</div>';
+ if(isSpr){
+  var st3=CV.sprintTag;
+  if(st3&&st3.tag){html+='<div style="padding:10px 13px;margin-bottom:10px;border:1.5px solid rgba(255,214,10,.55);border-radius:12px;background:rgba(255,214,10,.07);font-size:13px;color:#f0d9a2;line-height:1.9">🏆 <b style="color:#ffd60a">今日悬赏标签（锁定任务时随机抽取）：'+st3.tag+'</b><br><small style="color:#a98d5f">完成≥1个该标签任务得1杯 · 标签今日总EP达成率≥60%得2杯 · ≥90%得3杯 · 每日上限3杯</small></div>';}
+  else if(state.tasksLocked){html+='<div style="padding:9px 13px;margin-bottom:10px;border:1px dashed rgba(255,214,10,.4);border-radius:12px;color:#a98d5f;font-size:12px;line-height:1.8">🏆 今日悬赏标签将在下次进入杯赛页时从已锁定任务的标签中随机抽取</div>';}
+ }
+ else if(tags)html+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">'+tags.map(function(t,i){var cur=isSpr?(i===(v2now().getDay()-1)):true;return '<span class="chip" style="'+(cur?'border-color:rgba(255,214,10,.55);color:#ffd60a':'opacity:.55')+'">'+t+(isSpr?(' · '+v2DAYS[i+1]):'')+(cur&&isSpr?' ◀':'')+'</span>';}).join('')+'</div>';
+ if(CV.lastSettle&&CV.lastSettle[cup.id]){
+  var _ls=CV.lastSettle[cup.id];
+  html+='<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;margin-bottom:10px;border:1px dashed rgba(124,196,255,.4);border-radius:11px;background:rgba(124,196,255,.06);font-size:12px;color:#a8d8ff;line-height:1.7">'
+   +'<span>📜 上期结算 · '+_ls.name+'：得分 '+v2fmt(_ls.score)+' · 结算 '+_ls.granted.length+' 档（'+_ls.granted.slice(0,2).join('、')+(_ls.granted.length>2?' 等':'')+'）已入账</span>'
+   +'<button class="btn" style="padding:3px 10px;font-size:11px;flex-shrink:0" onclick="v2dismissSettle(\''+cup.id+'\')">✕</button></div>';
+ }
  if(!joined&&!ended)html+='<div class="lockstrip">⚠️ 尚未报名：成绩不计入本杯。点击右上角「📜 报名」签署协议后开始计分。</div>';
  if(joined&&!ended)html+='<div class="lockstrip">🔒 赛中锁定：'+cup.dur+' 结束后可一键领取全部达成档位（含参与奖）。</div>';
  if(joined&&ended){
@@ -1937,10 +1987,22 @@ function v2Tick(){
   if(CV.joined.champ&&!CV.ended.champ)CV.scores.champ=(CV.scores.champ||0)+v2todayDetail(v2cupTags(v2cupById('champ'))).total;
   if(CV.joined.biwk&&!CV.ended.biwk)CV.scores.biwk=(CV.scores.biwk||0)+v2todayDetail(v2cupTags(v2cupById('biwk'))).total;
   if(CV.joined.sprint&&!CV.ended.sprint&&d>=1&&d<=5){
-   var tags=v2cupTags(v2cupById('sprint'));
-   var cnt=0;
-   (state.todayTasks||[]).forEach(function(t){var tg=null;try{tg=getTag(t.tagId);}catch(e){}if(tg&&tags.indexOf(v2tagOf(t.tagId))>=0&&parseFloat(t.baseEp)>0)cnt++;});
-   CV.tby[d]=Math.min(3,cnt);
+   var st=CV.sprintTag,tro=0;
+   if(st&&st.tag){
+    var sum=0,tot=0,done1=false;
+    (state.todayTasks||[]).forEach(function(t){
+     if(!t.tagId)return;
+     try{
+      var tg=getTag(t.tagId);if(!tg||!tg.path)return;
+      var pp=tg.path.join('·').replace(/\s+/g,''),tt=String(st.tag).replace(/\s+/g,'');
+      if(!(pp===tt||pp.indexOf(tt)===0||tt.indexOf(pp)===0))return;
+      tot+=tg.maxEp;
+      if(parseFloat(t.baseEp)>0){sum+=parseFloat(t.baseEp);done1=true;}
+     }catch(e){}
+    });
+    if(done1){var rate=tot>0?sum/tot:0;tro=rate>=0.9?3:rate>=0.6?2:1;}
+   }
+   CV.tby[d]=Math.min(3,tro);
    CV.trophies=Object.keys(CV.tby).reduce(function(s,k){return s+CV.tby[k];},0);
   }
   v2resolveChallenge();
@@ -1990,6 +2052,12 @@ try{
 }catch(e){}
 /* window 导出 */
 ['v2openPact','v2closePact','v2pactToggle','v2sign','v2claimAll','v2buyEnergy','v2preReg','v2join','v2place','v2endFx','v2showLg','v2closeLg','v2challenge','v2defense','v2optimize','v2revenge','v2settle'].forEach(function(f){window[f]=eval(f);});
+window.v2dismissSettle=v2dismissSettle;
+window.__cupBounty=function(){var out=[];try{var d=new Date().getDay();
+ if(CV.joined['sprint']&&d>=1&&d<=5){var st2=CV.sprintTag;if(st2&&st2.tag)out.push({cup:'冲刺杯',tag:st2.tag});}
+ if(CV.joined['champ']){var tg=v2cupTags(v2cupById('champ'));if(tg&&tg[0])out.push({cup:'王者周',tag:tg[0]});}
+ if(CV.joined['biwk']){v2cupTags(v2cupById('biwk')).forEach(function(t){out.push({cup:'双周杯',tag:t});});}
+}catch(e){}return out;};
 window.__v2Dbg={v2Tick:v2Tick,v2renderArena:v2renderArena,AV:AV,CV:CV,get cands(){return AV_CANDS;}};
 
 function v2compMail(){
@@ -2014,7 +2082,7 @@ v2rollCheck();
 
 /* ===== v1.5.6「协议时代」公告（注入式，置顶） ===== */
 (function(){
- var ANN='<div id="ann-1561hf" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;"><b style="color:#e8a33d;">v1.5.6.1 热修复</b> <span style="font-size:11px;color:#8e8e93;">11.13</span><div style="font-size:12px;color:#6e6e73;line-height:1.8;margin-top:3px;">① 股票行情改为盘中跳动：每15分钟冷却，打开股票页自动/手动刷新（日结仍全量刷新）。<br>② 促销与黑币商店购买增加确认弹窗防误触。<br>③ 交易所重做：万人在线虚拟市场（每笔交易即时影响板块股/指导价/汇率）、幽灵互买、搜索框、订单簿展示、移除系统直购；挂单统一按0.5×~2×指导价合法带定价，指导价大改后过时单自动清算退回仓库。<br>④ 在线与离线交易同频（3分钟/轮），离线再上线按时间跨度一次性补跑（上限7天）。<br>⑤ 成交量复利爆炸修复（今量锚定基准盘）。<br>⑥ 轮盘三件套（天赋槽位扩展券/费用扩展券/天人合一主题）按轮盘保底×60%重定价，交易所指导价同步修正。<br>⑦ 新增【主题】天人合一：仓库装备/卸下，基于当前赛季配色衍生全站UI（底色/字体/卡片/对话框）；主题仓库唯一（多余自动折算80抽奖积分）。<br>⑧ 天赋槽位/费用扩展券仓库可见（使用效果待后续版本实装）。<br>⑨ 板块巨变事件系统：特殊玩法/随机黑天鹅冲击单一板块（±8~16%），即时传染全市场并数日衰减消化，超跌反弹/过热退热；离线补跑同样触发，上线可在快讯查看事件记录。</div></div>'+'<div id="ann-156pact" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;"><b style="color:#ff3b30;">v1.5.6「协议时代」</b> <span style="font-size:11px;color:#8e8e93;">竞技杯赛重做 · 金融中心 · 11.12</span><div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">⚔️ 竞技重做：周赛季联赛制——周日休赛+预报名、周一填入EP 1:1定级五联赛（业余600~精英2201+）、周二~六挑战/防御/复仇（防御优化只抬基准不改段位）、周六按联赛排名结算16档。🏆 杯赛重做：填入EP 1:1+满档奖励（80/90/100%→+100/200/300）、父标签悬赏、协议报名、赛事名每周轮换、赛后一键全领。🏛️ 金融中心：股票/汇率、理财、交易所三页暗金重排，黑币硬通货贯穿全部交易。📜 全交易协议化：股票/理财/交易所/杯赛一律先填数字→弹出带具体数字的协议（≥1200字）→打钩确认后才成交。💰 旧杯赛进度补偿已发放（详见邮箱）。</div></div>';
+ var ANN='<div id="ann-1562hf" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;"><b style="color:#e8a33d;">v1.5.6.2 热修复</b> <span style="font-size:11px;color:#8e8e93;">11.18</span><div style="font-size:12px;color:#6e6e73;line-height:1.8;margin-top:3px;">① 新增背单词默写系统：主程序内按今日任务分类多窗口（无任务锁屏）、文档版式默写表、逐空批改自动回填正确率/用时、剩余≤10 通关自动 +1 List；另附独立默写页 vocab.html。<br>② 背单词任务的正确率/用时计分栏改为默写自动写入，禁止手填。<br>③ 背单词页页头接入全站皮肤体系（渐变流光标题随主题变色）。<br>④ 计时器离页暂停；同标签多任务窗口去重。</div></div>'+'<div id="ann-1561hf" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;"><b style="color:#e8a33d;">v1.5.6.1 热修复</b> <span style="font-size:11px;color:#8e8e93;">11.13</span><div style="font-size:12px;color:#6e6e73;line-height:1.8;margin-top:3px;">① 股票行情改为盘中跳动：每15分钟冷却，打开股票页自动/手动刷新（日结仍全量刷新）。<br>② 促销与黑币商店购买增加确认弹窗防误触。<br>③ 交易所重做：万人在线虚拟市场（每笔交易即时影响板块股/指导价/汇率）、幽灵互买、搜索框、订单簿展示、移除系统直购；挂单统一按0.5×~2×指导价合法带定价，指导价大改后过时单自动清算退回仓库。<br>④ 在线与离线交易同频（3分钟/轮），离线再上线按时间跨度一次性补跑（上限7天）。<br>⑤ 成交量复利爆炸修复（今量锚定基准盘）。<br>⑥ 轮盘三件套（天赋槽位扩展券/费用扩展券/天人合一主题）按轮盘保底×60%重定价，交易所指导价同步修正。<br>⑦ 新增【主题】天人合一：仓库装备/卸下，基于当前赛季配色衍生全站UI（底色/字体/卡片/对话框）；主题仓库唯一（多余自动折算80抽奖积分）。<br>⑧ 天赋槽位/费用扩展券仓库可见（使用效果待后续版本实装）。<br>⑨ 板块巨变事件系统：特殊玩法/随机黑天鹅冲击单一板块（±8~16%），即时传染全市场并数日衰减消化，超跌反弹/过热退热；离线补跑同样触发，上线可在快讯查看事件记录。</div></div>'+'<div id="ann-156pact" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;"><b style="color:#ff3b30;">v1.5.6「协议时代」</b> <span style="font-size:11px;color:#8e8e93;">竞技杯赛重做 · 金融中心 · 11.12</span><div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">⚔️ 竞技重做：周赛季联赛制——周日休赛+预报名、周一填入EP 1:1定级五联赛（业余600~精英2201+）、周二~六挑战/防御/复仇（防御优化只抬基准不改段位）、周六按联赛排名结算16档。🏆 杯赛重做：填入EP 1:1+满档奖励（80/90/100%→+100/200/300）、父标签悬赏、协议报名、赛事名每周轮换、赛后一键全领。🏛️ 金融中心：股票/汇率、理财、交易所三页暗金重排，黑币硬通货贯穿全部交易。📜 全交易协议化：股票/理财/交易所/杯赛一律先填数字→弹出带具体数字的协议（≥1200字）→打钩确认后才成交。💰 旧杯赛进度补偿已发放（详见邮箱）。</div></div>';
  function inject(){try{var el=document.getElementById('ann-list');if(!el||document.getElementById('ann-156pact'))return;el.insertAdjacentHTML('afterbegin',ANN);}catch(e){}}
  inject();
  try{if(typeof renderAnnouncements==='function'){var __r156=renderAnnouncements;window.renderAnnouncements=function(){__r156.apply(this,arguments);inject();};}}catch(e){}

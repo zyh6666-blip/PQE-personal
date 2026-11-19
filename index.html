@@ -1,12 +1,12 @@
-<!-- FILE-MARKER: kaoyan-ep-index · 成就树v3.3 · v1.5.6.1 hotfix · 文件必须完整下载，见页脚徽标 -->
+<!-- FILE-MARKER: kaoyan-ep-index · 成就树v3.3 · v1.5.6.2 hotfix · 文件必须完整下载，见页脚徽标 -->
 <!DOCTYPE html>
 <!-- build 20261112-0112 -->
-<!-- v1.5.6 -->
+<!-- v1.5.6.2 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>考研成长系统 v1.5.6.1</title>
+<title>考研成长系统 v1.5.6.2</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314100a'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='34'%3E%F0%9F%93%8B%3C/text%3E%3C/svg%3E">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -981,12 +981,12 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 #page-daily button,#page-daily input,#page-daily select{font:inherit}
 #page-daily button{touch-action:manipulation}
 #page-daily button:focus-visible,#page-daily input:focus-visible,#page-daily select:focus-visible,#page-daily summary:focus-visible{outline:2px solid var(--gold-l);outline-offset:3px}
-#page-daily .dl-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+#page-daily .dl-head,#page-vocab .dl-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:16px}
 #page-daily .dl-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:#a98d5f;margin-bottom:6px}
 #page-daily .dl-title{font-size:clamp(24px,4.6vw,32px);font-weight:800;letter-spacing:.06em;background:linear-gradient(110deg,#f7dfae,var(--gold) 45%,#fff6e2 55%,var(--gold-d));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 16px rgba(232,163,61,.35));animation:bwShine 6s linear infinite}
 #page-daily .dl-sub{font-size:11px;color:#a98d5f;letter-spacing:.12em;margin-top:4px}
 #page-daily .dl-mode{font-family:var(--mono);font-size:11px;line-height:1.5;color:#d8a6ff;border:1px solid rgba(175,82,222,.45);background:rgba(175,82,222,.1);padding:7px 13px;border-radius:999px;max-width:100%}
-#page-daily .dl-panel{position:relative;background:rgba(22,17,10,.68);border:1px solid rgba(232,163,61,.22);border-radius:16px;padding:14px;margin-bottom:12px;backdrop-filter:blur(10px);box-shadow:0 10px 28px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,220,160,.04);transition:border-color .2s,box-shadow .2s}
+#page-daily .dl-panel,#page-vocab .dl-panel{position:relative;background:rgba(22,17,10,.68);border:1px solid rgba(232,163,61,.22);border-radius:16px;padding:14px;margin-bottom:12px;backdrop-filter:blur(10px);box-shadow:0 10px 28px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,220,160,.04);transition:border-color .2s,box-shadow .2s}
 #page-daily .dl-sec{font-size:12px;font-weight:700;letter-spacing:.18em;color:#c9a86a;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 #page-daily .dl-n{margin-left:auto;font-family:var(--mono);font-size:9.5px;line-height:1.5;color:#a98d5f;font-weight:400;letter-spacing:.02em;text-align:right}
 #page-daily .dl-subsec{margin-top:14px;padding-top:12px;border-top:1px solid rgba(232,163,61,.1)}
@@ -1682,6 +1682,19 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 </style>
 <base target="_blank">
 <base target="_blank">
+<style id="vocab-style">
+#page-vocab .vw-card{background:rgba(22,17,10,.6);border:1px solid rgba(232,163,61,.18);border-radius:14px;padding:16px;margin-bottom:12px}
+#page-vocab .vw-word{font-size:26px;font-weight:800;color:#f0d9a2;letter-spacing:.04em}
+#page-vocab .vw-pos{font-size:12px;color:#a98d5f;font-family:var(--mono);margin-left:8px}
+#page-vocab .vw-in{width:100%;padding:12px;border:1px solid #4a3b20;border-radius:10px;background:#1e180e;color:#f0e6cf;font-size:15px;margin-top:10px;box-sizing:border-box}
+#page-vocab .vw-in:focus{outline:none;border-color:#e0a83f;box-shadow:0 0 0 3px rgba(232,163,61,.18)}
+#page-vocab .vw-chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:4px 10px;border-radius:8px;border:1px solid;margin:2px 3px 2px 0;font-family:var(--mono)}
+#page-vocab .vw-ok{color:#7ee2a0;border-color:rgba(52,199,89,.4);background:rgba(52,199,89,.08)}
+#page-vocab .vw-bad{color:#ff8a80;border-color:rgba(255,59,48,.4);background:rgba(255,59,48,.08)}
+#page-vocab .vw-miss{color:#8d7c5f;border-color:#4a3b22;background:rgba(141,124,95,.08);text-decoration:line-through;opacity:.6}
+#page-vocab .vw-idx{color:#a98d5f;font-family:var(--mono);font-size:12px;margin-right:10px}
+</style>
+
 </head>
 <body>
 <div id="app">
@@ -1689,7 +1702,7 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 <div style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #d1d1d6;padding:10px 16px;">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:18px;font-weight:800;letter-spacing:.05em;color:#f3e7c8;text-shadow:0 0 14px rgba(232,163,61,.35);">📚 考研EP系统</span> <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.22em;color:var(--gold-l);font-weight:700;">1.5.6.1</span>
+      <span style="font-size:18px;font-weight:800;letter-spacing:.05em;color:#f3e7c8;text-shadow:0 0 14px rgba(232,163,61,.35);">📚 考研EP系统</span> <span style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.22em;color:var(--gold-l);font-weight:700;">1.5.6.2</span>
             <div style="display:flex;flex-direction:column;gap:3px;min-width:120px;">
         <span id="top-lv" style="font-size:13px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:600;">Lv.1 列兵1</span>
         <div style="display:flex;align-items:center;gap:6px;">
@@ -1717,6 +1730,7 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
       <div class="nd-opt" onclick="switchPage('shop')"><span>🛒</span>商店</div>
       <div class="nd-opt" onclick="switchPage('warehouse')"><span>🎒</span>仓库</div>
       <div class="nd-opt" onclick="switchPage('calendar')"><span>📅</span>日历</div>
+      <div class="nd-opt" onclick="switchPage('vocab')"><span>📝</span>背单词默写</div>
       </div>
     </div>
     <div class="nd-item">
@@ -1804,7 +1818,7 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
     <div id="home-mode-detail"></div>
   </div>
 
-  <div class="hm-deck"><div class="hm-tile" onclick="switchPage('daily')"><span class="ic">📋</span><span class="lb">登记</span></div><div class="hm-tile" onclick="switchPage('shop')"><span class="ic">🛒</span><span class="lb">商店</span></div><div class="hm-tile" onclick="switchPage('warehouse')"><span class="ic">🎒</span><span class="lb">仓库</span></div><div class="hm-tile" onclick="switchPage('mail')"><span class="ic">📮</span><span class="lb">邮件</span></div><div class="hm-tile" onclick="switchPage('calendar')"><span class="ic">📅</span><span class="lb">日历</span></div><div class="hm-tile" onclick="switchPage('talent')"><span class="ic">🎯</span><span class="lb">天赋</span></div><div class="hm-tile" onclick="switchPage('potential')"><span class="ic">✨</span><span class="lb">潜能</span></div><div class="hm-tile" onclick="switchPage('brawl')"><span class="ic">⚔️</span><span class="lb">乱斗</span></div><div class="hm-tile" onclick="switchPage('evolve')"><span class="ic">🧬</span><span class="lb">进化</span></div><div class="hm-tile" onclick="switchPage('passive')"><span class="ic">🛡️</span><span class="lb">功能</span></div><div class="hm-tile" onclick="switchPage('achievement')"><span class="ic">🏆</span><span class="lb">成就</span></div><div class="hm-tile" onclick="switchPage('upgrade')"><span class="ic">🏷️</span><span class="lb">升级</span></div><div class="hm-tile" onclick="switchPage('cup')"><span class="ic">🥇</span><span class="lb">杯赛</span></div><div class="hm-tile" onclick="switchPage('race')"><span class="ic">🏁</span><span class="lb">竞技</span></div><div class="hm-tile" onclick="switchPage('cycle')"><span class="ic">🔄</span><span class="lb">周期</span></div><div class="hm-tile" onclick="switchPage('long')"><span class="ic">🗓️</span><span class="lb">长期</span></div><div class="hm-tile" onclick="switchPage('guide')"><span class="ic">📖</span><span class="lb">指南</span></div></div>
+  <div class="hm-deck"><div class="hm-tile" onclick="switchPage('daily')"><span class="ic">📋</span><span class="lb">登记</span></div><div class="hm-tile" onclick="switchPage('shop')"><span class="ic">🛒</span><span class="lb">商店</span></div><div class="hm-tile" onclick="switchPage('warehouse')"><span class="ic">🎒</span><span class="lb">仓库</span></div><div class="hm-tile" onclick="switchPage('mail')"><span class="ic">📮</span><span class="lb">邮件</span></div><div class="hm-tile" onclick="switchPage('calendar')"><span class="ic">📅</span><span class="lb">日历</span></div><div class="hm-tile" onclick="switchPage('talent')"><span class="ic">🎯</span><span class="lb">天赋</span></div><div class="hm-tile" onclick="switchPage('potential')"><span class="ic">✨</span><span class="lb">潜能</span></div><div class="hm-tile" onclick="switchPage('brawl')"><span class="ic">⚔️</span><span class="lb">乱斗</span></div><div class="hm-tile" onclick="switchPage('evolve')"><span class="ic">🧬</span><span class="lb">进化</span></div><div class="hm-tile" onclick="switchPage('passive')"><span class="ic">🛡️</span><span class="lb">功能</span></div><div class="hm-tile" onclick="switchPage('achievement')"><span class="ic">🏆</span><span class="lb">成就</span></div><div class="hm-tile" onclick="switchPage('upgrade')"><span class="ic">🏷️</span><span class="lb">升级</span></div><div class="hm-tile" onclick="switchPage('cup')"><span class="ic">🥇</span><span class="lb">杯赛</span></div><div class="hm-tile" onclick="switchPage('race')"><span class="ic">🏁</span><span class="lb">竞技</span></div><div class="hm-tile" onclick="switchPage('cycle')"><span class="ic">🔄</span><span class="lb">周期</span></div><div class="hm-tile" onclick="switchPage('long')"><span class="ic">🗓️</span><span class="lb">长期</span></div><div class="hm-tile" onclick="switchPage('guide')"><span class="ic">📖</span><span class="lb">指南</span></div><div class="hm-tile" onclick="switchPage('vocab')"><span class="ic">📝</span><span class="lb">默写</span></div></div>
 
   <div class="hm-panel">
     <div class="hm-sec">🔓 玩法解锁进度</div>
@@ -2357,6 +2371,20 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
   </div>
 </div>
 
+<!-- 背单词默写 v1.5.6-v1 -->
+<div id="page-vocab" class="page">
+  <header class="dl-head">
+    <div>
+      <div class="pv-kicker">VOCAB WORKSHEET · 默写台 v2.8</div>
+      <div class="pv-title" style="margin-bottom:6px">📝 背单词默写</div>
+      <div class="pv-sub" id="vcSub2">按今日任务分类 · 每任务独立窗口</div>
+    </div>
+    <span id="vcTimer" style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:var(--gold-l);border:1px solid rgba(232,163,61,.4);border-radius:999px;padding:5px 14px;background:rgba(240,179,92,.07);white-space:nowrap">⏱ --:--</span>
+  </header>
+  <div id="vcGate"></div>
+  <div id="vcTabs" style="display:none;gap:8px;margin-bottom:12px;flex-wrap:wrap"></div>
+  <section class="dl-panel" id="vcBody"></section>
+</div>
 <!-- 邮件 v2 -->
 <div id="page-mail" class="page">
   <header class="mv2-head">
@@ -6240,7 +6268,7 @@ const detailAmount=v=>v>0?'+'+v:String(v);
       if(_allDone)_addMat(t.swapTagId||t.tagId,'badge',1);
     });
     state._lastDrops=_dropLog;
-    if(Object.keys(_dropLog).length){const _box=document.getElementById('notif-container');if(_box){const _c=document.createElement('div');_c.className='notif-card';_c.style.borderLeftColor='#007aff';const _items=Object.keys(_dropLog).map(function(k){return k+'×'+_dropLog[k];}).join(' · ');_c.innerHTML='<div class="notif-title">🏷️ 标签材料掉落</div><div class="notif-reward">'+_items+'</div>';_box.appendChild(_c);requestAnimationFrame(function(){_c.classList.add('show');});setTimeout(function(){_c.classList.add('hide');setTimeout(function(){_c.remove();},300);},5000);}}
+    /* 材料掉落并入结算战报对话框（UI统一：获得物品一律对话框，不再右侧划出） */
     state.dailyHistory.push({date:today,ep:finalEp,rawEp:effectiveRawEp,grossRawEp:grossRawEp,penalty:Math.round(penaltyTotal*100),points:pointsInfo.total,tokens:tks,cardId:usedCardId,didVocab:didVocab,listClearToday:listClearToday,tasks:tasksSnapshot});
     try{if(typeof window.__cvAccrue==='function')window.__cvAccrue();}catch(e){}
     state.todayTasks.forEach(t=>{if(t.fromLong&&!t.completed){const lt=state.longTasks.find(x=>x.id===t.fromLong);if(lt)lt.migrated=false;}});
@@ -6700,6 +6728,7 @@ function confirmTalentEquip(){
     saveState();
     updateTalentUI();
     closeModal();
+    try{if(typeof window.tlLockFX==='function')window.tlLockFX();}catch(e){}
   });
 }
 function updateEquipUI(){
@@ -6969,52 +6998,77 @@ function updatePotentialUI(){
   const rail=document.getElementById('p-slots');if(!rail)return;
   const now=Date.now();
   const TIMES=['早 · 09:00','午 · 14:00','晚 · 18:00','第4栏'];
-  let html='';
-  for(let i=0;i<4;i++){
-    const item=(state.potential.hist||[])[i]||null;
-    const c=item?(CAT_COLOR[item.cat]||'#8e7c5f'):'#8e7c5f';
-    if(item){
-      html+='<div class="pp-slot filled'+(window.__pfNew===i?' clunk':'')+'" style="--sc:'+c+'"><div class="pp-sl-time">'+TIMES[i]+'</div><div class="pp-sl-name">'+item.name+'</div><span class="pp-sl-cat" style="border-color:'+c+'66;color:'+c+'">'+item.cat+'</span></div>';
-      continue;
-    }
-    if(isPotentialSlotUnlocked(i)){
-      const sel=(state.potential.candidates&&state.potential.candidates.length&&state.potential.candidateSlot===i);
-      const poolN=POTENTIALS.filter(x=>state.potential.drawn.indexOf(x.id)===-1&&canPotentialInSlot(x.id,i)).length;
-      const sub=i===3?' · 已满500EP':'';
-      html+='<div class="pp-slot empty'+(sel?' active':'')+'" onclick="drawPotential()"><div class="pp-sl-time">'+TIMES[i]+sub+'</div><div class="pp-sl-name">点击抽取</div><div class="pp-sl-pool">池 '+poolN+' 潜能</div></div>';
-      continue;
-    }
-    if(i===3){
-      const t4=getPotentialSlotUnlockTime(3);
-      if(t4===null){
-        html+='<div class="pp-slot locked" id="pp-s4"><div class="pp-sl-time">第4栏</div><div class="pp-sl-lock">🔒</div><div class="pp-sl-name">条件未满足</div><div class="pp-sl-req">累计EP '+Math.min(500,state.totalEP)+'/500<br>且 18:00 后开放</div></div>';
-      }else{
-        html+='<div class="pp-slot waiting" id="pp-s4"><div class="pp-sl-time">第4栏</div><div class="pp-sl-lock">⏳</div><div class="pp-sl-name">已满足 · 未到点</div><div class="pp-sl-req">距开放 '+fmtCD(t4-now)+'</div></div>';
+  /* 栏位重建键（不含秒级倒计时）：键不变不重建，倒计时原位更新 → 不跳且可交互 */
+  const railKey=JSON.stringify([(state.potential.hist||[]).map(x=>x.id),
+    [0,1,2,3].map(isPotentialSlotUnlocked),
+    !!(state.potential.candidates||[]).length,
+    state.potential.candidateSlot,
+    (state.potential.refreshLeft||0),
+    (state.potential.drawn||[]).join(','),
+    window.__pfNew||-1]);
+  if(railKey!==window.__pRailKey){
+    window.__pRailKey=railKey;
+    let html='';
+    for(let i=0;i<4;i++){
+      const item=(state.potential.hist||[])[i]||null;
+      const c=item?(CAT_COLOR[item.cat]||'#8e7c5f'):'#8e7c5f';
+      if(item){
+        html+='<div class="pp-slot filled'+(window.__pfNew===i?' clunk':'')+'" style="--sc:'+c+'"><div class="pp-sl-time">'+TIMES[i]+'</div><div class="pp-sl-name">'+item.name+'</div><span class="pp-sl-cat" style="border-color:'+c+'66;color:'+c+'">'+item.cat+'</span></div>';
+        continue;
       }
-      continue;
+      if(isPotentialSlotUnlocked(i)){
+        const sel=(state.potential.candidates&&state.potential.candidates.length&&state.potential.candidateSlot===i);
+        const poolN=POTENTIALS.filter(x=>state.potential.drawn.indexOf(x.id)===-1&&canPotentialInSlot(x.id,i)).length;
+        const sub=i===3?' · 条件已满足':'';
+        html+='<div class="pp-slot empty'+(sel?' active':'')+'" onclick="drawPotential()"><div class="pp-sl-time">'+TIMES[i]+sub+'</div><div class="pp-sl-name">点击抽取</div><div class="pp-sl-pool">池 '+poolN+' 潜能</div></div>';
+        continue;
+      }
+      if(i===3){
+        const t4=getPotentialSlotUnlockTime(3);
+        if(t4===null){
+          html+='<div class="pp-slot locked" id="pp-s4"><div class="pp-sl-time">第4栏</div><div class="pp-sl-lock">🔒</div><div class="pp-sl-name">条件未满足</div><div class="pp-sl-req">今日填入EP '+Math.min(800,getTodayFilledEp())+'/800<br>且 18:00 后开放</div></div>';
+        }else{
+          html+='<div class="pp-slot waiting" id="pp-s4" data-pslot="3"><div class="pp-sl-time">第4栏</div><div class="pp-sl-lock">⏳</div><div class="pp-sl-name">已满足 · 未到点</div><div class="pp-sl-req">距开放 '+fmtCD(t4-now)+'</div></div>';
+        }
+        continue;
+      }
+      const t=getPotentialSlotUnlockTime(i);
+      html+='<div class="pp-slot waiting" data-pslot="'+i+'"><div class="pp-sl-time">'+TIMES[i]+'</div><div class="pp-sl-lock">⏳</div><div class="pp-sl-name">未到点</div><div class="pp-sl-req">距开放 '+(t?fmtCD(t-now):'—')+'</div></div>';
     }
-    const t=getPotentialSlotUnlockTime(i);
-    html+='<div class="pp-slot waiting"><div class="pp-sl-time">'+TIMES[i]+'</div><div class="pp-sl-lock">⏳</div><div class="pp-sl-name">未到点</div><div class="pp-sl-req">距开放 '+(t?fmtCD(t-now):'—')+'</div></div>';
+    rail.innerHTML=html;
+    const now4=isPotentialSlotUnlocked(3);
+    if(window.__pfPrev4===undefined)window.__pfPrev4=now4;
+    if(window.__pfPrev4===false&&now4===true){
+      const el=document.getElementById('pp-s4');
+      if(el){el.classList.add('gold-flash');el.insertAdjacentHTML('beforeend','<span class="halo"></span>');setTimeout(function(){el.classList.remove('gold-flash');},950);if(typeof pfBurst==='function')pfBurst(el,26);}
+    }
+    window.__pfPrev4=now4;
+    window.__pfNew=-1;
+  }else{
+    /* 倒计时原位刷新（不重建 DOM） */
+    for(let i=0;i<4;i++){
+      const req=rail.querySelector('[data-pslot="'+i+'"] .pp-sl-req');
+      if(!req)continue;
+      const t=getPotentialSlotUnlockTime(i);
+      if(i===3&&t===null)req.innerHTML='今日填入EP '+Math.min(800,getTodayFilledEp())+'/800<br>且 18:00 后开放';
+      else req.textContent='距开放 '+(t?fmtCD(t-now):'—');
+    }
   }
-  rail.innerHTML=html;
-  const now4=isPotentialSlotUnlocked(3);
-  if(window.__pfPrev4===undefined)window.__pfPrev4=now4;
-  if(window.__pfPrev4===false&&now4===true){
-    const el=document.getElementById('pp-s4');
-    if(el){el.classList.add('gold-flash');el.insertAdjacentHTML('beforeend','<span class="halo"></span>');setTimeout(function(){el.classList.remove('gold-flash');},950);if(typeof pfBurst==='function')pfBurst(el,26);}
-  }
-  window.__pfPrev4=now4;
-  window.__pfNew=-1;
   const stage=document.getElementById('p-stage');
   const cs=state.potential.candidates||[];
-  if(cs.length&&state.potential.candidateSlot!==null&&state.potential.candidateSlot!==undefined){
-    const n=state.potential.candidateSlot;
-    stage.innerHTML='<div class="pp-stg-label">第 <b>'+(n+1)+'</b> 栏候选 · 各卡可单独刷新</div><div class="pp-cands">'+cs.map(function(x,i){const cc=CAT_COLOR[x.cat]||'#8e7c5f';
-      return '<div class="pp-cand" style="--cc:'+cc+'"><div class="pp-cd-name">'+x.name+'</div><span class="pp-cd-cat">'+x.cat+'</span><div class="pp-cd-eff">'+x.effect+'</div><button class="pp-cd-rf" '+(state.potential.refreshLeft<=0?'disabled':'')+' onclick="refreshPotentialCandidate('+i+')">🔄 换一个（剩 '+state.potential.refreshLeft+'）</button><div class="pp-cd-take" onclick="choosePotentialCandidate('+i+')">▼ 点击装配</div></div>';
-    }).join('')+'</div>';
-  }else{
-    const next=getNextPotentialSlot();
-    stage.innerHTML='<div class="pp-stg-label">'+(next!==null?'下一开放栏位：<b>第 '+(next+1)+'</b> 栏':'今日四栏已定 · 等待次日重置')+'</div><div class="pp-summon'+(next===null?' off':'')+'" '+(next!==null?'onclick="drawPotential()"':'')+'><div class="pp-sm-t">⚡ 展开候选潜能</div><div class="pp-sm-s">'+(next!==null?'TAP TO REVEAL':'DONE')+'</div></div>';
+  /* 舞台重建键：候选/槽位/刷新次数/已选数变化才重建 → 点击交互即时反馈，无事不动 */
+  const stageKey=JSON.stringify([cs.map(x=>x.id),state.potential.candidateSlot,(state.potential.refreshLeft||0),(state.potential.hist||[]).length]);
+  if(stage&&stageKey!==window.__pStageKey){
+    window.__pStageKey=stageKey;
+    if(cs.length&&state.potential.candidateSlot!==null&&state.potential.candidateSlot!==undefined){
+      const n=state.potential.candidateSlot;
+      stage.innerHTML='<div class="pp-stg-label">第 <b>'+(n+1)+'</b> 栏候选 · 各卡可单独刷新</div><div class="pp-cands">'+cs.map(function(x,i){const cc=CAT_COLOR[x.cat]||'#8e7c5f';
+        return '<div class="pp-cand" style="--cc:'+cc+'"><div class="pp-cd-name">'+x.name+'</div><span class="pp-cd-cat">'+x.cat+'</span><div class="pp-cd-eff">'+x.effect+'</div><button class="pp-cd-rf" '+(state.potential.refreshLeft<=0?'disabled':'')+' onclick="refreshPotentialCandidate('+i+')">🔄 换一个（剩 '+state.potential.refreshLeft+'）</button><div class="pp-cd-take" onclick="choosePotentialCandidate('+i+')">▼ 点击装配</div></div>';
+      }).join('')+'</div>';
+    }else{
+      const next=getNextPotentialSlot();
+      stage.innerHTML='<div class="pp-stg-label">'+(next!==null?'下一开放栏位：<b>第 '+(next+1)+'</b> 栏':'今日四栏已定 · 等待次日重置')+'</div><div class="pp-summon'+(next===null?' off':'')+'" '+(next!==null?'onclick="drawPotential()"':'')+'><div class="pp-sm-t">⚡ 展开候选潜能</div><div class="pp-sm-s">'+(next!==null?'TAP TO REVEAL':'DONE')+'</div></div>';
+    }
   }
   const prog=document.getElementById('p-progress');
   if(prog)prog.textContent='已选定 '+state.potential.hist.length+' / 4 · 今日刷新 '+state.potential.refreshLeft+' / 3';
@@ -8698,7 +8752,7 @@ function spTagNode(node,pathArr,sel){
   return '<details style="margin:5px 0;" '+(spTreeOpen(key,pathArr)?'open':'')+' ontoggle="markSPTreeOpen(\''+key+'\',this.open)"><summary style="cursor:pointer;font-size:12px;font-weight:700;padding:7px 9px;background:#f9f9fb;border:1px solid #e5e5ea;border-radius:8px;">'+pathArr.join(' · ')+'</summary><div style="padding:3px 0 3px 8px;">'+children+'</div></details>';
 }
 
-loadState();dailyResetCheck();try{updateBrawlConfirmBtn();}catch(e){}notifyNewMails();ensureV146Mail();notifyNewMails();getEnergy();getCupState();getRacing();updateMailBadge();settleDayCups();ensureCupNotices();checkLongMigration();checkCycleMigration();setInterval(function(){tickPassiveSpeed();arenaTick();if(document.getElementById('page-race').classList.contains('active'))renderArenaUI();updateBrawlUI();updatePotentialUI();renderDailyAttrs();renderDailySkills();renderTalentBars();},1000);renderLongTasks();renderCycleTasks();updateTopBar();renderLock('talent');renderLock('potential');renderLock('brawl');renderLock('passive');updateTalentUI();updatePotentialUI();updateBrawlUI();updatePassiveUI();updateShopUI();updateDailyUI();renderTasks();renderAchievementUI();renderTalentBars();
+loadState();dailyResetCheck();try{updateBrawlConfirmBtn();}catch(e){}notifyNewMails();ensureV146Mail();notifyNewMails();getEnergy();getCupState();getRacing();updateMailBadge();settleDayCups();ensureCupNotices();checkLongMigration();checkCycleMigration();setInterval(function(){tickPassiveSpeed();arenaTick();if(document.getElementById('page-race').classList.contains('active'))renderArenaUI();updateBrawlUI();if(document.getElementById('page-potential').classList.contains('active'))updatePotentialUI();renderDailyAttrs();renderDailySkills();renderTalentBars();},1000);renderLongTasks();renderCycleTasks();updateTopBar();renderLock('talent');renderLock('potential');renderLock('brawl');renderLock('passive');updateTalentUI();updatePotentialUI();updateBrawlUI();updatePassiveUI();updateShopUI();updateDailyUI();renderTasks();renderAchievementUI();renderTalentBars();
 
 
 /* ===== 恢复的函数（构建期误删回补） ===== */
@@ -9814,7 +9868,7 @@ function qEvalPanel(src,idx,t){
   h+='<div style="font-size:11px;color:#8e8e93;margin-bottom:5px;">📋 任务状态评价 <span style="color:#8d7c5f;">（0-100 · 默认'+QUALITY_DEFAULT+' · 权重：正确率60% 专注度25% 用时8% 基本状态7%）</span></div>';
   h+='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">';
   QUALITY_DIMS.forEach(function(d){
-    h+='<label style="display:flex;align-items:center;gap:3px;font-size:11px;color:#9c8a6c;white-space:nowrap;">'+d[1]+'<input type="number" min="0" max="100" value="'+qDimVal(t,d[0])+'" oninput="updateQDim(\''+src+'\','+idx+',\''+d[0]+'\',this.value)" style="width:50px;padding:4px 5px;border:1px solid #4a3b22;border-radius:6px;font-size:12px;"></label>';
+    h+='<label style="display:flex;align-items:center;gap:3px;font-size:11px;color:#9c8a6c;white-space:nowrap;">'+d[1]+'<input type="number" min="0" max="100" value="'+qDimVal(t,d[0])+'" '+((t.tagId&&String(t.tagId).indexOf('wd')===0&&String(t.tagId).indexOf('_new')<0&&(d[0]==='acc'||d[0]==='time'))?'disabled title="由背单词默写自动填入" style="width:50px;padding:4px 5px;border:1px solid #4a3b22;border-radius:6px;font-size:12px;opacity:.45;cursor:not-allowed;background:#241c10" ':'style="width:50px;padding:4px 5px;border:1px solid #4a3b22;border-radius:6px;font-size:12px;" ')+"oninput=\"updateQDim(\'"+src+"\',"+idx+",\'"+d[0]+"\',this.value)"+'"></label>';
   });
   h+='<span id="qres-'+src+'-'+idx+'" style="font-size:12px;color:#9c8a6c;margin-left:auto;white-space:nowrap;">→ 质量EP <b style="color:#007aff;">'+computeQualityEp(t)+'</b>（'+Math.round(qualityAvg(t))+'%）</span>';
   h+='</div></div>';
@@ -10734,7 +10788,6 @@ document.addEventListener('click',function(e){
   ndCloseAll();
 });
 </script>
-</script>
 
 
 <script>
@@ -10907,7 +10960,7 @@ function dlQualityEp(t){const tag=getTag(t.tagId);if(!tag)return parseInt(t.qual
 function dlQualityPanel(i,t){
   const dims=[['acc','正确率'],['focus','专注度'],['time','用时'],['state','基本状态']];
   let h='<div><div style="font-size:11px;color:#c9b791;margin-bottom:7px;">📋 任务状态评价 <span style="color:#a98d5f">（0-100 · 默认60 · 权重：正确率60% 专注度25% 用时8% 基本状态7%）</span></div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">';
-  dims.forEach(function(d){h+='<label style="display:flex;align-items:center;gap:4px;white-space:nowrap">'+d[1]+'<input type="number" min="0" max="100" value="'+dlQualityDim(t,d[0])+'" oninput="updateQDim(\'today\','+i+',\''+d[0]+'\',this.value)" style="width:56px;padding:7px;border:1px solid #4a3b22;border-radius:8px;text-align:center"></label>';});
+  dims.forEach(function(d){h+='<label style="display:flex;align-items:center;gap:4px;white-space:nowrap">'+d[1]+'<input type="number" min="0" max="100" value="'+dlQualityDim(t,d[0])+'" '+(t.tagId&&String(t.tagId).indexOf('wd')===0&&String(t.tagId).indexOf('_new')<0&&(d[0]==='acc'||d[0]==='time')?'disabled title="由背单词默写自动填入" style="width:56px;padding:7px;border:1px solid #4a3b22;border-radius:8px;text-align:center;opacity:.45;cursor:not-allowed;background:#241c10" ':'style="width:56px;padding:7px;border:1px solid #4a3b22;border-radius:8px;text-align:center" ')+'oninput="updateQDim(\'today\','+i+',\''+d[0]+'\',this.value)"></label>';});
   h+='<span id="qres-today-'+i+'" style="font-size:12px;color:#c4ad83;margin-left:auto;white-space:nowrap">→ 质量EP <b style="color:#f0d9a2">'+dlQualityEp(t)+'</b>（'+Math.round(dlQualityAvg(t))+'%）</span></div></div>';
   return h;
 }
@@ -10967,6 +11020,7 @@ function dlUpdateLockStrip(){
   let info={total:0,pot:0,dailyOK:false};try{if(typeof todayEditInfo==='function')info=todayEditInfo();}catch(e){}
   const text=can?'🔒 任务已锁定 · 今日还可修改 '+info.total+' 次'+(info.pot>0?'（含免罚 '+info.pot+' 次）':'')+(info.dailyOK?'（限18:00前）':''):'🔒 任务已锁定 · 今日修改入口已关闭';
   host.innerHTML='<div class="dl-lock-strip"><span>'+text+'</span>'+(can?'<button type="button" onclick="openTaskEditModal()">✏️ 修改任务</button>':'')+'</div>';
+  try{var _b=window.__cupBounty?window.__cupBounty():[];if(_b.length){host.innerHTML+='<div class="dl-lock-strip" style="border-color:rgba(255,214,10,.45);background:rgba(255,214,10,.05)"><span>🏆 今日杯赛悬赏标签：'+_b.map(function(x){return '<b style="color:#ffd60a">'+x.tag+'</b>（'+x.cup+'）';}).join(' · ')+' · 完成对应标签任务计入奖杯</span></div>';}}catch(e){}
 }
 function dlSPCardTheme(tag){
   const base=tag&&typeof _origGetTag==='function'?_origGetTag(tag.id):tag;
@@ -11052,10 +11106,14 @@ function dlUpdateTasksChrome(){
 }
 function dlAnimateCompletion(i,card){
   card.dataset.dlCompleting='true';card.classList.add('dl-completing');
+  const bar0=document.getElementById('dl-bar-'+i),pct0=document.getElementById('dl-pct-'+i);
+  if(bar0){bar0.style.transition='none';bar0.style.width='0%';void bar0.offsetWidth;bar0.style.transition='';}
+  if(pct0)pct0.textContent='0%';
+  if(!card.querySelector('.dl-seal')){const seal=document.createElement('div');seal.className='dl-seal';seal.textContent='✓';card.appendChild(seal);}
   dlUpdateTaskProgress(i,true);dlUpdateSummary();updatePointsPreview();renderDailySkills();renderDailyAttrs();renderTalentBars();renderEvolveBars();
   const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  setTimeout(function(){if(card.isConnected)card.classList.add('dl-folding');},reduced?0:800);
-  setTimeout(function(){window.__dlSuppressTaskIn=true;dlRenderTasks();},reduced?30:1450);
+  setTimeout(function(){if(card.isConnected)card.classList.add('dl-folding');},reduced?0:1250);
+  setTimeout(function(){window.__dlSuppressTaskIn=true;dlRenderTasks();},reduced?30:1950);
 }
 function dlObserveSPCards(container){
   const cards=Array.from(container.querySelectorAll('.task-card[class*="task-sp-"]'));
@@ -11158,9 +11216,9 @@ updateDailyUI();
   box-shadow:0 0 18px rgba(240,179,92,.28);
   animation:dlRailBreathe 4.8s ease-in-out infinite;
 }
-#page-daily>.dl-head,#page-daily>.dl-panel{position:relative;z-index:1}
-#page-daily .dl-head{padding:4px 2px 17px;margin-bottom:14px;border-bottom:1px solid rgba(232,163,61,.11)}
-#page-daily .dl-head::after{content:'';position:absolute;left:0;bottom:-1px;width:72px;height:1px;background:var(--gold);box-shadow:0 0 12px rgba(240,179,92,.45)}
+#page-daily>.dl-head,#page-daily>.dl-panel,#page-vocab>.dl-head,#page-vocab>.dl-panel{position:relative;z-index:1}
+#page-daily .dl-head,#page-vocab .dl-head{padding:4px 2px 17px;margin-bottom:14px;border-bottom:1px solid rgba(232,163,61,.11)}
+#page-daily .dl-head::after,#page-vocab .dl-head::after{content:'';position:absolute;left:0;bottom:-1px;width:72px;height:1px;background:var(--gold);box-shadow:0 0 12px rgba(240,179,92,.45)}
 #page-daily .dl-kicker{color:#a98d5f;letter-spacing:.32em}
 #page-daily .dl-title{
   color:#f7dfae;-webkit-text-fill-color:#f7dfae;background:none;filter:none;animation:none;
@@ -11168,7 +11226,7 @@ updateDailyUI();
 }
 #page-daily .dl-sub{color:#a98d5f;letter-spacing:.1em}
 #page-daily .dl-mode{border-radius:7px;background:rgba(10,8,5,.55);box-shadow:inset 0 0 14px rgba(175,82,222,.05)}
-#page-daily .dl-panel{
+#page-daily .dl-panel,#page-vocab .dl-panel{
   border-color:rgba(232,163,61,.2);border-radius:13px;
   background:linear-gradient(145deg,rgba(28,21,11,.88),rgba(14,11,7,.82));
   box-shadow:0 12px 30px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,220,160,.035);
@@ -12364,11 +12422,11 @@ window.renderArenaUI=function(){
   background-size:680px 680px;animation:shellTw 7s ease-in-out infinite alternate}
 #page-passive .card{position:relative;z-index:1;background:rgba(22,17,10,.6)!important;border:1px solid rgba(232,163,61,.18)!important;border-radius:16px;color:var(--ink);backdrop-filter:blur(10px);box-shadow:0 10px 28px rgba(0,0,0,.3)}
 /* 页头 */
-#page-passive .pv-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:#a98d5f;margin-bottom:6px}
-#page-passive .pv-title{font-size:clamp(24px,4.6vw,36px);font-weight:800;letter-spacing:.06em;margin-bottom:4px;
+#page-passive .pv-kicker,#page-vocab .pv-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:#a98d5f;margin-bottom:6px}
+#page-passive .pv-title,#page-vocab .pv-title{font-size:clamp(24px,4.6vw,36px);font-weight:800;letter-spacing:.06em;margin-bottom:4px;
   background:linear-gradient(110deg,#f7dfae,var(--gold) 45%,#fff6e2 55%,var(--gold-d));background-size:200% 100%;
   -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 16px rgba(232,163,61,.35));animation:bwShine 6s linear infinite}
-#page-passive .pv-sub{font-size:12px;color:#a98d5f;letter-spacing:.12em;margin-bottom:14px}
+#page-passive .pv-sub,#page-vocab .pv-sub{font-size:12px;color:#a98d5f;letter-spacing:.12em;margin-bottom:14px}
 /* 装配台头 */
 #page-passive .pv-bay-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:6px}
 #page-passive .pv-sec{font-size:13px;font-weight:700;letter-spacing:.18em;color:#c9a86a}
@@ -14494,19 +14552,48 @@ function rkPump(){
  else{rkHeaderLevel(it);}
 }
 function rkHeaderLevel(it){
+ /* 升级（非升段）全屏动画：方章组装 → 官位格逐格点亮到第 N 格 → 爆闪收束 */
  try{updateTopBar();}catch(e){}
  paintLogo(true);
  var bar=document.getElementById('lv-progress-bar');
  if(bar){bar.classList.remove('rk-flow');void bar.offsetWidth;bar.classList.add('rk-flow');}
+ var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(reduced){setTimeout(function(){rkBusy=false;rkPump();},400);return;}
  try{
-  var box=document.getElementById('notif-container');
-  if(box){var c=document.createElement('div');c.className='notif-card';c.style.borderLeftColor='#e8a33d';
-   c.innerHTML='<div class="notif-title">🎖️ 军衔晋升</div><div class="notif-body">恭喜升至 Lv.'+it.lv+' '+it.name+'</div>';
-   c.onclick=function(){c.remove();};box.appendChild(c);
-   requestAnimationFrame(function(){c.classList.add('show');});
-   setTimeout(function(){c.classList.add('hide');setTimeout(function(){c.remove();},320);},6000);}
- }catch(e){}
- setTimeout(function(){rkBusy=false;rkPump();},800);
+  var old=document.querySelector('.rk-cs');if(old)old.remove();
+  var f=fam(it.name),sub=subIndex(it.lv),size=familySize(f);
+  var cs=document.createElement('div');cs.className='rk-cs rk-lvcs';
+  var segs='';for(var si=1;si<=size;si++)segs+='<span class="rk-lvseg'+(si<sub?' on':'')+'" data-i="'+si+'"></span>';
+  cs.innerHTML='<div class="rk-flash"></div><div class="rk-ring"></div>'
+   +'<div class="rk-stage"><div class="rk-plate rk-lvplate">'+rankPlateSVG(it.lv,true)+'</div>'
+   +'<div class="rk-lvsegs">'+segs+'</div>'
+   +'<div class="rk-small">恭 喜 升 级</div>'
+   +'<div class="rk-big rk-big-sm">'+it.name+'</div>'
+   +'<div class="rk-sub">'+it.prevName+' → '+it.name+' · LEVEL UP</div></div>';
+  document.body.appendChild(cs);
+  var dirs=[[-140,-100,-30],[130,-120,25],[-160,50,-50],[150,70,40],[0,-160,0],[-90,120,60],[100,130,-45]];
+  var parts=cs.querySelectorAll('.rk-part');
+  parts.forEach(function(g,i){var d=dirs[i%dirs.length];g.style.setProperty('--fx',d[0]+'px');g.style.setProperty('--fy',d[1]+'px');g.style.setProperty('--fr',d[2]+'deg');g.style.animationDelay=(0.08+i*0.07)+'s';});
+  /* 第 N 格点亮：0.75s 章体落位后爆闪 */
+  var cur=cs.querySelector('.rk-lvseg[data-i="'+sub+'"]');
+  var t0=750;
+  setTimeout(function(){
+   if(cur){cur.classList.add('lit');
+    var ring=document.createElement('div');ring.className='rk-lvhit';cur.appendChild(ring);
+    setTimeout(function(){if(ring.parentNode)ring.parentNode.removeChild(ring);},700);}
+   var fl=cs.querySelector('.rk-flash');if(fl){fl.style.animation='none';void fl.offsetWidth;fl.style.animation='';}
+  },t0);
+  cs.style.cursor='pointer';
+  var done=false;
+  var dismiss=function(){
+   if(done)return;done=true;
+   cs.classList.add('rk-lvout');
+   setTimeout(function(){cs.remove();rkBusy=false;rkPump();},420);
+  };
+  cs.addEventListener('click',dismiss);
+  var hint=document.createElement('div');hint.className='rk-lvhint';hint.textContent='点 击 任 意 处 继 续';
+  cs.appendChild(hint);
+ }catch(e){setTimeout(function(){rkBusy=false;rkPump();},800);}
 }
 function rkPromoCS(it){
  try{updateTopBar();}catch(e){}
@@ -15908,9 +15995,9 @@ var __rtV2Mine=function(){
       +'<div class="t-more open" id="tmore'+i+'"><div class="t-eval">'
       +'<div class="t-eval-title">📋 任务状态评价 <span>0-100 · 默认60 · 权重：正确率60% 专注度25% 用时8% 基本状态7%</span></div>'
       +'<div class="t-eval-body"><div class="t-eval-inputs">'
-      +'<span>正确率</span><input type="number" min="0" max="100" value="'+num('acc')+'" oninput="updateQDim(\'today\','+i+',\'acc\',this.value)">'
+      +'<span>正确率</span><input type="number" min="0" max="100" value="'+num('acc')+'" '+(t.tagId&&String(t.tagId).indexOf('wd')===0&&String(t.tagId).indexOf('_new')<0?'disabled title="由背单词默写自动填入" style="opacity:.5;cursor:not-allowed" ':'')+'oninput="updateQDim(\'today\','+i+',\'acc\',this.value)">'
       +'<span>专注度</span><input type="number" min="0" max="100" value="'+num('focus')+'" oninput="updateQDim(\'today\','+i+',\'focus\',this.value)">'
-      +'<span>用时</span><input type="number" min="0" max="100" value="'+num('time')+'" oninput="updateQDim(\'today\','+i+',\'time\',this.value)">'
+      +'<span>用时</span><input type="number" min="0" max="100" value="'+num('time')+'" '+(t.tagId&&String(t.tagId).indexOf('wd')===0&&String(t.tagId).indexOf('_new')<0?'disabled title="由背单词默写自动填入" style="opacity:.5;cursor:not-allowed" ':'')+'oninput="updateQDim(\'today\','+i+',\'time\',this.value)">'
       +'<span>基本状态</span><input type="number" min="0" max="100" value="'+num('state')+'" oninput="updateQDim(\'today\','+i+',\'state\',this.value)">'
       +'</div><div class="t-eval-out" id="qres-today-'+i+'">→ 质量EP <b>'+qNow+'</b>（'+wNow+'%）</div>'
       +'</div></div></div>';
@@ -16043,18 +16130,31 @@ var __rtV2Mine=function(){
   if(submitBtn){submitBtn.disabled=false;submitBtn.style.opacity=locked?'1':'0.65';submitBtn.title=locked?'结算今日任务':'请先确认今日任务后再结算';}
   updatePointsPreview();renderDailySkills();renderDailyAttrs();renderHome();renderTalentBars();renderEvolveBars();
   setTimeout(function(){
-    container.querySelectorAll('.t-pct[data-target]').forEach(function(el){
-      var target=parseInt(el.getAttribute('data-target'))||0;var cur=0;
-      var iv=setInterval(function(){cur=Math.min(target,cur+2);el.textContent=cur+'%';if(cur>=target)clearInterval(iv);},28);
+    /* 完成确认编舞：✓印章砸入 + 冲击脉冲 → 进度条 0→实际值（JS驱动，与数字同步）→ 卡片折叠为完成态 */
+    var __finCards=container.querySelectorAll('.task-card.done-enter:not(.dl-completing)');
+    if(__finCards.length)window.__justFinished=null;
+    __finCards.forEach(function(c){
+      var bar=c.querySelector('i[data-fill]');
+      var pctEl=c.querySelector('.t-pct[data-target]');
+      var target=bar?(parseInt(bar.getAttribute('data-fill'))||0):(pctEl?(parseInt(pctEl.getAttribute('data-target'))||0):0);
+      c.classList.add('dl-completing');
+      if(!c.querySelector('.dl-seal')){var seal=document.createElement('div');seal.className='dl-seal';seal.textContent='✓';c.appendChild(seal);}
+      var cur=0;
+      if(bar)bar.style.transition='none';
+      var iv=setInterval(function(){
+        cur=Math.min(target,cur+2);
+        if(bar)bar.style.width=cur+'%';
+        if(pctEl)pctEl.textContent=cur+'%';
+        if(cur>=target){
+          clearInterval(iv);
+          if(bar)bar.style.transition='';
+          setTimeout(function(){
+            c.classList.add('done');c.classList.remove('done-enter');c.classList.remove('dl-completing');
+            var s=c.querySelector('.dl-seal');if(s&&s.parentNode)s.parentNode.removeChild(s);
+          },420);
+        }
+      },28);
     });
-    container.querySelectorAll('.task-card.done-enter').forEach(function(c){
-      requestAnimationFrame(function(){requestAnimationFrame(function(){
-        c.classList.add('done');c.classList.remove('done-enter');
-        var bar=c.querySelector('i[data-fill]');
-        if(bar)bar.style.width=bar.getAttribute('data-fill')+'%';
-      });});
-    });
-    window.__justFinished=null;
   },80);
 };
 
@@ -18494,6 +18594,7 @@ var GOODS=[
  {id:'g_exp2',cat:'evo',ic:'⚡',n:'2倍经验卡',baseBC:0.44,qty:1},
  {id:'g_exp3',cat:'evo',ic:'⚡',n:'3倍经验卡',baseBC:1.4,qty:1},
  {id:'g_coupon',cat:'pot',ic:'🎴',n:'高级功能半价券',baseBC:0.3,qty:2},
+ {id:'g_potrial',cat:'pot',ic:'🧪',n:'潜能体验卡',baseBC:0.4,qty:2},
  {id:'g_trial',cat:'pot',ic:'🧪',n:'潜能体验卡',baseBC:0.4,qty:1},
  {id:'g_golddie',cat:'bra',ic:'🎲',n:'金骰子',baseBC:0.16,qty:1,rare:true},
  {id:'g_slotext',cat:'talent',ic:'🗳️',n:'天赋槽位扩展券',baseBC:355,qty:0,rare:true,unique:true},
@@ -19933,26 +20034,60 @@ function v2rollDay(){
  if(CV.extra){var rest=opts.filter(function(i){return i!==CV.dayType;});CV.dayType2=rest[v2hash('Y'+v2dkey())%rest.length];}
  else CV.dayType2=-1;
 }
+function v2settleCup(id){try{
+  var cup=v2cupById(id),score=v2cupScore(cup),granted=[];
+  v2tiers(cup).forEach(function(t,i){var k=id+':'+i;if(!CV.claimed[k]&&score>=cup.ths[i]){CV.claimed[k]=true;granted.push(t);v2grant(t);}});
+  if(granted.length){
+    CV.lastSettle=CV.lastSettle||{};
+    CV.lastSettle[id]={name:v2cupName(cup),score:score,granted:granted,at:Date.now()};
+    try{toast('📦 上期「'+v2cupName(cup)+'」奖励已自动结算 '+granted.length+' 档：'+granted.slice(0,3).join('、')+(granted.length>3?' 等':''));}catch(e){}
+  }
+  delete CV.joined[id];delete CV.ended[id];delete CV.scores[id];Object.keys(CV.claimed).forEach(function(k){if(k.indexOf(id+':')===0)delete CV.claimed[k];});
+ }catch(e){}}
+function v2dismissSettle(id){try{if(CV.lastSettle)delete CV.lastSettle[id];v2save();v2renderCup(v2cupById(id));}catch(e){}}
 function v2rollCheck(){
+ /* 一次性清扫：joined+ended 并存=旧周期遗留（历史版本无重置机制），立即结算清账 */
+ ['day','day2','sprint','champ','wkpt','core','biwk'].forEach(function(id){if(CV.ended[id])v2settleCup(id);});
  var wk=v2wkey(),bk=v2bikey(),dk=v2dkey();
  if(CV.dk!==dk){
   if(CV.dk){
    Object.keys(CV.joined).forEach(function(id){if((id==='day'||id==='day2')&&CV.joined[id]&&!CV.ended[id])CV.ended[id]=true;});
+   ['day','day2'].forEach(function(id){if(CV.ended[id])v2settleCup(id);});
   }
   CV.dk=dk;v2rollDay();
  }
  if(CV.wk!==wk){
-  if(CV.wk){['sprint','champ','wkpt','core'].forEach(function(id){if(CV.joined[id]&&!CV.ended[id])CV.ended[id]=true;});}
+  if(CV.wk){['sprint','champ','wkpt','core'].forEach(function(id){if(CV.joined[id]&&!CV.ended[id])CV.ended[id]=true;});
+   ['sprint','champ','wkpt','core'].forEach(function(id){if(CV.ended[id])v2settleCup(id);});}
   CV.wk=wk;CV.trophies=0;CV.tby={};
  }
  if(CV.bk!==bk){
   if(CV.bk&&CV.joined.biwk&&!CV.ended.biwk)CV.ended.biwk=true;
+  if(CV.bk&&CV.ended.biwk)v2settleCup('biwk');
   CV.bk=bk;
  }
  if(AV.wk!==wk){
   AV.wk=wk;AV.preReg=false;AV.joined=false;AV.placed=false;AV.league=-1;AV.placeScore=0;AV.pts=1000;AV.placeEP=0;AV.revenge=[];AV.pendingG=null;AV.chDay='';AV.optDay='';
   v2initGhosts();
  }
+ v2rollSprintTag();
+}
+function v2rollSprintTag(){
+ try{
+  if(!CV.joined['sprint']||CV.ended['sprint'])return;
+  if(!state.tasksLocked)return;
+  var dk=v2dkey();
+  if(CV.sprintTag&&CV.sprintTag.dk===dk&&CV.sprintTag.tag)return;
+  var tags=[];
+  (state.todayTasks||[]).forEach(function(t){
+   if(!t.tagId)return;
+   try{var tg=getTag(t.tagId);if(tg&&tg.path){var p=tg.path.join('·');if(tags.indexOf(p)<0)tags.push(p);}}catch(e){}
+  });
+  if(!tags.length){CV.sprintTag={dk:dk,tag:null};return;}
+  var pick=tags[Math.floor(Math.random()*tags.length)];
+  CV.sprintTag={dk:dk,tag:pick};
+  try{toast('🏆 冲刺杯今日悬赏标签：'+pick+' · 完成≥1个得1杯，总EP≥60%得2杯、≥90%得3杯（日上限3）');}catch(e){}
+ }catch(e){}
 }
 /* ---------- 今日任务得分 ---------- */
 function v2todayRaw(){var s=0;(state.todayTasks||[]).forEach(function(t){var e=parseFloat(t.baseEp);if(e>0)s+=e;});return s;}
@@ -20041,8 +20176,10 @@ function v2sign(){
  if(CV.joined[id]){v2closePact();v2toast('已报名');return;}
  var en=state.cupV3.energy||0;
  if(en<cup.e){v2toast('能量不足（剩 '+en+' 点）');return;}
- state.cupV3.energy=en-cup.e;CV.joined[id]=true;CV.scores[id]=CV.scores[id]||0;
+ state.cupV3.energy=en-cup.e;CV.joined[id]=true;
+ delete CV.ended[id];CV.scores[id]=0;
  v2closePact();v2toast('🎉 报名成功：'+v2cupName(cup)+'（-'+cup.e+' 能量）');
+ try{if(typeof window.cupSignFX==='function')window.cupSignFX(v2cupName(cup),cup.e);}catch(e){}
  v2renderCup();v2save();
 }
 function v2claimAll(id){
@@ -20085,7 +20222,18 @@ function v2renderCup(){
   +(joined?(ended?(claimN>0?'<span class="chip pill" style="border-color:rgba(255,214,10,.6);color:#ffd60a">已结束 · 待领取 '+claimN+' 档</span>':'<span class="chip pill">已结束 · 已领完</span>'):'<span class="chip pill" style="border-color:rgba(124,196,255,.4);color:#7cc4ff">进行中 · 已报名 ⚡'+cup.e+'</span>')
     :'<button class="btn gold" onclick="v2openPact(\''+cup.id+'\')">📜 报名 ⚡'+cup.e+'</button>')+'</div>';
  html+='<div class="cup-rest'+((!joined&&!ended)?' dimmed':'')+'">';
- if(tags)html+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">'+tags.map(function(t,i){var cur=isSpr?(i===(v2now().getDay()-1)):true;return '<span class="chip" style="'+(cur?'border-color:rgba(255,214,10,.55);color:#ffd60a':'opacity:.55')+'">'+t+(isSpr?(' · '+v2DAYS[i+1]):'')+(cur&&isSpr?' ◀':'')+'</span>';}).join('')+'</div>';
+ if(isSpr){
+  var st3=CV.sprintTag;
+  if(st3&&st3.tag){html+='<div style="padding:10px 13px;margin-bottom:10px;border:1.5px solid rgba(255,214,10,.55);border-radius:12px;background:rgba(255,214,10,.07);font-size:13px;color:#f0d9a2;line-height:1.9">🏆 <b style="color:#ffd60a">今日悬赏标签（锁定任务时随机抽取）：'+st3.tag+'</b><br><small style="color:#a98d5f">完成≥1个该标签任务得1杯 · 标签今日总EP达成率≥60%得2杯 · ≥90%得3杯 · 每日上限3杯</small></div>';}
+  else if(state.tasksLocked){html+='<div style="padding:9px 13px;margin-bottom:10px;border:1px dashed rgba(255,214,10,.4);border-radius:12px;color:#a98d5f;font-size:12px;line-height:1.8">🏆 今日悬赏标签将在下次进入杯赛页时从已锁定任务的标签中随机抽取</div>';}
+ }
+ else if(tags)html+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">'+tags.map(function(t,i){var cur=isSpr?(i===(v2now().getDay()-1)):true;return '<span class="chip" style="'+(cur?'border-color:rgba(255,214,10,.55);color:#ffd60a':'opacity:.55')+'">'+t+(isSpr?(' · '+v2DAYS[i+1]):'')+(cur&&isSpr?' ◀':'')+'</span>';}).join('')+'</div>';
+ if(CV.lastSettle&&CV.lastSettle[cup.id]){
+  var _ls=CV.lastSettle[cup.id];
+  html+='<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;margin-bottom:10px;border:1px dashed rgba(124,196,255,.4);border-radius:11px;background:rgba(124,196,255,.06);font-size:12px;color:#a8d8ff;line-height:1.7">'
+   +'<span>📜 上期结算 · '+_ls.name+'：得分 '+v2fmt(_ls.score)+' · 结算 '+_ls.granted.length+' 档（'+_ls.granted.slice(0,2).join('、')+(_ls.granted.length>2?' 等':'')+'）已入账</span>'
+   +'<button class="btn" style="padding:3px 10px;font-size:11px;flex-shrink:0" onclick="v2dismissSettle(\''+cup.id+'\')">✕</button></div>';
+ }
  if(!joined&&!ended)html+='<div class="lockstrip">⚠️ 尚未报名：成绩不计入本杯。点击右上角「📜 报名」签署协议后开始计分。</div>';
  if(joined&&!ended)html+='<div class="lockstrip">🔒 赛中锁定：'+cup.dur+' 结束后可一键领取全部达成档位（含参与奖）。</div>';
  if(joined&&ended){
@@ -20369,10 +20517,22 @@ function v2Tick(){
   if(CV.joined.champ&&!CV.ended.champ)CV.scores.champ=(CV.scores.champ||0)+v2todayDetail(v2cupTags(v2cupById('champ'))).total;
   if(CV.joined.biwk&&!CV.ended.biwk)CV.scores.biwk=(CV.scores.biwk||0)+v2todayDetail(v2cupTags(v2cupById('biwk'))).total;
   if(CV.joined.sprint&&!CV.ended.sprint&&d>=1&&d<=5){
-   var tags=v2cupTags(v2cupById('sprint'));
-   var cnt=0;
-   (state.todayTasks||[]).forEach(function(t){var tg=null;try{tg=getTag(t.tagId);}catch(e){}if(tg&&tags.indexOf(v2tagOf(t.tagId))>=0&&parseFloat(t.baseEp)>0)cnt++;});
-   CV.tby[d]=Math.min(3,cnt);
+   var st=CV.sprintTag,tro=0;
+   if(st&&st.tag){
+    var sum=0,tot=0,done1=false;
+    (state.todayTasks||[]).forEach(function(t){
+     if(!t.tagId)return;
+     try{
+      var tg=getTag(t.tagId);if(!tg||!tg.path)return;
+      var pp=tg.path.join('·').replace(/\s+/g,''),tt=String(st.tag).replace(/\s+/g,'');
+      if(!(pp===tt||pp.indexOf(tt)===0||tt.indexOf(pp)===0))return;
+      tot+=tg.maxEp;
+      if(parseFloat(t.baseEp)>0){sum+=parseFloat(t.baseEp);done1=true;}
+     }catch(e){}
+    });
+    if(done1){var rate=tot>0?sum/tot:0;tro=rate>=0.9?3:rate>=0.6?2:1;}
+   }
+   CV.tby[d]=Math.min(3,tro);
    CV.trophies=Object.keys(CV.tby).reduce(function(s,k){return s+CV.tby[k];},0);
   }
   v2resolveChallenge();
@@ -20422,6 +20582,12 @@ try{
 }catch(e){}
 /* window 导出 */
 ['v2openPact','v2closePact','v2pactToggle','v2sign','v2claimAll','v2buyEnergy','v2preReg','v2join','v2place','v2endFx','v2showLg','v2closeLg','v2challenge','v2defense','v2optimize','v2revenge','v2settle'].forEach(function(f){window[f]=eval(f);});
+window.v2dismissSettle=v2dismissSettle;
+window.__cupBounty=function(){var out=[];try{var d=new Date().getDay();
+ if(CV.joined['sprint']&&d>=1&&d<=5){var st2=CV.sprintTag;if(st2&&st2.tag)out.push({cup:'冲刺杯',tag:st2.tag});}
+ if(CV.joined['champ']){var tg=v2cupTags(v2cupById('champ'));if(tg&&tg[0])out.push({cup:'王者周',tag:tg[0]});}
+ if(CV.joined['biwk']){v2cupTags(v2cupById('biwk')).forEach(function(t){out.push({cup:'双周杯',tag:t});});}
+}catch(e){}return out;};
 window.__v2Dbg={v2Tick:v2Tick,v2renderArena:v2renderArena,AV:AV,CV:CV,get cands(){return AV_CANDS;}};
 
 function v2compMail(){
@@ -20497,5 +20663,944 @@ v2rollCheck();
 })();
 
 </script>
+<script>
+/* ================= 背单词默写（主程序版）v2 · 分类多窗口/门禁/自动计分 ================= */
+(function(){
+'use strict';
+state.vocab=state.vocab||{lists:{},active:null,pendingClear:0,lastAuto:'',lastDone:''};
+function vse(id){return document.getElementById(id);}
+/* ---------- 数据 ---------- */
+var SEED_WORDS=[["deduce","vt.",["推断","推论","演绎"]],["possession","n.",["拥有","占有","财产"]],["adhere","vi.",["遵守","坚持","附着"]],["inferior","adj.",["下级的","劣等的"]],["integrity","n.",["正直","诚实","完整"]],["elaborate","adj.",["精心制作的","复杂的"]],["collaborate","vi.",["合作","协作"]],["legacy","n.",["遗产","遗留"]],["elegant","adj.",["优雅的","精致的"]],["lever","n.",["杠杆","手段"]],["liability","n.",["责任","负债"]],["liable","adj.",["有责任的","易于"]],["alliance","n.",["联盟","联合"]],["delicate","adj.",["精致的","脆弱的"]],["literacy","n.",["读写能力","识字"]],["prolong","vt.",["延长","拖延"]],["illusion","n.",["幻觉","错觉"]],["margin","n.",[["边缘","页边","差额"],["利润","余地","幅度"]]],["marginal","adj.",["边缘的","微不足道的"]],["dimension","n.",["维度","尺寸","方面"]],["commerce","n.",["商业","贸易"]],["merit","n.",["优点","价值"]],["prominent","adj.",["杰出的","突出的"]],["misery","n.",["痛苦","悲惨"]],["promising","adj.",["有前途的"]],["modify","vt.",["修改","更改"]],["motive","n.",["动机","目的"]],["multitude","n.",["大量","群众"]],["commute","v.",["通勤","乘车上下班"]],["mutual","adj.",["相互的","共同的"]],["renaissance","n.",["文艺复兴","复兴"]],["narrative","adj.",["叙事的","叙述的"]],["nurture","n.",["养育","培养"]],["adolescent","adj.",["青春期的","青少年的"]],["opt","v.",["选择","抉择"]],["coordinate","vt.",["协调","配合"]],["parliament","n.",["议会","国会"]],["depart","v.",[["离开","出发","启程"],["背离","去世"]]],["compel","vt.",["强迫","迫使"]],["people","vt.",["使充满","使居住"]],["penalty","n.",["惩罚","罚金"]],["compensate","v.",["补偿","赔偿"]],["indispensable","adj.",["必不可少的"]],["pension","n.",["养老金","退休金"]],["suspend","v.",["悬挂","暂停","中止"]]];
+function mkWord(w,pos,a){var slots=Array.isArray(a[0])?a:[a];return {w:w,pos:pos,slots:slots,sa:slots.map(function(){return 0;}),sla:slots.map(function(){return 0;}),st:0};}
+(function initSeed(){
+  if(!state.vocab.__gift1562){
+    state.vocab.__gift1562=1;
+    state.inventory=state.inventory||{};
+    state.inventory.potential_trial=(parseInt(state.inventory.potential_trial)||0)+3;
+    state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];
+    state.mailbox.push({id:'gift1562trial',title:'🎁 奖励 · 潜能体验卡 ×3',body:'背单词模块「剩余单词」标注释义功能上线奖励：潜能模式体验卡 ×3（已入账，可在交易所挂牌交易）。',items:{},createdAt:Date.now(),read:false});
+    setTimeout(function(){try{toast('🎁 奖励到账：潜能体验卡 ×3（已入仓库，可交易）');}catch(e){}},800);
+  }
+  if(!state.vocab.lists['PQE-L15']){
+    state.vocab.lists['PQE-L15']={id:'PQE-L15',title:'考研词汇 L15 · 十五轮一次',tag:'wd_ky',rounds:0,cur:null,cleared:false,lastSummary:'',
+      words:SEED_WORDS.map(function(x){return mkWord(x[0],x[1],x[2]);})};
+  }
+  /* 旧结构迁移 */
+  Object.keys(state.vocab.lists).forEach(function(k){var L=state.vocab.lists[k];
+    L.words.forEach(function(w){if(!w.slots){w.slots=[w.a||['']];w.sa=[w.st||0];w.sla=[w.ls||0];}});});
+  if(!state.vocab.uiActive)state.vocab.uiActive=null;
+})();
+function vSave(){try{saveState();}catch(e){}}
+/* ---------- 工具 ---------- */
+function vNorm(x){return String(x||'').toLowerCase().replace(/^(vt|vi|adj|adv|n|v|prep|conj|num|art|pron)\.?/,'').replace(/[\s\.,;，。；、\.\(\)（\）\/\\\-\—!！?？'"''""]/g,'');}
+function vSim(x,y){x=vNorm(x);y=vNorm(y);if(!x||!y)return 0;if(x===y)return 1;if(x.indexOf(y)>=0||y.indexOf(x)>=0)return 0.9;
+  function bg(s2){var r=[];for(var i=0;i<s2.length-1;i++)r.push(s2.slice(i,i+2));return r;}
+  var A=bg(x),B=bg(y),m={},hit=0;B.forEach(function(b){m[b]=(m[b]||0)+1;});A.forEach(function(a){if(m[a]>0){hit++;m[a]--;}});return 2*hit/(A.length+B.length);}
+function vShuf(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
+function vRemain(L){return L.words.filter(function(w){return w.st!==1;}).length;}
+/* ---------- 任务分类 ---------- */
+function vFam(tagId){var p=String(tagId||'').split('_');return p.length>=2?p.slice(0,2).join('_'):(p[0]||'wd');}
+function vTagName(tagId){try{var t=getTag(tagId);return t&&t.path?t.path.slice(1).join('·'):tagId;}catch(e){return tagId;}}
+function vTasks(){var out=[];var seen={};(state.todayTasks||[]).forEach(function(t,i){if(t.tagId&&String(t.tagId).indexOf('wd')===0){var fam=vFam(t.tagId);if(seen[fam]){seen[fam].t=t;seen[fam].i=i;return;}var x={t:t,i:i,fam:fam,name:vTagName(t.tagId)};seen[fam]=x;out.push(x);}});return out;}
+function vListsFor(fam){var out=[];Object.keys(state.vocab.lists).forEach(function(k){var L=state.vocab.lists[k];var lt=L.tag||'wd';if(lt===fam||fam.indexOf(lt)===0||lt.indexOf(fam)===0)out.push(L);});return out;}
+/* ---------- 页面 ---------- */
+var voTMR=null,voCur=null; /* voCur={task,L} */
+window.voSwitch=function(fam){
+  var lists=vListsFor(fam);
+  state.vocab.uiActive=fam;voCur={fam:fam,L:lists[0]||null};
+  document.querySelectorAll('.vo-tab').forEach(function(b){b.className='vo-tab'+(b.getAttribute('data-f')===fam?' on':'');});
+  vSave();voRender();};
+function voGate(){
+  voCSS();
+  var g=vse('vcGate');if(!g)return false;
+  var tasks=vTasks();
+  if(!tasks.length){
+    g.innerHTML='';
+    vse('vcTabs').style.display='none';
+    return false;}
+  g.innerHTML='';
+  var tabs=vse('vcTabs');tabs.style.display='flex';
+  tabs.innerHTML=tasks.map(function(x){return '<button class="vo-tab'+(state.vocab.uiActive===x.fam?' on':'')+'" data-f="'+x.fam+'" onclick="voSwitch(\''+x.fam+'\')">📘 '+x.name+'<small style="opacity:.6"> '+x.fam+'</small></button>';}).join('');
+  if(!state.vocab.uiActive||!tasks.some(function(x){return x.fam===state.vocab.uiActive;}))state.vocab.uiActive=tasks[0].fam;
+  return true;}
+var voCSSInjected=false;
+function voCSS(){if(voCSSInjected)return;voCSSInjected=true;
+  var st=document.createElement('style');st.textContent=[
+  '.vo-tab{padding:9px 16px;border:1px solid #4a3b22;border-radius:10px;background:#171208;color:#d8c9a8;font-size:13px;cursor:pointer;font-family:inherit}',
+  '.vo-tab.on{background:linear-gradient(135deg,#f0b35c,#d9832a);color:#2a1c08;font-weight:700;border-color:transparent}',
+  '.vo-sheet{background:rgba(28,21,11,.8);border:1px solid rgba(232,163,61,.25);border-radius:14px;padding:14px 12px}',
+  '.vo-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px}@media(max-width:560px){.vo-grid{grid-template-columns:1fr}}',
+  '.vo-row{display:flex;align-items:baseline;gap:8px;padding:7px 6px;border-bottom:1px dashed rgba(232,163,61,.12)}',
+  '.vo-row.col{flex-direction:column;align-items:stretch;gap:3px}.vo-row.col>div{display:flex;align-items:baseline;gap:8px}',
+  '.vo-num{font-family:var(--mono);font-size:12px;color:#8d7c5f;width:30px;flex-shrink:0;text-align:right}',
+  '.vo-w{font-size:16.5px;font-weight:700;color:#f0d9a2;white-space:nowrap}',
+  '.vo-p{font-size:11px;color:#a98d5f;font-family:var(--mono);white-space:nowrap}',
+  '.vo-row.pblue .vo-num,.vo-row.pblue .vo-w{color:#8ec8ff}.vo-row.pblue .vo-p{color:rgba(124,196,255,.65)}.vo-row.pblue .vo-in{border-bottom-color:rgba(124,196,255,.55)}',
+  '.vo-row.pred .vo-num,.vo-row.pred .vo-w{color:#ff9a8a}.vo-row.pred .vo-p{color:rgba(255,138,128,.62)}.vo-row.pred .vo-in{border-bottom-color:rgba(255,138,128,.55)}',
+  '.vo-in{border:none;border-bottom:1.5px solid rgba(232,163,61,.35);background:transparent;color:#ffe9b8;font-size:14.5px;padding:2px 4px;flex:none;width:165px;max-width:40vw;min-width:90px;font-family:inherit;text-align:center}',
+  '.vo-in:focus{outline:none;border-bottom-color:#f0b35c;background:rgba(240,179,92,.06)}',
+  '.vo-in.ok{border-bottom-color:rgba(52,199,89,.6);color:#7ee2a0}.vo-in.bad{border-bottom-color:rgba(255,59,48,.6);color:#ff9a8a}.vo-in.miss{border-bottom-color:rgba(255,59,48,.8);color:#8d7c5f}',
+  '@keyframes vopop{0%{transform:scale(0) rotate(-40deg);opacity:0}60%{transform:scale(1.35) rotate(10deg);opacity:1}100%{transform:scale(1)}}',
+  '.vo-mk{display:inline-flex;align-items:center;justify-content:center;margin-left:5px;font-weight:900;flex-shrink:0;animation:vopop .45s cubic-bezier(.2,1.6,.3,1) both}',
+  '.vo-mk.ok{color:#34c759;font-size:16px}.vo-mk.bad{color:#ff3b30;font-size:16px}.vo-mk.miss{color:#8e8e93;font-size:11px;border:1.6px solid #8e8e93;border-radius:50%;width:17px;height:17px;line-height:1}',
+  '.vo-brk{grid-column:1/-1;text-align:center;font-size:10px;color:#8d7c5f;letter-spacing:.4em;border-top:1px dashed rgba(232,163,61,.25);padding-top:8px;margin:8px 0 2px}'
+  ].join('\n');document.head.appendChild(st);}
+/* ---------- 词库首页 / 导入 / 剩余单词 ---------- */
+function voImportFormHTML(fam){
+  return '<details class="dl-panel" style="margin-bottom:12px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--gold-l);list-style:none">📥 导入新词表（点我展开）</summary><div style="margin-top:8px">'
+   +'<div style="font-size:11.5px;color:#a98d5f;line-height:1.8;margin-bottom:6px">格式：首行 <b>#列表名</b>，之后每行 <b>单词 词性 | 答案1/答案2</b>；双空词答案槽间用 <b>;</b> 分隔并在行尾加 <b>| m</b></div>'
+   +'<textarea id="voImpTa_'+(fam||'x')+'" rows="6" style="width:100%;background:#1e180e;color:#f0e6cf;border:1px solid #4a3b20;border-radius:10px;padding:10px;font-family:var(--mono);font-size:12px;box-sizing:border-box" placeholder="#考研词汇 L16&#10;deduce vt. | 推断/推论&#10;margin n. | 边缘/页边;利润/余地 | m"></textarea>'
+   +'<button class="btn-primary" style="width:100%;padding:11px;margin-top:8px" onclick="voDoImport(\''+(fam||'')+'\')">📥 导入'+(fam?'到 '+fam:'并设为本轮')+'</button></div></details>';
+}
+window.voDoImport=function(fam){
+  var ta=vse('voImpTa_'+(fam||'x'));if(!ta)return;
+  var txt=(ta.value||'').trim();if(!txt){try{toast('请先粘贴词表');}catch(e){}return;}
+  var lines=txt.split(/\n+/).map(function(l){return l.trim();}).filter(Boolean);
+  var title='导入词表',tag=fam||'wd',words=[];
+  lines.forEach(function(l){
+    if(l[0]==='#'){var m=l.slice(1).split('|');title=m[0].trim()||title;if(m[1]&&!fam)tag=m[1].trim();return;}
+    var parts=l.split('|'),wp=parts[0].trim(),isM=parts.length>=3&&parts[2].trim()==='m';
+    var raw=parts[1]||'';
+    var slots=isM?raw.split(';').map(function(sg){return sg.split('/').map(function(x){return x.trim();}).filter(Boolean);}).filter(function(a){return a.length;}):[raw.split('/').map(function(x){return x.trim();}).filter(Boolean)];
+    var m2=wp.match(/^(\S+)\s+((?:vt|vi|adj|adv|n|v|prep|conj|num)\.?)$/i);
+    var w2=null;if(m2)w2=m2[1];else if(/^\S+$/.test(wp))w2=wp;
+    if(w2)words.push({w:w2,pos:m2?m2[2]:'',slots:slots,sa:slots.map(function(){return 0;}),sla:slots.map(function(){return 0;}),st:0});
+  });
+  if(!words.length){try{toast('未识别到单词行，格式：单词 词性 | 答案');}catch(e){}return;}
+  var id='IMP-'+Date.now().toString(36);
+  state.vocab.lists[id]={id:id,title:title,tag:tag,words:words,rounds:0,cur:null,cleared:false,lastSummary:''};
+  state.vocab.active=id;
+  try{toast('📥 已导入「'+title+'」'+words.length+' 词');}catch(e){}
+  if(fam){state.vocab.uiView='win';state.vocab.uiActive=fam;vSave();voSwitch(fam);}
+  else{vSave();voRenderHome();}
+};
+function voBankHTML(L){
+  var left=L.words.map(function(w,i){return {w:w,i:i};}).filter(function(x){return x.w.st!==1;});
+  var slotsTot=L.words.reduce(function(a,w){return a+w.slots.length;},0);
+  var done=L.words.reduce(function(a,w){return a+w.sa.filter(function(s){return s===1;}).length;},0);
+  function meaningOf(w){return w.slots.map(function(sl){return sl[0]||'';}).filter(Boolean).join(' / ');}
+  function colorOf(w){
+    if(w.sla.some(function(s){return s===2;}))return '#8ec8ff';
+    if(w.sla.length&&w.sla.every(function(s){return s===3;}))return '#ff9a8a';
+    return '#f0d9a2';
+  }
+  var html='<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:10px;font-size:13px;color:#c9a86a"><span>📚 '+L.title+' · 剩余 <b style="color:#ffd60a">'+left.length+'</b>/'+L.words.length+' 词 · 已清槽位 '+done+'/'+slotsTot+'</span></div>';
+  if(!left.length)return html+'<div style="text-align:center;color:#7ee2a0;padding:22px">🎉 全部掌握</div>';
+  var col1=left.slice(0,Math.ceil(left.length/2)),col2=left.slice(Math.ceil(left.length/2));
+  function row(x,n){
+    var w=x.w,c=colorOf(w);
+    var slots=w.slots.length>1?'<small style="opacity:.55;font-family:var(--mono"> · '+w.sa.filter(function(s){return s!==1;}).length+'空</small>':'';
+    return '<div class="vo-row" style="border-bottom:1px dashed rgba(232,163,61,.12);padding:7px 6px;display:flex;align-items:baseline;gap:8px">'
+     +'<span class="vo-num">'+n+'.</span>'
+     +'<span class="vo-w" style="color:'+c+'">'+w.w+'</span>'
+     +'<span class="vo-p">'+w.pos+'</span>'
+     +'<span style="font-size:13px;color:#ffe9b8;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+meaningOf(w)+'</span>'
+     +slots+'</div>';
+  }
+  html+='<div class="vo-sheet"><div class="vo-grid"><div>'+col1.map(function(x,i){return row(x,i+1);}).join('')+'</div><div>'+col2.map(function(x,i){return row(x,col1.length+i+1);}).join('')+'</div></div></div>';
+  return html;
+}
+
+function voRenderHome(){
+  var body=vse('vcBody');if(!body)return;
+  var sub=vse('vcSub2');if(sub)sub.textContent='词库首页 · 已导入列表与导入入口';
+  var lists=Object.keys(state.vocab.lists).map(function(k){return state.vocab.lists[k];});
+  var tasks=vTasks();
+  var html='';
+  if(!tasks.length){
+    html+='<div style="padding:9px 13px;border:1px dashed rgba(232,163,61,.3);border-radius:11px;background:rgba(240,179,92,.04);color:#a98d5f;font-size:12px;margin-bottom:12px;line-height:1.8">🌙 今日无背单词相关任务 · 可在此浏览词库、查看剩余单词或导入新表，明天安排了任务再来默写</div>';
+  }
+  tasks.forEach(function(x){
+    if(String(x.t.tagId).indexOf('_new')>0&&!vListsFor(x.fam).length){
+      html+='<div style="padding:11px 13px;border:1.5px dashed rgba(255,149,0,.55);border-radius:12px;background:rgba(255,149,0,.06);color:#f0d9a2;font-size:13px;margin-bottom:12px;line-height:1.9">⚠️ 今日任务「'+x.name+'」是新 list，但 <b>尚未导入对应词表</b> —— 请先在下方导入 <span style="font-family:var(--mono);font-size:11px">'+x.fam+'</span> 词表</div>';
+    }});
+  if(!lists.length){
+    html+='<div style="text-align:center;padding:36px 16px;border:1.5px dashed rgba(232,163,61,.35);border-radius:14px;color:#8d7c5f;line-height:2.4;margin-bottom:12px">📥 <b style="color:#f0d9a2">首次使用 · 请先上传一份单词表</b><br><small>把词表文档发给我，我会整理成下方导入格式</small></div>';
+  }else{
+    html+='<div style="font-size:12.5px;font-weight:700;letter-spacing:.16em;color:#c9a86a;margin-bottom:8px">📚 已导入词表 · '+lists.length+' 份</div>'
+     +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:14px">'
+     +lists.map(function(L){
+       var rem=vRemain(L);
+       return '<div style="border:1px solid rgba(232,163,61,.2);border-radius:14px;padding:13px;background:rgba(28,21,11,.7)">'
+        +'<div style="font-size:10.5px;color:#a98d5f;font-family:var(--mono);letter-spacing:.1em">📘 '+(L.tag||'wd')+(L.cleared?' · <span style="color:#7ee2a0">🏆已通关</span>':'')+'</div>'
+        +'<div style="font-size:15px;font-weight:800;color:#f0d9a2;margin:4px 0">'+L.title+'</div>'
+        +'<div style="font-size:12px;color:#c9a86a">剩余 <b style="color:#ffd60a">'+rem+'</b>/'+L.words.length+' 词 · 第 '+((L.rounds||0)+1)+' 轮</div>'
+        +'<div style="display:flex;gap:6px;margin-top:10px">'
+        +'<button class="btn-secondary" style="flex:1;padding:7px;font-size:12px" onclick="voBankView(\''+L.id+'\')">📚 剩余单词</button>'
+        +'<button class="btn-primary" style="flex:1.4;padding:7px;font-size:12px" onclick="voEnter(\''+L.id+'\')">'+(L.cur&&!L.cur.done?'⏸ 继续默写':'✍️ 开始默写')+'</button>'
+        +'</div></div>';
+     }).join('')+'</div>';
+  }
+  html+=voImportFormHTML('');
+  body.innerHTML=html;
+}
+window.voBankView=function(id){
+  var L=state.vocab.lists[id];if(!L)return;
+  var body=vse('vcBody');if(!body)return;
+  state.vocab.uiView='bank';
+  body.innerHTML='<button class="btn-secondary" style="padding:6px 14px;font-size:12px;margin-bottom:10px" onclick="voGoHome()">← 返回词库首页</button><div class="vo-sheet">'+voBankHTML(L)+'</div>';
+};
+window.voEnter=function(id){
+  var L=state.vocab.lists[id];if(!L)return;
+  var fam=L.tag||'wd';
+  state.vocab.uiView='win';state.vocab.uiActive=fam;state.vocab.active=id;
+  var tasks=vTasks();
+  if(tasks.length){document.querySelectorAll('.vo-tab').forEach(function(b){b.className='vo-tab'+(b.getAttribute('data-f')===fam?' on':'');});}
+  vSave();voRender();
+};
+window.voGoHome=function(){state.vocab.uiView='home';state.vocab.uiActive=null;vSave();voGate();voRenderHome();};
+function voRender(){
+  voCSS();
+  var body=vse('vcBody');if(!body)return;
+  var tasks=vTasks();
+  if(!tasks.length){voGate();return;}
+  var fam=state.vocab.uiActive||tasks[0].fam;
+  var lists=vListsFor(fam);var L=lists[0]||null;voCur={fam:fam,L:L,task:tasks.filter(function(x){return x.fam===fam;})[0]};
+  var sub=vse('vcSub2');if(sub)sub.textContent=L?L.title+' · 通关线：剩余 ≤10':'该标签暂无词库';
+  if(!L){
+    var isNew=voCur.task&&String(voCur.task.t.tagId).indexOf('_new')>0;
+    if(isNew){
+      body.innerHTML='<div style="text-align:center;padding:30px 16px;border:1.5px dashed rgba(255,149,0,.55);border-radius:14px;color:#f0d9a2;line-height:2.2;margin-bottom:12px">📥 请导入新list单词表<br><small style="color:#a98d5f">「'+voCur.task.name+'」尚无词库 · 粘贴文本即可导入（也可把文档发我整理）</small></div>'+voImportFormHTML(fam);
+    }else{
+      body.innerHTML='<div class="card" style="text-align:center;padding:36px 16px;color:#8d7c5f">「'+fam+'」分类下暂无词库<br><span style="font-size:12px">联系开发者导入对应词表</span></div>';
+    }
+    return;}
+  var rem=vRemain(L),rd=(L.rounds||0)+1;
+  var html='<button class="btn-secondary" style="padding:6px 14px;font-size:12px;margin-bottom:10px" onclick="voGoHome()">← 词库首页</button>'
+   +'<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:12px;font-size:13px;color:#c9a86a"><span>📖 '+L.title+' · 剩余 <b style="color:#ffd60a">'+rem+'</b>/'+L.words.length+' 词 · 第 '+rd+' 轮</span></div>';
+  if(L.cleared){html+='<div style="text-align:center;padding:26px 12px;border:1.5px dashed rgba(52,199,89,.5);border-radius:12px;color:#7ee2a0;line-height:2">🏆 本列表已通关 · W4 轮次已计入登记<br><small style="color:#a98d5f">请联系开发者导入下一份词表</small></div>';}
+  else if(!L.cur||L.cur.done){
+    if(rem>0)html+='<button class="btn-primary" style="width:100%;padding:13px" onclick="voStart()">▶ 开始第 '+rd+' 轮默写（'+rem+' 词'+(L.rounds>0?' · 已重排':'')+'）</button>';
+    if(L.lastSummary)html+=L.lastSummary;}
+  else{
+    var order=L.cur.order;
+    var col1=order.slice(0,20),col2=order.slice(20,40),rest=order.slice(40);
+    L.cur.disp=col1.concat(col2).concat(rest);L.cur.slotMap={};
+    var disp=L.cur.disp;
+    function cell(idx,num){var w=L.words[idx];var k=disp.indexOf(idx);
+      L.cur.slotMap[k]=w.sa.map(function(s,j){return s!==1?j:null;}).filter(function(x){return x!==null;});
+      var left=L.cur.slotMap[k];var n=left.length;
+      function nx(j){var nx2=j<n-1?('vin-'+k+'-'+(j+1)):('vin-'+(k+1));return 'onkeydown="if(event.key===\'Enter\'){var e2=document.getElementById(\''+nx2+'\');if(e2)e2.focus();}"';}
+      function inp(j){var v=((L.cur.vals||{})[idx+'|'+left[j]])||'';return '<input class="vo-in" id="vin-'+k+(j?'-'+j:'')+'" autocomplete="off" value="'+v.replace(/"/g,'&quot;')+'" '+nx(j)+'>';}
+      var pc=(function(){var anyB=w.sla.some(function(s){return s===2;});var allM=w.sla.length&&w.sla.every(function(s){return s===3;});return anyB?' pblue':(allM?' pred':'');})();
+      if(n<=1)return '<div class="vo-row'+pc+'"><span class="vo-num">'+num+'.</span><span class="vo-w">'+w.w+'</span><span class="vo-p">'+w.pos+'</span>'+inp(0)+'</div>';
+      var lines='';for(var j=0;j<n;j++)lines+='<div>'+(j===0?('<span class="vo-num">'+num+'.</span><span class="vo-w">'+w.w+'</span>'):'')+'<span class="vo-p">'+w.pos+'</span>'+inp(j)+'</div>';
+      return '<div class="vo-row col'+pc+'">'+lines+'</div>';}
+    var h1=col1.map(function(idx,i){return cell(idx,i+1);}).join('');
+    var h2=col2.map(function(idx,i){return cell(idx,21+i);}).join('');
+    html+='<div class="vo-sheet"><div class="vo-grid"><div>'+h1+'</div><div>'+h2+'</div>';
+    if(rest.length){
+      var r1=rest.filter(function(_,i){return i%2===0;}).map(function(idx,i){return cell(idx,41+i*2);}).join('');
+      var r2=rest.filter(function(_,i){return i%2===1;}).map(function(idx,i){return cell(idx,42+i*2);}).join('');
+      html+='<div class="vo-brk">— 2 —</div><div style="grid-column:1/-1"><div class="vo-grid"><div>'+r1+'</div><div>'+r2+'</div></div></div>';}
+    html+='</div></div><button class="btn-primary" style="width:100%;padding:13px;margin-top:14px" onclick="voGrade()">✓ 交卷批改（'+order.length+' 词）</button>';
+    if(!voTMR)voTMR=setInterval(voTick,1000);}
+  body.innerHTML=html;}
+window.voStart=function(){var L=voCur&&voCur.L;if(!L||L.cleared)return;
+  var cand=L.words.map(function(w,i){return i;}).filter(function(i){return L.words[i].st!==1;});
+  if(!cand.length)return;
+  vShuf(cand);
+  L.cur={order:cand,disp:null,slotMap:{},vals:{},start:Date.now(),done:false};
+  vSave();voRender();};
+function voTick(){var L=voCur&&voCur.L;var el=vse('vcTimer');if(!el)return;
+  if(L&&L.cur&&!L.cur.done){var s=Math.floor((Date.now()-L.cur.start)/1000);el.textContent='⏱ '+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+  else el.textContent='⏱ --:--';}
+window.voGrade=function(){var L=voCur&&voCur.L;if(!L||!L.cur||L.cur.done)return;
+  var btn=document.querySelector('#vcBody .btn-primary');if(btn)btn.disabled=true;
+  var results=[];
+  L.cur.disp.forEach(function(idx,k){var w=L.words[idx];
+    (L.cur.slotMap[k]||[]).forEach(function(slot,row){
+      var inp=vse('vin-'+k+(row?'-'+row:''));
+      var v=inp?(inp.value||'').trim():((((L.cur.vals||{})[idx+'|'+slot])||'')).trim();
+      var r={idx:idx,w:w,slot:slot,v:v,result:'miss',best:0,inp:inp};
+      if(v){var best=0;w.slots[slot].forEach(function(a){var s=vSim(v,a);if(s>best)best=s;});r.best=best;r.result=best>=0.8?'ok':'bad';}
+      results.push(r);
+      if(inp){inp.classList.add(r.result);var mk=document.createElement('span');mk.className='vo-mk '+r.result;mk.textContent=r.result==='ok'?'✓':(r.result==='bad'?'✗':'○');mk.style.animationDelay=Math.min(k*45,1600)+'ms';inp.parentElement.appendChild(mk);}});});
+  setTimeout(function(){voPhase2(L,results);},1400);};
+function voPhase2(L,results){
+  var ok=0,tried=0,res=[];
+  results.forEach(function(r){var w=r.w,j=r.slot;
+    L.cur.vals=L.cur.vals||{};L.cur.vals[r.idx+'|'+j]=r.v;
+    if(r.result==='miss'){w.sa[j]=3;res.push({w:w,miss:true,slot:j});return;}
+    tried++;if(r.result==='ok'){w.sa[j]=1;ok++;res.push({w:w,ok:true,slot:j});}
+    else{w.sa[j]=2;res.push({w:w,best:r.best,v:r.v,slot:j});}});
+  L.words.forEach(function(w){if(w.st!==1){w.sla=w.sa.slice();
+    if(w.sa.every(function(s){return s===1;}))w.st=1;else if(w.sa.every(function(s){return s===3;}))w.st=3;else w.st=2;}});
+  var total=results.length,acc=Math.round(ok/total*100);
+  var minutes=Math.max(1,Math.round((Date.now()-L.cur.start)/60000));
+  var tscore=Math.max(10,Math.min(100,Math.round(100-minutes*1.5)));
+  L.rounds=(L.rounds||0)+1;L.cur.done=true;
+  var rem=vRemain(L),cleared=false;
+  if(rem<=10&&!L.cleared){L.cleared=true;cleared=true;state.vocab.pendingClear=(state.vocab.pendingClear||0)+1;}
+  window.__vo={L:L,acc:acc,tscore:tscore,minutes:minutes,cleared:cleared,rem:rem,ok:ok,total:total,task:voCur.task,wrongs:res.filter(function(r){return !r.ok;}).map(function(r){
+    var stxt=r.w.slots.length>1?('空'+((r.slot||0)+1)+' '):'';
+    return r.miss?('<div style="padding:7px 10px;border:1px solid rgba(255,59,48,.25);border-radius:8px;margin-top:6px;color:#ff9a8a;font-size:12.5px">'+r.w.w+' '+r.w.pos+' · '+stxt+'未写 → '+r.w.slots[r.slot||0].slice(0,2).join('/')+'</div>')
+      :('<div style="padding:7px 10px;border:1px solid rgba(255,59,48,.25);border-radius:8px;margin-top:6px;color:#ff9a8a;font-size:12.5px">'+r.w.w+' '+r.w.pos+' · '+stxt+'「'+r.v+'」'+Math.round((r.best||0)*100)+'% → '+r.w.slots[r.slot||0].slice(0,2).join('/')+'</div>');}).join('')};
+  /* 成绩确认（应用原生 showModal） */
+  var title=cleared?'🏆 通关 · 本轮成绩':'📊 本轮成绩';
+  var body='<div style="line-height:2.1;text-align:center">'
+    +(cleared?'<div style="color:#7ee2a0;font-weight:700">剩余 '+rem+' 词 ≤ 10 · W4 轮次 +1</div>':'<div style="color:#f0d9a2">第 '+L.rounds+' 轮完成 · 剩余 '+rem+' 词</div>')
+    +'<div style="font-family:var(--mono);font-size:15px">正确率得分 <b style="color:#ffd60a;font-size:19px">'+acc+'</b> <span style="opacity:.6">('+ok+'/'+total+' 空，空/错均计错)</span></div>'
+    +'<div style="font-family:var(--mono);font-size:15px">用时得分 <b style="color:#ffd60a;font-size:19px">'+tscore+'</b> <span style="opacity:.6">('+minutes+' 分钟)</span></div>'
+    +'<div style="font-size:11.5px;color:#8d7c5f">确认后自动计入「'+(voCur.task?voCur.task.name:'')+'」任务的正确率/用时栏</div></div>';
+  try{showModal(title,body,function(){voConfirm(true);});}catch(e){voConfirm(true);}}
+function voConfirm(counted){var m=window.__vo;if(!m)return;var L=m.L;
+  if(counted){
+    /* 自动写入当天任务计分栏 */
+    try{
+      var ti=m.task?m.task.i:-1;
+      if(ti>=0&&typeof updateQDim==='function'){
+        updateQDim('today',ti,'acc',m.acc);
+        updateQDim('today',ti,'time',m.tscore);
+        if(typeof toast==='function')toast('✅ 已自动计入「'+m.task.name+'」：正确率 '+m.acc+' · 用时 '+m.tscore);
+      }
+    }catch(e){}
+    if(m.cleared){
+      try{if(typeof showGainModal==='function')showGainModal('🏆 恭喜获得 · 背单词通关',[['📘',L.title,'#7ee2a0'],['🎯','W4 轮次 +1（登记已自动计入）','#ffd60a'],['⏱','用时 '+m.minutes+' 分钟 · 得分 '+m.tscore,'#7cc4ff']]);}catch(e){}
+    }}
+  try{closeModal();}catch(e){}
+  var sum='<div style="border-radius:12px;padding:13px;font-size:13px;line-height:2;margin-top:12px;border:1px solid '+(m.cleared?'rgba(52,199,89,.5)':'rgba(232,163,61,.35)')+';color:'+(m.cleared?'#7ee2a0':'#f0d9a2')+'">'
+    +(m.cleared?'🏆 通关！剩余 '+m.rem+' 词 ≤ 10 · W4 轮次 +1':'第 '+L.rounds+' 轮完成 · 剩余 '+m.rem+' 词')
+    +'<div style="color:#c9a86a;margin-top:4px">正确率 <b style="color:#ffd60a">'+m.acc+'%</b>（'+m.ok+'/'+m.total+' 空）· 用时 <b>'+m.minutes+'</b> 分钟'+(counted?' · <span style="color:#7ee2a0">已自动计入计分栏</span>':'')+'</div>'
+    +m.wrongs
+    +(!m.cleared&&m.rem>0?'<button class="btn-primary" style="width:100%;padding:12px;margin-top:12px" onclick="voStart()">▶ 第 '+(L.rounds+1)+' 轮（重排剩余 '+m.rem+' 词）</button>':'')
+    +'</div>';
+  L.lastSummary=sum;window.__vo=null;vSave();voRender();}
+window.voCancel=function(){voConfirm(false);};
+/* ---------- 导航 ---------- */
+function voNav(name){
+  if(name==='vocab'){
+    voGate();
+    if(state.vocab.uiView==='win'&&state.vocab.uiActive&&vListsFor(state.vocab.uiActive).length){
+      voSwitch(state.vocab.uiActive);
+    }else{
+      state.vocab.uiView='home';
+      voRenderHome();
+    }}
+  if(name==='daily'){
+    if(state.vocab.pendingClear>0){var di=state.dailyInputs=state.dailyInputs||{};di.list=String((parseInt(di.list)||0)+state.vocab.pendingClear);state.vocab.pendingClear=0;vSave();
+      var dl=document.getElementById('daily-list');if(dl)dl.value=di.list;
+      try{toast('✅ 背单词 List 通关 +1 已自动计入登记');}catch(e){}}
+    var today=new Date().toDateString();
+    var tasks=vTasks();
+    var hasL=tasks.some(function(x){return vListsFor(x.fam).length>0;});
+    if(tasks.length&&hasL&&state.vocab.lastAuto!==today){
+      var anyPending=Object.keys(state.vocab.lists).some(function(k){var L=state.vocab.lists[k];return !L.cleared&&L.words.some(function(w){return w.st!==1;});});
+      if(anyPending){state.vocab.lastAuto=today;vSave();setTimeout(function(){try{switchPage('vocab');}catch(e){}},400);}}}}
+try{(function(){var sp=window.switchPage;if(sp&&!sp.__vo){var w2=function(n){var r=sp.apply(this,arguments);try{voNav(n);}catch(e){}return r;};w2.__vo=true;window.switchPage=w2;}})();}catch(e){}
+window.renderVocabPage=function(){if(!voGate())return;voSwitch(state.vocab.uiActive||vTasks()[0].fam);};
+})();
+/* ================= 背单词默写（主程序版）END ================= */
+</script>
+
+<!-- ============ 覆盖层 00B1：全站UI打磨 v1 · 完成确认演出/军衔升级/天赋锁定/图标修正/全局平滑 ============ -->
+<script>
+/* ============================================================
+ * UI 打磨 v1 · ui_polish.js
+ * ① 任务完成：进度条 0→实际值 + ✓印章 + 冲击脉冲，done卡去灰化改呼吸发光
+ * ② 军衔升级：官位格逐格点亮（样式补充）
+ * ③ 天赋锁定：金印砸落过场 + 已装备卡呼吸灯
+ * ④ 特惠轮盘：奖池/兑换池 SVG 图标尺寸约束
+ * ⑤ 全局：按钮压感 / 弹窗弹性 / 卡片过渡 统一 spring 曲线
+ * ============================================================ */
+(function(){
+if(window.__uiPolish1)return;window.__uiPolish1=1;
+
+var CSS=[
+'/* ===== ① 任务完成确认演出 ===== */',
+'.dl-seal{position:absolute;right:16px;top:34%;width:54px;height:54px;margin-top:-27px;border-radius:50%;border:3px solid #7ee2a0;color:#7ee2a0;display:flex;align-items:center;justify-content:center;font-size:27px;font-weight:900;line-height:1;background:radial-gradient(circle at 35% 28%,rgba(126,226,160,.28),rgba(16,32,21,.92));box-shadow:0 0 34px -4px rgba(126,226,160,.75),inset 0 2px 8px rgba(255,255,255,.14);animation:dlSealIn .55s cubic-bezier(.2,1.7,.3,1) both;z-index:6;pointer-events:none}',
+'@keyframes dlSealIn{0%{transform:scale(2.4) rotate(-20deg);opacity:0}55%{transform:scale(.9) rotate(4deg);opacity:1}78%{transform:scale(1.07) rotate(-1deg)}100%{transform:scale(1) rotate(0)}}',
+'#page-daily #task-list .task-card.dl-completing{animation:dlCompImpact .85s cubic-bezier(.3,.9,.3,1)!important;border-color:rgba(126,226,160,.65)!important;box-shadow:0 0 30px -6px rgba(126,226,160,.5),0 10px 26px rgba(0,0,0,.35)!important}',
+'@keyframes dlCompImpact{0%{transform:scale(1)}16%{transform:scale(1.028)}36%{transform:scale(.984)}58%{transform:scale(1.01)}80%{transform:scale(.997)}100%{transform:scale(1)}}',
+'/* 完成卡：去灰化 → 微发亮 + 呼吸光晕（表示已锁定） */',
+'#page-daily #task-list .task-card.done{filter:brightness(.8) saturate(.75)!important;opacity:.85!important;transform:none!important;border-color:rgba(126,226,160,.14)!important;background:linear-gradient(158deg,rgba(16,22,17,.55),rgba(10,9,6,.92) 55%)!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25),0 4px 12px rgba(0,0,0,.35)!important;animation:none!important;transition:filter .6s ease,opacity .6s ease,border-color .6s ease,background .6s ease,box-shadow .6s ease}',
+'@keyframes dlDoneBreathe{0%,100%{box-shadow:0 0 16px -8px rgba(126,226,160,.3),0 8px 20px rgba(0,0,0,.3)}50%{box-shadow:0 0 26px -5px rgba(126,226,160,.55),0 8px 22px rgba(0,0,0,.32)}}',
+'#page-daily #task-list .task-card.done .task-name{color:#8fae93!important}','#page-daily .task-card.done .t-name{color:#8fae93!important;text-shadow:none}',
+'#page-daily #task-list .task-card.done .dl-bar i::after{opacity:0;animation:none}',
+'#page-daily #task-list .task-card.done .dl-pct{text-shadow:none}',
+'/* 完成卡 SP 涂装不被绿光覆盖：保留 SP 色呼吸 */',
+'#page-daily #task-list .task-card.done[class*="task-sp-"]{border-color:color-mix(in srgb,var(--sp-c) 22%,transparent)!important;background:linear-gradient(158deg,color-mix(in srgb,var(--sp-c) 7%,transparent),rgba(10,9,6,.92) 55%)!important;animation:none!important}',
+'@keyframes dlDoneBreatheSP{0%,100%{box-shadow:0 0 16px -8px var(--sp-glow),0 8px 20px rgba(0,0,0,.3)}50%{box-shadow:0 0 26px -5px var(--sp-glow),0 8px 22px rgba(0,0,0,.32)}}',
+'/* ===== ② 军衔升级动画（官位格点亮） ===== */',
+'.rk-cs.rk-lvcs{animation:rkLvOut .45s ease 2.05s both}',
+'@keyframes rkLvOut{to{opacity:0;visibility:hidden}}',
+'.rk-cs .rk-lvplate{width:min(150px,42vw);height:167px}',
+'.rk-lvsegs{display:flex;gap:7px;justify-content:center;margin:16px auto 0;width:fit-content}',
+'.rk-lvseg{width:22px;height:14px;border:1.5px solid #4a3b22;border-radius:3px;background:#1c1509;box-shadow:inset 0 1px 3px rgba(0,0,0,.7);position:relative;transition:all .18s}',
+'.rk-lvseg.on{background:linear-gradient(180deg,#f7dfae,#e8a33d 55%,#c07f22);border-color:#f0b35c;box-shadow:0 0 8px -1px rgba(240,179,92,.5)}',
+'.rk-lvseg.lit{background:linear-gradient(180deg,#fff6e2,#f0b35c 55%,#d9832a);border-color:#ffd60a;animation:rkLvSegPop .55s cubic-bezier(.2,1.8,.3,1) both;box-shadow:0 0 16px -1px rgba(255,214,10,.85),0 0 34px -6px rgba(240,179,92,.6)}',
+'@keyframes rkLvSegPop{0%{transform:scale(.6);filter:brightness(3)}45%{transform:scale(1.45);filter:brightness(2.2)}75%{transform:scale(.94)}100%{transform:scale(1);filter:brightness(1.15)}}',
+'.rk-lvhit{position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px;border:2px solid rgba(255,214,10,.9);border-radius:50%;animation:rkLvHit .65s ease-out both;pointer-events:none}',
+'@keyframes rkLvHit{from{opacity:1;transform:scale(.4)}to{opacity:0;transform:scale(3)}}',
+'.rk-cs .rk-big-sm{font-size:clamp(30px,8vw,44px)}',
+'/* ===== ③ 天赋锁定过场 + 呼吸灯 ===== */',
+'.tl-fx{position:fixed;inset:0;z-index:430;background:radial-gradient(circle at 50% 44%,rgba(26,19,10,.94),rgba(7,5,3,.97) 72%);display:flex;align-items:center;justify-content:center;animation:tlFxOut .45s ease 1.55s both;pointer-events:none}',
+'@keyframes tlFxOut{to{opacity:0;visibility:hidden}}',
+'.tl-fx .tl-fxstage{position:relative;text-align:center}',
+'.tl-fx .tl-fxseal{width:110px;height:110px;margin:0 auto;border-radius:50%;border:5px solid #f0b35c;background:radial-gradient(circle at 38% 30%,#f7dfae,#d9832a 60%,#8a5a18);box-shadow:0 0 60px -6px rgba(240,179,92,.9),inset 0 4px 12px rgba(255,246,226,.5),inset 0 -6px 14px rgba(80,40,0,.5);display:flex;align-items:center;justify-content:center;font-size:48px;line-height:1;animation:tlFxSlam .6s cubic-bezier(.25,1.5,.3,1) both}',
+'@keyframes tlFxSlam{0%{transform:translateY(-52vh) scale(1.8) rotate(14deg);opacity:0}55%{opacity:1}72%{transform:translateY(6px) scale(.94) rotate(-2deg)}88%{transform:translateY(-3px) scale(1.02)}100%{transform:translateY(0) scale(1) rotate(0)}}',
+'.tl-fx .tl-fxring{position:absolute;left:50%;top:55px;width:150px;height:150px;margin:-75px;border:3px solid rgba(240,179,92,.8);border-radius:50%;animation:rkRing .9s .45s ease-out both}',
+'.tl-fx .tl-fxring.r2{width:210px;height:210px;margin:-105px;border-color:rgba(255,246,226,.35);animation-delay:.58s}',
+'.tl-fx .tl-fxtitle{margin-top:24px;font-size:clamp(22px,5.6vw,32px);font-weight:800;letter-spacing:.14em;background:linear-gradient(110deg,#f7dfae,#e8a33d 45%,#fff6e2 55%,#d9832a);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 20px rgba(232,163,61,.55));opacity:0;animation:rkRise .55s .5s ease both}',
+'.tl-fx .tl-fxsub{margin-top:8px;font-size:11px;letter-spacing:.4em;color:#8d7c5f;font-family:ui-monospace,monospace;opacity:0;animation:rkRise .5s .68s ease both}',
+'#page-talent.tl-locked .tl-slot.filled{animation:tlSlotBreathe 3.2s ease-in-out infinite}',
+'@keyframes tlSlotBreathe{0%,100%{box-shadow:0 0 14px -6px var(--c,#f0b35c),inset 0 0 10px -6px var(--c,#f0b35c)}50%{box-shadow:0 0 26px -4px var(--c,#f0b35c),inset 0 0 16px -4px var(--c,#f0b35c)}}',
+'#page-talent.tl-locked .tl-chip.on{animation:tlChipBreathe 3.2s ease-in-out infinite}',
+'@keyframes tlChipBreathe{0%,100%{box-shadow:0 0 8px -3px var(--c,#f0b35c);filter:brightness(1)}50%{box-shadow:0 0 16px -2px var(--c,#f0b35c);filter:brightness(1.22)}}',
+'/* ===== ④ 特惠轮盘：表格内 SVG 图标约束 ===== */',
+'#page-gacha .tbl td svg,.gmo .tbl td svg{width:22px!important;height:22px!important;vertical-align:-5px;flex-shrink:0}',
+'/* ===== ⑤ 全局平滑：压感/弹性/过渡 ===== */',
+'.btn-primary,.btn-secondary,.btn-accent{transition:transform .18s cubic-bezier(.2,.9,.3,1.5),box-shadow .28s ease,filter .28s ease,background .28s ease}',
+'.btn-primary:active,.btn-secondary:active,.btn-accent:active{transform:scale(.93)}',
+'.btn-primary:hover,.btn-accent:hover{filter:brightness(1.1)}',
+'.card,.dl-panel,.sp-item,.wh-item{transition:box-shadow .32s ease,border-color .32s ease,transform .28s cubic-bezier(.2,.8,.2,1)}',
+'#modal-overlay>div{animation:moPopIn .34s cubic-bezier(.2,1.35,.3,1)}',
+'@keyframes moPopIn{0%{opacity:0;transform:translateY(16px) scale(.94)}100%{opacity:1;transform:none}}',
+'#modal-overlay{animation:moFadeIn .22s ease}',
+'@keyframes moFadeIn{from{opacity:0}to{opacity:1}}',
+'.vo-tab,.sp-buy,.mv2-tool,.mv2-f{transition:transform .16s cubic-bezier(.2,.9,.3,1.5),filter .25s ease,box-shadow .25s ease}',
+'.vo-tab:active,.sp-buy:active,.mv2-tool:active{transform:scale(.94)}',
+'@media (prefers-reduced-motion: reduce){.dl-seal,#page-daily #task-list .task-card.done,#page-talent.tl-locked .tl-slot.filled,#page-talent.tl-locked .tl-chip.on{animation:none!important}}'
+].join('\n');
+var st=document.createElement('style');st.id='ui-polish1-style';st.textContent=CSS;document.head.appendChild(st);
+
+/* ---------- 天赋锁定过场 ---------- */
+window.tlLockFX=function(){
+ try{
+  var old=document.querySelector('.tl-fx');if(old)old.remove();
+  var fx=document.createElement('div');fx.className='tl-fx';
+  fx.innerHTML='<div class="tl-fxstage"><div class="tl-fxring"></div><div class="tl-fxring r2"></div><div class="tl-fxseal">🔒</div>'
+   +'<div class="tl-fxtitle">今日天赋构筑已锁定</div><div class="tl-fxsub">LOADOUT SEALED · 结算前不可更换</div></div>';
+  document.body.appendChild(fx);
+  setTimeout(function(){if(fx.parentNode)fx.parentNode.removeChild(fx);},2100);
+ }catch(e){}
+};
+
+/* ---------- 天赋页锁定态呼吸开关 ---------- */
+var __tu=window.updateTalentUI;
+if(typeof __tu==='function'){
+ window.updateTalentUI=function(){
+  __tu.apply(this,arguments);
+  try{
+   var pg=document.getElementById('page-talent');if(!pg)return;
+   var locked=!!(state.talentLocked&&state.talentLockDate===new Date().toDateString());
+   pg.classList.toggle('tl-locked',locked);
+  }catch(e){}
+ };
+ try{window.updateTalentUI();}catch(e){}
+}
+})();
+</script>
+
+
+<!-- ============ 覆盖层 00B2：UI精修第二轮 · 首页华为风海报轮播/杯赛报名动画/军衔手动关闭 ============ -->
+<script>
+(function(){
+'use strict';
+if(window.__uiPolish2)return;window.__uiPolish2=true;
+
+/* ================= CSS ================= */
+var CSS=[
+/* ===== 军衔升级：点击提示 + 退出 ===== */
+'.rk-lvhint{position:absolute;bottom:7.5%;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.42em;color:rgba(233,220,192,.55);animation:rkHintPulse 1.6s ease-in-out infinite;pointer-events:none;white-space:nowrap}',
+'@keyframes rkHintPulse{0%,100%{opacity:.35}50%{opacity:.9}}',
+'.rk-cs.rk-lvout{animation:rkLvOut .42s cubic-bezier(.5,0,.8,.4) forwards!important}',
+'@keyframes rkLvOut{0%{opacity:1;transform:scale(1)}40%{opacity:.9;transform:scale(1.06)}100%{opacity:0;transform:scale(1.18)}}',
+/* ===== 杯赛报名成功：有力气的签署动画 ===== */
+'.csg-ov{position:fixed;inset:0;z-index:2600;display:flex;align-items:center;justify-content:center;background:rgba(8,6,3,.82);backdrop-filter:blur(6px);animation:csgBgIn .35s ease}',
+'@keyframes csgBgIn{from{opacity:0}to{opacity:1}}',
+'.csg-stage{position:relative;text-align:center;padding:34px 48px;border-radius:22px;background:linear-gradient(165deg,#221a0e,#14100a 60%);border:1px solid rgba(232,163,61,.4);box-shadow:0 0 60px -12px rgba(232,163,61,.5),0 30px 60px -20px rgba(0,0,0,.8);animation:csgSlam .55s cubic-bezier(.2,1.6,.35,1)}',
+'@keyframes csgSlam{0%{transform:scale(2.1);opacity:0}55%{transform:scale(.94);opacity:1}75%{transform:scale(1.05)}100%{transform:scale(1)}}',
+'.csg-ring{position:absolute;left:50%;top:50%;width:190px;height:190px;margin:-95px 0 0 -95px;border-radius:50%;border:2px solid rgba(240,179,92,.7);animation:csgRing .9s cubic-bezier(.1,.7,.3,1) forwards;pointer-events:none}',
+'.csg-ring.r2{animation-delay:.14s;border-color:rgba(240,179,92,.4)}',
+'@keyframes csgRing{0%{transform:scale(.4);opacity:1}100%{transform:scale(2.4);opacity:0}}',
+'.csg-ic{font-size:58px;line-height:1;filter:drop-shadow(0 0 22px rgba(240,179,92,.85));animation:csgIcPop .6s .1s cubic-bezier(.2,1.8,.4,1) backwards}',
+'@keyframes csgIcPop{0%{transform:scale(0) rotate(-24deg)}100%{transform:scale(1) rotate(0)}}',
+'.csg-kick{margin-top:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.5em;color:#a98d5f}',
+'.csg-title{margin-top:8px;font-size:clamp(24px,5vw,34px);font-weight:800;letter-spacing:.12em;background:linear-gradient(110deg,#f7d489,#e8a33d 45%,#ffe9b0 70%,#e8a33d);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 14px rgba(232,163,61,.4))}',
+'.csg-sub{margin-top:8px;font-size:13px;color:#c9b58c;letter-spacing:.08em}',
+'.csg-sub b{color:#ffd60a}',
+'.csg-hint{margin-top:16px;font-family:var(--mono);font-size:10px;letter-spacing:.4em;color:rgba(233,220,192,.45);animation:rkHintPulse 1.6s ease-in-out infinite}',
+'.csg-ov.csg-out{animation:csgOut .38s cubic-bezier(.5,0,.8,.4) forwards}',
+'@keyframes csgOut{0%{opacity:1}100%{opacity:0;transform:scale(1.1)}}',
+/* ===== 首页 · 华为风版本热门海报轮播 ===== */
+'.hp-sec{margin:18px 0 14px}',
+'.hp-head{display:flex;align-items:baseline;gap:14px;margin-bottom:12px}',
+'.hp-title{font-size:clamp(18px,3.4vw,24px);font-weight:800;letter-spacing:.1em;color:#f0d9a2}',
+'.hp-title::after{content:"";display:block;width:34px;height:3px;margin-top:5px;border-radius:2px;background:linear-gradient(90deg,#c0392b,var(--gold))}',
+'.hp-sub{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:#8d7c5f}',
+'.hp-carousel{position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(232,163,61,.2)}',
+'.hp-track{display:flex;transition:transform .62s cubic-bezier(.22,.9,.24,1)}',
+'.hp-slide{min-width:100%;position:relative;padding:30px 30px 26px;min-height:196px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;overflow:hidden}',
+'.hp-slide.s-fin{background:radial-gradient(120% 160% at 88% -20%,rgba(64,130,255,.22),transparent 55%),radial-gradient(100% 140% at 70% 120%,rgba(232,163,61,.16),transparent 55%),linear-gradient(150deg,#181410,#0e0c08 65%)}',
+'.hp-slide.s-bc{background:radial-gradient(120% 160% at 88% -20%,rgba(232,163,61,.26),transparent 55%),radial-gradient(100% 140% at 70% 120%,rgba(192,57,43,.18),transparent 55%),linear-gradient(150deg,#1a130c,#0e0b07 65%)}',
+'.hp-slide::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,235,190,.025) 46px 47px);pointer-events:none}',
+'.hp-ver{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--gold-l);border:1px solid rgba(232,163,61,.4);border-radius:999px;padding:3px 12px;background:rgba(240,179,92,.08)}',
+'.hp-ver .dot{width:6px;height:6px;border-radius:50%;background:#ff5f57;box-shadow:0 0 8px #ff5f57;animation:rkHintPulse 1.8s infinite}',
+'.hp-name{margin-top:12px;font-size:clamp(24px,5vw,36px);font-weight:800;letter-spacing:.06em;line-height:1.2;color:#f5e7c8;text-shadow:0 2px 18px rgba(0,0,0,.5)}',
+'.hp-name .en{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.34em;color:#a98d5f;margin-top:5px}',
+'.hp-desc{margin-top:10px;font-size:12.5px;line-height:1.75;color:#c9b58c;max-width:78%}',
+'.hp-cta{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;letter-spacing:.12em;color:#ffb4a2}',
+'.hp-cta .chev{color:#e74c3c;font-size:16px;transition:transform .25s cubic-bezier(.2,.8,.2,1)}',
+'.hp-slide:hover .hp-cta .chev{transform:translateX(6px)}',
+'.hp-art{position:absolute;right:26px;top:50%;transform:translateY(-50%);font-size:88px;line-height:1;opacity:.9;filter:drop-shadow(0 0 26px rgba(232,163,61,.5));pointer-events:none;animation:hpFloat 5.2s ease-in-out infinite}',
+'@keyframes hpFloat{0%,100%{transform:translateY(-50%) rotate(-3deg)}50%{transform:translateY(-58%) rotate(3deg)}}',
+/* 底部小框（华为轮播切换条样式，点击直入页面） */
+'.hp-bar{display:flex;align-items:stretch;gap:8px;margin-top:10px}',
+'.hp-tab{position:relative;flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 8px;border-radius:12px;background:rgba(22,17,10,.6);border:1px solid rgba(232,163,61,.16);cursor:pointer;overflow:hidden;transition:border-color .25s,background .25s,transform .18s}',
+'.hp-tab:active{transform:scale(.96)}',
+'.hp-tab .t-ic{font-size:17px;filter:drop-shadow(0 0 6px rgba(232,163,61,.4))}',
+'.hp-tab .t-lb{font-size:12px;font-weight:700;letter-spacing:.1em;color:#d8c9a8;white-space:nowrap}',
+'.hp-tab .t-pg{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:#8d7c5f}',
+'.hp-tab:hover{border-color:rgba(240,179,92,.55)}',
+'.hp-tab.on{border-color:rgba(240,179,92,.6);background:rgba(240,179,92,.09)}',
+'.hp-tab .t-prog{position:absolute;left:0;bottom:0;height:3px;width:0%;background:linear-gradient(90deg,#c0392b,var(--gold));border-radius:2px;transition:width .3s linear}',
+'.hp-tab.on .t-prog{animation:hpProg 6s linear forwards}',
+'@keyframes hpProg{from{width:0%}to{width:100%}}',
+'.hp-arrow{flex:0 0 42px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(22,17,10,.6);border:1px solid rgba(232,163,61,.16);color:#c9a86a;font-size:16px;cursor:pointer;transition:all .2s}',
+'.hp-arrow:hover{border-color:rgba(240,179,92,.55);color:var(--gold-l)}',
+'.hp-arrow:active{transform:scale(.92)}',
+'@media(max-width:640px){.hp-desc{max-width:100%}.hp-art{font-size:60px;right:16px;opacity:.55}.hp-tab .t-pg{display:none}}'
+].join('\n');
+var st=document.createElement('style');st.id='ui-polish-2';st.textContent=CSS;document.head.appendChild(st);
+
+/* ================= 杯赛报名成功动画 ================= */
+window.cupSignFX=function(cupName,energy){
+ try{
+  var old=document.querySelector('.csg-ov');if(old)old.remove();
+  var ov=document.createElement('div');ov.className='csg-ov';
+  ov.innerHTML='<div class="csg-stage"><div class="csg-ring"></div><div class="csg-ring r2"></div>'
+   +'<div class="csg-ic">📝</div>'
+   +'<div class="csg-kick">PROTOCOL SIGNED</div>'
+   +'<div class="csg-title">报 名 成 功</div>'
+   +'<div class="csg-sub"><b>'+cupName+'</b> · 已消耗 ⚡'+energy+' 能量 · 赛中锁定</div>'
+   +'<div class="csg-hint">点 击 任 意 处 继 续</div></div>';
+  document.body.appendChild(ov);
+  var done=false;
+  var dismiss=function(){if(done)return;done=true;ov.classList.add('csg-out');setTimeout(function(){ov.remove();},400);};
+  ov.addEventListener('click',dismiss);
+  setTimeout(dismiss,3400);
+ }catch(e){}
+};
+
+/* ================= 首页 · 华为风版本热门海报轮播 ================= */
+var HP_SLIDES=[
+ {cls:'s-fin',art:'📈',ver:'v1.5.6.1 · 当前热门',name:'交易所 × 货币股市',en:'EXCHANGE & STOCK MARKET',
+  desc:'19 种货品幽灵撮合 · 万人在线虚拟市场 · 双币汇率对锁 · 概念股六板块 —— 黑币经济全速运转。',
+  cta:'进入金融中心',page:'exchange',
+  tabs:[{ic:'🏦',lb:'交易所',pg:'EXCHANGE',page:'exchange'},{ic:'📈',lb:'股市',pg:'STOCK',page:'stock'},{ic:'💰',lb:'理财',pg:'WEALTH',page:'wealth'}]},
+ {cls:'s-bc',art:'⚫',ver:'v1.5.6 · 黑币来袭',name:'黑币 · 特惠与促销',en:'BLACK COIN & DEALS',
+  desc:'结算 EP÷300 产黑币 · 天命归一轮盘抽天赋槽位 · 每周促销随机折扣 · 黑币专属标签装扮。',
+  cta:'前往特惠',page:'deals',
+  tabs:[{ic:'🎡',lb:'天命轮盘',pg:'GACHA',page:'gacha'},{ic:'🎁',lb:'特惠',pg:'DEALS',page:'deals'},{ic:'🛒',lb:'商店',pg:'SHOP',page:'shop'}]}
+];
+var hpIdx=0,hpTimer=null;
+function hpRender(){
+ var host=document.querySelector('#page-home .hm-modehero');
+ if(!host||document.getElementById('hp-sec'))return;
+ var sec=document.createElement('div');sec.className='hp-sec';sec.id='hp-sec';
+ var slides='',tabs='';
+ HP_SLIDES.forEach(function(d,i){
+  slides+='<div class="hp-slide '+d.cls+'" data-hp="'+i+'">'
+   +'<span class="hp-ver"><span class="dot"></span>'+d.ver+'</span>'
+   +'<div class="hp-name">'+d.name+'<span class="en">'+d.en+'</span></div>'
+   +'<div class="hp-desc">'+d.desc+'</div>'
+   +'<span class="hp-cta">'+d.cta+' <span class="chev">›</span></span>'
+   +'<div class="hp-art">'+d.art+'</div></div>';
+ });
+ HP_SLIDES[0].tabs.forEach(function(t){
+  tabs+='<div class="hp-tab" data-hpp="'+t.page+'"><span class="t-ic">'+t.ic+'</span><span class="t-lb">'+t.lb+'</span><span class="t-pg">'+t.pg+' ›</span><i class="t-prog"></i></div>';
+ });
+ sec.innerHTML='<div class="hp-head"><span class="hp-title">版本热门玩法</span><span class="hp-sub">FEATURED · HOT</span></div>'
+  +'<div class="hp-carousel"><div class="hp-track" id="hp-track">'+slides+'</div></div>'
+  +'<div class="hp-bar"><div class="hp-arrow" data-hparr="-1">‹</div><div id="hp-tabs" style="flex:1;display:flex;gap:8px;align-items:stretch">'+tabs+'</div><div class="hp-arrow" data-hparr="1">›</div></div>';
+ host.parentNode.insertBefore(sec,host.nextSibling);
+ sec.addEventListener('click',function(ev){
+  var tab=ev.target.closest('.hp-tab');
+  if(tab){try{switchPage(tab.getAttribute('data-hpp'));}catch(e){}return;}
+  var arr=ev.target.closest('.hp-arrow');
+  if(arr){hpGo(hpIdx+parseInt(arr.getAttribute('data-hparr')));return;}
+  var sl=ev.target.closest('.hp-slide');
+  if(sl){var d=HP_SLIDES[parseInt(sl.getAttribute('data-hp'))];try{switchPage(d.page);}catch(e){}}
+ });
+ hpGo(0);
+}
+function hpGo(n){
+ hpIdx=((n%HP_SLIDES.length)+HP_SLIDES.length)%HP_SLIDES.length;
+ var track=document.getElementById('hp-track');
+ if(track)track.style.transform='translateX(-'+(hpIdx*100)+'%)';
+ var d=HP_SLIDES[hpIdx];
+ var tabsHost=document.getElementById('hp-tabs');
+ if(tabsHost){
+  var html='';
+  d.tabs.forEach(function(t){html+='<div class="hp-tab" data-hpp="'+t.page+'"><span class="t-ic">'+t.ic+'</span><span class="t-lb">'+t.lb+'</span><span class="t-pg">'+t.pg+' ›</span><i class="t-prog"></i></div>';});
+  tabsHost.innerHTML=html;
+  /* 第一张 tab 点亮进度条 */
+  var first=tabsHost.querySelector('.hp-tab');if(first)first.classList.add('on');
+ }
+ if(hpTimer)clearTimeout(hpTimer);
+ hpTimer=setTimeout(function(){hpGo(hpIdx+1);},6000);
+}
+/* 挂到 renderHome 之后（renderHome 每次回首页都跑，幂等守卫在 hpRender 内） */
+var _rh=window.renderHome;
+if(typeof _rh==='function'){
+ window.renderHome=function(){var r=_rh.apply(this,arguments);try{hpRender();}catch(e){}return r;};
+}
+if(document.querySelector('#page-home')){try{hpRender();}catch(e){}}
+})();
+</script>
+
+<!-- ============ 覆盖层 00B3：首页下半部华为风重做 · 版块标题红金杠/公告新闻卡/面板精修 ============ -->
+<script>
+(function(){
+'use strict';
+if(window.__uiPolish3)return;window.__uiPolish3=true;
+
+var CSS=[
+/* ===== 版块标题：华为式大标题 + 红金短杠 ===== */
+'#page-home .hm-sec{position:relative;font-size:17px;font-weight:800;letter-spacing:.1em;color:#f0d9a2;padding-bottom:11px;margin-bottom:14px}',
+'#page-home .hm-sec::after{content:"";position:absolute;left:0;bottom:0;width:34px;height:3px;border-radius:2px;background:linear-gradient(90deg,#c0392b,var(--gold))}',
+'#page-home .hm-sec .hm-badge{align-self:center}',
+/* ===== 面板：更通透的玻璃卡 ===== */
+'#page-home .hm-panel{background:rgba(24,19,11,.62);border:1px solid rgba(232,163,61,.16);border-radius:16px;padding:18px 18px 16px;transition:border-color .3s ease,box-shadow .3s ease}',
+'#page-home .hm-panel:hover{border-color:rgba(232,163,61,.3);box-shadow:0 14px 34px -18px rgba(0,0,0,.7)}',
+/* ===== 解锁进度：行 hover + 细金条 ===== */
+'#page-home .hm-ur{padding:7px 8px;margin:0 -8px 5px;border-radius:9px;transition:background .22s ease}',
+'#page-home .hm-ur:hover{background:rgba(240,179,92,.06)}',
+'#page-home .hm-ur .bar{height:4px;background:#241d11;border-radius:2px}',
+'#page-home .hm-ur .bar i{background:linear-gradient(90deg,#b7791f,var(--gold-l));border-radius:2px;box-shadow:0 0 8px -2px rgba(240,179,92,.5)}',
+'#page-home .hm-ur.done .n{color:#f0d9a2}',
+'#page-home .hm-ur.done .p{color:var(--gold-l);font-weight:700}',
+/* ===== chips 精修 ===== */
+'#page-home .hm-chip{transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s ease}',
+'#page-home .hm-chip:hover{transform:translateY(-2px);box-shadow:0 6px 14px -8px rgba(0,0,0,.7)}',
+/* ===== 今日任务行 ===== */
+'#page-home .hm-today-row{display:flex;gap:26px;flex-wrap:wrap;font-size:13px;color:#c9b58c}',
+'#page-home .hm-today-row b{color:#f0d9a2;font-family:var(--mono)}',
+/* ===== 公告栏 → 华为「新闻动态」卡 ===== */
+'#page-home .hm-ann.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-height:560px;overflow-y:auto;padding:2px 8px 4px 2px;scrollbar-width:thin;scrollbar-color:rgba(232,163,61,.35) transparent}',
+'#page-home .hm-ann.news-grid::-webkit-scrollbar{width:5px}',
+'#page-home .hm-ann.news-grid::-webkit-scrollbar-thumb{background:rgba(232,163,61,.3);border-radius:3px}',
+'@media(max-width:960px){#page-home .hm-ann.news-grid{grid-template-columns:repeat(2,1fr)}}',
+'@media(max-width:600px){#page-home .hm-ann.news-grid{grid-template-columns:1fr}}',
+'#page-home .hm-news{position:relative;display:flex;flex-direction:column;min-height:148px;padding:16px 16px 34px;border-radius:14px;background:rgba(18,14,9,.72);border:1px solid rgba(232,163,61,.14);border-bottom-width:1px!important;cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s ease,box-shadow .25s ease}',
+'#page-home .hm-news:hover{transform:translateY(-3px);border-color:rgba(240,179,92,.5);box-shadow:0 14px 30px -16px rgba(0,0,0,.75),0 0 18px -8px rgba(232,163,61,.35)}',
+'#page-home .hm-news .n-date{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:#8d7c5f;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+'#page-home .hm-news .n-date:empty{display:none}',
+'#page-home .hm-news .n-head{font-size:14.5px;font-weight:800;letter-spacing:.05em;line-height:1.5;color:#f0d9a2;margin-bottom:7px}',
+'#page-home .hm-news .n-head b{font:inherit;color:inherit}',
+'#page-home .hm-news .n-body{font-size:12px;line-height:1.7;color:#a6937a;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;transition:all .3s ease}',
+'#page-home .hm-news.open .n-body{-webkit-line-clamp:unset;display:block}',
+'#page-home .hm-news .n-chev{position:absolute;right:14px;bottom:10px;font-size:19px;font-weight:700;color:#e74c3c;line-height:1;transition:transform .25s cubic-bezier(.2,.8,.2,1)}',
+'#page-home .hm-news:hover .n-chev{transform:translateX(5px)}',
+'#page-home .hm-news.open .n-chev{transform:rotate(90deg)}',
+'#page-home .hm-news .n-hint{position:absolute;left:16px;bottom:12px;font-family:var(--mono);font-size:8.5px;letter-spacing:.3em;color:rgba(141,124,95,.55)}',
+/* ===== 数据管理：页脚条 ===== */
+'#page-home .hm-dm{margin-top:20px;padding-top:16px;border-top:1px solid rgba(232,163,61,.18);display:flex;align-items:center;gap:10px;flex-wrap:wrap}',
+'#page-home .hm-dm .l{font-family:var(--mono);font-size:10px;letter-spacing:.34em;color:#8d7c5f;margin-right:auto}',
+'#page-home .hm-lk{border:1px solid rgba(232,163,61,.3);border-radius:10px;transition:all .2s ease}',
+'#page-home .hm-lk:hover{border-color:rgba(240,179,92,.65);transform:translateY(-1px)}'
+].join('\n');
+var st=document.createElement('style');st.id='ui-polish-3';st.textContent=CSS;document.head.appendChild(st);
+
+/* ===== 公告条目 → 新闻卡（MutationObserver 自动重排，任何注入器都生效） ===== */
+function newsify(list){
+ if(!list)return;
+ list.classList.add('news-grid');
+ var items=list.children;
+ for(var i=0;i<items.length;i++){
+  var it=items[i];
+  if(it.classList.contains('hm-news'))continue;
+  if(it.tagName!=='DIV')continue;
+  var b=it.querySelector('b');
+  var meta=null;
+  if(b&&b.nextElementSibling&&b.nextElementSibling.tagName==='SPAN')meta=b.nextElementSibling;
+  var keepId=it.id||'';
+  var headHTML,bodyHTML='';
+  if(b){
+   headHTML=b.innerHTML;
+   var body=it.querySelector('div');
+   if(body){bodyHTML=body.innerHTML;}
+   else{
+    /* 扁平结构：剔除标题 b 与日期 span，剥掉前导 <br> */
+    var frag=document.createElement('div');
+    [...it.childNodes].forEach(function(nd){
+     if(nd===b||(meta&&nd===meta))return;
+     frag.appendChild(nd.cloneNode(true));
+    });
+    while(frag.firstChild&&(frag.firstChild.nodeName==='BR'||(frag.firstChild.textContent||'').trim()===''))frag.removeChild(frag.firstChild);
+    bodyHTML=frag.innerHTML;
+   }
+   /* 正文首段与标题重复时剥离 */
+   if(bodyHTML){
+    var tmp=document.createElement('div');tmp.innerHTML=bodyHTML;
+    var bt=b.textContent.replace(/[\s📢]/g,'').slice(0,8);
+    var firstSeg='';
+    for(var n=0;n<tmp.childNodes.length;n++){var nd=tmp.childNodes[n];if(nd.nodeName==='BR')break;firstSeg+=nd.textContent||'';}
+    if(bt&&firstSeg.replace(/[\s📢]/g,'').indexOf(bt)>-1){
+     var kill=[];for(var n2=0;n2<tmp.childNodes.length;n2++){var nd2=tmp.childNodes[n2];kill.push(nd2);if(nd2.nodeName==='BR')break;}
+     kill.forEach(function(k){k.remove();});
+     bodyHTML=tmp.innerHTML;
+    }
+   }
+  }else{
+   /* 无 <b> 结构（renderAnnouncements 色条卡 / 注入器）：容器内第一个子 div=标题，其余=正文 */
+   var inner=it.querySelector('div');
+   var divs=inner?inner.querySelectorAll(':scope > div'):[];
+   if(divs.length>=2){
+    headHTML=divs[0].innerHTML;
+    bodyHTML=[...divs].slice(1).map(function(d){return d.outerHTML;}).join('');
+   }else if(divs.length===1){
+    headHTML=divs[0].innerHTML;bodyHTML='';
+   }else{
+    headHTML=it.textContent.trim().slice(0,40);
+    bodyHTML=inner?inner.innerHTML:'';
+   }
+  }
+  var news=document.createElement('div');
+  news.className='hm-news';
+  if(keepId)news.id=keepId;
+  news.innerHTML='<div class="n-date">'+(meta?meta.innerHTML:'')+'</div>'
+   +'<div class="n-head">'+headHTML+'</div>'
+   +'<div class="n-body">'+bodyHTML+'</div>'
+   +'<span class="n-hint">ANNOUNCEMENT</span><span class="n-chev">›</span>';
+  it.replaceWith(news);
+ }
+}
+if(!window.__annNewsBound){
+ window.__annNewsBound=true;
+ document.addEventListener('click',function(ev){
+  var n=ev.target.closest&&ev.target.closest('#page-home .hm-news');
+  if(n)n.classList.toggle('open');
+ });
+}
+function bindAnn(){
+ var list=document.getElementById('ann-list');
+ if(!list||list.__newsBound)return;
+ list.__newsBound=true;
+ newsify(list);
+ new MutationObserver(function(){newsify(list);}).observe(list,{childList:true});
+}
+/* renderHome 后挂载（首页每次渲染公告可能重排） */
+var _rh3=window.renderHome;
+if(typeof _rh3==='function'){
+ window.renderHome=function(){var r=_rh3.apply(this,arguments);try{bindAnn();}catch(e){}return r;};
+}
+try{bindAnn();}catch(e){}
+})();
+</script>
+<!-- ============ ========= 覆盖层 00B4：潜能页重做 · CF风节点进度链/选卡舞台/第4栏解锁环 ============ -->
+<style id="ui-polish-4">
+#page-potential .pf-chain{display:flex;align-items:flex-start;padding:16px 10px 12px;border:1px solid rgba(232,163,61,.22);border-radius:14px;background:linear-gradient(180deg,rgba(24,19,11,.72),rgba(12,9,5,.85));overflow-x:auto;scrollbar-width:thin}
+#page-potential .pf-alt{flex:0 0 64px;text-align:center}
+#page-potential .pf-alt-d{width:40px;height:40px;margin:1px auto 0;transform:rotate(45deg);border:2px solid rgba(240,179,92,.75);border-radius:9px;background:linear-gradient(160deg,#241b0d,#0d0a05);display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px -3px rgba(240,179,92,.5)}
+#page-potential .pf-alt-n{transform:rotate(-45deg);font-family:var(--mono);font-size:19px;font-weight:800;color:#f7e3b2;text-shadow:0 0 10px rgba(240,179,92,.7)}
+#page-potential .pf-alt-t{font-size:9px;letter-spacing:.14em;color:#a98d5f;margin-top:8px;font-family:var(--mono)}
+#page-potential .pf-link{flex:1;min-width:12px;height:2px;margin-top:20px;background:rgba(140,120,80,.28)}
+#page-potential .pf-link.on{background:linear-gradient(90deg,rgba(240,179,92,.75),rgba(240,179,92,.35))}
+#page-potential .pf-node{flex:0 0 58px;text-align:center;position:relative}
+#page-potential .pf-node.n4{flex-basis:76px}
+#page-potential .pf-dot{width:38px;height:38px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:15px;position:relative;border:2px solid rgba(140,120,80,.35);background:#131007;color:#6f6248;transition:border-color .3s,box-shadow .3s}
+#page-potential .pf-node.done .pf-dot{border-color:var(--nc,#8e7c5f);color:var(--nc,#8e7c5f);background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.08),transparent 60%),#16120a;box-shadow:0 0 10px -2px var(--nc,#8e7c5f)}
+#page-potential .pf-node.ready{cursor:pointer}
+#page-potential .pf-node.ready .pf-dot{border-color:#7ef29a;color:#0f2b16;background:radial-gradient(circle at 50% 40%,#a9ffc4,#3fae63 72%);animation:pfBlink 1.15s ease-in-out infinite}
+#page-potential .pf-node.ready .pf-dot::after{content:'';position:absolute;inset:-7px;border-radius:50%;border:2px solid rgba(126,242,154,.7);animation:pfPing 1.15s ease-out infinite}
+#page-potential .pf-node.ready.pf-born .pf-dot{animation:pfBorn .72s cubic-bezier(.2,1.4,.3,1),pfBlink 1.15s ease-in-out .72s infinite}
+#page-potential .pf-node.lock4 .pf-dot{border-color:transparent;background:rgba(19,16,7,.55)}
+#page-potential .pf-ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none}
+#page-potential .pf-lb{font-size:9px;color:#8d7c5f;margin-top:5px;font-family:var(--mono);letter-spacing:.06em}
+#page-potential .pf-cd{font-family:var(--mono);color:#ff6b5e;font-size:9.5px;margin-top:2px;line-height:1.5;white-space:nowrap}
+#page-potential .pf-cd.ok{color:#7ef29a}
+#page-potential .pf-shock{position:absolute;left:50%;top:19px;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;border:3px solid rgba(240,225,160,.9);animation:pfShock .85s ease-out forwards;pointer-events:none;z-index:3}
+#page-potential .pf-alldone{margin-top:8px;text-align:center;font-size:11px;color:#7ee2a0;font-family:var(--mono);letter-spacing:.14em}
+@keyframes pfBlink{0%,100%{box-shadow:0 0 10px -2px rgba(126,242,154,.55)}50%{box-shadow:0 0 24px 3px rgba(126,242,154,.95)}}
+@keyframes pfPing{from{transform:scale(.78);opacity:.9}to{transform:scale(1.4);opacity:0}}
+@keyframes pfBorn{0%{transform:scale(.5) rotate(-8deg);filter:brightness(3.2)}55%{transform:scale(1.28) rotate(3deg)}100%{transform:scale(1) rotate(0);filter:brightness(1)}}
+@keyframes pfShock{from{transform:scale(.3);opacity:1}to{transform:scale(1.9);opacity:0}}
+#page-potential .pfc-row{display:grid;grid-template-columns:1fr 92px 1fr;gap:12px;width:100%;max-width:780px;padding:14px 28px 4px;position:relative}
+#page-potential .pfc-card{position:relative;border-radius:16px;padding:34px 14px 14px;text-align:center;cursor:pointer;border:1px solid rgba(232,163,61,.18);background:radial-gradient(ellipse at 50% -6%,var(--ccg,rgba(126,242,154,.16)),transparent 62%),linear-gradient(180deg,rgba(19,17,9,.94),rgba(9,8,4,.97));transition:transform .22s,box-shadow .22s,border-color .22s;animation:pfcIn .5s cubic-bezier(.2,1.3,.3,1) both}
+#page-potential .pfc-card:hover{transform:translateY(-4px) scale(1.015);border-color:var(--cc);box-shadow:0 12px 34px -10px var(--cc)}
+#page-potential .pfc-key{position:absolute;top:-13px;left:50%;transform:translateX(-50%);width:27px;height:27px;border-radius:7px;background:linear-gradient(180deg,#f8f4ea,#c9c0ab);color:#26200f;font-family:var(--mono);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 7px rgba(0,0,0,.55)}
+#page-potential .pfc-portrait{width:76px;height:76px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:37px;border:2px solid var(--cc);box-shadow:0 0 24px -4px var(--cc),inset 0 0 18px -6px var(--cc);background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.10),transparent 62%),#10130c;animation:pfcFloat 3.4s ease-in-out infinite}
+#page-potential .pfc-name{font-size:17px;font-weight:800;color:var(--cc);text-shadow:0 0 14px var(--cc)}
+#page-potential .pfc-cat{display:inline-block;font-size:9.5px;font-family:var(--mono);padding:2px 9px;border-radius:999px;border:1px solid var(--cc);color:var(--cc);margin-top:7px;opacity:.85}
+#page-potential .pfc-eff{font-size:11px;color:#c3b493;line-height:1.75;margin-top:9px;min-height:58px}
+#page-potential .pfc-pick{margin-top:10px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:#8d7c5f;transition:color .2s}
+#page-potential .pfc-card:hover .pfc-pick{color:#f7e3b2}
+#page-potential .pfc-rf{position:absolute;top:50%;width:44px;height:44px;margin-top:-22px;transform:rotate(45deg);border-radius:10px;border:2px solid rgba(126,242,154,.45);background:linear-gradient(160deg,#101c12,#070b07);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,box-shadow .2s;z-index:2}
+#page-potential .pfc-rf:hover{border-color:#7ef29a;box-shadow:0 0 16px -3px rgba(126,242,154,.7)}
+#page-potential .pfc-rf:disabled{opacity:.28;pointer-events:none}
+#page-potential .pfc-rf span{transform:rotate(-45deg);font-size:16px;color:#a9ffc4}
+#page-potential .pfc-rf.rf-l{left:-22px}
+#page-potential .pfc-rf.rf-r{right:-22px}
+#page-potential .pfc-rfn{position:absolute;top:calc(50% + 30px);width:80px;text-align:center;font-family:var(--mono);font-size:9.5px;color:#8fd7a4;letter-spacing:.06em;pointer-events:none}
+#page-potential .pfc-rfn.rfn-l{left:-40px}
+#page-potential .pfc-rfn.rfn-r{right:-40px}
+#page-potential .pfc-mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative}
+#page-potential .pfc-mid::before,#page-potential .pfc-mid::after{position:absolute;top:30px;font-size:20px;color:rgba(126,242,154,.55);font-family:var(--mono)}
+#page-potential .pfc-mid::before{content:'\2039';left:0}
+#page-potential .pfc-mid::after{content:'\203A';right:0}
+#page-potential .pfc-dia{width:56px;height:56px;transform:rotate(45deg);border-radius:12px;background:linear-gradient(160deg,#2e5c34,#0d2011);border:2px solid rgba(126,242,154,.65);display:flex;align-items:center;justify-content:center;animation:pfcDia 2.4s ease-in-out infinite}
+#page-potential .pfc-dia b{transform:rotate(-45deg);font-family:var(--mono);font-size:23px;font-weight:800;color:#d9ffe2;text-shadow:0 0 12px rgba(126,242,154,.9)}
+#page-potential .pfc-midlb{font-family:var(--mono);font-size:8.5px;letter-spacing:.24em;color:#7ba889}
+#page-potential .pfc-hint{margin-top:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;color:#8d7c5f;text-align:center}
+@keyframes pfcIn{from{opacity:0;transform:translateY(16px) scale(.88);filter:brightness(2.2)}to{opacity:1;transform:none;filter:brightness(1)}}
+@keyframes pfcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes pfcDia{0%,100%{box-shadow:0 0 12px -3px rgba(126,242,154,.4)}50%{box-shadow:0 0 26px -2px rgba(126,242,154,.8)}}
+#page-potential .pp-summon{border-color:rgba(126,242,154,.4)}
+#page-potential .pp-summon:hover{box-shadow:0 0 30px -6px rgba(126,242,154,.55)}
+@media (max-width:640px){
+#page-potential .pfc-row{grid-template-columns:1fr;gap:30px;padding:14px 12px 4px}
+#page-potential .pfc-rf.rf-l{left:6px}
+#page-potential .pfc-rf.rf-r{right:6px}
+#page-potential .pfc-rfn.rfn-l{left:-11px}
+#page-potential .pfc-rfn.rfn-r{right:-11px}
+}
+</style>
+<script>
+(function(){
+if(window.__pf4)return;window.__pf4=true;
+var CAT_ICON={'经验增益':'📈','作息调控':'🌙','科目权重':'📚','风险':'⚠️','跨日影响':'🌉'};
+function catIcon(c){return CAT_ICON[c]||'✨';}
+function pfCD(ms){var s=Math.max(0,Math.ceil(ms/1000));if(s<60)return s+'秒';var m=Math.floor(s/60);if(m<60)return m+'分'+((s%60)?('0'+(s%60)).slice(-2)+'秒':'');var h=Math.floor(m/60);return h+'时'+((m%60)?('0'+(m%60)).slice(-2)+'分':'');}
+function pot(){return state.potential||{hist:[],drawn:[],candidates:[],candidateSlot:null,refreshLeft:3};}
+function drawableCount(){var h=pot().hist||[],n=0;for(var i=0;i<4;i++){if(h.length>i)continue;try{if(isPotentialSlotUnlocked(i))n++;}catch(e){}}return n;}
+function s4State(){
+ var now=Date.now(),t=null;try{t=getPotentialSlotUnlockTime(3);}catch(e){}
+ var has5=false;try{has5=hasPassive(5);}catch(e){}
+ var epNeed=has5?0:800;
+ var epFill=0;try{epFill=getTodayFilledEp();}catch(e){}
+ var epPct=epNeed?Math.min(1,epFill/epNeed):1;
+ var t18=todayAt(18),t0=todayAt(0);
+ var tp=now>=t18?1:Math.max(0,(now-t0)/(t18-t0));
+ var pct=Math.min(epPct,tp);
+ return {t:t,unlocked:t!==null&&now>=t,epNeed:epNeed,epGot:Math.min(epNeed,epFill),epDone:epNeed===0||epFill>=epNeed,timeDone:now>=t18,t18:t18,pct:(t!==null&&now>=t)?1:Math.min(pct,0.995)};
+}
+function s4Sub(s){var now=Date.now(),p=[];if(!s.epDone)p.push('EP '+s.epGot+'/'+s.epNeed);if(!s.timeDone)p.push('⏱ '+pfCD(s.t18-now));return p.length?p.join('<br>'):'即将解锁…';}
+function chainSig(){
+ var h=pot().hist||[],s='',now=Date.now();
+ for(var i=0;i<4;i++){
+  if(h.length>i){s+='d';continue;}
+  var t=null;try{t=getPotentialSlotUnlockTime(i);}catch(e){}
+  s+=(t!==null&&now>=t)?'r':'l';
+ }
+ var cs=pot().candidates||[];
+ return h.length+'|'+s+'|'+(cs.length?('c'+pot().candidateSlot):'-');
+}
+function pfChainTouch(){
+ var now=Date.now();
+ var cds=document.querySelectorAll('#p-unlock-panel .pf-cd[data-t]');
+ for(var i=0;i<cds.length;i++){
+  var t=parseInt(cds[i].getAttribute('data-t'))||0;
+  if(t)cds[i].textContent=pfCD(t-now);
+ }
+ var altn=document.getElementById('pf-altn');if(altn)altn.textContent=drawableCount();
+ var s4=s4State();
+ var ring=document.getElementById('pf-ring4-fg');
+ if(ring)ring.setAttribute('stroke-dashoffset',(119.4*(1-s4.pct)).toFixed(1));
+ var cd4=document.getElementById('pf-cd4');if(cd4)cd4.innerHTML=s4Sub(s4);
+ window.__pf4Locked=!s4.unlocked;
+}
+function pfChainRender(){
+ var box=document.getElementById('p-unlock-panel');if(!box)return;
+ if(!state.potential)return;
+ var sig=chainSig();
+ if(box.querySelector('.pf-chain')&&sig===window.__pf4Sig){pfChainTouch();return;}
+ var now=Date.now(),h=pot().hist||[];
+ var s4=s4State();
+ var labels=['09:00','14:00','18:00','第4栏'];
+ var born4=(window.__pf4Locked===true&&s4.unlocked&&h.length<=3);
+ var html='<div class="pf-chain">';
+ html+='<div class="pf-alt"><div class="pf-alt-d"><div class="pf-alt-n" id="pf-altn">'+drawableCount()+'</div></div><div class="pf-alt-t">可抽取</div></div>';
+ for(var i=0;i<4;i++){
+  html+='<div class="pf-link'+(h.length>i?' on':'')+'"></div>';
+  var item=h[i]||null;
+  if(item){
+   var cc=(typeof CAT_COLOR!=='undefined'&&CAT_COLOR[item.cat])||'#8e7c5f';
+   html+='<div class="pf-node done" style="--nc:'+cc+'" title="#'+item.id+' '+item.name+'"><div class="pf-dot">✓</div><div class="pf-lb">'+labels[i]+'</div><div class="pf-cd" style="color:'+cc+'">'+item.name+'</div></div>';
+   continue;
+  }
+  var unlocked,t=null;
+  if(i<3){try{t=getPotentialSlotUnlockTime(i);}catch(e){}unlocked=t!==null&&now>=t;}
+  else{t=s4.t;unlocked=s4.unlocked;}
+  if(unlocked){
+   var sel=(pot().candidates||[]).length&&pot().candidateSlot===i;
+   var born=(i===3&&born4);
+   html+='<div class="pf-node ready'+(born?' pf-born':'')+(i===3?' n4':'')+'" onclick="drawPotential()">'+(born?'<span class="pf-shock"></span>':'')+'<div class="pf-dot">⚡</div><div class="pf-lb">'+labels[i]+'</div><div class="pf-cd ok">'+(sel?'选择候选 ↓':'点击抽取')+'</div></div>';
+  }else if(i===3){
+   html+='<div class="pf-node lock4 n4"><div class="pf-dot"><svg class="pf-ring" width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" fill="none" stroke="rgba(140,120,80,.25)" stroke-width="3.5"/><circle id="pf-ring4-fg" cx="23" cy="23" r="19" fill="none" stroke="#f0b35c" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="'+(119.4*(1-s4.pct)).toFixed(1)+'" transform="rotate(-90 23 23)" style="transition:stroke-dashoffset .95s linear"/></svg><span style="position:relative;z-index:1;font-size:14px">🔒</span></div><div class="pf-lb">第4栏</div><div class="pf-cd" id="pf-cd4">'+s4Sub(s4)+'</div></div>';
+  }else{
+   html+='<div class="pf-node"><div class="pf-dot">·</div><div class="pf-lb">'+labels[i]+'</div><div class="pf-cd" data-t="'+(t||0)+'">'+(t?pfCD(t-now):'—')+'</div></div>';
+  }
+ }
+ html+='</div>';
+ if(h.length>=4)html+='<div class="pf-alldone">✅ 今日四栏已定 · 等待次日重置</div>';
+ box.innerHTML=html;
+ if(born4){
+  var nd=box.querySelector('.pf-node.pf-born');
+  if(nd&&typeof pfBurst==='function')setTimeout(function(){pfBurst(nd,24);},120);
+ }
+ window.__pf4Locked=!s4.unlocked;
+ window.__pf4Sig=chainSig();
+}
+function pfStageRender(){
+ var stage=document.getElementById('p-stage');if(!stage)return;
+ var cs=pot().candidates||[];
+ var slot=pot().candidateSlot;
+ if(!(cs.length&&slot!==null&&slot!==undefined)){window.__pf4StageSig=null;return;}
+ var left=pot().refreshLeft||0;
+ var ssig=cs.map(function(x){return x.id;}).join(',')+'|'+slot+'|'+left+'|'+(pot().hist||[]).length;
+ if(stage.querySelector('.pfc-row')&&ssig===window.__pf4StageSig)return;
+ window.__pf4StageSig=ssig;
+ var parts=cs.map(function(x,i){
+  var cc=(typeof CAT_COLOR!=='undefined'&&CAT_COLOR[x.cat])||'#8e7c5f';
+  return '<div class="pfc-card" style="--cc:'+cc+';--ccg:'+cc+'29" onclick="choosePotentialCandidate('+i+')">'
+   +'<div class="pfc-key">'+(i===0?'Q':'E')+'</div>'
+   +'<button class="pfc-rf '+(i===0?'rf-l':'rf-r')+'" '+(left<=0?'disabled':'')+' onclick="event.stopPropagation();refreshPotentialCandidate('+i+')"><span>⟳</span></button>'
+   +'<div class="pfc-rfn '+(i===0?'rfn-l':'rfn-r')+'">刷新 '+left+'/3</div>'
+   +'<div class="pfc-portrait">'+catIcon(x.cat)+'</div>'
+   +'<div class="pfc-name">'+x.name+'</div>'
+   +'<span class="pfc-cat">'+x.cat+'</span>'
+   +'<div class="pfc-eff">'+x.effect+'</div>'
+   +'<div class="pfc-pick">▼ 点 击 装 配</div>'
+  +'</div>';
+ });
+ var mid='<div class="pfc-mid"><div class="pfc-dia"><b>'+(slot+1)+'</b></div><div class="pfc-midlb">SLOT '+(slot+1)+'</div></div>';
+ var row=parts.length>1?parts[0]+mid+parts[1]:mid+parts[0];
+ stage.innerHTML='<div class="pp-stg-label">第 <b>'+(slot+1)+'</b> 栏候选 · 时机成熟 · 择一装配</div><div class="pfc-row">'+row+'</div><div class="pfc-hint">TAP CARD · OR PRESS Q / E</div>';
+}
+var _origUpd=window.updatePotentialUI;
+window.updatePotentialUI=function(){
+ try{_origUpd&&_origUpd.apply(this,arguments);}catch(e){}
+ try{pfStageRender();}catch(e){}
+};
+window.renderPotentialUnlockPanel=function(){try{pfChainRender();}catch(e){}};
+function pfTick(){
+ try{
+  var page=document.getElementById('page-potential');
+  if(!page||!page.classList.contains('active'))return;
+  if(typeof checkUnlock==='function'&&!checkUnlock('potential'))return;
+  if(!state.potential)return;
+  var sig=chainSig();
+  if(sig!==window.__pf4Sig){window.updatePotentialUI();return;}
+ }catch(e){}
+}
+setInterval(pfTick,1000);
+document.addEventListener('keydown',function(e){
+ try{
+  var cs=(state.potential&&state.potential.candidates)||[];if(!cs.length)return;
+  var page=document.getElementById('page-potential');if(!page||!page.classList.contains('active'))return;
+  var tag=(e.target&&e.target.tagName)||'';if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT')return;
+  var mo=document.getElementById('modal-overlay');if(mo&&mo.style.display==='flex')return;
+  var k=(e.key||'').toLowerCase();
+  if(k==='q'||k==='1')choosePotentialCandidate(0);
+  else if((k==='e'||k==='2')&&cs.length>1)choosePotentialCandidate(1);
+ }catch(err){}
+});
+setTimeout(function(){try{pfChainRender();}catch(e){}},800);
+})();
+</script>
+
+
 </body>
 </html>
