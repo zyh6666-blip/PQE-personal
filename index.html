@@ -14616,7 +14616,16 @@ function rkPromoCS(it){
   +'<div class="rk-big">'+fam(it.name)+'</div>'
   +'<div class="rk-sub">'+it.prevName+' → '+it.name+' · RANK PROMOTED</div></div>';
  document.body.appendChild(cs);
- setTimeout(function(){cs.remove();rkBusy=false;rkPump();},3400);
+ cs.style.cursor='pointer';
+ var rkDone=false;
+ var rkDismiss=function(){
+  if(rkDone)return;rkDone=true;
+  cs.classList.add('rk-lvout');
+  setTimeout(function(){cs.remove();rkBusy=false;rkPump();},420);
+ };
+ cs.addEventListener('click',rkDismiss);
+ var rkHint=document.createElement('div');rkHint.className='rk-lvhint';rkHint.textContent='点 击 任 意 处 继 续';
+ cs.appendChild(rkHint);
 }
 window.showRankUpNotices=function(levels){
  if(!levels||!levels.length)return;
@@ -20668,9 +20677,9 @@ v2rollCheck();
 (function(){
 'use strict';
 state.vocab=state.vocab||{lists:{},active:null,pendingClear:0,lastAuto:'',lastDone:''};
+try{if(state.vocab.lists['PQE-L15']){delete state.vocab.lists['PQE-L15'];if(state.vocab.active==='PQE-L15')state.vocab.active=null;}}catch(e){}
 function vse(id){return document.getElementById(id);}
 /* ---------- 数据 ---------- */
-var SEED_WORDS=[["deduce","vt.",["推断","推论","演绎"]],["possession","n.",["拥有","占有","财产"]],["adhere","vi.",["遵守","坚持","附着"]],["inferior","adj.",["下级的","劣等的"]],["integrity","n.",["正直","诚实","完整"]],["elaborate","adj.",["精心制作的","复杂的"]],["collaborate","vi.",["合作","协作"]],["legacy","n.",["遗产","遗留"]],["elegant","adj.",["优雅的","精致的"]],["lever","n.",["杠杆","手段"]],["liability","n.",["责任","负债"]],["liable","adj.",["有责任的","易于"]],["alliance","n.",["联盟","联合"]],["delicate","adj.",["精致的","脆弱的"]],["literacy","n.",["读写能力","识字"]],["prolong","vt.",["延长","拖延"]],["illusion","n.",["幻觉","错觉"]],["margin","n.",[["边缘","页边","差额"],["利润","余地","幅度"]]],["marginal","adj.",["边缘的","微不足道的"]],["dimension","n.",["维度","尺寸","方面"]],["commerce","n.",["商业","贸易"]],["merit","n.",["优点","价值"]],["prominent","adj.",["杰出的","突出的"]],["misery","n.",["痛苦","悲惨"]],["promising","adj.",["有前途的"]],["modify","vt.",["修改","更改"]],["motive","n.",["动机","目的"]],["multitude","n.",["大量","群众"]],["commute","v.",["通勤","乘车上下班"]],["mutual","adj.",["相互的","共同的"]],["renaissance","n.",["文艺复兴","复兴"]],["narrative","adj.",["叙事的","叙述的"]],["nurture","n.",["养育","培养"]],["adolescent","adj.",["青春期的","青少年的"]],["opt","v.",["选择","抉择"]],["coordinate","vt.",["协调","配合"]],["parliament","n.",["议会","国会"]],["depart","v.",[["离开","出发","启程"],["背离","去世"]]],["compel","vt.",["强迫","迫使"]],["people","vt.",["使充满","使居住"]],["penalty","n.",["惩罚","罚金"]],["compensate","v.",["补偿","赔偿"]],["indispensable","adj.",["必不可少的"]],["pension","n.",["养老金","退休金"]],["suspend","v.",["悬挂","暂停","中止"]]];
 function mkWord(w,pos,a){var slots=Array.isArray(a[0])?a:[a];return {w:w,pos:pos,slots:slots,sa:slots.map(function(){return 0;}),sla:slots.map(function(){return 0;}),st:0};}
 (function initSeed(){
   if(!state.vocab.__gift1562){
@@ -20681,10 +20690,7 @@ function mkWord(w,pos,a){var slots=Array.isArray(a[0])?a:[a];return {w:w,pos:pos
     state.mailbox.push({id:'gift1562trial',title:'🎁 奖励 · 潜能体验卡 ×3',body:'背单词模块「剩余单词」标注释义功能上线奖励：潜能模式体验卡 ×3（已入账，可在交易所挂牌交易）。',items:{},createdAt:Date.now(),read:false});
     setTimeout(function(){try{toast('🎁 奖励到账：潜能体验卡 ×3（已入仓库，可交易）');}catch(e){}},800);
   }
-  if(!state.vocab.lists['PQE-L15']){
-    state.vocab.lists['PQE-L15']={id:'PQE-L15',title:'考研词汇 L15 · 十五轮一次',tag:'wd_ky',rounds:0,cur:null,cleared:false,lastSummary:'',
-      words:SEED_WORDS.map(function(x){return mkWord(x[0],x[1],x[2]);})};
-  }
+  
   /* 旧结构迁移 */
   Object.keys(state.vocab.lists).forEach(function(k){var L=state.vocab.lists[k];
     L.words.forEach(function(w){if(!w.slots){w.slots=[w.a||['']];w.sa=[w.st||0];w.sla=[w.ls||0];}});});
@@ -20747,248 +20753,49 @@ function voCSS(){if(voCSSInjected)return;voCSSInjected=true;
   ].join('\n');document.head.appendChild(st);}
 /* ---------- 词库首页 / 导入 / 剩余单词 ---------- */
 function voImportFormHTML(fam){
-  return '<details class="dl-panel" style="margin-bottom:12px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--gold-l);list-style:none">📥 导入新词表（点我展开）</summary><div style="margin-top:8px">'
-   +'<div style="font-size:11.5px;color:#a98d5f;line-height:1.8;margin-bottom:6px">格式：首行 <b>#列表名</b>，之后每行 <b>单词 词性 | 答案1/答案2</b>；双空词答案槽间用 <b>;</b> 分隔并在行尾加 <b>| m</b></div>'
-   +'<textarea id="voImpTa_'+(fam||'x')+'" rows="6" style="width:100%;background:#1e180e;color:#f0e6cf;border:1px solid #4a3b20;border-radius:10px;padding:10px;font-family:var(--mono);font-size:12px;box-sizing:border-box" placeholder="#考研词汇 L16&#10;deduce vt. | 推断/推论&#10;margin n. | 边缘/页边;利润/余地 | m"></textarea>'
-   +'<button class="btn-primary" style="width:100%;padding:11px;margin-top:8px" onclick="voDoImport(\''+(fam||'')+'\')">📥 导入'+(fam?'到 '+fam:'并设为本轮')+'</button></div></details>';
+  return '<details class="dl-panel" style="margin-bottom:12px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--gold-l);list-style:none">📥 导入新词表 · 上传文件（点我展开）</summary><div style="margin-top:8px">'
+   +'<div style="font-size:11.5px;color:#a98d5f;line-height:1.8;margin-bottom:6px">上传 <b>.txt</b> 词表：首行 <b>#列表名</b>，之后每行 <b>单词 词性 | 答案1/答案2</b>；双空词答案槽间用 <b>;</b> 分隔、行尾加 <b>| m</b>。也支持 .json（{"title","tag","words":[{w,pos,slots}]}）</div>'
+   +'<input type="file" id="voImpF_'+(fam||'x')+'" accept=".txt,.md,.csv,.json" style="width:100%;background:#1e180e;color:#f0e6cf;border:1px solid #4a3b20;border-radius:10px;padding:9px;font-size:12px;box-sizing:border-box;font-family:var(--mono)">'
+   +'<button class="btn-primary" style="width:100%;padding:11px;margin-top:8px" onclick="voDoImport(\''+(fam||'')+'\')">📥 上传并导入'+(fam?'到 '+fam:'并设为本轮')+'</button></div></details>';
 }
 window.voDoImport=function(fam){
-  var ta=vse('voImpTa_'+(fam||'x'));if(!ta)return;
-  var txt=(ta.value||'').trim();if(!txt){try{toast('请先粘贴词表');}catch(e){}return;}
-  var lines=txt.split(/\n+/).map(function(l){return l.trim();}).filter(Boolean);
-  var title='导入词表',tag=fam||'wd',words=[];
-  lines.forEach(function(l){
-    if(l[0]==='#'){var m=l.slice(1).split('|');title=m[0].trim()||title;if(m[1]&&!fam)tag=m[1].trim();return;}
-    var parts=l.split('|'),wp=parts[0].trim(),isM=parts.length>=3&&parts[2].trim()==='m';
-    var raw=parts[1]||'';
-    var slots=isM?raw.split(';').map(function(sg){return sg.split('/').map(function(x){return x.trim();}).filter(Boolean);}).filter(function(a){return a.length;}):[raw.split('/').map(function(x){return x.trim();}).filter(Boolean)];
-    var m2=wp.match(/^(\S+)\s+((?:vt|vi|adj|adv|n|v|prep|conj|num)\.?)$/i);
-    var w2=null;if(m2)w2=m2[1];else if(/^\S+$/.test(wp))w2=wp;
-    if(w2)words.push({w:w2,pos:m2?m2[2]:'',slots:slots,sa:slots.map(function(){return 0;}),sla:slots.map(function(){return 0;}),st:0});
-  });
-  if(!words.length){try{toast('未识别到单词行，格式：单词 词性 | 答案');}catch(e){}return;}
-  var id='IMP-'+Date.now().toString(36);
-  state.vocab.lists[id]={id:id,title:title,tag:tag,words:words,rounds:0,cur:null,cleared:false,lastSummary:''};
-  state.vocab.active=id;
-  try{toast('📥 已导入「'+title+'」'+words.length+' 词');}catch(e){}
-  if(fam){state.vocab.uiView='win';state.vocab.uiActive=fam;vSave();voSwitch(fam);}
-  else{vSave();voRenderHome();}
-};
-function voBankHTML(L){
-  var left=L.words.map(function(w,i){return {w:w,i:i};}).filter(function(x){return x.w.st!==1;});
-  var slotsTot=L.words.reduce(function(a,w){return a+w.slots.length;},0);
-  var done=L.words.reduce(function(a,w){return a+w.sa.filter(function(s){return s===1;}).length;},0);
-  function meaningOf(w){return w.slots.map(function(sl){return sl[0]||'';}).filter(Boolean).join(' / ');}
-  function colorOf(w){
-    if(w.sla.some(function(s){return s===2;}))return '#8ec8ff';
-    if(w.sla.length&&w.sla.every(function(s){return s===3;}))return '#ff9a8a';
-    return '#f0d9a2';
-  }
-  var html='<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:10px;font-size:13px;color:#c9a86a"><span>📚 '+L.title+' · 剩余 <b style="color:#ffd60a">'+left.length+'</b>/'+L.words.length+' 词 · 已清槽位 '+done+'/'+slotsTot+'</span></div>';
-  if(!left.length)return html+'<div style="text-align:center;color:#7ee2a0;padding:22px">🎉 全部掌握</div>';
-  var col1=left.slice(0,Math.ceil(left.length/2)),col2=left.slice(Math.ceil(left.length/2));
-  function row(x,n){
-    var w=x.w,c=colorOf(w);
-    var slots=w.slots.length>1?'<small style="opacity:.55;font-family:var(--mono"> · '+w.sa.filter(function(s){return s!==1;}).length+'空</small>':'';
-    return '<div class="vo-row" style="border-bottom:1px dashed rgba(232,163,61,.12);padding:7px 6px;display:flex;align-items:baseline;gap:8px">'
-     +'<span class="vo-num">'+n+'.</span>'
-     +'<span class="vo-w" style="color:'+c+'">'+w.w+'</span>'
-     +'<span class="vo-p">'+w.pos+'</span>'
-     +'<span style="font-size:13px;color:#ffe9b8;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+meaningOf(w)+'</span>'
-     +slots+'</div>';
-  }
-  html+='<div class="vo-sheet"><div class="vo-grid"><div>'+col1.map(function(x,i){return row(x,i+1);}).join('')+'</div><div>'+col2.map(function(x,i){return row(x,col1.length+i+1);}).join('')+'</div></div></div>';
-  return html;
-}
-
-function voRenderHome(){
-  var body=vse('vcBody');if(!body)return;
-  var sub=vse('vcSub2');if(sub)sub.textContent='词库首页 · 已导入列表与导入入口';
-  var lists=Object.keys(state.vocab.lists).map(function(k){return state.vocab.lists[k];});
-  var tasks=vTasks();
-  var html='';
-  if(!tasks.length){
-    html+='<div style="padding:9px 13px;border:1px dashed rgba(232,163,61,.3);border-radius:11px;background:rgba(240,179,92,.04);color:#a98d5f;font-size:12px;margin-bottom:12px;line-height:1.8">🌙 今日无背单词相关任务 · 可在此浏览词库、查看剩余单词或导入新表，明天安排了任务再来默写</div>';
-  }
-  tasks.forEach(function(x){
-    if(String(x.t.tagId).indexOf('_new')>0&&!vListsFor(x.fam).length){
-      html+='<div style="padding:11px 13px;border:1.5px dashed rgba(255,149,0,.55);border-radius:12px;background:rgba(255,149,0,.06);color:#f0d9a2;font-size:13px;margin-bottom:12px;line-height:1.9">⚠️ 今日任务「'+x.name+'」是新 list，但 <b>尚未导入对应词表</b> —— 请先在下方导入 <span style="font-family:var(--mono);font-size:11px">'+x.fam+'</span> 词表</div>';
-    }});
-  if(!lists.length){
-    html+='<div style="text-align:center;padding:36px 16px;border:1.5px dashed rgba(232,163,61,.35);border-radius:14px;color:#8d7c5f;line-height:2.4;margin-bottom:12px">📥 <b style="color:#f0d9a2">首次使用 · 请先上传一份单词表</b><br><small>把词表文档发给我，我会整理成下方导入格式</small></div>';
-  }else{
-    html+='<div style="font-size:12.5px;font-weight:700;letter-spacing:.16em;color:#c9a86a;margin-bottom:8px">📚 已导入词表 · '+lists.length+' 份</div>'
-     +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:14px">'
-     +lists.map(function(L){
-       var rem=vRemain(L);
-       return '<div style="border:1px solid rgba(232,163,61,.2);border-radius:14px;padding:13px;background:rgba(28,21,11,.7)">'
-        +'<div style="font-size:10.5px;color:#a98d5f;font-family:var(--mono);letter-spacing:.1em">📘 '+(L.tag||'wd')+(L.cleared?' · <span style="color:#7ee2a0">🏆已通关</span>':'')+'</div>'
-        +'<div style="font-size:15px;font-weight:800;color:#f0d9a2;margin:4px 0">'+L.title+'</div>'
-        +'<div style="font-size:12px;color:#c9a86a">剩余 <b style="color:#ffd60a">'+rem+'</b>/'+L.words.length+' 词 · 第 '+((L.rounds||0)+1)+' 轮</div>'
-        +'<div style="display:flex;gap:6px;margin-top:10px">'
-        +'<button class="btn-secondary" style="flex:1;padding:7px;font-size:12px" onclick="voBankView(\''+L.id+'\')">📚 剩余单词</button>'
-        +'<button class="btn-primary" style="flex:1.4;padding:7px;font-size:12px" onclick="voEnter(\''+L.id+'\')">'+(L.cur&&!L.cur.done?'⏸ 继续默写':'✍️ 开始默写')+'</button>'
-        +'</div></div>';
-     }).join('')+'</div>';
-  }
-  html+=voImportFormHTML('');
-  body.innerHTML=html;
-}
-window.voBankView=function(id){
-  var L=state.vocab.lists[id];if(!L)return;
-  var body=vse('vcBody');if(!body)return;
-  state.vocab.uiView='bank';
-  body.innerHTML='<button class="btn-secondary" style="padding:6px 14px;font-size:12px;margin-bottom:10px" onclick="voGoHome()">← 返回词库首页</button><div class="vo-sheet">'+voBankHTML(L)+'</div>';
-};
-window.voEnter=function(id){
-  var L=state.vocab.lists[id];if(!L)return;
-  var fam=L.tag||'wd';
-  state.vocab.uiView='win';state.vocab.uiActive=fam;state.vocab.active=id;
-  var tasks=vTasks();
-  if(tasks.length){document.querySelectorAll('.vo-tab').forEach(function(b){b.className='vo-tab'+(b.getAttribute('data-f')===fam?' on':'');});}
-  vSave();voRender();
-};
-window.voGoHome=function(){state.vocab.uiView='home';state.vocab.uiActive=null;vSave();voGate();voRenderHome();};
-function voRender(){
-  voCSS();
-  var body=vse('vcBody');if(!body)return;
-  var tasks=vTasks();
-  if(!tasks.length){voGate();return;}
-  var fam=state.vocab.uiActive||tasks[0].fam;
-  var lists=vListsFor(fam);var L=lists[0]||null;voCur={fam:fam,L:L,task:tasks.filter(function(x){return x.fam===fam;})[0]};
-  var sub=vse('vcSub2');if(sub)sub.textContent=L?L.title+' · 通关线：剩余 ≤10':'该标签暂无词库';
-  if(!L){
-    var isNew=voCur.task&&String(voCur.task.t.tagId).indexOf('_new')>0;
-    if(isNew){
-      body.innerHTML='<div style="text-align:center;padding:30px 16px;border:1.5px dashed rgba(255,149,0,.55);border-radius:14px;color:#f0d9a2;line-height:2.2;margin-bottom:12px">📥 请导入新list单词表<br><small style="color:#a98d5f">「'+voCur.task.name+'」尚无词库 · 粘贴文本即可导入（也可把文档发我整理）</small></div>'+voImportFormHTML(fam);
+  var fi=vse('voImpF_'+(fam||'x'));if(!fi||!fi.files||!fi.files[0]){try{toast('请先选择词表文件');}catch(e){}return;}
+  var file=fi.files[0],rd=new FileReader();
+  rd.onload=function(){
+    var txt=String(rd.result||'').replace(/^\uFEFF/,'').trim();
+    if(!txt){try{toast('文件为空');}catch(e){}return;}
+    var title='导入词表',tag=fam||'wd',words=[];
+    if(file.name.slice(-5).toLowerCase()==='.json'||txt[0]==='{'){
+      try{
+        var J=JSON.parse(txt);
+        title=(J.title||title);if(!fam&&J.tag)tag=J.tag;
+        (J.words||[]).forEach(function(x){
+          var slots=(x.slots&&x.slots.length?x.slots:[[x.a||'']]).map(function(sg){return (Array.isArray(sg)?sg:String(sg).split('/')).map(function(s){return String(s).trim();}).filter(Boolean);}).filter(function(a){return a.length;});
+          if(x.w&&slots.length)words.push({w:String(x.w),pos:x.pos||'',slots:slots,sa:slots.map(function(){return 0;}),sla:slots.map(function(){return 0;}),st:0});
+        });
+      }catch(e){try{toast('JSON 解析失败：'+e.message);}catch(_){}return;}
     }else{
-      body.innerHTML='<div class="card" style="text-align:center;padding:36px 16px;color:#8d7c5f">「'+fam+'」分类下暂无词库<br><span style="font-size:12px">联系开发者导入对应词表</span></div>';
+      txt.split(/\n+/).map(function(l){return l.trim();}).filter(Boolean).forEach(function(l){
+        if(l[0]==='#'){var m=l.slice(1).split('|');title=m[0].trim()||title;if(m[1]&&!fam)tag=m[1].trim();return;}
+        var parts=l.split('|'),wp=parts[0].trim(),isM=parts.length>=3&&parts[2].trim()==='m';
+        var raw=parts[1]||'';
+        var slots=isM?raw.split(';').map(function(sg){return sg.split('/').map(function(x){return x.trim();}).filter(Boolean);}).filter(function(a){return a.length;}):[raw.split('/').map(function(x){return x.trim();}).filter(Boolean)];
+        var m2=wp.match(/^(\S+)\s+((?:vt|vi|adj|adv|n|v|prep|conj|num)\.?)$/i);
+        var w2=null;if(m2)w2=m2[1];else if(/^\S+$/.test(wp))w2=wp;
+        if(w2)words.push({w:w2,pos:m2?m2[2]:'',slots:slots,sa:slots.map(function(){return 0;}),sla:slots.map(function(){return 0;}),st:0});
+      });
     }
-    return;}
-  var rem=vRemain(L),rd=(L.rounds||0)+1;
-  var html='<button class="btn-secondary" style="padding:6px 14px;font-size:12px;margin-bottom:10px" onclick="voGoHome()">← 词库首页</button>'
-   +'<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:12px;font-size:13px;color:#c9a86a"><span>📖 '+L.title+' · 剩余 <b style="color:#ffd60a">'+rem+'</b>/'+L.words.length+' 词 · 第 '+rd+' 轮</span></div>';
-  if(L.cleared){html+='<div style="text-align:center;padding:26px 12px;border:1.5px dashed rgba(52,199,89,.5);border-radius:12px;color:#7ee2a0;line-height:2">🏆 本列表已通关 · W4 轮次已计入登记<br><small style="color:#a98d5f">请联系开发者导入下一份词表</small></div>';}
-  else if(!L.cur||L.cur.done){
-    if(rem>0)html+='<button class="btn-primary" style="width:100%;padding:13px" onclick="voStart()">▶ 开始第 '+rd+' 轮默写（'+rem+' 词'+(L.rounds>0?' · 已重排':'')+'）</button>';
-    if(L.lastSummary)html+=L.lastSummary;}
-  else{
-    var order=L.cur.order;
-    var col1=order.slice(0,20),col2=order.slice(20,40),rest=order.slice(40);
-    L.cur.disp=col1.concat(col2).concat(rest);L.cur.slotMap={};
-    var disp=L.cur.disp;
-    function cell(idx,num){var w=L.words[idx];var k=disp.indexOf(idx);
-      L.cur.slotMap[k]=w.sa.map(function(s,j){return s!==1?j:null;}).filter(function(x){return x!==null;});
-      var left=L.cur.slotMap[k];var n=left.length;
-      function nx(j){var nx2=j<n-1?('vin-'+k+'-'+(j+1)):('vin-'+(k+1));return 'onkeydown="if(event.key===\'Enter\'){var e2=document.getElementById(\''+nx2+'\');if(e2)e2.focus();}"';}
-      function inp(j){var v=((L.cur.vals||{})[idx+'|'+left[j]])||'';return '<input class="vo-in" id="vin-'+k+(j?'-'+j:'')+'" autocomplete="off" value="'+v.replace(/"/g,'&quot;')+'" '+nx(j)+'>';}
-      var pc=(function(){var anyB=w.sla.some(function(s){return s===2;});var allM=w.sla.length&&w.sla.every(function(s){return s===3;});return anyB?' pblue':(allM?' pred':'');})();
-      if(n<=1)return '<div class="vo-row'+pc+'"><span class="vo-num">'+num+'.</span><span class="vo-w">'+w.w+'</span><span class="vo-p">'+w.pos+'</span>'+inp(0)+'</div>';
-      var lines='';for(var j=0;j<n;j++)lines+='<div>'+(j===0?('<span class="vo-num">'+num+'.</span><span class="vo-w">'+w.w+'</span>'):'')+'<span class="vo-p">'+w.pos+'</span>'+inp(j)+'</div>';
-      return '<div class="vo-row col'+pc+'">'+lines+'</div>';}
-    var h1=col1.map(function(idx,i){return cell(idx,i+1);}).join('');
-    var h2=col2.map(function(idx,i){return cell(idx,21+i);}).join('');
-    html+='<div class="vo-sheet"><div class="vo-grid"><div>'+h1+'</div><div>'+h2+'</div>';
-    if(rest.length){
-      var r1=rest.filter(function(_,i){return i%2===0;}).map(function(idx,i){return cell(idx,41+i*2);}).join('');
-      var r2=rest.filter(function(_,i){return i%2===1;}).map(function(idx,i){return cell(idx,42+i*2);}).join('');
-      html+='<div class="vo-brk">— 2 —</div><div style="grid-column:1/-1"><div class="vo-grid"><div>'+r1+'</div><div>'+r2+'</div></div></div>';}
-    html+='</div></div><button class="btn-primary" style="width:100%;padding:13px;margin-top:14px" onclick="voGrade()">✓ 交卷批改（'+order.length+' 词）</button>';
-    if(!voTMR)voTMR=setInterval(voTick,1000);}
-  body.innerHTML=html;}
-window.voStart=function(){var L=voCur&&voCur.L;if(!L||L.cleared)return;
-  var cand=L.words.map(function(w,i){return i;}).filter(function(i){return L.words[i].st!==1;});
-  if(!cand.length)return;
-  vShuf(cand);
-  L.cur={order:cand,disp:null,slotMap:{},vals:{},start:Date.now(),done:false};
-  vSave();voRender();};
-function voTick(){var L=voCur&&voCur.L;var el=vse('vcTimer');if(!el)return;
-  if(L&&L.cur&&!L.cur.done){var s=Math.floor((Date.now()-L.cur.start)/1000);el.textContent='⏱ '+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
-  else el.textContent='⏱ --:--';}
-window.voGrade=function(){var L=voCur&&voCur.L;if(!L||!L.cur||L.cur.done)return;
-  var btn=document.querySelector('#vcBody .btn-primary');if(btn)btn.disabled=true;
-  var results=[];
-  L.cur.disp.forEach(function(idx,k){var w=L.words[idx];
-    (L.cur.slotMap[k]||[]).forEach(function(slot,row){
-      var inp=vse('vin-'+k+(row?'-'+row:''));
-      var v=inp?(inp.value||'').trim():((((L.cur.vals||{})[idx+'|'+slot])||'')).trim();
-      var r={idx:idx,w:w,slot:slot,v:v,result:'miss',best:0,inp:inp};
-      if(v){var best=0;w.slots[slot].forEach(function(a){var s=vSim(v,a);if(s>best)best=s;});r.best=best;r.result=best>=0.8?'ok':'bad';}
-      results.push(r);
-      if(inp){inp.classList.add(r.result);var mk=document.createElement('span');mk.className='vo-mk '+r.result;mk.textContent=r.result==='ok'?'✓':(r.result==='bad'?'✗':'○');mk.style.animationDelay=Math.min(k*45,1600)+'ms';inp.parentElement.appendChild(mk);}});});
-  setTimeout(function(){voPhase2(L,results);},1400);};
-function voPhase2(L,results){
-  var ok=0,tried=0,res=[];
-  results.forEach(function(r){var w=r.w,j=r.slot;
-    L.cur.vals=L.cur.vals||{};L.cur.vals[r.idx+'|'+j]=r.v;
-    if(r.result==='miss'){w.sa[j]=3;res.push({w:w,miss:true,slot:j});return;}
-    tried++;if(r.result==='ok'){w.sa[j]=1;ok++;res.push({w:w,ok:true,slot:j});}
-    else{w.sa[j]=2;res.push({w:w,best:r.best,v:r.v,slot:j});}});
-  L.words.forEach(function(w){if(w.st!==1){w.sla=w.sa.slice();
-    if(w.sa.every(function(s){return s===1;}))w.st=1;else if(w.sa.every(function(s){return s===3;}))w.st=3;else w.st=2;}});
-  var total=results.length,acc=Math.round(ok/total*100);
-  var minutes=Math.max(1,Math.round((Date.now()-L.cur.start)/60000));
-  var tscore=Math.max(10,Math.min(100,Math.round(100-minutes*1.5)));
-  L.rounds=(L.rounds||0)+1;L.cur.done=true;
-  var rem=vRemain(L),cleared=false;
-  if(rem<=10&&!L.cleared){L.cleared=true;cleared=true;state.vocab.pendingClear=(state.vocab.pendingClear||0)+1;}
-  window.__vo={L:L,acc:acc,tscore:tscore,minutes:minutes,cleared:cleared,rem:rem,ok:ok,total:total,task:voCur.task,wrongs:res.filter(function(r){return !r.ok;}).map(function(r){
-    var stxt=r.w.slots.length>1?('空'+((r.slot||0)+1)+' '):'';
-    return r.miss?('<div style="padding:7px 10px;border:1px solid rgba(255,59,48,.25);border-radius:8px;margin-top:6px;color:#ff9a8a;font-size:12.5px">'+r.w.w+' '+r.w.pos+' · '+stxt+'未写 → '+r.w.slots[r.slot||0].slice(0,2).join('/')+'</div>')
-      :('<div style="padding:7px 10px;border:1px solid rgba(255,59,48,.25);border-radius:8px;margin-top:6px;color:#ff9a8a;font-size:12.5px">'+r.w.w+' '+r.w.pos+' · '+stxt+'「'+r.v+'」'+Math.round((r.best||0)*100)+'% → '+r.w.slots[r.slot||0].slice(0,2).join('/')+'</div>');}).join('')};
-  /* 成绩确认（应用原生 showModal） */
-  var title=cleared?'🏆 通关 · 本轮成绩':'📊 本轮成绩';
-  var body='<div style="line-height:2.1;text-align:center">'
-    +(cleared?'<div style="color:#7ee2a0;font-weight:700">剩余 '+rem+' 词 ≤ 10 · W4 轮次 +1</div>':'<div style="color:#f0d9a2">第 '+L.rounds+' 轮完成 · 剩余 '+rem+' 词</div>')
-    +'<div style="font-family:var(--mono);font-size:15px">正确率得分 <b style="color:#ffd60a;font-size:19px">'+acc+'</b> <span style="opacity:.6">('+ok+'/'+total+' 空，空/错均计错)</span></div>'
-    +'<div style="font-family:var(--mono);font-size:15px">用时得分 <b style="color:#ffd60a;font-size:19px">'+tscore+'</b> <span style="opacity:.6">('+minutes+' 分钟)</span></div>'
-    +'<div style="font-size:11.5px;color:#8d7c5f">确认后自动计入「'+(voCur.task?voCur.task.name:'')+'」任务的正确率/用时栏</div></div>';
-  try{showModal(title,body,function(){voConfirm(true);});}catch(e){voConfirm(true);}}
-function voConfirm(counted){var m=window.__vo;if(!m)return;var L=m.L;
-  if(counted){
-    /* 自动写入当天任务计分栏 */
-    try{
-      var ti=m.task?m.task.i:-1;
-      if(ti>=0&&typeof updateQDim==='function'){
-        updateQDim('today',ti,'acc',m.acc);
-        updateQDim('today',ti,'time',m.tscore);
-        if(typeof toast==='function')toast('✅ 已自动计入「'+m.task.name+'」：正确率 '+m.acc+' · 用时 '+m.tscore);
-      }
-    }catch(e){}
-    if(m.cleared){
-      try{if(typeof showGainModal==='function')showGainModal('🏆 恭喜获得 · 背单词通关',[['📘',L.title,'#7ee2a0'],['🎯','W4 轮次 +1（登记已自动计入）','#ffd60a'],['⏱','用时 '+m.minutes+' 分钟 · 得分 '+m.tscore,'#7cc4ff']]);}catch(e){}
-    }}
-  try{closeModal();}catch(e){}
-  var sum='<div style="border-radius:12px;padding:13px;font-size:13px;line-height:2;margin-top:12px;border:1px solid '+(m.cleared?'rgba(52,199,89,.5)':'rgba(232,163,61,.35)')+';color:'+(m.cleared?'#7ee2a0':'#f0d9a2')+'">'
-    +(m.cleared?'🏆 通关！剩余 '+m.rem+' 词 ≤ 10 · W4 轮次 +1':'第 '+L.rounds+' 轮完成 · 剩余 '+m.rem+' 词')
-    +'<div style="color:#c9a86a;margin-top:4px">正确率 <b style="color:#ffd60a">'+m.acc+'%</b>（'+m.ok+'/'+m.total+' 空）· 用时 <b>'+m.minutes+'</b> 分钟'+(counted?' · <span style="color:#7ee2a0">已自动计入计分栏</span>':'')+'</div>'
-    +m.wrongs
-    +(!m.cleared&&m.rem>0?'<button class="btn-primary" style="width:100%;padding:12px;margin-top:12px" onclick="voStart()">▶ 第 '+(L.rounds+1)+' 轮（重排剩余 '+m.rem+' 词）</button>':'')
-    +'</div>';
-  L.lastSummary=sum;window.__vo=null;vSave();voRender();}
-window.voCancel=function(){voConfirm(false);};
-/* ---------- 导航 ---------- */
-function voNav(name){
-  if(name==='vocab'){
-    voGate();
-    if(state.vocab.uiView==='win'&&state.vocab.uiActive&&vListsFor(state.vocab.uiActive).length){
-      voSwitch(state.vocab.uiActive);
-    }else{
-      state.vocab.uiView='home';
-      voRenderHome();
-    }}
-  if(name==='daily'){
-    if(state.vocab.pendingClear>0){var di=state.dailyInputs=state.dailyInputs||{};di.list=String((parseInt(di.list)||0)+state.vocab.pendingClear);state.vocab.pendingClear=0;vSave();
-      var dl=document.getElementById('daily-list');if(dl)dl.value=di.list;
-      try{toast('✅ 背单词 List 通关 +1 已自动计入登记');}catch(e){}}
-    var today=new Date().toDateString();
-    var tasks=vTasks();
-    var hasL=tasks.some(function(x){return vListsFor(x.fam).length>0;});
-    if(tasks.length&&hasL&&state.vocab.lastAuto!==today){
-      var anyPending=Object.keys(state.vocab.lists).some(function(k){var L=state.vocab.lists[k];return !L.cleared&&L.words.some(function(w){return w.st!==1;});});
-      if(anyPending){state.vocab.lastAuto=today;vSave();setTimeout(function(){try{switchPage('vocab');}catch(e){}},400);}}}}
-try{(function(){var sp=window.switchPage;if(sp&&!sp.__vo){var w2=function(n){var r=sp.apply(this,arguments);try{voNav(n);}catch(e){}return r;};w2.__vo=true;window.switchPage=w2;}})();}catch(e){}
-window.renderVocabPage=function(){if(!voGate())return;voSwitch(state.vocab.uiActive||vTasks()[0].fam);};
+    if(!words.length){try{toast('未识别到单词行，格式：单词 词性 | 答案');}catch(e){}return;}
+    var id='IMP-'+Date.now().toString(36);
+    state.vocab.lists[id]={id:id,title:title,tag:tag,words:words,rounds:0,cur:null,cleared:false,lastSummary:''};
+    state.vocab.active=id;
+    try{toast('📥 已导入「'+title+'」'+words.length+' 词');}catch(e){}
+    if(fam){state.vocab.uiView='win';state.vocab.uiActive=fam;vSave();voSwitch(fam);}
+    else{vSave();voRenderHome();}
+  };
+  rd.onerror=function(){try{toast('文件读取失败');}catch(e){}};
+  rd.readAsText(file,'utf-8');
+};
 })();
 /* ================= 背单词默写（主程序版）END ================= */
 </script>
@@ -21602,5 +21409,92 @@ setTimeout(function(){try{pfChainRender();}catch(e){}},800);
 </script>
 
 
+<script>
+/* ============================================================
+   考研EP系统 进化属性获得演出补丁 v1.0 · build 20261119-0200
+   ① 进化模式 Lv.3/6/9 随机大幅属性 → 全屏获得演出（图标+渐变流光名称+描述）
+   ② 其余通知维持右上角小框
+   ③ 修复通知小框对比度（深底亮字）
+   守卫 __evoBigFx，已注入时自动跳过
+   ============================================================ */
+(function(){
+'use strict';
+if(window.__evoBigFx)return;window.__evoBigFx=true;
+
+/* ---------- CSS：全屏演出 + 小框对比度 ---------- */
+var st=document.createElement('style');
+st.id='evoBigFxStyle';
+st.textContent=[
+'#evoBigFxOv{position:fixed;inset:0;z-index:1350;background:rgba(6,4,2,.84);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s ease;cursor:pointer;overflow-y:auto;padding:20px;box-sizing:border-box}',
+'#evoBigFxOv.show{opacity:1}',
+'.evoBigFx-card{position:relative;width:min(560px,92vw);text-align:center;padding:44px 26px 30px;border-radius:22px;border:1.5px solid rgba(240,179,92,.55);background:radial-gradient(circle at 50% -12%,rgba(240,179,92,.18),transparent 55%),linear-gradient(165deg,#221a10,#120e08);box-shadow:0 0 60px -12px rgba(240,179,92,.55),0 24px 70px rgba(0,0,0,.75);transform:scale(.86) translateY(18px);transition:transform .38s cubic-bezier(.2,1.35,.3,1);box-sizing:border-box}',
+'#evoBigFxOv.show .evoBigFx-card{transform:none}',
+'.evoBigFx-lv{position:absolute;top:14px;right:16px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:#ffd60a;border:1px solid rgba(255,214,10,.5);border-radius:999px;padding:3px 11px;background:rgba(255,214,10,.08)}',
+'.evoBigFx-kick{font-family:var(--mono);font-size:10px;letter-spacing:.4em;color:#a98d5f;margin-bottom:14px}',
+'.evoBigFx-ic{font-size:62px;line-height:1;filter:drop-shadow(0 0 22px rgba(255,214,10,.6));margin-bottom:14px;animation:evoBigFxPulse 2.2s ease-in-out infinite}',
+'.evoBigFx-name{font-size:clamp(30px,7vw,44px);font-weight:800;letter-spacing:.1em;background:linear-gradient(110deg,#f7dfae,#e8a33d 45%,#fff6e2 55%,#d9832a);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px rgba(232,163,61,.45));animation:bwShine 5.5s linear infinite;margin-bottom:10px}',
+'.evoBigFx-en{font-family:var(--mono);font-size:9.5px;letter-spacing:.42em;color:#8d7c5f;margin-bottom:18px;text-transform:uppercase}',
+'.evoBigFx-desc{font-size:13.5px;color:#d8c9a8;line-height:2;padding:14px 16px;border:1px dashed rgba(232,163,61,.35);border-radius:12px;background:rgba(240,179,92,.05);text-align:left}',
+'.evoBigFx-hint{margin-top:16px;font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:#6b5a3d}',
+'@keyframes evoBigFxPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}',
+'.notif-card{background:rgba(19,14,8,.98)!important;border:1px solid rgba(240,179,92,.5)!important;box-shadow:0 6px 24px rgba(0,0,0,.55)!important}',
+'.notif-title{color:#ffd60a!important;font-size:14px!important;letter-spacing:.04em}',
+'.notif-body{color:#f3ead6!important;font-size:12.5px!important;line-height:1.65!important}'
+].join('\n');
+document.head.appendChild(st);
+
+/* ---------- 全屏演出（连发排队） ---------- */
+var __q=[],__busy=false;
+function evoBigFxShow(name,desc,lv,pathLabel){
+  __q.push({n:name,d:desc,lv:lv,p:pathLabel});
+  if(!__busy)__next();
+}
+function __next(){
+  var it=__q.shift();
+  if(!it){__busy=false;return;}
+  __busy=true;
+  var ov=document.createElement('div');
+  ov.id='evoBigFxOv';
+  ov.innerHTML='<div class="evoBigFx-card">'
+    +'<span class="evoBigFx-lv">Lv.'+it.lv+' \u7a81\u7834</span>'
+    +'<div class="evoBigFx-kick">EVOLUTION \u00b7 MAJOR ATTRIBUTE \u00b7 '+(it.p||'')+'</div>'
+    +'<div class="evoBigFx-ic">\u26a1</div>'
+    +'<div class="evoBigFx-name">'+it.n+'</div>'
+    +'<div class="evoBigFx-en">ATTRIBUTE ACQUIRED</div>'
+    +'<div class="evoBigFx-desc">'+it.d+'</div>'
+    +'<div class="evoBigFx-hint">\u70b9 \u51fb \u4efb \u610f \u5904 \u7ee7 \u7eed</div></div>';
+  document.body.appendChild(ov);
+  requestAnimationFrame(function(){ov.classList.add('show');});
+  var closed=false;
+  function close(){if(closed)return;closed=true;ov.classList.remove('show');setTimeout(function(){ov.remove();__next();},320);}
+  ov.addEventListener('click',close);
+}
+
+/* ---------- 接管 3/6/9 级大幅属性发放 ---------- */
+function arm(){
+  if(typeof window.onEvolveLevelUp!=='function'||typeof window.pushEvolveNote!=='function'){setTimeout(arm,300);return;}
+  if(window.onEvolveLevelUp.__evofx)return;window.onEvolveLevelUp.__evofx=true;
+  var __raw=window.onEvolveLevelUp;
+  window.onEvolveLevelUp=function(lv){
+    if(lv!==3&&lv!==6&&lv!==9)return __raw(lv);
+    var pathLabel='\u2694\ufe0f \u653b\u51fb';
+    try{var e=(typeof getEvolve==='function')?getEvolve():{};if(e&&e.path==='def')pathLabel='\U0001f6e1\ufe0f \u9632\u5fa1';}catch(_){}
+    var __push=window.pushEvolveNote;
+    window.pushEvolveNote=function(msg){
+      window.pushEvolveNote=__push;
+      msg=String(msg);
+      var m=msg.match(/\u26a1 \u968f\u673a\u5c5e\u6027\u3010(.+?)\u3011\uff1a([\s\S]*?)(?=<br>|$)/);
+      if(m)evoBigFxShow(m[1],m[2],lv,pathLabel);
+      var rest=msg.replace(/<br>\u26a1 \u968f\u673a\u5c5e\u6027\u3010[\s\S]*?(?=<br>|$)/,'');
+      if(rest)__push(rest);
+    };
+    try{__raw(lv);}finally{if(window.pushEvolveNote!==__push)window.pushEvolveNote=__push;}
+  };
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',arm);
+else arm();
+})();
+
+</script>
 </body>
 </html>
