@@ -53,11 +53,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .notif-body{font-size:11px;color:#6e6e73;line-height:1.4;}
 .notif-reward{font-size:11px;color:#af52de;font-weight:500;}
 
-
-
 /* SSC Tuatara SP主题（1.4.8新增车目） */
 .task-card.task-sp-tuatara{border-color:#ff4d2e!important;background:linear-gradient(135deg,#0a0505 0%,#1c0b06 34%,#ff4d2e 62%,#ffd6c2 78%,#0a0505 100%)!important;box-shadow:0 0 0 1.5px #ff4d2e40,inset 0 0 20px rgba(255,77,46,.20)!important;}
-
 
 /* 通行证主题漂浮装饰 */
 @keyframes passFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-10px) rotate(6deg);}}
@@ -117,10 +114,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 .top-rank-wrap{display:flex;align-items:center;gap:8px;}
 
-
 /* 新版通用弹窗：独立滚动内容区 + 固定底部按钮 */
 #modal-overlay{padding:16px;box-sizing:border-box;}
-#modal-overlay>div{width:min(860px,94vw)!important;max-width:none!important;max-height:min(88vh,900px)!important;display:flex;flex-direction:column;overflow:hidden;padding:18px!important;box-sizing:border-box;}
+#modal-overlay>div{width:min(1180px,94vw)!important;max-width:none!important;max-height:min(88vh,900px)!important;display:flex;flex-direction:column;overflow:hidden;padding:18px!important;box-sizing:border-box;}
 #modal-title{flex:0 0 auto;}
 #modal-body,#modal-extra{overflow-y:auto;min-height:0;flex:1 1 auto;overscroll-behavior:contain;}
 #modal-extra:empty{display:none;}
@@ -134,15 +130,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
   #modal-body .candidate-grid{grid-template-columns:1fr!important;}
 }
 
-
 .hint-chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:4px 8px;border-radius:8px;background:#f2f2f7;color:#6e6e73;border:1px solid #e5e5ea;cursor:help;line-height:1.2;}
 .hint-chip b{color:#1d1d1f;font-weight:600;}
 .static-hints{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 10px;}
 
-
 .upgrade-two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start;}
 @media(max-width:680px){.upgrade-two-col{grid-template-columns:1fr;}}
-
 
 /* ================= 暗金设计系统 v2.0 · 乱斗页完全重设计 ================= */
 :root{--gold:#e8a33d;--gold-l:#f0b35c;--gold-d:#d9832a;--ink:#f3ede2;--ink-dim:rgba(243,237,226,.55);--line:rgba(232,163,61,.18)}
@@ -298,7 +291,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 #page-brawl summary{display:flex;align-items:center;gap:6px}
 /* ================= v2.1 END ================= */
 
-
 /* ================= v2.2：图鉴与玩法说明 暗金化（inline 覆盖） ================= */
 #page-brawl .card{background:rgba(24,18,10,.75)!important;border:1px solid rgba(232,163,61,.20)!important;color:var(--ink)!important}
 #page-brawl summary{background:rgba(240,179,92,.08)!important;color:var(--gold-l)!important;
@@ -314,12 +306,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 /* ================= 乱斗重设计 END ================= */
 
-
 /* ================= 全局外壳 v3.0（暗金·赛季驱动） ================= */
 body{background:#0f0c08;color:#e8dcc0}
 /* 顶栏：暗色玻璃 */
-#app>div[style*="position:sticky"]{background:rgba(15,12,8,.90)!important;border-bottom:1px solid rgba(232,163,61,.25)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-#app>div[style*="position:sticky"] span{font-weight:600}
+#app>div[style*="sticky"]{background:rgba(15,12,8,.90)!important;border-bottom:1px solid rgba(232,163,61,.25)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+#app>div[style*="sticky"] span{font-weight:600}
 #top-points,#top-tokens,#top-ep{color:#f0b35c!important}
 /* 导航 */
 .navbtn{border-color:#4a3b22;color:#d8c9a8;background:rgba(240,179,92,.05)}
@@ -357,7 +348,6 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 ::-webkit-scrollbar-thumb{background:#3d321e;border-radius:5px}
 ::-webkit-scrollbar-track{background:transparent}
 /* ================= 外壳 END ================= */
-
 
 /* ================= 进化页 · 暗金科幻重设计 ================= */
 #page-evolve{--pc:#e8a33d;--pc2:#f0b35c;position:relative;overflow:hidden;border-radius:18px;padding:20px 16px 24px;color:var(--ink);
@@ -447,7 +437,6 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 #page-evolve .lock-lv{color:var(--gold-l)!important}
 /* ================= 进化页 END =================
 
-
 /* ================= 外壳 v3.1 · 乱斗同款科幻 ================= */
 :root{--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,'Courier New',monospace;}
 /* 字体渲染：系统默认（antialiased 会使中文笔画发虚，已撤） */
@@ -465,7 +454,7 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
   background-size:680px 680px;animation:shellTw 7s ease-in-out infinite alternate}
 @keyframes shellTw{from{opacity:.45}to{opacity:.9}}
 /* 页眉：加强玻璃 + 金色进度 */
-#app>div[style*="position:sticky"]{background:rgba(13,11,8,.85)!important;backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25)}
+#app>div[style*="sticky"]{background:rgba(13,11,8,.85)!important;backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25)}
 #lv-progress-bar{background:linear-gradient(90deg,var(--gold),var(--gold-l))!important;border-radius:3px}
 #lv-progress-text{font-family:var(--mono);color:#a98d5f!important}
 #top-points,#top-tokens,#top-ep{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums}
@@ -486,7 +475,6 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 .notif-title{letter-spacing:.03em}
 #modal-title{letter-spacing:.04em}
 /* ================= 外壳 v3.1 END =================
-
 
 /* ================= 首页 · 指挥甲板 ================= */
 #page-home{position:relative;border-radius:18px;padding:26px 16px 28px;color:var(--ink);
@@ -559,7 +547,6 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 #page-home .hm-lk.solid{background:linear-gradient(135deg,var(--gold-l),var(--gold-d));color:#2a1c08;border:none;font-weight:700}
 /* ================= 首页 END =================
 
-
 /* ================= 首页 · 今日玩法主角位 ================= */
 #page-home .hm-modehero{margin:4px 0 18px;padding:20px 16px 16px;border-radius:18px;text-align:center;position:relative;overflow:hidden;
   background:radial-gradient(circle at 50% -20%,rgba(240,179,92,.12),transparent 62%),rgba(22,17,10,.62);
@@ -574,7 +561,6 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 #page-home .hm-men{font-family:var(--mono);font-size:10.5px;letter-spacing:.38em;color:#a98d5f;text-transform:uppercase;margin-bottom:10px}
 #page-home .hm-modehero .chip-wrap{margin-top:4px}
 /* ================= 今日玩法主角位 END =================
-
 
 /* ================= 导航甲板 ================= */
 .navdeck{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;position:relative;z-index:60}
@@ -600,11 +586,9 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
   font-family:var(--mono);letter-spacing:.04em;box-shadow:0 2px 8px rgba(217,131,42,.4);vertical-align:2px}
 /* ================= 导航甲板 END =================
 
-
 /* ================= 杯赛/追猎 过渡暗金皮 ================= */
 #page-cup .card{background:rgba(26,20,12,.88)!important;border:1px solid #4a3b22!important;color:#e8dcc0}#page-cup details{border:1px solid #4a3b22;border-radius:10px;overflow:hidden;margin-bottom:8px;background:#171208}#page-cup summary{background:#201a10!important;color:#e6d3ac!important;font-weight:600;list-style:none}#page-cup details[open]>summary{background:#2a2214!important;color:#f0d9a2!important}#page-cup [style*="background:#fff"]{background:#1e180e!important;color:#e8dcc0!important;border-color:#4a3b22!important}#page-cup [style*="background:#f9f9fb"], #page-cup [style*="background:#fafbfd"], #page-cup [style*="background:#f2f2f7"]{background:#221b11!important;color:#d8c9a8!important;border-color:#4a3b22!important}#page-cup [style*="color:#1d1d1f"]{color:#f0e6cf!important}#page-cup [style*="color:#3a3a3c"]{color:#e8dcc0!important}#page-cup [style*="background:#e5e5ea"]{background:#2a2214!important}#page-cup .btn-accent, #page-cup .btn-primary{background:linear-gradient(90deg,var(--gold-l),var(--gold-d))!important;color:#2a1c08!important;border:none!important}#page-cup .btn-secondary{border-color:#4a3b22;color:#d8c9a8}#page-cup .badge{background:#2a2214;color:#eccf95}#page-cup [style*="border:1px solid #e5e5ea"]{border-color:#3d3118!important}#page-cup [style*="border:1px solid #d1d1d6"]{border-color:#4a3b22!important}
 /* ================= 过渡皮 END =================
-
 
 /* ================= 商店 · 补给站 ================= */
 #page-shop{position:relative;overflow:hidden;border-radius:18px;padding:22px 16px 26px;color:var(--ink);
@@ -649,7 +633,6 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 #page-shop details>div{background:rgba(14,11,7,.65)!important;color:var(--ink-dim)!important;border:1px solid rgba(232,163,61,.16)!important;border-top:none!important;line-height:1.85!important}
 #page-shop details>div b{color:#f0d9a2!important}
 /* ================= 商店 END =================
-
 
 /* ================= 竞技页 · 影子赛道 v2（暗金科幻 · 原生 markup 重构） ================= */
 #page-race{position:relative;overflow:hidden;border-radius:18px;padding:22px 16px 26px;color:var(--ink);
@@ -742,7 +725,6 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 #page-race .rc-row.rc-top1{background:rgba(240,179,92,.05)}
 /* ================= 竞技页 END ================= 
 
-
 /* ================= 补丁杯赛UI（cup-rail2）暗金化 ================= */
 #page-cup .cup-shell{background:transparent!important}
 #page-cup .cup-rail2 button{background:#221b11!important;color:#d8c9a8!important;border:1px solid #4a3b22!important;letter-spacing:.04em}
@@ -756,7 +738,6 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 #page-cup [style*="color:#6e6e73"],#page-cup [style*="color:#8e8e93"]{color:#c4ad83!important}
 #page-cup [style*="background:#f2f2f7"]{background:#241c10!important;color:#d8c9a8!important}
 /* ================= 补丁杯赛UI END =================
-
 
 /* ================= 天赋页 · 装配台 ================= */
 #page-talent{position:relative;overflow:hidden;border-radius:18px;padding:22px 16px 26px;color:var(--ink);
@@ -852,7 +833,6 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 #page-talent .tl-loadout.st1 .tl-slot{border-color:rgba(52,199,89,.18)}
 /* ================= 天赋页 END =================
 
-
 /* ================= 商店动效 · 仓库 ================= */
 #page-shop .sp-left{font-family:var(--mono);font-size:12.5px;color:#f0d9a2;font-weight:700}
 #page-shop .sp-tick .sp-left{display:inline-block;animation:spCount .55s cubic-bezier(.2,1.6,.3,1)}
@@ -892,7 +872,6 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 #page-warehouse .wh-mat-name{color:#d8c9a8}
 #page-warehouse .wh-mat-c{font-family:var(--mono);font-size:10.5px;color:#c9a86a;white-space:nowrap}
 /* ================= 商店仓库 END =================
-
 
 /* ================= 潜能页 · 时序构筑 ================= */
 #page-potential{position:relative;overflow:hidden;border-radius:18px;padding:22px 16px 26px;color:var(--ink);
@@ -972,7 +951,6 @@ input:focus,select:focus{outline:none;border-color:#e0a83f!important;box-shadow:
 #page-potential .lock-desc{color:var(--ink-dim)!important}
 #page-potential .lock-lv{color:var(--gold-l)!important}
 /* ================= 潜能页 END =================
-
 
 /* ================= 每日登记 · 作战日志（demo 全量重构） ================= */
 #page-daily{position:relative;isolation:isolate;overflow:hidden;border-radius:18px;padding:22px 16px 28px;color:var(--ink);background:radial-gradient(circle at 20% -8%,rgba(240,179,92,.12),transparent 46%),radial-gradient(circle at 95% 110%,rgba(217,138,126,.08),transparent 42%),linear-gradient(180deg,#12100b,#0b0906);--daily-amb:rgba(240,179,92,.08);transition:box-shadow .25s ease}
@@ -1485,20 +1463,19 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 .g-toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);background:rgba(24,19,11,.97);border:1px solid rgba(52,199,89,.5);color:#7ee2a0;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:400;pointer-events:none}
 #page-gacha .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #page-gacha .hist{margin-top:10px;font-size:10px;color:#6b5a3d;font-family:var(--mono);max-height:60px;overflow-y:auto;line-height:1.7}
-#page-gacha /* ===== 封面主视觉 ===== */
 #page-gacha .cover{position:relative;border-radius:20px;overflow:hidden;border:1px solid rgba(240,179,92,.4);margin-bottom:16px;background:#171008}
 #page-gacha .hero{position:relative;min-height:330px;padding:24px 22px 18px;overflow:hidden;
-#page-gacha   background:
-#page-gacha    radial-gradient(ellipse 120% 70% at 78% 30%,rgba(255,220,130,.28),transparent 60%),
-#page-gacha    radial-gradient(ellipse 90% 60% at 20% 90%,rgba(217,131,42,.24),transparent 55%),
-#page-gacha    linear-gradient(165deg,#33240f 0%,#20150a 45%,#150e07 100%)}
+  background:
+   radial-gradient(ellipse 120% 70% at 78% 30%,rgba(255,220,130,.28),transparent 60%),
+   radial-gradient(ellipse 90% 60% at 20% 90%,rgba(217,131,42,.24),transparent 55%),
+   linear-gradient(165deg,#33240f 0%,#20150a 45%,#150e07 100%)}
 #page-gacha .hero-rays{position:absolute;inset:-40%;background:repeating-conic-gradient(from -10deg at 74% 42%,rgba(255,214,10,.14) 0 7deg,transparent 7deg 20deg);pointer-events:none;animation:gspin 60s linear infinite}
 #page-gacha .hero-title-wrap{position:relative;z-index:3;max-width:52%}
 .cover-kicker{font-size:10px;letter-spacing:.4em;color:#e8c98f;font-family:Georgia,serif;font-style:italic;text-shadow:0 1px 3px rgba(0,0,0,.6)}
 .cover-title{font-size:clamp(38px,7vw,56px);font-weight:800;letter-spacing:.14em;margin:8px 0 10px;font-style:italic;line-height:1.1;
-#page-gacha   font-family:'STKaiti','KaiTi','Songti SC','Comic Sans MS',Georgia,serif;
-#page-gacha   background:linear-gradient(110deg,#fff3c9,#f0b35c 40%,#fff6e2 52%,#d9832a 65%,#fff3c9);background-size:220% 100%;
-#page-gacha   -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 10px rgba(0,0,0,.55)) drop-shadow(0 0 24px rgba(232,163,61,.4));animation:bwShine 5.5s linear infinite}
+  font-family:'STKaiti','KaiTi','Songti SC','Comic Sans MS',Georgia,serif;
+  background:linear-gradient(110deg,#fff3c9,#f0b35c 40%,#fff6e2 52%,#d9832a 65%,#fff3c9);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 10px rgba(0,0,0,.55)) drop-shadow(0 0 24px rgba(232,163,61,.4));animation:bwShine 5.5s linear infinite}
 #page-gacha .hero-prize-name{margin-top:4px;font-size:13px;font-weight:800;letter-spacing:.1em;color:#ffe9b0;font-family:'STKaiti','KaiTi','Songti SC',Georgia,serif;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 #page-gacha .hero-prize-sub{font-size:10px;color:#c9a86a;font-family:var(--mono);margin-top:5px;letter-spacing:.06em}
 #page-gacha .hero-tags{position:relative;z-index:3;margin-top:12px;display:flex;gap:6px}
@@ -1512,8 +1489,8 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 #page-gacha .ha-spark{position:absolute;color:#fff3c9;text-shadow:0 0 8px #ffd60a;font-size:12px;animation:tw 2.4s infinite}
 #page-gacha .cover-btns{position:relative;z-index:4;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:14px 12px 16px;background:linear-gradient(180deg,rgba(18,12,6,.25),rgba(18,12,6,.7));border-top:1px solid rgba(240,179,92,.2)}
 #page-gacha .cv-btn{padding:11px 22px;font-size:13px;font-weight:800;letter-spacing:.08em;cursor:pointer;border:none;color:#2a1c08;font-family:var(--mono);
-#page-gacha   background:linear-gradient(135deg,#f7dfae,#d9832a);clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,12px 100%,0 50%);
-#page-gacha   transition:filter .2s,transform .1s}
+  background:linear-gradient(135deg,#f7dfae,#d9832a);clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,12px 100%,0 50%);
+  transition:filter .2s,transform .1s}
 #page-gacha .cv-btn:hover{filter:brightness(1.12)}
 #page-gacha .cv-btn:active{transform:scale(.95)}
 #page-gacha .cv-btn.gold{background:linear-gradient(135deg,#ffe9b0,#f0b35c)}
@@ -1521,31 +1498,28 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 #page-gacha .cv-btn.dim{background:#2c2415;color:#8d7c5f}
 #page-gacha .ptag{display:inline-block;font-size:8px;padding:1px 6px;border-radius:6px;background:#b5772a;color:#fff;font-weight:700;letter-spacing:.05em;margin:0 1px}
 #page-gacha .ptag.uq{background:#8b5cf6}
-#page-gacha /* ===== 大奖特写 ===== */
-#page-gacha /* ===== 大奖特写（立绘撑满） ===== */
 .grand-box{width:min(560px,94vw);border-radius:22px;overflow:hidden;border:2px solid #ffd60a;box-shadow:0 0 70px -6px rgba(255,214,10,.65),0 24px 70px rgba(0,0,0,.8);animation:gpop .45s cubic-bezier(.2,1.4,.3,1) both;background:#160a05}
 .grand-banner{position:relative;min-height:430px;display:flex;flex-direction:column;align-items:center;overflow:hidden;
-#page-gacha   background:radial-gradient(ellipse 120% 90% at 50% 110%,rgba(255,160,40,.5),transparent 60%),
-#page-gacha              radial-gradient(ellipse 90% 70% at 50% -10%,rgba(255,60,20,.35),transparent 60%),
-#page-gacha              linear-gradient(175deg,#2b0d05 0%,#1a0805 45%,#0f0505 100%)}
+  background:radial-gradient(ellipse 120% 90% at 50% 110%,rgba(255,160,40,.5),transparent 60%),
+             radial-gradient(ellipse 90% 70% at 50% -10%,rgba(255,60,20,.35),transparent 60%),
+             linear-gradient(175deg,#2b0d05 0%,#1a0805 45%,#0f0505 100%)}
 .gb-rays{position:absolute;inset:-45%;background:repeating-conic-gradient(from 0deg at 50% 42%,rgba(255,190,60,.22) 0 5deg,transparent 5deg 14deg);animation:gspin 40s linear infinite}
 .gb-beam{position:absolute;top:-20%;width:120px;height:130%;background:linear-gradient(180deg,rgba(255,220,120,.4),transparent 75%);filter:blur(18px);transform:rotate(14deg);pointer-events:none}
 .gb-beam.b1{left:12%}
 .gb-beam.b2{right:14%;transform:rotate(-12deg);width:90px;opacity:.7}
 .gb-floor{position:absolute;bottom:64px;left:50%;transform:translateX(-50%);width:78%;height:90px;border-radius:50%;
-#page-gacha   background:radial-gradient(ellipse,rgba(255,190,60,.55),rgba(255,120,30,.18) 55%,transparent 75%);filter:blur(6px);animation:ghaP 2.6s ease-in-out infinite}
+  background:radial-gradient(ellipse,rgba(255,190,60,.55),rgba(255,120,30,.18) 55%,transparent 75%);filter:blur(6px);animation:ghaP 2.6s ease-in-out infinite}
 .gb-kicker{position:absolute;top:16px;z-index:4;font-size:10px;letter-spacing:.55em;color:#ffe0a0;font-family:Georgia,serif;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,.7)}
 .gb-ic{position:relative;z-index:3;margin-top:64px;filter:drop-shadow(0 0 34px rgba(255,210,60,.95)) drop-shadow(0 16px 30px rgba(0,0,0,.65))}
 .gb-ic svg{width:225px;height:225px}
 .gb-mirror{position:relative;z-index:2;height:70px;overflow:hidden;margin-top:-6px;opacity:.32;transform:scaleY(-1);
-#page-gacha   -webkit-mask-image:linear-gradient(180deg,transparent 30%,#000 100%);mask-image:linear-gradient(180deg,transparent 30%,#000 100%)}
+  -webkit-mask-image:linear-gradient(180deg,transparent 30%,#000 100%);mask-image:linear-gradient(180deg,transparent 30%,#000 100%)}
 .gb-mirror svg{width:225px;height:225px;filter:blur(1.5px) saturate(.8)}
 .gb-spark{position:absolute;color:#ffe9b0;text-shadow:0 0 10px #ffd60a;z-index:3;animation:tw 1.8s infinite}
 .gb-shade{position:absolute;left:0;right:0;bottom:0;height:118px;z-index:3;background:linear-gradient(180deg,transparent,rgba(10,4,3,.92) 75%);pointer-events:none}
 .gb-name{position:absolute;bottom:44px;z-index:5;font-size:30px;font-weight:800;letter-spacing:.1em;color:#fff3c9;font-family:'STKaiti','KaiTi','Songti SC',Georgia,serif;font-style:italic;text-shadow:0 2px 12px rgba(0,0,0,.7),0 0 30px rgba(255,190,60,.6)}
 .gb-sub{position:absolute;bottom:22px;z-index:5;font-size:11px;color:#ffb36b;font-family:var(--mono);letter-spacing:.32em}
 .gb-note{padding:12px 16px;text-align:center;font-size:11px;color:#c9a86a;line-height:1.8;border-top:1px solid rgba(255,214,10,.25);background:#160a05}
-#page-gacha /* ===== 暂存箱双栏 ===== */
 .stash-cols{display:flex;gap:14px;flex-wrap:wrap}
 .stash-left{flex:1.4;min-width:250px}
 .stash-right{flex:1;min-width:200px}
@@ -1553,13 +1527,11 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 .sc-tbl{width:100%;border-collapse:collapse;font-size:10.5px}
 .sc-tbl th{color:#c9a86a;padding:4px 6px;border-bottom:1px solid rgba(232,163,61,.3);text-align:left;font-family:var(--mono);font-size:9.5px}
 .sc-tbl td{padding:4px 6px;border-bottom:1px solid rgba(232,163,61,.08);color:#c9b791;font-family:var(--mono)}
-#page-gacha /* 兑换区角标 */
 #page-gacha .ctag{position:absolute;top:0;font-size:8px;padding:1.5px 6px;font-weight:800;letter-spacing:.04em;z-index:2}
 #page-gacha .ctag.uq{left:0;border-radius:12px 0 8px 0;background:linear-gradient(135deg,#8b5cf6,#6d3fd4);color:#fff}
 #page-gacha .ctag.fs{right:0;border-radius:0 12px 0 8px;background:linear-gradient(135deg,#f0b35c,#d9832a);color:#2a1c08}
 #page-gacha .ex-item .ei{margin-top:5px}
 #page-gacha 
-#page-gacha /* 图标尺寸分级 */
 .tbl svg,.sc-tbl svg{width:15px;height:15px;vertical-align:-3px}
 #page-gacha .stash-row .n svg{width:16px;height:16px;vertical-align:-3px}
 #page-gacha .oitem .oi,.oitem .oi svg{width:20px;height:20px}
@@ -1571,7 +1543,6 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 .gb-mirror svg{width:180px;height:180px}
 .intro-ic,.intro-ic svg{width:30px;height:30px}
 #page-gacha 
-#page-gacha /* 新品介绍字体 */
 .gmo-t{font-family:'STKaiti','KaiTi','Songti SC',Georgia,serif;font-style:italic;letter-spacing:.2em}
 .intro-n{font-family:'STKaiti','KaiTi','Songti SC',Georgia,serif;font-style:italic;font-size:17px}
 .intro-badges .intro-b{border-radius:999px;font-size:9px;padding:2px 9px;letter-spacing:.06em}
@@ -1790,68 +1761,103 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 
 <!-- 首页 -->
 <div id="page-home" class="page active">
-  <div class="hm-hero">
-    <div class="hm-kicker">KAOYAN EP SYSTEM · COMMAND DECK</div>
-    <h1 class="hm-title">欢迎使用考研EP系统！</h1>
-    <div class="hm-season" id="home-season" onclick="showSeasonIntro()" style="display:none;"></div>
-    <span id="pass-badge" class="hm-passbadge" style="display:none;"></span>
-    <div class="hm-stats">
-      <div class="hm-stat"><span class="k">军衔</span><b id="home-lv-name">-</b></div>
-      <div class="hm-stat"><span class="k">称号</span><b id="home-title">🏷️</b></div>
-      <div class="hm-stat"><span class="k">总EP</span><b id="home-total-ep">0</b></div>
-      <div class="hm-stat"><span class="k">积分</span><b id="home-points">0</b></div>
-      <div class="hm-stat"><span class="k">代币</span><b id="home-tokens">0</b></div>
-      <div class="hm-stat"><span class="k">连续打卡</span><b><span id="home-streak">0</span> 天</b></div>
-      <div class="hm-stat"><span class="k">累计登记</span><b><span id="home-days">0</span> 天</b></div>
+
+  <!-- ① 身份与进度 -->
+  <div class="hx-hero">
+    <div class="hx-kicker">COMMAND DECK <i>·</i> 今日作战台</div>
+    <div class="hx-idrow">
+      <span class="hx-rank" id="home-lv-name">-</span>
+      <span class="hx-title" id="home-title">🏷️</span>
+      <span id="pass-badge" class="hx-pass" style="display:none;"></span>
     </div>
-    <div class="hm-lvline">
-      <span class="hm-range" id="home-lv-range">-</span>
-      <div class="hm-lvbar"><i id="home-lv-bar"></i></div>
-      <span class="hm-remain" id="home-lv-remain">-</span>
+    <div class="hx-season" id="home-season" onclick="showSeasonIntro()" style="display:none;"></div>
+    <div class="hx-kpis">
+      <div class="hx-kpi"><span class="k">总 EP</span><b id="home-total-ep">0</b></div>
+      <div class="hx-kpi"><span class="k">积分</span><b id="home-points">0</b></div>
+      <div class="hx-kpi"><span class="k">代币</span><b id="home-tokens">0</b></div>
+      <div class="hx-kpi"><span class="k">连续打卡</span><b><span id="home-streak">0</span><i>天</i></b></div>
+      <div class="hx-kpi"><span class="k">累计登记</span><b><span id="home-days">0</span><i>天</i></b></div>
     </div>
-  </div>
-
-  <div class="hm-modehero">
-    <div class="hm-mk">今日玩法 · TODAY'S PROTOCOL <span class="hm-badge" id="home-mode-badge"></span></div>
-    <div class="hm-mname" id="hm-mode-name">📘 经典玩法</div>
-    <div class="hm-men" id="hm-mode-en">CLASSIC PROTOCOL</div>
-    <div id="home-mode-detail"></div>
-  </div>
-
-  <div class="hm-deck"><div class="hm-tile" onclick="switchPage('daily')"><span class="ic">📋</span><span class="lb">登记</span></div><div class="hm-tile" onclick="switchPage('shop')"><span class="ic">🛒</span><span class="lb">商店</span></div><div class="hm-tile" onclick="switchPage('warehouse')"><span class="ic">🎒</span><span class="lb">仓库</span></div><div class="hm-tile" onclick="switchPage('mail')"><span class="ic">📮</span><span class="lb">邮件</span></div><div class="hm-tile" onclick="switchPage('calendar')"><span class="ic">📅</span><span class="lb">日历</span></div><div class="hm-tile" onclick="switchPage('talent')"><span class="ic">🎯</span><span class="lb">天赋</span></div><div class="hm-tile" onclick="switchPage('potential')"><span class="ic">✨</span><span class="lb">潜能</span></div><div class="hm-tile" onclick="switchPage('brawl')"><span class="ic">⚔️</span><span class="lb">乱斗</span></div><div class="hm-tile" onclick="switchPage('evolve')"><span class="ic">🧬</span><span class="lb">进化</span></div><div class="hm-tile" onclick="switchPage('passive')"><span class="ic">🛡️</span><span class="lb">功能</span></div><div class="hm-tile" onclick="switchPage('achievement')"><span class="ic">🏆</span><span class="lb">成就</span></div><div class="hm-tile" onclick="switchPage('upgrade')"><span class="ic">🏷️</span><span class="lb">升级</span></div><div class="hm-tile" onclick="switchPage('cup')"><span class="ic">🥇</span><span class="lb">杯赛</span></div><div class="hm-tile" onclick="switchPage('race')"><span class="ic">🏁</span><span class="lb">竞技</span></div><div class="hm-tile" onclick="switchPage('cycle')"><span class="ic">🔄</span><span class="lb">周期</span></div><div class="hm-tile" onclick="switchPage('long')"><span class="ic">🗓️</span><span class="lb">长期</span></div><div class="hm-tile" onclick="switchPage('guide')"><span class="ic">📖</span><span class="lb">指南</span></div><div class="hm-tile" onclick="switchPage('vocab')"><span class="ic">📝</span><span class="lb">默写</span></div></div>
-
-  <div class="hm-panel">
-    <div class="hm-sec">🔓 玩法解锁进度</div>
-    <div id="home-unlock-list"></div>
-  </div>
-
-  <div class="hm-2col">
-    <div class="hm-panel">
-      <div class="hm-sec">🧬 已装备天赋 <span class="hm-badge" id="home-talent-count"></span></div>
-      <div id="home-talents" class="chip-wrap"></div>
-    </div>
-    <div class="hm-panel">
-      <div class="hm-sec">🛡️ 被动槽位 <span class="hm-badge" id="home-passive-count"></span></div>
-      <div id="home-passives" class="chip-wrap"></div>
+    <div class="hx-lv">
+      <div class="hx-lv-top"><span id="home-lv-range">-</span><span id="home-lv-remain">-</span></div>
+      <div class="hx-lvbar"><i id="home-lv-bar"></i></div>
     </div>
   </div>
 
-  <div class="hm-panel">
-    <div class="hm-sec">📋 今日任务</div>
-    <div id="home-today"></div>
+  <!-- ② 今日 -->
+  <div class="hx-row hx-today">
+    <div class="hx-card hm-modehero">
+      <div class="hx-card-h"><span class="hx-lb">今日玩法</span><span class="hx-en">TODAY’S PROTOCOL</span><span class="hm-badge" id="home-mode-badge"></span></div>
+      <div class="hx-mode">
+        <div class="hx-mode-name" id="hm-mode-name">📘 经典玩法</div>
+        <div class="hx-mode-en" id="hm-mode-en">CLASSIC PROTOCOL</div>
+      </div>
+      <div class="hx-mode-detail" id="home-mode-detail"></div>
+    </div>
+    <div class="hx-card hx-tasks">
+      <div class="hx-card-h"><span class="hx-lb">今日任务</span><span class="hx-en">TODAY</span><span class="hx-go" onclick="switchPage(\'daily\')">去登记 ›</span></div>
+      <div id="home-today"></div>
+    </div>
   </div>
 
-  <div class="hm-panel">
-    <div class="hm-sec">📢 公告栏 <button class="btn-secondary hm-guide" onclick="switchPage('guide')">📖 游戏指南</button></div>
+  <!-- ③ 推荐位（热门玩法轮播挂载点） -->
+  <div id="hp-slot" class="hx-slot"></div>
+
+  <!-- ④ 快捷入口 -->
+  <div class="hx-card hx-quick">
+    <div class="hx-card-h"><span class="hx-lb">快捷入口</span><span class="hx-en">ALL MODULES · 18</span></div>
+    <div class="hx-qg">
+      <div class="hx-qg-lb">每日</div>
+      <div class="hx-tiles"><div class="hx-tile" onclick="switchPage('daily')"><span class="ic">📋</span><span class="lb">登记</span></div><div class="hx-tile" onclick="switchPage('calendar')"><span class="ic">📅</span><span class="lb">日历</span></div><div class="hx-tile" onclick="switchPage('vocab')"><span class="ic">📝</span><span class="lb">默写</span></div><div class="hx-tile" onclick="switchPage('cycle')"><span class="ic">🔄</span><span class="lb">周期</span></div><div class="hx-tile" onclick="switchPage('long')"><span class="ic">🗓️</span><span class="lb">长期</span></div></div>
+    </div>
+    <div class="hx-qg">
+      <div class="hx-qg-lb">成长</div>
+      <div class="hx-tiles"><div class="hx-tile" onclick="switchPage('talent')"><span class="ic">🎯</span><span class="lb">天赋</span></div><div class="hx-tile" onclick="switchPage('potential')"><span class="ic">✨</span><span class="lb">潜能</span></div><div class="hx-tile" onclick="switchPage('evolve')"><span class="ic">🧬</span><span class="lb">进化</span></div><div class="hx-tile" onclick="switchPage('passive')"><span class="ic">🛡️</span><span class="lb">功能</span></div><div class="hx-tile" onclick="switchPage('upgrade')"><span class="ic">🏷️</span><span class="lb">升级</span></div></div>
+    </div>
+    <div class="hx-qg">
+      <div class="hx-qg-lb">对战</div>
+      <div class="hx-tiles"><div class="hx-tile" onclick="switchPage('cup')"><span class="ic">🥇</span><span class="lb">杯赛</span></div><div class="hx-tile" onclick="switchPage('race')"><span class="ic">🏁</span><span class="lb">竞技</span></div><div class="hx-tile" onclick="switchPage('brawl')"><span class="ic">⚔️</span><span class="lb">乱斗</span></div><div class="hx-tile" onclick="switchPage('achievement')"><span class="ic">🏆</span><span class="lb">成就</span></div></div>
+    </div>
+    <div class="hx-qg">
+      <div class="hx-qg-lb">系统</div>
+      <div class="hx-tiles"><div class="hx-tile" onclick="switchPage('shop')"><span class="ic">🛒</span><span class="lb">商店</span></div><div class="hx-tile" onclick="switchPage('warehouse')"><span class="ic">🎒</span><span class="lb">仓库</span></div><div class="hx-tile" onclick="switchPage('mail')"><span class="ic">📮</span><span class="lb">邮件</span></div><div class="hx-tile" onclick="switchPage('guide')"><span class="ic">📖</span><span class="lb">指南</span></div></div>
+    </div>
+  </div>
+
+  <!-- ⑤ 成长：解锁进度 + 装备 -->
+  <div class="hx-row hx-grow">
+    <div class="hx-card">
+      <div class="hx-card-h"><span class="hx-lb">玩法解锁进度</span><span class="hx-en">UNLOCKS</span></div>
+      <div id="home-unlock-list"></div>
+    </div>
+    <div class="hx-col">
+      <div class="hx-card">
+        <div class="hx-card-h"><span class="hx-lb">已装备天赋</span><span class="hm-badge" id="home-talent-count"></span></div>
+        <div id="home-talents" class="chip-wrap"></div>
+      </div>
+      <div class="hx-card">
+        <div class="hx-card-h"><span class="hx-lb">被动槽位</span><span class="hm-badge" id="home-passive-count"></span></div>
+        <div id="home-passives" class="chip-wrap"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑥ 公告 -->
+  <div class="hx-card hx-news">
+    <div class="hx-card-h"><span class="hx-lb">公告栏</span><span class="hx-en">ANNOUNCEMENTS</span><button class="btn-secondary hx-guide" onclick="switchPage(\'guide\')">📖 游戏指南</button></div>
     <div id="ann-list" class="hm-ann"></div>
   </div>
 
-  <div class="hm-dm">
-    <span class="l">数据管理</span>
-    <button class="hm-lk solid" onclick="exportData()">📤 导出</button>
-    <label class="hm-lk" style="cursor:pointer;">📥 导入文件<input type="file" accept=".json,application/json" style="display:none;" onchange="importDataFromFile(this)"></label>
-    <button class="hm-lk" onclick="importDataPrompt()">📋 粘贴导入</button>
+  <!-- ⑦ 数据 -->
+  <div class="hx-foot">
+    <span class="hx-foot-l">数据管理 · 全部存储在本机</span>
+    <div class="hx-foot-b">
+      <button class="hm-lk solid" onclick="exportData()">📤 导出</button>
+      <label class="hm-lk" style="cursor:pointer;">📥 导入文件<input type="file" accept=".json,application/json" style="display:none;" onchange="importDataFromFile(this)"></label>
+      <button class="hm-lk" onclick="importDataPrompt()">📋 粘贴导入</button>
+    </div>
   </div>
+
 </div>
 
 <!-- 天赋 -->
@@ -2375,7 +2381,7 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 <div id="page-vocab" class="page">
   <header class="dl-head">
     <div>
-      <div class="pv-kicker">VOCAB WORKSHEET · 默写台 v2.8</div>
+      <div class="pv-kicker">VOCAB WORKSHEET · 默写台 v2.9</div>
       <div class="pv-title" style="margin-bottom:6px">📝 背单词默写</div>
       <div class="pv-sub" id="vcSub2">按今日任务分类 · 每任务独立窗口</div>
     </div>
@@ -2409,21 +2415,48 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
 </div>
 
 <!-- 日历 -->
-<div id="page-calendar" class="page">
-  <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-      <button class="btn-secondary" style="padding:4px 12px;font-size:12px;" onclick="calShift(-1)">← 上月</button>
-      <span id="cal-title" style="font-size:16px;font-weight:600;"></span>
-      <button class="btn-secondary" style="padding:4px 12px;font-size:12px;" onclick="calShift(1)">下月 →</button>
+<style>
+#page-calendar .cal-wk{margin-bottom:8px}
+#page-calendar .cal-wh{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px}
+#page-calendar .cal-whd{text-align:center;padding:6px 2px;border-radius:8px;font-family:var(--mono)}
+#page-calendar .cal-whd .d1{font-size:12px;color:#c9b791;letter-spacing:.1em;font-weight:700}
+#page-calendar .cal-whd .d2{font-size:11px;color:#8d7c5f;margin-top:2px}
+#page-calendar .cal-whd.past{opacity:.38}
+#page-calendar .cal-whd.past .d1{color:#6b5a3d}
+#page-calendar .cal-whd.today{border:1px solid var(--gold);box-shadow:0 0 12px -4px rgba(232,163,61,.55);background:rgba(240,179,92,.06)}
+#page-calendar .cal-whd.today .d1{color:#ffd60a}
+#page-calendar .cal-body{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;background:rgba(22,17,10,.5);border:1px solid rgba(232,163,61,.16);border-radius:12px;padding:6px}
+#page-calendar .cal-bar{position:relative;display:flex;align-items:center;gap:6px;padding:0 10px 0 24px;border-radius:8px;background:linear-gradient(135deg,#1c160d,#110c06);border:1px solid rgba(232,163,61,.22);color:#e8dcc0;font-size:11.5px;font-weight:700;overflow:hidden;box-shadow:inset 3px 0 0 var(--c2),0 2px 8px rgba(0,0,0,.35);cursor:pointer;white-space:nowrap;transition:all .15s}
+#page-calendar .cal-bar:hover{border-color:rgba(240,179,92,.55);background:linear-gradient(135deg,#251d11,#171009)}
+#page-calendar .cal-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;box-shadow:0 0 5px rgba(0,0,0,.6)}
+#page-calendar .cal-bar.off{filter:grayscale(.35) brightness(.6)}
+#page-calendar .cal-bar.off .cal-bs{display:none}
+#page-calendar .cal-bar.off{padding-right:8px}
+#page-calendar .cal-bdg{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:14px;height:14px;border-radius:50%;background:#ffd60a;color:#3a2a05;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 0 6px rgba(255,214,10,.7);flex-shrink:0}
+#page-calendar .cal-bn{flex:1;overflow:hidden;text-overflow:ellipsis}
+#page-calendar .cal-bn i{font-style:normal;font-weight:400;opacity:.85;margin-left:3px}
+#page-calendar .cal-bs{font-weight:400;font-size:10px;opacity:.92;font-family:var(--mono);flex-shrink:0}
+</style>
+<div id="page-calendar" class="page" style="position:relative;overflow:hidden;border-radius:18px;padding:22px 16px 26px;color:var(--ink);background:radial-gradient(circle at 80% -10%,rgba(240,179,92,.12),transparent 46%),linear-gradient(180deg,#12100b,#0d0b08)">
+  <div class="cld-head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:14px">
+    <div>
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:#a98d5f;margin-bottom:6px">SCHEDULE · 赛季日历</div>
+      <div style="font-size:clamp(24px,4.6vw,32px);font-weight:800;letter-spacing:.06em;background:linear-gradient(110deg,#f7dfae,#e8a33d 45%,#fff6e2 55%,#d9832a);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 16px rgba(232,163,61,.35));animation:bwShine 6s linear infinite">赛季日历</div>
+      <div style="font-size:11px;color:#a98d5f;letter-spacing:.12em;margin-top:4px">当前版本全杯赛/竞技周期 · 点任意一天看详情</div>
     </div>
-    <div id="cal-grid"></div>
-    <div id="cal-legend"></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="btn-secondary" style="padding:7px 14px;font-size:12px;border-color:#4a3b22;color:#d8c9a8;background:rgba(23,18,10,.8)" onclick="calShift(-1)">← 上周</button>
+      <span id="cal-title" style="font-family:var(--mono);font-size:13px;color:#f0d9a2;font-weight:700;letter-spacing:.06em"></span>
+      <button class="btn-secondary" style="padding:7px 14px;font-size:12px;border-color:#4a3b22;color:#d8c9a8;background:rgba(23,18,10,.8)" onclick="calShift(1)">下周 →</button>
+    </div>
   </div>
+  <div id="cal-grid"></div>
+  <div id="cal-legend"></div>
 </div>
 
 <!-- 杯赛 v3 -->
 <div id="page-cup" class="page v2c">
-  <header class="cv3-head"><div><div class="cv3-kicker">CHAMPIONSHIP · 杯赛中心</div><div class="cv3-title">🏆 杯赛</div><div class="cv3-sub">新计分：填入EP 1:1 + 满档奖励 · 赛中锁领奖 · 结束后一键全领</div></div>
+  <header class="cv3-head"><div><div class="cv3-kicker">CHAMPIONSHIP · 杯赛中心</div><div class="cv3-title">🏆 杯赛</div><div class="cv3-sub">挑一个杯赛 · 报名后自动计分 · 结束后一键领取</div></div>
   <span class="chip pill">⚡ 能量 <b id="v2enC">10</b>/10 · 每日结算 +3　<button class="btn" style="padding:5px 12px;font-size:11px" onclick="v2buyEnergy()">🪙 40 补 5（每日1次）</button></span></header>
   <div class="cv3-layout"><nav id="cupV2Rail"></nav><div class="card" id="cupV2Panel" style="margin-bottom:0"></div></div>
 </div>
@@ -2523,18 +2556,29 @@ button.dl-m-row:hover{border-color:rgba(240,179,92,.42);background:rgba(40,29,14
   </div>
 </div>
 <script>
+window.addEventListener('unhandledrejection',function(e){
+ try{
+  var box=document.getElementById('notif-container');if(!box)return;
+  var c=document.createElement('div');
+  c.className='notif-card';c.style.borderLeftColor='#ff3b30';
+  c.innerHTML='<div class="notif-title">⚠️ 未处理Promise错误</div><div class="notif-body" style="word-break:break-all;">'+String((e.reason&&(e.reason.stack||e.reason.message))||e.reason).slice(0,400)+'</div>';
+  box.appendChild(c);
+  requestAnimationFrame(function(){c.classList.add('show');});
+ }catch(_){}
+});
 window.addEventListener('error',function(e){
   try{
+    /* Edge external-file 遮罩错误（无 e.error）来自浏览器注入层，无法也不需处理，静默 */
+    if(e.message==='Script error.'&&!e.error){console.warn('[masked]',e);return;}
     var box=document.getElementById('notif-container');if(!box)return;
     var c=document.createElement('div');
     c.className='notif-card';c.style.borderLeftColor='#ff3b30';
-    c.innerHTML='<div class="notif-title">⚠️ 程序错误（请截图给开发者）</div><div class="notif-body" style="word-break:break-all;">'+String(e.message).slice(0,200)+'<br>@ '+(e.filename||'').split('/').pop()+':'+e.lineno+':'+e.colno+'</div>';
+    c.innerHTML='<div class="notif-title">⚠️ 程序错误（请截图给开发者）</div><div class="notif-body" style="word-break:break-all;">'+(e.error?(String(e.error.message||e.message).slice(0,150)+'<br>'+String(e.error.stack||'').split('\n').slice(0,3).join('<br>').slice(0,400)):String(e.message).slice(0,200)+'<br>@ '+(e.filename||'').split('/').pop()+':'+e.lineno+':'+e.colno)+'</div>';
     box.appendChild(c);
     requestAnimationFrame(function(){c.classList.add('show');});
     setTimeout(function(){c.classList.add('hide');setTimeout(function(){c.remove();},300);},15000);
   }catch(_){}
 });
-
 
 const LEVELS=[{lv:1,name:"列兵1",s:0,e:500},{lv:2,name:"列兵2",s:501,e:1047},{lv:3,name:"三等兵",s:1048,e:1662},{lv:4,name:"二等兵",s:1663,e:2342},{lv:5,name:"一等兵",s:2343,e:3066},{lv:6,name:"上等兵1",s:3067,e:3833},{lv:7,name:"上等兵2",s:3834,e:4628},{lv:8,name:"上等兵3",s:4629,e:5464},{lv:9,name:"上等兵4",s:5465,e:6331},{lv:10,name:"下士1",s:6332,e:7235},{lv:11,name:"下士2",s:7236,e:8182},{lv:12,name:"下士3",s:8183,e:9164},{lv:13,name:"下士4",s:9165,e:10208},{lv:14,name:"下士5",s:10209,e:11277},{lv:15,name:"下士6",s:11278,e:12447},{lv:16,name:"中士1",s:12448,e:13653},{lv:17,name:"中士2",s:13654,e:14922},{lv:18,name:"中士3",s:14923,e:16226},{lv:19,name:"中士4",s:16227,e:17573},{lv:20,name:"中士5",s:17574,e:18962},{lv:21,name:"中士6",s:18963,e:20460},{lv:22,name:"上士1",s:20461,e:22025},{lv:23,name:"上士2",s:22026,e:23621},{lv:24,name:"上士3",s:23622,e:25265},{lv:25,name:"上士4",s:25266,e:26949},{lv:26,name:"上士5",s:26950,e:28685},{lv:27,name:"上士6",s:28686,e:30540},{lv:28,name:"少尉1",s:30541,e:32453},{lv:29,name:"少尉2",s:32454,e:34429},{lv:30,name:"少尉3",s:34430,e:36476},{lv:31,name:"少尉4",s:36477,e:38610},{lv:32,name:"少尉5",s:38611,e:40836},{lv:33,name:"少尉6",s:40837,e:43155},{lv:34,name:"少尉7",s:43156,e:45559},{lv:35,name:"少尉8",s:45560,e:48113},{lv:36,name:"中尉1",s:48114,e:50770},{lv:37,name:"中尉2",s:50771,e:53532},{lv:38,name:"中尉3",s:53533,e:56398},{lv:39,name:"中尉4",s:56399,e:59374},{lv:40,name:"中尉5",s:59375,e:62463},{lv:41,name:"中尉6",s:62464,e:65660},{lv:42,name:"中尉7",s:65661,e:68963},{lv:43,name:"中尉8",s:68964,e:72428},{lv:44,name:"上尉1",s:72429,e:76011},{lv:45,name:"上尉2",s:76012,e:79724},{lv:46,name:"上尉3",s:79725,e:83560},{lv:47,name:"上尉4",s:83561,e:87620},{lv:48,name:"上尉5",s:87621,e:91798},{lv:49,name:"上尉6",s:91799,e:96095},{lv:50,name:"上尉7",s:96096,e:100519},{lv:51,name:"上尉8",s:100520,e:105167},{lv:52,name:"少校1",s:105168,e:109894},{lv:53,name:"少校2",s:109895,e:114709},{lv:54,name:"少校3",s:114710,e:119613},{lv:55,name:"少校4",s:119614,e:124627},{lv:56,name:"少校5",s:124628,e:129865},{lv:57,name:"少校6",s:129866,e:135294},{lv:58,name:"少校7",s:135295,e:140929},{lv:59,name:"少校8",s:140930,e:146867},{lv:60,name:"中校1",s:146868,e:153013},{lv:61,name:"中校2",s:153014,e:159370},{lv:62,name:"中校3",s:159371,e:165950},{lv:63,name:"中校4",s:165951,e:172744},{lv:64,name:"中校5",s:172745,e:179771},{lv:65,name:"中校6",s:179772,e:187026},{lv:66,name:"中校7",s:187027,e:194515},{lv:67,name:"中校8",s:194516,e:202339},{lv:68,name:"上校1",s:202340,e:210408},{lv:69,name:"上校2",s:210409,e:218704},{lv:70,name:"上校3",s:218705,e:227231},{lv:71,name:"上校4",s:227232,e:236006},{lv:72,name:"上校5",s:236007,e:245032},{lv:73,name:"上校6",s:245033,e:254322},{lv:74,name:"上校7",s:254323,e:263877},{lv:75,name:"上校8",s:263878,e:273813},{lv:76,name:"大校1",s:273814,e:284038},{lv:77,name:"大校2",s:284039,e:294565},{lv:78,name:"大校3",s:294566,e:305399},{lv:79,name:"大校4",s:305400,e:316546},{lv:80,name:"大校5",s:316547,e:328235},{lv:81,name:"大校6",s:328236,e:340370},{lv:82,name:"少将1",s:340371,e:353046},{lv:83,name:"少将2",s:353047,e:366237},{lv:84,name:"少将3",s:366238,e:379967},{lv:85,name:"少将4",s:379968,e:394226},{lv:86,name:"少将5",s:394227,e:409011},{lv:87,name:"少将6",s:409012,e:424761},{lv:88,name:"中将1",s:424762,e:441020},{lv:89,name:"中将2",s:441021,e:457795},{lv:90,name:"中将3",s:457796,e:475122},{lv:91,name:"中将4",s:475123,e:493068},{lv:92,name:"中将5",s:493069,e:511637},{lv:93,name:"中将6",s:511638,e:531400},{lv:94,name:"上将1",s:531401,e:551855},{lv:95,name:"上将2",s:551856,e:573019},{lv:96,name:"上将3",s:573020,e:594923},{lv:97,name:"上将4",s:594924,e:617563},{lv:98,name:"上将5",s:617564,e:640942},{lv:99,name:"上将6",s:640943,e:665029},{lv:100,name:"元帅",s:665030,e:999999},{lv:101,name:"大元首",s:1000000,e:1099999},{lv:102,name:"荣誉元首",s:1100000,e:99999999}];
 const TALENTS=[
@@ -2851,7 +2895,6 @@ getTag=function(id,_t){
 function getTagRate(tag){if(!tag)return 0.30;if(typeof tag.pen==='number')return tag.pen/100;return getPenaltyRate(tag.maxEp);}
 function tagChildren(parentPath){const pl=parentPath?parentPath.length:0;return TASK_TAGS.filter(t=>t.path.length===pl+1&&(!parentPath||t.path.slice(0,pl).join('/')===parentPath.join('/')));}
 
-
 function getPenaltyRate(maxEp){
   if(maxEp<=150)return 0.05;
   if(maxEp<=200)return 0.10;
@@ -2892,7 +2935,7 @@ function applySeasonUI(){
     +'.card{background:rgba(26,20,12,.88)!important;border-color:'+hexA(t.btnA,0.30)+'!important;color:#e8dcc0;}'
     +'.navbtn.active{background:linear-gradient(90deg,'+t.btnA+','+t.btnB+')!important;color:#2a1c08!important;border-color:transparent!important;}'
     +'.btn-primary,.btn-accent{background:linear-gradient(90deg,'+t.btnA+','+t.btnB+')!important;color:#2a1c08!important;}'
-    +'#app>div[style*="position:sticky"]{border-bottom-color:'+hexA(t.btnA,0.30)+'!important;}';
+    +'#app>div[style*="sticky"]{border-bottom-color:'+hexA(t.btnA,0.30)+'!important;}';
   document.documentElement.style.setProperty('--gold',t.color||'#e8a33d');
   document.documentElement.style.setProperty('--gold-l',t.btnA||'#f0b35c');
   document.documentElement.style.setProperty('--gold-d',t.btnB||'#d9832a');
@@ -3012,7 +3055,6 @@ if(it.run)note=it.run();
 saveState();updateTopBar();updateShopUI();renderPassUI();closeModal();showGainModal('🛍️ 兑换成功 · 恭喜获得',[[note,'','#ff2d95']]);});}
 /* ================= 通行证系统 END ================= */
 
-
 /* ================= 进化模式 v1.5.0「终极进化」 ================= */
 const EVOLVE_LV=[
 {atk:{a:'settle',v:10,t:'今天结算时额外获得10EP'},def:{a:'pen',v:0.03,t:'今天结算时减少扣除3%的EP'}},
@@ -3115,9 +3157,6 @@ function onEvolveLevelUp(lv){
  pushEvolveNote(msg);
 }
 
-
-
-
 function useEvoBoil(){const e=getEvolve();const now=Date.now();if((e.boilUntil||0)>now)return;if((e.boilCdUntil||0)>now){alert('🩸 热血沸腾冷却中：'+fmtCD(e.boilCdUntil-now));return;}
  showModal('🩸 热血沸腾','进入 <b>120分钟</b> 沸血时间：所有未完成任务 <b>最大EP +100%</b>、<b>扣减 -80%</b>。<br><br>结束后冷却 240 分钟。',function(){e.boilUntil=Date.now()+120*60000;e.boilCdUntil=Date.now()+240*60000;saveState();renderTasks();renderEvolveBars();closeModal();});}
 function useEvoStealth(){const e=getEvolve();const now=Date.now();if((e.stealthUntil||0)>now)return;if((e.stealthCdUntil||0)>now){alert('🫥 隐身冷却中：'+fmtCD(e.stealthCdUntil-now));return;}
@@ -3193,7 +3232,6 @@ function evalTagMarks(){
  });
  state.tagMarks=marks;
 }
-
 
 /* ================= 精英任务 v1.5.2「精英降临」· 每标签独立 ================= */
 const ELITE_PARENTS=['wd_ky','wd_zyks','bk_zyk_zy','bk_zyk_bk'];
@@ -3328,7 +3366,6 @@ function doSwapExclusive(id){
  pushEvolveNote('🎴 专属功能切换为：'+(it?it.n:id));
  if(document.getElementById('page-passive').classList.contains('active'))renderExclusiveUI();
 }
-
 
 function openElitePanel(){
  let h='<div style="font-size:11px;color:#8e8e93;margin-bottom:10px;line-height:1.6;">每个精英标签<b>独立订阅</b>（'+ELITE_COST+' 积分 / 3 天）：有效期内开放调整界面，各标签互不影响；到期自动关闭、调整值保留、耐久修复照常。<b>一经付款，不做退款。</b></div>';
@@ -3679,8 +3716,6 @@ function getModeBlock(type){
   if(type==='potential'&&state.todayMode!=='potential')return{title:'✨ 潜能模式今日未开启',desc:'今日玩法为「'+MODE_NAMES[state.todayMode]+'」<br>潜能仅在当日选择潜能玩法时生效<br>可在「每日登记」中切换今日玩法'};
   return null;
 }
-
-
 
 function hasPassive(id){return getPassiveItems().some(p=>p.id===id);}
 function getPassiveState(){
@@ -4925,7 +4960,7 @@ function applyTianrenTheme(){
       ':root{--gold:'+GOLD+'!important;--gold-l:'+GOLDA+'!important;--gold-d:'+GOLDB+'!important;--rose:'+ROSE+'!important;--ink:#e6f0e2;--ink-dim:rgba(230,240,226,.55);--line:'+GOLD+'30}',
       'body{background:radial-gradient(circle at 12% -4%,'+GOLDA+'21,transparent 52%),radial-gradient(circle at 88% 104%,'+GOLDB+'1c,transparent 46%),linear-gradient(180deg,#0b130d,#090e0a)!important;color:#e2ecd8!important}',
       '#app::before{background-image:radial-gradient(1px 1px at 12% 18%,'+GOLDA+'aa,transparent),radial-gradient(1px 1px at 34% 8%,'+GOLDA+'77,transparent),radial-gradient(1.5px 1.5px at 58% 24%,'+GOLDA+'99,transparent),radial-gradient(1px 1px at 78% 12%,'+GOLDA+'66,transparent),radial-gradient(1px 1px at 90% 46%,'+GOLDA+'88,transparent),radial-gradient(1.5px 1.5px at 20% 68%,'+GOLDA+'55,transparent),radial-gradient(1px 1px at 66% 82%,'+GOLDA+'77,transparent),radial-gradient(1px 1px at 44% 94%,'+GOLDA+'66,transparent)!important}',
-      '#app>div[style*="position:sticky"]{background:rgba(9,15,11,.9)!important;border-bottom:1px solid '+GOLD+'55!important;backdrop-filter:blur(18px) saturate(1.2)!important}',
+      '#app>div[style*="sticky"]{background:rgba(9,15,11,.9)!important;border-bottom:1px solid '+GOLD+'55!important;backdrop-filter:blur(18px) saturate(1.2)!important}',
       /* ===== 全局字体：自然系衬线（数字保留等宽） ===== */
       'body,.page,.card,input,select,textarea,button{font-family:"STKaiti","KaiTi","Kaiti SC","Songti SC","SimSun",Georgia,serif!important;letter-spacing:.02em}',
       '#top-points,#top-tokens,#top-ep,#top-black,.hm-stat b,.hm-badge,.ssrp-gain,.ssrp-no,.t-n,.finpg .bal b,.inst-price,.fin-rate{font-family:ui-monospace,Menlo,Consolas,monospace!important;letter-spacing:0!important}',
@@ -6271,6 +6306,9 @@ const detailAmount=v=>v>0?'+'+v:String(v);
     /* 材料掉落并入结算战报对话框（UI统一：获得物品一律对话框，不再右侧划出） */
     state.dailyHistory.push({date:today,ep:finalEp,rawEp:effectiveRawEp,grossRawEp:grossRawEp,penalty:Math.round(penaltyTotal*100),points:pointsInfo.total,tokens:tks,cardId:usedCardId,didVocab:didVocab,listClearToday:listClearToday,tasks:tasksSnapshot});
     try{if(typeof window.__cvAccrue==='function')window.__cvAccrue();}catch(e){}
+    try{if(window.__v2Dbg&&typeof window.__v2Dbg.v2Tick==='function')window.__v2Dbg.v2Tick();}catch(e){}
+    try{if(window.__v2Dbg&&typeof window.__v2Dbg.v2Backfill1119==='function')window.__v2Dbg.v2Backfill1119();}catch(e){}
+    try{if(window.__v2Dbg&&typeof window.__v2Dbg.v2autoPlace==='function')window.__v2Dbg.v2autoPlace();}catch(e){}
     state.todayTasks.forEach(t=>{if(t.fromLong&&!t.completed){const lt=state.longTasks.find(x=>x.id===t.fromLong);if(lt)lt.migrated=false;}});
     state.todayTasks=[];state.tasksMarkInit=false;state.taskReedit=false;
     if(state.deletedToday)state.deletedToday.items=[];
@@ -7338,14 +7376,11 @@ function resetAllPassive(){if(!checkUnlock('passive')){alert('当前无开放权
 /* ===== v1.4.6 新增系统：日历 / 杯赛 / 影子竞技 / 升级预览 ===== */
 let calCursor=new Date();calCursor.setDate(1);
 
-
 function normHistDate(s){const p=s.split('/').map(Number);if(p.length<3)return s;return p[0]+'-'+String(p[1]).padStart(2,'0')+'-'+String(p[2]).padStart(2,'0');}
 function getWeekDates(wk){const start=parseDateOnly(wk);const out=[];for(let i=0;i<7;i++){const d=new Date(start+i*86400000);out.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'));}return out;}
 
-
 function getEnergy(){const today=new Date().toDateString();if(!state.energy||state.energy.date!==today){state.energy={v:Math.min(10,((state.energy&&typeof state.energy.v==='number')?state.energy.v:10)),date:today};saveState();}return state.energy;}
 function countTagSettleDays(){const keys={};(state.dailyHistory||[]).forEach(d=>{(d.tasks||[]).forEach(t=>{if(t.completed&&t.tagId)keys[d.date+'|'+t.tagId]=1;});});const days={};Object.keys(keys).forEach(k=>{const tagId=k.split('|')[1];days[tagId]=(days[tagId]||0)+1;});return days;}
-
 
 function cupWeekScore(){const cs=getCupState();const dates=getWeekDates(cs.weekKey);let score=0;(function(){const _r=(state.dailyHistory||[]).slice();if((state.todayTasks||[]).some(function(t){return t.completed&&t.baseEp!=='';}))_r.push({date:todayStr(),tasks:state.todayTasks});return _r;})().forEach(d=>{if(dates.indexOf(normHistDate(d.date))===-1)return;let counted=0;(d.tasks||[]).forEach(t=>{if(counted>=3)return;if(t.completed&&cupTagOf(t.swapTagId||t.tagId)===cs.tagId){const tag=getTag(t.tagId);const own=(parseInt(t.baseEp)||0)+(parseInt(t.qualityEp)||0);if(tag&&tag.maxEp>0){score+=Math.round(own/tag.maxEp*100);if(own>=tag.maxEp)score+=20;}counted++;}});});return score;}
 function getCupDaily(){const today=new Date().toDateString();if(!state.cupDaily||state.cupDaily.date!==today){state.cupDaily={date:today,claimed:{}};saveState();}return state.cupDaily;}
@@ -7356,12 +7391,9 @@ function getDailyGoalSet(){const alt=new Date().getDate()%2===0;const done=today
   return alt?setA:setB;}
 function claimDailyGoal(id){const g=getDailyGoalSet().filter(x=>x.id===id)[0];if(!g)return;const cd=getCupDaily();if(cd.claimed[id])return;if(!g.ok()){alert('目标尚未完成');return;}if(g.rw.points)state.points+=g.rw.points;cd.claimed[id]=true;saveState();updateTopBar();renderCupUI();showGainModal('📋 每日任务完成',[['积分','+'+g.rw.points]]);}
 
-
 function buyEnergy(){const today=new Date().toDateString();if(state.energyBuyDate===today){alert('今日已购买过能量');return;}if(state.tokens<40){alert('代币不足（需 40）');return;}const en=getEnergy();state.tokens-=40;en.v=Math.min(10,en.v+5);state.energyBuyDate=today;saveState();updateTopBar();renderCupUI();}
 
-
 function claimMatTier(mat,idx){claimDayTier(mat,idx);}
-
 
 const RACE_LEAGUES=[{n:'青铜',min:0,rw:{points:100}},{n:'白银',min:100,rw:{points:150}},{n:'黄金',min:200,rw:{points:200,draw_ticket:1}},{n:'铂金',min:350,rw:{tokens:30,draw_ticket:1,sp_core:1}},{n:'钻石',min:500,rw:{tokens:60,sp_core:1}},{n:'车王',min:700,rw:{tokens:100,brawl_vip:1,sp_core:2}}];
 function rankLeague(rating){let cur=RACE_LEAGUES[0];RACE_LEAGUES.forEach(function(l){if(rating>=l.min)cur=l;});return cur;}
@@ -7395,11 +7427,6 @@ function getRaceOpponents(){
   return [{id:'last',name:'上周的你',sub:'本周已过天数 vs 上周同期',ghost:g1,pts:20,neg:10},{id:'avg',name:'30天的你',sub:'近30天日均 × 本周已过天数',ghost:g2,pts:30,neg:15},{id:'best',name:'历史最佳的你',sub:'历史最佳周同期 × 0.9',ghost:g3,pts:40,neg:20}].map(function(o){o.mine=mine;o.win=mine>o.ghost;return o;});
 }
 
-
-
-
-
-
 /* ===== v1.4.6 完整版：四维改装 / 杯赛三赛制 / 竞技连胜 / 材料 ===== */
 const UP_PARTS=[{k:'spd',n:'训练印记',icon:'🎖️',desc:'主：极速 maxEp +3%/级 ｜ 副：氮增 +0.5pp/级',mat:'mark',matN:'训练印记'},{k:'acc',n:'冲刺奖章',icon:'⚡',desc:'主：加速 连击 +2%/级 ｜ 副：极速 +1%/级',mat:'medal',matN:'冲刺奖章'},{k:'ctl',n:'全勤徽章',icon:'🛡️',desc:'主：操控 罚率 -2%/级 ｜ 副：加速 +0.5%/级',mat:'badge',matN:'全勤徽章'},{k:'nit',n:'巅峰凭证',icon:'🧪',desc:'主：氮增 占比 +1pp/级 ｜ 副：操控 -0.5%/级',mat:'peak',matN:'巅峰凭证'}];
 const UP_DAYS=[2,7,16,30,50,80,122,178,253,353];
@@ -7407,24 +7434,9 @@ const UP_NEED=[0,0,0,0,0,1,2,3,4,5];
 const UP_COST=[40,60,100,150,210,300,400,530,680,880];
 const UP_TOK=[0,0,0,0,0,5,8,12,16,20];
 
-
-
-
-
-
 function requiredBaseOf(t){const tag=getTag(t.tagId);if(!tag)return 50;const et=eliteTune(t.tagId);const rr=et?(1+(et.ratioR-1)*eliteStrength(t.tagId)):1;return Math.round(tag.maxEp*baseRatioOf(t,tag)*rr);}
 
-
-
-
 const SP_RECIPE={S:{label:'S',mats:12,core:6,tokens:260,ult:4},A:{label:'A',mats:10,core:5,tokens:200,ult:3},B:{label:'B',mats:8,core:4,tokens:150,ult:3},C:{label:'C',mats:6,core:3,tokens:100,ult:2},D:{label:'D',mats:5,core:2,tokens:70,ult:2}};
-
-
-
-
-
-
-
 
 /* ===== 杯赛 v2：四档报名 + 双周耐力赛 + 限时产出赛 ===== */
 const CUP_TIERS=[{n:'业余',days:0,th:[150,100,50],rw:[{points:100},{tokens:10},{points:60}]},{n:'新人',days:15,th:[200,140,70],rw:[{tokens:15,change_ticket:1},{tokens:12},{points:80}]},{n:'强手',days:60,th:[260,180,100],rw:[{tokens:25,exp25:1},{tokens:18,change_ticket:1},{points:120,exp12:1}]},{n:'车王',days:150,th:[340,240,140],rw:[{tokens:50,sp_core:1,ult_upgrade:1},{tokens:30,exp3:1},{tokens:20,draw_ticket:1}]}];
@@ -7501,7 +7513,6 @@ function claimEnduSupply(idx){
 }
 /* ===== 日历 v2：限时赛金色标记 ===== */
 
-
 /* ===== 成就计数器（自动化） ===== */
 function countDiscardReviewTasks(){let n=0;(state.dailyHistory||[]).forEach(function(d){(d.tasks||[]).forEach(function(t){if(t.completed&&isDiscardReviewTag(getTag(t.tagId)))n++;});});return n;}
 function countMockTasks(){let n=0;(state.dailyHistory||[]).forEach(function(d){(d.tasks||[]).forEach(function(t){if(t.completed&&tType(getTag(t.tagId))==='mk')n++;});});return n;}
@@ -7527,7 +7538,6 @@ function getAchieveProgress(it){
 }
 /* ===== v1.4.6 定稿：日杯 / 月杯 / 公告栏 / 指南 / 升级树形折叠 ===== */
 function renderGuidePage(){/* 静态页，无需渲染 */}
-
 
 const DAY_CUP_KINDS=['points','mark','medal','badge','peak'];
 function dayCupHash(ds){let h=0;for(let i=0;i<ds.length;i++)h=(h*31+ds.charCodeAt(i))>>>0;return h;}
@@ -7674,25 +7684,15 @@ function getLimitedCup(){
   return state.cupLimited;
 }
 
-
 function limitedDates(){const lc=getLimitedCup();const out=[];if(!lc)return out;for(let i=0;i<3;i++){const d=new Date(lc.from+i*86400000);out.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'));}return out;}
-
 
 /* ===== v1.4.6 定稿：SP面板 / 升级数值三档 / 竞技胜负分明示 ===== */
 const SPABLE=function(){return TASK_TAGS.filter(function(t){return (t.path[0]==='考研'||t.path[0]==='背单词')&&t.path.length>=3;});};
-
 
 function upNextTxt(k,lv,up){
   const u2={spd:up.spd,acc:up.acc,ctl:up.ctl,nit:up.nit};u2[k]=Math.min(10,lv+1);
   return upEffTxt(k,u2);
 }
-
-
-
-
-
-
-
 
 function grantCumulative(rwArr,rank){for(let i=rank;i<rwArr.length;i++)grantRW(rwArr[i]);}
 function fmtRW(rw){return Object.keys(rw).map(function(k){return (GAIN_NAMES[k]||k)+'×'+rw[k];}).join('、');}
@@ -7703,9 +7703,6 @@ function cupLadder(th,rwArr){
 
 /* ===== 标签专精经济：前5级金币 / 后5级零件+金币+代币 / SP=四卡+代币+直接升级 ===== */
 function tagFreqClass(t){const v=t.maxEp;const pn=typeof t.pen==='number'?t.pen:Math.round(getPenaltyRate(t.maxEp)*100);if(v>=600||pn>=50)return 'S';if(v>=500||pn>=40)return 'A';if(v>=400||pn>=30)return 'B';if(v>=300||pn>=20)return 'C';return 'D';}
-
-
-
 
 function _upCard2(t,usage){
   const up=getTagUp(t.id);const mats=getTagMats(t.id);const tag=getTag(t.id);
@@ -7726,9 +7723,6 @@ function _upCard2(t,usage){
   return '<div style="border:1px solid #e5e5ea;border-radius:8px;padding:8px;margin:6px 0;background:#fff;"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;"><span>'+t.path.join(' · ')+_ultBtn+'</span><span style="font-size:10px;color:#8e8e93;font-weight:400;">'+usage[t.id]+' 天 · max '+tag.maxEp+'</span></div>'
   +'<div style="display:flex;align-items:center;gap:6px;margin:3px 0;"><div style="flex:1;height:5px;background:#e5e5ea;border-radius:3px;overflow:hidden;"><div style="height:100%;width:'+_prog+'%;background:linear-gradient(90deg,#007aff,#af52de);border-radius:3px;"></div></div><span style="font-size:10px;color:#8e8e93;white-space:nowrap;">综合 '+_prog+'%</span></div>'+lines+spLine+'</div>';
 }
-
-
-
 
 /* ===== 修复与杯赛UI v7 ===== */
 function _upCard(t,usage){return _upCard2(t,usage);}
@@ -7863,7 +7857,6 @@ function claimSprintAll(){const sp=state.sprintArchive;if(!sp||!sp.enrolled)retu
 function initCupStates(){try{getSprint();getWeekendCup();getMonthCup();getBiCup();}catch(e){}}
 function showCupRules(type){switchPage('guide');setTimeout(function(){var g=document.getElementById('guide-cup');if(g)g.scrollIntoView({behavior:'smooth',block:'start'});},80);}
 
-
 function renderCupUI(){try{renderCupUIImpl();}catch(e){console.error('cupUI',e);}}
 function renderCupUIImpl(){{
   const en=getEnergy();
@@ -7905,9 +7898,6 @@ function renderCupUIImpl(){{
 }function settleDayCups(){}
 function settleLimited(lc){if(lc&&!lc.claimed){lc.claimed=true;saveState();}}
 function calDayDetail(ds){const ev=[];(state.dailyHistory||[]).forEach(function(d){if(normHistDate(d.date)===ds)ev.push('✅ 已结算：+'+d.ep+' EP');});getWeekDates(getCupState().weekKey).forEach(function(d){if(d===ds)ev.push('🎯 周悬赏进行中');});const wk=getWeekendCup();[fmtDate(parseDateOnly(wk.weekKey)+5*86400000),fmtDate(parseDateOnly(wk.weekKey)+6*86400000)].forEach(function(d){if(d===ds)ev.push('💠 精研核心杯');});limitedDates().forEach(function(d){if(d===ds)ev.push('⚡ 大型赛事');});const _dk1=DAY_CUP_KINDS[dayCupHash(ds+'#type')%DAY_CUP_KINDS.length];ev.push('🏆 日杯① · '+(_dk1==='points'?'积分杯':dayCupKindName(_dk1)));if(dayCupHash(ds+'#double')%5===0){const _ks=DAY_CUP_KINDS.filter(k=>k!==_dk1);const _dk2=_ks[dayCupHash(ds+'#type2')%_ks.length];ev.push('🏆 日杯② · '+(_dk2==='points'?'积分杯':dayCupKindName(_dk2)));}if(ds.slice(8)==='01')ev.push('🗓️ 月杯进行中 / 竞技新赛季');if(!ev.length)ev.push('暂无赛事');showModal('📅 '+ds,ev.join('<br>'),function(){switchPage(ds.slice(8)==='01'?'race':'cup');closeModal();});}
-
-
-
 
 /* ===== 竞技：按测试版规则补齐 renderArenaUI / arenaAddEp，不自创额外机制 ===== */
 const ARENA_DIVS=['bronze','silver','gold','platinum','diamond','legend'];
@@ -8132,47 +8122,88 @@ function renderArenaUI(){
 }
 function arenaTick(){const a=getArena();let changed=false;if(a.qualActive&&Date.now()>a.qualEndAt){arenaFinishQual(a);changed=true;}if(a.pending&&Date.now()>a.pending.endAt){arenaFinishPending(a);changed=true;}if(a.revenge&&a.revenge.active&&Date.now()>a.revenge.endAt){arenaFinishRevenge(a);changed=true;}arenaSettleWeek(a);if(!a.pending&&!a.qualActive&&!(a.revenge&&a.revenge.active)&&Date.now()<arenaSundayEnd()&&a.attackCount<2&&Math.random()<0.00012){arenaMaybeAttack();}}
 
-
-
-
 /* ===== 日历：线性周视图，一次展示一周赛事（含竞技） ===== */
 function calShift(n){calCursor.setDate(calCursor.getDate()+n*7);renderCalendar();}
 function renderCalendar(){
   if(!window.__calInited){calCursor=new Date();window.__calInited=true;}
-  const box=document.getElementById('cal-grid');if(!box)return;
-  const pad=n=>String(n).padStart(2,'0');
-  const cur=new Date(calCursor);cur.setHours(0,0,0,0);
-  const dow=(cur.getDay()+6)%7;cur.setDate(cur.getDate()-dow);
-  const end=new Date(cur);end.setDate(end.getDate()+6);
-  const fmtD=d=>(d.getMonth()+1)+'/'+d.getDate();
-  document.getElementById('cal-title').textContent=cur.getFullYear()+'年 '+fmtD(cur)+' - '+fmtD(end);
-  const todayDs=new Date().getFullYear()+'-'+pad(new Date().getMonth()+1)+'-'+pad(new Date().getDate());
-  const settled={};(state.dailyHistory||[]).forEach(d=>{settled[normHistDate(d.date)]=d;});
-  const weekDates=[];for(let i=0;i<7;i++){const d=new Date(cur);d.setDate(d.getDate()+i);weekDates.push(d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()));}
-  const weekKey=weekDates[0];const cs=getCupState();const wk=getWeekendCup();const lc=getLimitedCup();const a=getArena();const arenaWeek=a.weekKey;
-  const html=weekDates.map(function(ds,idx){
-    const d=new Date(ds+'T00:00:00');const isToday=ds===todayDs;const events=[];
-    const dh=settled[ds];if(dh)events.push({icon:'✅',text:'已结算：+'+dh.ep+' EP',color:'#34c759'});
-    const dk=DAY_CUP_KINDS[dayCupHash(ds+'#type')%DAY_CUP_KINDS.length];events.push({icon:'🏆',text:'日杯① · '+(dk==='points'?'积分杯':dayCupKindName(dk)),color:'#007aff'});
-    if(dayCupHash(ds+'#double')%5===0){const rem=DAY_CUP_KINDS.filter(k=>k!==dk);const dk2=rem[dayCupHash(ds+'#type2')%rem.length];events.push({icon:'🏆',text:'日杯② · '+(dk2==='points'?'积分杯':dayCupKindName(dk2)),color:'#007aff'});}
-    (state.deferredTasks||[]).forEach(x=>{if(x.date===ds)events.push({icon:'📥',text:'延期任务：'+x.name,color:'#8e8e93'});});
-    const sp=getSprint();
-    if(idx<5){const dd=sp.days[idx];if(dd){events.push({icon:'🏆',text:'冲刺 · '+cupName(dd.tagId),color:'#af52de'});}}
-    if(idx===5)events.push({icon:'🏆',text:'冲刺锦标赛 · 周末结算日',color:'#af52de'});
-    if(idx===5||idx===6)events.push({icon:'💠',text:'精研核心杯',color:'#ff9500'});
-    if(lc&&limitedDates().indexOf(ds)>-1)events.push({icon:'⚡',text:'大型赛事 · '+cupName(lc.tagId),color:'#ff3b30'});
-    if(ds.slice(0,7)===getMonthCup().key){const _mc=getMonthCup();const _ids=_mc.tagIds||[_mc.tagId];events.push({icon:'🗓️',text:'月杯进行中 · '+_ids.map(function(id){return cupName(id);}).join(' ｜ '),color:'#6e6e73'});}
-    const _bc=getBiCup();if(_bc&&biDates(_bc.key).indexOf(ds)>-1){events.push({icon:'🏅',text:'双周标签杯 · '+(_bc.tagIds||[]).map(function(id){return cupName(id);}).join('·'),color:'#007aff'});}
-    if(ds===arenaWeek&&idx===0)events.push({icon:'⚔️',text:'竞技 · 120分钟资格赛',color:'#ff3b30'});
-    if(ds>=arenaWeek&&idx>0&&idx<6)events.push({icon:'⚔️',text:'竞技 · 每日挑战',color:'#ff3b30'});
-    if(ds===arenaWeek&&idx===6)events.push({icon:'⚔️',text:'竞技 · 每日挑战 / 周日结算',color:'#ff3b30'});
-    const chips=events.map(e=>'<span style="display:inline-flex;align-items:center;gap:3px;font-size:11px;padding:3px 7px;border-radius:7px;background:'+e.color+'15;color:'+e.color+';border:1px solid '+e.color+'25;white-space:nowrap;">'+e.icon+' '+e.text+'</span>').join('');
-    return '<div onclick="calDayDetail(\''+ds+'\')" style="cursor:pointer;border:1px solid '+(isToday?'#007aff':'#e5e5ea')+';border-left:4px solid '+(isToday?'#007aff':'#d1d1d6')+';border-radius:10px;padding:10px;margin-bottom:8px;background:'+(isToday?'#007aff08':'#fff')+';"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px;"><div style="font-size:13px;font-weight:'+(isToday?'700':'600')+';">'+['周一','周二','周三','周四','周五','周六','周日'][idx]+' <span style="color:#8e8e93;font-weight:400;">'+ds+'</span></div>'+(isToday?'<span style="font-size:10px;color:#007aff;font-weight:600;">今天</span>':'')+'</div><div style="display:flex;flex-wrap:wrap;gap:5px;">'+(chips||'<span style="font-size:11px;color:#c7c7cc;">暂无赛事</span>')+'</div></div>';
-  }).join('');
-  box.innerHTML=html;
-  const legend=document.getElementById('cal-legend');if(legend)legend.innerHTML='<div style="display:flex;flex-wrap:wrap;gap:6px;font-size:11px;color:#8e8e93;margin-top:6px;"><span>✅ 已结算</span><span>🏆 日杯</span><span>🎯 周悬赏</span><span>💠 精研核心杯</span><span>⚡ 大型赛事</span><span>🗓️ 月杯</span><span>⚔️ 竞技</span></div>';
+  var box=document.getElementById('cal-grid');if(!box)return;
+  var cur=new Date(calCursor.getFullYear(),calCursor.getMonth(),calCursor.getDate());
+  var dow=(cur.getDay()+6)%7;
+  var mon0=new Date(cur.getFullYear(),cur.getMonth(),cur.getDate()-dow);
+  var wkEnd=new Date(mon0.getFullYear(),mon0.getMonth(),mon0.getDate()+6);
+  document.getElementById('cal-title').textContent=(mon0.getMonth()+1)+'.'+mon0.getDate()+' – '+(wkEnd.getMonth()+1)+'.'+wkEnd.getDate();
+  var settled={};
+  (state.dailyHistory||[]).forEach(function(d){var k=normHistDate(d.date);if(!settled[k]||d.ep>settled[k])settled[k]=d.ep;});
+  var TODAY=fmtDate(new Date());
+  var WD=['一','二','三','四','五','六','日'];
+  var now=new Date();now.setHours(0,0,0,0);
+  function D(n){return new Date(mon0.getFullYear(),mon0.getMonth(),mon0.getDate()+n);}
+  var evs=[
+   {c:1,s:5,n:'⏱ 五日冲刺令',e:'1⚡',c1:'#7a2e26',c2:'#9e4a38',a:mon0,b:D(4)},
+   {c:5,s:3,n:'💰 周末积分杯',e:'1⚡',c1:'#7a5a1e',c2:'#a8842f',a:D(4),b:wkEnd},
+   {c:5,s:3,n:'💠 核心圣杯战',e:'3⚡',c1:'#54427a',c2:'#6e5a94',a:D(4),b:wkEnd},
+   {c:1,s:7,n:'👑 王者加冕周',e:'3⚡',c1:'#8a6a1a',c2:'#c9a227',a:mon0,b:wkEnd},
+   {c:1,s:7,n:'🚗 双周千里拉力',e:'3⚡',c1:'#3d5a73',c2:'#5b7f9e',a:mon0,b:wkEnd},
+   {c:1,s:7,n:'⚔️ 竞技 · 周赛季',e:'',c1:'#8a4a2a',c2:'#c1703f',a:mon0,b:wkEnd}
+  ];
+  for(var dd=0;dd<7;dd++){
+    var dt=D(dd);var ds=fmtDate(dt);
+    evs.push({c:dd+1,s:1,n:'🏆 日杯',e:'2⚡',c1:'#6b4a1f',c2:'#8a5f2a',a:dt,b:dt});
+    if(fnvX('X'+ds)%5===0)evs.push({c:dd+1,s:1,n:'🏆 加开日杯',e:'2⚡',c1:'#7a4a2a',c2:'#a06a35',a:dt,b:dt});
+  }
+  function st(ev){
+    if(ev.b<now)return{t:'已结束',off:1};
+    if(ev.a<=now&&ev.b>=now)return{t:'今日 · '+ev.e,off:0};
+    var d=Math.round((ev.a-now)/86400000);
+    return{t:'还有'+d+'天 · '+ev.e,off:0};
+  }
+  evs.sort(function(a,b){return (b.s-a.s)||(a.c-b.c);});
+  var tracks=[];
+  evs.forEach(function(ev){
+    var ti=0;
+    while(true){
+      var free=true;
+      for(var cc=ev.c;cc<ev.c+ev.s;cc++){if(tracks[ti]&&tracks[ti][cc]){free=false;break;}}
+      if(free)break;
+      ti++;
+    }
+    tracks[ti]=tracks[ti]||{};
+    for(var cc=ev.c;cc<ev.c+ev.s;cc++)tracks[ti][cc]=1;
+    ev.r=ti+1;
+  });
+  var wh='';
+  for(var k=0;k<7;k++){
+    var dt=D(k);var ds=fmtDate(dt);
+    var past=dt<now;
+    var ep=settled[ds];
+    wh+='<div class="cal-whd'+(ds===TODAY?' today':'')+(past&&ds!==TODAY?' past':'')+'"><div class="d1">周'+WD[k]+(ds===TODAY?' ·今':'')+'</div><div class="d2">'+(dt.getMonth()+1)+'.'+dt.getDate()+(ep?' ·<b style="color:#7ee2a0">+'+ep+'</b>':'')+'</div></div>';
+  }
+  var bars='';
+  evs.forEach(function(ev){
+    var s=st(ev);
+    bars+='<div class="cal-bar'+(s.off?' off':'')+'" style="grid-column:'+ev.c+'/span '+ev.s+';grid-row:'+ev.r+';--c1:'+ev.c1+';--c2:'+ev.c2+'" onclick="calDayDetail(\''+fmtDate(ev.a)+'\')"><span class="cal-bdg">!</span><i class="cal-dot" style="background:'+ev.c2+'"></i><span class="cal-bn">'+ev.n+(ev.e?' <i>'+ev.e+'</i>':'')+'</span><span class="cal-bs">'+s.t+'</span></div>';
+  });
+  box.innerHTML='<div class="cal-wk"><div class="cal-wh">'+wh+'</div><div class="cal-body" style="grid-template-rows:repeat('+tracks.length+',46px)">'+bars+'</div></div>';
+  document.getElementById('cal-legend').innerHTML='';
 }
-
+function fnvX(s){var x=2166136261;for(var i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619);}return x>>>0;}
+function calDayDetail(ds){
+ var ev=[];
+ (state.dailyHistory||[]).forEach(function(d){if(normHistDate(d.date)===ds)ev.push('✅ 已结算：+'+d.ep+' EP');});
+ var dt=new Date(ds+'T00:00:00');var day=dt.getDay();
+ if(day>=1&&day<=5)ev.push('⏱ 五日冲刺令（每日悬赏父标签 · 每日最多3奖杯）');
+ if(day===5||day===6||day===0){ev.push('💰 周末积分杯（周五~周日累计 · 1⚡）');ev.push('💠 核心圣杯战（周五~周日累计 · 3⚡）');}
+ ev.push('🏆 日杯 · 材料冠名杯（每日随机 · 2⚡）');
+ if(fnvX('X'+ds)%5===0)ev.push('🏆 加开日杯（20%概率双开 · 2⚡）');
+ ev.push('👑 王者加冕周（本周父标签累计 · 3⚡）');
+ ev.push('🚗 双周千里拉力（双周父标签累计 · 3⚡）');
+ if(day===0)ev.push('⚔️ 竞技：休赛日 · 可预报名（周一结算后定级）');
+ if(day===1)ev.push('⚔️ 竞技：定级日（报名 + 当天结算的完成+质量EP 定五联赛）');
+ if(day>=2&&day<=6)ev.push('⚔️ 竞技：挑战/防御/复仇日');
+ if(day===6)ev.push('🏁 竞技：赛季结算日（23:59 按联赛排名结算16档）');
+ if(!ev.length)ev.push('暂无赛事');
+ showModal('📅 '+ds,ev.join('<br>'),function(){switchPage('cup');closeModal();});
+}
 
 /* ===== 标签专精：材料双属性升级（升级次数不变，后期成本更高） ===== */
 const UP_STAT_NAME={spd:'极速',acc:'加速',ctl:'操控',nit:'氮增'};
@@ -8186,9 +8217,6 @@ const _upNeed2=[0,0,1,1,2,2,3,4,5,6];
 const _upCost2=[50,80,120,180,260,380,540,760,1050,1450];
 const _upTok2=[0,0,0,0,0,0,0,0,0,0];
 for(let _i=0;_i<10;_i++){UP_NEED[_i]=_upNeed2[_i];UP_COST[_i]=_upCost2[_i];UP_TOK[_i]=_upTok2[_i];}
-
-
-
 
 function getTagUp(tagId){
   state.tagUp=state.tagUp||{};
@@ -8249,10 +8277,8 @@ function computeTagChains(done){
   });
 }
 
-
 function upPartNextTxt(part,lv,up){const p=Object.assign({},up.parts||{});p[part.k]=Math.min(10,lv+1);return part.affects.map(k=>UP_STAT_NAME[k]+' '+upEffTxt(k,{parts:p})).join(' ｜ ');}
 function upMaxTxt(k){const lv={spd:10,acc:10,ctl:10,nit:10};return upEffTxt(k,{parts:{mark:10,medal:10,badge:10,peak:10}});}
-
 
 function useDirectUpgrade(tagId,part){
   if((state.inventory.direct_up||0)<1){alert('没有「直接升级」道具，可在商店购买');return;}
@@ -8274,13 +8300,6 @@ function useUltUpgrade(tagId){
   });
 }
 
-
-
-
-
-
-
-
 /* ===== SP与主次属性修正：材料满10必满主属性；SP材料量按Sportline量级 ===== */
 Object.assign(SP_RECIPE.S,{mats:75,core:85,tokens:750,ult:20});
 Object.assign(SP_RECIPE.A,{mats:60,core:70,tokens:650,ult:15});
@@ -8292,11 +8311,7 @@ UP_PARTS[1].main='acc';UP_PARTS[1].secondary='nit';UP_PARTS[1].desc='主：加�
 UP_PARTS[2].main='ctl';UP_PARTS[2].secondary='acc';UP_PARTS[2].desc='主：操控 ｜ 副：加速';
 UP_PARTS[3].main='nit';UP_PARTS[3].secondary='spd';UP_PARTS[3].desc='主：氮增 ｜ 副：极速';
 
-
 function syncUpStats(up){const lv=upStatLevels(up);up.spd=lv.spd;up.acc=lv.acc;up.ctl=lv.ctl;up.nit=lv.nit;return up;}
-
-
-
 
 /* ===== 标签专精UI：属性状态为主体 + Lv10全满效果 + SP预览对齐每日登记 ===== */
 function upFullEffectText(raw){
@@ -8305,13 +8320,6 @@ function upFullEffectText(raw){
   const penFull=Math.round(pen0*(1-0.25));
   return 'Lv10全满效果（SP前）：maxEp '+raw.maxEp+' → '+maxFull+' ｜ 罚率 '+pen0+'% → '+penFull+'% ｜ 连击 +25%/阶 ｜ 完成占比20%';
 }
-
-
-
-
-
-
-
 
 /* ===== 标签专精交互版：属性词条系统化 / 材料卡选中升级 / 属性栏预览下级 ===== */
 UP_STAT_NAME.spd='最大EP';UP_STAT_NAME.acc='连击加成';UP_STAT_NAME.ctl='扣减减免';UP_STAT_NAME.nit='完成占比';
@@ -8332,11 +8340,6 @@ useDirectUpgrade=function(tagId,part){
   return _directUpgradeImpl(tagId,part);
 };
 
-
-
-
-
-
 function upComparisonHtml(part,up){
   const next=upPartSimulation(up,part.k);
   return part.affects.map(function(k){
@@ -8345,28 +8348,6 @@ function upComparisonHtml(part,up){
     return '<div style="display:flex;justify-content:space-between;gap:8px;align-items:center;padding:4px 0;border-bottom:1px solid #f2f2f7;font-size:11px;"><span style="font-weight:600;">'+UP_STAT_NAME[k]+'</span><span style="color:#6e6e73;">当前 '+cur+'</span><span>→</span><b style="color:'+(changed?'#ff9500':'#8e8e93')+';">'+nxt+'</b></div>';
   }).join('');
 }
-
-
-
-
-function spPreviewTaskCard(t,isSP){
-  const sample=(state.todayTasks&&state.todayTasks[0])||null;
-  const name=(sample&&sample.name)||'当前任务';
-  const currentTag=getTag(t.id);
-  const maxEp=isSP?Math.round(currentTag.maxEp*1.25):currentTag.maxEp;
-  const req=isSP?Math.round(maxEp*0.1):requiredBaseOf(sample||{},t);
-  const quality=sample?((parseInt(sample.qualityEp)||0)):Math.round(maxEp*0.6);
-  const theme=isSP?('task-sp-'+getSPCardTheme(t)):'';
-  const tc=getTagColor(currentTag.maxEp);
-  const nameStyle=isSP?'color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.45);':'';
-  const border=isSP?'#1a1a1a':tc;
-  const bg=isSP?'':tc+'10';
-  const boxStyle=isSP?'background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.18);':'background:#f2f2f7;color:#6e6e73;';
-  const badgeStyle=isSP?'background:rgba(52,199,89,.22);border:1px solid rgba(102,255,154,.38);color:#66ff9a;':'color:#34c759;';
-  const tagBadge=isSP?'<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:#000;color:#fff;box-shadow:0 0 0 1px #ff950066,inset 0 0 8px rgba(255,149,0,.25);font-weight:600;">★ '+t.path.join(' · ')+' · SP · max '+maxEp+'</span>':'<span style="font-size:10px;padding:2px 6px;border-radius:4px;background:'+tc+'15;color:'+tc+';font-weight:600;">'+t.path.join(' · ')+' · max '+maxEp+'</span>';
-  return '<div class="task-card '+theme+'" style="border:1px solid '+(isSP?'#e5e5e5':border)+';border-left:4px solid '+border+';border-radius:10px;padding:10px;background:'+bg+';"><div style="display:flex;justify-content:space-between;gap:6px;align-items:center;"><div style="font-size:13px;font-weight:600;'+nameStyle+'">'+name+'</div>'+tagBadge+'</div><div style="display:flex;gap:6px;align-items:center;margin-top:6px;"><div style="flex:1;padding:8px 10px;border-radius:8px;font-size:13px;'+boxStyle+'">完成EP: '+req+'</div><div style="flex:1;padding:8px 10px;border-radius:8px;font-size:13px;'+boxStyle+'">质量EP: '+quality+'</div><div style="font-size:12px;font-weight:600;padding:4px 8px;border-radius:8px;'+badgeStyle+'">✓ 已完成</div></div></div>';
-}
-
 
 /* ===== 升级页终版：标签树折叠 + 左属性预览 + 右材料选择 ===== */
 function markTreeOpen(key,open){state.upTreeOpen=state.upTreeOpen||{};state.upTreeOpen[key]=!!open;saveState();}
@@ -8383,9 +8364,6 @@ function buildUpgradeTree(){
   });
   return root;
 }
-
-
-
 
 function renderUpgradeLeaf(t){
   const raw=t;const tag=getTag(t.id);const up=getTagUp(t.id);const mats=getTagMats(t.id);const lv=upStatLevels(up);const usage=countTagSettleDays();const days=usage[t.id]||0;
@@ -8417,15 +8395,10 @@ function renderUpgradeUI(){
   box.innerHTML=Object.keys(tree.children).sort().map(k=>renderUpgradeNode(tree.children[k],[k])).join('')||'<div style="text-align:center;color:#8e8e93;padding:20px;">暂无标签</div>';
 }
 
-
 /* ===== 非线性双属性：主属性每级+1，副属性按3/6级跳段+2，两个条不同步 ===== */
 function upSecondaryBonus(lv){return lv>=6?4:(lv>=3?2:0);}
 
-
-
-
 /* ===== 双属性恒定增长：主属性每级+1，副属性每级+0.5，不同步且每次都涨 ===== */
-
 
 function fmtUpNum(n){return (Math.round(n*10)/10).toFixed(1).replace('.0','');}
 function upEffTxt(k,up){
@@ -8437,17 +8410,7 @@ function upEffTxt(k,up){
   return '';
 }
 
-
 /* ===== 随机副属性曲线：每次升级两条都涨，但涨幅随机且不等于主属性 ===== */
-
-
-
-
-
-
-
-
-
 
 /* ===== 材料约束修正：最多2属性 / 副涨幅≤主50% / 主材料满级前属性不满 / 资源缺口红色提示 ===== */
 function makeUpCurve(){
@@ -8483,11 +8446,9 @@ function upPartSimulation(up,partKey){
   return sim;
 }
 
-
 function upMiniPreview(part,up,tagId,mats,days){
   return '<div style="margin-top:6px;padding:6px 8px;border-radius:8px;background:#007aff08;border:1px solid #007aff25;font-size:10px;line-height:1.5;"><b style="color:#007aff;">本级预览</b><br>'+upComparisonHtml(part,up)+(mats?upResourceHtml(part,up,mats,days||0):'')+'</div>';
 }
-
 
 /* ===== SP运动版面版：左标签树 / 右SP前后视觉与材料 ===== */
 function markSPTreeOpen(key,open){state.spTreeOpen=state.spTreeOpen||{};state.spTreeOpen[key]=!!open;saveState();}
@@ -8495,7 +8456,6 @@ function spTreeOpen(key,pathArr){const v=(state.spTreeOpen||{})[key];return type
 function spIntroHtml(){
   return '<details open style="margin-bottom:10px;"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#ff9500;">🏎️ 运动版任务介绍</summary><div style="font-size:12px;color:#6e6e73;line-height:1.8;padding:8px 2px;">运动版任务是标签专精的最终养成阶段。玩家需要先把普通标签的四种材料全部提升到满级，才能解锁对应标签的运动版预览与觉醒入口。运动版不会直接替代日常任务，而是在原有任务结构上继续强化标签上限、完成质量与结算表现。觉醒前可以查看普通状态与运动版状态的视觉差异，觉醒后会保留该标签的独立成长记录，并在每日登记、任务卡和结算明细中显示专属标识。不同标签拥有不同材料配方，稀有度越高，觉醒所需的材料、精研核心与直接升级越多。运动版的核心目标是把一个普通标签逐步培养成可长期重复使用的高价值任务标签。</div></details>';
 }
-
 
 function spCostLine(label,own,need){
   const ok=own>=need;
@@ -8508,9 +8468,6 @@ function spRecipeHtml(t,up){
   return '<div style="margin-top:10px;padding:10px;border:1px solid #ff950040;background:#ff950008;border-radius:10px;"><div style="font-size:13px;font-weight:700;margin-bottom:4px;">SP觉醒材料（'+r.label+'级）</div>'+spCostLine('训练印记',mats.mark||0,r.mats)+spCostLine('冲刺奖章',mats.medal||0,r.mats)+spCostLine('全勤徽章',mats.badge||0,r.mats)+spCostLine('巅峰凭证',mats.peak||0,r.mats)+spCostLine('💠 精研核心',state.inventory.sp_core||0,r.core)+spCostLine('🪙 代币',state.tokens,r.tokens)+spCostLine('🔧 直接升级',state.inventory.direct_up||0,r.ult)+'</div>';
 }
 
-
-
-
 /* ===== SP视觉切换：基础任务 / 运动版任务 ===== */
 function switchSPVisual(tab,tagId){state.spVisualTab=tab;saveState();openSPPanel(tagId);}
 function spVisualTabs(t){
@@ -8521,9 +8478,6 @@ function spVisualTabs(t){
   };
   return '<div style="display:flex;gap:8px;margin:8px 0;">'+btn('base','基础任务','📘')+btn('sp','运动版任务','🏎️')+'</div>';
 }
-
-
-
 
 function getSPCardTheme(tag){
   const t=getTag(tag&&tag.id);const c=getTagColor(t?t.maxEp:0);
@@ -8536,7 +8490,6 @@ function getSPCardTheme(tag){
   return 'bc';
 }
 
-
 function spGainCompareHtml(t,up){
   const lv=upStatLevels(up);
   const maxCur=getTag(t.id).maxEp,maxSp=Math.round(maxCur*1.25);
@@ -8548,7 +8501,6 @@ function spGainCompareHtml(t,up){
   if(up.sp)return '<div style="font-size:11px;color:#ff9500;font-weight:700;">当前已是SP运动版</div>'+row('性能分',sc,sc)+row('最大EP',maxCur,maxCur)+row('连击加成','+'+fmtUpNum(acc)+'%/阶','+'+fmtUpNum(acc)+'%/阶')+row('扣减减免','-'+fmtUpNum(ctl)+'%','-'+fmtUpNum(ctl)+'%')+row('完成占比',fmtUpNum(nit)+'%',fmtUpNum(nit)+'%');
   return row('性能分',sc,scSp)+row('最大EP',maxCur,maxSp)+row('连击加成','+'+fmtUpNum(acc)+'%/阶','+'+fmtUpNum(accSp)+'%/阶')+row('扣减减免','-'+fmtUpNum(ctl)+'%','-'+fmtUpNum(ctlSp)+'%')+row('完成占比',fmtUpNum(nit)+'%',nitSp+'%');
 }
-
 
 /* ===== 材料包：批量购买 / 通用材料 / 批量使用 ===== */
 GAIN_NAMES.universal_mat='🧊 通用材料';
@@ -8566,17 +8518,7 @@ function buyPartsPackBulk(){
   });
 }
 
-
-
-
-
-
-
-
-
-
 /* ===== 材料包批量自选：选择标签 + 四种材料之一 + 数量 ===== */
-
 
 function upResourceHtml(part,up,mats,days){
   const plv=up.parts[part.k];if(plv>=10)return '<span style="color:#34c759;">该材料已满级</span>';
@@ -8621,7 +8563,6 @@ function awakenSP(tagId){
   });
 }
 
-
 /* ===== 全商店批量购买 ===== */
 function buyItem(id){
   const sp=SHOP_POINTS.find(x=>x.id===id);const st=SHOP_TOKENS.find(x=>x.id===id);const item=sp||st;
@@ -8649,7 +8590,6 @@ function buyItem(id){
   });
 }
 
-
 /* ===== 材料包免选标签：自动使用当前升级页标签 ===== */
 function markTagOpen(tagId,open){state.upOpen=state.upOpen||{};state.upOpen[tagId]=!!open;if(open)state.currentUpgradeTag=tagId;saveState();}
 function selectUpgradePart(tagId,partIdx){
@@ -8670,9 +8610,6 @@ function openSPPanel(sel){
   const body=spIntroHtml()+'<div style="display:grid;grid-template-columns:minmax(180px,240px) 1fr;gap:12px;"><div><div style="font-size:12px;font-weight:700;margin-bottom:6px;">标签选择</div><div style="max-height:320px;overflow-y:auto;padding-right:4px;">'+left+'</div></div><div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">'+t.path.join(' · ')+'</div>'+(up.sp?'<div style="margin-bottom:8px;padding:6px 10px;border-radius:8px;background:linear-gradient(90deg,#0b1f3f,#2f8cff);color:#fff;font-size:12px;font-weight:700;">🏎️ 该任务已升到运动版</div>':'')+visual+(ready||up.sp?'<div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:700;margin-bottom:4px;">增益预览（SP前 → SP后）</div>'+stats+'</div><div style="border:1px solid #e5e5ea;border-radius:10px;padding:8px;"><div style="font-size:12px;font-weight:700;margin-bottom:4px;">材料等级</div>'+UP_PARTS.map(p=>'<div style="display:flex;justify-content:space-between;font-size:11px;padding:2px 0;"><span>'+p.n+'</span><b>'+up.parts[p.k]+'/10</b></div>').join('')+'</div></div>':'')+spRecipeHtml(t,up)+'</div></div>';
   showModal(up.sp?'🏎️ SP运动版详情':'🏎️ 运动版（SP觉醒）',body,function(){if(ready&&!up.sp)awakenSP(t.id);else closeModal();});
 }
-
-
-
 
 /* ===== 材料全局化：材料包使用后，所有标签共享 ===== */
 function migrateGlobalMats(){
@@ -8754,7 +8691,6 @@ function spTagNode(node,pathArr,sel){
 
 loadState();dailyResetCheck();try{updateBrawlConfirmBtn();}catch(e){}notifyNewMails();ensureV146Mail();notifyNewMails();getEnergy();getCupState();getRacing();updateMailBadge();settleDayCups();ensureCupNotices();checkLongMigration();checkCycleMigration();setInterval(function(){tickPassiveSpeed();arenaTick();if(document.getElementById('page-race').classList.contains('active'))renderArenaUI();updateBrawlUI();if(document.getElementById('page-potential').classList.contains('active'))updatePotentialUI();renderDailyAttrs();renderDailySkills();renderTalentBars();},1000);renderLongTasks();renderCycleTasks();updateTopBar();renderLock('talent');renderLock('potential');renderLock('brawl');renderLock('passive');updateTalentUI();updatePotentialUI();updateBrawlUI();updatePassiveUI();updateShopUI();updateDailyUI();renderTasks();renderAchievementUI();renderTalentBars();
 
-
 /* ===== 恢复的函数（构建期误删回补） ===== */
 function claimDayCup(){
   const info=getDayCupInfo();const k='dcr_'+info.dateStr;const st=state[k];
@@ -8781,7 +8717,6 @@ function enrollDayCup(){
   en.v-=1;state[k]={enrolled:true,claimed:false};saveState();renderCupUI();
 }
 
-
 function equippedTitle(){return (state.titleEquipped&&(state.achievement.titles||[]).indexOf(state.titleEquipped)>-1)?state.titleEquipped:'';}
 function fmtRemain(ms){
   if(ms<0)ms=0;
@@ -8791,9 +8726,7 @@ function fmtRemain(ms){
   return m+' 分钟';
 }
 
-
 function grantRW2(rw,tagId){Object.keys(rw).forEach(function(k){if(k==='_mats'){const m=getTagMats(tagId);m.mark+=2*rw[k];m.medal+=2*rw[k];m.badge+=2*rw[k];m.peak+=2*rw[k];}else if(k==='points')state.points+=rw[k];else if(k==='tokens')state.tokens+=rw[k];else state.inventory[k]=(state.inventory[k]||0)+rw[k];});}
-
 
 function renderAnnouncements(){
   const box=document.getElementById('ann-list');if(!box)return;
@@ -9120,7 +9053,6 @@ arenaSettleWeek=function(a){
   saveState();
 };
 
-
 /* ---------- 批次C：界面 + 定时器（追加覆盖） ---------- */
 getArena=function(){
   const st=state;
@@ -9132,9 +9064,6 @@ getArena=function(){
   return st.arena;
 };
 
-
-
-
 /* ---------- 补丁D：名册惰性生成包装 ---------- */
 var __renderArenaUI_w=renderArenaUI;
 renderArenaUI=function(){try{arenaEnsureRoster(getArena());}catch(e){}__renderArenaUI_w();};
@@ -9144,7 +9073,6 @@ var __arenaMaybeAttack_w=arenaMaybeAttack;
 arenaMaybeAttack=function(){try{arenaEnsureRoster(getArena());}catch(e){}__arenaMaybeAttack_w();};
 var __arenaSettleWeek_w=arenaSettleWeek;
 arenaSettleWeek=function(a){try{arenaEnsureRoster(a);}catch(e){}__arenaSettleWeek_w(a);};
-
 
 /* ---------- 补丁E：赛季奖励重调（覆盖 arenaDivReward） ---------- */
 const ARENA_RW2={
@@ -9166,7 +9094,6 @@ arenaDivReward=function(div,tierIdx){
   if(tierIdx<3){const c=e.core[tierIdx];if(c>0)r.sp_core=c;}
   return r;
 };
-
 
 /* ---------- 补丁F：旧档回填 + 排名等级区块 + 幽灵对战 ---------- */
 var __getArena_b=getArena;
@@ -9230,13 +9157,11 @@ function arenaRewardsHTML(){
   return html;
 }
 
-
 var __tickF=arenaTick;
 arenaTick=function(){
   __tickF();
   try{if(Math.random()<0.001){arenaGhostMatch();}}catch(e){}
 };
-
 
 /* ---------- 补丁G：战绩回填 + 幽灵seed兜底 ---------- */
 var __getArena_c=getArena;
@@ -9246,7 +9171,6 @@ getArena=function(){
   try{(state.arenaRoster.list||[]).forEach(function(g,i){if(typeof g.seed!=='number')g.seed=i+1;});}catch(e){}
   return a;
 };
-
 
 /* ---------- 补丁H：NaN回填+袭击稳健+幽灵对战自动化+比赛日志 ---------- */
 var __getArena_d=getArena;
@@ -9348,7 +9272,6 @@ arenaRewardsHTML=function(){
   return html;
 };
 
-
 /* ---------- 补丁I：每段位500人 + 500行排行榜(自己高亮/钉住) ---------- */
 var __aerI=arenaEnsureRoster;
 arenaEnsureRoster=function(a){
@@ -9382,8 +9305,6 @@ var arenaBoardScroll=function(el){
   else pin.style.display='none';
 };
 
-
-
 /* ---------- 补丁J：幽灵自动化对战可挑战我 ---------- */
 function arenaGhostVsMe(){
   const a=getArena();
@@ -9415,7 +9336,6 @@ function arenaAutoMatch(){
   if(Math.random()<0.15)arenaGhostVsMe();
   else arenaGhostMatch();
 }
-
 
 /* ---------- 补丁K：幽灵挑战我=常规对战(±x) + 排行榜分页 ---------- */
 arenaGhostVsMe=function(){
@@ -9503,8 +9423,6 @@ arenaStartRevenge=function(idx){
 };
 
 /* ④ 包装 renderArenaUI：在 #arena-revenge 渲染未复仇目标列表 + 逐个复仇按钮 */
-
-
 
 /* ⑤ 重写 arenaAutoMatch：概率按分钟计算，0:00-06:00 为 0.05/60，其余 0.30；时间戳存 state.arenaAutoLast */
 function arenaMinuteProb(date){const h=date.getHours();return (h>=0&&h<6)?(0.05/60):0.30;}
@@ -10433,7 +10351,6 @@ try{renderTasks();}catch(e){}
 
 /* ============ 0. 工具 ============ */
 
-
 /* ============ 1. 公告（简版，置顶） ============ */
 var ANN153='<div id="ann-153" style="padding:8px 10px;border-bottom:1px solid #f2f2f7;"><b style="color:#ff3b30;">v1.5.3「极限追猎」</b> <span style="font-size:11px;color:#8e8e93;">10.27–11.26</span><div style="font-size:12px;color:#6e6e73;line-height:1.6;margin-top:3px;">🏹 赛季限时玩法「铭影追猎者」开启：商店300积分/张悬赏令（每周限5张），24h内击杀40000HP铭影Boss（失败不亏，阶段奖照领；击杀必得直接升级+25%精英券）。💀 精英战48h·80000HP·自带20000血条，血条清空无奖励。四据点：🍺酒馆（开战/代币强化）·💱黑市（泰坦碎片换全玩法补给/指定遗物）·🗼高塔10层（每层奖品明示，遗物1→10号）·⚒️车间（集指定遗物逐级铸造💠/🏆/直接SP）。局内道具：🛡护盾(仅精英) ⚔处决 🔨破甲 ⚡电弧，每场最多持2、每场清零。伤害=任务EP(含天赋/乱斗/潜能/进化加成)×标签倍率(背600%/研450%/本350%)+EP压制(总EP×0.03/任务)；仅电弧按原始EP结算。平衡：善恶之交天使降至5%、分界60%。修复：杯赛奖励显示JSON、竞技刷新名单消失、杯赛UI重做。</div></div>';
 window.__injectAnn153=function(){try{var el=document.getElementById('ann-list');if(!el||document.getElementById('ann-153'))return;el.insertAdjacentHTML('afterbegin',ANN153);}catch(e){}};
@@ -10761,7 +10678,6 @@ window.completeTask=function(){__ct.apply(this,arguments);setTimeout(function(){
 })();
 </script>
 
-
 <script>
 /* 导航甲板：分组下拉 */
 var ND_GROUP={home:'home',daily:'日常',shop:'日常',warehouse:'日常',calendar:'日常',
@@ -10788,7 +10704,6 @@ document.addEventListener('click',function(e){
   ndCloseAll();
 });
 </script>
-
 
 <script>
 /* alert 应用内替身（查看器常静默吞原生对话框） */
@@ -11648,7 +11563,9 @@ function spPreviewTaskCard(t,isSP){
   const sample=(state.todayTasks&&state.todayTasks[0])||null,name=(sample&&sample.name)||'当前任务',up=getTagUp(t.id),current=getTag(t.id),baseMax=up.sp?Math.round(current.maxEp/1.25):current.maxEp,maxEp=isSP?(up.sp?current.maxEp:Math.round(current.maxEp*1.25)):baseMax;
   const req=isSP?Math.round(maxEp*.1):requiredBaseOf(sample||{},t),quality=sample?(parseInt(sample.qualityEp)||0):Math.round(maxEp*.6),theme=dlSPCardTheme(t),tc=getTagColor((typeof _origGetTag==='function'?_origGetTag(t.id):t).maxEp);
   let h='<div class="upx-sp-preview '+(isSP?'task-sp-'+theme+' dl-sp-inview':'base')+'" style="'+(isSP?upxSPVars(theme):'--upx-tc:'+tc+';--sp-core:#d8c9a8')+'">';
-  if(isSP)h+=dlSPFxHTML(theme);h+='<div class="upx-sp-card-content"><div class="upx-sp-card-head"><div class="upx-sp-card-name">'+upxEsc(name)+'</div><div class="upx-sp-card-chip">'+upxEsc((isSP?'★ ':'')+t.path.join(' · ')+(isSP?' · SP':'')+' · max '+maxEp)+'</div></div><div class="upx-sp-card-row"><div class="upx-sp-card-box">完成EP：<b>'+req+'</b></div><div class="upx-sp-card-box">质量EP：<b>'+quality+'</b></div><div class="upx-sp-card-done">✓ 已完成</div></div></div></div>';return h;
+  if(isSP)h+=dlSPFxHTML(theme);h+='<div class="upx-sp-card-content"><div class="upx-sp-card-head"><div class="upx-sp-card-name">'+upxEsc(name)+'</div><div class="upx-sp-card-chip">'+upxEsc((isSP?'★ ':'')+t.path.join(' · ')+(isSP?' · SP':'')+' · max '+maxEp)+'</div></div><div class="upx-sp-card-row"><div class="upx-sp-card-box">完成EP：<b>'+req+'</b></div><div class="upx-sp-card-box">质量EP：<b>'+quality+'</b></div><div class="upx-sp-card-done">✓ 已完成</div></div></div>';
+  if(isSP)h+='<div class="upx-tk-seal">SP<small>AWAKENED</small></div>';
+  return h+'</div>';
 }
 function upxSPRow(k,a,b){return '<div class="upx-sp-row"><span class="k">'+k+'</span><span class="v">'+a+(b===undefined?'':' → <em>'+b+'</em>')+'</span></div>';}
 function upxSPGainHtml(t,up){
@@ -11685,7 +11602,16 @@ function openSPPanel(sel){
 </script>
 
 <!-- ============ 竞技页暗金重构 · 最终覆盖层 v2.3.0036 ============ -->
+
 <style>
+/* 竞技页字体统一：正文/数字/按钮继承全局字体栈（等宽仅保留 kicker/角标/时间戳/日志） */
+#page-race .rc-stat b,#page-race .rc-vs-meta,#page-race .rc-vs-lbl,#page-race .rc-tkline,
+#page-race .rc-cand-mid,#page-race .rc-cand-x,#page-race .rc-cand .btn-accent,
+#page-race .rc-bhint,#page-race .rc-rmeta,#page-race .rc-rank,
+#page-race .rc-pg,#page-race .rc-divtab,#page-race .rc-tier-rw,
+#page-race .rc-revrow .d{font-family:inherit}
+#page-race .rc-kicker,#page-race .rc-sec-n,#page-race .rc-cand-badge,
+#page-race .rc-revrow .tm,#page-race .rc-logrow .tm,#page-race .rc-divsub{font-family:var(--mono)}
 #page-race [style*="color:#8e8e93"]{color:#a98d5f!important}
 #page-race [style*="color:#6e6e73"]{color:#c4ad83!important}
 #page-race [style*="color:#1d1d1f"]{color:#f0e6cf!important}
@@ -11832,9 +11758,6 @@ window.renderArenaUI=function(){
 #page-race .rc-row.me{background:linear-gradient(90deg,rgba(240,179,92,.18),rgba(240,179,92,.04))!important;box-shadow:inset 3px 0 0 var(--gold-l),0 0 16px -6px rgba(240,179,92,.55)!important;border-radius:8px}
 #page-race .rc-row.me .rc-rname{color:#f7dfae!important;font-weight:800}
 </style>
-
-
-
 
 <!-- ============ 覆盖层 0040：防频闪 + VS名牌 + 金卡防报错 + 任务条动画 ============ -->
 <style>
@@ -12205,21 +12128,6 @@ window.renderArenaUI=function(){
    }
   }catch(e){}
  };
- /* ---- 日历页头 ---- */
- var __cal=window.renderCalendar;
- if(typeof __cal==='function'){
-  window.renderCalendar=function(){
-   __cal();
-   try{
-    var pg=document.getElementById('page-calendar');
-    if(pg&&!document.getElementById('cl-head')){
-     var hd=document.createElement('div');hd.id='cl-head';hd.style.cssText='position:relative;z-index:1;margin-bottom:14px';
-     hd.innerHTML='<div class="cl-kicker">SCHEDULE · 全年赛事一览</div><div class="cl-title">📅 日历</div><div class="cl-sub">结算日 · 日杯 · 冲刺锦标赛 · 精研核心杯 · 月杯 · 双周杯 · 竞技赛季 · 大型赛事</div>';
-     pg.insertBefore(hd,pg.firstChild);
-    }
-   }catch(e){}
-  };
- }
 })();
 </script>
 
@@ -13507,9 +13415,6 @@ window.toggleMail=mv2Open;
 })();
 </script>
 
-
-
-
 <!-- ============ 覆盖层 00A1：成就树 v3 · 整体画布拖动 + 触屏捏合缩放 + 分支折叠（旧版成就UI已全部移除，本模块独占）============ -->
 <script>
 /* ============================================================
@@ -13533,7 +13438,6 @@ try{
  _b.style.cssText='position:fixed;right:10px;bottom:64px;z-index:9999;padding:4px 10px;border-radius:999px;font-size:11px;font-family:monospace;background:rgba(20,40,20,.92);color:#7ee2a0;border:1px solid #34c75966;pointer-events:none';
  document.body.appendChild(_b);
 }catch(e){}
-
 
 /* ---------- 自包含样式 ---------- */
 var CSS=[
@@ -14089,7 +13993,6 @@ window.renderPassUI=function(){
  try{updatePassBadge();}catch(e){}
 };
 
-
 /* ---------- 平滑展开/收起（details 高度动画） ---------- */
 function pvSmoothToggle(det){
  var sum=det.querySelector('summary');
@@ -14378,7 +14281,7 @@ function rankStrapSVG(lv,anim){
 /* ================= 样式 ================= */
 var CSS=[
 '/* ===== 页眉 v3.2 ===== */',
-'#app>div[style*="position:sticky"]{background:rgba(13,11,8,.92)!important;border-bottom:1px solid rgba(232,163,61,.3)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 4px 24px rgba(0,0,0,.45)}',
+'#app>div[style*="sticky"]{background:rgba(13,11,8,.92)!important;border-bottom:1px solid rgba(232,163,61,.3)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 4px 24px rgba(0,0,0,.45)}',
 '#rk-logo{width:33px;height:50px;display:inline-block;cursor:pointer;filter:drop-shadow(0 3px 6px rgba(0,0,0,.55));transition:transform .2s,filter .2s;flex:0 0 auto}',
 '#rk-logo:hover{transform:translateY(-2px);filter:drop-shadow(0 5px 10px rgba(240,179,92,.45))}',
 '#rk-logo.rk-pop{animation:rkPop .7s cubic-bezier(.2,1.5,.3,1)}',
@@ -14439,7 +14342,7 @@ var st=document.createElement('style');st.id='hd-v32-style';st.textContent=CSS;d
 var hdEl=null;
 function patchHeader(){
  if(hdEl)return true;
- hdEl=document.querySelector('#app>div[style*="position:sticky"]');
+ hdEl=document.querySelector('#app>div[style*="sticky"]');
  if(!hdEl)return false;
  hdEl.style.background='rgba(13,11,8,.92)';
  hdEl.style.borderBottom='1px solid rgba(232,163,61,.3)';
@@ -16474,7 +16377,6 @@ function __fuseSpFx(){
 try{__fuseSpFx();}catch(e){}
 })();
 
-
 /* ===== 军衔图鉴（按钮 + 独立对话框 · 同款面板风格）===== */
 (function(){
 'use strict';
@@ -16512,7 +16414,6 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){var o=document.querySelector('.rk-album-ov');if(o)o.remove();}
 });
 })();
-
 
 /* ===== EP 星堆爆分 · 接入主线（每日登记右侧常驻 + 结算确认动画）===== */
 (function(){
@@ -17316,7 +17217,7 @@ window.__promoBC1543=true;
 var BC='<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="#161210" stroke="#f0b35c" stroke-width="4"/><circle cx="32" cy="32" r="21.5" fill="none" stroke="rgba(240,179,92,.5)" stroke-width="1.6" stroke-dasharray="3 4"/><path d="M32 19 L43 23.5 V33.5 C43 40.5 38 44.5 32 47 C26 44.5 21 40.5 21 33.5 V23.5 Z" fill="#f0b35c"/><path d="M32 24.5 L38.5 27.3 V33.5 C38.5 37.8 35.6 40.7 32 42.3 C28.4 40.7 25.5 37.8 25.5 33.5 V27.3 Z" fill="#161210"/></svg>';
 
 /* ---------- 黑币经济 ---------- */
-function bcGet(){state.blackCoin=state.blackCoin||0;return state.blackCoin;}
+function bcGet(){state.blackCoin=state.blackCoin||0;return Math.round(state.blackCoin*100)/100;}
 function bcSync(){try{var n=document.getElementById('top-black-n');if(n)n.textContent=bcGet();var s=document.getElementById('shop-black-n');if(s)s.textContent=bcGet();}catch(e){}}
 function bcAdd(n){if(!n)return;state.blackCoin=bcGet()+n;saveState();bcSync();}
 function bcPay(n){if(bcGet()<n)return false;state.blackCoin-=n;saveState();bcSync();return true;}
@@ -17834,6 +17735,21 @@ var EXSORT=EX.slice().sort(function(a,b){return b.cost-a.cost});
 var EXCL_ID={ex16:16,ex17:17,ex18:18,ex19:19,ex20:20,ex21:21};
 
 /* ---------- 真实发放 ---------- */
+
+/* ---- up10 兑换异常：回收逻辑回滚（2026-11-20）----
+   核查结论：特惠兑换系统未留存任何兑换记录，无法区分是否真实兑换过，
+   故不做任何回收；此前误收的 19 个直接升级全额退回，补偿保留作歉意。 */
+try{
+ if(state.__up10fix&&!state.__up10fix3){
+  state.__up10fix3=true;
+  var __inv=state.inventory=state.inventory||{};
+  __inv.direct_up=(__inv.direct_up||0)+19;
+  state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];
+  state.mailbox.push({id:'up10_fix2',title:'🔧 回收回滚：直接升级已退还',body:'各位考生：<br><br>经核查，特惠兑换系统<b>没有留存兑换记录</b>，无法区分是否真实兑换过「直接升级×10」，此前的库存回收属误操作。<br><br>已将误收的 <b>19 个直接升级</b>全额退回仓库；此前的补偿（⚫黑币×3、🪙代币×150、🎰抽奖积分×40）保留作为歉意。<br><br>发放异常本身已修复，之后兑换按正确数量（10 个）到账。',items:{},claimed:true,read:false,createdAt:Date.now()});
+  saveState();
+ }
+}catch(e){}
+
 function grant(key,c){
   var inv=state.inventory;
   switch(key){
@@ -17845,7 +17761,7 @@ function grant(key,c){
     case 'core5': inv.sp_core=(inv.sp_core||0)+5*c; break;
     case 'theme': var _th=inv.theme_tianren||0;var _add=Math.min(c,Math.max(0,1-_th));inv.theme_tianren=_th+_add;if(c>_add){state.lotteryPoint=(state.lotteryPoint||0)+(c-_add)*80;} break;
     case 'ticket6': inv.draw_ticket=(inv.draw_ticket||0)+6*c; break;
-    case 'up10': inv.direct_up=(inv.direct_up||0)+10*c; break;
+    case 'up10': inv.direct_up=(inv.direct_up||0)+c; break;
     case 'ult': inv.ult_upgrade=(inv.ult_upgrade||0)+c; break;
     case 'golddie': inv.treasure_die_yellow=(inv.treasure_die_yellow||0)+c; break;
     case 'ticket5': inv.draw_ticket=(inv.draw_ticket||0)+5*c; break;
@@ -18763,7 +18679,6 @@ function xSanitizeBook(){
   }catch(e){return 0;}
 }
 
-
 /* ================= 经济学模型引擎 v1.5.6-e1 =================
    价值 = 稀有度基准 × 板块情绪 × 库存清算调节
    供应流量：基础 + 版本促销聚焦周(×5) + 周末杯赛(杯类×3/核心×4)
@@ -19108,7 +19023,6 @@ GOODS.forEach(function(g){
 /* 指导价（代币）= 黑币基准 × 实时汇率 × 需求因子 */
 function guideTK(g){var fund=(FIN.fund&&typeof FIN.fund[g.id]==='number')?FIN.fund[g.id]:g.baseBC;return fund*rateTK()*X.mkt[g.id].demand;}
 function goodOf(id){return GOODS.find(function(x){return x.id===id;});}
-
 
 var curTab='fx', curInst=null, payCur='bc', sellCur='bc', viewCur='bc', finCur='bc';
 var rowView={};   /* 每行独立计价币种 */
@@ -19961,7 +19875,6 @@ try{
 })();
 /* ================= v1.5.6 金融中心 END ================= */
 
-
 </script>
 <script>
 
@@ -19971,17 +19884,26 @@ try{
 if(window.__v2cuparena)return;window.__v2cuparena=true;
 try{['renderCupUI','renderCupV3','cvRollover','renderArenaUI','arenaAddEp','cvAccrue','arenaSettleWeek','arenaOfflineCatchup','cupWeekScore'].forEach(function(f){window[f]=function(){};});}catch(e){}
 function $(id){return document.getElementById(id);}
-function v2save(){try{saveState();}catch(e){}try{updateTopBar();}catch(e){}}
-function v2toast(t){try{toast(t);}catch(e){}}
-function v2fmt(n){return (Math.round(n*100)/100).toLocaleString('en-US');}
+function __RAW_v2save(){try{saveState();}catch(e){}try{updateTopBar();}catch(e){}}
+function v2save(){try{return __RAW_v2save.apply(this,arguments);}catch(err){__v2err('v2save',err);}}
+function __RAW_v2toast(t){try{toast(t);}catch(e){}}
+function v2toast(){try{return __RAW_v2toast.apply(this,arguments);}catch(err){__v2err('v2toast',err);}}
+function __RAW_v2fmt(n){return (Math.round(n*100)/100).toLocaleString('en-US');}
+function v2fmt(){try{return __RAW_v2fmt.apply(this,arguments);}catch(err){__v2err('v2fmt',err);}}
 var v2DAYS=['周日','周一','周二','周三','周四','周五','周六'];
 var v2now=function(){return new Date();};
-function v2dkey(d){d=d||v2now();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-function v2monday(d){d=d||v2now();var x=new Date(d);x.setDate(x.getDate()-((x.getDay()+6)%7));return x;}
-function v2wkey(){return v2dkey(v2monday());}
-function v2bikey(){var m=v2monday();var wk=Math.floor(m.getTime()/6048e5);return 'B'+(Math.floor(wk/2));}
-function v2hash(s){var x=2166136261;for(var i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619);}return x>>>0;}
-function v2pick(arr,seed){return arr[seed%arr.length];}
+function __RAW_v2dkey(d){d=d||v2now();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function v2dkey(){try{return __RAW_v2dkey.apply(this,arguments);}catch(err){__v2err('v2dkey',err);}}
+function __RAW_v2monday(d){d=d||v2now();var x=new Date(d);x.setDate(x.getDate()-((x.getDay()+6)%7));return x;}
+function v2monday(){try{return __RAW_v2monday.apply(this,arguments);}catch(err){__v2err('v2monday',err);}}
+function __RAW_v2wkey(){return v2dkey(v2monday());}
+function v2wkey(){try{return __RAW_v2wkey.apply(this,arguments);}catch(err){__v2err('v2wkey',err);}}
+function __RAW_v2bikey(){var m=v2monday();var wk=Math.floor(m.getTime()/6048e5);return 'B'+(Math.floor(wk/2));}
+function v2bikey(){try{return __RAW_v2bikey.apply(this,arguments);}catch(err){__v2err('v2bikey',err);}}
+function __RAW_v2hash(s){var x=2166136261;for(var i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619);}return x>>>0;}
+function v2hash(){try{return __RAW_v2hash.apply(this,arguments);}catch(err){__v2err('v2hash',err);}}
+function __RAW_v2pick(arr,seed){return arr[seed%arr.length];}
+function v2pick(){try{return __RAW_v2pick.apply(this,arguments);}catch(err){__v2err('v2pick',err);}}
 /* ---------- 数据 ---------- */
 try{if(typeof state.cupV3!=='object'||!state.cupV3)state.cupV3={energy:10};if(typeof state.cupV3.energy!=='number')state.cupV3.energy=(typeof getEnergy==='function')?(getEnergy().v||10):10;}catch(e){}
 var CV=(state.cupV2=state.cupV2||{wk:'',bk:'',dk:'',joined:{},ended:{},claimed:{},scores:{},trophies:0,tby:{},dayType:-1,dayType2:-1,yType:-1,extra:false,pactId:null});
@@ -19997,35 +19919,43 @@ var V2CUPS=[
  {id:'biwk',e:3,dur:'双周',names:['双周千里拉力','双周马拉松杯','双周拉力赛','千里征途杯'],n:'🚗 双周千里拉力',wOff:1,ths:[0,4000,12000,26000,48000,80000,124000,182000,256000,350000,468000],tiersD:['参与奖 25代币','第1段 500积分','第2段 75代币','第3段 材料包×10','第4段 属性抽取券×10','第5段 重铸券×5','第6段 💠×3','第7段 300代币','第8段 450代币','第9段 黑币×50','第10段 终极改装包×1']},
  {id:'fest',e:3,dur:'依版本通知',names:null,n:'🎊 节庆狂欢杯',wOff:0,ths:[],tiersD:[],dis:true}
 ];
-function v2cupName(c){if(!c.names)return c.n;var wk=Math.floor(v2monday().getTime()/6048e5);return c.n.slice(0,3)+c.names[(wk+(c.wOff||0))%c.names.length];}
-function v2pool(){
+function __RAW_v2cupName(c){if(!c.names)return c.n;var wk=Math.floor(v2monday().getTime()/6048e5);return c.n.slice(0,3)+c.names[(wk+(c.wOff||0))%c.names.length];}
+function v2cupName(){try{return __RAW_v2cupName.apply(this,arguments);}catch(err){__v2err('v2cupName',err);}}
+function __RAW_v2pool(){
  if(typeof cupParentPool==='function'){try{var pp=cupParentPool();if(pp&&pp.length)return pp;}catch(e){}}
  var pool=[];
  if(typeof TASK_TAGS!=='undefined'){TASK_TAGS.forEach(function(t){if(t.path&&t.path.length>=2){var par=t.path.slice(0,-1).join('·');if(pool.indexOf(par)<0)pool.push(par);}});}
  return pool.length?pool:['考研·公共课·英语二','考研·公共课·政治','考研·专业课·333教育综合','本科·公共课'];
 }
-function v2rollTags(n){
+function v2pool(){try{return __RAW_v2pool.apply(this,arguments);}catch(err){__v2err('v2pool',err);}}
+function __RAW_v2rollTags(n){
  var pool=v2pool().slice();
  var h=v2hash('VT'+v2wkey()+(n*7));
  for(var i=pool.length-1;i>0;i--){h=(Math.imul(h,31)+7)>>>0;var j=h%(i+1);var t=pool[i];pool[i]=pool[j];pool[j]=t;}
  return pool.slice(0,Math.min(n,pool.length));
 }
-function v2tagOf(id){
+function v2rollTags(){try{return __RAW_v2rollTags.apply(this,arguments);}catch(err){__v2err('v2rollTags',err);}}
+function __RAW_v2tagOf(id){
  var t=null;try{t=getTag(id);}catch(e){}
  if(!t)return null;
  if(typeof cupTagOf==='function'){try{var c=cupTagOf(id);if(c)return c;}catch(e){}}
  return t.path&&t.path.length>=2?t.path.slice(0,-1).join('·'):null;
 }
-function v2cupTags(c){
+function v2tagOf(){try{return __RAW_v2tagOf.apply(this,arguments);}catch(err){__v2err('v2tagOf',err);}}
+function __RAW_v2cupTags(c){
  if(c.id==='champ')return v2rollTags(1);
  if(c.id==='biwk')return v2rollTags(2);
  if(c.id==='sprint')return v2rollTags(5);
  return null;
 }
-function v2dayTiers(k){if(k===0)return['参与奖 300积分','第1段 300积分','第2段 800积分','第3段 1500积分','第4段 2400积分','第5段 3600积分'];var m=MAT_CUPS[k].replace(/杯$/,'');return['参与奖 300积分','第1段 '+m+'×3','第2段 '+m+'×8','第3段 '+m+'×10','第4段 '+m+'×15','第5段 '+m+'×18'];}
-function v2tiers(c){if(c.id==='day')return v2dayTiers(CV.dayType);if(c.id==='day2')return v2dayTiers(CV.dayType2);return c.tiersD;}
-function v2cupById(id){if(id==='day2')return{id:'day2',e:2,dur:'当日',n:MAT_ICONS[CV.dayType2]+' 加开·'+MAT_CUPS[CV.dayType2]};return V2CUPS.find(function(x){return x.id===id;});}
-function v2active(c){
+function v2cupTags(){try{return __RAW_v2cupTags.apply(this,arguments);}catch(err){__v2err('v2cupTags',err);}}
+function __RAW_v2dayTiers(k){if(k===0)return['参与奖 300积分','第1段 300积分','第2段 800积分','第3段 1500积分','第4段 2400积分','第5段 3600积分'];var m=MAT_CUPS[k].replace(/杯$/,'');return['参与奖 300积分','第1段 '+m+'×3','第2段 '+m+'×8','第3段 '+m+'×10','第4段 '+m+'×15','第5段 '+m+'×18'];}
+function v2dayTiers(){try{return __RAW_v2dayTiers.apply(this,arguments);}catch(err){__v2err('v2dayTiers',err);}}
+function __RAW_v2tiers(c){if(c.id==='day')return v2dayTiers(CV.dayType);if(c.id==='day2')return v2dayTiers(CV.dayType2);return c.tiersD;}
+function v2tiers(){try{return __RAW_v2tiers.apply(this,arguments);}catch(err){__v2err('v2tiers',err);}}
+function __RAW_v2cupById(id){if(id==='day2')return{id:'day2',e:2,dur:'当日',n:MAT_ICONS[CV.dayType2]+' 加开·'+MAT_CUPS[CV.dayType2],ths:[0,300,800,1500,2400,3600]};return V2CUPS.find(function(x){return x.id===id;});}
+function v2cupById(){try{return __RAW_v2cupById.apply(this,arguments);}catch(err){__v2err('v2cupById',err);}}
+function __RAW_v2active(c){
  var d=v2now().getDay();
  if(c.id==='day')return true;
  if(c.id==='day2')return CV.extra&&CV.dayType2>=0;
@@ -20036,14 +19966,16 @@ function v2active(c){
  if(c.id==='fest')return false;
  return true;
 }
-function v2rollDay(){
+function v2active(){try{return __RAW_v2active.apply(this,arguments);}catch(err){__v2err('v2active',err);}}
+function __RAW_v2rollDay(){
  var opts=[0,1,2,3,4].filter(function(i){return i!==CV.yType;});
  CV.dayType=opts[v2hash(v2dkey())%opts.length];CV.yType=CV.dayType;
  CV.extra=(v2hash('X'+v2dkey())%5)===0;
  if(CV.extra){var rest=opts.filter(function(i){return i!==CV.dayType;});CV.dayType2=rest[v2hash('Y'+v2dkey())%rest.length];}
  else CV.dayType2=-1;
 }
-function v2settleCup(id){try{
+function v2rollDay(){try{return __RAW_v2rollDay.apply(this,arguments);}catch(err){__v2err('v2rollDay',err);}}
+function __RAW_v2settleCup(id){try{
   var cup=v2cupById(id),score=v2cupScore(cup),granted=[];
   v2tiers(cup).forEach(function(t,i){var k=id+':'+i;if(!CV.claimed[k]&&score>=cup.ths[i]){CV.claimed[k]=true;granted.push(t);v2grant(t);}});
   if(granted.length){
@@ -20053,8 +19985,12 @@ function v2settleCup(id){try{
   }
   delete CV.joined[id];delete CV.ended[id];delete CV.scores[id];Object.keys(CV.claimed).forEach(function(k){if(k.indexOf(id+':')===0)delete CV.claimed[k];});
  }catch(e){}}
-function v2dismissSettle(id){try{if(CV.lastSettle)delete CV.lastSettle[id];v2save();v2renderCup(v2cupById(id));}catch(e){}}
-function v2rollCheck(){
+function v2settleCup(){try{return __RAW_v2settleCup.apply(this,arguments);}catch(err){__v2err('v2settleCup',err);}}
+function __RAW_v2dismissSettle(id){try{if(CV.lastSettle)delete CV.lastSettle[id];v2save();v2renderCup(v2cupById(id));}catch(e){}}
+function v2dismissSettle(){try{return __RAW_v2dismissSettle.apply(this,arguments);}catch(err){__v2err('v2dismissSettle',err);}}
+function __RAW_v2rollCheck(){
+ /* 竞技报名日管理：补 joinDate；报名日已过且当天未结算→报名失效 */
+ try{var __tds=v2now().getFullYear()+'/'+(v2now().getMonth()+1)+'/'+v2now().getDate();if(AV.joined&&!AV.placed&&!AV.joinDate)AV.joinDate=__tds;if(AV.joined&&!AV.placed&&AV.joinDate&&AV.joinDate<__tds&&!v2settledEpOn(AV.joinDate)){AV.joined=false;AV.joinDate=null;AV.carryUsed=false;}}catch(e){}
  /* 一次性清扫：joined+ended 并存=旧周期遗留（历史版本无重置机制），立即结算清账 */
  ['day','day2','sprint','champ','wkpt','core','biwk'].forEach(function(id){if(CV.ended[id])v2settleCup(id);});
  var wk=v2wkey(),bk=v2bikey(),dk=v2dkey();
@@ -20078,10 +20014,14 @@ function v2rollCheck(){
  if(AV.wk!==wk){
   AV.wk=wk;AV.preReg=false;AV.joined=false;AV.placed=false;AV.league=-1;AV.placeScore=0;AV.pts=1000;AV.placeEP=0;AV.revenge=[];AV.pendingG=null;AV.chDay='';AV.optDay='';
   v2initGhosts();
+  if(typeof AV.joinDate==='undefined')AV.joinDate=null;if(typeof AV.carryUsed!=='boolean')AV.carryUsed=false;
+function __v2err(fn,err){try{var box=document.getElementById('notif-container');if(!box)return;var c=document.createElement('div');c.className='notif-card';c.style.borderLeftColor='#ff3b30';c.innerHTML='<div class="notif-title">\ud83d\udd27 \u62a5\u9519@'+fn+'</div><div class="notif-body" style="word-break:break-all;">'+String((err&&err.message)||err).slice(0,200)+'<br>'+((((err&&err.stack)||'').split('\\n')[1])||'').slice(0,150)+'</div>';box.appendChild(c);requestAnimationFrame(function(){c.classList.add('show');});}catch(_){}}
+
  }
  v2rollSprintTag();
 }
-function v2rollSprintTag(){
+function v2rollCheck(){try{return __RAW_v2rollCheck.apply(this,arguments);}catch(err){__v2err('v2rollCheck',err);}}
+function __RAW_v2rollSprintTag(){
  try{
   if(!CV.joined['sprint']||CV.ended['sprint'])return;
   if(!state.tasksLocked)return;
@@ -20098,32 +20038,38 @@ function v2rollSprintTag(){
   try{toast('🏆 冲刺杯今日悬赏标签：'+pick+' · 完成≥1个得1杯，总EP≥60%得2杯、≥90%得3杯（日上限3）');}catch(e){}
  }catch(e){}
 }
+function v2rollSprintTag(){try{return __RAW_v2rollSprintTag.apply(this,arguments);}catch(err){__v2err('v2rollSprintTag',err);}}
 /* ---------- 今日任务得分 ---------- */
-function v2todayRaw(){var s=0;(state.todayTasks||[]).forEach(function(t){var e=parseFloat(t.baseEp);if(e>0)s+=e;});return s;}
-function v2bonus(ep,max){if(ep>=max)return 300;if(ep>=max*0.9)return 200;if(ep>=max*0.8)return 100;return 0;}
-function v2todayDetail(tags){
+function __RAW_v2todayRaw(){var s=0;(state.todayTasks||[]).forEach(function(t){var e=parseFloat(t.baseEp)||0;var q=parseFloat(t.qualityEp)||0;s+=e+q;});return s;}
+function v2todayRaw(){try{return __RAW_v2todayRaw.apply(this,arguments);}catch(err){__v2err('v2todayRaw',err);}}
+function __RAW_v2bonus(ep,max){if(ep>=max)return 300;if(ep>=max*0.9)return 200;if(ep>=max*0.8)return 100;return 0;}
+function v2bonus(){try{return __RAW_v2bonus.apply(this,arguments);}catch(err){__v2err('v2bonus',err);}}
+function __RAW_v2todayDetail(tags,list){
  var raw=0,bonus=0;
- (state.todayTasks||[]).forEach(function(t){
-  var e=parseFloat(t.baseEp);if(!(e>0))return;
+ (list||state.todayTasks||[]).forEach(function(t){
+  var e=parseFloat(t.baseEp)||0;var q=parseFloat(t.qualityEp)||0;if(!(e>0))return;
   var tg=null;try{tg=getTag(t.tagId);}catch(err){}
   if(tags){if(!tg||tags.indexOf(v2tagOf(t.tagId))<0)return;}
   var mx=tg?tg.maxEp:99999;
-  raw+=e;bonus+=v2bonus(e,mx);
+  raw+=e+q;bonus+=v2bonus(e,mx);
  });
  return{raw:raw,bonus:bonus,total:raw+bonus};
 }
-function v2cupScore(c){
+function v2todayDetail(){try{return __RAW_v2todayDetail.apply(this,arguments);}catch(err){__v2err('v2todayDetail',err);}}
+function __RAW_v2cupScore(c){
  if(c.id==='sprint')return CV.trophies;
  if(c.id==='day'||c.id==='day2'||c.id==='wkpt'||c.id==='core'){var det=v2todayDetail(v2cupTags(c));return (CV.scores[c.id]||0)+(CV.joined[c.id]?det.total:0);}
  return CV.scores[c.id]||0;
 }
-function v2claimable(c){
+function v2cupScore(){try{return __RAW_v2cupScore.apply(this,arguments);}catch(err){__v2err('v2cupScore',err);}}
+function __RAW_v2claimable(c){
  if(!(CV.ended[c.id]&&CV.joined[c.id]))return 0;
  var s=v2cupScore(c),n=0;
  v2tiers(c).forEach(function(t,i){if(!CV.claimed[c.id+':'+i]&&s>=c.ths[i])n++;});
  return n;
 }
-function v2grant(s){
+function v2claimable(){try{return __RAW_v2claimable.apply(this,arguments);}catch(err){__v2err('v2claimable',err);}}
+function __RAW_v2grant(s){
  if(!s||s==='-')return;
  var inv=state.inventory=state.inventory||{};var mats=migrateGlobalMats();
  s.split('+').forEach(function(tok){
@@ -20147,10 +20093,12 @@ function v2grant(s){
   else if(m=tok.match(/^(训练印记|冲刺奖章|全勤徽章|巅峰凭证)×(\d+)$/)){var k2={'训练印记':'mark','冲刺奖章':'medal','全勤徽章':'badge','巅峰凭证':'peak'}[m[1]];mats[k2]=(mats[k2]||0)+ +m[2];}
  });
 }
+function v2grant(){try{return __RAW_v2grant.apply(this,arguments);}catch(err){__v2err('v2grant',err);}}
 
 /* ---------- 协议 ---------- */
-function v2fmtD(dt){return dt.getFullYear()+'年'+(dt.getMonth()+1)+'月'+dt.getDate()+'日';}
-function v2durText(cup){
+function __RAW_v2fmtD(dt){return dt.getFullYear()+'年'+(dt.getMonth()+1)+'月'+dt.getDate()+'日';}
+function v2fmtD(){try{return __RAW_v2fmtD.apply(this,arguments);}catch(err){__v2err('v2fmtD',err);}}
+function __RAW_v2durText(cup){
  var now=new Date();var day=now.getDay();
  var mon=new Date(now);mon.setDate(now.getDate()-((day+6)%7));
  var fri=new Date(mon);fri.setDate(mon.getDate()+4);
@@ -20163,23 +20111,31 @@ function v2durText(cup){
  if(cup.id==='biwk')return v2fmtD(mon)+' 00:00 – '+v2fmtD(sun2)+' 23:59（双周）';
  return cup.dur;
 }
-function v2pactHtml(name,cup){
+function v2durText(){try{return __RAW_v2durText.apply(this,arguments);}catch(err){__v2err('v2durText',err);}}
+function __RAW_v2pactHtml(name,cup){
  var d=v2now();var ds=d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日';
  var tags=v2cupTags(cup);
- var tagTxt=tags?('本杯指定父标签：<b style="color:#ffd60a">'+tags.join('</b>、<b style="color:#ffd60a">')+'</b>。只有任务标签属于上述父标签（含全部子标签）时才计入成绩。'):'本杯<b style="color:#ffd60a">不限标签</b>，赛事期间全部任务均计入成绩。';
- var scoreTxt=cup.id==='sprint'?'按日结算：每日仅统计当日悬赏父标签下的任务完成情况，每日最多 3 杯、五天最多 15 杯；本周奖杯总数即成绩。':'成绩 = 赛事期间完成任务时填入的真实EP累计（1:1，不含任何加成）；单任务达标签上限 80%/90%/100% 分别 +100/+200/+300 满档奖励分（取最高档）。';
- return '<h3>《'+name+' · 参赛协议》</h3><p style="text-align:center;font-family:var(--mono);font-size:11px;color:#8d7c5f;letter-spacing:.26em;margin:-4px 0 14px">签 署 日 期 · '+ds+'</p>'
- +'<p><b style="color:#e6d3ac">一、赛事周期与报名</b><br>本杯赛持续时间：<b style="color:#ffd60a">'+v2durText(cup)+'</b>。报名需消耗竞技能量 ⚡'+cup.e+'，能量一经消耗不予退还；报名成功后开始计分。</p>'
- +'<p><b style="color:#e6d3ac">二、杯赛标签</b><br>'+tagTxt+'</p>'
- +'<p><b style="color:#e6d3ac">三、分数获取方式</b><br>'+scoreTxt+'天赋、乱斗、潜能、经验卡等加成一律不计入。</p>'
- +'<p><b style="color:#e6d3ac">四、奖励种类与规则</b><br>'+v2tiers(cup).join('；')+'。按最终成绩对应档位，<b style="color:#ffd60a">赛后一次性领取全部达成档位（含参与奖）</b>；赛中奖励锁定，逾期未领视为放弃。</p>'
- +'<p><b style="color:#e6d3ac">五、通用条款</b><br>1. 严禁作弊，违者取消成绩并收回奖励。2. 幽灵选手为系统模拟对手。3. 赛事名称与悬赏标签按周期轮换。4. 本协议最终解释权归赛事组委会所有。</p>'
- +'<p style="text-align:center;color:#f0d9a2">—— 请阅读全文并勾选下方确认框后签署 ——</p>';
+ var tagTxt=tags?('仅 '+tags.join(' / ')+' 及其子标签计入'):'不限标签，全部任务计入';
+ var scoreTxt=cup.id==='sprint'?'每日按悬赏标签结算，每日上限 3 杯、五天 15 杯':'EP 1:1 累计；单任务满档 80/90/100% 分别 +100/+200/+300';
+ return '<h3>《'+name+' · 参赛协议》</h3>'
+ +'<p class="pact-date">'+ds+'</p>'
+ +'<ul class="pact-list">'
+ +'<li><i>赛期</i><span>'+v2durText(cup)+'</span></li>'
+ +'<li><i>报名</i><span>消耗 ⚡'+cup.e+' 能量，消耗后不退还；报名即开始计分</span></li>'
+ +'<li><i>标签</i><span>'+tagTxt+'</span></li>'
+ +'<li><i>计分</i><span>'+scoreTxt+'；天赋、乱斗、潜能等加成不计入</span></li>'
+ +'<li><i>奖励</i><span>'+v2tiers(cup).length+' 档 · 赛后一次性领取全部达成档（含参与奖），赛中锁定，逾期视为放弃</span></li>'
+ +'</ul>'
+ +'<p class="pact-fine">严禁作弊 · 幽灵选手为系统模拟 · 赛事名称与标签按周期轮换 · 组委会保留最终解释权</p>';
 }
-function v2openPact(id){v2rollCheck();CV.pactId=id;var cup=v2cupById(id);$('v2pactTitle').textContent='🏆 '+v2cupName(cup)+' · 参赛协议';$('v2pactCost').textContent=cup.e;$('v2pactText').innerHTML=v2pactHtml(v2cupName(cup),cup);$('v2pactCk').checked=false;$('v2pactOk').disabled=true;$('v2pactOv').classList.add('show');}
-function v2closePact(){$('v2pactOv').classList.remove('show');}
-function v2pactToggle(){$('v2pactOk').disabled=!$('v2pactCk').checked;}
-function v2sign(){
+function v2pactHtml(){try{return __RAW_v2pactHtml.apply(this,arguments);}catch(err){__v2err('v2pactHtml',err);}}
+function __RAW_v2openPact(id){v2rollCheck();CV.pactId=id;var cup=v2cupById(id);$('v2pactTitle').textContent='🏆 '+v2cupName(cup)+' · 参赛协议';$('v2pactCost').textContent=cup.e;$('v2pactText').innerHTML=v2pactHtml(v2cupName(cup),cup);$('v2pactCk').checked=false;$('v2pactOk').disabled=true;$('v2pactOv').classList.add('show');}
+function v2openPact(){try{return __RAW_v2openPact.apply(this,arguments);}catch(err){__v2err('v2openPact',err);}}
+function __RAW_v2closePact(){$('v2pactOv').classList.remove('show');}
+function v2closePact(){try{return __RAW_v2closePact.apply(this,arguments);}catch(err){__v2err('v2closePact',err);}}
+function __RAW_v2pactToggle(){$('v2pactOk').disabled=!$('v2pactCk').checked;}
+function v2pactToggle(){try{return __RAW_v2pactToggle.apply(this,arguments);}catch(err){__v2err('v2pactToggle',err);}}
+function __RAW_v2sign(){
  var id=CV.pactId;if(!id)return;
  var cup=v2cupById(id);
  if(CV.joined[id]){v2closePact();v2toast('已报名');return;}
@@ -20191,17 +20147,19 @@ function v2sign(){
  try{if(typeof window.cupSignFX==='function')window.cupSignFX(v2cupName(cup),cup.e);}catch(e){}
  v2renderCup();v2save();
 }
-function v2claimAll(id){
+function v2sign(){try{return __RAW_v2sign.apply(this,arguments);}catch(err){__v2err('v2sign',err);}}
+function __RAW_v2claimAll(id){
  var cup=v2cupById(id);var score=v2cupScore(cup);var got=[];
  v2tiers(cup).forEach(function(t,i){var k=id+':'+i;if(!CV.claimed[k]&&score>=cup.ths[i]){CV.claimed[k]=true;got.push(t);v2grant(t);}});
  if(!got.length){v2toast('没有可领取的档位');return;}
  v2toast('一键全领 '+got.length+' 档：'+got.slice(0,3).join('、')+(got.length>3?' 等':''));
  v2renderCup();v2save();
 }
+function v2claimAll(){try{return __RAW_v2claimAll.apply(this,arguments);}catch(err){__v2err('v2claimAll',err);}}
 
 /* ---------- 杯赛渲染 ---------- */
 var CV_CUR='day';
-function v2renderCup(){
+function __RAW_v2renderCup(){
  v2rollCheck();
  var list=V2CUPS.filter(v2active);if(CV.extra&&CV.dayType2>=0)list.splice(1,0,v2cupById('day2'));
  if(!list.some(function(c){return c.id===CV_CUR;}))CV_CUR=list.length?list[0].id:'day';
@@ -20220,15 +20178,21 @@ function v2renderCup(){
   el.className=cls;
   var nm=(c.id==='day')?MAT_ICONS[CV.dayType]+' '+MAT_CUPS[CV.dayType]:(c.id==='day2'?MAT_ICONS[CV.dayType2]+' 加开·'+MAT_CUPS[CV.dayType2]:v2cupName(c));
   var stateTxt=c.dis?'未开放':(cn>0?('待领取 '+cn+' 档'):(CV.ended[c.id]?'已结束':(CV.joined[c.id]?'进行中':'未报名')));
-  el.innerHTML=nm+'<small>'+(c.id==='day'?'日杯 · ':c.id==='day2'?'加开 · ':'')+'⚡'+c.e+' · '+stateTxt+'</small>';
+  var sp=String(nm).split(' '),ico=(sp.length>1?sp[0]:'🏆'),nm2=(sp.length>1?sp.slice(1).join(' '):nm);
+  el.title=nm2+' · '+stateTxt;
+  var meta='⚡'+c.e;
+  if(cn>0)meta='<b class="ok">可领 '+cn+'</b>';
+  else if(c.dis)meta='<b class="off">未开放</b>';
+  else if(CV.joined[c.id])meta='⚡'+c.e+' <b class="ok">'+(CV.ended[c.id]?'已结束':'已报名')+'</b>';
+  el.innerHTML='<span class="cc-ico">'+ico+'</span><span class="cc-nm">'+nm2+'</span><span class="cc-mt">'+meta+'</span>';
   if(!c.dis)el.onclick=function(){CV_CUR=c.id;v2renderCup();};
   rail.appendChild(el);
  });
  var isSpr=cup.id==='sprint';
  var html='<div class="rc-sec">'+((cup.id==='day')?MAT_ICONS[CV.dayType]+' '+MAT_CUPS[CV.dayType]:cup.n)+' <span class="rc-sec-n">'+cup.dur+'</span></div>';
  html+='<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:10px">'
-  +'<div class="cup-big"><span>'+v2fmt(score)+'</span>'+(isSpr?' 杯':'')+'<small>'+(isSpr?'本周累计奖杯（每日最多 3 杯 · 五天 15 杯）':'本杯得分（填入EP 1:1 + 满档奖励）'+(tags?' · 仅本杯标签':' · 不限标签'))+'</small></div>'
-  +(joined?(ended?(claimN>0?'<span class="chip pill" style="border-color:rgba(255,214,10,.6);color:#ffd60a">已结束 · 待领取 '+claimN+' 档</span>':'<span class="chip pill">已结束 · 已领完</span>'):'<span class="chip pill" style="border-color:rgba(124,196,255,.4);color:#7cc4ff">进行中 · 已报名 ⚡'+cup.e+'</span>')
+  +'<div class="cup-big"><span>'+v2fmt(score)+'</span><small>'+(isSpr?'本周累计奖杯':(tags?'本杯得分 · 仅本杯标签':'本杯得分'))+'</small></div>'
+  +(joined?(ended?(claimN>0?'<span class="chip pill" style="border-color:rgba(255,214,10,.6);color:#ffd60a">可领 '+claimN+' 档</span>':'<span class="chip pill">已领完</span>'):'<span class="chip pill" style="border-color:rgba(124,196,255,.4);color:#7cc4ff">已报名</span>')
     :'<button class="btn gold" onclick="v2openPact(\''+cup.id+'\')">📜 报名 ⚡'+cup.e+'</button>')+'</div>';
  html+='<div class="cup-rest'+((!joined&&!ended)?' dimmed':'')+'">';
  if(isSpr){
@@ -20243,21 +20207,21 @@ function v2renderCup(){
    +'<span>📜 上期结算 · '+_ls.name+'：得分 '+v2fmt(_ls.score)+' · 结算 '+_ls.granted.length+' 档（'+_ls.granted.slice(0,2).join('、')+(_ls.granted.length>2?' 等':'')+'）已入账</span>'
    +'<button class="btn" style="padding:3px 10px;font-size:11px;flex-shrink:0" onclick="v2dismissSettle(\''+cup.id+'\')">✕</button></div>';
  }
- if(!joined&&!ended)html+='<div class="lockstrip">⚠️ 尚未报名：成绩不计入本杯。点击右上角「📜 报名」签署协议后开始计分。</div>';
- if(joined&&!ended)html+='<div class="lockstrip">🔒 赛中锁定：'+cup.dur+' 结束后可一键领取全部达成档位（含参与奖）。</div>';
+ if(!joined&&!ended)html+='<div class="lockstrip">报名后开始计分 · 赛中不可领取</div>';
  if(joined&&ended){
   var reached=v2tiers(cup).filter(function(t,i){return score>=cup.ths[i];}).length;
   html+='<div class="claimall"><span class="s">🏁 杯赛已结束 · 达成 '+reached+'/'+v2tiers(cup).length+' 档'+(claimN>0?' · 待领取 '+claimN+' 档':' · 已全部领取')+'</span>'+(claimN>0?'<button class="btn" onclick="v2claimAll(\''+cup.id+'\')">📥 一键全领</button>':'<span class="btn" style="opacity:.5">✓ 已领取</span>')+'</div>';
  }
  html+=v2tiers(cup).map(function(t,i){
   var th=cup.ths[i],reach=score>=th,cl=CV.claimed[cup.id+':'+i],locked=joined&&!ended;
-  return '<div class="tier'+(reach?' reach':'')+(locked?' locked':'')+'"><span class="ti">'+(i===0?'参与':('#'+i))+'</span><span class="tn">'+t+'</span><span class="bar"><i style="width:'+Math.min(100,(th===0?100:score/th*100))+'%"></i></span>'+(cl?'<span class="got">已领 ✓</span>':(locked?'<span class="lock">🔒 待结束</span>':(reach?'<span class="tv" style="color:#ffd60a">可领</span>':'<span class="tv">'+v2fmt(th)+'</span>')))+'</div>';
+  return '<div class="tier'+(reach?' reach':'')+(locked?' locked':'')+'"><span class="ti">'+(i===0?'参与':('#'+i))+'</span><span class="tn">'+t+'</span><span class="bar"><i style="width:'+Math.min(100,(th===0?100:score/th*100))+'%"></i></span>'+(cl?'<span class="got">已领 ✓</span>':(locked?'<span class="lock">🔒</span>':(reach?'<span class="tv" style="color:#ffd60a">可领</span>':'<span class="tv">'+v2fmt(th)+'</span>')))+'</div>';
  }).join('');
  html+='</div>';
  $('cupV2Panel').innerHTML=html;
  var en=$('v2enC');if(en)en.textContent=state.cupV3.energy||0;
 }
-function v2buyEnergy(){
+function v2renderCup(){try{return __RAW_v2renderCup.apply(this,arguments);}catch(err){__v2err('v2renderCup',err);}}
+function __RAW_v2buyEnergy(){
  v2rollCheck();
  var today=v2dkey();
  if(state.cupV3.energyBought===today){v2toast('今日已补充过能量');return;}
@@ -20265,6 +20229,7 @@ function v2buyEnergy(){
  state.tokens-=40;state.cupV3.energyBought=today;state.cupV3.energy=Math.min(10,(state.cupV3.energy||0)+5);
  v2toast('🪙 40 补 5 能量');v2save();v2renderCup();v2renderArena();
 }
+function v2buyEnergy(){try{return __RAW_v2buyEnergy.apply(this,arguments);}catch(err){__v2err('v2buyEnergy',err);}}
 
 /* ================= 竞技 v2 ================= */
 var V2LG=[
@@ -20284,17 +20249,24 @@ var V2REWARD=[
 ];
 var V2SURN=['张','李','王','赵','刘','陈','杨','黄','周','吴','徐','孙','马','朱','胡','郭','何','林','罗','郑'];
 var V2NICK=['夜航','灯下','卷王','刷题','早起','续杯','词霸','上岸','黑马','稳过','三点钟','打铃','满勤','错题本','框架','回放','二刷','蹲馆'];
-function v2ri(a,b){return Math.round(a+Math.random()*(b-a));}
-function v2mkname(){return V2SURN[Math.floor(Math.random()*V2SURN.length)]+'·'+V2NICK[Math.floor(Math.random()*V2NICK.length)]+v2ri(100,999);}
-function v2ghostEP(li){var L=V2LG[li];return li===4?v2ri(2201,3200):v2ri(L.min,L.max);}
-function v2initGhosts(){AV.ghosts=[];for(var li=0;li<5;li++){for(var i=0;i<120;i++){AV.ghosts.push({n:v2mkname(),li:li,pts:v2ri(920,1080),placeEP:v2ghostEP(li)});}}}
+function __RAW_v2ri(a,b){return Math.round(a+Math.random()*(b-a));}
+function v2ri(){try{return __RAW_v2ri.apply(this,arguments);}catch(err){__v2err('v2ri',err);}}
+function __RAW_v2mkname(){return V2SURN[Math.floor(Math.random()*V2SURN.length)]+'·'+V2NICK[Math.floor(Math.random()*V2NICK.length)]+v2ri(100,999);}
+function v2mkname(){try{return __RAW_v2mkname.apply(this,arguments);}catch(err){__v2err('v2mkname',err);}}
+function __RAW_v2ghostEP(li){var L=V2LG[li];return li===4?v2ri(2201,3200):v2ri(L.min,L.max);}
+function v2ghostEP(){try{return __RAW_v2ghostEP.apply(this,arguments);}catch(err){__v2err('v2ghostEP',err);}}
+function __RAW_v2initGhosts(){AV.ghosts=[];for(var li=0;li<5;li++){for(var i=0;i<120;i++){AV.ghosts.push({n:v2mkname(),li:li,pts:v2ri(920,1080),placeEP:v2ghostEP(li)});}}}
+function v2initGhosts(){try{return __RAW_v2initGhosts.apply(this,arguments);}catch(err){__v2err('v2initGhosts',err);}}
 if(!AV.ghosts.length)v2initGhosts();
-function v2leagueOf(ep){if(ep<600)return -1;for(var i=0;i<5;i++){if(ep>=V2LG[i].min&&ep<=V2LG[i].max)return i;}return 4;}
-function v2xOf(a,b){return Math.max(15,Math.min(50,Math.round(30+(b-a)/50)));}
-function v2bandOf(r){for(var i=0;i<V2BAND.length;i++){var hi=parseInt(V2BAND[i].split('-')[1]||V2BAND[i],10);if(r<=hi)return i;}return V2BAND.length-1;}
+function __RAW_v2leagueOf(ep){if(ep<600)return -1;for(var i=0;i<5;i++){if(ep>=V2LG[i].min&&ep<=V2LG[i].max)return i;}return 4;}
+function v2leagueOf(){try{return __RAW_v2leagueOf.apply(this,arguments);}catch(err){__v2err('v2leagueOf',err);}}
+function __RAW_v2xOf(a,b){return Math.max(15,Math.min(50,Math.round(30+(b-a)/50)));}
+function v2xOf(){try{return __RAW_v2xOf.apply(this,arguments);}catch(err){__v2err('v2xOf',err);}}
+function __RAW_v2bandOf(r){for(var i=0;i<V2BAND.length;i++){var hi=parseInt(V2BAND[i].split('-')[1]||V2BAND[i],10);if(r<=hi)return i;}return V2BAND.length-1;}
+function v2bandOf(){try{return __RAW_v2bandOf.apply(this,arguments);}catch(err){__v2err('v2bandOf',err);}}
 var AV_CUR='cand';
 var AV_CANDS=[],AV_CANDS_DAY='';
-function v2renderArena(){
+function __RAW_v2renderArena(){
  v2rollCheck();
  var pg=$('page-race');if(!pg)return;
  var D=v2now().getDay();
@@ -20325,12 +20297,12 @@ function v2renderArena(){
   var inner='';
   if(AV.placed){inner='<span class="m">已定级：'+V2LG[AV.league].n+' · '+v2fmt(AV.placeScore)+' EP</span><button class="btn" onclick="v2showLg()">🏅 查看段位</button>';}
   else if(!AV.joined){inner='<button class="btn gold" onclick="v2join()">📝 报名（今日定级赛）</button>';}
-  else{inner='<button class="btn gold" onclick="v2place()"'+(!settled?' disabled':'')+'>🏁 定级（取今日结算EP）</button>';}
-  b.innerHTML='<div class="card"><div class="rc-sec">🏁 周一 · 定级日<span class="rc-sec-n">填入EP 1:1 · 无120分钟赛制</span></div><div class="row"><span class="n">'+(AV.preReg?'已预报名，自动参加定级。':'未预报名：需先报名，再以今天结算的填入EP（1:1）定级。')+'</span>'+inner+'</div></div>';
+  else{inner='<span class="chip pill" style="border-color:rgba(124,196,255,.4);color:#7cc4ff">结算后自动入段</span>';}
+  b.innerHTML='<div class="card"><div class="rc-sec">🏁 周一 · 定级日<span class="rc-sec-n">填入EP 1:1 · 无120分钟赛制</span></div><div class="row"><span class="n">'+(AV.preReg?'已预报名，自动参加定级。':'未预报名：先报名，今天结算后自动入段（完成+质量EP）')+'</span>'+inner+'</div></div>';
  }else{
   if(!AV.placed){
-   var regBtns=(AV.joined?'':'<button class="btn gold" onclick="v2join()">📝 报名今日定级</button>')+'<button class="btn gold" onclick="v2place()"'+(!settled?' disabled':'')+'>🏁 定级（取今日结算EP）</button>';
-   b.innerHTML='<div class="card"><div class="rc-sec">🔁 再次报名定级<span class="rc-sec-n">未入段 · 每日可重复报名直至达到 600</span></div><div class="row"><span class="n">本周尚未入段'+(AV.placeScore?('（上次定级 '+v2fmt(AV.placeScore)+' EP < 600）'):'')+'：每天可再次报名，以当天结算的填入EP重新定级，达到 600 即锁定本周联赛。</span>'+regBtns+'</div></div>';
+   var regBtns=(AV.joined?'':'<button class="btn gold" onclick="v2join()">📝 报名今日定级</button>')+'<span class="chip pill" style="border-color:rgba(124,196,255,.4);color:#7cc4ff">结算后自动入段</span>';
+   b.innerHTML='<div class="card"><div class="rc-sec">🔁 再次报名定级<span class="rc-sec-n">未入段 · 报名后当天结算自动入段，未满600顺延明日</span></div><div class="row"><span class="n">本周尚未入段'+(AV.placeScore?('（上次定级 '+v2fmt(AV.placeScore)+' EP < 600）'):'')+'：报名后无需操作：当天结算完毕自动定级入段；未满 600 自动顺延至明天；报名当天未结算则报名失效</span>'+regBtns+'</div></div>';
   }else{
    v2renderCands(b);
    v2renderDefense(b);
@@ -20338,10 +20310,13 @@ function v2renderArena(){
   }
  }
 }
+function v2renderArena(){try{return __RAW_v2renderArena.apply(this,arguments);}catch(err){__v2err('v2renderArena',err);}}
 
-function v2todaySettled(){return state.v2settledDay===v2dkey();}
-function v2ghostDaily(g){var L=V2LG[g.li];var lo=Math.round(L.min*0.8);var hi=g.li===4?3400:Math.round(L.max*1.15);return Math.max(lo,Math.min(hi,Math.round(g.placeEP*(0.75+Math.random()*0.5))));}
-function v2renderCands(b){
+function __RAW_v2todaySettled(){return state.v2settledDay===v2dkey();}
+function v2todaySettled(){try{return __RAW_v2todaySettled.apply(this,arguments);}catch(err){__v2err('v2todaySettled',err);}}
+function __RAW_v2ghostDaily(g){var L=V2LG[g.li];var lo=Math.round(L.min*0.8);var hi=g.li===4?3400:Math.round(L.max*1.15);return Math.max(lo,Math.min(hi,Math.round(g.placeEP*(0.75+Math.random()*0.5))));}
+function v2ghostDaily(){try{return __RAW_v2ghostDaily.apply(this,arguments);}catch(err){__v2err('v2ghostDaily',err);}}
+function __RAW_v2renderCands(b){
  var li=AV.league;
  if(AV_CANDS_DAY!==v2dkey()){AV_CANDS=[];var pool=AV.ghosts.filter(function(g){return g.li===li;});for(var i=0;i<5;i++)AV_CANDS.push(pool[Math.floor(Math.random()*pool.length)]);AV_CANDS_DAY=v2dkey();}
  var settled=v2todaySettled();
@@ -20357,7 +20332,8 @@ function v2renderCands(b){
  html+='</div></div>';
  b.innerHTML+=html;
 }
-function v2renderDefense(b){
+function v2renderCands(){try{return __RAW_v2renderCands.apply(this,arguments);}catch(err){__v2err('v2renderCands',err);}}
+function __RAW_v2renderDefense(b){
  var settled=v2todaySettled();
  var html='<div class="card"><div class="rc-sec">🛡️ 防御 · 优化与复仇<span class="rc-sec-n">被挑战比的是你的「定级赛EP」基准</span></div>';
  html+='<div class="row"><span class="n">随机模拟一次「幽灵挑战你」：对方以当日EP攻你的定级基准，高者赢（±x 流转）</span><button class="btn" onclick="v2defense()">🛡️ 模拟幽灵来袭</button></div>';
@@ -20371,19 +20347,66 @@ function v2renderDefense(b){
  html+='<div class="hint">规则：挑战/被挑战一律以<b>定级赛EP</b>为你的基准——发起挑战用今日真实EP攻对方当日EP；被人挑战时对方当日EP攻你的基准；防御优化只能抬基准、不改本周段位。</div></div>';
  b.innerHTML+=html;
 }
-function v2preReg(){AV.preReg=true;AV.joined=true;v2toast('预报名成功，周一自动定级');v2renderArena();v2save();}
-function v2join(){AV.joined=true;v2toast('报名成功，结算后即可定级');v2renderArena();v2save();}
+function v2renderDefense(){try{return __RAW_v2renderDefense.apply(this,arguments);}catch(err){__v2err('v2renderDefense',err);}}
+function __RAW_v2preReg(){AV.preReg=true;AV.joined=true;AV.joinDate=null;AV.carryUsed=false;v2toast('预报名成功：周一结算后即可定级');v2renderArena();v2save();}
+function v2preReg(){try{return __RAW_v2preReg.apply(this,arguments);}catch(err){__v2err('v2preReg',err);}}
+function __RAW_v2join(){AV.joined=true;AV.joinDate=v2slash();AV.carryUsed=false;v2toast('报名成功：今天结算后即可定级（读取完成+质量EP）');v2renderArena();v2save();}
+function v2join(){try{return __RAW_v2join.apply(this,arguments);}catch(err){__v2err('v2join',err);}}
 var AV_PFX_T=null;
-function v2place(){
- if(!AV.joined){v2toast('请先完成本周报名');return;}
- if(!v2todaySettled()){v2toast('请先结算今日');return;}
- var ep=v2todayRaw();
+function __RAW_v2slash(d){d=d||v2now();return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();}
+function v2slash(){try{return __RAW_v2slash.apply(this,arguments);}catch(err){__v2err('v2slash',err);}}
+function __RAW_v2settledEpOn(ds){
+ var h=state.dailyHistory||[];
+ for(var i=h.length-1;i>=0;i--){
+  if(h[i].date!==ds)continue;
+  var list=h[i].tasks||[];if(!list.length)continue;
+  var s=0;list.forEach(function(t){s+=(parseFloat(t.baseEp)||0)+(parseFloat(t.qualityEp)||0);});
+  return{ep:s,label:String(ds)+' 结算'};
+ }
+ return null;
+}
+function v2settledEpOn(){try{return __RAW_v2settledEpOn.apply(this,arguments);}catch(err){__v2err('v2settledEpOn',err);}}
+function v2autoPlace(){
+ if(!AV.joined||AV.placed)return;
+ var todayDs=v2slash();
+ if(!AV.joinDate)AV.joinDate=todayDs;
+ if(AV.joinDate<todayDs&&!v2settledEpOn(AV.joinDate)){AV.joined=false;AV.joinDate=null;AV.carryUsed=false;v2save();try{toast('报名已失效：报名当天未结算，请重新报名');}catch(e){}v2renderArena();return;}
+ if(state.v2settledDay!==v2dkey())return;
+ var info=v2settledEpOn(AV.joinDate);
+ if(!info)return;
+ var ep=info.ep;
+ AV.placeScore=ep;AV.league=v2leagueOf(ep);AV.placed=false;
+ if(AV.league>=0){
+  AV.placed=true;AV.pts=1000;AV.placeEP=ep;AV.fxThemeLock=true;v2save();v2playFx();
+  try{toast('⚔️ 自动入段：'+V2LG[AV.league].n+' · 定级EP '+v2fmt(ep)+'（'+info.label+'）');}catch(e){}
+ }else if(!AV.carryUsed){
+  var tm=new Date();tm.setDate(tm.getDate()+1);
+  AV.carryUsed=true;AV.joinDate=v2slash(tm);v2save();
+  try{toast('未入段：定级EP '+v2fmt(ep)+'（需≥600，差 '+v2fmt(Math.max(0,600-ep))+'）· 报名顺延至明天，明天结算后自动再判');}catch(e){}
+ }else{
+  AV.joined=false;AV.joinDate=null;AV.carryUsed=false;v2save();
+  try{toast('未入段：定级EP '+v2fmt(ep)+' · 报名资格已用完，请重新报名');}catch(e){}
+ }
+ v2renderArena();
+}
+function __RAW_v2place(){
+ if(!AV.joined){v2toast('请先报名');return;}
+ var todayDs=v2slash();
+ if(!AV.joinDate){AV.joinDate=todayDs;AV.carryUsed=false;}
+ var info=v2settledEpOn(AV.joinDate);
+ if(!info){
+  if(AV.joinDate<todayDs){var od=AV.joinDate;AV.joined=false;AV.joinDate=null;AV.carryUsed=false;v2save();v2toast('报名已失效：报名当天（'+od+'）未结算，请重新报名');v2renderArena();return;}
+  v2toast('今天结算后即可定级（读取今天完成+质量EP）');return;
+ }
+ var ep=info.ep;
  AV.placeScore=ep;AV.league=v2leagueOf(ep);AV.placed=false;
  if(AV.league>=0){AV.placed=true;AV.pts=1000;AV.placeEP=ep;AV.fxThemeLock=true;v2playFx();}
- else{v2toast('未达 600，未入段：明天可再次报名定级');}
+ else if(!AV.carryUsed){AV.carryUsed=true;v2toast('未入段：定级EP '+v2fmt(ep)+'（需≥600，差 '+v2fmt(Math.max(0,600-ep))+'）· '+info.label+' · 报名资格保留至明天，明天结算后可再定级');}
+ else{AV.joined=false;AV.joinDate=null;AV.carryUsed=false;v2toast('未入段：定级EP '+v2fmt(ep)+' · 报名资格已用完，请重新报名');}
  v2renderArena();v2save();
 }
-function v2playFx(){
+function v2place(){try{return __RAW_v2place.apply(this,arguments);}catch(err){__v2err('v2place',err);}}
+function __RAW_v2playFx(){
  var L=V2LG[AV.league];var pg=$('page-race');
  $('v2pfxOv').innerHTML='<div class="pfx-rays"></div><div class="pfx-box'+(AV.league===4?' elite':'')+'">'
   +'<div class="pfx-kick">PLACEMENT COMPLETE · 定级成功</div>'
@@ -20395,13 +20418,15 @@ function v2playFx(){
  AV.pfxBorn=Date.now();
  AV_PFX_T=setTimeout(v2endFx,2600);
 }
-function v2endFx(){
+function v2playFx(){try{return __RAW_v2playFx.apply(this,arguments);}catch(err){__v2err('v2playFx',err);}}
+function __RAW_v2endFx(){
  if(AV.pfxBorn&&Date.now()-AV.pfxBorn<700)return;
  if(AV_PFX_T){clearTimeout(AV_PFX_T);AV_PFX_T=null;}
  $('v2pfxOv').classList.remove('show');
  v2badgeArrive();
 }
-function v2badgeArrive(){
+function v2endFx(){try{return __RAW_v2endFx.apply(this,arguments);}catch(err){__v2err('v2endFx',err);}}
+function __RAW_v2badgeArrive(){
  var slot=$('v2lgBadgeSlot');if(!slot||!slot.querySelector)return;
  var badge=slot.querySelector('.lgbadge');if(!badge)return;
  if(!badge.animate||!badge.getBoundingClientRect)return;
@@ -20426,7 +20451,8 @@ function v2badgeArrive(){
   v2sweep();
  },500);
 }
-function v2sweep(){
+function v2badgeArrive(){try{return __RAW_v2badgeArrive.apply(this,arguments);}catch(err){__v2err('v2badgeArrive',err);}}
+function __RAW_v2sweep(){
  AV.fxThemeLock=false;
  v2renderArena();
  var slot=$('v2lgBadgeSlot');
@@ -20440,8 +20466,9 @@ function v2sweep(){
  if(veil.animate)veil.animate([{transform:'translate(-50%,-50%) scale(0)',opacity:.95},{transform:'translate(-50%,-50%) scale(1)',opacity:0}],{duration:900,easing:'cubic-bezier(.25,.7,.3,1)'});
  setTimeout(function(){if(veil.remove)veil.remove();},940);
 }
+function v2sweep(){try{return __RAW_v2sweep.apply(this,arguments);}catch(err){__v2err('v2sweep',err);}}
 
-function v2showLg(){
+function __RAW_v2showLg(){
  var box=document.querySelector('#v2lgOv .lgbox');if(box)box.classList.toggle('elite',AV.league===4);
  $('v2lgTitle').textContent=AV.league>=0?V2LG[AV.league].n:'未入段';
  $('v2lgShields').innerHTML=V2LG.map(function(L,i){
@@ -20453,8 +20480,10 @@ function v2showLg(){
   :('您的定级成绩：🏷 <b>'+v2fmt(AV.placeScore)+'</b>　→　未达 600，本周<b style="color:#ff8a80">未入段</b>');
  $('v2lgOv').classList.add('show');
 }
-function v2closeLg(){$('v2lgOv').classList.remove('show');}
-function v2challenge(idx){
+function v2showLg(){try{return __RAW_v2showLg.apply(this,arguments);}catch(err){__v2err('v2showLg',err);}}
+function __RAW_v2closeLg(){$('v2lgOv').classList.remove('show');}
+function v2closeLg(){try{return __RAW_v2closeLg.apply(this,arguments);}catch(err){__v2err('v2closeLg',err);}}
+function __RAW_v2challenge(idx){
  if(AV.chDay===v2dkey()){v2toast('今天已发起过挑战');return;}
  if(v2todaySettled()){v2toast('需先发起挑战再结算：今日已结算，请明天再挑战');return;}
  var g=AV_CANDS[idx];
@@ -20462,7 +20491,8 @@ function v2challenge(idx){
  v2toast('挑战已发起：结算今日后判定胜负');
  v2renderArena();v2save();
 }
-function v2resolveChallenge(){
+function v2challenge(){try{return __RAW_v2challenge.apply(this,arguments);}catch(err){__v2err('v2challenge',err);}}
+function __RAW_v2resolveChallenge(){
  if(!AV.pendingG)return;
  var g=null;
  for(var i=0;i<AV.ghosts.length;i++){if(AV.ghosts[i].n===AV.pendingG){g=AV.ghosts[i];break;}}
@@ -20472,7 +20502,8 @@ function v2resolveChallenge(){
  if(my>=gd){AV.pts+=x;g.pts-=Math.round(x/2);v2toast('⚔️ 挑战胜利 +'+x+' 分');}
  else{AV.pts-=x;g.pts+=Math.round(x/2);v2toast('⚔️ 挑战失败 -'+x+' 分');}
 }
-function v2defense(){
+function v2resolveChallenge(){try{return __RAW_v2resolveChallenge.apply(this,arguments);}catch(err){__v2err('v2resolveChallenge',err);}}
+function __RAW_v2defense(){
  if(!(AV.placed&&AV.league>=0)){v2toast('未入段无法被挑战');return;}
  var pool=AV.ghosts.filter(function(g){return g.li===AV.league;});
  var g=pool[Math.floor(Math.random()*pool.length)];
@@ -20481,7 +20512,8 @@ function v2defense(){
  else{AV.pts-=x;g.pts+=Math.round(x/2);AV.revenge.push({n:g.n,x:x,pe:gd});v2toast('🛡️ 防御失败 -'+x+' 分，可复仇');}
  v2renderArena();v2save();
 }
-function v2optimize(){
+function v2defense(){try{return __RAW_v2defense.apply(this,arguments);}catch(err){__v2err('v2defense',err);}}
+function __RAW_v2optimize(){
  if(!v2todaySettled()){v2toast('请先结算今日');return;}
  if(AV.optDay===v2dkey()){v2toast('今日已进行过防御优化');return;}
  AV.optDay=v2dkey();
@@ -20490,14 +20522,16 @@ function v2optimize(){
  else{v2toast('未超过当前基准，优化失败');}
  v2renderArena();v2save();
 }
-function v2revenge(idx){
+function v2optimize(){try{return __RAW_v2optimize.apply(this,arguments);}catch(err){__v2err('v2optimize',err);}}
+function __RAW_v2revenge(idx){
  var r=AV.revenge[idx];if(!r)return;
  if(!v2todaySettled()){v2toast('请先结算今日');return;}
  if(v2todayRaw()>=r.pe){AV.pts+=r.x;v2toast('⚔️ 复仇成功 +'+r.x+' 分');AV.revenge.splice(idx,1);}
  else{v2toast('复仇失败，只耗票');}
  v2renderArena();v2save();
 }
-function v2settle(){
+function v2revenge(){try{return __RAW_v2revenge.apply(this,arguments);}catch(err){__v2err('v2revenge',err);}}
+function __RAW_v2settle(){
  if(!(AV.placed&&AV.league>=0)){v2toast('未入段无赛季结算');return;}
  var li=AV.league;
  var board=AV.ghosts.filter(function(g){return g.li===li;}).sort(function(a,b){return b.pts-a.pts;});
@@ -20510,9 +20544,62 @@ function v2settle(){
  v2initGhosts();
  v2renderArena();v2save();
 }
+function v2settle(){try{return __RAW_v2settle.apply(this,arguments);}catch(err){__v2err('v2settle',err);}}
 
 /* ================= 每日结算钩子 ================= */
-function v2Tick(){
+function __RAW_v2Backfill1119(){
+ try{
+  if(CV.__bkfillv2)return;
+  var h=state.dailyHistory||[];
+  CV.__banked=CV.__banked||{};
+  var mon=v2monday();
+  var fri=new Date(mon);fri.setDate(mon.getDate()+4);fri.setHours(23,59,59,999);
+  var sun=new Date(mon);sun.setDate(mon.getDate()+6);sun.setHours(23,59,59,999);
+  var sun2=new Date(mon);sun2.setDate(mon.getDate()+13);sun2.setHours(23,59,59,999);
+  var todayDs=v2now().getFullYear()+'/'+(v2now().getMonth()+1)+'/'+v2now().getDate();
+  function inR(ds,a,b){var t=new Date(String(ds).replace(/\//g,'-'));return t>=a&&t<=b;}
+  var dirty=false;
+  function bSc(id,tags,list,ds){var k=id+'|'+ds;if(CV.__banked[k])return;CV.scores[id]=(CV.scores[id]||0)+v2todayDetail(tags,list).total;CV.__banked[k]=1;dirty=true;}
+  h.forEach(function(en){
+   var ds=en.date,list=en.tasks;
+   if(!list||!list.length)return;
+   ['day','day2'].forEach(function(id){if(ds===todayDs&&CV.joined[id]&&!CV.ended[id])bSc(id,v2cupTags(v2cupById(id)),list,ds);});
+   ['wkpt','core'].forEach(function(id){if(CV.joined[id]&&!CV.ended[id]&&inR(ds,fri,sun))bSc(id,v2cupTags(v2cupById(id)),list,ds);});
+   if(CV.joined.champ&&!CV.ended.champ&&inR(ds,mon,sun))bSc('champ',v2cupTags(v2cupById('champ')),list,ds);
+   if(CV.joined.biwk&&!CV.ended.biwk&&inR(ds,mon,sun2))bSc('biwk',v2cupTags(v2cupById('biwk')),list,ds);
+   if(CV.joined.sprint&&!CV.ended.sprint&&inR(ds,mon,fri)){
+    var k='sprint|'+ds;
+    if(!CV.__banked[k]){
+     var st=CV.sprintTag,tro=0;
+     if(st&&st.tag){
+      var sum=0,tot=0,done1=false;
+      list.forEach(function(t){
+       if(!t.tagId)return;
+       try{
+        var tg=getTag(t.tagId);if(!tg||!tg.path)return;
+        var pp=tg.path.join('·').replace(/\s+/g,''),tt=String(st.tag).replace(/\s+/g,'');
+        if(!(pp===tt||pp.indexOf(tt)===0||tt.indexOf(pp)===0))return;
+        tot+=tg.maxEp;
+        if(parseFloat(t.baseEp)>0){sum+=parseFloat(t.baseEp);done1=true;}
+       }catch(e){}
+      });
+      if(done1){var rate=tot>0?sum/tot:0;tro=rate>=0.9?3:rate>=0.6?2:1;}
+     }
+     var dd=new Date(String(ds).replace(/\//g,'-')).getDay();
+     CV.tby=CV.tby||{};
+     if(!CV.tby[dd]){CV.tby[dd]=Math.min(3,tro);dirty=true;}
+     CV.__banked[k]=1;
+    }
+   }
+  });
+  if(dirty){CV.trophies=Object.keys(CV.tby||{}).reduce(function(s,k){return s+CV.tby[k];},0);try{toast('📥 杯赛记账修复：历史结算成绩已补入账');}catch(e){}}
+  CV.__bkfillv2=true;
+  v2save();
+ }catch(e){}
+}
+function v2Backfill1119(){try{return __RAW_v2Backfill1119.apply(this,arguments);}catch(err){__v2err('v2Backfill1119',err);}}
+
+function __RAW_v2Tick(){
  try{
   v2rollCheck();
   var today=v2dkey();
@@ -20520,11 +20607,13 @@ function v2Tick(){
   state.v2settledDay=today;
   state.cupV3.energy=Math.min(10,(state.cupV3.energy||0)+3);
   var d=v2now().getDay();
+  var __dk=v2now().getFullYear()+'/'+(v2now().getMonth()+1)+'/'+v2now().getDate();
+  CV.__banked=CV.__banked||{};
   ['day','day2','wkpt','core'].forEach(function(id){
-   if(CV.joined[id]&&!CV.ended[id]){var cup=v2cupById(id);CV.scores[id]=(CV.scores[id]||0)+v2todayDetail(v2cupTags(cup)).total;}
+   if(CV.joined[id]&&!CV.ended[id]){var cup=v2cupById(id);CV.scores[id]=(CV.scores[id]||0)+v2todayDetail(v2cupTags(cup)).total;CV.__banked[id+'|'+__dk]=1;}
   });
-  if(CV.joined.champ&&!CV.ended.champ)CV.scores.champ=(CV.scores.champ||0)+v2todayDetail(v2cupTags(v2cupById('champ'))).total;
-  if(CV.joined.biwk&&!CV.ended.biwk)CV.scores.biwk=(CV.scores.biwk||0)+v2todayDetail(v2cupTags(v2cupById('biwk'))).total;
+  if(CV.joined.champ&&!CV.ended.champ){CV.scores.champ=(CV.scores.champ||0)+v2todayDetail(v2cupTags(v2cupById('champ'))).total;CV.__banked['champ|'+__dk]=1;}
+  if(CV.joined.biwk&&!CV.ended.biwk){CV.scores.biwk=(CV.scores.biwk||0)+v2todayDetail(v2cupTags(v2cupById('biwk'))).total;CV.__banked['biwk|'+__dk]=1;}
   if(CV.joined.sprint&&!CV.ended.sprint&&d>=1&&d<=5){
    var st=CV.sprintTag,tro=0;
    if(st&&st.tag){
@@ -20542,12 +20631,14 @@ function v2Tick(){
     if(done1){var rate=tot>0?sum/tot:0;tro=rate>=0.9?3:rate>=0.6?2:1;}
    }
    CV.tby[d]=Math.min(3,tro);
+   CV.__banked['sprint|'+__dk]=1;
    CV.trophies=Object.keys(CV.tby).reduce(function(s,k){return s+CV.tby[k];},0);
   }
   v2resolveChallenge();
   v2save();
  }catch(e){}
 }
+function v2Tick(){try{return __RAW_v2Tick.apply(this,arguments);}catch(err){__v2err('v2Tick',err);}}
 try{
  var __v2ssr=window.__ssShowReport;
  window.__ssShowReport=function(b,a){var r=__v2ssr?__v2ssr.apply(this,arguments):undefined;try{v2Tick();}catch(e){}return r;};
@@ -20563,13 +20654,13 @@ var V2_RACE_HTML='<header class="rc-head"><div><div class="rc-kicker">SHADOW ARE
 +'<span class="chip">🎯 挑战基准 <b id="v2baseChip">-</b></span>'
 +'<span class="chip">复仇名单 <b id="v2revChip">0</b></span>'
 +'</div></div><div id="v2arenaBody"></div>';
-var V2_CUP_HTML='<header class="cv3-head"><div><div class="cv3-kicker">CHAMPIONSHIP · 杯赛中心</div><div class="cv3-title">🏆 杯赛</div><div class="cv3-sub">新计分：填入EP 1:1 + 满档奖励 · 赛中锁领奖 · 结束后一键全领</div></div>'
+var V2_CUP_HTML='<header class="cv3-head"><div><div class="cv3-kicker">CHAMPIONSHIP · 杯赛中心</div><div class="cv3-title">🏆 杯赛</div><div class="cv3-sub">挑一个杯赛 · 报名后自动计分 · 结束后一键领取</div></div>'
 +'<span class="chip pill">⚡ 能量 <b id="v2enC">10</b>/10 · 每日结算 +3　<button class="btn" style="padding:5px 12px;font-size:11px" onclick="v2buyEnergy()">🪙 40 补 5（每日1次）</button></span></header>'
 +'<div class="cv3-layout"><nav id="cupV2Rail"></nav><div class="card" id="cupV2Panel" style="margin-bottom:0"></div></div>';
 var V2_MODALS='<div class="pfx-ov" id="v2pfxOv" onclick="v2endFx()"></div>'
 +'<div class="lgov" id="v2lgOv"><div class="lgbox"><div class="lg-title"><b id="v2lgTitle">定级结果</b><button onclick="v2closeLg()">✕</button></div><div class="lg-body"><div class="lg-shields" id="v2lgShields"></div><div class="lg-score" id="v2lgScore"></div><div class="lg-note">您的联赛级别取决于每周一定级日的结算成绩（填入EP 1:1）。<br>提升每日填入EP，以在下一赛季进入更高联赛。</div></div></div></div>'
 +'<div class="pactov" id="v2pactOv"><div class="pactbox"><div class="pact-h"><span id="v2pactTitle">🏆 杯赛参赛协议</span><button onclick="v2closePact()">✕</button></div><div class="pact-body" id="v2pactText"></div><div class="pact-f"><label class="pact-lab"><input type="checkbox" id="v2pactCk" onchange="v2pactToggle()"> 我已阅读协议并确认参与此杯赛</label><div class="pact-btns"><button class="btn" onclick="v2closePact()">取消</button><button class="btn gold" id="v2pactOk" disabled onclick="v2sign()">✍️ 签署并报名 · ⚡<span id="v2pactCost">0</span></button></div></div></div></div>';
-function v2injectModals(){
+function __RAW_v2injectModals(){
  var d=document.createElement('div');d.innerHTML=V2_MODALS;while(d.firstChild)document.body.appendChild(d.firstChild);
  var stub=document.createElement('div');stub.style.display='none';stub.id='v2oldStubs';
  ['cupV3-rail','cupV3-panel','cupV3-pending','cv3-energy','cv3-energyPill','arena-header','arena-qual','arena-race','arena-board','arena-revenge'].forEach(function(id){
@@ -20577,6 +20668,7 @@ function v2injectModals(){
  });
  document.body.appendChild(stub);
 }
+function v2injectModals(){try{return __RAW_v2injectModals.apply(this,arguments);}catch(err){__v2err('v2injectModals',err);}}
 try{
  var __v2sp=window.switchPage;
  window.switchPage=function(name){
@@ -20597,9 +20689,9 @@ window.__cupBounty=function(){var out=[];try{var d=new Date().getDay();
  if(CV.joined['champ']){var tg=v2cupTags(v2cupById('champ'));if(tg&&tg[0])out.push({cup:'王者周',tag:tg[0]});}
  if(CV.joined['biwk']){v2cupTags(v2cupById('biwk')).forEach(function(t){out.push({cup:'双周杯',tag:t});});}
 }catch(e){}return out;};
-window.__v2Dbg={v2Tick:v2Tick,v2renderArena:v2renderArena,AV:AV,CV:CV,get cands(){return AV_CANDS;}};
+window.__v2Dbg={v2Tick:v2Tick,v2renderArena:v2renderArena,v2Backfill1119:v2Backfill1119,v2autoPlace:v2autoPlace,AV:AV,CV:CV,get cands(){return AV_CANDS;}};
 
-function v2compMail(){
+function __RAW_v2compMail(){
  try{
   state.mailbox=Array.isArray(state.mailbox)?state.mailbox:[];
   state.mailGranted=state.mailGranted||{};
@@ -20614,10 +20706,13 @@ function v2compMail(){
   v2save();
  }catch(e){}
 }
+function v2compMail(){try{return __RAW_v2compMail.apply(this,arguments);}catch(err){__v2err('v2compMail',err);}}
 v2compMail();
 
 v2injectModals();
 v2rollCheck();
+try{v2Backfill1119();}catch(e){}
+try{v2autoPlace();}catch(e){}
 
 /* ===== v1.5.6「协议时代」公告（注入式，置顶） ===== */
 (function(){
@@ -20899,7 +20994,6 @@ if(typeof __tu==='function'){
 })();
 </script>
 
-
 <!-- ============ 覆盖层 00B2：UI精修第二轮 · 首页华为风海报轮播/杯赛报名动画/军衔手动关闭 ============ -->
 <script>
 (function(){
@@ -21003,7 +21097,7 @@ var HP_SLIDES=[
 ];
 var hpIdx=0,hpTimer=null;
 function hpRender(){
- var host=document.querySelector('#page-home .hm-modehero');
+ var host=document.getElementById('hp-slot')||document.querySelector('#page-home .hm-modehero');
  if(!host||document.getElementById('hp-sec'))return;
  var sec=document.createElement('div');sec.className='hp-sec';sec.id='hp-sec';
  var slides='',tabs='';
@@ -21021,7 +21115,7 @@ function hpRender(){
  sec.innerHTML='<div class="hp-head"><span class="hp-title">版本热门玩法</span><span class="hp-sub">FEATURED · HOT</span></div>'
   +'<div class="hp-carousel"><div class="hp-track" id="hp-track">'+slides+'</div></div>'
   +'<div class="hp-bar"><div class="hp-arrow" data-hparr="-1">‹</div><div id="hp-tabs" style="flex:1;display:flex;gap:8px;align-items:stretch">'+tabs+'</div><div class="hp-arrow" data-hparr="1">›</div></div>';
- host.parentNode.insertBefore(sec,host.nextSibling);
+ if(host.id==='hp-slot'){host.appendChild(sec);}else{host.parentNode.insertBefore(sec,host.nextSibling);}
  sec.addEventListener('click',function(ev){
   var tab=ev.target.closest('.hp-tab');
   if(tab){try{switchPage(tab.getAttribute('data-hpp'));}catch(e){}return;}
@@ -21408,7 +21502,6 @@ setTimeout(function(){try{pfChainRender();}catch(e){}},800);
 })();
 </script>
 
-
 <script>
 /* ============================================================
    考研EP系统 进化属性获得演出补丁 v1.0 · build 20261119-0200
@@ -21496,5 +21589,830 @@ else arm();
 })();
 
 </script>
+<script>
+/* ===== 全局错误捕获系统 v2 =====
+   edge://external-file 把所有错误遮罩成 "Script error"（onerror 拿不到真消息），
+   策略：包圆 setTimeout/setInterval/requestAnimationFrame + 全部应用全局函数，
+   异常现场直接弹出真实消息+堆栈；5 秒内同错去重；弹窗带 ✕ 手动关闭。 */
+(function(){
+'use strict';
+if(window.__gdiagV2)return;window.__gdiagV2=true;
+
+var __rawST=window.setTimeout, __rawSI=window.setInterval, __rawRAF=window.requestAnimationFrame;
+var __lastKey='',__lastT=0;
+
+function __gerr(tag,err){
+ try{
+  var msg=String((err&&(err.message||err))||err).slice(0,200);
+  var stack=String((err&&err.stack)||'').split('\n').slice(1,4).join(' ⏎ ').slice(0,300);
+  var key=tag+'|'+msg;
+  var now=Date.now();
+  if(key===__lastKey&&now-__lastT<5000)return;
+  __lastKey=key;__lastT=now;
+  var box=document.getElementById('notif-container');if(!box)return;
+  var c=document.createElement('div');
+  c.className='notif-card';c.style.borderLeftColor='#ff3b30';
+  c.innerHTML='<div class="notif-title" style="display:flex;justify-content:space-between;align-items:center;gap:8px">🔧 报错@'+tag+'<span onclick="this.parentNode.parentNode.remove()" style="cursor:pointer;color:#8d7c5f;font-size:14px;padding:0 2px">✕</span></div>'
+   +'<div class="notif-body" style="word-break:break-all;font-family:var(--mono);font-size:11px;line-height:1.7">'+msg+(stack?'<br><span style="color:#a98d5f">'+stack+'</span>':'')+'</div>';
+  box.appendChild(c);
+  requestAnimationFrame(function(){c.classList.add('show');});
+ }catch(e){}
+}
+
+/* 1) 定时器包圆（异步错误真凶大头） */
+window.setTimeout=function(cb,ms){
+ if(typeof cb==='function'){
+  var args=Array.prototype.slice.call(arguments,2);
+  return __rawST.call(this,function(){try{return cb.apply(this,args);}catch(err){__gerr('setTimeout',err);}},ms);
+ }
+ return __rawST.apply(this,arguments);
+};
+window.setInterval=function(cb,ms){
+ if(typeof cb==='function'){
+  var args=Array.prototype.slice.call(arguments,2);
+  return __rawSI.call(this,function(){try{return cb.apply(this,args);}catch(err){__gerr('setInterval',err);}},ms);
+ }
+ return __rawSI.apply(this,arguments);
+};
+if(__rawRAF){
+ window.requestAnimationFrame=function(cb){
+  return __rawRAF.call(this,function(t){try{return cb(t);}catch(err){__gerr('rAF',err);}});
+ };
+}
+
+/* 2) addEventListener 回调包圆（load/DOMContentLoaded/各种交互） */
+try{
+ var __rawAEL=EventTarget.prototype.addEventListener;
+ EventTarget.prototype.addEventListener=function(type,listener,opts){
+  if(typeof listener==='function'){
+   var w=function(ev){try{return listener.call(this,ev);}catch(err){__gerr('listener:'+type,err);}};
+   w.__gdiag=true;
+   return __rawAEL.call(this,type,w,opts);
+  }
+  return __rawAEL.call(this,type,listener,opts);
+ };
+}catch(e){}
+
+/* 3) 应用全局函数包圆（跳过原生/危险项） */
+var __block={eval:1,open:1,close:1,alert:1,confirm:1,prompt:1,postMessage:1,print:1,stop:1,focus:1,blur:1,scroll:1,scrollTo:1,scrollBy:1,moveTo:1,moveBy:1,resizeTo:1,resizeBy:1,atob:1,btoa:1,fetch:1,XDomainRequest:1,constructor:1,prototype:1};
+try{
+ Object.getOwnPropertyNames(window).forEach(function(k){
+  if(__block[k])return;
+  try{
+   var d=Object.getOwnPropertyDescriptor(window,k);
+   if(!d||typeof d.value!=='function'||!d.configurable||d.value.__gdiag)return;
+   if(/\{\s*\[native code\]\s*\}/.test(Function.prototype.toString.call(d.value)))return;
+   var raw=d.value;
+   var w=function(){try{return raw.apply(this,arguments);}catch(err){__gerr(k,err);throw err;}};
+   w.__gdiag=true;
+   window[k]=w;
+  }catch(e){}
+ });
+}catch(e){}
+})();
+</script>
+
+<!-- ============ 覆盖层 00B5：SP觉醒长方形弹窗 + A8电弧向外冒 + 竞技字体统一 ============ -->
+<style id="ui-polish-5">
+/* SP 觉醒弹窗：长方形（宽屏比例，参考登记处任务卡横向布局） */
+#modal-overlay:has(.upx-sp-modal)>div{width:min(1180px,96vw)!important;max-width:none!important;max-height:min(88vh,860px)!important}
+@media(max-width:860px){#modal-overlay:has(.upx-sp-modal)>div{width:min(860px,94vw)!important;max-width:none!important}}
+/* 窄屏：左树折叠为横向滚动条 */
+@media(max-width:700px){
+.upx-sp-grid{grid-template-columns:1fr!important}
+.upx-sp-tree{max-height:130px!important;display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;gap:5px;padding:6px}
+.upx-sp-tree .upx-sp-group{margin:0 4px 0 0;flex:0 0 auto}
+.upx-sp-tree .upx-sp-leaf{width:auto;white-space:nowrap;min-height:32px}
+}
+
+.upx-sp-preview .upx-tk-seal{position:absolute;right:14px;top:-13px;width:47px;height:47px;border-radius:50%;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:15px;font-weight:900;letter-spacing:.04em;color:#2a1c08;background:radial-gradient(circle at 35% 28%,#ffe9bd,#e8a33d 62%,#b06a1a);border:2px solid #ffd98a;box-shadow:0 0 18px -3px rgba(240,179,92,.85),0 3px 8px rgba(0,0,0,.4);transform:rotate(-8deg)}
+.upx-sp-preview .upx-tk-seal small{font-size:5.5px;font-weight:800;letter-spacing:.1em;color:#4a3312}
+
+/* A8 式电弧：外圈大范围 fork 持续向外冒（作用于 .upx-sp-preview 本体） */
+.upx-sp-preview .dl-sp-arcs{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;mix-blend-mode:screen}
+.upx-sp-preview .dl-sp-arc{opacity:0;animation:dlArcFlicker 3.6s linear infinite}
+.upx-sp-preview .dl-sp-arc path{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.upx-sp-preview .dl-sp-arc-glow{stroke:var(--sp-c);stroke-width:6.5;opacity:.4}
+.upx-sp-preview .dl-sp-arc-core{stroke:var(--sp-core);stroke-width:1.4;opacity:.95}
+.upx-sp-preview .dl-sp-arc1{animation-delay:-.3s}
+.upx-sp-preview .dl-sp-arc2{animation-delay:-1.1s}
+.upx-sp-preview .dl-sp-arc3{animation-delay:-1.9s}
+.upx-sp-preview .dl-sp-arc4{animation-delay:-2.6s}
+.upx-sp-preview .dl-sp-arc5{animation-delay:-3.3s}
+.upx-sp-preview .dl-sp-arc2 .dl-sp-arc-glow,.upx-sp-preview .dl-sp-arc5 .dl-sp-arc-glow{stroke:var(--sp-alt)}
+.upx-sp-preview .dl-sp-strip{animation-duration:3.6s}
+.upx-sp-preview .dl-sp-node{animation-duration:2.2s}
+/* 金章（右上角外溢） */
+.upx-tk-seal{position:absolute;right:14px;top:-13px;width:47px;height:47px;border-radius:50%;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:15px;font-weight:900;letter-spacing:.04em;color:#2a1c08;background:radial-gradient(circle at 35% 28%,#ffe9bd,#e8a33d 62%,#b06a1a);border:2px solid #ffd98a;box-shadow:0 0 18px -3px rgba(240,179,92,.85),0 3px 8px rgba(0,0,0,.4);transform:rotate(-8deg)}
+.upx-tk-seal small{font-size:5.5px;font-weight:800;letter-spacing:.1em;color:#4a3312}
+/* 觉醒时刻：整卡电弧爆发 1.2s */
+.upx-sp-preview.upx-sp-burst .dl-sp-arc{animation:upxArcBurst 1.2s linear both}
+.upx-sp-preview.upx-sp-burst .dl-sp-arc2{animation-delay:.12s}
+.upx-sp-preview.upx-sp-burst .dl-sp-arc3{animation-delay:.2s}
+.upx-sp-preview.upx-sp-burst .dl-sp-arc4{animation-delay:.3s}
+.upx-sp-preview.upx-sp-burst .dl-sp-arc5{animation-delay:.38s}
+@keyframes upxArcBurst{0%{opacity:0}6%{opacity:1}12%{opacity:.3}18%{opacity:1}40%{opacity:.8}70%{opacity:.4}100%{opacity:0}}
+/* 预览区给电弧留外溢空间 */
+.upx-sp-preview .upx-sp-preview{overflow:visible}
+
+/* 竞技 v2r 正文字体统一：小节标题/说明行/报名行/chip/头部副标题脱等宽（后置于 18323 段 v2r 规则，同优先级靠源码序胜出）；数字、角标、时间戳保留等宽 */
+#page-race.v2r .rc-sec{font-family:inherit}
+#page-race.v2r .row .n,#page-race.v2r .row .m,#page-race.v2r .entryrow .n,
+#page-race.v2r .chip,#page-race.v2r .rc-sub,#page-race.v2r .cand .cm{font-family:inherit}
+#page-race.v2r .chip b{font-family:var(--mono)}
+</style>
+<script>
+(function(){
+if(window.__upx5)return;window.__upx5=true;
+/* 觉醒成功 → 弹窗重开后给预览卡加一次电弧爆发 */
+var _origAwaken=window.awakenSP;
+if(typeof _origAwaken==='function'){
+ window.awakenSP=function(tagId){
+  window.__upx5Burst=tagId;
+  _origAwaken.apply(this,arguments);
+ };
+}
+var _origOpen=window.openSPPanel;
+if(typeof _origOpen==='function'){
+ window.openSPPanel=function(sel){
+  _origOpen.apply(this,arguments);
+  if(window.__upx5Burst){
+   var tk=document.querySelector('#modal-overlay .upx-sp-preview[class*="task-sp-"]');
+   if(tk){tk.classList.add('upx-sp-burst');}
+   window.__upx5Burst=null;
+  }
+ };
+}
+})();
+</script>
+
+<style id="ui-polish-css">
+/* ============================================================
+ * UI POLISH LAYER · v1.5.6.3-p1
+ * 只在末尾追加，不改动既有逻辑；所有覆盖都是加法
+ * ============================================================ */
+:root{
+  --font-ui:"PingFang SC","HarmonyOS Sans SC","MiSans","Noto Sans CJK SC","Source Han Sans SC","Hiragino Sans GB",-apple-system,BlinkMacSystemFont,"Microsoft YaHei",sans-serif;
+  --font-display:"PingFang SC","HarmonyOS Sans SC","MiSans","Noto Sans CJK SC","Source Han Sans SC",-apple-system,"Microsoft YaHei",sans-serif;
+  --font-num:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Roboto Mono",monospace;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.16,1,.3,1);
+  --ease-soft:cubic-bezier(.33,0,.2,1);
+  --t-fast:.18s;--t-base:.32s;--t-slow:.6s;
+  --ring:0 0 0 3px rgba(240,179,92,.22);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-ui);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  font-synthesis:none;text-rendering:optimizeLegibility;
+}
+::selection{background:rgba(240,179,92,.28);color:#fff6e2}
+
+/* ---------- 1. 字体归位：去掉楷体/衬线斜体，统一到显示屏字体 ---------- */
+[style*="STKaiti"],[style*="KaiTi"],[style*="Georgia,serif"]{
+  font-family:var(--font-display)!important;font-style:normal!important;
+}
+.cover-title,.hero-prize-name,.gb-name,.gmo-t,.intro-n{
+  font-family:var(--font-display)!important;font-style:normal!important;font-weight:900;
+}
+.cover-title{letter-spacing:.06em}
+.hero-prize-name,.gb-name{letter-spacing:.06em}
+.cover-kicker,.gb-kicker{
+  font-family:var(--font-num)!important;font-style:normal!important;
+  letter-spacing:.3em!important;font-weight:500;
+}
+/* 数字与英文小标：等宽 + 表格数字，避免跳动 */
+#top-points,#top-tokens,#top-ep,#top-black,#home-total-ep,#home-points,#home-tokens,
+.hm-stat b,.t-n,.sp-left,.rc-stat b,.st-ep,.gn-card .v{font-variant-numeric:tabular-nums}
+/* 小标签的等宽字重统一，避免同层级粗细不一 */
+.hm-kicker,.dl-kicker,.hm-mk,.hm-men,.sp-kicker,.rc-kicker,.tl-kicker,.wh-kicker,
+.st-kicker,.gn-kicker,.cl-kicker{font-weight:500!important;letter-spacing:.28em!important}
+
+/* ---------- 2. 页面切换：淡入 + 轻微上浮 ---------- */
+@keyframes uiPageIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@keyframes uiRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes uiFade{from{opacity:0}to{opacity:1}}
+.page.active{animation:uiPageIn .5s var(--ease-out) backwards}
+.page.active .card{animation:uiRise .58s var(--ease-out) backwards}
+.page.active .card:nth-of-type(2){animation-delay:.05s}
+.page.active .card:nth-of-type(3){animation-delay:.1s}
+.page.active .dl-panel{animation:uiRise .6s var(--ease-out) backwards}
+.page.active .dl-panel:nth-of-type(2){animation-delay:.06s}
+.page.active .dl-panel:nth-of-type(3){animation-delay:.12s}
+.page.active .dl-panel:nth-of-type(4){animation-delay:.18s}
+/* 折叠面板展开也有过渡，不再“啪”地跳出来 */
+details[open]>*:not(summary){animation:uiFade .28s var(--ease-out) backwards}
+summary{transition:background-color .2s var(--ease-soft),color .2s,border-color .2s}
+summary:hover{background:rgba(240,179,92,.08)}
+
+/* ---------- 3. 弹窗：遮罩淡入 + 面板回弹 ---------- */
+@keyframes uiOvIn{from{opacity:0}to{opacity:1}}
+@keyframes uiModalIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+#modal-overlay{background:rgba(6,4,2,.68)!important;backdrop-filter:blur(8px) saturate(1.02);transition:opacity .3s var(--ease-soft);animation:uiOvIn .3s var(--ease-soft) backwards}
+#modal-overlay>div{animation:uiModalIn .52s var(--ease-out) backwards;transform-origin:50% 60%}
+#modal-overlay.ui-closing{opacity:0}
+#modal-overlay.ui-closing>div{transform:translateY(8px) scale(.97);transition:transform .2s var(--ease-soft),opacity .2s}
+/* 动画期间不做过滤模糊叠加，避免低端机掉帧 */
+
+/* ---------- 4. 按钮：统一缓动、按压、焦点环、水波纹 ---------- */
+button,.navbtn,.nd-btn,.btn,.btn-primary,.btn-secondary,.btn-accent,.hm-tile,.cv-btn{
+  transition:transform var(--t-fast) var(--ease-out),filter .2s var(--ease-soft),
+             box-shadow .28s var(--ease-out),background-color .2s,border-color .2s,color .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+button:active:not(:disabled){transform:scale(.984)}
+button:focus-visible,.navbtn:focus-visible{outline:2px solid var(--gold-l);outline-offset:2px}
+.ui-ripple{
+  position:fixed;z-index:9000;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,246,226,.32),rgba(240,179,92,.12) 55%,transparent 72%);
+  transform:translate(-50%,-50%) scale(0);animation:uiRipple .5s var(--ease-out) forwards;
+  mix-blend-mode:screen;
+}
+@keyframes uiRipple{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+.ui-confirm-hit{animation:uiConfirmGlow .7s var(--ease-out)}
+@keyframes uiConfirmGlow{
+  0%{box-shadow:0 0 0 0 rgba(240,179,92,.34)}
+  100%{box-shadow:0 0 0 12px rgba(240,179,92,0)}
+}
+
+/* ---------- 5. 卡片 / 列表：悬停抬起与边框呼吸 ---------- */
+@media (hover:hover) and (pointer:fine){
+  .card{transition:border-color .25s var(--ease-soft),box-shadow .3s var(--ease-out)}
+  .card:hover{border-color:rgba(240,179,92,.42)}
+  .shop-item,.wh-item,.inv-item,.sp-item{transition:transform .22s var(--ease-out),border-color .25s,box-shadow .3s}
+  .shop-item:hover,.wh-item:hover,.inv-item:hover,.sp-item:hover{transform:translateY(-2px)}
+}
+/* 任务卡完成后的左侧进度提示统一为细边，不加粗 */
+.task-card{transition:border-color .25s var(--ease-soft),box-shadow .3s var(--ease-out),transform .2s var(--ease-out)}
+
+/* ---------- 6. 进度 / 数值：所有填充条同一缓动 ---------- */
+.t-bar i,#home-lv-bar,.st-bar i,.ssrp-bar i,.upx-bar i,.cup-bar i,
+[class*="bar"]>i,[class*="bar"]>span[style*="width"]{
+  transition:width .9s var(--ease-out),background .3s linear,box-shadow .3s;
+}
+
+/* ---------- 7. 局部修复 ---------- */
+/* 竞技页：长说明文字与按钮不再抢位 */
+#page-race.v2r .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+#page-race.v2r .row .n{flex:1 1 340px;min-width:0}
+#page-race.v2r .row .m{flex:0 0 auto}
+/* 日历：窄格里不再把赛事名截成“日杯…” */
+#page-calendar .cal-bar{white-space:normal;align-items:flex-start;line-height:1.35;padding:7px 8px 7px 22px}
+#page-calendar .cal-bn{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:clip}
+#page-calendar .cal-bs{display:none}
+/* 顶部导航：两行时保持左对齐呼吸一致 */
+.navdeck{gap:8px}
+.navdeck .nd-btn{transition:border-color .2s var(--ease-soft),background-color .2s,color .2s,transform .16s var(--ease-out)}
+/* 滚动条 */
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:rgba(10,8,5,.4)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#8a6a34,#5b4520);border-radius:9px;border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#c9a86a,#8a6a34);background-clip:padding-box}
+
+
+/* 首页数据条：7 项在宽屏换 4 列，军衔/称号不再被挤成两行 */
+@media (min-width:880px){
+  #page-home .hm-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+  #page-home .hm-stat:nth-child(1){grid-column:span 2}
+}
+@media (max-width:879px) and (min-width:561px){
+  #page-home .hm-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #page-home .hm-stat:nth-child(1){grid-column:span 3}
+}
+@media (max-width:560px){
+  #page-home .hm-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+#page-home .hm-stat b{font-size:13px;line-height:1.35;letter-spacing:0}
+#page-home #home-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+
+/* ---------- 9. 确认爆点（全站共用一套，确认任务 = 确认玩法） ---------- */
+.ui-bring{position:fixed;border:1.5px solid rgba(247,223,174,.5);border-radius:50%;z-index:9001;
+  pointer-events:none;animation:uiRing .72s var(--ease-out) forwards}
+@keyframes uiRing{0%{opacity:.45;transform:scale(.95)}100%{opacity:0;transform:scale(1.1)}}
+.ui-bp{position:fixed;z-index:9002;pointer-events:none;text-shadow:0 0 8px currentColor;
+  animation:uiSpark .82s cubic-bezier(.1,.85,.3,1) forwards}
+@keyframes uiSpark{0%{opacity:.2;transform:translate(0,0) scale(.4) rotate(0)}
+  25%{opacity:1}
+  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1) rotate(var(--rot))}}
+.ui-stamp{display:none!important}
+@keyframes uiStamp{0%{opacity:0;transform:translate(-50%,6px) scale(.6)}
+  22%{opacity:1;transform:translate(-50%,-10px) scale(1.06)}
+  55%{opacity:1;transform:translate(-50%,-14px) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-30px) scale(.94)}}
+
+
+/* ---------- 10. 空状态与弹窗文字排版 ---------- */
+.ui-empty{padding:13px 14px;border:1px dashed rgba(240,179,92,.24);border-radius:11px;
+  background:rgba(240,179,92,.035);color:#8d7c5f;font-size:11.5px;line-height:1.7;
+  letter-spacing:.06em;text-align:center;animation:uiFade .3s var(--ease-out)}
+.ui-empty b{color:#c9a86a;font-weight:700}
+#modal-body{font-size:13.5px!important;line-height:1.78!important;color:#d3c4a4!important}
+#modal-body b{color:#f0d9a2}
+#modal-title{font-size:17.5px!important;letter-spacing:.08em!important}
+#modal-overlay>div{max-width:min(600px,92vw)}
+
+
+/* ---------- 11. 顶栏在窄屏不再被挤成竖排 ---------- */
+#app>div[style*="sticky"] div{min-width:0}
+#app>div[style*="sticky"] [style*="font-size:18px"]{white-space:nowrap;flex:0 0 auto;letter-spacing:.02em}
+#header-season{white-space:nowrap;flex:0 0 auto;max-width:100%}
+#app>div[style*="sticky"]>div{gap:8px 12px}
+@media (max-width:560px){
+  #app>div[style*="sticky"]{padding:9px 12px}
+  #app>div[style*="sticky"] [style*="font-size:18px"]{font-size:15px!important}
+  #app>div[style*="sticky"]>div>div:first-child{flex-wrap:wrap;gap:6px}
+  #app>div[style*="sticky"]>div>div:last-child{flex-wrap:wrap;gap:6px 12px;font-size:11.5px!important}
+  #app>div[style*="sticky"] [style*="min-width:120px"]{min-width:92px}
+  #header-season{font-size:10px;padding:2px 8px}
+  #app>div[style*="sticky"] span{white-space:nowrap}
+}
+
+/* ---------- 12. 杯赛：品牌官网式「橱窗」而非游戏面板 ---------- */
+#page-cup{padding:30px 22px 38px}
+#page-cup .cv3-layout{display:block}
+#page-cup .cv3-sub{letter-spacing:.02em;color:#9c8d72}
+#cupV2Rail{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;
+  margin:0 0 20px;padding:2px;
+}
+@media(max-width:900px){#cupV2Rail{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:640px){#cupV2Rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+#cupV2Rail button{
+  --tint:240,179,92;
+  position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+  min-height:142px;padding:20px 18px 15px;border-radius:20px;
+  background:linear-gradient(158deg,rgba(var(--tint),.40),rgba(var(--tint),.10) 52%,rgba(20,16,11,.96) 100%);
+  border:1px solid rgba(var(--tint),.18);color:#e6dcc6;font-family:inherit;letter-spacing:0;
+  text-align:left;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,246,226,.05);
+  transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out),
+             border-color .45s var(--ease-out),background .45s var(--ease-out);
+}
+#cupV2Rail button:nth-child(2){--tint:214,110,120}
+#cupV2Rail button:nth-child(3){--tint:96,148,232}
+#cupV2Rail button:nth-child(4){--tint:150,120,232}
+#cupV2Rail button:nth-child(5){--tint:86,186,168}
+#cupV2Rail button:nth-child(6){--tint:236,198,120}
+#cupV2Rail button:nth-child(7){--tint:128,140,164}
+#cupV2Rail button .cc-ico{font-size:30px;line-height:1;filter:saturate(1.1) drop-shadow(0 2px 6px rgba(0,0,0,.45))}
+#cupV2Rail button .cc-nm{font-size:14.5px;font-weight:600;color:#f1e7d2;letter-spacing:.01em;line-height:1.35}
+#cupV2Rail button .cc-mt{font-family:var(--font-ui);font-size:10.5px;color:#b5a68b;letter-spacing:.08em;margin-top:auto;font-variant-numeric:tabular-nums}
+#cupV2Rail button .cc-mt b{font-weight:600}
+#cupV2Rail button .cc-mt b.ok{color:#e9c07f}
+#cupV2Rail button .cc-mt b.off{color:#8d7c5f}
+#cupV2Rail button:hover{transform:translateY(-3px);border-color:rgba(var(--tint),.4);box-shadow:0 10px 28px -14px rgba(var(--tint),.85)}
+#cupV2Rail button.on{
+  border-color:rgba(var(--tint),.5);
+  background:linear-gradient(158deg,rgba(var(--tint),.62),rgba(var(--tint),.20) 55%,rgba(22,18,12,.96) 100%);
+  box-shadow:0 10px 30px -16px rgba(var(--tint),.9);transform:none;color:#fff6e2;font-weight:400;
+}
+#cupV2Rail button.on .cc-nm{color:#fff6e2;font-weight:700}
+#cupV2Rail button.dim{opacity:.6}
+#cupV2Rail button.claim{background:radial-gradient(130% 100% at 16% -10%,rgba(255,206,120,.30),rgba(18,14,9,.92) 66%);
+  border-color:rgba(255,206,120,.45);animation:none;color:#f3e8d0;font-weight:400}
+#cupV2Panel{
+  border-radius:22px!important;padding:24px 22px 18px!important;
+  border:1px solid rgba(255,246,226,.08)!important;
+  background:linear-gradient(180deg,rgba(30,25,16,.92),rgba(14,11,7,.95))!important;
+  box-shadow:0 18px 46px rgba(0,0,0,.45)!important;
+}
+#cupV2Panel .rc-sec{font-size:15px;font-weight:700;letter-spacing:.05em;color:#f1e7d2;margin:0 0 16px}
+#cupV2Panel .rc-sec-n{font-size:10px;letter-spacing:.18em;color:#8d7c5f;font-weight:400}
+#cupV2Panel .cup-big{font-family:var(--font-ui);font-size:42px;font-weight:800;color:#fff6e2;letter-spacing:-.01em;line-height:1.05}
+#cupV2Panel .cup-big small{font-family:var(--font-num);font-size:10.5px;letter-spacing:.16em;color:#9c8d72;margin-top:9px;font-weight:400}
+#cupV2Panel .chip.pill{font-size:11px;padding:6px 14px;border-radius:999px;letter-spacing:.08em}
+#cupV2Panel .lockstrip{border:none;border-top:1px solid rgba(255,246,226,.06);border-radius:0;background:none;
+  padding:12px 2px 2px;margin:0 0 8px;font-size:10.5px;letter-spacing:.1em;color:#8d7c5f}
+#cupV2Panel .claimall{border-radius:16px;margin-bottom:10px}
+#cupV2Panel .tier{
+  border:0;border-bottom:1px solid rgba(255,246,226,.055);border-radius:0;background:none;
+  padding:12px 2px;margin:0;font-size:12.5px;animation:none;
+  transition:opacity .4s var(--ease-out),background .4s var(--ease-out)
+}
+#cupV2Panel .tier:last-child{border-bottom:0}
+#cupV2Panel .tier.reach{border-color:rgba(255,246,226,.12);
+  background:linear-gradient(90deg,rgba(240,179,92,.10),rgba(240,179,92,0) 72%);border-radius:10px;padding-left:10px;padding-right:8px}
+#cupV2Panel .tier.locked{opacity:.46}
+#cupV2Panel .tier .bar{flex:0 0 132px;max-width:132px;height:4px;background:rgba(255,246,226,.07);border-radius:2px;margin-left:auto}
+#cupV2Panel .tier .bar i{background:linear-gradient(90deg,rgba(232,163,61,.85),rgba(247,223,174,.9));transition:width .8s var(--ease-out)}
+#cupV2Panel .tier .tn{color:#cdbfa4}
+#cupV2Panel .tier.reach .tn{color:#f3e8d0}
+#cupV2Panel .tier .lock{opacity:.5}
+@media(max-width:560px){
+  #page-cup .cv3-head{flex-direction:column;align-items:flex-start;gap:12px}
+  #page-cup .cv3-head .chip.pill{width:100%;flex-wrap:wrap;justify-content:flex-start;white-space:normal;gap:6px 10px;font-size:11px;padding:9px 12px;line-height:1.5}
+  #page-cup .cv3-head .chip.pill b{white-space:nowrap}
+  #page-cup .cv3-head .chip.pill button{white-space:nowrap;font-size:10.5px;padding:5px 10px}
+  #page-cup .cv3-sub{font-size:11px;line-height:1.65;letter-spacing:.02em}
+  #page-cup{padding:22px 14px 30px}
+  #cupV2Rail button{min-height:104px;padding:14px 13px 12px;border-radius:16px;gap:6px}
+  #cupV2Rail button .cc-ico{font-size:24px}
+  #cupV2Rail button .cc-nm{font-size:13px}
+  #cupV2Panel{padding:18px 15px 12px!important;border-radius:18px!important}
+  #cupV2Panel .cup-big{font-size:34px}
+  #cupV2Panel .tier{padding:10px 0}
+}
+
+/* 杯赛页去掉常驻闪烁与标题流光，改为静态质感 */
+#page-cup::before{animation:none!important;opacity:.4}
+#page-cup .cv3-title{animation:none!important;filter:none}
+
+/* 参赛协议：清单式排版 + 平滑入场 */
+#v2pactOv .pactbox{animation:uiModalIn .55s var(--ease-out) both}
+.pact-date{font-family:var(--font-num);font-size:10.5px;letter-spacing:.2em;color:#8d7c5f;text-align:center;margin:-2px 0 16px}
+.pact-list{list-style:none;padding:0;margin:0 0 12px}
+.pact-list li{display:grid;grid-template-columns:46px minmax(0,1fr);gap:14px;align-items:start;
+  padding:11px 0;border-bottom:1px solid rgba(255,246,226,.06);font-size:12.5px;line-height:1.85;
+  text-align:left;color:#d3c4a4}
+.pact-list li:last-child{border-bottom:0}
+.pact-list li i{font-style:normal;font-family:var(--font-num);font-size:10px;letter-spacing:.14em;color:#8d7c5f;padding-top:4px}
+.pact-list li span b{color:#f0d9a2}
+.pact-fine{font-size:10.5px;color:#7d6f58;letter-spacing:.04em;text-align:center;line-height:1.8;margin:2px 0 0}
+@media(max-width:560px){.pact-list li{grid-template-columns:40px minmax(0,1fr);gap:10px;font-size:12px}}
+
+/* 杯赛面板内容变化时缓慢淡入，不再「啪」地替换 */
+@keyframes cvPanelIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+#cupV2Panel.cv-fade{animation:cvPanelIn .48s var(--ease-out) both}
+#cupV2Panel.cv-fade .tier{animation:uiRise .5s var(--ease-out) backwards}
+#cupV2Panel.cv-fade .tier:nth-child(2){animation-delay:.03s}
+#cupV2Panel.cv-fade .tier:nth-child(3){animation-delay:.06s}
+#cupV2Panel.cv-fade .tier:nth-child(4){animation-delay:.09s}
+#cupV2Panel.cv-fade .tier:nth-child(5){animation-delay:.12s}
+#cupV2Panel.cv-fade .tier:nth-child(6){animation-delay:.15s}
+#cupV2Panel.cv-fade .tier:nth-child(7){animation-delay:.18s}
+
+/* ---------- 14. 首页重构：作战台 ---------- */
+#page-home{--hx-line:rgba(255,246,226,.075);--hx-card:rgba(20,16,10,.6);--hx-gold:#f0b35c}
+
+/* 身份卡 */
+#page-home .hx-hero{position:relative;overflow:hidden;padding:22px!important;border-radius:20px!important;
+  border:1px solid var(--hx-line)!important;margin:0 0 14px!important;box-shadow:none!important;
+  background:radial-gradient(120% 100% at 0% 0%,rgba(240,179,92,.10),transparent 58%),linear-gradient(180deg,rgba(27,21,13,.80),rgba(15,12,7,.74))!important}
+#page-home .hx-kicker{font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;color:#7d6f57;text-transform:uppercase}
+#page-home .hx-kicker i{font-style:normal;color:#5d5240;margin:0 6px}
+#page-home .hx-idrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+#page-home .hx-rank{font-size:30px;font-weight:800;line-height:1.12;color:#f6e9cd;letter-spacing:0;
+  font-variant-numeric:tabular-nums}
+#page-home .hx-title{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#c0ad8b;
+  border:1px solid rgba(255,246,226,.12);background:rgba(255,246,226,.04);padding:4px 10px;border-radius:999px}
+#page-home .hx-pass{font-family:var(--mono);font-size:11px;color:#0e0b06;background:var(--hx-gold);
+  padding:3px 9px;border-radius:999px;font-weight:700}
+#page-home .hx-season{position:relative;overflow:hidden;margin-top:14px;padding:12px 14px;border-radius:12px;
+  border:1px solid rgba(232,163,61,.26);background:rgba(240,179,92,.05);cursor:pointer}
+#page-home .hx-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:18px;padding-top:16px;
+  border-top:1px solid var(--hx-line)}
+#page-home .hx-kpi{padding:0 14px;border-left:1px solid var(--hx-line);min-width:0}
+#page-home .hx-kpi:first-child{padding-left:0;border-left:0}
+#page-home .hx-kpi .k{display:block;font-size:9.5px;letter-spacing:.2em;color:#7d6f57;margin-bottom:6px}
+#page-home .hx-kpi b{display:block;font-family:var(--mono);font-size:19px;font-weight:700;color:#f6e9cd;
+  letter-spacing:-.01em;line-height:1.2;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis}
+#page-home .hx-kpi b i{font-style:normal;font-size:10px;color:#8d7c5f;margin-left:3px;letter-spacing:.06em}
+#page-home .hx-lv{margin-top:16px}
+#page-home .hx-lv-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;
+  letter-spacing:.05em;color:#8d7c5f;margin-bottom:7px}
+#page-home .hx-lvbar{height:4px;border-radius:999px;background:rgba(255,246,226,.08);overflow:hidden}
+#page-home .hx-lvbar i{display:block;height:100%;border-radius:999px;
+  background:linear-gradient(90deg,#c98b3c,#f0b35c);box-shadow:0 0 12px rgba(240,179,92,.4);
+  transition:width .8s cubic-bezier(.16,1,.3,1)}
+
+/* 通用卡片与版块头 */
+#page-home .hx-card{padding:18px!important;border-radius:18px!important;border:1px solid var(--hx-line)!important;
+  background:var(--hx-card)!important;box-shadow:none!important}
+#page-home .hx-card-h{display:flex;align-items:center;gap:10px;padding-bottom:12px;margin-bottom:14px;
+  border-bottom:1px solid var(--hx-line)}
+#page-home .hx-lb{font-size:12.5px;font-weight:700;letter-spacing:.12em;color:#ece0c9}
+#page-home .hx-en{font-family:var(--mono);font-size:8.5px;letter-spacing:.24em;color:#6f6350}
+#page-home .hx-go{margin-left:auto;font-size:10.5px;color:#a9926a;letter-spacing:.04em;cursor:pointer}
+#page-home .hx-go:hover{color:var(--hx-gold)}
+#page-home .hx-row{display:grid;gap:14px;margin-bottom:14px}
+#page-home .hx-today{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:stretch!important}
+#page-home .hx-today .hx-card{height:100%!important;text-align:left!important}
+#page-home .hx-today .hm-modehero{background:linear-gradient(155deg,rgba(240,179,92,.075),rgba(20,16,10,.62) 58%)!important;
+  border-color:rgba(240,179,92,.16)!important}
+#page-home #home-today{display:flex;flex-direction:column;flex:1;justify-content:center}
+#page-home #home-today .hm-today-bar{margin-top:auto!important}
+#page-home .hx-grow{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:stretch!important}
+#page-home .hx-grow>.hx-card{height:100%!important}
+#page-home .hx-col{display:flex;flex-direction:column;gap:14px;height:100%}
+#page-home .hx-col .hx-card{display:flex;flex-direction:column;flex:1 1 0;min-height:0}
+#page-home #home-talents,#page-home #home-passives{flex:1;align-content:flex-start;min-height:0}
+
+/* 今日玩法 / 今日任务 */
+#page-home .hx-mode{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+#page-home .hx-mode-name{font-size:26px;font-weight:800;line-height:1.15;color:#f6e9cd;letter-spacing:.01em}
+#page-home .hx-mode-en{font-family:var(--mono);font-size:9px;letter-spacing:.26em;color:#7d6f57;padding-bottom:5px}
+#page-home .hx-mode-detail{margin-top:2px}
+#page-home .hx-tasks{display:flex;flex-direction:column}
+#page-home #home-today .hm-today-row{display:grid!important;grid-template-columns:1fr 1fr 1.25fr;gap:10px}
+#page-home #home-today .hm-today-row>span{display:flex;flex-direction:column;gap:4px;font-size:9.5px;
+  letter-spacing:.18em;color:#7d6f57;text-transform:none}
+#page-home #home-today .hm-today-row b{font-family:var(--mono);font-size:18px;font-weight:700;color:#f6e9cd;
+  letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}
+#page-home #home-today .hm-today-bar{height:4px;margin-top:14px;border-radius:999px;background:rgba(255,246,226,.08);overflow:hidden}
+#page-home #home-today .hm-today-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#c98b3c,#f0b35c)}
+
+/* 热门玩法位 */
+#page-home #hp-sec{padding:0!important;border:0!important;background:none!important;margin:0 0 14px!important}
+#page-home .hp-head{align-items:center!important;gap:10px!important;padding:0!important;margin:0 0 14px!important;
+  padding-bottom:12px!important;border-bottom:1px solid var(--hx-line)!important}
+#page-home .hp-title{font-size:12.5px!important;font-weight:700!important;letter-spacing:.12em!important;color:#ece0c9!important}
+#page-home .hp-title::after{display:none!important}
+#page-home .hp-sub{margin-left:auto;font-family:var(--mono)!important;font-size:8.5px!important;
+  letter-spacing:.24em!important;color:#6f6350!important}
+
+/* 快捷入口：四组，列宽一致 */
+#page-home .hx-quick{padding:18px 18px 8px!important;margin-bottom:14px}
+#page-home .hx-qg{display:grid;grid-template-columns:66px minmax(0,1fr);gap:14px;align-items:center;
+  padding:9px 0;border-bottom:1px solid rgba(255,246,226,.05)}
+#page-home .hx-qg:last-child{border-bottom:0}
+#page-home .hx-qg-lb{font-size:10.5px;letter-spacing:.18em;color:#8d7c5f}
+#page-home .hx-tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+#page-home .hx-tile{display:flex;align-items:center;gap:8px;height:44px;padding:0 11px;border-radius:11px;
+  border:1px solid rgba(255,246,226,.06);background:rgba(255,246,226,.02);cursor:pointer;
+  transition:border-color .22s,background .22s,transform .18s}
+#page-home .hx-tile:hover{border-color:rgba(240,179,92,.3);background:rgba(240,179,92,.06);transform:translateY(-1px)}
+#page-home .hx-tile:active{transform:scale(.985)}
+#page-home .hx-tile .ic{font-size:15px;line-height:1;flex:none}
+#page-home .hx-tile .lb{font-size:11.5px;color:#cdbfa4;letter-spacing:.03em}
+
+/* 解锁进度 */
+#page-home .hm-ur .bar{width:100%!important;flex:none!important;min-width:0}
+#page-home .hm-ur{display:grid!important;grid-template-columns:172px minmax(0,1fr) 92px!important;gap:14px!important;
+  align-items:center!important;padding:8px 10px!important;margin:0 -10px 1px!important;border-radius:9px;
+  transition:background .2s}
+#page-home .hm-ur:hover{background:rgba(255,246,226,.025)}
+#page-home .hm-ur .n{width:auto!important;overflow:hidden;text-overflow:ellipsis;font-size:12px!important;color:#cbbc9f!important}
+#page-home .hm-ur .n small{display:inline;color:#8d7c5f!important}
+#page-home .hm-ur .p{width:auto!important;text-align:right;font-size:10.5px!important;color:#8d7c5f!important;font-family:var(--mono)}
+#page-home .hm-ur.done .n{color:#f6e9cd!important}
+#page-home .hm-ur.done .p{color:#e9c07f!important;font-weight:600!important}
+
+/* 公告：单列紧凑列表，点开看全文 */
+#page-home .hm-ann{display:flex!important;flex-direction:column;gap:0!important;max-height:326px!important;
+  overflow-y:auto;padding:0 6px 0 0!important}
+#page-home .hm-news{flex:0 0 auto!important;display:grid!important;grid-template-columns:minmax(0,1fr) 14px;
+  grid-template-areas:"d c" "h c" "b c";grid-template-rows:auto auto 1fr;column-gap:10px;row-gap:1px;align-items:start;
+  height:auto!important;min-height:0!important;padding:12px 2px!important;border-radius:0!important;
+  border:0!important;border-bottom:1px solid rgba(255,246,226,.06)!important;background:none!important;
+  cursor:pointer;transition:none!important;box-shadow:none!important}
+#page-home .hm-news:last-child{border-bottom:0!important}
+#page-home .hm-news:hover{background:rgba(255,246,226,.02)!important}
+#page-home .hm-news .n-date{grid-area:d;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:#6f6350;
+  line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#page-home .hm-news .n-head{grid-area:h;font-size:13px;font-weight:700;color:#e8dcc5;line-height:1.5;
+  display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+#page-home .hm-news .n-body{grid-area:b;font-size:11px;line-height:1.7;color:#8f8168;
+  display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+#page-home .hm-news.open .n-head{-webkit-line-clamp:3}
+#page-home .hm-news.open .n-body{-webkit-line-clamp:8}
+#page-home .hm-news .n-hint{display:none!important}
+#page-home .hm-news .n-chev{grid-area:c;position:static!important;align-self:center;font-size:13px;color:#6f6350;transition:transform .25s}
+#page-home .hm-news.open .n-chev{transform:rotate(90deg);color:var(--hx-gold)}
+
+/* 数据管理 */
+#page-home .hx-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:14px 2px 4px;border-top:1px solid var(--hx-line)}
+#page-home .hx-foot-l{font-size:9.5px;letter-spacing:.16em;color:#6f6350}
+#page-home .hx-foot-b{display:flex;gap:8px;flex-wrap:wrap}
+
+@media(max-width:980px){
+  #page-home .hx-today,#page-home .hx-grow{grid-template-columns:1fr}
+  #page-home .hx-grow>.hx-card,#page-home .hx-col{height:auto!important}
+  #page-home .hx-col .hx-card{flex:0 0 auto!important}
+  #page-home .hx-kpis{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:14px}
+  #page-home .hx-tiles{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:640px){
+  #page-home .hx-hero{padding:18px!important}
+  #page-home .hx-rank{font-size:24px}
+  #page-home .hx-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #page-home .hx-kpi{padding:0 10px}
+  #page-home .hx-qg{grid-template-columns:1fr;gap:8px;padding:12px 0}
+  #page-home .hx-tiles{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  #page-home .hx-tile{flex-direction:column;justify-content:center;gap:4px;height:62px;padding:0 4px}
+  #page-home .hx-tile .ic{font-size:19px}
+  #page-home .hx-tile .lb{font-size:10.5px;letter-spacing:0}
+  #page-home .hx-en{display:none!important}
+  #page-home .hx-kpi:last-child{grid-column:span 2}
+  #page-home .hx-guide{padding:5px 8px!important;font-size:10px!important;white-space:nowrap}
+  #page-home .hx-mode-name{font-size:20px}
+  #page-home .hx-lb{font-size:11.5px}
+  #page-home .hx-mode-name{font-size:21px}
+  #page-home .hx-row{gap:10px;margin-bottom:10px}
+  #page-home .hm-news{grid-template-columns:minmax(0,1fr) 14px;grid-template-areas:"d c" "h c" "b c";gap:2px 10px;
+    padding:11px 2px!important}
+  #page-home .hm-news .n-body{margin-top:0}
+  #page-home .hp-sec .hp-name{font-size:20px}
+  #page-home .hp-cta{font-size:11px}
+  #page-home #home-today .hm-today-row{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #page-home #home-today .hm-today-row b{font-size:13px}
+  #page-home .hp-art{display:none!important}
+  #page-home .hx-foot{flex-direction:column;align-items:flex-start}
+}
+
+/* 金融中心：余额条等宽排布 + 卡片等高 */
+.finpg .balbar{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px!important;margin-bottom:18px!important}
+@media(max-width:560px){
+  .finpg .balbar{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .finpg .bal{white-space:normal!important;overflow:visible!important;font-size:11px!important;padding:9px 10px!important;
+    flex-wrap:wrap;row-gap:2px;align-items:flex-start}
+  .finpg .bal b{font-size:11.5px!important;margin-left:0!important;flex:1 0 100%;line-height:1.35;display:flex;flex-wrap:wrap;gap:2px 5px;align-items:baseline;min-width:0}
+  .finpg .bal b span{white-space:nowrap;font-size:10px;letter-spacing:0!important}
+  .finpg .fin-nav{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px!important}
+  .finpg .fin-nb{font-size:10.5px!important;padding:8px 4px!important;justify-content:center;white-space:nowrap}
+}
+.finpg .bal{display:flex!important;align-items:center;gap:8px;padding:10px 13px!important;border-radius:12px!important;
+  background:rgba(255,246,226,.035);border:1px solid rgba(255,246,226,.08);font-family:var(--font-ui)!important;
+  font-size:11px!important;color:#b5a68b!important;letter-spacing:.02em;min-width:0}
+.finpg .bal b{margin-left:auto;font-family:var(--font-num)!important;font-size:12.5px!important;font-weight:600;color:#f1e7d2;letter-spacing:0!important;white-space:nowrap}
+.finpg .bal{white-space:nowrap;overflow:hidden}
+.finpg .fin-grid{grid-template-columns:repeat(auto-fit,minmax(246px,1fr))!important;gap:14px!important;align-items:stretch}
+.finpg .fin-card{min-height:198px;padding:18px!important;gap:12px!important;border-radius:16px!important;
+  border:1px solid rgba(255,246,226,.07)!important;background:rgba(255,246,226,.03)!important;box-shadow:none!important}
+.finpg .fin-card:hover{border-color:rgba(240,179,92,.26)!important}
+.finpg .fin-top{align-items:flex-start!important;gap:10px}
+.finpg .fin-name{font-size:13.5px!important;font-weight:600!important;color:#f1e7d2!important;line-height:1.4}
+.finpg .fin-tag{font-size:9.5px!important;padding:3px 9px!important;letter-spacing:.04em;white-space:nowrap;font-weight:500}
+.finpg .fin-rate{font-size:28px!important;font-weight:700!important;color:#f1e7d2!important;letter-spacing:-.01em;line-height:1.1}
+.finpg .fin-rate small{font-size:10px!important;color:#8d7c5f!important;margin-left:4px}
+.finpg .fin-desc{font-size:11px!important;line-height:1.75!important;color:#9a8a72!important;min-height:58px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.finpg .fin-act{margin-top:auto;padding-top:4px}
+.finpg .fin-act .btn{padding:9px!important;font-size:12px!important;border-radius:11px!important}
+
+/* ---------- 8. 减少动态偏好 ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+</style>
+<script id="ui-polish-js">
+(function(){
+ if(window.__uiPolish)return;window.__uiPolish=1;
+ var EASE='cubic-bezier(.22,1,.36,1)';
+
+ /* ---- 通用弹窗：入场 / 出场都做过渡 ---- */
+ var _show=window.showModal,_close=window.closeModal;
+ if(typeof _show==='function'){
+  window.showModal=function(){
+   var r=_show.apply(this,arguments);
+   var ov=document.getElementById('modal-overlay');
+   if(ov){
+    ov.classList.remove('ui-closing');
+    ov.classList.add('ui-open');
+    var panel=ov.querySelector('div');
+    if(panel){panel.style.animation='none';void panel.offsetWidth;panel.style.animation='';}
+   }
+   setTimeout(function(){
+    var ok=document.getElementById('modal-confirm');
+    if(ok&&ok.style.display!=='none'){ok.classList.remove('ui-confirm-hit');void ok.offsetWidth;ok.classList.add('ui-confirm-hit');}
+   },280);
+   return r;
+  };
+ }
+ if(typeof _close==='function'){
+  window.closeModal=function(){
+   var ov=document.getElementById('modal-overlay');
+   if(!ov||ov.style.display==='none'){return _close.apply(this,arguments);}
+   if(ov.classList.contains('ui-closing'))return;
+   ov.classList.add('ui-closing');
+   setTimeout(function(){
+    _close();
+    ov.classList.remove('ui-open','ui-closing');
+   },200);
+  };
+ }
+
+ /* ---- 页面切换：回到顶部，交给 CSS 做淡入 ---- */
+ var _sw=window.switchPage;
+ if(typeof _sw==='function'){
+  window.switchPage=function(){
+   var r=_sw.apply(this,arguments);
+   try{window.scrollTo({top:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}
+   return r;
+  };
+ }
+
+ /* ---- 换页回到顶部（导航与首页磁贴） ---- */
+ document.addEventListener('click',function(e){
+  if(e.target&&e.target.closest&&e.target.closest('.nd-opt,.nd-btn,.navbtn,.hm-tile')){
+   setTimeout(function(){try{window.scrollTo({top:0,behavior:'smooth'});}catch(err){window.scrollTo(0,0);}},60);
+  }
+ },true);
+
+ /* ---- 水波纹：只做反馈，不改变任何行为 ---- */
+ document.addEventListener('pointerdown',function(e){
+  var b=e.target&&e.target.closest?e.target.closest('button,.nd-btn,.navbtn,.hm-tile,.chip'):null;
+  if(!b||b.disabled)return;
+  var rect=b.getBoundingClientRect();
+  var size=Math.max(rect.width,rect.height)*2.1;
+  var sp=document.createElement('span');
+  sp.className='ui-ripple';
+  sp.style.width=sp.style.height=size+'px';
+  sp.style.left=e.clientX+'px';sp.style.top=e.clientY+'px';
+  document.body.appendChild(sp);
+  setTimeout(function(){sp.remove();},620);
+ },{passive:true});
+
+
+ /* ---- 确认爆点：环 + 火星，和玩法确认同源 ---- */
+ function polishBurst(btn){
+  /* 只留一圈极细的扩散，替代原来的火星爆点 */
+  var r=btn.getBoundingClientRect();
+  var sz=Math.max(r.width,r.height)*1.02;
+  var ring=document.createElement('div');ring.className='ui-bring';
+  ring.style.left=(r.left+r.width/2-sz/2)+'px';
+  ring.style.top=(r.top+r.height/2-sz/2)+'px';
+  ring.style.width=sz+'px';ring.style.height=sz+'px';
+  document.body.appendChild(ring);setTimeout(function(){ring.remove();},820);
+ }
+ function polishStamp(){}
+
+ /* ---- 对话框「确认」：先放确认动画，再执行动作 ---- */
+ document.addEventListener('click',function(e){
+  var ok=e.target&&e.target.closest?e.target.closest('#modal-confirm'):null;
+  if(!ok||ok.dataset._busy)return;
+  if(!ok.offsetWidth||getComputedStyle(ok).display==='none')return;
+  e.preventDefault();e.stopImmediatePropagation();
+  ok.dataset._busy='1';
+  polishBurst(ok);
+  setTimeout(function(){
+   delete ok.dataset._busy;
+   var h=ok.onclick;
+   if(typeof h==='function'){ok.onclick=null;try{h.call(ok);}catch(err){console.error(err);}ok.onclick=h;}
+  },340);
+ },true);
+
+ /* ---- 确认类按钮：统一复用「确认玩法」同款爆点动画 ---- */
+ document.addEventListener('click',function(e){
+  var b=e.target&&e.target.closest?e.target.closest('button'):null;
+  if(!b||b.disabled)return;
+  var txt=(b.textContent||'').replace(/\s+/g,'');
+  if(!/确认|确定|完成|结算|领取|报名|购入|兑换|抽取|保存|锁定|提交/.test(txt))return;
+  if(txt.length>18)return; /* 长文案按钮多半是说明项，不触发 */
+  var now=Date.now();
+  if(now-(+b.dataset.boomAt||0)<700)return;
+  b.dataset.boomAt=now;
+  polishBurst(b);
+  b.classList.remove('ui-confirm-hit');void b.offsetWidth;b.classList.add('ui-confirm-hit');
+ },true);
+
+ /* ---- 任务条 / 数值就位后补一次平滑填充（避免刷新瞬间硬跳） ---- */
+ function softenBars(root){
+  try{
+   var bars=(root||document).querySelectorAll('.t-bar i,#home-lv-bar,.st-bar i,.ssrp-bar i');
+   bars.forEach(function(el){
+    if(el.dataset.soften)return;el.dataset.soften='1';
+    var w=el.style.width;el.style.width='0%';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){el.style.width=w;});});
+   });
+  }catch(e){}
+ }
+ var _upd=window.updateDailyUI;
+ if(typeof _upd==='function'){
+  window.updateDailyUI=function(){var r=_upd.apply(this,arguments);setTimeout(function(){softenBars(document);},30);return r;};
+ }
+ setTimeout(function(){softenBars(document);},600);
+
+ /* ---- 杯赛面板换杯时淡入 ---- */
+ (function(){
+  var bound=null;
+  function bindCupPanel(){
+   var p=document.getElementById('cupV2Panel');
+   if(!p||p===bound)return;
+   bound=p;
+   new MutationObserver(function(){
+    p.classList.remove('cv-fade');void p.offsetWidth;p.classList.add('cv-fade');
+   }).observe(p,{childList:true});
+  }
+  setTimeout(bindCupPanel,800);
+  document.addEventListener('click',function(e){
+   if(e.target&&e.target.closest&&e.target.closest('.nd-btn,.nd-opt,.navbtn'))setTimeout(bindCupPanel,60);
+  },true);
+ })();
+
+ /* ---- 增益面板空状态提示（只在真的没有任何内容时出现） ---- */
+ function ensureBuffEmpty(){
+  try{
+   var panel=document.getElementById('buffPanel');if(!panel)return;
+   var ids=['attr-btns','attr-detail','growth-bar','talent-bars','evolve-bars','skill-btns'];
+   var has=false;
+   ids.forEach(function(id){var el=document.getElementById(id);if(el&&el.textContent.trim().length)has=true;});
+   var tip=document.getElementById('buff-empty');
+   if(has){if(tip)tip.remove();return;}
+   if(tip)return;
+   var d=document.createElement('div');d.id='buff-empty';d.className='ui-empty';
+   d.innerHTML='今日暂无生效增益 · 去 <b>天赋 / 乱斗 / 潜能</b> 配装后，加成会在这里汇总';
+   var sec=panel.querySelector('#daily-buff-title');
+   if(sec&&sec.parentNode)sec.parentNode.insertBefore(d,sec.nextSibling);else panel.appendChild(d);
+  }catch(e){}
+ }
+ setTimeout(ensureBuffEmpty,900);
+ document.addEventListener('click',function(){setTimeout(ensureBuffEmpty,120);},false);
+
+})();
+</script>
+
 </body>
 </html>
