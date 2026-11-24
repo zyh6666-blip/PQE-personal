@@ -20348,9 +20348,9 @@ function __RAW_v2renderDefense(b){
  b.innerHTML+=html;
 }
 function v2renderDefense(){try{return __RAW_v2renderDefense.apply(this,arguments);}catch(err){__v2err('v2renderDefense',err);}}
-function __RAW_v2preReg(){AV.preReg=true;AV.joined=true;AV.joinDate=null;AV.carryUsed=false;v2toast('预报名成功：周一结算后即可定级');v2renderArena();v2save();}
+function __RAW_v2preReg(){AV.preReg=true;AV.joined=true;AV.joinDate=null;AV.carryUsed=false;v2toast('预报名成功：周一结算后即可定级');v2renderArena();v2save();try{v2autoPlace();}catch(e){}}
 function v2preReg(){try{return __RAW_v2preReg.apply(this,arguments);}catch(err){__v2err('v2preReg',err);}}
-function __RAW_v2join(){AV.joined=true;AV.joinDate=v2slash();AV.carryUsed=false;v2toast('报名成功：今天结算后即可定级（读取完成+质量EP）');v2renderArena();v2save();}
+function __RAW_v2join(){AV.joined=true;AV.joinDate=v2slash();AV.carryUsed=false;v2toast('报名成功：今天结算后即可定级（读取完成+质量EP）');v2renderArena();v2save();try{v2autoPlace();}catch(e){}}
 function v2join(){try{return __RAW_v2join.apply(this,arguments);}catch(err){__v2err('v2join',err);}}
 var AV_PFX_T=null;
 function __RAW_v2slash(d){d=d||v2now();return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();}
@@ -20802,7 +20802,7 @@ function vRemain(L){return L.words.filter(function(w){return w.st!==1;}).length;
 /* ---------- 任务分类 ---------- */
 function vFam(tagId){var p=String(tagId||'').split('_');return p.length>=2?p.slice(0,2).join('_'):(p[0]||'wd');}
 function vTagName(tagId){try{var t=getTag(tagId);return t&&t.path?t.path.slice(1).join('·'):tagId;}catch(e){return tagId;}}
-function vTasks(){var out=[];var seen={};(state.todayTasks||[]).forEach(function(t,i){if(t.tagId&&String(t.tagId).indexOf('wd')===0){var fam=vFam(t.tagId);if(seen[fam]){seen[fam].t=t;seen[fam].i=i;return;}var x={t:t,i:i,fam:fam,name:vTagName(t.tagId)};seen[fam]=x;out.push(x);}});return out;}
+function vTasks(){var out=[];var seen={};(state.todayTasks||[]).forEach(function(t,i){if(t.tagId==='v1'||t.tagId==='v2')t=Object.assign({},t,{tagId:'wd_ky_old'});if(t.tagId&&String(t.tagId).indexOf('wd')===0){var fam=vFam(t.tagId);if(seen[fam]){seen[fam].t=t;seen[fam].i=i;return;}var x={t:t,i:i,fam:fam,name:vTagName(t.tagId)};seen[fam]=x;out.push(x);}});return out;}
 function vListsFor(fam){var out=[];Object.keys(state.vocab.lists).forEach(function(k){var L=state.vocab.lists[k];var lt=L.tag||'wd';if(lt===fam||fam.indexOf(lt)===0||lt.indexOf(fam)===0)out.push(L);});return out;}
 /* ---------- 页面 ---------- */
 var voTMR=null,voCur=null; /* voCur={task,L} */
@@ -20816,7 +20816,7 @@ function voGate(){
   var g=vse('vcGate');if(!g)return false;
   var tasks=vTasks();
   if(!tasks.length){
-    g.innerHTML='';
+    g.innerHTML='<div style="padding:18px 14px;border:1px dashed rgba(232,163,61,.35);border-radius:12px;background:rgba(240,179,92,.05);text-align:center;color:#c9b791;font-size:12.5px;line-height:2">📭 今日暂无背单词任务<br><span style="font-size:11px;color:#8d7c5f">在「每日登记」添加背单词标签任务后在此默写 · 也可以先上传词表备用</span></div>'+voImportFormHTML(null);
     vse('vcTabs').style.display='none';
     return false;}
   g.innerHTML='';
@@ -20849,48 +20849,451 @@ function voCSS(){if(voCSSInjected)return;voCSSInjected=true;
 /* ---------- 词库首页 / 导入 / 剩余单词 ---------- */
 function voImportFormHTML(fam){
   return '<details class="dl-panel" style="margin-bottom:12px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--gold-l);list-style:none">📥 导入新词表 · 上传文件（点我展开）</summary><div style="margin-top:8px">'
-   +'<div style="font-size:11.5px;color:#a98d5f;line-height:1.8;margin-bottom:6px">上传 <b>.txt</b> 词表：首行 <b>#列表名</b>，之后每行 <b>单词 词性 | 答案1/答案2</b>；双空词答案槽间用 <b>;</b> 分隔、行尾加 <b>| m</b>。也支持 .json（{"title","tag","words":[{w,pos,slots}]}）</div>'
-   +'<input type="file" id="voImpF_'+(fam||'x')+'" accept=".txt,.md,.csv,.json" style="width:100%;background:#1e180e;color:#f0e6cf;border:1px solid #4a3b20;border-radius:10px;padding:9px;font-size:12px;box-sizing:border-box;font-family:var(--mono)">'
-   +'<button class="btn-primary" style="width:100%;padding:11px;margin-top:8px" onclick="voDoImport(\''+(fam||'')+'\')">📥 上传并导入'+(fam?'到 '+fam:'并设为本轮')+'</button></div></details>';
+   +'<div style="font-size:11.5px;color:#a98d5f;line-height:1.8;margin-bottom:6px">支持 <b>.txt / .md / .csv / .json / .docx / .pdf</b>：首行 <b>#列表名</b>，之后每行 <b>单词 词性 | 答案1/答案2</b>（双空词答案槽间用 <b>;</b> 分隔、行尾加 <b>| m</b>）。.docx 直接解析；.pdf 为尽力提取（扫描件/图片版提取不出，请复制文本走下方粘贴导入）</div>'
+   +'<input type="file" id="voImpF_'+(fam||'x')+'" accept=".txt,.md,.csv,.json,.docx,.pdf" style="width:100%;background:#1e180e;color:#f0e6cf;border:1px solid #4a3b20;border-radius:10px;padding:9px;font-size:12px;box-sizing:border-box;font-family:var(--mono)">'
+   +'<button class="btn-primary" style="width:100%;padding:11px;margin-top:8px" onclick="voDoImport(\''+(fam||'')+'\')">📥 上传并导入'+(fam?'到 '+fam:'并设为本轮')+'</button>'
+   +'<details style="margin-top:8px"><summary style="cursor:pointer;font-size:11px;color:#8d7c5f;list-style:none">📋 或粘贴文本导入（PDF/Word 可复制内容后备用）</summary>'
+   +'<textarea id="voImpTa_'+(fam||'x')+'" rows="6" style="width:100%;background:#1e180e;color:#f0e6cf;border:1px solid #4a3b20;border-radius:10px;padding:9px;font-size:12px;font-family:var(--mono);box-sizing:border-box;margin-top:6px" placeholder="#列表名&#10;abandon vt. | 放弃/抛弃&#10;deduct vt. | 扣除 | m"></textarea>'
+   +'<button class="btn-secondary" style="width:100%;padding:10px;margin-top:6px;font-size:12px" onclick="voDoPasteImport(\''+(fam||'')+'\')">📋 粘贴导入</button></details>'
+   +'</div></details>';
+}
+window.voDoPasteImport=function(fam){
+  var ta=vse('voImpTa_'+(fam||'x'));
+  var txt=ta?String(ta.value||''):'';
+  if(!txt.trim()){try{toast('请先粘贴词表文本');}catch(e){}return;}
+  voParseAndImport(txt,fam,'粘贴词表');
+};
+
+/* 内置迷你词典：导入时空答案词自动查阅（键=小写词干，值=/分隔同义答案） */
+var VO_DICT={'deduce':'推断/推论/演绎','possession':'拥有/占有/财产','adhere':'遵守/坚持/附着','inferior':'下级的/劣等的','integrity':'正直/诚实/完整','elaborate':'精心制作的/详细说明','collaborate':'合作/协作','legacy':'遗产/遗留','liability':'责任/负债','liablilty':'责任/负债','liable':'有责任的/易于','delicate':'精致的/脆弱的','illusion':'幻觉/错觉','margin':'边缘/页边/差额/利润','dimension':'维度/尺寸/方面','merit':'优点/价值','prominent':'杰出的/突出的','modify':'修改/更改','commute':'通勤/乘车上下班','mutual':'相互的/共同的','adolescent':'青春期的/青少年','coordinate':'协调/配合','parliament':'议会/国会','compel':'强迫/迫使','propel':'推进/驱动','compensate':'补偿/赔偿','suspend':'悬挂/暂停/中止'};
+function voParseAndImport(txt,fam,fileName){
+  txt=String(txt||'').replace(/^\uFEFF/,'').trim();
+  if(!txt){try{toast('未读取到内容');}catch(e){}return;}
+  var title='导入词表',tag=fam||'wd',words=[];
+  if((fileName||'').slice(-5).toLowerCase()==='.json'||txt[0]==='{'){
+    try{
+      var J=JSON.parse(txt);
+      title=(J.title||title);if(!fam&&J.tag)tag=J.tag;
+      (J.words||[]).forEach(function(x){
+        var slots=(x.slots&&x.slots.length?x.slots:[[x.a||'']]).map(function(sg){return (Array.isArray(sg)?sg:String(sg).split('/')).map(function(s){return String(s).trim();}).filter(Boolean);}).filter(function(a){return a.length;});
+        if(x.w&&slots.length)words.push({w:String(x.w),pos:x.pos||'',slots:slots,sa:slots.map(function(){return 0;}),sla:slots.map(function(){return 0;}),st:0});
+      });
+    }catch(e){try{toast('JSON 解析失败：'+e.message);}catch(_){}return;}
+  }else{
+    var skipped=0;
+    /* 默写卷模式：编号 + 下划线填空（常见于 PDF 提取结果） */
+    var wsheet=false;
+    var merged0=txt.split(/\r?\n+/).join('');
+    if(/\d{1,3}\s*[.、．]/.test(merged0)&&/_{2,}/.test(merged0)){
+      wsheet=true;
+      txt=merged0.replace(/\s+/g,' ')
+        .replace(/(\d{1,3})\s*[.、．]\s*/g,'\n$1.')
+        .replace(/_{2,}/g,'|');
+    }
+    txt.split(/\r?\n+/).map(function(l){return l.trim();}).filter(Boolean).forEach(function(l){
+      if(l[0]==='#'){var m=l.slice(1).split('|');title=m[0].trim()||title;if(m[1]&&!fam)tag=m[1].trim();return;}
+      var parts=l.split('|'),wp=parts[0].trim().replace(/^\d{1,3}\s*[.、．)]\s*/,'');if(wsheet)wp=wp.replace(/([a-z'\-])(vt|vi|adj|adv|prep|conj|num)\.?$/i,'$1 $2').replace(/([a-z'\-])(n|v)\.?$/i,'$1 $2').replace(/([a-z])((?:vt|vi|adj|adv|n|v)\.)\s*(?:n|v)\./i,'$1 $2').replace(/^(\S+)\s+((?:vt|vi|adj|adv|n|v)\.)\s+(?:n|v)\.$/i,'$1 $2');var isM=parts.length>=3&&parts[2].trim()==='m';
+      var raw=parts[1]||'';if(/^(?:vt|vi|adj|adv|n|v|prep|conj|num)\.?$/i.test(raw.trim()))raw='';
+      var slots=isM?raw.split(';').map(function(sg){return sg.split('/').map(function(x){return x.trim();}).filter(Boolean);}).filter(function(a){return a.length;}):[raw.split('/').map(function(x){return x.trim();}).filter(Boolean)];
+      var m2=wp.match(/^(\S+)\s+((?:vt|vi|adj|adv|n|v|prep|conj|num)\.?)$/i);
+      var w2=null;if(m2)w2=m2[1];else if(/^[A-Za-z][A-Za-z'\-]{2,}$/.test(wp))w2=wp;
+      if(w2)words.push({w:w2,pos:m2?m2[2]:'',slots:slots,sa:slots.map(function(){return 0;}),sla:slots.map(function(){return 0;}),st:0});
+    });
+  }
+  if(!words.length){try{toast('未识别到单词行，格式：单词 词性 | 答案');}catch(e){}return;}
+  var autoN=0,selfN=0;
+  words.forEach(function(x){
+    if(!x.slots.some(function(s){return s.length;})){
+      var d=VO_DICT[x.w.toLowerCase()];
+      if(d){x.slots=[[d]];autoN++;}else selfN++;
+    }
+  });
+  var id='IMP-'+Date.now().toString(36);
+  state.vocab.lists[id]={id:id,title:title,tag:tag,words:words,rounds:0,cur:null,cleared:false,lastSummary:''};
+  state.vocab.active=id;
+  try{toast('📥 已导入「'+title+'」'+words.length+' 词'+(autoN?' · 自动查阅 '+autoN+' 词':'')+(selfN?' · '+selfN+' 词待词库手动填释义':''));}catch(e){}
+  if(fam){state.vocab.uiView='win';state.vocab.uiActive=fam;vSave();voSwitch(fam);}
+  else{vSave();voRenderHome();}
+}
+/* ---- .docx 解析：ZIP 中央目录 + DecompressionStream 原生解压 ---- */
+function voUnzip(ab){
+  var u8=new Uint8Array(ab),dv=new DataView(ab),eocd=-1;
+  for(var i=u8.length-22;i>=0;i--){if(dv.getUint32(i,true)===0x06054b50){eocd=i;break;}}
+  if(eocd<0)throw new Error('不是有效的 docx（找不到 ZIP 目录）');
+  var count=dv.getUint16(eocd+10,true),cdOff=dv.getUint32(eocd+16,true),entries={};
+  for(var k=0;k<count;k++){
+    var p=cdOff+46*k;
+    if(dv.getUint32(p,true)!==0x02014b50)break;
+    var method=dv.getUint16(p+10,true),csize=dv.getUint32(p+20,true),lname=dv.getUint16(p+28,true),loff=dv.getUint32(p+42,true);
+    var name='';for(var c=0;c<lname;c++)name+=String.fromCharCode(u8[p+46+c]);
+    entries[name]={method:method,csize:csize,off:loff};
+  }
+  return {u8:u8,dv:dv,entries:entries};
+}
+function voUnzipRead(z,name){
+  var e=z.entries[name];if(!e)throw new Error('docx 内未找到 '+name);
+  var p=e.off;
+  if(z.dv.getUint32(p,true)!==0x04034b50)throw new Error('ZIP 本地头损坏');
+  var lname=z.dv.getUint16(p+26,true),lextra=z.dv.getUint16(p+28,true);
+  var start=p+30+lname+lextra;
+  var raw=z.u8.slice(start,start+e.csize);
+  if(e.method===0)return Promise.resolve(new TextDecoder('utf-8').decode(raw));
+  if(e.method===8){
+    return new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer()
+      .then(function(buf){return new TextDecoder('utf-8').decode(new Uint8Array(buf));});
+  }
+  throw new Error('不支持的压缩方式 '+e.method);
+}
+function voDocxToText(ab){
+  var z;
+  try{z=voUnzip(ab);}catch(e){return Promise.reject(e);}
+  if(!z.entries['word/document.xml'])throw new Error('docx 内没有 word/document.xml');
+  return voUnzipRead(z,'word/document.xml').then(function(xml){
+    var txt=xml
+      .replace(/<w:tab\/>/g,'\t')
+      .replace(/<\/w:p>/g,'\n')
+      .replace(/<[^>]+>/g,'')
+      .replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/&amp;/g,'&');
+    if(!txt.trim())throw new Error('docx 中没有可提取的文本');
+    return txt;
+  });
+}
+/* ---- .pdf 解析：流扫描 + FlateDecode 解压 + Tj/TJ 文本算子提取（尽力而为） ---- */
+function voPdfToText(ab){
+  try{
+  var u8=new Uint8Array(ab),dec=new TextDecoder('latin1');
+  var whole=dec.decode(u8);
+  var jobs=[],pos=0;
+  while(true){
+    var s=whole.indexOf('stream',pos);if(s<0)break;
+    var e=whole.indexOf('endstream',s+6);if(e<0)break;
+    var header=whole.substring(Math.max(0,s-400),s);
+    var dstart=s+6;if(u8[dstart]===13)dstart++;if(u8[dstart]===10)dstart++;
+    var data=u8.subarray(dstart,e);
+    var lm=/\/Length\s+(\d+)/.exec(header);
+    if(lm)data=data.subarray(0,Math.min(data.length,+lm[1]));
+    if(data.length>2097152||/(?:\/Subtype\s*\/Image|FontFile|CIDToGIDMap|Decode\s*\[)/.test(header)){pos=e+9;continue;}
+    if(/\/FlateDecode/.test(header)){
+      (function(d){jobs.push(new Response(new Blob([d]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer().then(function(buf){return new Uint8Array(buf);}).catch(function(){return new Response(new Blob([d]).stream().pipeThrough(new DecompressionStream('deflate'))).arrayBuffer().then(function(buf){return new Uint8Array(buf);}).catch(function(){return null;});}));})(data.slice());
+    }else{
+      jobs.push(Promise.resolve(data.slice()));
+    }
+    pos=e+9;
+  }
+  if(!jobs.length)return Promise.reject(new Error('PDF 中没有可提取的文本流（可能是扫描件/图片版）'));
+  function hexToStr(h){var out='';h=h.replace(/\s+/g,'');for(var i=0;i+3<h.length;i+=4){out+=String.fromCharCode(parseInt(h.substr(i,4),16));}return out;}
+  function parseCMap(txt){
+    var map={},m;
+    var re1=/beginbfchar([\s\S]*?)endbfchar/g;
+    while((m=re1.exec(txt))){var lr=/<([0-9A-Fa-f]+)>\s*<([0-9A-Fa-f]+)>/g,mm;while((mm=lr.exec(m[1]))){try{map[parseInt(mm[1],16)]=hexToStr(mm[2]);}catch(e){}}}
+    var re2=/beginbfrange([\s\S]*?)endbfrange/g;
+    while((m=re2.exec(txt))){
+      m[1].split(/\r?\n/).forEach(function(line){
+        if(!line.trim())return;
+        var mm=/<([0-9A-Fa-f]+)>\s*<([0-9A-Fa-f]+)>\s*<([0-9A-Fa-f]+)>/.exec(line);
+        if(mm){var a2=parseInt(mm[1],16),b2=parseInt(mm[2],16),c2=parseInt(mm[3],16);if(b2-a2<500){for(var i=a2;i<=b2;i++)map[i]=String.fromCharCode(c2+(i-a2));}return;}
+        mm=/<([0-9A-Fa-f]+)>\s*<([0-9A-Fa-f]+)>\s*\[([^\]]*)\]/.exec(line);
+        if(mm){var a3=parseInt(mm[1],16);var arr=mm[3].match(/<([0-9A-Fa-f]+)>/g)||[];arr.forEach(function(h,idx){try{map[a3+idx]=hexToStr(h.slice(1,-1));}catch(e){}});}
+      });
+    }
+    return map;
+  }
+  function pdfUnescape(s){return s.replace(/\\([nrtbf()\\]|[0-7]{1,3})/g,function(m,g){if(g==='n')return '\n';if(g==='r')return '\r';if(g==='t')return '\t';if(g==='b')return '\b';if(g==='f')return '\f';if(g[0]>='0'&&g[0]<='7')return String.fromCharCode(parseInt(g,8));return g;});}
+  function bytesToText(bytes,cmap){
+    if(cmap&&Object.keys(cmap).length&&bytes.length>=2&&bytes.length%2===0){
+      var out='',hit=0,total=0;
+      for(var i=0;i+1<bytes.length;i+=2){var cid=bytes[i]*256+bytes[i+1];total++;if(cmap[cid]!==undefined){out+=cmap[cid];hit++;}else if(bytes[i]===0&&bytes[i+1]<128){out+=String.fromCharCode(bytes[i+1]);}}
+      if(total>0&&hit/total>=0.5)return out;
+    }
+    var s='';for(var k=0;k<bytes.length;k++)s+=String.fromCharCode(bytes[k]);return s;
+  }
+  function hexToBytes(h){h=h.replace(/\s+/g,'');var b=[];for(var i=0;i+1<h.length;i+=2)b.push(parseInt(h.substr(i,2),16));return b;}
+  return Promise.all(jobs).then(function(list){
+    var cmap={};
+    list.forEach(function(c){if(!c)return;var t=dec.decode(c);if(t.indexOf('beginbfchar')>=0||t.indexOf('beginbfrange')>=0){var m2=parseCMap(t);for(var k in m2)cmap[k]=m2[k];}});
+    var out=[];
+    list.forEach(function(c){
+      if(!c)return;
+      var t=dec.decode(c);
+      if(t.indexOf('beginbfchar')>=0)return;
+      var re=/\(((?:\\.|[^\\()])*)\)\s*(?:Tj|'|")|<([0-9A-Fa-f\s]+)>\s*(?:Tj|'|")|\[((?:\((?:\\.|[^\\()])*\)|<[^>\s]*>|[^\]])*)\]\s*TJ/g;
+      var m;
+      while((m=re.exec(t))){
+        if(m[1]!==undefined){var u=pdfUnescape(m[1]);var bs=[];for(var i=0;i<u.length;i++)bs.push(u.charCodeAt(i));out.push(bytesToText(bs,cmap));}
+        else if(m[2]!==undefined){out.push(bytesToText(hexToBytes(m[2]),cmap));}
+        else if(m[3]){var seg=m[3],sr=/\(((?:\\.|[^\\()])*)\)|<([0-9A-Fa-f\s]+)>/g,sm,parts=[];while((sm=sr.exec(seg))){if(sm[1]!==undefined){var u2=pdfUnescape(sm[1]);var bs2=[];for(var i2=0;i2<u2.length;i2++)bs2.push(u2.charCodeAt(i2));parts.push(bytesToText(bs2,cmap));}else parts.push(bytesToText(hexToBytes(sm[2]),cmap));}if(parts.length)out.push(parts.join(''));}
+      }
+    });
+    var txt=out.join('\n');
+    if(!txt.trim())throw new Error('PDF 文本提取为空（扫描件/图片版或字体编码不支持，请复制文本走粘贴导入）');
+    return txt;
+  });
+  }catch(e){return Promise.reject(e);}
 }
 window.voDoImport=function(fam){
   var fi=vse('voImpF_'+(fam||'x'));if(!fi||!fi.files||!fi.files[0]){try{toast('请先选择词表文件');}catch(e){}return;}
-  var file=fi.files[0],rd=new FileReader();
-  rd.onload=function(){
-    var txt=String(rd.result||'').replace(/^\uFEFF/,'').trim();
-    if(!txt){try{toast('文件为空');}catch(e){}return;}
-    var title='导入词表',tag=fam||'wd',words=[];
-    if(file.name.slice(-5).toLowerCase()==='.json'||txt[0]==='{'){
-      try{
-        var J=JSON.parse(txt);
-        title=(J.title||title);if(!fam&&J.tag)tag=J.tag;
-        (J.words||[]).forEach(function(x){
-          var slots=(x.slots&&x.slots.length?x.slots:[[x.a||'']]).map(function(sg){return (Array.isArray(sg)?sg:String(sg).split('/')).map(function(s){return String(s).trim();}).filter(Boolean);}).filter(function(a){return a.length;});
-          if(x.w&&slots.length)words.push({w:String(x.w),pos:x.pos||'',slots:slots,sa:slots.map(function(){return 0;}),sla:slots.map(function(){return 0;}),st:0});
-        });
-      }catch(e){try{toast('JSON 解析失败：'+e.message);}catch(_){}return;}
-    }else{
-      txt.split(/\n+/).map(function(l){return l.trim();}).filter(Boolean).forEach(function(l){
-        if(l[0]==='#'){var m=l.slice(1).split('|');title=m[0].trim()||title;if(m[1]&&!fam)tag=m[1].trim();return;}
-        var parts=l.split('|'),wp=parts[0].trim(),isM=parts.length>=3&&parts[2].trim()==='m';
-        var raw=parts[1]||'';
-        var slots=isM?raw.split(';').map(function(sg){return sg.split('/').map(function(x){return x.trim();}).filter(Boolean);}).filter(function(a){return a.length;}):[raw.split('/').map(function(x){return x.trim();}).filter(Boolean)];
-        var m2=wp.match(/^(\S+)\s+((?:vt|vi|adj|adv|n|v|prep|conj|num)\.?)$/i);
-        var w2=null;if(m2)w2=m2[1];else if(/^\S+$/.test(wp))w2=wp;
-        if(w2)words.push({w:w2,pos:m2?m2[2]:'',slots:slots,sa:slots.map(function(){return 0;}),sla:slots.map(function(){return 0;}),st:0});
-      });
-    }
-    if(!words.length){try{toast('未识别到单词行，格式：单词 词性 | 答案');}catch(e){}return;}
-    var id='IMP-'+Date.now().toString(36);
-    state.vocab.lists[id]={id:id,title:title,tag:tag,words:words,rounds:0,cur:null,cleared:false,lastSummary:''};
-    state.vocab.active=id;
-    try{toast('📥 已导入「'+title+'」'+words.length+' 词');}catch(e){}
-    if(fam){state.vocab.uiView='win';state.vocab.uiActive=fam;vSave();voSwitch(fam);}
-    else{vSave();voRenderHome();}
-  };
+  var file=fi.files[0],ext=(file.name.split('.').pop()||'').toLowerCase();
+  if(ext==='docx'||ext==='pdf'){
+    var rd1=new FileReader();
+    rd1.onload=function(){
+      var pr=(ext==='docx'?voDocxToText(rd1.result):voPdfToText(rd1.result));
+      pr.then(function(txt){voParseAndImport(txt,fam,file.name);})
+        .catch(function(err){try{toast((ext==='pdf'?'PDF':'DOCX')+' 解析失败：'+err.message);}catch(e){}});
+    };
+    rd1.onerror=function(){try{toast('文件读取失败');}catch(e){}};
+    rd1.readAsArrayBuffer(file);
+    return;
+  }
+  var rd=new FileReader();
+  rd.onload=function(){voParseAndImport(String(rd.result||''),fam,file.name);};
   rd.onerror=function(){try{toast('文件读取失败');}catch(e){}};
   rd.readAsText(file,'utf-8');
 };
+function voBankHTML(L){
+  var left=L.words.map(function(w,i){return {w:w,i:i};}).filter(function(x){return x.w.st!==1;});
+  var slotsTot=L.words.reduce(function(a,w){return a+w.slots.length;},0);
+  var done=L.words.reduce(function(a,w){return a+w.sa.filter(function(s){return s===1;}).length;},0);
+  function meaningOf(w){return w.slots.map(function(sl){return sl[0]||'';}).filter(Boolean).join(' / ');}
+  function colorOf(w){
+    if(w.sla.some(function(s){return s===2;}))return '#8ec8ff';
+    if(w.sla.length&&w.sla.every(function(s){return s===3;}))return '#ff9a8a';
+    return '#f0d9a2';
+  }
+  var html='<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:10px;font-size:13px;color:#c9a86a"><span>📚 '+L.title+' · 剩余 <b style="color:#ffd60a">'+left.length+'</b>/'+L.words.length+' 词 · 已清槽位 '+done+'/'+slotsTot+'</span></div>';
+  if(!left.length)return html+'<div style="text-align:center;color:#7ee2a0;padding:22px">🎉 全部掌握</div>';
+  var col1=left.slice(0,Math.ceil(left.length/2)),col2=left.slice(Math.ceil(left.length/2));
+  function row(x,n){
+    var w=x.w,c=colorOf(w);
+    var noAns=!w.slots.some(function(s){return s.length;});
+    var slots=w.slots.length>1?'<small style="opacity:.55;font-family:var(--mono"> · '+w.sa.filter(function(s){return s!==1;}).length+'空</small>':'';
+    return '<div class="vo-row" style="border-bottom:1px dashed rgba(232,163,61,.12);padding:7px 6px;display:flex;align-items:baseline;gap:8px">'
+     +'<span class="vo-num">'+n+'.</span>'
+     +'<span class="vo-w" style="color:'+(noAns?'#ff9a8a':c)+'">'+w.w+'</span>'
+     +'<span class="vo-p">'+w.pos+'</span>'
+     +(noAns
+       ?'<span style="font-size:11px;color:#ff9a8a;flex:1;text-align:right">无释义 · 点右侧填写</span>'
+       :'<span style="font-size:13px;color:#ffe9b8;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+meaningOf(w)+'</span>')
+     +'<button class="btn" style="padding:2px 10px;font-size:10.5px;flex-shrink:0" onclick="voEditAnswer(\''+L.id+'\','+x.i+',event)" title="编辑释义">'+(noAns?'\u26a0\ufe0f \u586b\u7b54\u6848':'\u270e')+'</button>'
+     +slots+'</div>';
+  }
+  html+='<div class="vo-sheet"><div class="vo-grid"><div>'+col1.map(function(x,i){return row(x,i+1);}).join('')+'</div><div>'+col2.map(function(x,i){return row(x,col1.length+i+1);}).join('')+'</div></div></div>';
+  return html;
+}
+window.voEditAnswer=function(listId,idx,ev){
+ var L=state.vocab.lists[listId];if(!L)return;
+ var w=L.words[idx];
+ var rowEl=ev&&ev.target&&ev.target.closest?ev.target.closest('.vo-row'):null;
+ if(!rowEl)return;
+ var cur=w.slots.map(function(sl){return sl.join('/');}).join(' ; ');
+ rowEl.innerHTML='<span class="vo-num">'+(idx+1)+'.</span>'
+  +'<span class="vo-w" style="color:#f0d9a2">'+w.w+'</span>'
+  +'<span class="vo-p">'+w.pos+'</span>'
+  +'<input id="voEditInp" value="'+String(cur).replace(/"/g,'&quot;')+'" placeholder="\u7b54\u68481/\u7b54\u68482 \uff1b \u591a\u7a7a\u8bcd\u69fd2\u7b54\u6848" style="flex:1;background:#1e180e;color:#f0e6cf;border:1px solid var(--gold);border-radius:8px;padding:5px 9px;font-size:12px;font-family:var(--mono);min-width:0">'
+  +'<button class="btn" style="padding:4px 12px;font-size:11px;background:linear-gradient(135deg,var(--gold-l),var(--gold-d));color:#2a1c08;font-weight:700;flex-shrink:0" onclick="voSaveAnswer(\''+listId+'\','+idx+')">\u5b58</button>';
+ setTimeout(function(){var i=document.getElementById('voEditInp');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length);}},40);
+};
+window.voSaveAnswer=function(listId,idx){
+ var L=state.vocab.lists[listId];if(!L)return;
+ var w=L.words[idx];
+ var inp=document.getElementById('voEditInp');if(!inp)return;
+ var groups=String(inp.value||'').split(';').map(function(g){return g.split('/').map(function(x){return String(x).trim();}).filter(Boolean);}).filter(function(g){return g.length;});
+ w.slots=groups.length?groups:[[]];
+ w.sa=w.slots.map(function(){return 0;});
+ w.sla=w.slots.map(function(){return 0;});
+ vSave();
+ if(state.vocab.uiView==='win'){try{voSwitch(state.vocab.uiActive);}catch(e){voRenderHome();}}else{voRenderHome();}
+ try{toast('\u2705 \u5df2\u4fdd\u5b58\u300c'+w.w+'\u300d\u91ca\u4e49 '+w.slots.reduce(function(a,s){return a+s.length;},0)+' \u4e2a');}catch(e){}
+};
+
+
+function voRenderHome(){
+  var body=vse('vcBody');if(!body)return;
+  var sub=vse('vcSub2');if(sub)sub.textContent='词库首页 · 已导入列表与导入入口';
+  var lists=Object.keys(state.vocab.lists).map(function(k){return state.vocab.lists[k];});
+  var tasks=vTasks();
+  var html='';
+  if(!tasks.length){
+    html+='<div style="padding:9px 13px;border:1px dashed rgba(232,163,61,.3);border-radius:11px;background:rgba(240,179,92,.04);color:#a98d5f;font-size:12px;margin-bottom:12px;line-height:1.8">🌙 今日无背单词相关任务 · 可在此浏览词库、查看剩余单词或导入新表，明天安排了任务再来默写</div>';
+  }
+  tasks.forEach(function(x){
+    if(String(x.t.tagId).indexOf('_new')>0&&!vListsFor(x.fam).length){
+      html+='<div style="padding:11px 13px;border:1.5px dashed rgba(255,149,0,.55);border-radius:12px;background:rgba(255,149,0,.06);color:#f0d9a2;font-size:13px;margin-bottom:12px;line-height:1.9">⚠️ 今日任务「'+x.name+'」是新 list，但 <b>尚未导入对应词表</b> —— 请先在下方导入 <span style="font-family:var(--mono);font-size:11px">'+x.fam+'</span> 词表</div>';
+    }});
+  if(!lists.length){
+    html+='<div style="text-align:center;padding:36px 16px;border:1.5px dashed rgba(232,163,61,.35);border-radius:14px;color:#8d7c5f;line-height:2.4;margin-bottom:12px">📥 <b style="color:#f0d9a2">首次使用 · 请先上传一份单词表</b><br><small>把词表文档发给我，我会整理成下方导入格式</small></div>';
+  }else{
+    html+='<div style="font-size:12.5px;font-weight:700;letter-spacing:.16em;color:#c9a86a;margin-bottom:8px">📚 已导入词表 · '+lists.length+' 份</div>'
+     +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:14px">'
+     +lists.map(function(L){
+       var rem=vRemain(L);
+       return '<div style="border:1px solid rgba(232,163,61,.2);border-radius:14px;padding:13px;background:rgba(28,21,11,.7)">'
+        +'<div style="font-size:10.5px;color:#a98d5f;font-family:var(--mono);letter-spacing:.1em">📘 '+(L.tag||'wd')+(L.cleared?' · <span style="color:#7ee2a0">🏆已通关</span>':'')+'</div>'
+        +'<div style="font-size:15px;font-weight:800;color:#f0d9a2;margin:4px 0">'+L.title+'</div>'
+        +'<div style="font-size:12px;color:#c9a86a">剩余 <b style="color:#ffd60a">'+rem+'</b>/'+L.words.length+' 词 · 第 '+((L.rounds||0)+1)+' 轮</div>'
+        +'<div style="display:flex;gap:6px;margin-top:10px">'
+        +'<button class="btn-secondary" style="flex:1;padding:7px;font-size:12px" onclick="voBankView(\''+L.id+'\')">📚 剩余单词</button>'
+        +'<button class="btn-primary" style="flex:1.4;padding:7px;font-size:12px" onclick="voEnter(\''+L.id+'\')">'+(L.cur&&!L.cur.done?'⏸ 继续默写':'✍️ 开始默写')+'</button>'
+        +'</div></div>';
+     }).join('')+'</div>';
+  }
+  html+=voImportFormHTML('');
+  body.innerHTML=html;
+}
+window.voBankView=function(id){
+  var L=state.vocab.lists[id];if(!L)return;
+  var body=vse('vcBody');if(!body)return;
+  state.vocab.uiView='bank';
+  body.innerHTML='<button class="btn-secondary" style="padding:6px 14px;font-size:12px;margin-bottom:10px" onclick="voGoHome()">← 返回词库首页</button><div class="vo-sheet">'+voBankHTML(L)+'</div>';
+};
+window.voEnter=function(id){
+  var L=state.vocab.lists[id];if(!L)return;
+  var fam=L.tag||'wd';
+  state.vocab.uiView='win';state.vocab.uiActive=fam;state.vocab.active=id;
+  var tasks=vTasks();
+  if(tasks.length){document.querySelectorAll('.vo-tab').forEach(function(b){b.className='vo-tab'+(b.getAttribute('data-f')===fam?' on':'');});}
+  vSave();voRender();
+};
+window.voGoHome=function(){state.vocab.uiView='home';state.vocab.uiActive=null;vSave();voGate();voRenderHome();};
+function voRender(){
+  voCSS();
+  var body=vse('vcBody');if(!body)return;
+  var tasks=vTasks();
+  if(!tasks.length){voGate();return;}
+  var fam=state.vocab.uiActive||tasks[0].fam;
+  var lists=vListsFor(fam);var L=lists[0]||null;voCur={fam:fam,L:L,task:tasks.filter(function(x){return x.fam===fam;})[0]};
+  var sub=vse('vcSub2');if(sub)sub.textContent=L?L.title+' · 通关线：剩余 ≤10':'该标签暂无词库';
+  if(!L){
+    var isNew=voCur.task&&String(voCur.task.t.tagId).indexOf('_new')>0;
+    if(isNew){
+      body.innerHTML='<div style="text-align:center;padding:30px 16px;border:1.5px dashed rgba(255,149,0,.55);border-radius:14px;color:#f0d9a2;line-height:2.2;margin-bottom:12px">📥 请导入新list单词表<br><small style="color:#a98d5f">「'+voCur.task.name+'」尚无词库 · 粘贴文本即可导入（也可把文档发我整理）</small></div>'+voImportFormHTML(fam);
+    }else{
+      body.innerHTML='<div class="card" style="text-align:center;padding:36px 16px;color:#8d7c5f">「'+fam+'」分类下暂无词库<br><span style="font-size:12px">联系开发者导入对应词表</span></div>';
+    }
+    return;}
+  var rem=vRemain(L),rd=(L.rounds||0)+1;
+  var html='<button class="btn-secondary" style="padding:6px 14px;font-size:12px;margin-bottom:10px" onclick="voGoHome()">← 词库首页</button>'
+   +'<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:12px;font-size:13px;color:#c9a86a"><span>📖 '+L.title+' · 剩余 <b style="color:#ffd60a">'+rem+'</b>/'+L.words.length+' 词 · 第 '+rd+' 轮</span></div>';
+  if(L.cleared){html+='<div style="text-align:center;padding:26px 12px;border:1.5px dashed rgba(52,199,89,.5);border-radius:12px;color:#7ee2a0;line-height:2">🏆 本列表已通关 · W4 轮次已计入登记<br><small style="color:#a98d5f">请联系开发者导入下一份词表</small></div>';}
+  else if(!L.cur||L.cur.done){
+    if(rem>0)html+='<button class="btn-primary" style="width:100%;padding:13px" onclick="voStart()">▶ 开始第 '+rd+' 轮默写（'+rem+' 词'+(L.rounds>0?' · 已重排':'')+'）</button>';
+    if(L.lastSummary)html+=L.lastSummary;}
+  else{
+    var order=L.cur.order;
+    var col1=order.slice(0,20),col2=order.slice(20,40),rest=order.slice(40);
+    L.cur.disp=col1.concat(col2).concat(rest);L.cur.slotMap={};
+    var disp=L.cur.disp;
+    function cell(idx,num){var w=L.words[idx];var k=disp.indexOf(idx);
+      L.cur.slotMap[k]=w.sa.map(function(s,j){return s!==1?j:null;}).filter(function(x){return x!==null;});
+      var left=L.cur.slotMap[k];var n=left.length;
+      function nx(j){var nx2=j<n-1?('vin-'+k+'-'+(j+1)):('vin-'+(k+1));return 'onkeydown="if(event.key===\'Enter\'){var e2=document.getElementById(\''+nx2+'\');if(e2)e2.focus();}"';}
+      function inp(j){var v=((L.cur.vals||{})[idx+'|'+left[j]])||'';return '<input class="vo-in" id="vin-'+k+(j?'-'+j:'')+'" autocomplete="off" value="'+v.replace(/"/g,'&quot;')+'" '+nx(j)+'>';}
+      var pc=(function(){var anyB=w.sla.some(function(s){return s===2;});var allM=w.sla.length&&w.sla.every(function(s){return s===3;});return anyB?' pblue':(allM?' pred':'');})();
+      if(n<=1)return '<div class="vo-row'+pc+'"><span class="vo-num">'+num+'.</span><span class="vo-w">'+w.w+'</span><span class="vo-p">'+w.pos+'</span>'+inp(0)+'</div>';
+      var lines='';for(var j=0;j<n;j++)lines+='<div>'+(j===0?('<span class="vo-num">'+num+'.</span><span class="vo-w">'+w.w+'</span>'):'')+'<span class="vo-p">'+w.pos+'</span>'+inp(j)+'</div>';
+      return '<div class="vo-row col'+pc+'">'+lines+'</div>';}
+    var h1=col1.map(function(idx,i){return cell(idx,i+1);}).join('');
+    var h2=col2.map(function(idx,i){return cell(idx,21+i);}).join('');
+    html+='<div class="vo-sheet"><div class="vo-grid"><div>'+h1+'</div><div>'+h2+'</div>';
+    if(rest.length){
+      var r1=rest.filter(function(_,i){return i%2===0;}).map(function(idx,i){return cell(idx,41+i*2);}).join('');
+      var r2=rest.filter(function(_,i){return i%2===1;}).map(function(idx,i){return cell(idx,42+i*2);}).join('');
+      html+='<div class="vo-brk">— 2 —</div><div style="grid-column:1/-1"><div class="vo-grid"><div>'+r1+'</div><div>'+r2+'</div></div></div>';}
+    html+='</div></div><button class="btn-primary" style="width:100%;padding:13px;margin-top:14px" onclick="voGrade()">✓ 交卷批改（'+order.length+' 词）</button>';
+    if(!voTMR)voTMR=setInterval(voTick,1000);}
+  body.innerHTML=html;}
+window.voStart=function(){var L=voCur&&voCur.L;if(!L||L.cleared)return;
+  var cand=L.words.map(function(w,i){return i;}).filter(function(i){return L.words[i].st!==1;});
+  if(!cand.length)return;
+  vShuf(cand);
+  L.cur={order:cand,disp:null,slotMap:{},vals:{},start:Date.now(),done:false};
+  vSave();voRender();};
+function voTick(){var L=voCur&&voCur.L;var el=vse('vcTimer');if(!el)return;
+  if(L&&L.cur&&!L.cur.done){var s=Math.floor((Date.now()-L.cur.start)/1000);el.textContent='⏱ '+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+  else el.textContent='⏱ --:--';}
+window.voGrade=function(){var L=voCur&&voCur.L;if(!L||!L.cur||L.cur.done)return;
+  var btn=document.querySelector('#vcBody .btn-primary');if(btn)btn.disabled=true;
+  var results=[];
+  L.cur.disp.forEach(function(idx,k){var w=L.words[idx];
+    (L.cur.slotMap[k]||[]).forEach(function(slot,row){
+      var inp=vse('vin-'+k+(row?'-'+row:''));
+      var v=inp?(inp.value||'').trim():((((L.cur.vals||{})[idx+'|'+slot])||'')).trim();
+      var r={idx:idx,w:w,slot:slot,v:v,result:'miss',best:0,inp:inp};
+      if(v){var best=0;w.slots[slot].forEach(function(a){var s=vSim(v,a);if(s>best)best=s;});r.best=best;r.result=best>=0.8?'ok':'bad';}
+      results.push(r);
+      if(inp){inp.classList.add(r.result);var mk=document.createElement('span');mk.className='vo-mk '+r.result;mk.textContent=r.result==='ok'?'✓':(r.result==='bad'?'✗':'○');mk.style.animationDelay=Math.min(k*45,1600)+'ms';inp.parentElement.appendChild(mk);}});});
+  setTimeout(function(){voPhase2(L,results);},1400);};
+function voPhase2(L,results){
+  var ok=0,tried=0,res=[];
+  results.forEach(function(r){var w=r.w,j=r.slot;
+    L.cur.vals=L.cur.vals||{};L.cur.vals[r.idx+'|'+j]=r.v;
+    if(r.result==='miss'){w.sa[j]=3;res.push({w:w,miss:true,slot:j});return;}
+    tried++;if(r.result==='ok'){w.sa[j]=1;ok++;res.push({w:w,ok:true,slot:j});}
+    else{w.sa[j]=2;res.push({w:w,best:r.best,v:r.v,slot:j});}});
+  L.words.forEach(function(w){if(w.st!==1){w.sla=w.sa.slice();
+    if(w.sa.every(function(s){return s===1;}))w.st=1;else if(w.sa.every(function(s){return s===3;}))w.st=3;else w.st=2;}});
+  var total=results.length,acc=Math.round(ok/total*100);
+  var minutes=Math.max(1,Math.round((Date.now()-L.cur.start)/60000));
+  var tscore=Math.max(10,Math.min(100,Math.round(100-minutes*1.5)));
+  L.rounds=(L.rounds||0)+1;L.cur.done=true;
+  var rem=vRemain(L),cleared=false;
+  if(rem<=10&&!L.cleared){L.cleared=true;cleared=true;state.vocab.pendingClear=(state.vocab.pendingClear||0)+1;}
+  window.__vo={L:L,acc:acc,tscore:tscore,minutes:minutes,cleared:cleared,rem:rem,ok:ok,total:total,task:voCur.task,wrongs:res.filter(function(r){return !r.ok;}).map(function(r){
+    var stxt=r.w.slots.length>1?('空'+((r.slot||0)+1)+' '):'';
+    return r.miss?('<div style="padding:7px 10px;border:1px solid rgba(255,59,48,.25);border-radius:8px;margin-top:6px;color:#ff9a8a;font-size:12.5px">'+r.w.w+' '+r.w.pos+' · '+stxt+'未写 → '+r.w.slots[r.slot||0].slice(0,2).join('/')+'</div>')
+      :('<div style="padding:7px 10px;border:1px solid rgba(255,59,48,.25);border-radius:8px;margin-top:6px;color:#ff9a8a;font-size:12.5px">'+r.w.w+' '+r.w.pos+' · '+stxt+'「'+r.v+'」'+Math.round((r.best||0)*100)+'% → '+r.w.slots[r.slot||0].slice(0,2).join('/')+'</div>');}).join('')};
+  /* 成绩确认（应用原生 showModal） */
+  var title=cleared?'🏆 通关 · 本轮成绩':'📊 本轮成绩';
+  var body='<div style="line-height:2.1;text-align:center">'
+    +(cleared?'<div style="color:#7ee2a0;font-weight:700">剩余 '+rem+' 词 ≤ 10 · W4 轮次 +1</div>':'<div style="color:#f0d9a2">第 '+L.rounds+' 轮完成 · 剩余 '+rem+' 词</div>')
+    +'<div style="font-family:var(--mono);font-size:15px">正确率得分 <b style="color:#ffd60a;font-size:19px">'+acc+'</b> <span style="opacity:.6">('+ok+'/'+total+' 空，空/错均计错)</span></div>'
+    +'<div style="font-family:var(--mono);font-size:15px">用时得分 <b style="color:#ffd60a;font-size:19px">'+tscore+'</b> <span style="opacity:.6">('+minutes+' 分钟)</span></div>'
+    +'<div style="font-size:11.5px;color:#8d7c5f">确认后自动计入「'+(voCur.task?voCur.task.name:'')+'」任务的正确率/用时栏</div></div>';
+  try{showModal(title,body,function(){voConfirm(true);});}catch(e){voConfirm(true);}}
+function voConfirm(counted){var m=window.__vo;if(!m)return;var L=m.L;
+  if(counted){
+    /* 自动写入当天任务计分栏 */
+    try{
+      var ti=m.task?m.task.i:-1;
+      if(ti>=0&&typeof updateQDim==='function'){
+        updateQDim('today',ti,'acc',m.acc);
+        updateQDim('today',ti,'time',m.tscore);
+        if(typeof toast==='function')toast('✅ 已自动计入「'+m.task.name+'」：正确率 '+m.acc+' · 用时 '+m.tscore);
+      }
+    }catch(e){}
+    if(m.cleared){
+      try{if(typeof showGainModal==='function')showGainModal('🏆 恭喜获得 · 背单词通关',[['📘',L.title,'#7ee2a0'],['🎯','W4 轮次 +1（登记已自动计入）','#ffd60a'],['⏱','用时 '+m.minutes+' 分钟 · 得分 '+m.tscore,'#7cc4ff']]);}catch(e){}
+    }}
+  try{closeModal();}catch(e){}
+  var sum='<div style="border-radius:12px;padding:13px;font-size:13px;line-height:2;margin-top:12px;border:1px solid '+(m.cleared?'rgba(52,199,89,.5)':'rgba(232,163,61,.35)')+';color:'+(m.cleared?'#7ee2a0':'#f0d9a2')+'">'
+    +(m.cleared?'🏆 通关！剩余 '+m.rem+' 词 ≤ 10 · W4 轮次 +1':'第 '+L.rounds+' 轮完成 · 剩余 '+m.rem+' 词')
+    +'<div style="color:#c9a86a;margin-top:4px">正确率 <b style="color:#ffd60a">'+m.acc+'%</b>（'+m.ok+'/'+m.total+' 空）· 用时 <b>'+m.minutes+'</b> 分钟'+(counted?' · <span style="color:#7ee2a0">已自动计入计分栏</span>':'')+'</div>'
+    +m.wrongs
+    +(!m.cleared&&m.rem>0?'<button class="btn-primary" style="width:100%;padding:12px;margin-top:12px" onclick="voStart()">▶ 第 '+(L.rounds+1)+' 轮（重排剩余 '+m.rem+' 词）</button>':'')
+    +'</div>';
+  L.lastSummary=sum;window.__vo=null;vSave();voRender();}
+window.voCancel=function(){voConfirm(false);};
+/* ---------- 导航 ---------- */
+function voNav(name){
+  if(name==='vocab'){
+    voGate();
+    if(state.vocab.uiView==='win'&&state.vocab.uiActive&&vListsFor(state.vocab.uiActive).length){
+      voSwitch(state.vocab.uiActive);
+    }else{
+      state.vocab.uiView='home';
+      voRenderHome();
+    }}
+  if(name==='daily'){
+    if(state.vocab.pendingClear>0){var di=state.dailyInputs=state.dailyInputs||{};di.list=String((parseInt(di.list)||0)+state.vocab.pendingClear);state.vocab.pendingClear=0;vSave();
+      var dl=document.getElementById('daily-list');if(dl)dl.value=di.list;
+      try{toast('✅ 背单词 List 通关 +1 已自动计入登记');}catch(e){}}
+    var today=new Date().toDateString();
+    var tasks=vTasks();
+    var hasL=tasks.some(function(x){return vListsFor(x.fam).length>0;});
+    if(tasks.length&&hasL&&state.vocab.lastAuto!==today){
+      var anyPending=Object.keys(state.vocab.lists).some(function(k){var L=state.vocab.lists[k];return !L.cleared&&L.words.some(function(w){return w.st!==1;});});
+      if(anyPending){state.vocab.lastAuto=today;vSave();setTimeout(function(){try{switchPage('vocab');}catch(e){}},400);}}}}
+try{(function(){var sp=window.switchPage;if(sp&&!sp.__vo){var w2=function(n){var r=sp.apply(this,arguments);try{voNav(n);}catch(e){}return r;};w2.__vo=true;window.switchPage=w2;}})();}catch(e){}
+window.renderVocabPage=function(){if(!voGate())return;voSwitch(state.vocab.uiActive||vTasks()[0].fam);};
 })();
 /* ================= 背单词默写（主程序版）END ================= */
 </script>

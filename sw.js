@@ -1,8 +1,8 @@
 /* ============================================================
-   考研EP系统 v1.5.6.2 热修复补丁 · build 20261123-0003
-   = index(2).html 内嵌全套（金融中心/杯赛竞技v2/自动入段/两位小数/公告注入）
+   考研EP系统 v1.5.6.2 热修复补丁 · build 20261124-1635
+   = index.html 内嵌全套（金融中心/杯赛竞技v2/自动入段/报名即判级）
    守卫 __fin156 / __v2cuparena / __money2dp，已内嵌时自动跳过
-   源文件 1810125B md5 1bf552561901b9ddebadc766483a3780（用户自改：首页 hx- 新版指挥甲板）
+   源文件 1841397B md5 ed735d6951b266bed1e91d2be7cd0afa
    ============================================================ */
 
 /* ================= v1.5.6「协议时代」· 金融中心 ================= */
@@ -1893,9 +1893,9 @@ function __RAW_v2renderDefense(b){
  b.innerHTML+=html;
 }
 function v2renderDefense(){try{return __RAW_v2renderDefense.apply(this,arguments);}catch(err){__v2err('v2renderDefense',err);}}
-function __RAW_v2preReg(){AV.preReg=true;AV.joined=true;AV.joinDate=null;AV.carryUsed=false;v2toast('预报名成功：周一结算后即可定级');v2renderArena();v2save();}
+function __RAW_v2preReg(){AV.preReg=true;AV.joined=true;AV.joinDate=null;AV.carryUsed=false;v2toast('预报名成功：周一结算后即可定级');v2renderArena();v2save();try{v2autoPlace();}catch(e){}}
 function v2preReg(){try{return __RAW_v2preReg.apply(this,arguments);}catch(err){__v2err('v2preReg',err);}}
-function __RAW_v2join(){AV.joined=true;AV.joinDate=v2slash();AV.carryUsed=false;v2toast('报名成功：今天结算后即可定级（读取完成+质量EP）');v2renderArena();v2save();}
+function __RAW_v2join(){AV.joined=true;AV.joinDate=v2slash();AV.carryUsed=false;v2toast('报名成功：今天结算后即可定级（读取完成+质量EP）');v2renderArena();v2save();try{v2autoPlace();}catch(e){}}
 function v2join(){try{return __RAW_v2join.apply(this,arguments);}catch(err){__v2err('v2join',err);}}
 var AV_PFX_T=null;
 function __RAW_v2slash(d){d=d||v2now();return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();}
