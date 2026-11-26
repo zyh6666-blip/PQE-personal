@@ -1,8 +1,8 @@
 /* ============================================================
-   考研EP系统 v1.5.6.2 热修复补丁 · build 20261124-1635
-   = index.html 内嵌全套（金融中心/杯赛竞技v2/自动入段/报名即判级）
+   考研EP系统 v1.5.7「冬日旅途」补丁 · build 20261127-0048
+   = index(2).html 内嵌全套（金融中心/固定牌价1⚫=5🪙/杯赛竞技v2/自动入段）
    守卫 __fin156 / __v2cuparena / __money2dp，已内嵌时自动跳过
-   源文件 1841397B md5 ed735d6951b266bed1e91d2be7cd0afa
+   源文件 2112899B md5 141bcbeeb268660f8e45dff21088f8ca
    ============================================================ */
 
 /* ================= v1.5.6「协议时代」· 金融中心 ================= */
@@ -23,9 +23,9 @@ var SEED=20261109;
 /* 计价币种 cur：fx 用货币对双币交易；stock 分币种专区（bc=黑币盘 / tk=代币盘 / pt=积分盘）
    定价：汇率盘按名义体量分档（BC/PT 体量最大单价最高）；概念股按币种钱包日产量定价 */
 var INSTR=[
- {id:'fx_bt',tab:'fx',ic:'⚫🪙',name:'黑币/代币',code:'BC/TK',base:1,price:1,cur:'bc',nom:'1 ⚫ 名义'},
- {id:'fx_bp',tab:'fx',ic:'⚫💰',name:'黑币/积分',code:'BC/PT',base:1,price:1,cur:'bc',nom:'1 ⚫ 名义'},
- {id:'fx_tp',tab:'fx',ic:'🪙💰',name:'代币/积分',code:'TK/PT',base:0.2,price:0.2,cur:'bc',nom:'10 🪙 名义'},
+ {id:'fx_bt',tab:'fx',ic:'⚫🪙',name:'黑币/代币',code:'BC/TK',base:1,price:1,cur:'bc',nom:'1 ⚫ = 5 🪙'},
+ {id:'fx_bp',tab:'fx',ic:'⚫💰',name:'黑币/积分',code:'BC/PT',base:1,price:1,cur:'bc',nom:'1 ⚫ = 90 💰'},
+ {id:'fx_tp',tab:'fx',ic:'🪙💰',name:'代币/积分',code:'TK/PT',base:2,price:2,cur:'bc',nom:'10 🪙 = 2 ⚫（1 🪙 = 18 💰）'},
  {id:'st_talent',tab:'stock',ic:'🎯',name:'天赋科技',code:'TAL',base:6,price:6,cur:'bc'},
  {id:'st_cup',tab:'stock',ic:'🏆',name:'杯赛重工',code:'CUP',base:8,price:8,cur:'tk'},
  {id:'st_brawl',tab:'stock',ic:'⚔️',name:'乱斗娱乐',code:'BRA',base:6,price:6,cur:'tk'},
@@ -38,7 +38,7 @@ INSTR.forEach(function(it){it.hist=[{o:it.base,c:it.base,h:it.base,l:it.base}];}
 var GI={g_draw:'draw_ticket',g_change:'change_ticket',g_reroll:'reroll_ticket',g_vip:'brawl_vip',
  g_core:'sp_core',g_dup:'direct_up',g_pack:'parts_pack',g_exp12:'exp12',g_exp15:'exp15',g_exp2:'exp2',g_exp3:'exp3',
  g_coupon:'excl_coupon',g_trial:'potential_trial',g_golddie:'treasure_die_yellow',
- g_slotext:'talent_slot_ext',g_costext:'talent_cost_ext',g_theme:'theme_tianren'};
+ g_slotext:'talent_slot_ext',g_costext:'talent_cost_ext',g_theme:'theme_tianren',g_ult:'ult_upgrade'};
 var GM={g_mark:'mark',g_medal:'medal',g_badge:'badge',g_peak:'peak'};
 function qtyOf(g){if(GM[g.id])return migrateGlobalMats()[GM[g.id]]||0;return state.inventory[GI[g.id]]||0;}
 function setQty(g,v){if(GM[g.id]){migrateGlobalMats()[GM[g.id]]=v;}else{state.inventory[GI[g.id]]=v;}}
@@ -73,8 +73,13 @@ var GOODS=[
  {id:'g_golddie',cat:'bra',ic:'🎲',n:'金骰子',baseBC:0.16,qty:1,rare:true},
  {id:'g_slotext',cat:'talent',ic:'🗳️',n:'天赋槽位扩展券',baseBC:355,qty:0,rare:true,unique:true},
  {id:'g_costext',cat:'talent',ic:'⚖️',n:'天赋费用扩展券',baseBC:320,qty:0,rare:true,unique:true},
- {id:'g_theme',cat:'pot',ic:'🐉',n:'【主题】天人合一',baseBC:105,qty:0,rare:true,unique:true}
+ {id:'g_theme',cat:'pot',ic:'🐉',n:'【主题】天人合一',baseBC:105,qty:0,rare:true,unique:true},
+ {id:'g_ult',cat:'sp',ic:'🏆',n:'终极改装包',baseBC:12,qty:1,rare:true}
 ];
+/* v1.6 汇率重定价：基准从「1⚫=50🪙」改为「1⚫=5🪙」后，货品若沿用旧 baseBC，代币价会整体缩水 10 倍。
+   这里把 baseBC 统一 ×10，使「指导价（🪙）= baseBC × rateTK()」与旧版代币价完全一致，
+   同时让 ⚫ 报价真正符合 1⚫=5🪙 的标准（不再出现「8🪙 只值 0.16⚫」的 10 倍错位）。 */
+GOODS.forEach(function(g){g.baseBC=Math.round(g.baseBC*10*100)/100;});
 function FE(id){var e=document.getElementById(id);if(e)return e;
   return {style:{},classList:{add:function(){},remove:function(){},contains:function(){return false}},value:'',textContent:'',innerHTML:'',onclick:null,oninput:null,querySelectorAll:function(){return [];}};}
 var FIN=(state.fin=state.fin||{day:1,pos:{},fin:{},pool:200,idx:3000,idxHist:[3000],news:'',listings:[],bag:[],mkt:{},volLog:{}});
@@ -582,9 +587,11 @@ function instCurs(it){return it.tab==='fx'?(it.id==='fx_bt'?['bc','tk']:(it.id==
 function instUnit(it){return {bc:'⚫',tk:'🪙',pt:'💰'}[it.cur];}
 function instBCPrice(it){return it.cur==='bc'?it.price:(it.cur==='tk'?it.price/rateTK():it.price/ratePT());}
 function priceIn(it,cur){return cur===it.cur?it.price:bcTo(cur,instBCPrice(it));}
-/* 汇率：1⚫ 兑多少代币/积分（随汇率盘波动） */
-function rateTK(){return INSTR[0].price/INSTR[0].base*50;}   /* 基准：指数100 ⇔ 1⚫=50🪙 */
-function ratePT(){return INSTR[1].price/INSTR[1].base*900;} /* 基准：指数100 ⇔ 1⚫=9000💰 */
+/* 汇率：1⚫ 兑多少代币/积分（随汇率盘波动）
+   v1.6 基准牌价：1 ⚫ = 5 🪙；1 🪙 = 18 💰（即 1 ⚫ = 90 💰），全站换汇/指导价/理财折算统一走这里 */
+var RATE_TK_BASE=5, RATE_PT_BASE=90;
+function rateTK(){return INSTR[0].price/INSTR[0].base*RATE_TK_BASE;}   /* 基准：指数100 ⇔ 1⚫=5🪙 */
+function ratePT(){return INSTR[1].price/INSTR[1].base*RATE_PT_BASE;}   /* 基准：指数100 ⇔ 1⚫=90💰 */
 function curName(k){return {bc:'⚫ 黑币',tk:'🪙 代币',pt:'💰 积分'}[k];}
 function curBal(k){return {bc:S.bc,tk:S.tk,pt:S.pt}[k];}
 function bcTo(k,amt){return k==='bc'?amt:(k==='tk'?amt*rateTK():amt*ratePT());}
@@ -765,7 +772,7 @@ function xRender(){
      +'<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid rgba(232,163,61,.28);border-radius:11px;background:rgba(240,179,92,.05);margin-bottom:6px">'
      +'<span style="font-size:18px">'+g.ic+'</span><b style="font-size:13px;color:#ecdcba">'+g.n+'</b>'
      +(g.rare?'<span class="pos-chip" style="background:rgba(255,214,10,.14);color:#ffd60a;border-color:rgba(255,214,10,.4)">稀有</span>':'')
-     +'<span style="margin-left:auto;font-size:10px;color:#8d7c5f;font-family:var(--mono);text-align:right">指导价 '+fmt(guide)+' · 今量 '+m.vol+' · 在售 '+(gcnt+mcnt)+' 单</span></div>'
+     +'<span style="margin-left:auto;font-size:10px;color:#8d7c5f;font-family:var(--mono);text-align:right">指导价 '+fmt(guide)+' · 今量 '+Math.round(m.vol)+' · 在售 '+(gcnt+mcnt)+' 单</span></div>'
      +xRowBook(g)+'</div>';
   }).join('')||'<div style="text-align:center;color:#6b5a3d;padding:18px;font-size:12px">没有匹配「'+q+'」的商品 · 换个关键字试试</div>';
   var mine=FE('f-xMine');
@@ -981,14 +988,13 @@ function whRender(){
   el.innerHTML=html||'<div style="text-align:center;color:#6b5a3d;padding:14px;font-size:12px">仓库空空 · 去交易所买入或等每日掉落</div>';
 }
 function swapRate(f,t){
-  var rTK=rateTK(), rPT=ratePT();   /* 1⚫=rTK🪙=rPT💰 */
+  /* 统一牌价：1⚫ = rTK 🪙 = rPT 💰（基准 1⚫=5🪙=90💰，随汇率盘浮动） */
+  var rTK=rateTK(), rPT=ratePT();
   if(f===t)return 1;
-  if(f==='bc'&&t==='tk')return rTK;
-  if(f==='tk'&&t==='bc')return 1/rTK;
-  if(f==='bc'&&t==='pt')return rPT;
-  if(f==='pt'&&t==='bc')return 1/rPT;
-  if(f==='tk'&&t==='pt')return rPT/rTK;
-  return rTK/rPT;
+  if(f==='bc')return t==='tk'?rTK:rPT;
+  if(f==='tk')return t==='bc'?1/rTK:rPT/rTK;
+  if(f==='pt')return t==='bc'?1/rPT:rTK/rPT;
+  return 1;
 }
 function updSwap(){
   var amt=parseFloat(FE('swAmt').value)||0;
@@ -1420,6 +1426,24 @@ try{
     if(typeof raw!=='function')return;
     eval(fn+'=function(){try{return raw.apply(this,arguments);}catch(err){toast("🏛️ 金融报错@"+fn+"："+(err&&err.message)+" ｜ "+((((err&&err.stack)||"").split("\n")[1])||"").slice(0,140));throw err;}};');
   });
+}catch(e){}
+/* v1.6 仓库/交易桥：把金融内部只读能力暴露给仓库页（GOODS/指导价/库存读写/出售入口） */
+try{
+  window.__finBridge={
+    goods:function(){return GOODS.slice();},
+    goodOf:function(id){return goodOf(id);},
+    gidOf:function(k){for(var gid in GI){if(GI[gid]===k)return gid;}return null;},
+    catOf:function(g){return goodCatName(g.cat);},
+    guide:function(g){return guideTK(g);},
+    qty:function(g){return qtyOf(g);},
+    setQty:function(g,v){return setQty(g,v);},
+    rateTK:rateTK,ratePT:ratePT,
+    bag:function(){return X.bag;},
+    listings:function(){return X.listings;},
+    renderAll:function(){return renderAll();},
+    tick:function(gain){try{return tickMarket();}catch(e){return null;}},
+    save:function(){try{saveState();}catch(e){}}
+  };
 }catch(e){}
 })();
 
